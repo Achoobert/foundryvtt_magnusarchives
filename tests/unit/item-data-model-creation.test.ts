@@ -792,6 +792,118 @@ describe("Item DataModel creation defaults", () => {
     expect(character.derived.wounds.capacities).toEqual({minor: 3, moderate: 3, major: 3});
   });
 
+  it("reconstructs non-persisted Pool maxima after an index-only Genre resolution", async () => {
+    const {CharacterDataModel} = await import("../../src/data/actors/character");
+    const {character: characterFixture} = await import("../helpers/core-fixtures");
+    const actor = characterFixture();
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    for (const pool of ["might", "speed", "intellect"] as const) {
+      actor.system.derived.pools[pool].max = 0;
+      actor.system.stats[pool].max = 0;
+    }
+    const model = Object.assign(actor.system, {parent: {items: []}});
+    const previousResolver = globalThis.fromUuidSync;
+    globalThis.fromUuidSync = (() => ({
+      _id: "superhero",
+      uuid: actor.system.genre.sourceUuid,
+      name: "Superheroes",
+      type: "genre"
+    })) as typeof fromUuidSync;
+
+    try {
+      expect(() => CharacterDataModel.prototype.prepareDerivedData.call(model)).not.toThrow();
+      for (const pool of ["might", "speed", "intellect"] as const) {
+        expect(actor.system.derived.pools[pool].max).toBe(10);
+        expect(actor.system.stats[pool].max).toBe(10);
+      }
+    } finally {
+      globalThis.fromUuidSync = previousResolver;
+    }
+  });
+
+  it.each([
+    ["Type", "characterType"],
+    ["Descriptor", "descriptor"],
+    ["Species", "species"],
+    ["Focus", "focus"]
+  ] as const)("keeps Pool derivation valid with an attached %s", async (_label, type) => {
+    const {CharacterDataModel} = await import("../../src/data/actors/character");
+    const {character: characterFixture} = await import("../helpers/core-fixtures");
+    const actor = characterFixture();
+    const packageSystem = {
+      instance: {
+        sourceUuid: `Item.${type}`,
+        instanceId: `${type}-instance`,
+        role: "primary",
+        attachedAt: 1,
+        selections: {
+          edgePool: "none",
+          superheroicsPool: "none",
+          powerShifts: [],
+          poolChoices: [],
+          skillChoices: [],
+          abilityChoices: [],
+          descriptorChoices: [],
+          suppressedGrantIds: []
+        },
+        parent: {kind: "other", sourceUuid: "", instanceId: "", grantId: "", status: "active"}
+      },
+      poolBonuses: {might: type === "focus" ? 0 : 2, speed: 0, intellect: 0},
+      poolBonusChoiceGroups: [],
+      woundBonuses: {minor: 0, moderate: 0, major: 0},
+      edgeGrant: {mode: "fixed", pool: "none", amount: 0},
+      weaponUse: {light: false, medium: false, heavy: false},
+      weaponFamilies: [],
+      weaponFamilyUse: {axes: false, knives: false, swords: false},
+      armorUse: {light: false, medium: false, heavy: false},
+      cypherLimitBonus: 0
+    };
+    const item = type === "focus"
+      ? {id: type, name: "Focus", type, system: {}}
+      : {id: type, name: type, type, system: packageSystem};
+    const model = Object.assign(actor.system, {parent: {items: [item]}});
+
+    expect(() => CharacterDataModel.prototype.prepareDerivedData.call(model)).not.toThrow();
+    expect(actor.system.derived.pools.might.max).toBe(type === "focus" ? 10 : 12);
+    expect(actor.system.stats.might.max).toBe(type === "focus" ? 10 : 12);
+  });
+
+  it("preserves Pool base and effective maxima across unrelated partial Actor updates", async () => {
+    const {character: characterFixture} = await import("../helpers/core-fixtures");
+    const actor = characterFixture();
+    const before = {
+      baseMax: actor.system.stats.might.baseMax,
+      derivedMax: actor.system.derived.pools.might.max
+    };
+
+    await actor.update({"system.xp": 3});
+    await actor.update({"system.stats.might.value": 8});
+
+    expect(actor.system.stats.might).toMatchObject({value: 8, baseMax: before.baseMax});
+    expect(actor.system.derived.pools.might.max).toBe(before.derivedMax);
+    expect(actor.updates).toEqual([
+      {"system.xp": 3},
+      {"system.stats.might.value": 8}
+    ]);
+  });
+
+  it("hydrates beta.2-style Character Pool sources without persisting a zero maximum", async () => {
+    const {CharacterDataModel} = await import("../../src/data/actors/character");
+    const legacy = new (CharacterDataModel as unknown as new (source: Record<string, unknown>) => any)({
+      stats: {
+        effortBase: 1,
+        might: {value: 8, baseMax: 8, baseEdge: 0},
+        speed: {value: 8, baseMax: 8, baseEdge: 0},
+        intellect: {value: 8, baseMax: 8, baseEdge: 0}
+      }
+    });
+
+    expect(legacy.genre).toEqual({sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0});
+    for (const pool of ["might", "speed", "intellect"] as const) {
+      expect(legacy.stats[pool]).toMatchObject({value: 8, baseMax: 8, max: 8});
+    }
+  });
+
   it("preserves a finalized Core Setup through Character migration/reload", async () => {
     const {CharacterDataModel} = await import("../../src/data/actors/character");
     const migrated = CharacterDataModel.migrateData({

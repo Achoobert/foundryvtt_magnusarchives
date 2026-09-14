@@ -82,6 +82,71 @@ function combatActor(): CombatCharacterLike {
 describe("All-in-One Roll Dialog view model", () => {
   afterEach(() => vi.unstubAllGlobals());
 
+  it("builds a player Weapon Attack Summary when its Genre source is an index-only Compendium entry", () => {
+    const actor = Object.assign(combatActor(), {
+      isOwner: true,
+      ownership: {player: 3}
+    });
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    actor.system.derived.packages.totalEffortCapMode = "unlimited";
+    vi.stubGlobal("fromUuidSync", () => ({
+      _id: "superhero",
+      uuid: actor.system.genre.sourceUuid,
+      name: "Superheroes",
+      type: "genre"
+    }));
+    const {rolls, combat} = services();
+    const attack = combat.buildWeaponAttackPlan(actor, weapon()).requests[0]!;
+
+    const prepared = rolls.preview(actor, attack, policy);
+    const summary = buildRollDialogPreview(prepared, actor, localize);
+
+    expect(summary).toMatchObject({rollLabel: "Greatsword", pool: "might"});
+    expect(summary.totalEffortMaximum).toBeNull();
+  });
+
+  it("executes a player Speed Weapon Attack without replacing the Pool maximum", async () => {
+    const actor = Object.assign(combatActor(), {
+      isOwner: true,
+      ownership: {player: 3}
+    });
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    actor.system.derived.packages.totalEffortCapMode = "unlimited";
+    vi.stubGlobal("fromUuidSync", () => ({
+      _id: "superhero",
+      uuid: actor.system.genre.sourceUuid,
+      name: "Superheroes",
+      type: "genre"
+    }));
+    const {rolls, combat} = services();
+    const vacuumPistol = {
+      ...weapon(),
+      name: "Vacuum Pistol",
+      system: {...weapon().system, attackType: "ranged" as const, defaultPool: "speed" as const}
+    };
+    const before = {
+      baseMax: actor.system.stats.speed.baseMax,
+      derivedMax: actor.system.derived.pools.speed.max
+    };
+
+    const attack = combat.buildWeaponAttackPlan(actor, vacuumPistol, {
+      difficulty: {mode: "known", value: 3},
+      paidEffort: 1
+    }).requests[0]!;
+    const preview = rolls.preview(actor, attack, policy);
+    const summary = buildRollDialogPreview(preview, actor, localize);
+    const execution = await rolls.execute(actor, attack, policy);
+
+    expect(summary).toMatchObject({rollLabel: "Vacuum Pistol", pool: "speed", totalCost: 3});
+    expect(execution.result.prepared.poolCost).toBe(3);
+    expect(actor.system.stats.speed.value).toBe(7);
+    expect(actor.system.stats.speed.baseMax).toBe(before.baseMax);
+    expect(actor.system.derived.pools.speed.max).toBe(before.derivedMax);
+    expect((actor as unknown as {updates: unknown[]}).updates).toEqual([
+      {"system.stats.speed.value": 7}
+    ]);
+  });
+
   it.each(["might", "speed", "intellect"] as const)("keeps a generic %s Task request authoritative", (pool) => {
     const result = genericTaskRequest({
       pool,

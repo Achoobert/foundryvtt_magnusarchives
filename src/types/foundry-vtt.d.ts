@@ -38,6 +38,7 @@ declare class Actor {
     ids: string[],
     operation?: Record<string, unknown>
   ): Promise<unknown[]>;
+  reset(): void;
 }
 
 declare class Item {
@@ -239,6 +240,7 @@ declare const CONFIG: {
   Item: {
     documentClass: typeof Item;
     dataModels: Record<string, typeof TypeDataModelBase>;
+    compendiumIndexFields: string[];
   };
 };
 
@@ -258,6 +260,9 @@ declare const game: {
   user: {id: string; isGM: boolean; isActiveGM: boolean; active: boolean; targets: Iterable<TokenLike>};
   users: Iterable<{id: string; isGM: boolean; active: boolean}>;
   actors: Iterable<Actor> & {get(id: string): Actor | undefined};
+  packs: Iterable<unknown> & {
+    get(id: string): {getIndex(options: {fields: string[]}): Promise<unknown>} | undefined;
+  };
   items: Iterable<Item> & {get(id: string): Item | undefined};
   messages: Iterable<ChatMessage> & {get(id: string): ChatMessage | undefined};
   socket: {

@@ -1,8 +1,9 @@
 import {CORE_TOTAL_EFFORT_CAP} from "../rules/core/effort-rules";
-import type {
-  GenreAssociationData,
-  GenreDocumentLike,
-  GenreEffortCapMode
+import {
+  GENRE_EFFORT_CAP_MODES,
+  type GenreAssociationData,
+  type GenreDocumentLike,
+  type GenreEffortCapMode
 } from "./genre-types";
 
 export interface EffectiveGenreData {
@@ -17,9 +18,15 @@ export function effectiveGenre(
 ): EffectiveGenreData | null {
   if (!association.sourceUuid) return null;
   const genre = resolve(association.sourceUuid);
-  if (!genre || genre.type !== "genre") return null;
+  if (
+    !genre
+    || genre.type !== "genre"
+    || !genre.system
+    || !genre.system.options
+    || !GENRE_EFFORT_CAP_MODES.includes(genre.system.options.totalEffortCapMode)
+  ) return null;
   return {
-    sourceUuid: genre.uuid,
+    sourceUuid: association.sourceUuid,
     name: genre.name,
     totalEffortCapMode: genre.system.options.totalEffortCapMode
   };

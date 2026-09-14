@@ -1,11 +1,11 @@
-const I = "cypherv2", fs = "0.1.0";
+const $ = "cypherv2", ys = "0.1.0";
 const ee = [
   "inability",
   "untrained",
   "trained",
   "specialized",
   "expert"
-], Ya = ["choose", "might", "speed", "intellect"], xe = ["light", "medium", "heavy"], Fa = ["melee", "ranged"], wn = ["immediate", "short", "long", "very-long", "specified"], Ue = ["light", "medium", "heavy"], Da = ["block", "blockWithShield", "dodge"], hs = ["d6", "d10", "d20"], Nn = ["subtle", "manifest"], Mn = ["low", "medium", "advanced", "high", "ultra"], ae = ["minor", "moderate", "major"], Ta = [
+], Fa = ["choose", "might", "speed", "intellect"], xe = ["light", "medium", "heavy"], Da = ["melee", "ranged"], wn = ["immediate", "short", "long", "very-long", "specified"], Ge = ["light", "medium", "heavy"], Ta = ["block", "blockWithShield", "dodge"], bs = ["d6", "d10", "d20"], Nn = ["subtle", "manifest"], Mn = ["low", "medium", "advanced", "high", "ultra"], ae = ["minor", "moderate", "major"], za = [
   "action",
   "firstAction",
   "lastAction",
@@ -15,10 +15,10 @@ const ee = [
   "perpetual",
   "passive",
   "special"
-], go = ["none", "might", "speed", "intellect", "choose"], za = ["none", "task", "attack", "defense"], Na = ["none", "single", "multiple"], Ae = ["one-action", "10-minutes", "1-hour", "10-hours"], gs = ["normal", "nonRest"], ys = ["10-minutes", "1-hour", "10-hours"];
-function bs(n, e, t) {
+], go = ["none", "might", "speed", "intellect", "choose"], Na = ["none", "task", "attack", "defense"], Ma = ["none", "single", "multiple"], Ae = ["one-action", "10-minutes", "1-hour", "10-hours"], ws = ["normal", "nonRest"], vs = ["10-minutes", "1-hour", "10-hours"];
+function Cs(n, e, t) {
   return Object.freeze({
-    version: fs,
+    version: ys,
     rules: n,
     services: e,
     themes: t
@@ -33,7 +33,7 @@ const V = ["might", "speed", "intellect"], _t = {
 function vt(n = !1) {
   return { oneAction: n, tenMinutes: n, oneHour: n, tenHours: n };
 }
-function Ma(n) {
+function qa(n) {
   return Ae.filter((e) => !n[_t[e]]);
 }
 let yo = 0;
@@ -54,7 +54,7 @@ function pt(n) {
     major: n.major.map((e) => ({ ...e }))
   };
 }
-const Gi = [
+const Ui = [
   "tier",
   "effort",
   "mightMax",
@@ -64,7 +64,7 @@ const Gi = [
   "intellectMax",
   "intellectEdge"
 ];
-function ws() {
+function Es() {
   return {
     tier: null,
     effort: null,
@@ -140,19 +140,19 @@ function vn(n, e) {
     minimum: i === "max" ? 1 : -20
   };
 }
-const vs = [
+const Rs = [
   { id: "core-recovery-action", type: "one-action" },
   { id: "core-recovery-ten-minutes", type: "10-minutes" },
   { id: "core-recovery-one-hour", type: "1-hour" },
   { id: "core-recovery-ten-hours", type: "10-hours" }
 ];
 function at(n = vt(!1)) {
-  return vs.map((e) => ({
+  return Rs.map((e) => ({
     ...e,
     used: n[_t[e.type]]
   }));
 }
-function Cs(n, e = vt(!1)) {
+function Ps(n, e = vt(!1)) {
   if (!Array.isArray(n) || n.length === 0) return at(e);
   const t = /* @__PURE__ */ new Set(), i = [];
   for (const o of n) {
@@ -179,7 +179,7 @@ function bo(n, e, t) {
   if (i.used) throw new Error(`Recovery slot '${e}' has already been used today.`);
   return t === "10-hours" ? n.map((o) => ({ ...o, used: !1 })) : n.map((o) => o.id === e ? { ...o, used: !0 } : { ...o });
 }
-function Es(n) {
+function Ss(n) {
   const e = vt(!1);
   for (const t of Ae)
     e[_t[t]] = n.some((i) => i.type === t && i.used);
@@ -196,7 +196,7 @@ function we(n) {
 function ve(n, e, t, i, o) {
   return { id: n, sourceId: e, sourceType: t, label: i, value: o };
 }
-function Rs(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] }, r = 0, s = {
+function ks(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] }, r = 0, s = {
   weaponCategories: [],
   weaponFamilies: [],
   armorCategories: [],
@@ -207,33 +207,33 @@ function Rs(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
   descriptorNames: [],
   speciesNames: [],
   characterSentence: ""
-}, l = 2, u = 1, c = ws(), p = 0, h = []) {
+}, l = 2, u = 1, c = Es(), p = 0, h = []) {
   const m = {};
-  for (const $ of V) {
+  for (const I of V) {
     const W = [
       ve(
-        `pool.${$}.max.base`,
-        `system.stats.${$}.baseMax`,
+        `pool.${I}.max.base`,
+        `system.stats.${I}.baseMax`,
         "base",
-        `${$} base maximum`,
-        n[$].baseMax
+        `${I} base maximum`,
+        n[I].baseMax
       ),
-      ...i.poolMax?.[$] ?? []
+      ...i.poolMax?.[I] ?? []
     ], J = [
       ve(
-        `pool.${$}.edge.base`,
-        `system.stats.${$}.baseEdge`,
+        `pool.${I}.edge.base`,
+        `system.stats.${I}.baseEdge`,
         "base",
-        `${$} base Edge`,
-        n[$].baseEdge
+        `${I} base Edge`,
+        n[I].baseEdge
       ),
-      ...i.poolEdge?.[$] ?? []
+      ...i.poolEdge?.[I] ?? []
     ], ie = we(W), pe = we(J);
-    m[$] = {
+    m[I] = {
       calculatedMax: ie,
       calculatedEdge: pe,
-      max: ft(ie, c.stats?.[$]?.max),
-      edge: ft(pe, c.stats?.[$]?.edge),
+      max: ft(ie, c.stats?.[I]?.max),
+      edge: ft(pe, c.stats?.[I]?.edge),
       maxContributions: W,
       edgeContributions: J
     };
@@ -260,24 +260,24 @@ function Rs(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
     ve("cypher-limit.base", "system.cypherLimitBase", "base", "Base Cypher Limit", l),
     ...i.cypherLimit ?? []
   ], Y = {}, k = {}, H = {};
-  for (const $ of ae) {
+  for (const I of ae) {
     const W = [
       ve(
-        `wound.${$}.capacity.core`,
+        `wound.${I}.capacity.core`,
         "cypherv2.core",
         "core",
-        `${$} Wound capacity`,
+        `${I} Wound capacity`,
         3
       ),
-      ...i.woundCapacity?.[$] ?? []
-    ], J = Math.max(1, we(W)), ie = c.wounds?.[$] ?? 0;
-    k[$] = J, Y[$] = ie === 0 ? W : [...W, ve(
-      `wound.${$}.capacity.manual`,
-      `system.overrides.wounds.${$}`,
+      ...i.woundCapacity?.[I] ?? []
+    ], J = Math.max(1, we(W)), ie = c.wounds?.[I] ?? 0;
+    k[I] = J, Y[I] = ie === 0 ? W : [...W, ve(
+      `wound.${I}.capacity.manual`,
+      `system.overrides.wounds.${I}`,
       "base",
-      `Manual ${$} Wound capacity modifier`,
+      `Manual ${I} Wound capacity modifier`,
       ie
-    )], H[$] = Math.max(1, J + ie);
+    )], H[I] = Math.max(1, J + ie);
   }
   const M = [];
   e.moderate.length >= H.moderate && M.push(
@@ -289,19 +289,19 @@ function Rs(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
       1
     )
   );
-  for (const $ of e.major)
+  for (const I of e.major)
     M.push(
       ve(
-        `wound.major.${$.id}.hindrance`,
-        $.id,
+        `wound.major.${I.id}.hindrance`,
+        I.id,
         "wound",
-        $.label || "Major Wound",
+        I.label || "Major Wound",
         1
       )
     );
   M.push(...i.hindrance ?? []);
-  const O = [...o].filter(($) => $.type === "armor" && $.system.equipped).filter(($) => Ue.includes($.system.category)).sort(($, W) => Oi[W.system.category] - Oi[$.system.category] || $.id.localeCompare(W.id))[0], A = O?.system.category ?? "none", D = O ? Oi[O.system.category] : 0, S = O ? a.armorCategories.includes(O.system.category) : !0, K = ($, W, J) => O && J > 0 ? [ve(
-    `armor.${O.id}.${$}`,
+  const O = [...o].filter((I) => I.type === "armor" && I.system.equipped).filter((I) => Ge.includes(I.system.category)).sort((I, W) => Oi[W.system.category] - Oi[I.system.category] || I.id.localeCompare(W.id))[0], A = O?.system.category ?? "none", D = O ? Oi[O.system.category] : 0, S = O ? a.armorCategories.includes(O.system.category) : !0, K = (I, W, J) => O && J > 0 ? [ve(
+    `armor.${O.id}.${I}`,
     O.id,
     "item",
     W,
@@ -337,7 +337,7 @@ function Rs(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
       manualModifier: p,
       bonus: C + p,
       bonusContributions: w,
-      availableTypes: h.length > 0 ? [...new Set(Mt(h).map(($) => $.type))] : Ma(t)
+      availableTypes: h.length > 0 ? [...new Set(Mt(h).map((I) => I.type))] : qa(t)
     },
     cypherLimit: { max: Math.max(0, we(P)), contributions: P },
     combat: {
@@ -362,17 +362,17 @@ function wo(n) {
 const {
   ArrayField: xn,
   BooleanField: Vi,
-  HTMLField: qa,
+  HTMLField: xa,
   NumberField: Et,
-  ObjectField: Ps,
+  ObjectField: As,
   SchemaField: kt,
   StringField: he
 } = foundry.data.fields, d = {
   ArrayField: xn,
   BooleanField: Vi,
-  HTMLField: qa,
+  HTMLField: xa,
   NumberField: Et,
-  ObjectField: Ps,
+  ObjectField: As,
   SchemaField: kt,
   StringField: he
 };
@@ -412,12 +412,12 @@ function wt() {
   return new kt({
     id: new he({ required: !0, nullable: !1, blank: !1 }),
     label: new he({ required: !0, nullable: !1, initial: "" }),
-    description: new qa({ required: !0, nullable: !1, initial: "" }),
+    description: new xa({ required: !0, nullable: !1, initial: "" }),
     sourceUuid: new he({ required: !0, nullable: !1, initial: "" }),
     treated: new Vi({ required: !0, nullable: !1, initial: !1 })
   });
 }
-function Ss() {
+function Hs() {
   return new kt({
     id: new he({ required: !0, nullable: !1, blank: !1 }),
     sourceId: new he({ required: !0, nullable: !1, blank: !1 }),
@@ -431,14 +431,14 @@ function Ss() {
   });
 }
 function fe() {
-  return new xn(Ss(), {
+  return new xn(Hs(), {
     required: !0,
     nullable: !1,
     initial: [],
     persisted: !1
   });
 }
-function ks() {
+function Is() {
   return new kt({
     enabled: new Vi({ required: !0, nullable: !1, initial: !1 }),
     trigger: new he({
@@ -474,7 +474,7 @@ function Yi(n = "") {
     })
   });
 }
-class xa extends foundry.abstract.TypeDataModel {
+class Ga extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       schemaVersion: E(1, 1),
@@ -484,7 +484,7 @@ class xa extends foundry.abstract.TypeDataModel {
     };
   }
 }
-const Un = [
+const Gn = [
   "increaseCapabilities",
   "moveTowardPerfection",
   "extraEffort",
@@ -495,12 +495,12 @@ const Un = [
   "armor",
   "weapons",
   "genre"
-], As = [...Un, "other"], Ga = [
+], $s = [...Gn, "other"], Oa = [
   "characterCreation",
   "additionalFocus",
   "otherAdvancement",
   "newTier"
-], Hs = ["otherAdvancement", "newTier"], Oa = Object.freeze({
+], Vs = ["otherAdvancement", "newTier"], Ba = Object.freeze({
   xpCost: 4,
   purchasesPerTier: 4,
   capabilityPoints: 4,
@@ -510,7 +510,7 @@ const Un = [
   genreChoiceForTier: (n) => n >= 3 && n % 3 === 0,
   attackDefenseTrainingTier: 2,
   attackDefenseSpecializationTier: 4
-}), Ba = ["axes", "knives", "swords"];
+}), La = ["axes", "knives", "swords"];
 function rt(n) {
   const e = String(n ?? "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim().toLocaleLowerCase("en-US").replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-+|-+$/g, "");
   return e === "none" ? "" : e;
@@ -525,7 +525,7 @@ function ht(n) {
 function Fi(n) {
   return !n || typeof n != "object" || Array.isArray(n) ? [] : se(Object.entries(n).filter(([, e]) => e === !0).map(([e]) => e));
 }
-const $s = [
+const Ys = [
   "Accuracy",
   "Strength",
   "Dexterity",
@@ -540,7 +540,7 @@ const $s = [
   "Savant",
   "Custom"
 ];
-function La(n) {
+function ja(n) {
   if (!n || typeof n != "object" || Array.isArray(n)) return null;
   const e = n, t = String(e.id ?? "").trim(), i = String(e.category ?? "").trim(), o = Number(e.shifts);
   return !t || !i || !Number.isInteger(o) || o < 1 ? null : {
@@ -551,16 +551,16 @@ function La(n) {
     description: String(e.description ?? "").trim()
   };
 }
-function ja(n) {
+function Wa(n) {
   if (!Array.isArray(n)) return [];
   const e = /* @__PURE__ */ new Set(), t = [];
   for (const i of n) {
-    const o = La(i);
+    const o = ja(i);
     !o || e.has(o.id) || (e.add(o.id), t.push(o));
   }
   return t;
 }
-function Is(n) {
+function Fs(n) {
   return n.filter((e) => e.type === "characterType").flatMap((e) => {
     const t = e.system.instance?.instanceId || e.id;
     return (e.system.instance?.selections?.powerShifts ?? []).flatMap((i, o) => {
@@ -576,16 +576,16 @@ function Is(n) {
   });
 }
 function vo(n, e) {
-  const t = ja(n);
-  return t.length > 0 ? t : Is(e);
+  const t = Wa(n);
+  return t.length > 0 ? t : Fs(e);
 }
-function Vs(n) {
+function Ds(n) {
   return n.filter((e) => e.type === "characterType").reduce((e, t) => {
     const i = Number(t.system.superhero?.powerShiftCount ?? 0);
     return e + (Number.isInteger(i) && i > 0 ? i : 0);
   }, 0);
 }
-function Ys(n, e) {
+function Ts(n, e) {
   const t = n.reduce((o, a) => o + a.shifts, 0), i = /* @__PURE__ */ new Map();
   for (const o of n) {
     const a = o.category.trim().toLocaleLowerCase("en-US");
@@ -598,13 +598,13 @@ function Ys(n, e) {
     categoryWarnings: new Set([...i].filter(([, o]) => o > 3).map(([o]) => o))
   };
 }
-function Fs(n, e, t = Oe) {
-  const i = e.id?.trim() || t(), o = La({ ...e, id: i });
+function zs(n, e, t = Oe) {
+  const i = e.id?.trim() || t(), o = ja({ ...e, id: i });
   if (!o) throw new Error("A Power Shift requires a category and a positive whole-number value.");
   const a = n.findIndex((r) => r.id === i);
   return a < 0 ? [...n, o] : n.map((r, s) => s === a ? o : r);
 }
-function Ds(n, e) {
+function Ns(n, e) {
   return n.filter((t) => t.id !== e);
 }
 function ai(n, e) {
@@ -632,11 +632,11 @@ function Co(n, e = !1) {
 function z(n, e) {
   return Object.prototype.hasOwnProperty.call(n, e);
 }
-function Ts(n, e) {
+function Ms(n, e) {
   const t = { ...n };
   return (!e || z(n, "cycle")) && (t.cycle = Number.isInteger(n.cycle) ? n.cycle : 1), (!e || z(n, "purchases")) && (t.purchases = Array.isArray(n.purchases) ? n.purchases : []), (!e || z(n, "initializedFocusUuids")) && (t.initializedFocusUuids = Array.isArray(n.initializedFocusUuids) ? n.initializedFocusUuids : []), (!e || z(n, "pendingFocusChoices")) && (t.pendingFocusChoices = Array.isArray(n.pendingFocusChoices) ? n.pendingFocusChoices : []), (!e || z(n, "pendingGenreChoices")) && (t.pendingGenreChoices = Array.isArray(n.pendingGenreChoices) ? n.pendingGenreChoices : []), (!e || z(n, "guidanceCompletedTiers")) && (t.guidanceCompletedTiers = Array.isArray(n.guidanceCompletedTiers) ? [...new Set(n.guidanceCompletedTiers.filter((i) => Number.isInteger(i) && Number(i) >= 1).map(Number))].sort((i, o) => i - o) : []), (!e || z(n, "notes")) && (t.notes = typeof n.notes == "string" ? n.notes : ""), t;
 }
-function zs(n, e) {
+function qs(n, e) {
   const t = { ...n };
   if ((!e || z(n, "coreInitialized")) && (t.coreInitialized = n.coreInitialized === !0), !e || z(n, "mode")) {
     const i = n.mode === "setup" ? "completed" : String(n.mode);
@@ -656,7 +656,7 @@ function Eo(n, e) {
   }
   return t;
 }
-function Ns(n, e = {}) {
+function xs(n, e = {}) {
   const t = e.partial === !0;
   if (t ? n.overrides && typeof n.overrides == "object" && (n.overrides = Co(n.overrides, !0)) : n.overrides = Co(
     n.overrides && typeof n.overrides == "object" ? n.overrides : {}
@@ -681,9 +681,9 @@ function Ns(n, e = {}) {
       initialChoicesGranted: o.initialChoicesGranted === !0,
       attachedAt: Number.isInteger(o.attachedAt) ? o.attachedAt : 0
     };
-  })), n.advancement && typeof n.advancement == "object" && (n.advancement = Ts(n.advancement, t)), !t || n.recovery && typeof n.recovery == "object") {
+  })), n.advancement && typeof n.advancement == "object" && (n.advancement = Ms(n.advancement, t)), !t || n.recovery && typeof n.recovery == "object") {
     const i = n.recovery && typeof n.recovery == "object" ? n.recovery : {}, o = i.used && typeof i.used == "object" ? { ...vt(!1), ...i.used } : vt(!1), a = { ...i };
-    (!t || z(i, "bonus")) && (a.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || z(i, "slots")) && (a.slots = Cs(i.slots, o), a.used = Ct(a.slots)), (!t || z(i, "customized")) && (a.customized = i.customized === !0), (!t || z(i, "rollModifier")) && (a.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || z(i, "history")) && (a.history = Array.isArray(i.history) ? i.history.map((r) => r && typeof r == "object" ? { slotId: "", ...r } : r) : []), n.recovery = a;
+    (!t || z(i, "bonus")) && (a.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || z(i, "slots")) && (a.slots = Ps(i.slots, o), a.used = Ct(a.slots)), (!t || z(i, "customized")) && (a.customized = i.customized === !0), (!t || z(i, "rollModifier")) && (a.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || z(i, "history")) && (a.history = Array.isArray(i.history) ? i.history.map((r) => r && typeof r == "object" ? { slotId: "", ...r } : r) : []), n.recovery = a;
   }
   if (t) {
     if (n.presentation && typeof n.presentation == "object") {
@@ -701,7 +701,7 @@ function Ns(n, e = {}) {
     const i = n.proficiencies && typeof n.proficiencies == "object" ? n.proficiencies : {}, o = { ...i };
     (!t || z(i, "weaponFamilies")) && (o.weaponFamilies = se(i.weaponFamilies)), n.proficiencies = o;
   }
-  return (!t || z(n, "powerShifts")) && (n.powerShifts = ja(n.powerShifts)), n.creation && typeof n.creation == "object" && (n.creation = zs(n.creation, t)), n;
+  return (!t || z(n, "powerShifts")) && (n.powerShifts = Wa(n.powerShifts)), n.creation && typeof n.creation == "object" && (n.creation = qs(n.creation, t)), n;
 }
 function dt(n, e, t) {
   return {
@@ -715,7 +715,7 @@ function dt(n, e, t) {
 function je(n) {
   return Number.isInteger(n) && Number(n) > 0 ? Number(n) : 0;
 }
-function Wa(n) {
+function _a(n) {
   if (n.type !== "descriptor") return [];
   const e = n.system, t = e.instance?.selections?.poolChoices ?? [];
   return (e.poolBonusChoiceGroups ?? []).flatMap((i) => {
@@ -723,19 +723,19 @@ function Wa(n) {
     return o ? s.map((l) => ({ groupId: i.id, pool: l, amount: o })) : [];
   });
 }
-function _a(n) {
+function Ka(n) {
   if (n.type !== "characterType") return null;
   const e = n.system;
   if (!e.superhero?.superheroics?.enabled) return null;
   const t = e.instance?.selections?.superheroicsPool, i = je(e.superhero.superheroics.poolBonus);
   return t && t !== "none" && V.includes(t) && i > 0 ? { pool: t, amount: i } : null;
 }
-function Ms(n, e, t = []) {
+function Gs(n, e, t = []) {
   const i = [...n, ...e].join(" ").trim(), o = t.length > 0 ? `who ${t.join(" and ")}` : "";
   return [i, o].filter(Boolean).join(" ");
 }
-function qs(n, e = [], t = [], i = [], o = []) {
-  const a = {}, r = {}, s = {}, l = new Set(e.filter((f) => xe.includes(f))), u = new Set(se(o)), c = new Set(t.filter((f) => Ue.includes(f))), p = [], h = [], m = [], y = [];
+function Us(n, e = [], t = [], i = [], o = []) {
+  const a = {}, r = {}, s = {}, l = new Set(e.filter((f) => xe.includes(f))), u = new Set(se(o)), c = new Set(t.filter((f) => Ge.includes(f))), p = [], h = [], m = [], y = [];
   for (const f of n) {
     if (f.type === "characterType" || f.type === "species") {
       const P = f.system;
@@ -760,7 +760,7 @@ function qs(n, e = [], t = [], i = [], o = []) {
         k && (r[Y] ??= []).push(dt(f, `edge.${Y}`, k));
       }
       for (const k of xe) P.weaponUse[k] && l.add(k);
-      for (const k of Ue) P.armorUse[k] && c.add(k);
+      for (const k of Ge) P.armorUse[k] && c.add(k);
     } else
       h.push(f.name);
     const w = f.system.poolBonuses;
@@ -768,13 +768,13 @@ function qs(n, e = [], t = [], i = [], o = []) {
       const Y = je(w[P]);
       Y && (a[P] ??= []).push(dt(f, `pool.${P}`, Y));
     }
-    for (const P of Wa(f))
+    for (const P of _a(f))
       (a[P.pool] ??= []).push(dt(
         f,
         `pool-choice.${P.groupId}.${P.pool}`,
         P.amount
       ));
-    const C = _a(f);
+    const C = Ka(f);
     C && (a[C.pool] ??= []).push(dt(
       f,
       `superheroics.${C.pool}`,
@@ -789,48 +789,48 @@ function qs(n, e = [], t = [], i = [], o = []) {
     typeNames: p,
     descriptorNames: h,
     speciesNames: m,
-    characterSentence: Ms(h, p, i)
+    characterSentence: Gs(h, p, i)
   };
 }
 function Li(n) {
   const e = n.system, t = Object.fromEntries(V.map((o) => [o, je(e.poolBonuses[o])]));
-  for (const o of Wa(n)) t[o.pool] += o.amount;
-  const i = _a(n);
+  for (const o of _a(n)) t[o.pool] += o.amount;
+  const i = Ka(n);
   return i && (t[i.pool] += i.amount), t;
 }
-function Ka(n, e, t) {
+function Xa(n, e, t) {
   const i = Math.max(0, e - n);
   return Math.max(0, Math.min(t, t - i));
 }
-const xs = ["core", "unlimited"], Us = ["manual", "typeSuggestion", "migration"], Gs = ["progression", "origin"], Os = 6;
-function Bs(n, e) {
+const Ja = ["core", "unlimited"], Os = ["manual", "typeSuggestion", "migration"], Bs = ["progression", "origin"], Ls = 6;
+function js(n, e) {
   if (!n.sourceUuid) return null;
   const t = e(n.sourceUuid);
-  return !t || t.type !== "genre" ? null : {
-    sourceUuid: t.uuid,
+  return !t || t.type !== "genre" || !t.system || !t.system.options || !Ja.includes(t.system.options.totalEffortCapMode) ? null : {
+    sourceUuid: n.sourceUuid,
     name: t.name,
     totalEffortCapMode: t.system.options.totalEffortCapMode
   };
 }
-function Ls(n) {
-  return n === "unlimited" ? null : Os;
+function Ws(n) {
+  return n === "unlimited" ? null : Ls;
 }
-const Xa = ["theme", "portrait", "custom"], js = "#96082a", Ws = { r: 23, g: 24, b: 27 };
-function Gn(n) {
+const Qa = ["theme", "portrait", "custom"], _s = "#96082a", Ks = { r: 23, g: 24, b: 27 };
+function Un(n) {
   const e = n.trim().match(/^#([\da-f]{3}|[\da-f]{6})$/i);
   return e ? `#${(e[1].length === 3 ? [...e[1]].map((i) => `${i}${i}`).join("") : e[1]).toLocaleLowerCase("en-US")}` : null;
 }
-function Ja(n) {
+function Za(n) {
   return {
     r: Number.parseInt(n.slice(1, 3), 16),
     g: Number.parseInt(n.slice(3, 5), 16),
     b: Number.parseInt(n.slice(5, 7), 16)
   };
 }
-function Qa({ r: n, g: e, b: t }) {
+function er({ r: n, g: e, b: t }) {
   return `#${[n, e, t].map((i) => Math.max(0, Math.min(255, Math.round(i))).toString(16).padStart(2, "0")).join("")}`;
 }
-function Za(n, e, t) {
+function tr(n, e, t) {
   const i = 1 - t;
   return {
     r: n.r * t + e.r * i,
@@ -838,30 +838,30 @@ function Za(n, e, t) {
     b: n.b * t + e.b * i
   };
 }
-function _s(n) {
-  const e = Ja(n);
-  return Math.max(e.r, e.g, e.b) < 96 ? Qa(Za(e, { r: 255, g: 255, b: 255 }, 0.72)) : n;
+function Xs(n) {
+  const e = Za(n);
+  return Math.max(e.r, e.g, e.b) < 96 ? er(tr(e, { r: 255, g: 255, b: 255 }, 0.72)) : n;
 }
-function er(n) {
-  const e = Gn(n);
-  return e ? Qa(Za(Ja(e), Ws, 0.2)) : null;
+function ir(n) {
+  const e = Un(n);
+  return e ? er(tr(Za(e), Ks, 0.2)) : null;
 }
-function tr(n) {
-  const e = Gn(n);
-  return e ? _s(e) : null;
+function nr(n) {
+  const e = Un(n);
+  return e ? Xs(e) : null;
 }
-function Ks(n) {
+function Js(n) {
   return `url("${n.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replace(/[\n\r\f;]/g, "")}")`;
 }
-function ir(n, e = (t) => foundry.utils.getRoute(t)) {
+function or(n, e = (t) => foundry.utils.getRoute(t)) {
   const t = n.trim();
   return t ? /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(t) ? t : e(t) : "";
 }
-function Xs(n, e, t) {
-  const i = Xa.includes(n.backgroundMode) ? n.backgroundMode : "theme", o = n.customImage.trim(), a = Gn(n.color), r = a ? tr(a) : null, s = a ? er(a) : null, l = i === "portrait" ? e.trim() : i === "custom" ? o : "", u = ir(l, t), c = [
+function Qs(n, e, t) {
+  const i = Qa.includes(n.backgroundMode) ? n.backgroundMode : "theme", o = n.customImage.trim(), a = Un(n.color), r = a ? nr(a) : null, s = a ? ir(a) : null, l = i === "portrait" ? e.trim() : i === "custom" ? o : "", u = or(l, t), c = [
     ...r ? [`--cypherv2-character-accent: ${r}`] : [],
     ...s ? [`--cypherv2-character-tint: ${s}`] : [],
-    ...u ? [`--cypherv2-character-background-image: ${Ks(u)}`] : []
+    ...u ? [`--cypherv2-character-background-image: ${Js(u)}`] : []
   ];
   return {
     backgroundMode: i,
@@ -872,17 +872,17 @@ function Xs(n, e, t) {
     hasCharacterColor: !!a,
     accent: r,
     tint: s,
-    colorInput: a ?? js,
+    colorInput: a ?? _s,
     isTheme: i === "theme",
     isPortrait: i === "portrait",
     isCustom: i === "custom",
     style: c.join("; ")
   };
 }
-function Js() {
+function Zs() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    kind: new d.StringField({ required: !0, nullable: !1, choices: [...As] }),
+    kind: new d.StringField({ required: !0, nullable: !1, choices: [...$s] }),
     otherKind: new d.StringField({
       required: !0,
       nullable: !1,
@@ -895,22 +895,22 @@ function Js() {
     timestamp: E()
   });
 }
-function Qs() {
+function el() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    source: new d.StringField({ required: !0, nullable: !1, choices: [...Ga] }),
+    source: new d.StringField({ required: !0, nullable: !1, choices: [...Oa] }),
     grantTier: E(1, 1),
     focusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" })
   });
 }
-function Zs() {
+function tl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    source: new d.StringField({ required: !0, nullable: !1, choices: [...Hs] }),
+    source: new d.StringField({ required: !0, nullable: !1, choices: [...Vs] }),
     grantTier: E(1, 1)
   });
 }
-function el() {
+function il() {
   return new d.SchemaField({
     nodeId: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     mode: new d.StringField({
@@ -923,14 +923,14 @@ function el() {
       required: !0,
       nullable: !1,
       initial: "none",
-      choices: ["none", ...Ga]
+      choices: ["none", ...Oa]
     }),
     choiceGrantTier: E(1, 1),
     choiceFocusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     acquiredAt: E()
   });
 }
-function tl() {
+function nl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     slotId: new d.StringField({ required: !0, nullable: !1, blank: !0, initial: "" }),
@@ -938,7 +938,7 @@ function tl() {
       required: !0,
       nullable: !1,
       initial: "normal",
-      choices: [...gs]
+      choices: [...ws]
     }),
     type: new d.StringField({ required: !0, nullable: !1, choices: [...Ae] }),
     rolled: new d.BooleanField({ required: !0, nullable: !1, initial: !0 }),
@@ -952,17 +952,17 @@ function tl() {
     timestamp: E()
   });
 }
-function il() {
+function ol() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     type: new d.StringField({ required: !0, nullable: !1, choices: [...Ae] }),
     used: new d.BooleanField({ required: !0, nullable: !1, initial: !1 })
   });
 }
-function nl() {
+function al() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    type: new d.StringField({ required: !0, nullable: !1, choices: [...ys] }),
+    type: new d.StringField({ required: !0, nullable: !1, choices: [...vs] }),
     choice: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     majorTaskSucceeded: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
     removedWoundIds: Q(),
@@ -979,7 +979,7 @@ function ji() {
     edgeContributions: fe()
   });
 }
-class ol extends xa {
+class rl extends Ga {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1023,14 +1023,14 @@ class ol extends xa {
           oneHour: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
           tenHours: new d.BooleanField({ required: !0, nullable: !1, initial: !1 })
         }),
-        slots: new d.ArrayField(il(), {
+        slots: new d.ArrayField(ol(), {
           required: !0,
           nullable: !1,
           initial: at()
         }),
         customized: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
         rollModifier: E(0, -20),
-        history: new d.ArrayField(tl(), {
+        history: new d.ArrayField(nl(), {
           required: !0,
           nullable: !1,
           initial: []
@@ -1038,7 +1038,7 @@ class ol extends xa {
       }),
       rest: new d.SchemaField({
         lastType: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-        history: new d.ArrayField(nl(), {
+        history: new d.ArrayField(al(), {
           required: !0,
           nullable: !1,
           initial: []
@@ -1059,7 +1059,7 @@ class ol extends xa {
         new d.SchemaField({
           focusUuid: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
           ownedNodeIds: Q(),
-          acquisitions: new d.ArrayField(el(), {
+          acquisitions: new d.ArrayField(il(), {
             required: !0,
             nullable: !1,
             initial: []
@@ -1086,7 +1086,7 @@ class ol extends xa {
           required: !0,
           nullable: !1,
           initial: "manual",
-          choices: [...Us]
+          choices: [...Os]
         }),
         attachedAt: E()
       }),
@@ -1095,7 +1095,7 @@ class ol extends xa {
           required: !0,
           nullable: !1,
           initial: "theme",
-          choices: [...Xa]
+          choices: [...Qa]
         }),
         customImage: new d.StringField({
           required: !0,
@@ -1124,18 +1124,18 @@ class ol extends xa {
       }), { required: !0, nullable: !1, initial: [] }),
       advancement: new d.SchemaField({
         cycle: E(1, 1),
-        purchases: new d.ArrayField(Js(), {
+        purchases: new d.ArrayField(Zs(), {
           required: !0,
           nullable: !1,
           initial: []
         }),
         initializedFocusUuids: Q(),
-        pendingFocusChoices: new d.ArrayField(Qs(), {
+        pendingFocusChoices: new d.ArrayField(el(), {
           required: !0,
           nullable: !1,
           initial: []
         }),
-        pendingGenreChoices: new d.ArrayField(Zs(), {
+        pendingGenreChoices: new d.ArrayField(tl(), {
           required: !0,
           nullable: !1,
           initial: []
@@ -1253,7 +1253,7 @@ class ol extends xa {
     };
   }
   static migrateData(e, t = {}) {
-    return Ns(super.migrateData(e), t);
+    return xs(super.migrateData(e), t);
   }
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -1261,16 +1261,16 @@ class ol extends xa {
       id: l.id,
       type: l.type,
       system: l.system
-    })), i = this.proficiencies, o = qs(
+    })), i = this.proficiencies, o = Us(
       e.filter((l) => l.type === "characterType" || l.type === "descriptor" || l.type === "species"),
       i.weaponCategories,
       i.armorCategories,
       [],
       se(i.weaponFamilies)
-    ), a = Bs(this.genre, (l) => typeof fromUuidSync != "function" ? null : fromUuidSync(l)), r = {
+    ), a = js(this.genre, (l) => typeof fromUuidSync != "function" ? null : fromUuidSync(l)), r = {
       armorCategories: o.armorCategories,
       freelyUse: i.freelyUse
-    }, s = Rs(
+    }, s = ks(
       this.stats,
       this.wounds,
       this.recovery.used,
@@ -1301,7 +1301,7 @@ class ol extends xa {
       this.stats[l].max = s.pools[l].max, this.stats[l].edge = s.pools[l].edge;
   }
 }
-class al extends xa {
+class sl extends Ga {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1380,7 +1380,7 @@ class al extends xa {
     super.prepareDerivedData(), this.health.max = this.health.baseMax, this.dead = this.health.value <= 0;
   }
 }
-const rl = ["none", "fantasy", "scienceFiction", "superhero", "custom"], sl = ["primary", "additional", "speciesGranted", "custom"], nr = ["none", "fixed", "choice"], ll = ["type", "descriptor", "focus", "genre", "species", "other"], cl = ["active", "retained"], dl = ["fixed", "catalog"], ul = ["none", "descriptor"];
+const ll = ["none", "fantasy", "scienceFiction", "superhero", "custom"], cl = ["primary", "additional", "speciesGranted", "custom"], ar = ["none", "fixed", "choice"], dl = ["type", "descriptor", "focus", "genre", "species", "other"], ul = ["active", "retained"], ml = ["fixed", "catalog"], pl = ["none", "descriptor"];
 function At() {
   return new d.SchemaField({
     name: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1388,13 +1388,13 @@ function At() {
     system: new d.ObjectField({ required: !0, nullable: !1, initial: {} })
   });
 }
-function or() {
+function rr() {
   return new d.SchemaField({
-    kind: new d.StringField({ required: !0, nullable: !1, initial: "other", choices: [...ll] }),
+    kind: new d.StringField({ required: !0, nullable: !1, initial: "other", choices: [...dl] }),
     sourceUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     instanceId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     grantId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    status: new d.StringField({ required: !0, nullable: !1, initial: "active", choices: [...cl] }),
+    status: new d.StringField({ required: !0, nullable: !1, initial: "active", choices: [...ul] }),
     contentUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     contentKey: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     replacement: new d.SchemaField({
@@ -1409,7 +1409,7 @@ function or() {
     })
   });
 }
-function ar() {
+function sr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     itemUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1423,7 +1423,7 @@ function Wi() {
     optionIds: new d.ArrayField(new d.StringField({ required: !0, nullable: !1, blank: !1 }), { required: !0, nullable: !1, initial: [] })
   });
 }
-function ml() {
+function fl() {
   return new d.SchemaField({
     groupId: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     pools: new d.ArrayField(
@@ -1436,7 +1436,7 @@ function On() {
   return new d.SchemaField({
     sourceUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     instanceId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    role: new d.StringField({ required: !0, nullable: !1, initial: "primary", choices: [...sl] }),
+    role: new d.StringField({ required: !0, nullable: !1, initial: "primary", choices: [...cl] }),
     attachedAt: E(),
     selections: new d.SchemaField({
       edgePool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
@@ -1445,16 +1445,16 @@ function On() {
         new d.StringField({ required: !0, nullable: !1, initial: "" }),
         { required: !0, nullable: !1, initial: [] }
       ),
-      poolChoices: new d.ArrayField(ml(), { required: !0, nullable: !1, initial: [] }),
+      poolChoices: new d.ArrayField(fl(), { required: !0, nullable: !1, initial: [] }),
       skillChoices: new d.ArrayField(Wi(), { required: !0, nullable: !1, initial: [] }),
       abilityChoices: new d.ArrayField(Wi(), { required: !0, nullable: !1, initial: [] }),
       descriptorChoices: new d.ArrayField(Wi(), { required: !0, nullable: !1, initial: [] }),
       suppressedGrantIds: new d.ArrayField(new d.StringField({ required: !0, nullable: !1, blank: !1 }), { required: !0, nullable: !1, initial: [] })
     }),
-    parent: or()
+    parent: rr()
   });
 }
-function pl() {
+function hl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     amount: E(1, 1),
@@ -1471,10 +1471,10 @@ function Bn() {
     abilityUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     notes: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     snapshot: At(),
-    alternatives: new d.ArrayField(ar(), { required: !0, nullable: !1, initial: [] })
+    alternatives: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function fl() {
+function gl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     skillUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1491,7 +1491,7 @@ function Ln() {
     notes: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
     rank: new d.StringField({ required: !0, nullable: !1, initial: "trained", choices: [...ee] }),
     snapshot: At(),
-    alternatives: new d.ArrayField(ar(), { required: !0, nullable: !1, initial: [] })
+    alternatives: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] })
   });
 }
 function jn() {
@@ -1499,24 +1499,24 @@ function jn() {
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     choose: E(1, 1),
     rank: new d.StringField({ required: !0, nullable: !1, initial: "trained", choices: [...ee] }),
-    options: new d.ArrayField(fl(), { required: !0, nullable: !1, initial: [] })
+    options: new d.ArrayField(gl(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function rr() {
+function lr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     choose: E(1, 1),
     options: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function sr() {
+function cr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     descriptorUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     snapshot: At()
   });
 }
-function hl() {
+function yl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     choose: E(1, 1),
@@ -1524,15 +1524,15 @@ function hl() {
       required: !0,
       nullable: !1,
       initial: "fixed",
-      choices: [...dl]
+      choices: [...ml]
     }),
     catalogItemType: new d.StringField({
       required: !0,
       nullable: !1,
       initial: "none",
-      choices: [...ul]
+      choices: [...pl]
     }),
-    options: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] })
+    options: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] })
   });
 }
 function Ri() {
@@ -1561,7 +1561,7 @@ class me extends foundry.abstract.TypeDataModel {
           initial: "descriptive",
           choices: ["descriptive", "assisted", "automatic"]
         }),
-        duration: ks(),
+        duration: Is(),
         rollDefaults: new d.ObjectField({ required: !0, nullable: !1, initial: {} })
       }),
       ruleElements: new d.ArrayField(
@@ -1572,25 +1572,25 @@ class me extends foundry.abstract.TypeDataModel {
         new d.StringField({ required: !0, nullable: !1, blank: !1 }),
         { required: !0, nullable: !1, initial: [] }
       ),
-      grantedBy: or()
+      grantedBy: rr()
     };
   }
 }
-const gl = [...V];
+const bl = [...V];
 function Cn(n, e = "none") {
   return Array.isArray(n) ? V.filter((t) => n.includes(t)) : e === "choose" || e === "any" ? [...V] : V.includes(e) ? [e] : [];
 }
 function We(n) {
   return Cn(n.system.cost.allowedPools, n.system.pool);
 }
-function yl(n, e, t) {
+function wl(n, e, t) {
   const i = V.filter((o) => n.includes(o));
   return i.length === 0 ? "" : i.length === 1 ? e(i[0]) : i.length === 2 ? `${e(i[0])}${t.pair}${e(i[1])}` : `${e(i[0])}${t.middle}${e(i[1])}${t.final}${e(i[2])}`;
 }
-function lr(n, e, t, i, o = !1) {
-  return !Number.isInteger(n) || n <= 0 || e.length === 0 ? "" : `${n}${o ? "+" : ""} ${yl(e, t, i)}`;
+function dr(n, e, t, i, o = !1) {
+  return !Number.isInteger(n) || n <= 0 || e.length === 0 ? "" : `${n}${o ? "+" : ""} ${wl(e, t, i)}`;
 }
-class bl extends me {
+class vl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1601,7 +1601,7 @@ class bl extends me {
         required: !0,
         nullable: !1,
         initial: "action",
-        choices: [...Ta]
+        choices: [...za]
       }),
       // Legacy V1 single-Pool source retained for safe document migration.
       // Runtime and UI use cost.allowedPools as the normalized authority.
@@ -1624,7 +1624,7 @@ class bl extends me {
         required: !0,
         nullable: !1,
         initial: "none",
-        choices: [...za]
+        choices: [...Na]
       }),
       rollModifier: new d.NumberField({
         required: !0,
@@ -1654,7 +1654,7 @@ class bl extends me {
         required: !0,
         nullable: !1,
         initial: "none",
-        choices: [...Na]
+        choices: [...Ma]
       }),
       // Reserved for the later Focus acquisition workflow. Phase 1 never writes these fields.
       sourceFocusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1694,7 +1694,7 @@ const et = Object.freeze({
   moderate: 2,
   major: 1
 });
-class wl extends me {
+class Cl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1725,7 +1725,7 @@ class wl extends me {
     super.prepareDerivedData(), Object.assign(this.derived.capacities, this.woundCapacities), this.derived.broken = this.wounds.major.length >= this.derived.capacities.major;
   }
 }
-class vl extends me {
+class El extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1733,7 +1733,7 @@ class vl extends me {
         required: !0,
         nullable: !1,
         initial: "light",
-        choices: [...Ue]
+        choices: [...Ge]
       }),
       // Legacy compatibility only. Effective Armor familiarity is derived from the Character.
       freelyUsed: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
@@ -1743,7 +1743,7 @@ class vl extends me {
     };
   }
 }
-class Cl extends me {
+class Rl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1769,14 +1769,14 @@ class Cl extends me {
     return i;
   }
 }
-class El extends me {
+class Pl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
       poolBonuses: new d.SchemaField({ might: E(), speed: E(), intellect: E() }),
       woundBonuses: new d.SchemaField({ minor: E(), moderate: E(), major: E() }),
       edgeGrant: new d.SchemaField({
-        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...nr] }),
+        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ar] }),
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: E(1)
       }),
@@ -1795,10 +1795,10 @@ class El extends me {
         })
       }),
       abilityGrants: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new d.ArrayField(rr(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] }),
       skillGrants: new d.ArrayField(Ln(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(jn(), { required: !0, nullable: !1, initial: [] }),
-      genre: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...rl] }),
+      genre: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ll] }),
       customGenreId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
       backgroundOptions: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
       equipmentNotes: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
@@ -1814,7 +1814,7 @@ class El extends me {
     ])), delete o.weaponFamilyUse, o;
   }
 }
-class Rl extends me {
+class Sl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1848,19 +1848,19 @@ class Rl extends me {
     return i;
   }
 }
-class Pl extends me {
+class kl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
       poolBonuses: new d.SchemaField({ might: E(), speed: E(), intellect: E() }),
-      poolBonusChoiceGroups: new d.ArrayField(pl(), { required: !0, nullable: !1, initial: [] }),
+      poolBonusChoiceGroups: new d.ArrayField(hl(), { required: !0, nullable: !1, initial: [] }),
       skillGrants: new d.ArrayField(Ln(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(jn(), { required: !0, nullable: !1, initial: [] }),
       instance: On()
     };
   }
 }
-class Sl extends me {
+class Al extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -1871,7 +1871,7 @@ class Sl extends me {
     };
   }
 }
-function kl() {
+function Hl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     abilityUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1893,21 +1893,21 @@ function kl() {
     })
   });
 }
-function Al() {
+function Il() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     from: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     to: new d.StringField({ required: !0, nullable: !1, blank: !1 })
   });
 }
-class Hl extends me {
+class $l extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
       graph: new d.SchemaField({
         version: E(1, 1),
-        nodes: new d.ArrayField(kl(), { required: !0, nullable: !1, initial: [] }),
-        connections: new d.ArrayField(Al(), {
+        nodes: new d.ArrayField(Hl(), { required: !0, nullable: !1, initial: [] }),
+        connections: new d.ArrayField(Il(), {
           required: !0,
           nullable: !1,
           initial: []
@@ -1955,7 +1955,7 @@ class Wn extends Error {
   }
   code;
 }
-function cr(n) {
+function ur(n) {
   const e = Number(n);
   if (!Number.isInteger(e) || e < nt || e > Bt)
     throw new Wn(
@@ -1964,23 +1964,23 @@ function cr(n) {
     );
   return e;
 }
-function $l(n, e, t) {
-  const i = cr(t);
+function Vl(n, e, t) {
+  const i = ur(t);
   let o = !1;
   const a = n.map((r) => r.id !== e ? r : (o = !0, { ...r, minimumTier: i }));
   if (!o) throw new Wn("entry-missing", "Genre Ability catalog entry not found.");
   return a;
 }
-function Il(n, e, t) {
+function Yl(n, e, t) {
   let i = !1;
   const o = n.map((a) => a.id !== e ? a : (i = !0, { ...a, snapshot: t }));
   if (!i) throw new Wn("entry-missing", "Genre Ability catalog entry not found.");
   return o;
 }
-function Vl(n, e) {
+function Fl(n, e) {
   return n.filter((t) => t.id !== e);
 }
-function Yl() {
+function Dl() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     abilityUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1996,7 +1996,7 @@ function Yl() {
       required: !0,
       nullable: !1,
       initial: "progression",
-      choices: [...Gs]
+      choices: [...Bs]
     }),
     minimumSuperheroRank: new d.NumberField({
       required: !0,
@@ -2009,11 +2009,11 @@ function Yl() {
     snapshot: At()
   });
 }
-class Fl extends me {
+class Tl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      abilityCatalog: new d.ArrayField(Yl(), {
+      abilityCatalog: new d.ArrayField(Dl(), {
         required: !0,
         nullable: !1,
         initial: []
@@ -2023,14 +2023,14 @@ class Fl extends me {
           required: !0,
           nullable: !1,
           initial: "core",
-          choices: [...xs]
+          choices: [...Ja]
         })
       }),
       legacyKey: new d.StringField({ required: !0, nullable: !1, initial: "" })
     };
   }
 }
-class Dl extends me {
+class zl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -2044,7 +2044,7 @@ class Dl extends me {
         required: !0,
         nullable: !1,
         initial: "choose",
-        choices: [...Ya]
+        choices: [...Fa]
       }),
       category: new d.StringField({ required: !0, nullable: !1, initial: "general" }),
       contexts: new d.ArrayField(
@@ -2064,14 +2064,14 @@ class Dl extends me {
     return (!t.partial || o) && (i.defaultPool === "" || i.defaultPool === null || i.defaultPool === void 0) && (i.defaultPool = "choose"), i;
   }
 }
-class Tl extends me {
+class Nl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
       poolBonuses: new d.SchemaField({ might: E(), speed: E(), intellect: E() }),
       woundBonuses: new d.SchemaField({ minor: E(), moderate: E(), major: E() }),
       edgeGrant: new d.SchemaField({
-        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...nr] }),
+        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ar] }),
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: E(1)
       }),
@@ -2085,9 +2085,9 @@ class Tl extends me {
       skillGrants: new d.ArrayField(Ln(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(jn(), { required: !0, nullable: !1, initial: [] }),
       abilityGrants: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new d.ArrayField(rr(), { required: !0, nullable: !1, initial: [] }),
-      descriptorGrants: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] }),
-      descriptorChoiceGroups: new d.ArrayField(hl(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] }),
+      descriptorGrants: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] }),
+      descriptorChoiceGroups: new d.ArrayField(yl(), { required: !0, nullable: !1, initial: [] }),
       instance: On()
     };
   }
@@ -2099,7 +2099,7 @@ class Tl extends me {
     ])), delete o.weaponFamilyUse, o;
   }
 }
-class zl extends me {
+class Ml extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -2114,7 +2114,7 @@ class zl extends me {
         required: !0,
         nullable: !1,
         initial: "melee",
-        choices: [...Fa]
+        choices: [...Da]
       }),
       rangeCategory: new d.StringField({
         required: !0,
@@ -2196,24 +2196,24 @@ class zl extends me {
     this.baseDamage = Math.max(0, e[this.category] + this.bonusDamage);
   }
 }
-function Nl() {
+function ql() {
   Object.assign(CONFIG.Actor.dataModels, {
-    character: ol,
-    npc: al
+    character: rl,
+    npc: sl
   }), Object.assign(CONFIG.Item.dataModels, {
-    ability: bl,
-    skill: Dl,
-    weapon: zl,
-    armor: vl,
-    shield: wl,
-    equipment: Sl,
-    cypher: Rl,
-    artifact: Cl,
-    descriptor: Pl,
-    characterType: El,
-    focus: Hl,
-    genre: Fl,
-    species: Tl
+    ability: vl,
+    skill: zl,
+    weapon: Ml,
+    armor: El,
+    shield: Cl,
+    equipment: Al,
+    cypher: Sl,
+    artifact: Rl,
+    descriptor: kl,
+    characterType: Pl,
+    focus: $l,
+    genre: Tl,
+    species: Nl
   }), CONFIG.Actor.trackableAttributes = {
     character: {
       bar: ["stats.might", "stats.speed", "stats.intellect"],
@@ -2247,56 +2247,56 @@ const _ = "systems/cypherv2/assets", Ro = {
   lobby: `${_}/cypherlobby.png`,
   turnMarker: `${_}/ui/cypherturnmarker.png`
 };
-function Ml(n) {
+function xl(n) {
   return n in Ro ? Ro[n] : null;
 }
-function ql(n) {
+function Gl(n) {
   return n in Po ? Po[n] : null;
 }
-function xl(n) {
+function Ul(n) {
   if ("prototypeToken.actorLink" in n) return !0;
   const e = n.prototypeToken;
   return !!(e && typeof e == "object" && "actorLink" in e);
 }
-function Ul(n, e) {
-  return n === "character" && !xl(e);
+function Ol(n, e) {
+  return n === "character" && !Ul(e);
 }
-class Gl extends Actor {
+class Bl extends Actor {
   static getDefaultArtwork(e) {
-    const t = Ml(String(e.type ?? ""));
+    const t = xl(String(e.type ?? ""));
     return t ? { img: t, texture: { src: t } } : super.getDefaultArtwork(e);
   }
   async _preCreate(e, t, i) {
     const o = await super._preCreate(e, t, i);
-    return o === !1 ? !1 : (Ul(this.type, e) && this.prototypeToken.updateSource({ actorLink: !0 }), o);
+    return o === !1 ? !1 : (Ol(this.type, e) && this.prototypeToken.updateSource({ actorLink: !0 }), o);
   }
   /**
    * Rule actions will be delegated to services in later phases.
    * The document shell intentionally contains no roll or wound logic.
    */
 }
-function Ol(n) {
+function Ll(n) {
   return Object.keys(n).some((e) => e === "system.poolBonuses" || e.startsWith("system.poolBonuses.") || e === "system.poolBonusChoiceGroups" || e.startsWith("system.poolBonusChoiceGroups.") || e === "system.instance.selections.poolChoices" || e.startsWith("system.instance.selections.poolChoices.") || e === "system.instance.selections.superheroicsPool" || e === "system.superhero.superheroics.poolBonus" || e === "system" && typeof n.system == "object" && n.system !== null && ("poolBonuses" in n.system || "poolBonusChoiceGroups" in n.system || "superhero" in n.system || "instance" in n.system && typeof n.system.instance == "object" && n.system.instance !== null && "selections" in n.system.instance && typeof n.system.instance.selections == "object" && n.system.instance.selections !== null && ("poolChoices" in n.system.instance.selections || "superheroicsPool" in n.system.instance.selections)));
 }
-function Bl(n) {
+function jl(n) {
   if (n["system.equipped"] === !0) return !0;
   const e = n.system;
   return !!(e && typeof e == "object" && e.equipped === !0);
 }
-class Ll extends Item {
+class Wl extends Item {
   static getDefaultArtwork(e) {
-    const t = ql(String(e.type ?? ""));
+    const t = Gl(String(e.type ?? ""));
     return t ? { img: t } : super.getDefaultArtwork(e);
   }
   async update(e, t = {}) {
-    const i = this.actor?.type === "character" ? this.actor : null, o = i && (this.type === "characterType" || this.type === "descriptor" || this.type === "species") && Ol(e), a = o ? Object.fromEntries(V.map((l) => [
+    const i = this.actor?.type === "character" ? this.actor : null, o = i && (this.type === "characterType" || this.type === "descriptor" || this.type === "species") && Ll(e), a = o ? Object.fromEntries(V.map((l) => [
       l,
       Number(i.system.derived.pools[l].max)
     ])) : null, r = o ? Object.fromEntries(V.map((l) => [
       l,
       Number(i.system.stats[l].value)
     ])) : null, s = await super.update(e, t);
-    if (i && (this.type === "shield" || this.type === "armor") && Bl(e) && t.cypherv2CombatEquipmentSync !== !0 && t.cypherv2ShieldEquipmentSync !== !0)
+    if (i && (this.type === "shield" || this.type === "armor") && jl(e) && t.cypherv2CombatEquipmentSync !== !0 && t.cypherv2ShieldEquipmentSync !== !0)
       for (const l of i.items)
         l.id === this.id || l.type !== this.type || l.system.equipped && await l.update(
           { "system.equipped": !1 },
@@ -2306,15 +2306,15 @@ class Ll extends Item {
       const l = {};
       for (const u of V) {
         const c = Number(i.system.derived.pools[u].max);
-        l[`system.stats.${u}.value`] = Ka(r[u], a[u], c);
+        l[`system.stats.${u}.value`] = Xa(r[u], a[u], c);
       }
       await i.update(l, { cypherv2PackagePoolSync: !0 });
     }
     return s;
   }
 }
-function jl() {
-  CONFIG.Actor.documentClass = Gl, CONFIG.Item.documentClass = Ll;
+function _l() {
+  CONFIG.Actor.documentClass = Bl, CONFIG.Item.documentClass = Wl;
 }
 const st = 1, Kt = 20, Kn = 1;
 function Ht(n) {
@@ -2324,17 +2324,17 @@ function Ht(n) {
     Math.max(st, Math.trunc(e))
   ) : Kn;
 }
-function Wl(n) {
+function Kl(n) {
   return Number.isInteger(n) && Number(n) >= st && Number(n) <= Kt;
 }
-function dr(n) {
+function mr(n) {
   const e = Ht(n);
   return e === 1 ? "neutral" : e <= 3 ? "low" : e <= 5 ? "elevated" : e <= 8 ? "severe" : e <= 12 ? "extreme" : e <= 16 ? "catastrophic" : "maximum";
 }
-function ur(n) {
+function pr(n) {
   return (Ht(n) - st) / (Kt - st) * 100;
 }
-const U = {
+const G = {
   difficultyVisibility: "difficultyVisibility",
   showGmRollAudit: "showGmRollAudit",
   defaultDifficultyCeiling: "defaultDifficultyCeiling",
@@ -2346,8 +2346,8 @@ const U = {
   horrorIntrusionRange: "horrorIntrusionRange",
   pendingIntrusionXP: "gmIntrusions"
 };
-function _l(n) {
-  game.settings.register(I, U.difficultyVisibility, {
+function Xl(n) {
+  game.settings.register($, G.difficultyVisibility, {
     name: "CYPHERV2.Settings.DifficultyVisibility.Name",
     hint: "CYPHERV2.Settings.DifficultyVisibility.Hint",
     scope: "world",
@@ -2360,14 +2360,14 @@ function _l(n) {
       rollOnly: "CYPHERV2.Settings.DifficultyVisibility.RollOnly"
     },
     default: "full"
-  }), game.settings.register(I, U.showGmRollAudit, {
+  }), game.settings.register($, G.showGmRollAudit, {
     name: "CYPHERV2.Settings.ShowGmRollAudit.Name",
     hint: "CYPHERV2.Settings.ShowGmRollAudit.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register(I, U.defaultDifficultyCeiling, {
+  }), game.settings.register($, G.defaultDifficultyCeiling, {
     name: "CYPHERV2.Settings.DifficultyCeiling.Name",
     hint: "CYPHERV2.Settings.DifficultyCeiling.Hint",
     scope: "world",
@@ -2375,31 +2375,31 @@ function _l(n) {
     type: Number,
     default: 10,
     range: { min: 0, max: 15, step: 1 }
-  }), game.settings.register(I, U.interfaceHiddenDifficulty, {
+  }), game.settings.register($, G.interfaceHiddenDifficulty, {
     name: "CYPHERV2.Settings.HiddenDifficulty.Name",
     hint: "CYPHERV2.Settings.HiddenDifficulty.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !0
-  }), game.settings.register(I, U.enabledRuleModules, {
+  }), game.settings.register($, G.enabledRuleModules, {
     scope: "world",
     config: !1,
     type: Array,
     default: []
-  }), game.settings.register(I, U.debugRules, {
+  }), game.settings.register($, G.debugRules, {
     name: "CYPHERV2.Settings.DebugRules.Name",
     hint: "CYPHERV2.Settings.DebugRules.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register(I, U.worldSchemaVersion, {
+  }), game.settings.register($, G.worldSchemaVersion, {
     scope: "world",
     config: !1,
     type: Number,
     default: 1
-  }), game.settings.register(I, U.theme, {
+  }), game.settings.register($, G.theme, {
     name: "CYPHERV2.Settings.Theme.Name",
     hint: "CYPHERV2.Settings.Theme.Hint",
     scope: "world",
@@ -2408,7 +2408,7 @@ function _l(n) {
     choices: n.choices(),
     default: "core",
     onChange: (e) => n.apply(e)
-  }), game.settings.register(I, U.horrorIntrusionRange, {
+  }), game.settings.register($, G.horrorIntrusionRange, {
     name: "CYPHERV2.Horror.SettingName",
     hint: "CYPHERV2.Horror.SettingHint",
     scope: "world",
@@ -2424,7 +2424,7 @@ function _l(n) {
       "cypherv2HorrorIntrusionRangeChanged",
       Ht(e)
     )
-  }), game.settings.register(I, U.pendingIntrusionXP, {
+  }), game.settings.register($, G.pendingIntrusionXP, {
     scope: "world",
     config: !1,
     type: Array,
@@ -2437,7 +2437,7 @@ function Me() {
   return {
     base: {
       difficultyCeiling: Number(
-        game.settings.get(I, U.defaultDifficultyCeiling)
+        game.settings.get($, G.defaultDifficultyCeiling)
       ),
       assetLimit: 0
     },
@@ -2445,29 +2445,29 @@ function Me() {
   };
 }
 function ot() {
-  const n = game.settings.get(I, U.enabledRuleModules);
+  const n = game.settings.get($, G.enabledRuleModules);
   return Array.isArray(n) ? n.filter((e) => typeof e == "string") : [];
 }
 function Di() {
-  const n = game.settings.get(I, U.difficultyVisibility);
+  const n = game.settings.get($, G.difficultyVisibility);
   return n === "resultOnly" || n === "rollOnly" ? n : "full";
 }
-function mr() {
-  return game.settings.get(I, U.interfaceHiddenDifficulty) === !0;
+function fr() {
+  return game.settings.get($, G.interfaceHiddenDifficulty) === !0;
 }
 function Ti() {
-  return game.settings.get(I, U.showGmRollAudit) === !0;
+  return game.settings.get($, G.showGmRollAudit) === !0;
 }
 function En() {
   return typeof game > "u" ? Kn : Ht(
-    game.settings.get(I, U.horrorIntrusionRange)
+    game.settings.get($, G.horrorIntrusionRange)
   );
 }
-async function Kl(n) {
+async function Jl(n) {
   if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.GMOnly"));
-  if (!Wl(n))
+  if (!Kl(n))
     throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.InvalidRange"));
-  return await game.settings.set(I, U.horrorIntrusionRange, n), n;
+  return await game.settings.set($, G.horrorIntrusionRange, n), n;
 }
 const Xn = {
   tag: "form",
@@ -2499,14 +2499,14 @@ function Zn(n, e, t) {
       t.has(i.dataset.action ?? "") && (i.setAttribute("aria-disabled", "true"), i instanceof HTMLButtonElement ? i.disabled = !0 : (i.removeAttribute("tabindex"), i.setAttribute("inert", "")));
   }
 }
-const Xl = Object.freeze({ minor: 2, moderate: 5 }), pr = 10;
-class Jl {
+const Ql = Object.freeze({ minor: 2, moderate: 5 }), hr = 10;
+class Zl {
   #e;
   constructor(e) {
     this.#e = e;
   }
   costFor(e) {
-    return Xl[e];
+    return Ql[e];
   }
   canApply(e) {
     try {
@@ -2551,7 +2551,7 @@ class Jl {
         failure: "major-not-rallyable"
       };
     const r = a ?? this.costFor(i);
-    if (!Number.isInteger(r) || r < 0 || r > pr)
+    if (!Number.isInteger(r) || r < 0 || r > hr)
       return {
         success: !1,
         severity: i,
@@ -2603,11 +2603,11 @@ class Jl {
     }), a;
   }
 }
-function fr(n) {
+function gr(n) {
   return n === "one-action" ? ["normal", "lastAction", "nonRest"] : ["normal", "nonRest"];
 }
-function Ql(n, e) {
-  if (!fr(n).includes(e))
+function ec(n, e) {
+  if (!gr(n).includes(e))
     throw new Error(`Recovery mode '${e}' is not available for '${n}'.`);
   return e === "nonRest" ? { kind: "nonRest", lastAction: !1 } : { kind: "normal", lastAction: e === "lastAction" };
 }
@@ -2642,7 +2642,7 @@ function Pi(n) {
     "'": "&#039;"
   })[e]);
 }
-async function Zl(n, e, t) {
+async function tc(n, e, t) {
   const i = n.system.wounds[e].find((a) => a.id === t);
   if (!i) {
     _e(new Error(`Wound '${t}' was not found in ${e} Wounds.`));
@@ -2671,7 +2671,7 @@ async function Zl(n, e, t) {
       _e(a);
     }
 }
-async function ec(n, e, t) {
+async function ic(n, e, t) {
   if (await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Wounds.DeleteTitle") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Wounds.DeleteConfirm")}</p></div>`,
@@ -2686,7 +2686,7 @@ async function ec(n, e, t) {
       _e(o);
     }
 }
-async function tc(n) {
+async function nc(n) {
   const e = await eo(
     game.i18n.localize("CYPHERV2.Actions.ApplyWound"),
     `<div class="cypherv2-dialog-fields">
@@ -2712,7 +2712,7 @@ async function tc(n) {
       _e(t);
     }
 }
-async function ic(n) {
+async function oc(n) {
   const e = await eo(
     game.i18n.localize("CYPHERV2.Actions.PoolDamage"),
     `<div class="cypherv2-dialog-fields">
@@ -2773,7 +2773,7 @@ async function ko(n, e, t) {
       return;
     }
   }
-  const s = fr(a), l = await foundry.applications.api.DialogV2.input({
+  const s = gr(a), l = await foundry.applications.api.DialogV2.input({
     window: { title: `${game.i18n.localize("CYPHERV2.Actions.Recovery")} — ${game.i18n.localize(`CYPHERV2.Recovery.${a}`)}` },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-dialog">
       <header class="cypherv2-dialog-heading">
@@ -2796,7 +2796,7 @@ async function ko(n, e, t) {
   });
   if (l)
     try {
-      const u = Ql(a, qe(l, "mode"));
+      const u = ec(a, qe(l, "mode"));
       if (u.kind === "nonRest") {
         await game.cypherv2.services.recovery.completeNonRest(n, a, r), ui.notifications.info(game.i18n.localize("CYPHERV2.Recovery.NonRestCompleted"));
         return;
@@ -2851,10 +2851,10 @@ async function ko(n, e, t) {
       _e(u);
     }
 }
-async function nc(n) {
+async function ac(n) {
   const e = game.cypherv2.services.rally, t = n.system.stats.might.value, i = n.system.derived.pools.might.max, o = e.costFor("minor"), a = e.costFor("moderate"), r = e.preview(n, "minor", o), s = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Actions.Rally") },
-    content: oc(
+    content: rc(
       t,
       i,
       o,
@@ -2863,7 +2863,7 @@ async function nc(n) {
     ),
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Rally") },
-    render: (l, u) => ac(u.element, n)
+    render: (l, u) => sc(u.element, n)
   });
   if (s)
     try {
@@ -2879,7 +2879,7 @@ async function nc(n) {
       _e(l);
     }
 }
-function oc(n, e, t = 2, i = 5, o = null) {
+function rc(n, e, t = 2, i = 5, o = null) {
   const a = game.i18n.localize("CYPHERV2.Wounds.Severity.minor"), r = game.i18n.localize("CYPHERV2.Wounds.Severity.moderate");
   return `<div class="cypherv2 cypherv2-dialog cypherv2-rally-dialog" data-current-might="${n}" data-max-might="${e}">
     <header class="cypherv2-dialog-heading"><span>${game.i18n.localize("CYPHERV2.Actions.Rally")}</span><strong data-rally-heading>${a}</strong></header>
@@ -2889,7 +2889,7 @@ function oc(n, e, t = 2, i = 5, o = null) {
         <label class="cypherv2-dialog-toggle"><input type="radio" name="severity" value="moderate" data-default-cost="${i}"><span>${r}</span></label>
       </div>
       <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Rally.Cost")}
-        <input name="cost" type="number" min="0" max="${pr}" step="1" value="${t}">
+        <input name="cost" type="number" min="0" max="${hr}" step="1" value="${t}">
       </label>
     </section>
     <section class="cypherv2-dialog-section" aria-label="${game.i18n.localize("CYPHERV2.Roll.Summary")}">
@@ -2900,7 +2900,7 @@ function oc(n, e, t = 2, i = 5, o = null) {
     </section>
   </div>`;
 }
-function ac(n, e) {
+function sc(n, e) {
   const t = n.querySelector('input[name="cost"]'), i = [...n.querySelectorAll('input[name="severity"]')], o = n.querySelector("[data-rally-cost]"), a = n.querySelector("[data-rally-after]"), r = n.querySelector("[data-rally-heading]"), s = n.querySelector("[data-rally-error]"), l = n.querySelector('button[data-action="ok"]');
   if (!t) return;
   const u = () => {
@@ -2912,7 +2912,7 @@ function ac(n, e) {
   });
   t.addEventListener("input", u), u();
 }
-async function rc(n, e) {
+async function lc(n, e) {
   const t = vn(n.system, e), i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Overrides.Edit") },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-override-dialog">
@@ -2949,10 +2949,10 @@ function wi(n, e) {
   if (!Number.isInteger(t)) throw new Error(`${e} must be a whole number.`);
   return t;
 }
-function hr(n) {
+function yr(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-function sc(n, e) {
+function cc(n, e) {
   for (const t of ae) {
     if (!Number.isInteger(e[t])) throw new Error(`${t} modifier must be a whole number.`);
     if (n[t] + e[t] < 1)
@@ -2960,7 +2960,7 @@ function sc(n, e) {
   }
   return { ...e };
 }
-async function lc(n) {
+async function dc(n) {
   const e = n.system.derived.wounds.calculatedCapacities, t = n.system.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Overrides.WoundsEdit") },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-wound-override-dialog">
@@ -2979,23 +2979,23 @@ async function lc(n) {
   });
   if (i)
     try {
-      const o = sc(e, {
+      const o = cc(e, {
         minor: wi(i.minor, "Minor"),
         moderate: wi(i.moderate, "Moderate"),
         major: wi(i.major, "Major")
       });
       await n.update({ "system.overrides.wounds": o });
     } catch (o) {
-      hr(o);
+      yr(o);
     }
 }
-function cc(n) {
+function uc(n) {
   return Ae.map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Recovery.${e}`)}</option>`).join("");
 }
-function gr(n) {
+function br(n) {
   return `<div class="recovery-override-slot" data-recovery-slot-id="${Ao(n.id)}">
     <i class="fa-solid fa-grip-lines" aria-hidden="true"></i>
-    <select name="slotType__${Ao(n.id)}" aria-label="${game.i18n.localize("CYPHERV2.Overrides.RecoverySlotType")}">${cc(n.type)}</select>
+    <select name="slotType__${Ao(n.id)}" aria-label="${game.i18n.localize("CYPHERV2.Overrides.RecoverySlotType")}">${uc(n.type)}</select>
     <span class="recovery-slot-state">${n.used ? game.i18n.localize("CYPHERV2.Overrides.Used") : game.i18n.localize("CYPHERV2.Overrides.Available")}</span>
     <span class="character-settings-row-actions">
       <button type="button" class="cypherv2-icon-action" data-recovery-slot-move="up" title="${game.i18n.localize("CYPHERV2.Actions.MoveUp")}"><i class="fa-solid fa-arrow-up"></i></button>
@@ -3004,12 +3004,12 @@ function gr(n) {
     </span>
   </div>`;
 }
-function dc(n, e) {
+function mc(n, e) {
   return `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-override-dialog">
     <section class="cypherv2-dialog-section">
       <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Overrides.RecoveryTrack")}</span>
       <input type="hidden" name="slotOrder" value="${n.map((t) => t.id).join(",")}">
-      <div class="recovery-override-slots">${n.map(gr).join("")}</div>
+      <div class="recovery-override-slots">${n.map(br).join("")}</div>
       <button type="button" class="compact-inline-action recovery-slot-add" data-recovery-slot-add><i class="fa-solid fa-plus"></i> ${game.i18n.localize("CYPHERV2.Overrides.AddRecoverySlot")}</button>
     </section>
     <section class="cypherv2-dialog-section">
@@ -3027,20 +3027,20 @@ function _i(n) {
     a && (a.disabled = i === 0), r && (r.disabled = i === e.length - 1), s && (s.disabled = e.length <= 1);
   }
 }
-function uc(n) {
+function pc(n) {
   _i(n), n.addEventListener("click", (e) => {
     const t = e.target instanceof Element ? e.target.closest("button") : null;
     if (!t) return;
     const i = t.closest("[data-recovery-slot-id]"), o = n.querySelector(".recovery-override-slots");
     if (t.hasAttribute("data-recovery-slot-add") && o) {
       const a = { id: Oe(), type: "one-action", used: !1 };
-      o.insertAdjacentHTML("beforeend", gr(a)), _i(n);
+      o.insertAdjacentHTML("beforeend", br(a)), _i(n);
       return;
     }
     !i || !o || (t.hasAttribute("data-recovery-slot-remove") && i.remove(), t.dataset.recoverySlotMove === "up" && i.previousElementSibling && o.insertBefore(i, i.previousElementSibling), t.dataset.recoverySlotMove === "down" && i.nextElementSibling && o.insertBefore(i.nextElementSibling, i), _i(n));
   });
 }
-function mc(n, e) {
+function fc(n, e) {
   const t = String(n.slotOrder ?? "").split(",").filter(Boolean);
   if (t.length === 0 || new Set(t).size !== t.length) throw new Error("Recovery track must contain unique slots.");
   const i = new Map(e.map((r) => [r.id, r])), o = t.map((r) => {
@@ -3051,17 +3051,17 @@ function mc(n, e) {
   if (a < -20 || a > 20) throw new Error("Recovery roll modifier must be between -20 and 20.");
   return { slots: o, rollModifier: a };
 }
-async function pc(n) {
+async function hc(n) {
   const e = n.system.recovery.slots, t = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Overrides.RecoveryEdit") },
-    content: dc(e, n.system.recovery.rollModifier),
+    content: mc(e, n.system.recovery.rollModifier),
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Save") },
-    render: (i, o) => uc(o.element)
+    render: (i, o) => pc(o.element)
   });
   if (t)
     try {
-      const i = mc(t, e);
+      const i = fc(t, e);
       await n.update({
         "system.recovery.slots": i.slots,
         "system.recovery.used": Ct(i.slots),
@@ -3069,14 +3069,14 @@ async function pc(n) {
         "system.recovery.rollModifier": i.rollModifier
       });
     } catch (i) {
-      hr(i);
+      yr(i);
     }
 }
-async function fc(n) {
+async function gc(n) {
   await n.update({ "system.overrides.wounds": { minor: 0, moderate: 0, major: 0 } });
 }
-async function hc(n) {
-  const e = Es(n.system.recovery.slots);
+async function yc(n) {
+  const e = Ss(n.system.recovery.slots);
   await n.update({
     "system.recovery.slots": e,
     "system.recovery.used": Ct(e),
@@ -3084,14 +3084,14 @@ async function hc(n) {
     "system.recovery.rollModifier": 0
   });
 }
-function gc(n) {
+function bc(n) {
   const e = n?.token?.texture?.src;
   if (typeof e == "string" && e.trim()) return e;
   const t = n?.img;
   return typeof t == "string" ? t.trim() : "";
 }
 function Se(n) {
-  const e = gc(n), t = n?.system && typeof n.system == "object" ? n.system : null, i = t?.appearance && typeof t.appearance == "object" ? t.appearance : null, o = typeof i?.color == "string" ? i.color : "", a = tr(o), r = er(o), s = [
+  const e = bc(n), t = n?.system && typeof n.system == "object" ? n.system : null, i = t?.appearance && typeof t.appearance == "object" ? t.appearance : null, o = typeof i?.color == "string" ? i.color : "", a = nr(o), r = ir(o), s = [
     ...a ? [`--cypherv2-chat-accent: ${a}`] : [],
     ...r ? [`--cypherv2-chat-tint: ${r}`] : []
   ].join("; ");
@@ -3100,7 +3100,7 @@ function Se(n) {
     ...s ? { chatCardStyle: s } : {}
   };
 }
-function yc(n, e = []) {
+function wc(n, e = []) {
   return {
     kind: "gm-intrusion",
     intrusionId: n.id,
@@ -3118,7 +3118,7 @@ function yc(n, e = []) {
     }))
   };
 }
-function bc(n) {
+function vc(n) {
   const e = n.affectedCharacters ?? [], t = e.find((i) => i.actorId === n.sourceActorId) ?? (n.sourceActorId ? {
     actorId: n.sourceActorId,
     actorName: n.sourceActorName,
@@ -3148,9 +3148,9 @@ function Ki(n) {
   const e = n;
   return e.kind === "gm-intrusion" && typeof e.intrusionId == "string" && typeof e.sourceActorId == "string" && (e.mode === "targeted" || e.mode === "group" || e.mode === "free") && (e.status === "pending" || e.status === "resolving" || e.status === "resolved") && Array.isArray(e.recipients);
 }
-class wc {
+class Cc {
   async publish(e, t, i = []) {
-    const o = yc(e, i), a = await this.render(o, t);
+    const o = wc(e, i), a = await this.render(o, t);
     return await ChatMessage.create({
       speaker: ChatMessage.getSpeaker(
         t ? { actor: t } : void 0
@@ -3167,17 +3167,17 @@ class wc {
     return foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/gm-intrusion-card.hbs",
       {
-        ...bc(e),
+        ...vc(e),
         ...Se(t)
       }
     );
   }
 }
-const Vt = "system." + I;
+const Vt = "system." + $;
 function Lt() {
   return [...game.users];
 }
-function yr() {
+function wr() {
   return Lt().filter((n) => n.active);
 }
 function ri() {
@@ -3188,7 +3188,7 @@ function Ve(n) {
   return e?.type === "character" ? e : null;
 }
 function Xi() {
-  return yr().filter((n) => n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
+  return wr().filter((n) => n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
 }
 function Yt(n, e) {
   return Lt().filter((t) => !t.isGM && (!e || t.active)).filter((t) => n.testUserPermission(t, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)).sort((t, i) => t.id.localeCompare(i.id));
@@ -3206,15 +3206,15 @@ function Ho(n) {
   const e = n;
   return typeof e.intrusionId == "string" && e.intrusionId.length > 0 && typeof e.messageId == "string" && e.messageId.length > 0 && typeof e.sourceActorId == "string" && e.sourceActorId.length > 0 && Number.isInteger(e.amount) && Number(e.amount) > 0 && (e.responderUserId === void 0 || typeof e.responderUserId == "string");
 }
-function vc(n) {
+function Ec(n) {
   if (!n || typeof n != "object") return !1;
   const e = n;
   return typeof e.intrusionId == "string" && e.intrusionId.length > 0 && e.messageId === void 0 && typeof e.sourceActorId == "string" && e.sourceActorId.length > 0 && Number.isInteger(e.amount) && Number(e.amount) > 0 && (e.responderUserId === void 0 || typeof e.responderUserId == "string");
 }
-function Cc(n, e) {
+function Rc(n, e) {
   return JSON.stringify(n) === JSON.stringify(e);
 }
-class Ec {
+class Pc {
   #e;
   #t;
   #i = /* @__PURE__ */ new Set();
@@ -3226,7 +3226,7 @@ class Ec {
   initialize() {
     game.socket.on(Vt, (e) => {
       this.#d(e).catch((t) => {
-        console.error(I + " | GM Intrusion socket error", t), game.user.isGM && ui.notifications.error(t instanceof Error ? t.message : String(t));
+        console.error($ + " | GM Intrusion socket error", t), game.user.isGM && ui.notifications.error(t instanceof Error ? t.message : String(t));
       });
     }), Hooks.on("renderChatMessageHTML", (e, t) => {
       this.#l(e, t);
@@ -3327,7 +3327,7 @@ class Ec {
     Hooks.callAll("cypherv2GMIntrusionCreated", a);
   }
   #l(e, t) {
-    const i = e.getFlag(I, "gmIntrusion");
+    const i = e.getFlag($, "gmIntrusion");
     if (!Ki(i)) return;
     const o = this.#m().find((s) => s.intrusionId === i.intrusionId), a = o ? Ve(o.sourceActorId) : null, r = i.status === "pending" && (game.user.isGM || !!(o && a && this.#a(a, o)));
     for (const s of t.querySelectorAll("[data-action='assignSharedIntrusionXp']")) {
@@ -3355,10 +3355,10 @@ class Ec {
     }
     let a = e.responderUserId ? Lt().find((l) => l.id === e.responderUserId) ?? null : null;
     (!a || !Yt(i, !1).some((l) => l.id === a?.id)) && (a = Ji(Yt(i, !1)), a && (e = { ...e, responderUserId: a.id }, await this.#f(e)));
-    const r = o.getFlag(I, "gmIntrusion");
+    const r = o.getFlag($, "gmIntrusion");
     if (!Ki(r) || r.status !== "pending") return;
     const s = si(ri(), i.id);
-    (t || !Cc(r.recipients, s)) && await this.#t.update(o, { ...r, recipients: s }, i);
+    (t || !Rc(r.recipients, s)) && await this.#t.update(o, { ...r, recipients: s }, i);
   }
   async #s(e, t, i) {
     if (this.#i.has(e))
@@ -3371,11 +3371,11 @@ class Ec {
       const u = Ve(t);
       if (r = game.messages.get(l.messageId) ?? null, !s || !u || !r)
         throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.CharacterMissing"));
-      const c = r.getFlag(I, "gmIntrusion");
+      const c = r.getFlag($, "gmIntrusion");
       if (!Ki(c) || c.intrusionId !== e || c.status !== "pending")
         throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
       a = c;
-      const p = yr().find((f) => f.id === i);
+      const p = wr().find((f) => f.id === i);
       if (!(p?.isGM === !0 || !!(p && p.id === l.responderUserId && Yt(s, !0).some((f) => f.id === p.id)))) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NotAuthorized"));
       const y = si(ri(), s.id).find((f) => f.actorId === u.id);
       if (!y) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.RecipientUnavailable"));
@@ -3421,7 +3421,7 @@ class Ec {
     }
   }
   #m() {
-    const e = game.settings.get(I, U.pendingIntrusionXP);
+    const e = game.settings.get($, G.pendingIntrusionXP);
     return Array.isArray(e) ? e.filter(Ho).map((t) => ({
       intrusionId: t.intrusionId,
       messageId: t.messageId,
@@ -3437,17 +3437,17 @@ class Ec {
   }
   async #f(e) {
     const t = this.#m(), i = t.findIndex((o) => o.intrusionId === e.intrusionId);
-    i < 0 ? t.push(e) : t[i] = e, await game.settings.set(I, U.pendingIntrusionXP, t);
+    i < 0 ? t.push(e) : t[i] = e, await game.settings.set($, G.pendingIntrusionXP, t);
   }
   async #p(e) {
     await game.settings.set(
-      I,
-      U.pendingIntrusionXP,
+      $,
+      G.pendingIntrusionXP,
       this.#m().filter((t) => t.intrusionId !== e)
     );
   }
   async #g() {
-    const e = game.settings.get(I, U.pendingIntrusionXP), t = [];
+    const e = game.settings.get($, G.pendingIntrusionXP), t = [];
     for (const i of Array.isArray(e) ? e : []) {
       if (Ho(i)) {
         Ve(i.sourceActorId) && game.messages.get(i.messageId) && t.push({
@@ -3459,9 +3459,9 @@ class Ec {
         });
         continue;
       }
-      if (!vc(i)) continue;
+      if (!Ec(i)) continue;
       const o = Ve(i.sourceActorId), a = [...game.messages].find(
-        (u) => u.getFlag(I, "gmIntrusionId") === i.intrusionId
+        (u) => u.getFlag($, "gmIntrusionId") === i.intrusionId
       );
       if (!o || !a) continue;
       const r = i.responderUserId ? Lt().find((u) => u.id === i.responderUserId) : Ji(Yt(o, !1)), s = this.#e.policy(Me().enabledRuleModuleIds ?? []), l = {
@@ -3483,15 +3483,15 @@ class Ec {
         ...r ? { responderUserId: r.id } : {}
       });
     }
-    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set(I, U.pendingIntrusionXP, t);
+    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set($, G.pendingIntrusionXP, t);
   }
   #u() {
     return game.user.isGM && Xi()?.id === game.user.id;
   }
 }
 let xt = null;
-function Rc(n, e) {
-  return xt = new Ec(n, e), xt.initialize(), xt;
+function Sc(n, e) {
+  return xt = new Pc(n, e), xt.initialize(), xt;
 }
 function Xt() {
   if (!xt) throw new Error("GM Intrusion controller is not ready.");
@@ -3507,11 +3507,11 @@ function ke(n, e) {
   const t = Math.abs(Math.trunc(e));
   return t === 0 ? "0" : `${n === "ease" ? "+" : "-"}${t}`;
 }
-function Pc(n) {
+function kc(n) {
   if (!Number.isFinite(n)) throw new Error("Net step modifier must be finite.");
   return n === 0 ? "0" : ke(n > 0 ? "ease" : "hinder", n);
 }
-const $o = /* @__PURE__ */ new Set([
+const Io = /* @__PURE__ */ new Set([
   "manual.skill",
   "manual.other-ease",
   "manual.other-hindrance",
@@ -3528,7 +3528,7 @@ function io(n) {
 function no(n, e) {
   return e(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function Io(n, e) {
+function $o(n, e) {
   return e.context.difficulty.mode === "hidden" && n.id.startsWith("npc-modification.");
 }
 function Vo(n, e) {
@@ -3539,8 +3539,8 @@ function Vo(n, e) {
     direction: n.direction
   };
 }
-function Sc(n, e, t) {
-  const i = n.breakdown.filter((c) => Io(c, n)), o = n.breakdown.filter((c) => !Io(c, n)), a = o.filter((c) => $o.has(c.id)).map((c) => Vo(c, t)), r = o.filter((c) => !$o.has(c.id)).map((c) => Vo(c, t)), s = n.context.difficulty.mode === "known", l = n.context.pool;
+function Ac(n, e, t) {
+  const i = n.breakdown.filter((c) => $o(c, n)), o = n.breakdown.filter((c) => !$o(c, n)), a = o.filter((c) => Io.has(c.id)).map((c) => Vo(c, t)), r = o.filter((c) => !Io.has(c.id)).map((c) => Vo(c, t)), s = n.context.difficulty.mode === "known", l = n.context.pool;
   if (l === null) throw new Error("Configured rolls require a Pool.");
   const u = e.system.stats[l].value;
   return {
@@ -3549,7 +3549,7 @@ function Sc(n, e, t) {
     poolLabel: no(l, t),
     modifiers: a,
     automaticModifiers: r,
-    netModifier: i.length === 0 ? Pc(n.netSteps) : null,
+    netModifier: i.length === 0 ? kc(n.netSteps) : null,
     hiddenModifierCount: i.length,
     difficultyMode: n.context.difficulty.mode,
     baseDifficulty: s ? n.context.difficulty.value : null,
@@ -3579,31 +3579,31 @@ function Yo(n) {
 function re(n, e) {
   return String(n[e] ?? "");
 }
-function G(n, e) {
+function U(n, e) {
   return Number(n[e] ?? 0);
 }
-function kc(n, e) {
+function Hc(n, e) {
   const t = n[e];
   return t === !0 || t === "true" || t === "on";
 }
 function Jt(n, e) {
   const t = re(n, "difficulty").trim();
   return t ? {
-    mode: kc(n, "hidden") ? "hidden" : "known",
+    mode: Hc(n, "hidden") ? "hidden" : "known",
     value: Number(t)
   } : { mode: "unknown" };
 }
 function Qt(n) {
-  const e = G(n, "situationalSteps");
+  const e = U(n, "situationalSteps");
   return re(n, "situationalDirection") === "hinder" ? { otherEase: 0, otherHindrance: e } : { otherEase: e, otherHindrance: 0 };
 }
 function ge(n, e = 0) {
   return Array.from({ length: n + 1 }, (t, i) => `<option value="${i}"${i === e ? " selected" : ""}>${i}</option>`).join("");
 }
-function br(n) {
+function vr(n) {
   return ["might", "speed", "intellect"].map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${lt(no(e, io))}</option>`).join("");
 }
-const Ac = Object.freeze({
+const Ic = Object.freeze({
   inability: -1,
   untrained: 0,
   trained: 1,
@@ -3611,7 +3611,7 @@ const Ac = Object.freeze({
   expert: 3
 });
 function gt(n) {
-  return Ac[n];
+  return Ic[n];
 }
 function oo(n = 0, e = "") {
   return ee.map((t) => {
@@ -3705,7 +3705,7 @@ function Dt(n, e, t) {
   const i = n.querySelector(`[data-roll-summary="${e}"]`);
   i && (i.textContent = t);
 }
-function Hc(n, e, t) {
+function $c(n, e, t) {
   Dt(n, "label", e.rollLabel), Dt(n, "pool", e.poolLabel), Ke(n, "modifiers", Fo(e.modifiers)), Dt(n, "net", e.netModifier ?? game.i18n.localize("CYPHERV2.Roll.HiddenValue"));
   const i = n.querySelector('[data-roll-summary-section="automatic"]');
   i && (i.hidden = e.automaticModifiers.length === 0), Ke(n, "automatic", Fo(e.automaticModifiers));
@@ -3759,9 +3759,9 @@ function ii(n, e) {
   const t = () => {
     try {
       const i = e.buildRequest(Yo(n)), o = game.cypherv2.services.rolls.preview(e.actor, i, e.policyRequest);
-      Hc(
+      $c(
         n,
-        Sc(o, e.actor, io),
+        Ac(o, e.actor, io),
         e.attackSummary?.(Yo(n), o)
       );
     } catch (i) {
@@ -3775,25 +3775,25 @@ function Do(n) {
     label: "CYPHERV2.Roll.TaskRoll",
     pool: re(n, "pool"),
     difficulty: Jt(n),
-    skillSteps: G(n, "skillSteps"),
-    assets: G(n, "assets"),
-    paidEffort: G(n, "paidEffort"),
-    freeEffort: G(n, "freeEffort"),
+    skillSteps: U(n, "skillSteps"),
+    assets: U(n, "assets"),
+    paidEffort: U(n, "paidEffort"),
+    freeEffort: U(n, "freeEffort"),
     ...Qt(n),
     purpose: "task"
   };
 }
-function $c(n) {
+function Vc(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-async function Ic(n, e = "might") {
+async function Yc(n, e = "might") {
   const t = Me(), i = game.cypherv2.rules.resolveDifficultyPolicy(
     t.base,
     t.enabledRuleModuleIds ?? []
   ), o = `
-    ${ei(i.difficultyCeiling, mr())}
+    ${ei(i.difficultyCeiling, fr())}
     <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}
-      <select name="pool">${br(e)}</select>
+      <select name="pool">${vr(e)}</select>
     </label>
     <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}
       <select name="skillSteps">${oo()}</select>
@@ -3833,13 +3833,13 @@ async function Ic(n, e = "might") {
       );
       await to(n, r);
     } catch (r) {
-      $c(r);
+      Vc(r);
     }
 }
 function Qi(n, e) {
   return n === e ? " selected" : "";
 }
-function Vc(n, e) {
+function Fc(n, e) {
   const t = re(n, "skillRank");
   return ee.includes(t) ? t : e;
 }
@@ -3847,22 +3847,22 @@ function To(n, e, t) {
   const i = re(e, "pool");
   return game.cypherv2.services.skills.buildRollRequest(n, {
     ...i === "might" || i === "speed" || i === "intellect" ? { pool: i } : {},
-    rankOverride: Vc(e, n.system.rank),
+    rankOverride: Fc(e, n.system.rank),
     difficulty: Jt(e),
-    assets: G(e, "assets"),
-    paidEffort: G(e, "paidEffort"),
-    freeEffort: G(e, "freeEffort"),
+    assets: U(e, "assets"),
+    paidEffort: U(e, "paidEffort"),
+    freeEffort: U(e, "freeEffort"),
     ...Qt(e),
     enabledRuleModuleIds: t
   });
 }
-async function Yc(n, e) {
+async function Dc(n, e) {
   const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = game.cypherv2.services.skills.configuredPool(e) ?? "choose", r = `
     ${a === "choose" ? `<option value="" selected disabled>${game.i18n.localize("CYPHERV2.Skill.ChoosePool")}</option>` : ""}
     <option value="might"${Qi(a, "might")}>${game.i18n.localize("CYPHERV2.Pools.Might")}</option>
     <option value="speed"${Qi(a, "speed")}>${game.i18n.localize("CYPHERV2.Pools.Speed")}</option>
     <option value="intellect"${Qi(a, "intellect")}>${game.i18n.localize("CYPHERV2.Pools.Intellect")}</option>`, s = ee.map((c) => `<option value="${c}"${c === e.system.rank ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Skill.Ranks.${c}`)} · ${gt(c) === 0 ? game.i18n.localize("CYPHERV2.Roll.Unmodified") : gt(c) > 0 ? `+${gt(c)}` : gt(c)}</option>`).join(""), l = `
-    ${ei(o.difficultyCeiling, mr())}
+    ${ei(o.difficultyCeiling, fr())}
     <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${r}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillRank">${s}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
@@ -3908,7 +3908,7 @@ function jt(n, e) {
     testUserPermission: n.testUserPermission.bind(n)
   });
 }
-function wr(n) {
+function Cr(n) {
   const e = n.document ?? n, t = n.actor ?? e.actor ?? null;
   return !(t instanceof Actor) || t.type !== "npc" ? null : jt(t, {
     actorId: t.id,
@@ -3917,7 +3917,7 @@ function wr(n) {
     ...e.uuid ? { tokenUuid: e.uuid } : {}
   });
 }
-function vr(n) {
+function Er(n) {
   const e = n.document ?? n, t = n.actor ?? e.actor ?? null;
   return !(t instanceof Actor) || t.type !== "character" ? null : jt(t, {
     actorId: t.id,
@@ -3946,29 +3946,29 @@ async function Pn(n) {
   }
   return n.tokenId || n.tokenUuid ? null : Rn(n);
 }
-function Fc(n, e) {
+function Tc(n, e) {
   return String(n[e] ?? "");
 }
-function Cr(n) {
+function Rr(n) {
   return [...n.items].filter((e) => e instanceof Item && e.type === "skill").map((e) => e).sort((e, t) => e.name.localeCompare(t.name));
 }
-function Er(n, e = "manual:0") {
+function Pr(n, e = "manual:0") {
   const t = e.startsWith("manual:") ? Number(e.slice(7)) : null;
   return [
     `<optgroup label="${game.i18n.localize("CYPHERV2.Roll.ManualSkillLevel")}">${oo(t, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("CYPHERV2.Skill.Title")}">`,
-    ...Cr(n).map((i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${i.system.rank}`)}</option>`),
+    ...Rr(n).map((i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${i.system.rank}`)}</option>`),
     "</optgroup>"
   ].join("");
 }
-function Rr(n, e) {
-  return Cr(n).find((t) => t.id === e);
+function Sr(n, e) {
+  return Rr(n).find((t) => t.id === e);
 }
-function Pr(n) {
+function kr(n) {
   const e = re(n, "skillId");
   return e.startsWith("manual:") ? Number(e.slice(7)) : 0;
 }
-function Dc(n, e) {
+function zc(n, e) {
   const t = e === "dodge";
   return {
     pool: t ? "speed" : "might",
@@ -3976,7 +3976,7 @@ function Dc(n, e) {
     armorSteps: t ? n.system.derived.combat.armor.dodgeHindrance : n.system.derived.combat.armor.blockEase
   };
 }
-async function Sr(n) {
+async function Ar(n) {
   if (!n.flatMap((o) => o.execution.result.naturalEffects).find((o) => o.status === "available")) return null;
   const t = n[0]?.execution.result.naturalRoll ?? 19, i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Combat.NaturalChoice.Title") },
@@ -3992,22 +3992,22 @@ async function Sr(n) {
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Apply") }
   });
-  return i && Fc(i, "choice") === "damage" ? "damage" : "effect";
+  return i && Tc(i, "choice") === "damage" ? "damage" : "effect";
 }
-async function Tc(n, e) {
+async function Nc(n, e) {
   const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = game.cypherv2.services.combat.policy(i), r = game.cypherv2.services.targets.nativeNpcTargets(), l = r.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${r.map((w) => w.name).join(", ")}</span><small>${game.i18n.localize("CYPHERV2.Combat.HiddenTargetDifficulty")}</small></div>` : ei(o.difficultyCeiling, !0), u = game.cypherv2.services.combat.weaponAttackPool(e), c = `manual:${gt(e.system.skillLevel ?? "untrained")}`, p = (w) => {
-    const C = Rr(n, re(w, "skillId"));
+    const C = Sr(n, re(w, "skillId"));
     return {
       pool: re(w, "pool"),
       targets: r,
       difficulty: Jt(w),
       ...C ? { skill: C } : {},
-      skillSteps: Pr(w),
-      assets: G(w, "assets"),
-      paidEffort: G(w, "paidEffort"),
-      damageEffort: G(w, "damageEffort"),
-      freeDamageEffort: G(w, "freeDamageEffort"),
-      freeEffort: G(w, "freeEffort"),
+      skillSteps: kr(w),
+      assets: U(w, "assets"),
+      paidEffort: U(w, "paidEffort"),
+      damageEffort: U(w, "damageEffort"),
+      freeDamageEffort: U(w, "freeDamageEffort"),
+      freeEffort: U(w, "freeEffort"),
       ...Qt(w),
       extremeRange: re(w, "extremeRange") === "true" || w.extremeRange === !0 || w.extremeRange === "on",
       enabledRuleModuleIds: i
@@ -4018,8 +4018,8 @@ async function Tc(n, e) {
     return C;
   }, m = game.cypherv2.services.combat.weaponBaseDamage(e, a), y = `
     ${l}
-    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${br(u)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Er(n, c)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${vr(u)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Pr(n, c)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Combat.DamageEffort")}<select name="damageEffort">${ge(n.system.derived.effort.max)}</select></label>
@@ -4057,7 +4057,7 @@ async function Tc(n, e) {
         p(f),
         t
       );
-      const C = await Sr(w);
+      const C = await Ar(w);
       C && (w = game.cypherv2.services.combat.chooseAttackOutcomes(
         w,
         C,
@@ -4089,14 +4089,14 @@ async function Sn(n, e, t) {
     n,
     e,
     o
-  )[0], l = Dc(n, e), u = (m) => {
-    const y = Rr(n, re(m, "skillId"));
+  )[0], l = zc(n, e), u = (m) => {
+    const y = Sr(n, re(m, "skillId"));
     return {
       ...y ? { skill: y } : {},
-      skillSteps: Pr(m),
-      assets: G(m, "assets"),
-      paidEffort: G(m, "paidEffort"),
-      freeEffort: G(m, "freeEffort"),
+      skillSteps: kr(m),
+      assets: U(m, "assets"),
+      paidEffort: U(m, "paidEffort"),
+      freeEffort: U(m, "freeEffort"),
       ...Qt(m),
       enabledRuleModuleIds: o
     };
@@ -4111,7 +4111,7 @@ async function Sn(n, e, t) {
   }), p = `
     ${r}
     <div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("CYPHERV2.Pools.Pool")}</strong><span>${game.i18n.localize(`CYPHERV2.Pools.${l.pool === "speed" ? "Speed" : "Might"}`)}</span></div>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Er(n, s?.id)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Pr(n, s?.id)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(a.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
@@ -4153,9 +4153,9 @@ async function Sn(n, e, t) {
     return ui.notifications.error(m instanceof Error ? m.message : String(m)), !1;
   }
 }
-async function zc(n) {
+async function Mc(n) {
   if (!game.user.isGM) return;
-  const e = [...game.user.targets ?? []].map((i) => vr(i)).filter((i) => i !== null).map((i) => i);
+  const e = [...game.user.targets ?? []].map((i) => Er(i)).filter((i) => i !== null).map((i) => i);
   if (e.length === 0) {
     ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.NoCharacterTargets"));
     return;
@@ -4188,19 +4188,19 @@ function Wt(n) {
     throw new Error(`Depletion die must have ${zo} to ${No} sides.`);
   return t;
 }
-function Nc(n) {
+function qc(n) {
   return `1d${Wt(n)}`;
 }
 function Zi(n) {
   const e = Wt(n), t = Number(n.threshold);
   if (!Number.isInteger(t) || t < 1 || t > e)
     throw new Error(`Depletion threshold must be between 1 and ${e}.`);
-  return `${kr(t)} in 1d${e}`;
+  return `${Hr(t)} in 1d${e}`;
 }
-function kr(n) {
+function Hr(n) {
   return n === 1 ? "1" : `1-${n}`;
 }
-function Mc(n) {
+function xc(n) {
   const e = [...n.querySelectorAll(
     ".cypherv2-sheet.cypherv2-character > .tab[data-tab]"
   )], t = e.find((o) => o.classList.contains("active")), i = [...n.querySelectorAll(
@@ -4215,7 +4215,7 @@ function Mc(n) {
     ]))
   };
 }
-function qc(n, e) {
+function Gc(n, e) {
   for (const t of n.querySelectorAll(
     ".cypherv2-sheet.cypherv2-character > .tab[data-tab]"
   ))
@@ -4227,7 +4227,7 @@ function qc(n, e) {
     Object.hasOwn(e.disclosures, i) && (t.open = e.disclosures[i] ?? !1);
   }
 }
-function xc(n) {
+function Uc(n) {
   return n.replace(/[&<>'"]/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -4236,7 +4236,7 @@ function xc(n) {
     '"': "&quot;"
   })[e]);
 }
-async function Ar(n, e) {
+async function Ir(n, e) {
   const t = n.system.graph.nodes.find((r) => r.id === e);
   if (!t) throw new Error(`Focus node '${e}' was not found.`);
   if (t.abilityUuid)
@@ -4248,7 +4248,7 @@ async function Ar(n, e) {
       }
     } catch {
     }
-  const i = t.abilitySnapshot.name || t.id, o = xc(i), a = t.abilitySnapshot.description || game.i18n.localize("CYPHERV2.Focus.MissingAbility");
+  const i = t.abilitySnapshot.name || t.id, o = Uc(i), a = t.abilitySnapshot.description || game.i18n.localize("CYPHERV2.Focus.MissingAbility");
   await foundry.applications.api.DialogV2.input({
     window: { title: i },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-focus-snapshot"><h3>${o}</h3><div>${a}</div></div>`,
@@ -4264,7 +4264,7 @@ function Mo(n, e) {
     height: n.height
   };
 }
-function Uc(n, e) {
+function Oc(n, e) {
   const t = {
     x: n.left + n.width / 2,
     y: n.top + n.height / 2
@@ -4289,7 +4289,7 @@ function Uc(n, e) {
     y2: i.y - a * l
   };
 }
-function Gc(n) {
+function Bc(n) {
   const e = n.querySelector(".focus-tree-canvas"), t = e?.querySelector(".focus-tree-connections");
   if (!e || !t) return;
   const i = e.getBoundingClientRect(), o = i.width, a = i.height;
@@ -4303,14 +4303,14 @@ function Gc(n) {
   for (const s of t.querySelectorAll("line[data-from][data-to]")) {
     const l = r.get(s.dataset.from ?? ""), u = r.get(s.dataset.to ?? "");
     if (!l || !u) continue;
-    const c = Uc(
+    const c = Oc(
       Mo(l.getBoundingClientRect(), i),
       Mo(u.getBoundingClientRect(), i)
     );
     s.setAttribute("x1", String(c.x1)), s.setAttribute("y1", String(c.y1)), s.setAttribute("x2", String(c.x2)), s.setAttribute("y2", String(c.y2));
   }
 }
-class Hr {
+class $r {
   #e = null;
   #t = null;
   #i = [];
@@ -4328,7 +4328,7 @@ class Hr {
   }
   /** Public refresh point for future node movement and editor interactions. */
   refresh() {
-    for (const e of this.#i) Gc(e);
+    for (const e of this.#i) Bc(e);
   }
   scheduleRefresh() {
     this.#t === null && (this.#t = requestAnimationFrame(() => {
@@ -4339,14 +4339,14 @@ class Hr {
     this.#e?.disconnect(), this.#e = null, this.#t !== null && cancelAnimationFrame(this.#t), this.#t = null, this.#i = [];
   }
 }
-function Oc(n, e, t, i = 8) {
+function Lc(n, e, t, i = 8) {
   const o = n.right + i, a = o + e.width <= t.width - i ? o : n.left - e.width - i;
   return {
     left: Math.max(i, Math.min(a, t.width - e.width - i)),
     top: Math.max(i, Math.min(n.top, t.height - e.height - i))
   };
 }
-class $r {
+class Vr {
   #e = null;
   #t = null;
   #i = null;
@@ -4385,7 +4385,7 @@ class $r {
     if (!t) return;
     const i = e.ownerDocument.createElement("div");
     i.className = "cypherv2-system-tooltip", i.id = e.getAttribute("aria-describedby") ?? `cypherv2-tooltip-${crypto.randomUUID()}`, i.role = "tooltip", i.append(t.content.cloneNode(!0)), e.ownerDocument.body.append(i);
-    const o = e.getBoundingClientRect(), a = i.getBoundingClientRect(), r = e.ownerDocument.defaultView, s = Oc(o, a, {
+    const o = e.getBoundingClientRect(), a = i.getBoundingClientRect(), r = e.ownerDocument.defaultView, s = Lc(o, a, {
       width: r?.innerWidth ?? e.ownerDocument.documentElement.clientWidth,
       height: r?.innerHeight ?? e.ownerDocument.documentElement.clientHeight
     });
@@ -4398,7 +4398,7 @@ class Rt extends Error {
     super(e.map((t) => t.message).join("; ")), this.name = "FocusGraphValidationError", this.diagnostics = e;
   }
 }
-function Bc(n, e) {
+function jc(n, e) {
   const t = /* @__PURE__ */ new Map();
   for (const s of e) t.set(s, []);
   for (const s of n.connections)
@@ -4432,13 +4432,13 @@ function kn(n) {
     const r = `${a.from}\0${a.to}`;
     o.has(r) && e.push({ severity: "error", code: "duplicate-connection", connectionId: a.id, message: `Duplicate Focus connection '${a.from}' -> '${a.to}'.` }), o.add(r), (!t.has(a.from) || !t.has(a.to)) && e.push({ severity: "error", code: "missing-connection-node", connectionId: a.id, message: `Focus connection '${a.id}' references a missing node.` }), a.from === a.to && e.push({ severity: "error", code: "self-connection", connectionId: a.id, message: `Focus connection '${a.id}' cannot target itself.` });
   }
-  return !e.some((a) => a.severity === "error") && Bc(n, t) && e.push({
+  return !e.some((a) => a.severity === "error") && jc(n, t) && e.push({
     severity: "warning",
     code: "directed-cycle",
     message: "Focus graph contains a directed cycle; evaluation remains direct and deterministic."
   }), e;
 }
-function Lc(n) {
+function Wc(n) {
   const e = kn(n), t = e.filter((i) => i.severity === "error");
   if (t.length > 0) throw new Rt(t);
   return e;
@@ -4447,7 +4447,7 @@ class ao {
   evaluate(e, t) {
     if (!Number.isInteger(t.tier) || t.tier < 1)
       throw new Error("Character Tier must be an integer of at least 1.");
-    const i = [...Lc(e)], o = new Set(e.nodes.map((c) => c.id)), a = new Set(t.ownedNodeIds);
+    const i = [...Wc(e)], o = new Set(e.nodes.map((c) => c.id)), a = new Set(t.ownedNodeIds);
     for (const c of a)
       o.has(c) || i.push({
         severity: "warning",
@@ -4528,36 +4528,36 @@ class ao {
     return this.evaluate(e, { tier: t, ownedNodeIds: i }).diagnostics.filter((o) => o.code === "invalid-owned-progression" && o.nodeId).map((o) => o.nodeId);
   }
 }
-class Ge extends Error {
+class Ue extends Error {
   constructor() {
     super("Grant conflict resolution was cancelled."), this.name = "GrantConflictCancelledError";
   }
 }
-function Ir(n, e) {
+function Yr(n, e) {
   return `${n}:${String(e ?? "").trim().toLocaleLowerCase().replace(/\s+/g, " ")}`;
 }
 function Pe(n, e, t = "") {
-  return { type: n, contentUuid: t, contentKey: Ir(n, e) };
+  return { type: n, contentUuid: t, contentKey: Yr(n, e) };
 }
-function jc(n) {
+function _c(n) {
   if (n.type !== "ability" && n.type !== "skill") return null;
   const e = n.system.grantedBy ?? {};
   return {
     type: n.type,
     contentUuid: String(e.contentUuid ?? ""),
-    contentKey: String(e.contentKey || Ir(n.type, n.name))
+    contentKey: String(e.contentKey || Yr(n.type, n.name))
   };
 }
-function Wc(n, e) {
+function Kc(n, e) {
   return n.type !== e.type ? !1 : n.contentUuid && e.contentUuid ? n.contentUuid === e.contentUuid : n.contentKey === e.contentKey;
 }
-function Vr(n, e) {
+function Fr(n, e) {
   return !!zi(n, e);
 }
 function zi(n, e) {
   return [...n].find((t) => {
-    const i = jc(t);
-    return i ? Wc(i, e) : !1;
+    const i = _c(t);
+    return i ? Kc(i, e) : !1;
   }) ?? null;
 }
 class de extends Error {
@@ -4567,7 +4567,7 @@ class de extends Error {
     super(t), this.name = "FocusAcquisitionError", this.code = e, this.dependentNodeIds = i;
   }
 }
-const _c = async (n) => {
+const Xc = async (n) => {
   if (!n) return null;
   try {
     const e = await fromUuid(n);
@@ -4593,12 +4593,12 @@ function en(n, e) {
   }
   return `${i.toString(16).padStart(8, "0")}${o.toString(16).padStart(8, "0")}`;
 }
-class Kc {
+class Jc {
   #e;
   #t;
   #i;
   #n = /* @__PURE__ */ new Map();
-  constructor(e = new ao(), t = _c, i = Date.now) {
+  constructor(e = new ao(), t = Xc, i = Date.now) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   missingOwnedNodeIds(e, t, i) {
@@ -4653,7 +4653,7 @@ class Kc {
               `Focus node '${i}' grants an Ability already present on this Character; choose a replacement with the GM.`
             );
           const P = await r(C);
-          if (P.action === "cancel") throw new Ge();
+          if (P.action === "cancel") throw new Ue();
           if (P.action !== "gmOverride")
             throw new de(
               "duplicate-grant",
@@ -4864,7 +4864,7 @@ class Kc {
   }
   async #f(e, t, i, o) {
     const r = (o.system ?? {}).grantedBy ?? {};
-    if (Vr(e.items, {
+    if (Fr(e.items, {
       type: "ability",
       contentUuid: String(r.contentUuid ?? ""),
       contentKey: String(r.contentKey ?? `ability:${String(o.name ?? "").trim().toLocaleLowerCase()}`)
@@ -4924,7 +4924,7 @@ class X extends Error {
   }
   code;
 }
-const Xc = async (n) => {
+const Qc = async (n) => {
   try {
     const e = await fromUuid(n);
     if (!e || typeof e != "object" || !("type" in e)) return null;
@@ -4933,27 +4933,27 @@ const Xc = async (n) => {
   } catch {
     return null;
   }
-}, Jc = () => globalThis.crypto?.randomUUID?.() ?? `adv-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-function Qc(n) {
+}, Zc = () => globalThis.crypto?.randomUUID?.() ?? `adv-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+function ed(n) {
   return n.system.category === "attack" || n.system.category === "defense" || n.system.contexts.some((e) => e === "attack" || e.startsWith("attack.") || e === "defense" || e.startsWith("defense."));
 }
-function Zc(n) {
+function td(n) {
   return n === "inability" ? "untrained" : n === "untrained" ? "trained" : n === "trained" ? "specialized" : null;
 }
 function xo(n) {
   return [...new Set(n)];
 }
-class ed {
+class id {
   #e;
   #t;
   #i;
   #n;
   #o = /* @__PURE__ */ new Map();
-  constructor(e, t = Jc, i = Date.now, o = Xc) {
+  constructor(e, t = Zc, i = Date.now, o = Qc) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o;
   }
   policy(e = []) {
-    return this.#e.resolveAdvancementPolicy(Oa, e);
+    return this.#e.resolveAdvancementPolicy(Ba, e);
   }
   view(e, t = []) {
     const i = this.policy(t), o = e.system.advancement.purchases, a = o.length >= i.purchasesPerTier;
@@ -4962,7 +4962,7 @@ class ed {
       purchasedCount: o.length,
       remainingCount: Math.max(0, i.purchasesPerTier - o.length),
       canAdvanceTier: o.length === i.purchasesPerTier,
-      options: Un.map((r) => {
+      options: Gn.map((r) => {
         const s = o.some((u) => u.kind === r), l = r === "extraEffort" ? this.#s(e) < i.effortMaximum : !0;
         return { kind: r, purchased: s, available: !a && !s && l };
       }),
@@ -5000,7 +5000,7 @@ class ed {
   skillTrainingOptions(e, t = []) {
     const i = this.policy(t);
     return [...e.items].filter((o) => o.type === "skill" && ee.includes(o.system.rank)).map((o) => {
-      const a = Zc(o.system.rank), r = a === "trained" ? i.attackDefenseTrainingTier : a === "specialized" ? i.attackDefenseSpecializationTier : 0, s = !!(a && Qc(o) && L(e.system) < r);
+      const a = td(o.system.rank), r = a === "trained" ? i.attackDefenseTrainingTier : a === "specialized" ? i.attackDefenseSpecializationTier : 0, s = !!(a && ed(o) && L(e.system) < r);
       return {
         id: o.id,
         name: o.name,
@@ -5181,7 +5181,7 @@ class ed {
     } else if (t === "armor")
       o["system.proficiencies.armorCategories"] = xo([
         ...e.system.proficiencies.armorCategories,
-        ...Ue
+        ...Ge
       ]);
     else if (t === "weapons")
       o["system.proficiencies.weaponCategories"] = xo([
@@ -5232,7 +5232,7 @@ function ci(n) {
     "'": "&#039;"
   })[e]);
 }
-const td = {
+const nd = {
   "not-character": "CYPHERV2.Advancement.Errors.NotCharacter",
   "cycle-complete": "CYPHERV2.Advancement.Errors.CycleComplete",
   "already-purchased": "CYPHERV2.Advancement.Errors.AlreadyPurchased",
@@ -5253,7 +5253,7 @@ function Xe(n, e) {
 function tn(n, e) {
   return Number(n[e] ?? 0);
 }
-function id() {
+function od() {
   return ["might", "speed", "intellect"].map((n) => `<option value="${n}">${game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`)}</option>`).join("");
 }
 async function ut(n, e) {
@@ -5264,10 +5264,10 @@ async function ut(n, e) {
     ok: { label: game.i18n.localize("CYPHERV2.Advancement.Purchase") }
   });
 }
-function Yr(n) {
-  n instanceof X ? ui.notifications.error(game.i18n.localize(td[n.code])) : (console.error(n), ui.notifications.error(game.i18n.localize("CYPHERV2.Advancement.Errors.Unexpected")));
+function Dr(n) {
+  n instanceof X ? ui.notifications.error(game.i18n.localize(nd[n.code])) : (console.error(n), ui.notifications.error(game.i18n.localize("CYPHERV2.Advancement.Errors.Unexpected")));
 }
-async function nd(n, e) {
+async function ad(n, e) {
   const t = game.i18n.localize(`CYPHERV2.Advancement.Option.${e}`);
   if (e === "increaseCapabilities") {
     const i = await ut(t, `
@@ -5282,7 +5282,7 @@ async function nd(n, e) {
     } } : null;
   }
   if (e === "moveTowardPerfection") {
-    const i = await ut(t, `<label>${game.i18n.localize("CYPHERV2.Advancement.ChoosePool")}<select name="pool">${id()}</select></label>`);
+    const i = await ut(t, `<label>${game.i18n.localize("CYPHERV2.Advancement.ChoosePool")}<select name="pool">${od()}</select></label>`);
     return i ? { kind: e, pool: Xe(i, "pool") } : null;
   }
   if (e === "skillTraining") {
@@ -5327,8 +5327,8 @@ async function nd(n, e) {
   }
   return { kind: e };
 }
-async function od(n, e) {
-  const t = await nd(n, e);
+async function rd(n, e) {
+  const t = await ad(n, e);
   if (t)
     try {
       const i = await game.cypherv2.services.advancement.purchase(
@@ -5340,10 +5340,10 @@ async function od(n, e) {
         resourcePoints: i.resourcePointsGranted
       }));
     } catch (i) {
-      Yr(i);
+      Dr(i);
     }
 }
-async function ad(n) {
+async function sd(n) {
   try {
     const e = await game.cypherv2.services.advancement.advanceTier(
       n,
@@ -5351,7 +5351,7 @@ async function ad(n) {
     );
     ui.notifications.info(game.i18n.format("CYPHERV2.Advancement.TierAdvancedNotice", { tier: e.tier }));
   } catch (e) {
-    Yr(e);
+    Dr(e);
   }
 }
 class Te extends Error {
@@ -5360,12 +5360,12 @@ class Te extends Error {
   }
   code;
 }
-const rd = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-class sd {
+const ld = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+class cd {
   #e;
   #t;
   #i = /* @__PURE__ */ new Map();
-  constructor(e = rd, t = Date.now) {
+  constructor(e = ld, t = Date.now) {
     this.#e = e, this.#t = t;
   }
   async attach(e, t, i) {
@@ -5446,11 +5446,11 @@ function nn(n) {
     "'": "&#039;"
   })[e]);
 }
-function Fr(n) {
+function Tr(n) {
   const e = n instanceof Te ? `CYPHERV2.Focus.Association.Errors.${n.code}` : "CYPHERV2.Focus.Errors.Unexpected";
   n instanceof Te || console.error(n), ui.notifications.error(game.i18n.localize(e));
 }
-async function Uo(n, e) {
+async function Go(n, e) {
   let t = e;
   if (!t) {
     const a = [...game.items].filter((s) => s.type === "focus").sort((s, l) => s.name.localeCompare(l.name));
@@ -5492,10 +5492,10 @@ async function Uo(n, e) {
         a.choicesGranted.length > 0 ? "CYPHERV2.Focus.Association.Added" : "CYPHERV2.Focus.Association.Reattached"
       ));
     } catch (a) {
-      Fr(a);
+      Tr(a);
     }
 }
-async function ld(n, e) {
+async function dd(n, e) {
   const t = n.system.focusProgress.find((a) => a.focusUuid === e);
   if (!t) return;
   const i = t.ownedNodeIds.length > 0 ? game.i18n.format("CYPHERV2.Focus.Association.RemoveOwnedWarning", { count: t.ownedNodeIds.length }) : game.i18n.localize("CYPHERV2.Focus.Association.RemoveWarning");
@@ -5508,7 +5508,7 @@ async function ld(n, e) {
     try {
       await game.cypherv2.services.focusAssociations.remove(n, e), ui.notifications.info(game.i18n.localize("CYPHERV2.Focus.Association.Removed"));
     } catch (a) {
-      Fr(a);
+      Tr(a);
     }
 }
 class ue extends Error {
@@ -5517,7 +5517,7 @@ class ue extends Error {
   }
   code;
 }
-const cd = async (n) => {
+const ud = async (n) => {
   try {
     const e = await fromUuid(n);
     if (!e || typeof e != "object" || !("type" in e)) return null;
@@ -5527,13 +5527,13 @@ const cd = async (n) => {
     return null;
   }
 };
-function Go(n) {
+function Uo(n) {
   return n.trim().replace(/\s+/g, " ").toLocaleLowerCase();
 }
-class dd {
+class md {
   #e;
   #t;
-  constructor(e = cd, t = Date.now) {
+  constructor(e = ud, t = Date.now) {
     this.#e = e, this.#t = t;
   }
   async setup(e, t) {
@@ -5547,9 +5547,9 @@ class dd {
         "invalid-skills",
         "Core Setup requires two trained Skills, or three trained Skills and one different Inability."
       );
-    const s = await Promise.all(t.skills.map((p) => this.#i(p))), l = new Set([...e.items].filter((p) => p.type === "skill").map((p) => Go(p.name))), u = /* @__PURE__ */ new Set();
+    const s = await Promise.all(t.skills.map((p) => this.#i(p))), l = new Set([...e.items].filter((p) => p.type === "skill").map((p) => Uo(p.name))), u = /* @__PURE__ */ new Set();
     for (const p of s) {
-      const h = Go(String(p.name));
+      const h = Uo(String(p.name));
       if (!h || l.has(h) || u.has(h))
         throw new ue("duplicate-skill", "Starting Skills must all be different.");
       u.add(h);
@@ -5653,7 +5653,7 @@ function An(n) {
     "'": "&#039;"
   })[e]);
 }
-function ud() {
+function pd() {
   return [
     `<option value="custom">${game.i18n.localize("CYPHERV2.Creation.CustomSkill")}</option>`,
     ...[...game.items].filter((n) => n.type === "skill").sort((n, e) => n.name.localeCompare(e.name)).map((n) => `<option value="${An(n.uuid)}">${An(n.name)}</option>`)
@@ -5661,7 +5661,7 @@ function ud() {
 }
 function di(n, e) {
   return `<fieldset><legend>${e}</legend>
-    <label>${game.i18n.localize("CYPHERV2.Creation.SkillSource")}<select name="source${n}">${ud()}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Creation.SkillSource")}<select name="source${n}">${pd()}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Creation.CustomSkillName")}<input name="name${n}" type="text"></label>
   </fieldset>`;
 }
@@ -5678,7 +5678,7 @@ async function an(n, e, t) {
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Apply") }
   });
 }
-function md(n) {
+function fd(n) {
   const e = [...n.querySelectorAll(
     'input[name="might"], input[name="speed"], input[name="intellect"]'
   )], t = n.querySelector("[data-core-points-remaining]"), i = n.querySelector('button[data-action="ok"]'), o = () => {
@@ -5691,7 +5691,7 @@ function Hn(n) {
   const e = n instanceof ue ? `CYPHERV2.Creation.Errors.${n.code}` : "CYPHERV2.Creation.Errors.Unexpected";
   n instanceof ue || console.error(n), ui.notifications.error(game.i18n.localize(e));
 }
-async function pd(n) {
+async function hd(n) {
   const e = await an(
     game.i18n.localize("CYPHERV2.Creation.StepPools"),
     `<p>${game.i18n.localize("CYPHERV2.Creation.PoolsPrompt")}</p>
@@ -5699,7 +5699,7 @@ async function pd(n) {
      <label>${game.i18n.localize("CYPHERV2.Pools.Speed")} 8 + <input name="speed" type="number" min="0" max="6" value="0"></label>
      <label>${game.i18n.localize("CYPHERV2.Pools.Intellect")} 8 + <input name="intellect" type="number" min="0" max="6" value="0"></label>
      <p>${game.i18n.localize("CYPHERV2.Creation.PointsRemaining")}: <output data-core-points-remaining>6</output> / 6</p>`,
-    md
+    fd
   );
   if (!e) return;
   const t = { might: on(e, "might"), speed: on(e, "speed"), intellect: on(e, "intellect") };
@@ -5755,7 +5755,7 @@ async function Bo(n, e) {
 function pi(n, e) {
   return e.map((t) => n.system.graph.nodes.find((i) => i.id === t)?.abilitySnapshot.name || t).join(", ");
 }
-async function fd(n, e, t) {
+async function gd(n, e, t) {
   return game.cypherv2.services.focusAcquisition.hasEmbeddedAbility(n, e.uuid, t) ? !!await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Focus.UndoDeleteTitle") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Focus.UndoDeletePrompt")}</p></div>`,
@@ -5771,7 +5771,7 @@ async function Lo(n, e, t, i = !1) {
     yes: { label: game.i18n.localize("CYPHERV2.Focus.UndoAcquisition") },
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
   })) return;
-  const r = await fd(n, e, t);
+  const r = await gd(n, e, t);
   try {
     const s = await game.cypherv2.services.focusAcquisition.undo(
       n,
@@ -5813,7 +5813,7 @@ async function Lo(n, e, t, i = !1) {
     console.error(s), ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.Unexpected"));
   }
 }
-async function hd(n, e, t) {
+async function yd(n, e, t) {
   if (!game.user.isGM) return;
   const i = e.system.graph.nodes.find((a) => a.id === t);
   !i || !await foundry.applications.api.DialogV2.confirm({
@@ -5835,7 +5835,7 @@ function Ce(n) {
 function jo(n) {
   return n ? game.i18n.localize(`CYPHERV2.Skill.Ranks.${n}`) : "";
 }
-function gd(n) {
+function bd(n) {
   const e = n.toObject();
   return {
     name: n.name,
@@ -5853,13 +5853,13 @@ async function Wo(n, e, t) {
       type: n.type,
       name: i.name,
       itemUuid: i.uuid,
-      snapshot: gd(i),
+      snapshot: bd(i),
       reason: game.i18n.localize(t === "compendium" ? "CYPHERV2.GrantConflict.CompendiumItem" : "CYPHERV2.GrantConflict.WorldItem"),
       reasonSourceUuid: i.uuid
     }
   };
 }
-async function $t(n) {
+async function It(n) {
   const e = [...game.items].filter((u) => u.type === n.type).filter((u) => u.uuid !== n.existing.contentUuid && u.uuid !== n.proposed.contentUuid).sort((u, c) => u.name.localeCompare(c.name)), t = n.suggestions.length ? n.suggestions.map((u) => `
       <label class="grant-conflict-option">
         <input type="radio" name="resolution" value="suggestion:${Ce(u.id)}">
@@ -5926,18 +5926,18 @@ async function $t(n) {
 function mt(n) {
   return n.trim().toLocaleLowerCase().replace(/[^a-z0-9]+/g, "");
 }
-function yd(n, e) {
+function wd(n, e) {
   const t = n.genre === "custom" ? String(n.customGenreId ?? "") : String(n.genre ?? "");
   if (!t || t === "none") return null;
   const i = [...e].sort((o, a) => o.uuid.localeCompare(a.uuid));
   return i.find((o) => o.uuid === t) ?? i.find((o) => mt(o.system.legacyKey) === mt(t)) ?? i.find((o) => mt(String(o.system.slug ?? "")) === mt(t)) ?? i.find((o) => mt(o.name) === mt(t)) ?? null;
 }
-async function Dr(n, e, t) {
+async function zr(n, e, t) {
   if (n.genre === "custom" && n.customGenreId) {
     const i = await t(n.customGenreId);
     if (i?.type === "genre") return i;
   }
-  return yd(n, e);
+  return wd(n, e);
 }
 class Tt extends Error {
   constructor(e, t) {
@@ -5951,7 +5951,7 @@ class x extends Error {
   }
   code;
 }
-function bd() {
+function vd() {
   return {
     active: !1,
     originalName: "",
@@ -5966,7 +5966,7 @@ function bd() {
 function _o(n) {
   return structuredClone(n);
 }
-class wd {
+class Cd {
   #e;
   #t;
   #i;
@@ -6038,7 +6038,7 @@ class wd {
       if (c) {
         if (!i) throw new x("duplicate-grant", "This Ability is already present on the Character.");
         const m = await i(c);
-        if (m.action === "cancel") throw new Ge();
+        if (m.action === "cancel") throw new Ue();
         if (m.action !== "gmOverride")
           throw new x("duplicate-grant", "A Genre acquisition must use an Ability from its Genre catalog.");
         p = !0;
@@ -6084,7 +6084,7 @@ class wd {
       if (c) {
         if (!o) throw new x("duplicate-grant", "This Ability is already present on the Character.");
         const m = await o(c);
-        if (m.action === "cancel") throw new Ge();
+        if (m.action === "cancel") throw new Ue();
         if (m.action !== "gmOverride")
           throw new x("duplicate-grant", "A Genre choice must grant an Ability from its Genre catalog.");
         p = !0;
@@ -6113,7 +6113,7 @@ class wd {
       status: "active",
       contentUuid: c.contentUuid,
       contentKey: c.contentKey,
-      replacement: bd()
+      replacement: vd()
     };
     return { name: s, img: l, type: "ability", system: { ..._o(u), grantedBy: p } };
   }
@@ -6174,12 +6174,12 @@ function ze(n) {
   })[e]);
 }
 function Ni(n) {
-  if (n instanceof Ge) return;
+  if (n instanceof Ue) return;
   console.error(n);
   const e = n instanceof Tt ? `CYPHERV2.Genre.Errors.${n.code}` : n instanceof x ? `CYPHERV2.Genre.Errors.${n.code}` : "CYPHERV2.Genre.Errors.unexpected";
   ui.notifications.error(game.i18n.localize(e));
 }
-async function $n(n, e, t = "manual") {
+async function In(n, e, t = "manual") {
   let i = e;
   if (!i) {
     const o = [...game.items].filter((r) => r.type === "genre").sort((r, s) => r.name.localeCompare(s.name));
@@ -6207,7 +6207,7 @@ async function $n(n, e, t = "manual") {
       Ni(o);
     }
 }
-async function vd(n) {
+async function Ed(n) {
   if (await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Genre.Remove") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Genre.RemoveConfirm")}</p></div>`,
@@ -6220,7 +6220,7 @@ async function vd(n) {
       Ni(t);
     }
 }
-async function Cd(n, e) {
+async function Rd(n, e) {
   try {
     const t = await game.cypherv2.services.genres.active(n);
     if (!t) throw new x("genre-required", "Attach a Genre first.");
@@ -6238,13 +6238,13 @@ async function Cd(n, e) {
       n,
       i.id,
       String(a.entryId ?? ""),
-      $t
+      It
     ), ui.notifications.info(game.i18n.localize("CYPHERV2.Genre.AbilityAcquired"));
   } catch (t) {
     Ni(t);
   }
 }
-async function Ed(n) {
+async function Pd(n) {
   try {
     const e = await game.cypherv2.services.genres.active(n);
     if (!e) throw new x("genre-required", "Attach a Genre first.");
@@ -6274,7 +6274,7 @@ async function Ed(n) {
       await game.cypherv2.services.genres.acquireManual(
         n,
         a,
-        $t
+        It
       ), ui.notifications.info(game.i18n.localize("CYPHERV2.Genre.AbilityAcquired"));
       return;
     }
@@ -6295,7 +6295,7 @@ async function Ed(n) {
     Ni(e);
   }
 }
-function Ut(n) {
+function Gt(n) {
   return n.replace(/[&<>"']/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -6304,25 +6304,25 @@ function Ut(n) {
     "'": "&#039;"
   })[e]);
 }
-function Rd(n, e, t) {
+function Sd(n, e, t) {
   return n.includes(e) ? n.filter((i) => i !== e) : n.length >= t ? [...n] : [...n, e];
 }
-function Pd() {
+function kd() {
   let n = !1;
   return () => n ? !1 : (n = !0, !0);
 }
-function Sd(n, e) {
-  return n.map((t, i) => `<button type="button" class="package-choice-option"${e ? ` data-action="package-choice-${i}"` : ""} data-package-choice-option data-option-id="${Ut(t.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${Ut(t.label)}</span></button>`).join("");
+function Ad(n, e) {
+  return n.map((t, i) => `<button type="button" class="package-choice-option"${e ? ` data-action="package-choice-${i}"` : ""} data-package-choice-option data-option-id="${Gt(t.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${Gt(t.label)}</span></button>`).join("");
 }
 async function Mi(n) {
   const e = n.options.filter((l, u, c) => l.id && c.findIndex((p) => p.id === l.id) === u);
   if (!Number.isInteger(n.choose) || n.choose < 1 || n.choose > e.length) return null;
-  const t = n.choose === 1, i = Pd();
+  const t = n.choose === 1, i = kd();
   let o = [];
   const a = `<div class="cypherv2 cypherv2-dialog package-choice-dialog ${t ? "package-choice-single" : "package-choice-multiple"}" data-package-choice-required="${n.choose}">
-    <header class="cypherv2-dialog-heading package-choice-heading"><strong>${Ut(n.title)}</strong></header>
-    <p class="cypherv2-dialog-help package-choice-prompt">${Ut(n.prompt)}</p>
-    <div class="package-choice-options" role="group" aria-label="${Ut(n.ariaLabel)}">${Sd(e, t)}</div>
+    <header class="cypherv2-dialog-heading package-choice-heading"><strong>${Gt(n.title)}</strong></header>
+    <p class="cypherv2-dialog-help package-choice-prompt">${Gt(n.prompt)}</p>
+    <div class="package-choice-options" role="group" aria-label="${Gt(n.ariaLabel)}">${Ad(e, t)}</div>
     ${t ? "" : `<div class="package-choice-selection-status" aria-live="polite"><span data-package-choice-count>0 / ${n.choose} ${game.i18n.localize("CYPHERV2.Packages.Selected")}</span></div>`}
   </div>`, r = t ? e.map((l, u) => ({
     action: `package-choice-${u}`,
@@ -6353,49 +6353,49 @@ async function Mi(n) {
       };
       for (const y of c)
         y.addEventListener("click", () => {
-          o = Rd(o, y.dataset.optionId ?? "", n.choose), m();
+          o = Sd(o, y.dataset.optionId ?? "", n.choose), m();
         });
       m();
     }
   });
   return Array.isArray(s) && s.length === n.choose ? s : null;
 }
-const kd = "cypherv2.descriptors";
-function Ad(n) {
+const Hd = "cypherv2.descriptors";
+function Id(n) {
   return structuredClone(n);
 }
-function Hd(n) {
+function $d(n) {
   const e = n.toObject?.() ?? {};
   return {
     name: String(e.name ?? n.name),
     ...String(e.img ?? n.img ?? "") ? { img: String(e.img ?? n.img) } : {},
-    system: Ad(e.system ?? n.system)
+    system: Id(e.system ?? n.system)
   };
 }
-function $d(n, e) {
+function Vd(n, e) {
   const t = n.name.toLocaleLowerCase(), i = e.name.toLocaleLowerCase();
   return t < i ? -1 : t > i ? 1 : n.uuid < e.uuid ? -1 : n.uuid > e.uuid ? 1 : 0;
 }
-function Id(n, e) {
+function Yd(n, e) {
   const t = /* @__PURE__ */ new Map();
   for (const o of e)
     o.type !== "descriptor" || !o.uuid || t.has(o.uuid) || t.set(o.uuid, o);
-  const i = [...t.values()].sort($d).map((o) => ({
+  const i = [...t.values()].sort(Vd).map((o) => ({
     id: o.uuid,
     descriptorUuid: o.uuid,
-    snapshot: Hd(o)
+    snapshot: $d(o)
   }));
   return n.map((o) => (o.sourceMode ?? "fixed") !== "catalog" ? o : {
     ...o,
     options: o.catalogItemType === "descriptor" ? i : []
   });
 }
-async function Vd() {
-  const n = game, e = n.packs?.get(kd), t = e ? await e.getDocuments() : [], i = [...n.items].filter((o) => o.type === "descriptor");
+async function Fd() {
+  const n = game, e = n.packs?.get(Hd), t = e ? await e.getDocuments() : [], i = [...n.items].filter((o) => o.type === "descriptor");
   return [...t, ...i];
 }
-async function Yd(n) {
-  return n.some((e) => (e.sourceMode ?? "fixed") === "catalog") ? Id(n, await Vd()) : [...n];
+async function Dd(n) {
+  return n.some((e) => (e.sourceMode ?? "fixed") === "catalog") ? Yd(n, await Fd()) : [...n];
 }
 function Pt(n) {
   return n.replace(/[&<>"']/g, (e) => ({
@@ -6442,7 +6442,7 @@ function lo(n) {
     label: game.i18n.localize(`CYPHERV2.Pools.${e[0].toUpperCase()}${e.slice(1)}`)
   }));
 }
-async function Tr(n) {
+async function Nr(n) {
   const t = (await Mi({
     title: n,
     prompt: game.i18n.format("CYPHERV2.Packages.ChooseOne", {
@@ -6454,7 +6454,7 @@ async function Tr(n) {
   }))?.[0];
   return V.includes(t) ? t : null;
 }
-async function Fd(n) {
+async function Td(n) {
   const t = (await Mi({
     title: n,
     prompt: game.i18n.localize("CYPHERV2.Packages.SuperheroicsPoolPrompt"),
@@ -6478,10 +6478,10 @@ async function Ko(n, e) {
     return;
   const r = t.system;
   let s;
-  if (r.edgeGrant.mode === "choice" && (s = await Tr(t.name) ?? void 0, !s))
+  if (r.edgeGrant.mode === "choice" && (s = await Nr(t.name) ?? void 0, !s))
     return;
   let l;
-  if (r.genre === "superhero" && r.superhero?.superheroics?.enabled && (l = await Fd(t.name) ?? void 0, !l))
+  if (r.genre === "superhero" && r.superhero?.superheroics?.enabled && (l = await Td(t.name) ?? void 0, !l))
     return;
   const u = await tt(t.name, r.choiceGroups ?? [], game.i18n.localize("CYPHERV2.Packages.SkillChoice"));
   if (u === null) return;
@@ -6489,7 +6489,7 @@ async function Ko(n, e) {
   if (c !== null)
     try {
       await game.cypherv2.services.characterPackages.attachType(n, t, {
-        conflictResolver: $t,
+        conflictResolver: It,
         skillChoices: u,
         abilityChoices: c,
         ...s ? { edgePool: s } : {},
@@ -6499,7 +6499,7 @@ async function Ko(n, e) {
       }), ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.TypeAttached"));
       const p = n;
       if (!p.system.genre.sourceUuid) {
-        const h = [...game.items].filter((y) => y.type === "genre"), m = await Dr(
+        const h = [...game.items].filter((y) => y.type === "genre"), m = await zr(
           r,
           h,
           async (y) => await fromUuid(y)
@@ -6509,10 +6509,10 @@ async function Ko(n, e) {
           content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Genre.TypeSuggestionPrompt", { genre: Pt(m.name) })}</p></div>`,
           yes: { label: game.i18n.localize("CYPHERV2.Genre.AttachSuggestion") },
           no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
-        }) && await $n(p, m, "typeSuggestion");
+        }) && await In(p, m, "typeSuggestion");
       }
     } catch (p) {
-      p instanceof Ge || xi(p);
+      p instanceof Ue || xi(p);
     }
 }
 async function Xo(n, e) {
@@ -6526,7 +6526,7 @@ async function Xo(n, e) {
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Next") }
   });
   if (!o) return;
-  const a = t.system, r = await zr(t.name, a.poolBonusChoiceGroups ?? []);
+  const a = t.system, r = await Mr(t.name, a.poolBonusChoiceGroups ?? []);
   if (r === null) return;
   const s = await tt(
     t.name,
@@ -6539,13 +6539,13 @@ async function Xo(n, e) {
         role: String(o.role),
         poolChoices: r,
         skillChoices: s,
-        conflictResolver: $t
+        conflictResolver: It
       }), ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.DescriptorAttached"));
     } catch (l) {
-      l instanceof Ge || xi(l);
+      l instanceof Ue || xi(l);
     }
 }
-async function zr(n, e) {
+async function Mr(n, e) {
   const t = {};
   for (const i of e) {
     const o = [...new Set(i.pools)].filter((r) => V.includes(r));
@@ -6601,13 +6601,13 @@ async function Jo(n, e) {
     return;
   const r = t.system;
   let s;
-  if (r.edgeGrant.mode === "choice" && (s = await Tr(t.name) ?? void 0, !s))
+  if (r.edgeGrant.mode === "choice" && (s = await Nr(t.name) ?? void 0, !s))
     return;
   const l = await tt(t.name, r.choiceGroups ?? [], game.i18n.localize("CYPHERV2.Packages.SkillChoice"));
   if (l === null) return;
   const u = await tt(t.name, r.abilityChoiceGroups ?? [], game.i18n.localize("CYPHERV2.Species.AbilityChoice"));
   if (u === null) return;
-  const c = await Yd(r.descriptorChoiceGroups ?? []), p = await tt(
+  const c = await Dd(r.descriptorChoiceGroups ?? []), p = await tt(
     t.name,
     c,
     game.i18n.localize("CYPHERV2.Species.DescriptorChoice")
@@ -6615,7 +6615,7 @@ async function Jo(n, e) {
   if (p === null) return;
   const h = c.flatMap((f) => f.options.filter((w) => p[f.id]?.includes(w.id)).map((w) => ({ ...w, id: `${f.id}:${w.id}` }))), m = {}, y = {};
   for (const f of [...r.descriptorGrants ?? [], ...h]) {
-    const w = f.descriptorUuid ? await fromUuid(f.descriptorUuid) : null, C = w?.system ?? f.snapshot.system, P = await zr(
+    const w = f.descriptorUuid ? await fromUuid(f.descriptorUuid) : null, C = w?.system ?? f.snapshot.system, P = await Mr(
       f.snapshot.name || w?.name || t.name,
       C.poolBonusChoiceGroups ?? []
     );
@@ -6633,15 +6633,15 @@ async function Jo(n, e) {
       resolvedDescriptorChoiceGroups: c,
       descriptorSkillChoices: m,
       descriptorPoolChoices: y,
-      conflictResolver: $t,
+      conflictResolver: It,
       ...o ? { replaceItemId: o } : {},
       ...a ? { replaceGrantedItemsMode: a } : {}
     }), ui.notifications.info(game.i18n.localize("CYPHERV2.Species.Attached"));
   } catch (f) {
-    f instanceof Ge || xi(f);
+    f instanceof Ue || xi(f);
   }
 }
-async function Dd(n, e) {
+async function zd(n, e) {
   const t = qi(n).find((o) => o.id === e);
   if (!t) return;
   const i = await so(t.name);
@@ -6652,14 +6652,14 @@ async function Dd(n, e) {
       xi(o);
     }
 }
-function Nr(n) {
+function qr(n) {
   return [...n.items].filter((e) => e instanceof Item && e.type === "skill").map((e) => e).sort((e, t) => e.name.localeCompare(t.name));
 }
-function Td() {
+function Nd() {
   return [...game.user.targets ?? []].flatMap((n) => {
-    const e = wr(n);
+    const e = Cr(n);
     if (e) return [e];
-    const t = vr(n);
+    const t = Er(n);
     return t ? [t] : [];
   });
 }
@@ -6670,22 +6670,22 @@ function Qo(n, e) {
     return `<input type="hidden" name="pool" value="${o}"><div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("CYPHERV2.Pools.Pool")}</strong><span>${game.i18n.localize(`CYPHERV2.Pools.${o[0].toUpperCase()}${o.slice(1)}`)}</span></div>`;
   }
   if (!e && t.length === 0) return "";
-  const i = t.length > 1 ? t : gl;
+  const i = t.length > 1 ? t : bl;
   return `<label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${i.map((o) => `<option value="${o}">${game.i18n.localize(`CYPHERV2.Pools.${o[0].toUpperCase()}${o.slice(1)}`)}</option>`).join("")}</select></label>`;
 }
-function zd(n) {
+function Md(n) {
   return [
     `<optgroup label="${game.i18n.localize("CYPHERV2.Roll.ManualSkillLevel")}">${oo(0, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("CYPHERV2.Skill.Title")}">`,
-    ...Nr(n).map((e) => `<option value="${e.id}">${e.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${e.system.rank}`)}</option>`),
+    ...qr(n).map((e) => `<option value="${e.id}">${e.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${e.system.rank}`)}</option>`),
     "</optgroup>"
   ].join("");
 }
-function Nd(n, e) {
+function qd(n, e) {
   const t = re(e, "skillId");
-  return Nr(n).find((i) => i.id === t);
+  return qr(n).find((i) => i.id === t);
 }
-function Md(n) {
+function xd(n) {
   const e = re(n, "skillId");
   return e.startsWith("manual:") ? Number(e.slice(7)) : 0;
 }
@@ -6693,9 +6693,9 @@ function Zo(n) {
   const e = re(n, "pool");
   return e === "might" || e === "speed" || e === "intellect" ? e : void 0;
 }
-async function qd(n, e) {
+async function Gd(n, e) {
   if (!game.cypherv2.services.abilities.canUse(e)) return;
-  const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = e.system.targetMode === "none" ? [] : Td(), r = a.filter((f) => f.type === "npc"), s = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${a.length ? a.map((f) => f.name).join(", ") : game.i18n.localize("CYPHERV2.Common.None")}</span></div>`;
+  const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = e.system.targetMode === "none" ? [] : Nd(), r = a.filter((f) => f.type === "npc"), s = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${a.length ? a.map((f) => f.name).join(", ") : game.i18n.localize("CYPHERV2.Common.None")}</span></div>`;
   if (!s) {
     const f = await foundry.applications.api.DialogV2.input({
       window: { title: `${game.i18n.localize("CYPHERV2.Ability.Use")}: ${e.name}` },
@@ -6717,18 +6717,18 @@ async function qd(n, e) {
     return;
   }
   const u = r.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Roll.Difficulty")}</strong><span>${game.i18n.localize("CYPHERV2.Roll.HiddenValue")}</span></div>` : ei(o.difficultyCeiling, !0), c = (f) => {
-    const w = Nd(n, f), C = Zo(f);
+    const w = qd(n, f), C = Zo(f);
     return {
       ...C ? { pool: C } : {},
       targets: a,
       difficulty: Jt(f),
       ...w ? { skill: w } : {},
-      skillSteps: Md(f),
-      assets: G(f, "assets"),
-      paidEffort: G(f, "paidEffort"),
-      damageEffort: G(f, "damageEffort"),
-      freeDamageEffort: G(f, "freeDamageEffort"),
-      freeEffort: G(f, "freeEffort"),
+      skillSteps: xd(f),
+      assets: U(f, "assets"),
+      paidEffort: U(f, "paidEffort"),
+      damageEffort: U(f, "damageEffort"),
+      freeDamageEffort: U(f, "freeDamageEffort"),
+      freeEffort: U(f, "freeEffort"),
       ...Qt(f),
       enabledRuleModuleIds: i
     };
@@ -6740,7 +6740,7 @@ async function qd(n, e) {
     ${l}
     ${u}
     ${Qo(e, !0)}
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${zd(n)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Md(n)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     ${e.system.roll === "attack" ? `<label>${game.i18n.localize("CYPHERV2.Combat.DamageEffort")}<select name="damageEffort">${ge(n.system.derived.effort.max)}</select></label>
@@ -6784,7 +6784,7 @@ async function qd(n, e) {
         t
       );
       if (e.system.roll === "attack") {
-        const C = await Sr(f);
+        const C = await Ar(f);
         C && (f = game.cypherv2.services.abilities.chooseAttackOutcomes(f, C));
       }
       for (const C of f)
@@ -6800,14 +6800,14 @@ async function qd(n, e) {
       ui.notifications.error(f instanceof Error ? f.message : String(f));
     }
 }
-function xd(n) {
+function Ud(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function Ud(n) {
+function Od(n) {
   const e = String(n.pool ?? "");
   return e === "might" || e === "speed" || e === "intellect" ? e : null;
 }
-async function Gd(n, e) {
+async function Bd(n, e) {
   const t = We(e);
   if (e.system.cost.amount <= 0 || t.length === 0)
     throw new Error(game.i18n.localize("CYPHERV2.Ability.Payment.NoCost"));
@@ -6818,7 +6818,7 @@ async function Gd(n, e) {
     ).map((l, u) => `
       <label class="ability-payment-choice">
         <input type="radio" name="pool" value="${l.pool}" ${u === 0 ? "checked" : ""}>
-        <strong>${xd(l.pool)}</strong>
+        <strong>${Ud(l.pool)}</strong>
         <span>${game.i18n.localize("CYPHERV2.Ability.Payment.Current")}: ${l.currentBefore}</span>
         <span>${game.i18n.localize("CYPHERV2.Pools.Edge")}: ${l.edge}</span>
         <span>${game.i18n.localize("CYPHERV2.Ability.Payment.Pay")}: ${l.costPaid}</span>
@@ -6829,24 +6829,24 @@ async function Gd(n, e) {
       ok: { label: game.i18n.localize("CYPHERV2.Ability.Payment.Pay") }
     });
     if (!s) return;
-    if (i = Ud(s), !i || !t.includes(i)) throw new Error("Invalid Ability payment Pool.");
+    if (i = Od(s), !i || !t.includes(i)) throw new Error("Invalid Ability payment Pool.");
   }
   const o = await game.cypherv2.services.abilities.payCost(n, e, i);
   await game.cypherv2.services.abilityChat.publishPayment(n, o);
 }
-const Od = {
+const Ld = {
   descriptor: { accepts: "descriptor", placeholder: "[DESCRIPTOR]" },
   species: { accepts: "species", placeholder: "[SPECIES]" },
   type: { accepts: "characterType", placeholder: "[TYPE]" },
   focus: { accepts: "focus", placeholder: "[FOCUS]" }
-}, Bd = {
+}, jd = {
   "one-action": "CYPHERV2.Hud.Recovery.Action",
   "10-minutes": "CYPHERV2.Hud.Recovery.TenMinutes",
   "1-hour": "CYPHERV2.Hud.Recovery.OneHour",
   "10-hours": "CYPHERV2.Hud.Recovery.TenHours"
 };
 function Ft(n, e) {
-  const t = Od[n];
+  const t = Ld[n];
   return {
     kind: n,
     accepts: t.accepts,
@@ -6869,7 +6869,7 @@ const ea = {
 function rn(n) {
   return n.instanceId || n.id || n.uuid || `${n.role ?? "custom"}:${n.name.trim().toLocaleLowerCase("en-US")}`;
 }
-function Ld(n = []) {
+function Wd(n = []) {
   const e = /* @__PURE__ */ new Map();
   for (const t of n) {
     const i = rn(t);
@@ -6877,14 +6877,14 @@ function Ld(n = []) {
   }
   return [...e.values()].sort((t, i) => ea[t.role ?? "custom"] - ea[i.role ?? "custom"] || (t.attachedAt ?? 0) - (i.attachedAt ?? 0) || t.name.localeCompare(i.name, "en-US") || rn(t).localeCompare(rn(i), "en-US"));
 }
-function jd(n) {
+function _d(n) {
   const e = n.trim().replace(/^[^a-z]+/i, "").toLocaleLowerCase("en-US");
   return /^(honest|honor|hour|heir)/.test(e) ? "AN" : /^(one|once|euro|user|use|uni(?:t|v|q))/.test(e) ? "A" : /^[aeiou]/.test(e) ? "AN" : "A";
 }
-function Wd(n = {}) {
-  const e = Ld(n.descriptors), t = e.map((c) => Ft("descriptor", c));
+function Kd(n = {}) {
+  const e = Wd(n.descriptors), t = e.map((c) => Ft("descriptor", c));
   e.some((c) => c.role === "primary") || t.unshift(Ft("descriptor"));
-  const i = n.species ? Ft("species", n.species) : null, o = Ft("type", n.type), a = Ft("focus", n.focus), r = n.hideFocus !== !0, s = jd(t[0].displayName), u = [t.map((c) => c.displayName).join(" AND "), i?.displayName, o.displayName].filter(Boolean).join(" ");
+  const i = n.species ? Ft("species", n.species) : null, o = Ft("type", n.type), a = Ft("focus", n.focus), r = n.hideFocus !== !0, s = _d(t[0].displayName), u = [t.map((c) => c.displayName).join(" AND "), i?.displayName, o.displayName].filter(Boolean).join(" ");
   return {
     article: s,
     descriptors: t,
@@ -6895,7 +6895,7 @@ function Wd(n = {}) {
     sentence: r ? `I AM ${s} ${u} WHO ${a.displayName}` : `I AM ${s} ${u}`
   };
 }
-function _d(n, e) {
+function Xd(n, e) {
   const t = Math.max(0, Math.trunc(e)), i = Math.max(0, Math.min(t, Math.trunc(n)));
   return Array.from({ length: t }, (o, a) => ({
     index: a,
@@ -6909,33 +6909,33 @@ function vi(n, e) {
     count: n[t],
     capacity: e[t],
     overCapacity: Math.max(0, n[t] - e[t]),
-    pips: _d(n[t], e[t])
+    pips: Xd(n[t], e[t])
   }));
 }
-function Kd(n) {
+function Jd(n) {
   return (Array.isArray(n) ? n : at(n)).map((t) => {
     const i = t.used;
-    return { id: t.id, type: t.type, used: i, available: !i, shortLabel: Bd[t.type] };
+    return { id: t.id, type: t.type, used: i, available: !i, shortLabel: jd[t.type] };
   });
 }
-function Mr(n, e) {
+function xr(n, e) {
   const t = Number.isFinite(e) ? Math.max(0, e) : 0, i = Number.isFinite(n) ? Math.max(0, Math.min(t, n)) : 0, o = t > 0 ? i / t : 0;
   return { current: i, max: t, ratio: o, percent: o * 100 };
 }
-const Xd = ["name", "rank"], ta = {
+const Qd = ["name", "rank"], ta = {
   expert: 0,
   specialized: 1,
   trained: 2,
   untrained: 3,
   inability: 4
 };
-function Jd(n) {
-  return Xd.includes(n);
+function Zd(n) {
+  return Qd.includes(n);
 }
-function Qd(n, e) {
+function eu(n, e) {
   return [...n].sort((t, i) => (e === "rank" ? ta[t.rank] - ta[i.rank] : 0) || t.name.localeCompare(i.name, "en-US"));
 }
-function Zd(n) {
+function tu(n) {
   const e = n.system.grantedBy;
   return !e || e.status === "retained" ? !0 : !e.sourceUuid && !e.instanceId && !e.grantId;
 }
@@ -6950,14 +6950,14 @@ function ia(n) {
       payable: t > 0 && e.length > 0
     },
     description: n.system.description.trim(),
-    canDelete: Zd(n)
+    canDelete: tu(n)
   };
 }
-function eu(n) {
+function iu(n) {
   const e = new Intl.Collator("en-US", { sensitivity: "base", numeric: !0 });
   return n.map((t, i) => ({ ability: t, index: i })).sort((t, i) => +(t.ability.system.archived === !0) - +(i.ability.system.archived === !0) || e.compare(t.ability.name, i.ability.name) || t.index - i.index).map(({ ability: t }) => t);
 }
-class tu {
+class nu {
   #e = /* @__PURE__ */ new Set();
   isExpanded(e) {
     return this.#e.has(e);
@@ -6974,24 +6974,24 @@ class tu {
       t.has(i) || this.#e.delete(i);
   }
 }
-function Ui(n) {
+function Gi(n) {
   return String(n.level ?? "1").trim() || "1";
 }
 function Ai(n) {
-  return !/^\d+$/.test(Ui(n));
+  return !/^\d+$/.test(Gi(n));
 }
-function In(n) {
+function $n(n) {
   return n.depleted !== !0;
 }
-function qr(n) {
+function Gr(n) {
   return Nn.includes(n) ? n : "subtle";
 }
-function xr(n) {
+function Ur(n) {
   return Mn.includes(n) ? n : "low";
 }
 function co(n) {
   const e = Number(n.level);
-  return n.levelOverride === !0 && Number.isInteger(e) && e >= 1 ? e : qr(n.manifestation) === "manifest" ? 6 : 4;
+  return n.levelOverride === !0 && Number.isInteger(e) && e >= 1 ? e : Gr(n.manifestation) === "manifest" ? 6 : 4;
 }
 const Vn = ["equipment", "cypher", "artifact"];
 function na(n, e) {
@@ -7001,21 +7001,21 @@ function na(n, e) {
 function Ci(n) {
   return Vn.includes(n);
 }
-function iu(n) {
+function ou(n) {
   if (!Ci(n.type)) return null;
   const e = n.system.depletion && typeof n.system.depletion == "object" ? n.system.depletion : null;
   return {
     id: n.id,
     name: n.name,
     type: n.type,
-    level: n.type === "cypher" ? co(n.system) : n.type === "artifact" ? Ui(n.system) : null,
+    level: n.type === "cypher" ? co(n.system) : n.type === "artifact" ? Gi(n.system) : null,
     levelRollable: n.type === "artifact" && Ai(n.system),
-    power: n.type === "cypher" ? xr(n.system.power) : null,
+    power: n.type === "cypher" ? Ur(n.system.power) : null,
     quantity: n.type === "equipment" ? na(n.system.quantity, 1) : null,
     equipped: n.type === "equipment" && typeof n.system.equipped == "boolean" ? n.system.equipped : null,
     description: typeof n.system.description == "string" ? n.system.description.trim() : "",
     depleted: n.type === "artifact" && n.system.depleted === !0,
-    usable: n.type !== "artifact" || In(n.system),
+    usable: n.type !== "artifact" || $n(n.system),
     depletion: n.type === "artifact" && e ? {
       enabled: !!e.enabled,
       formula: String(e.formula || `1${String(e.die ?? "d6")}`),
@@ -7050,40 +7050,40 @@ function Yn(n) {
   }
   return { track: e, severity: t, count: o };
 }
-async function nu(n, e) {
+async function au(n, e) {
   const t = rt(e);
   if (!t) throw new Error("Weapon family must not be blank.");
   const i = se([...n.system.proficiencies.weaponFamilies, t]);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
-async function ou(n, e) {
+async function ru(n, e) {
   const t = rt(e), i = se(n.system.proficiencies.weaponFamilies).filter((o) => o !== t);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
-async function au(n) {
+async function su(n) {
   const e = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Settings.Character.AddWeaponFamily") },
     content: `<div class="cypherv2 cypherv2-dialog"><label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Settings.Character.WeaponFamily")}
       <input name="family" type="text" list="cypherv2-character-weapon-families" required autofocus>
-      <datalist id="cypherv2-character-weapon-families">${Ba.map((t) => `<option value="${ht(t)}"></option>`).join("")}</datalist>
+      <datalist id="cypherv2-character-weapon-families">${La.map((t) => `<option value="${ht(t)}"></option>`).join("")}</datalist>
     </label></div>`,
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Add") }
   });
-  e && await nu(n, e.family);
+  e && await au(n, e.family);
 }
-function ru(n) {
+function lu(n) {
   const e = n.family, t = n.category;
   if (e !== "weapon" && e !== "armor") throw new Error("Invalid familiarity action data.");
-  if (!t || !(e === "weapon" ? xe : Ue).includes(t)) throw new Error("Invalid familiarity action data.");
+  if (!t || !(e === "weapon" ? xe : Ge).includes(t)) throw new Error("Invalid familiarity action data.");
   return { family: e, category: t };
 }
-function su(n, e) {
-  const t = /* @__PURE__ */ new Set([...xe, ...Ue]), i = new Set(n.filter((o) => t.has(o)));
+function cu(n, e) {
+  const t = /* @__PURE__ */ new Set([...xe, ...Ge]), i = new Set(n.filter((o) => t.has(o)));
   return i.has(e) ? i.delete(e) : i.add(e), [...i];
 }
-async function lu(n, e, t) {
-  const i = e === "weapon" ? "weaponCategories" : "armorCategories", o = su(n.system.proficiencies[i], t);
+async function du(n, e, t) {
+  const i = e === "weapon" ? "weaponCategories" : "armorCategories", o = cu(n.system.proficiencies[i], t);
   return await n.update({ [`system.proficiencies.${i}`]: o }), o;
 }
 function fi(n) {
@@ -7095,12 +7095,12 @@ function fi(n) {
     "'": "&#039;"
   })[e]);
 }
-function cu(n) {
+function uu(n) {
   const e = n ?? { category: "Accuracy", shifts: 1, specification: "", description: "" };
   return `<div class="cypherv2 cypherv2-dialog cypherv2-power-shift-dialog">
     <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.PowerShifts.Category")}
       <input name="category" type="text" value="${fi(e.category)}" list="cypherv2-power-shift-categories" required>
-      <datalist id="cypherv2-power-shift-categories">${$s.map((t) => `<option value="${fi(t)}"></option>`).join("")}</datalist>
+      <datalist id="cypherv2-power-shift-categories">${Ys.map((t) => `<option value="${fi(t)}"></option>`).join("")}</datalist>
     </label>
     <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.PowerShifts.Shifts")}
       <input name="shifts" type="number" min="1" step="1" value="${e.shifts}" required>
@@ -7116,12 +7116,12 @@ function cu(n) {
 async function aa(n, e, t) {
   const i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize(t ? "CYPHERV2.PowerShifts.Edit" : "CYPHERV2.PowerShifts.Add") },
-    content: cu(t),
+    content: uu(t),
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Save") }
   });
   if (!i) return;
-  const o = Fs(e, {
+  const o = zs(e, {
     ...t ? { id: t.id } : {},
     category: String(i.category ?? ""),
     shifts: Number(i.shifts),
@@ -7130,26 +7130,26 @@ async function aa(n, e, t) {
   });
   await n.update({ "system.powerShifts": o });
 }
-async function du(n, e, t) {
-  await n.update({ "system.powerShifts": Ds(e, t) });
+async function mu(n, e, t) {
+  await n.update({ "system.powerShifts": Ns(e, t) });
 }
-const hi = "system." + I;
-function Ur() {
+const hi = "system." + $;
+function Or() {
   return [...game.users];
 }
 function ra() {
-  return Ur().filter((n) => n.active && n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
+  return Or().filter((n) => n.active && n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
 }
 function sa(n, e) {
   return e.isGM || n.testUserPermission(e, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
-function uu(n) {
+function pu(n) {
   return [...game.messages].some((e) => {
-    const t = e.getFlag(I, "playerIntrusion");
+    const t = e.getFlag($, "playerIntrusion");
     return !!(t && typeof t == "object" && t.requestId === n);
   });
 }
-class mu {
+class fu {
   #e;
   #t;
   #i = /* @__PURE__ */ new Set();
@@ -7188,13 +7188,13 @@ class mu {
     }
   }
   async #o(e, t, i) {
-    if (!(this.#n.has(e) || uu(e))) {
+    if (!(this.#n.has(e) || pu(e))) {
       this.#n.add(e);
       try {
         const a = await fromUuid(t);
         if (!a || a.type !== "character" || a.uuid !== t)
           throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.CharacterMissing"));
-        const r = Ur().find((l) => l.id === i && l.active);
+        const r = Or().find((l) => l.id === i && l.active);
         if (!r || !sa(a, r))
           throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.NotAuthorized"));
         const s = await this.#e.spend(a, e);
@@ -7233,21 +7233,21 @@ class mu {
       }
   }
 }
-let Gt = null;
-function pu(n, e) {
-  return Gt = new mu(n, e), Gt.initialize(), Gt;
+let Ut = null;
+function hu(n, e) {
+  return Ut = new fu(n, e), Ut.initialize(), Ut;
 }
-function fu() {
-  if (!Gt) throw new Error("Player Intrusion controller is not ready.");
-  return Gt;
+function gu() {
+  if (!Ut) throw new Error("Player Intrusion controller is not ready.");
+  return Ut;
 }
 const sn = "is-quick-roll-pulse";
-function hu(n) {
+function yu(n) {
   n.classList.remove(sn), n.offsetWidth, n.classList.add(sn), n.addEventListener("animationend", () => {
     n.classList.remove(sn);
   }, { once: !0 });
 }
-const gu = foundry.applications.api.HandlebarsApplicationMixin(
+const bu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 );
 function la(n) {
@@ -7261,7 +7261,7 @@ function q(n) {
   if (!e) throw new Error("Missing Item ID.");
   return e;
 }
-function yu(n) {
+function wu(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
 function ln(n) {
@@ -7272,7 +7272,7 @@ function Je(n) {
   if (!e || !t) throw new Error("Missing Focus node action data.");
   return { focusUuid: e, nodeId: t };
 }
-const bu = {
+const vu = {
   "not-character": "CYPHERV2.Focus.Errors.NotCharacter",
   "node-not-found": "CYPHERV2.Focus.Errors.NodeNotFound",
   "progress-missing": "CYPHERV2.Focus.Errors.ProgressMissing",
@@ -7370,13 +7370,13 @@ const ca = /* @__PURE__ */ new Set([
   "rollArtifactLevel",
   "playerIntrusion"
 ]);
-class R extends gu {
-  #e = new Hr();
-  #t = new $r();
+class R extends bu {
+  #e = new $r();
+  #t = new Vr();
   #i = null;
   #n = !1;
   #o = "name";
-  #r = new tu();
+  #r = new nu();
   #l = new oa();
   #a = new oa();
   #c = null;
@@ -7405,8 +7405,8 @@ class R extends gu {
       resetWoundCapacityOverride: R.#ye,
       editRecoveryOverride: R.#H,
       resetRecoveryOverride: R.#y,
-      rollPool: R.#$,
-      inspectHeaderFocus: R.#I,
+      rollPool: R.#I,
+      inspectHeaderFocus: R.#$,
       createSkill: R.#v,
       setSkillSort: R.#V,
       rollSkill: R.#Y,
@@ -7425,8 +7425,8 @@ class R extends gu {
       toggleArmorEquipped: R.#ke,
       editCombatItem: R.#Ae,
       deleteCombatItem: R.#He,
-      block: R.#$e,
-      dodge: R.#Ie,
+      block: R.#Ie,
+      dodge: R.#$e,
       openFocusNode: R.#Ve,
       acquireFocusNode: R.#Ye,
       gmAcquireFocusNode: R.#Fe,
@@ -7437,8 +7437,8 @@ class R extends gu {
       addFocus: R.#Me,
       removeFocus: R.#qe,
       toggleGmProgressionEdit: R.#xe,
-      undoFocusAcquisition: R.#Ue,
-      gmMarkFocusOwned: R.#Ge,
+      undoFocusAcquisition: R.#Ge,
+      gmMarkFocusOwned: R.#Ue,
       gmRemoveFocusOwned: R.#Oe,
       beginCoreSetup: R.#Be,
       skipCoreSetup: R.#Le,
@@ -7457,10 +7457,10 @@ class R extends gu {
       inspectGrantedItem: R.#N,
       createAbility: R.#q,
       useAbility: R.#M,
-      payAbilityCost: R.#G,
+      payAbilityCost: R.#U,
       toggleAbilityArchived: R.#O,
       toggleAbilityDetails: R.#x,
-      inspectAbility: R.#U,
+      inspectAbility: R.#G,
       deleteAbility: R.#B,
       addPowerShift: R.#ne,
       editPowerShift: R.#oe,
@@ -7498,7 +7498,7 @@ class R extends gu {
     if (await super._onRender(e, t), Zn(this.element, this.isEditable, ca), this.#s) {
       this.#d = this.#s.activeTab;
       const i = this.changeTab;
-      typeof i == "function" && i.call(this, this.#d, "primary"), qc(this.element, this.#s), this.#s = null;
+      typeof i == "function" && i.call(this, this.#d, "primary"), Gc(this.element, this.#s), this.#s = null;
     }
     this.#e.bind(this.element), this.#t.bind(this.element), this.#be(), this.#m();
   }
@@ -7535,7 +7535,7 @@ class R extends gu {
   async _onDropDocument(e, t) {
     if (!this.isEditable) return null;
     const i = t, a = (e.target instanceof Element ? e.target.closest("[data-hud-drop]") : null)?.dataset.hudDrop;
-    return a && i?.type !== a ? (ui.notifications.warn(game.i18n.localize("CYPHERV2.Hud.InvalidIdentityDrop")), null) : i?.type === "focus" ? (await Uo(this.actor, i), i) : i?.type === "characterType" ? (await Ko(this.actor, i), i) : i?.type === "descriptor" ? (await Xo(this.actor, i), i) : i?.type === "species" ? (await Jo(this.actor, i), i) : i?.type === "genre" ? (await $n(this.actor, i), i) : super._onDropDocument(e, t);
+    return a && i?.type !== a ? (ui.notifications.warn(game.i18n.localize("CYPHERV2.Hud.InvalidIdentityDrop")), null) : i?.type === "focus" ? (await Go(this.actor, i), i) : i?.type === "characterType" ? (await Ko(this.actor, i), i) : i?.type === "descriptor" ? (await Xo(this.actor, i), i) : i?.type === "species" ? (await Jo(this.actor, i), i) : i?.type === "genre" ? (await In(this.actor, i), i) : super._onDropDocument(e, t);
   }
   static async #w() {
     await Ko(this.actor);
@@ -7547,27 +7547,27 @@ class R extends gu {
     await Jo(this.actor);
   }
   static async #g() {
-    await $n(this.actor);
+    await In(this.actor);
   }
   static async #u() {
     await (await game.cypherv2.services.genres.active(this.actor))?.sheet?.render(!0);
   }
   static async #b() {
-    await vd(this.actor);
+    await Ed(this.actor);
   }
   static async #C(e, t) {
     const i = t.dataset.choiceId;
-    i && await Cd(this.actor, i);
+    i && await Rd(this.actor, i);
   }
   static async #D() {
-    await Ed(this.actor), await this.render({ force: !0 });
+    await Pd(this.actor), await this.render({ force: !0 });
   }
   static async #T(e, t) {
     const i = this.actor.items.get(q(t));
     i?.type !== "characterType" && i?.type !== "descriptor" && i?.type !== "species" || await i.sheet?.render(!0);
   }
   static async #z(e, t) {
-    await Dd(this.actor, q(t));
+    await zd(this.actor, q(t));
   }
   static async #N(e, t) {
     await this.actor.items.get(q(t))?.sheet?.render(!0);
@@ -7575,7 +7575,7 @@ class R extends gu {
   static async #M(e, t) {
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
-    await qd(
+    await Gd(
       this.actor,
       i
     );
@@ -7596,18 +7596,18 @@ class R extends gu {
     for (const s of a.querySelectorAll("[data-action='toggleAbilityDetails']"))
       s.setAttribute("aria-expanded", String(o));
   }
-  static async #U(e, t) {
+  static async #G(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
     await i.sheet?.render(!0);
   }
-  static async #G(e, t) {
+  static async #U(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
     try {
-      await Gd(
+      await Bd(
         this.actor,
         i
       );
@@ -7691,7 +7691,7 @@ class R extends gu {
     await game.cypherv2.services.itemChat.publish(i);
   }
   static async #J() {
-    await tc(this.actor);
+    await nc(this.actor);
   }
   static async #Q(e, t) {
     if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(
@@ -7726,14 +7726,14 @@ class R extends gu {
       game.user,
       CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
     )) return;
-    const { family: i, category: o } = ru(t.dataset);
-    await lu(this.actor, i, o), await this.render({ force: !0 });
+    const { family: i, category: o } = lu(t.dataset);
+    await du(this.actor, i, o), await this.render({ force: !0 });
   }
   static async #te() {
-    await au(this.actor), await this.render({ force: !0 });
+    await su(this.actor), await this.render({ force: !0 });
   }
   static async #ie(e, t) {
-    e.preventDefault(), e.stopPropagation(), await ou(
+    e.preventDefault(), e.stopPropagation(), await ru(
       this.actor,
       t.dataset.weaponFamily
     ), await this.render({ force: !0 });
@@ -7754,7 +7754,7 @@ class R extends gu {
   }
   static async #ae(e, t) {
     const i = t.dataset.powerShiftId;
-    i && await du(
+    i && await mu(
       this.actor,
       R.#S(this),
       i
@@ -7762,14 +7762,14 @@ class R extends gu {
   }
   static async #re(e, t) {
     const { severity: i, woundId: o } = la(t);
-    await Zl(this.actor, i, o);
+    await tc(this.actor, i, o);
   }
   static async #se(e, t) {
     const { severity: i, woundId: o } = la(t);
-    await ec(this.actor, i, o);
+    await ic(this.actor, i, o);
   }
   static async #le() {
-    await ic(this.actor);
+    await oc(this.actor);
   }
   static async #ce() {
     await ko(this.actor);
@@ -7792,12 +7792,12 @@ class R extends gu {
     }), ui.notifications.info(game.i18n.localize("CYPHERV2.Hud.RecoveriesReset"));
   }
   static async #me(e) {
-    e?.stopPropagation(), await nc(this.actor);
+    e?.stopPropagation(), await ac(this.actor);
   }
   static async #pe(e, t) {
     e.preventDefault(), e.stopPropagation(), t instanceof HTMLButtonElement && (t.disabled = !0);
     try {
-      await fu().activate(
+      await gu().activate(
         this.actor
       );
     } catch (i) {
@@ -7809,12 +7809,12 @@ class R extends gu {
   static async #fe(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
-    !i || !Gi.includes(i) || await rc(this.actor, i);
+    !i || !Ui.includes(i) || await lc(this.actor, i);
   }
   static async #he(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
-    if (!i || !Gi.includes(i)) return;
+    if (!i || !Ui.includes(i)) return;
     const o = vn(
       this.actor.system,
       i
@@ -7822,21 +7822,21 @@ class R extends gu {
     await this.actor.update({ [o.path]: null });
   }
   static async #ge(e) {
-    e.preventDefault(), e.stopPropagation(), await lc(this.actor);
+    e.preventDefault(), e.stopPropagation(), await dc(this.actor);
   }
   static async #ye(e) {
-    e.preventDefault(), e.stopPropagation(), await fc(this.actor);
+    e.preventDefault(), e.stopPropagation(), await gc(this.actor);
   }
   static async #H(e) {
-    e.preventDefault(), e.stopPropagation(), await pc(this.actor);
-  }
-  static async #y(e) {
     e.preventDefault(), e.stopPropagation(), await hc(this.actor);
   }
-  static async #$(e, t) {
+  static async #y(e) {
+    e.preventDefault(), e.stopPropagation(), await yc(this.actor);
+  }
+  static async #I(e, t) {
     if (e.target instanceof Element && e.target.closest("input, button, select, textarea, a")) return;
     const i = t.dataset.pool;
-    !i || !V.includes(i) || await Ic(this.actor, i);
+    !i || !V.includes(i) || await Yc(this.actor, i);
   }
   #be() {
     this.#i?.abort(), this.#i = new AbortController();
@@ -7850,7 +7850,7 @@ class R extends gu {
       i.stopPropagation(), await this.actor.update({ "system.appearance.color": t.value });
     }, { signal: e });
   }
-  static async #I(e, t) {
+  static async #$(e, t) {
     const i = t.dataset.focusUuid;
     if (!i) return;
     await (await Ye(this.actor, i))?.sheet?.render(!0);
@@ -7863,13 +7863,13 @@ class R extends gu {
   }
   static #V(e, t) {
     const i = t.dataset.sortMode;
-    !Jd(i) || i === this.#o || (this.#o = i, this.render({ force: !0 }));
+    !Zd(i) || i === this.#o || (this.#o = i, this.render({ force: !0 }));
   }
   static async #Y(e, t) {
     e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
-    hu(t);
+    yu(t);
     try {
       const o = ot(), a = game.cypherv2.services.skills.buildQuickRollRequest(
         i,
@@ -7888,7 +7888,7 @@ class R extends gu {
     e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
-    await Yc(
+    await Dc(
       this.actor,
       i
     );
@@ -7935,7 +7935,7 @@ class R extends gu {
       ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.Weapon.InsufficientAmmo"));
       return;
     }
-    await Tc(
+    await Nc(
       this.actor,
       i
     );
@@ -7996,16 +7996,16 @@ class R extends gu {
       no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
     }) && (this.#a.remove(i.id), await i.delete());
   }
-  static async #$e() {
+  static async #Ie() {
     await Sn(this.actor, "block");
   }
-  static async #Ie() {
+  static async #$e() {
     await Sn(this.actor, "dodge");
   }
   static async #Ve(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
     if (!a) throw new Error("Focus Item not found.");
-    await Ar(a, o);
+    await Ir(a, o);
   }
   static async #Ye(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
@@ -8018,7 +8018,7 @@ class R extends gu {
         this.actor,
         a,
         o,
-        $t
+        It
       );
       ui.notifications.info(game.i18n.localize(
         r.status === "acquired" ? "CYPHERV2.Focus.Acquired" : "CYPHERV2.Focus.AlreadyOwned"
@@ -8048,13 +8048,13 @@ class R extends gu {
   }
   static async #De(e, t) {
     const i = t.dataset.kind;
-    i !== "other" && !Un.includes(i) || await od(
+    i !== "other" && !Gn.includes(i) || await rd(
       this.actor,
       i
     );
   }
   static async #Te() {
-    await ad(this.actor);
+    await sd(this.actor);
   }
   static async #ze() {
     await game.cypherv2.services.advancement.completeProgressionGuidance(
@@ -8067,16 +8067,16 @@ class R extends gu {
     ), await this.render({ force: !0 });
   }
   static async #Me() {
-    await Uo(this.actor);
+    await Go(this.actor);
   }
   static async #qe(e, t) {
     const i = t.dataset.focusUuid;
-    i && await ld(this.actor, i);
+    i && await dd(this.actor, i);
   }
   static async #xe() {
     game.user.isGM && (this.#n = !this.#n, await this.render({ force: !0 }));
   }
-  static async #Ue(e, t) {
+  static async #Ge(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
     a && (await Lo(
       this.actor,
@@ -8084,10 +8084,10 @@ class R extends gu {
       o
     ), await this.render({ force: !0 }));
   }
-  static async #Ge(e, t) {
+  static async #Ue(e, t) {
     if (!game.user.isGM || !this.#n) return;
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
-    a && (await hd(
+    a && (await yd(
       this.actor,
       a,
       o
@@ -8103,7 +8103,7 @@ class R extends gu {
     ), await this.render({ force: !0 }));
   }
   static async #Be() {
-    await pd(this.actor);
+    await hd(this.actor);
   }
   static async #Le() {
     game.user.isGM && await Bo(this.actor, "skipped");
@@ -8131,17 +8131,17 @@ class R extends gu {
     }
   }
   static #ve(e) {
-    if (!(e instanceof Ge)) {
+    if (!(e instanceof Ue)) {
       if (e instanceof de) {
-        ui.notifications.error(game.i18n.localize(bu[e.code]));
+        ui.notifications.error(game.i18n.localize(vu[e.code]));
         return;
       }
       console.error(e), ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.Unexpected"));
     }
   }
   async _prepareContext(e) {
-    this.element?.isConnected && (this.#s = Mc(this.element), this.#d = this.#s.activeTab);
-    const t = await super._prepareContext(e), i = Qd([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
+    this.element?.isConnected && (this.#s = xc(this.element), this.#d = this.#s.activeTab);
+    const t = await super._prepareContext(e), i = eu([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
       const v = g, T = game.cypherv2.services.skills.configuredPool(v);
       return {
         id: v.id,
@@ -8150,13 +8150,13 @@ class R extends gu {
         rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${v.system.rank}`),
         poolLabel: T ? game.i18n.localize(`CYPHERV2.Pools.${T[0].toUpperCase()}${T.slice(1)}`) : game.i18n.localize("CYPHERV2.Skill.ChoosePool")
       };
-    }), this.#o), o = eu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
+    }), this.#o), o = iu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
     this.#r.retain(o.map((g) => g.id));
     const a = await Promise.all(o.map(async (g, v) => {
-      const T = g, N = ia(g), ce = this.#r.isExpanded(g.id), Ie = lr(
+      const T = g, N = ia(g), ce = this.#r.isExpanded(g.id), $e = dr(
         N.cost.amount,
         N.cost.pools,
-        yu,
+        wu,
         {
           pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
           middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
@@ -8175,7 +8175,7 @@ class R extends gu {
         canPay: this.isEditable && N.cost.payable,
         canDelete: this.isEditable && N.canDelete,
         expanded: ce,
-        costLabel: Ie,
+        costLabel: $e,
         enrichedDescription: ct,
         hasDescription: !!N.description
       };
@@ -8223,10 +8223,10 @@ class R extends gu {
         minor: v.system.wounds.minor.length,
         moderate: v.system.wounds.moderate.length,
         major: v.system.wounds.major.length
-      }, v.system.derived.capacities).map((Ie) => ({
-        ...Ie,
-        label: game.i18n.localize(`CYPHERV2.Wounds.Severity.${Ie.severity}`),
-        shortLabel: game.i18n.localize(`CYPHERV2.Hud.Wounds.${Ie.severity}`)
+      }, v.system.derived.capacities).map(($e) => ({
+        ...$e,
+        label: game.i18n.localize(`CYPHERV2.Wounds.Severity.${$e.severity}`),
+        shortLabel: game.i18n.localize(`CYPHERV2.Hud.Wounds.${$e.severity}`)
       }));
       return {
         id: v.id,
@@ -8309,9 +8309,9 @@ class R extends gu {
     }), S = this.actor.system, K = vo(
       S.powerShifts ?? [],
       k
-    ), j = Ys(
+    ), j = Ts(
       K,
-      Vs(k)
+      Ds(k)
     ), He = {
       enabled: S.presentation.powerShiftsEnabled,
       allocated: j.allocated,
@@ -8324,7 +8324,7 @@ class R extends gu {
       }))
     }, B = await game.cypherv2.services.genres.active(
       this.actor
-    ), $ = B ? {
+    ), I = B ? {
       attached: !0,
       available: !0,
       name: B.name,
@@ -8347,7 +8347,7 @@ class R extends gu {
     }, W = [...this.actor.items].filter((g) => Vn.includes(g.type)).sort((g, v) => g.name.localeCompare(v.name, "en-US"));
     this.#l.retain(W.map((g) => g.id));
     const J = (await Promise.all(W.map(async (g) => {
-      const v = iu(g);
+      const v = ou(g);
       if (!v) return null;
       const T = this.#l.isExpanded(g.id), N = v.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         v.description,
@@ -8368,7 +8368,7 @@ class R extends gu {
       equipment: J.filter((g) => g.type === "equipment"),
       cyphers: J.filter((g) => g.type === "cypher"),
       artifacts: J.filter((g) => g.type === "artifact")
-    }, pe = C.find((g) => g.provenance === "creation") ?? C[0], le = Wd({
+    }, pe = C.find((g) => g.provenance === "creation") ?? C[0], le = Kd({
       descriptors: O,
       ...M[0] ? { species: { id: M[0].id, name: M[0].name } } : {},
       ...H[0] ? { type: { id: H[0].id, name: H[0].name } } : {},
@@ -8388,7 +8388,7 @@ class R extends gu {
         ...le.focus,
         displayName: le.focus.missing ? game.i18n.localize("CYPHERV2.Hud.Placeholder.Focus") : le.focus.displayName
       }
-    }, $e = vi({
+    }, Ie = vi({
       minor: S.wounds.minor.length,
       moderate: S.wounds.moderate.length,
       major: S.wounds.major.length
@@ -8432,11 +8432,11 @@ class R extends gu {
           capacity: g.capacity
         })
       }))
-    } : null, ns = $e.map((g, v) => ({
+    } : null, rs = Ie.map((g, v) => ({
       character: g,
       shield: Le?.tracks[v] ?? null
-    })), os = {
-      appearance: Xs(S.appearance, this.actor.img),
+    })), ss = {
+      appearance: Qs(S.appearance, this.actor.img),
       identity: Be,
       stats: {
         tier: S.derived.tier.value,
@@ -8459,37 +8459,37 @@ class R extends gu {
         value: S.stats[g].value,
         max: S.derived.pools[g].max,
         edge: S.derived.pools[g].edge,
-        gauge: Mr(S.stats[g].value, S.derived.pools[g].max)
+        gauge: xr(S.stats[g].value, S.derived.pools[g].max)
       })),
       wounds: {
-        tracks: $e,
-        rows: ns,
+        tracks: Ie,
+        rows: rs,
         hindrance: S.derived.wounds.hindrance,
         hindranceModifier: ke("hinder", S.derived.wounds.hindrance),
         dead: S.derived.wounds.dead
       },
-      recoveries: Kd(S.recovery.slots).map((g) => ({
+      recoveries: Jd(S.recovery.slots).map((g) => ({
         ...g,
         label: game.i18n.localize(`CYPHERV2.Recovery.${g.type}`)
       })),
       recoveryFormulaLabel: S.derived.recovery.formula,
       canResetRecoveries: game.user.isGM,
       shield: Le
-    }, as = (g, v) => [
+    }, ls = (g, v) => [
       ...this.actor.items
     ].filter((T) => T.type !== "characterType" && T.type !== "species" ? !1 : T.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[v] === !0).map((T) => T.name), po = (g, v, T, N) => v.map((ce) => {
-      const Ie = as(g, ce), ct = T.includes(ce), ni = Ie.length > 0, ms = N.includes(ce), ps = ct && ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityManualAndGranted", { sources: Ie.join(", ") }) : ct ? game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual") : ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: Ie.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityAbsent");
+      const $e = ls(g, ce), ct = T.includes(ce), ni = $e.length > 0, hs = N.includes(ce), gs = ct && ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityManualAndGranted", { sources: $e.join(", ") }) : ct ? game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual") : ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: $e.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityAbsent");
       return {
         family: g,
         category: ce,
         label: game.i18n.localize(`CYPHERV2.Combat.${g === "weapon" ? "Weapon" : "Armor"}.Category.${ce}`),
         manual: ct,
         packageGranted: ni,
-        effective: ms,
+        effective: hs,
         canToggle: this.isEditable && (ct || !ni),
-        sourceHint: ps
+        sourceHint: gs
       };
-    }), rs = {
+    }), cs = {
       weapons: po(
         "weapon",
         xe,
@@ -8498,7 +8498,7 @@ class R extends gu {
       ),
       armor: po(
         "armor",
-        Ue,
+        Ge,
         S.proficiencies.armorCategories,
         S.derived.packages.armorCategories
       ),
@@ -8522,7 +8522,7 @@ class R extends gu {
           sourceHint: v.length > 0 ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: v.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual")
         };
       })
-    }, ss = {
+    }, ds = {
       tier: "CYPHERV2.Character.Tier",
       effort: "CYPHERV2.Character.Effort",
       mightMax: "CYPHERV2.Overrides.MightMax",
@@ -8531,20 +8531,20 @@ class R extends gu {
       speedEdge: "CYPHERV2.Overrides.SpeedEdge",
       intellectMax: "CYPHERV2.Overrides.IntellectMax",
       intellectEdge: "CYPHERV2.Overrides.IntellectEdge"
-    }, ls = Gi.map((g) => {
+    }, us = Ui.map((g) => {
       const v = vn(S, g);
-      return { ...v, label: game.i18n.localize(ss[g]), hasOverride: v.override !== null };
-    }), It = S.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, cs = {
-      hasOverride: Object.values(It).some((g) => g !== 0),
+      return { ...v, label: game.i18n.localize(ds[g]), hasOverride: v.override !== null };
+    }), $t = S.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, ms = {
+      hasOverride: Object.values($t).some((g) => g !== 0),
       calculated: S.derived.wounds.calculatedCapacities,
-      modifiers: It,
+      modifiers: $t,
       modifierLabels: {
-        minor: ln(It.minor),
-        moderate: ln(It.moderate),
-        major: ln(It.major)
+        minor: ln($t.minor),
+        moderate: ln($t.moderate),
+        major: ln($t.major)
       },
       effective: S.derived.wounds.capacities
-    }, ds = {
+    }, ps = {
       hasOverride: S.recovery.customized || S.recovery.rollModifier !== 0,
       calculatedSlots: 4,
       calculatedFormula: S.derived.recovery.calculatedFormula,
@@ -8553,7 +8553,7 @@ class R extends gu {
       modifier: S.recovery.rollModifier
     }, fo = [game.i18n.localize(Y.focusAbilityCount === 2 ? "CYPHERV2.Advancement.Guidance.TwoFocusAbilities" : "CYPHERV2.Advancement.Guidance.FocusAbility")];
     Y.includesGenreAbility && fo.push(game.i18n.localize("CYPHERV2.Advancement.Guidance.GenreAbility"));
-    const ho = typeof this.actor._source?.system?.notes == "string" ? this.actor._source.system.notes : "", us = ho ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(ho, {
+    const ho = typeof this.actor._source?.system?.notes == "string" ? this.actor._source.system.notes : "", fs = ho ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(ho, {
       async: !0,
       relativeTo: this.actor
     }) : "";
@@ -8563,15 +8563,15 @@ class R extends gu {
       system: this.actor.system,
       systemFields: Jn(this.actor),
       editable: this.isEditable,
-      enriched: { notes: us },
-      familiarities: rs,
+      enriched: { notes: fs },
+      familiarities: cs,
       powerShifts: He,
-      characterOverrides: ls,
-      woundOverride: cs,
-      recoveryOverride: ds,
-      genre: $,
+      characterOverrides: us,
+      woundOverride: ms,
+      recoveryOverride: ps,
+      genre: I,
       woundHindranceModifier: ke("hinder", S.derived.wounds.hindrance),
-      header: os,
+      header: ss,
       skillItems: i,
       skillSort: {
         mode: this.#o,
@@ -8634,7 +8634,7 @@ class ye extends Error {
   }
   code;
 }
-class wu {
+class Cu {
   #e = null;
   #t = null;
   get selectedNodeId() {
@@ -8669,7 +8669,7 @@ class wu {
     this.#e = null, this.#t = null;
   }
 }
-function vu() {
+function Eu() {
   return globalThis.crypto?.randomUUID?.().replaceAll("-", "") ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
 }
 function Fe(n) {
@@ -8711,12 +8711,12 @@ function pa(n, e) {
     return o - a || t.id.localeCompare(i.id);
   });
 }
-class Cu {
+class Ru {
   #e;
   #t;
   #i;
   #n = !1;
-  constructor(e, t = vu) {
+  constructor(e, t = Eu) {
     this.#e = t, this.#t = Fe(e), this.#i = Fe(e);
   }
   get graph() {
@@ -8846,7 +8846,7 @@ class Cu {
     );
   }
 }
-function Eu(n) {
+function Pu(n) {
   const e = n.querySelector(".cypherv2-sheet.cypherv2-item"), t = n.querySelector(".window-content"), i = [...n.querySelectorAll(
     ".cypherv2-focus-tree-section[data-focus-uuid]"
   )].map((o) => {
@@ -8863,7 +8863,7 @@ function Eu(n) {
     trees: i
   };
 }
-function Ru(n, e) {
+function Su(n, e) {
   const t = n.querySelector(".cypherv2-sheet.cypherv2-item");
   t && (t.scrollTop = e.vertical);
   const i = n.querySelector(".window-content");
@@ -8876,13 +8876,13 @@ function Ru(n, e) {
     s && (s.scrollLeft = a.left, s.scrollTop = a.top);
   }
 }
-class Pu extends Error {
+class ku extends Error {
   constructor(e) {
     super("Only one Shield may be equipped at a time."), this.shieldIds = e, this.name = "MultipleEquippedShieldsError";
   }
   shieldIds;
 }
-class Gr extends Error {
+class Br extends Error {
   constructor(e, t, i) {
     super(`Shield ${e} capacity cannot be lower than its current Wound count (${i}).`), this.severity = e, this.requested = t, this.current = i, this.name = "ShieldCapacityBelowWoundsError";
   }
@@ -8890,7 +8890,7 @@ class Gr extends Error {
   requested;
   current;
 }
-class Or {
+class Lr {
   #e;
   constructor(e) {
     this.#e = e;
@@ -8903,7 +8903,7 @@ class Or {
   }
   equipped(e) {
     const t = this.shields(e).filter((i) => i.system.equipped);
-    if (t.length > 1) throw new Pu(t.map((i) => i.id));
+    if (t.length > 1) throw new ku(t.map((i) => i.id));
     return t[0] ?? null;
   }
   async normalizeEquipped(e) {
@@ -8933,7 +8933,7 @@ class Or {
     if (!Number.isInteger(i) || i < 0)
       throw new RangeError("Shield Wound capacity must be a non-negative whole number.");
     const o = e.system.wounds[t].length;
-    if (i < o) throw new Gr(t, i, o);
+    if (i < o) throw new Br(t, i, o);
     await e.update({ [`system.woundCapacities.${t}`]: i });
   }
   canAbsorb(e) {
@@ -8987,7 +8987,7 @@ function fa(n) {
     "'": "&#039;"
   })[e]);
 }
-async function Su(n, e, t) {
+async function Au(n, e, t) {
   const i = n.system.wounds[e].find((a) => a.id === t);
   if (!i) throw new Error(`Shield Wound '${t}' was not found.`);
   const o = await foundry.applications.api.DialogV2.input({
@@ -9004,7 +9004,7 @@ async function Su(n, e, t) {
     description: String(o.description ?? "")
   });
 }
-async function ku(n, e, t) {
+async function Hu(n, e, t) {
   await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Wounds.DeleteTitle") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Wounds.DeleteConfirm")}</p></div>`,
@@ -9014,7 +9014,7 @@ async function ku(n, e, t) {
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
   }) && await game.cypherv2.services.shields.delete(n, e, t);
 }
-function Au(n) {
+function Iu(n) {
   const e = n.roll === "attack", t = n.roll === "task", i = n.roll === "defense", o = t || i || n.rollModifier !== 0, a = e || n.attackModifier !== 0, r = e || n.damage !== 0, s = e || n.woundSeverity !== "none", l = e || n.range.trim() !== "", u = e || n.targetMode !== "none";
   return {
     showIgnoresEdge: n.cost.amount > 0 && !!n.cost.allowedPools?.length || n.cost.ignoresEdge,
@@ -9028,10 +9028,10 @@ function Au(n) {
     hasConditionalFields: o || a || r || s || l || u
   };
 }
-function Hu(n) {
+function $u(n) {
   return n.defaultPool !== "choose" || n.category !== "general" || n.contexts.length > 0 || n.initiative;
 }
-function $u(n) {
+function Vu(n) {
   const e = n.querySelector("[data-item-sheet-scroll]"), t = n.querySelector("[data-item-focus-key]:focus"), i = t?.dataset.itemFocusKey;
   if (!t || !i) return { scrollTop: e?.scrollTop ?? 0 };
   let o = null, a = null, r = null;
@@ -9049,7 +9049,7 @@ function $u(n) {
     }
   };
 }
-function Iu(n, e) {
+function Yu(n, e) {
   const t = n.querySelector("[data-item-sheet-scroll]");
   if (t && (t.scrollTop = e.scrollTop), !e.focusedInput) return;
   const i = [...n.querySelectorAll("[data-item-focus-key]")].find((s) => s.dataset.itemFocusKey === e.focusedInput?.key);
@@ -9074,7 +9074,7 @@ function Ee(n) {
 function te(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-const Vu = foundry.applications.api.HandlebarsApplicationMixin(
+const Fu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ItemSheetV2
 ), ha = /* @__PURE__ */ new Set([
   "rollDepletion",
@@ -9109,10 +9109,10 @@ const Vu = foundry.applications.api.HandlebarsApplicationMixin(
   "refreshGenreAbility",
   "removeGenreAbility"
 ]);
-class F extends Vu {
-  #e = new Hr();
-  #t = new wu();
-  #i = new $r();
+class F extends Fu {
+  #e = new $r();
+  #t = new Cu();
+  #i = new Vr();
   #n = null;
   #o = null;
   #r = null;
@@ -9148,11 +9148,11 @@ class F extends Vu {
   }
   static async #C(e, t) {
     const i = F.#u(t);
-    await Su(this.item, i.severity, i.woundId);
+    await Au(this.item, i.severity, i.woundId);
   }
   static async #D(e, t) {
     const i = F.#u(t);
-    await ku(this.item, i.severity, i.woundId);
+    await Hu(this.item, i.severity, i.woundId);
   }
   static async #T() {
     !this.isEditable || this.item.type !== "weapon" || (await game.cypherv2.services.weapons.reload(this.item), await this.render({ force: !0 }));
@@ -9203,13 +9203,13 @@ class F extends Vu {
     main: { template: "systems/cypherv2/templates/item/item-sheet.hbs" }
   };
   async _onRender(e, t) {
-    if (await super._onRender(e, t), Zn(this.element, this.isEditable, ha), this.#s?.abort(), this.#s = null, this.#c && (Ru(this.element, this.#c), this.#c = null), this.#w && (Iu(this.element, this.#w), this.#w = null), this.#t.connectionSourceNodeId) {
+    if (await super._onRender(e, t), Zn(this.element, this.isEditable, ha), this.#s?.abort(), this.#s = null, this.#c && (Su(this.element, this.#c), this.#c = null), this.#w && (Yu(this.element, this.#w), this.#w = null), this.#t.connectionSourceNodeId) {
       const i = new AbortController();
       this.#s = i, this.element.addEventListener("keydown", (o) => {
         o.key === "Escape" && (o.preventDefault(), o.stopPropagation(), this.#t.cancelConnection(), this.#h());
       }, { signal: i.signal }), this.element.querySelector(".focus-tree-node-editor")?.focus({ preventScroll: !0 });
     }
-    this.#e.bind(this.element), this.#i.bind(this.element), this.#q(), this.#x(), this.#U(), this.#G(), this.#z(), this.#N(), this.#M();
+    this.#e.bind(this.element), this.#i.bind(this.element), this.#q(), this.#x(), this.#G(), this.#U(), this.#z(), this.#N(), this.#M();
   }
   _onClose(e) {
     this.#e.disconnect(), this.#i.disconnect(), this.#n?.abort(), this.#n = null, this.#o?.abort(), this.#o = null, this.#r?.abort(), this.#r = null, this.#l?.abort(), this.#l = null, this.#f?.abort(), this.#f = null, this.#p?.abort(), this.#p = null, this.#g?.abort(), this.#g = null, this.#a?.cancel(), this.#a = null, this.#t.reset(), this.#c = null, this.#s?.abort(), this.#s = null, super._onClose(e);
@@ -9265,7 +9265,7 @@ class F extends Vu {
               Number(i.value)
             );
           } catch (r) {
-            r instanceof Gr ? ui.notifications.warn(game.i18n.format("CYPHERV2.Shield.CapacityTooLow", {
+            r instanceof Br ? ui.notifications.warn(game.i18n.format("CYPHERV2.Shield.CapacityTooLow", {
               severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${r.severity}`),
               count: r.current
             })) : te(r), await this.render({ force: !0 });
@@ -9304,14 +9304,14 @@ class F extends Vu {
         o.preventDefault(), o.stopPropagation();
         const a = i.dataset.entryId ?? "", r = this.item.system.abilityCatalog;
         try {
-          const s = $l(r, a, Number(i.value));
+          const s = Vl(r, a, Number(i.value));
           await this.item.update({ "system.abilityCatalog": s });
         } catch (s) {
           te(s), await this.render({ force: !0 });
         }
       }, { signal: t.signal });
   }
-  #U() {
+  #G() {
     if (this.#r?.abort(), this.#r = null, this.item.type !== "characterType") return;
     const e = this.element.querySelector("select[data-type-genre-select]"), t = this.element.querySelector("[data-type-custom-genre]"), i = this.element.querySelector("[data-type-superhero]");
     if (!e || !t) return;
@@ -9322,7 +9322,7 @@ class F extends Vu {
     };
     e.addEventListener("change", a, { signal: o.signal }), a();
   }
-  #G() {
+  #U() {
     if (this.#l?.abort(), this.#l = null, this.item.type !== "characterType" && this.item.type !== "species" || !this.isEditable) return;
     const e = this.element.querySelector("input[data-package-weapon-families]");
     if (!e) return;
@@ -9426,14 +9426,14 @@ class F extends Vu {
     }
     const a = this.item.system.abilityCatalog;
     await this.item.update({
-      "system.abilityCatalog": Il(a, i.id, this.#v(o))
+      "system.abilityCatalog": Yl(a, i.id, this.#v(o))
     });
   }
   static async #W(e, t) {
     const i = t.dataset.entryId;
     if (!i || this.item.type !== "genre") return;
     const o = this.item.system.abilityCatalog;
-    await this.item.update({ "system.abilityCatalog": Vl(o, i) });
+    await this.item.update({ "system.abilityCatalog": Fl(o, i) });
   }
   static async #_(e, t) {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
@@ -9602,11 +9602,11 @@ class F extends Vu {
   static async #ne(e, t) {
     const i = t.dataset.nodeId;
     if (!i) throw new Error("Missing Focus node ID.");
-    await Ar(this.#$(), i);
+    await Ir(this.#I(), i);
   }
   static async #oe() {
     try {
-      this.#H(), this.#a = new Cu(
+      this.#H(), this.#a = new Ru(
         this.item.system.graph
       ), this.#t.reset(), await this.#h();
     } catch (e) {
@@ -9626,7 +9626,7 @@ class F extends Vu {
           <label>${game.i18n.localize("CYPHERV2.Focus.Editor.Ability")}
             <select name="abilityUuid">${t.map((r) => `<option value="${Ee(r.uuid)}">${Ee(r.name)}</option>`).join("")}</select>
           </label>
-          ${this.#I()}
+          ${this.#$()}
         </div>`,
         rejectClose: !1,
         ok: { label: game.i18n.localize("CYPHERV2.Focus.Editor.AddAbility") }
@@ -9756,7 +9756,7 @@ class F extends Vu {
     if (this.#H(), !this.#a) throw new Error("Focus Tree editing is not active.");
     return this.#a;
   }
-  #$() {
+  #I() {
     const e = this.#a?.graph ?? this.item.system.graph;
     return {
       id: this.item.id,
@@ -9772,7 +9772,7 @@ class F extends Vu {
       throw new Error(game.i18n.localize("CYPHERV2.Focus.Editor.DropAbilityOnly"));
     const i = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize("CYPHERV2.Focus.Editor.ChooseTier") },
-      content: `<div class="cypherv2-dialog-fields">${this.#I()}</div>`,
+      content: `<div class="cypherv2-dialog-fields">${this.#$()}</div>`,
       rejectClose: !1,
       ok: { label: game.i18n.localize("CYPHERV2.Focus.Editor.AddAbility") }
     });
@@ -9780,7 +9780,7 @@ class F extends Vu {
     const o = t.addAbility(e, Number(i.tier ?? 1));
     this.#t.select(o.id), await this.#h();
   }
-  #I() {
+  #$() {
     return `<label>${game.i18n.localize("CYPHERV2.Focus.Tier")}
       <select name="tier">${[1, 2, 3, 4, 5, 6].map((e) => `<option value="${e}">${e}</option>`).join("")}</select>
     </label>`;
@@ -9803,7 +9803,7 @@ class F extends Vu {
     const o = {
       id: crypto.randomUUID(),
       abilityUuid: e.uuid,
-      minimumTier: cr(t),
+      minimumTier: ur(t),
       catalog: "progression",
       minimumSuperheroRank: 0,
       snapshot: this.#v(e)
@@ -9900,19 +9900,19 @@ class F extends Vu {
     return t;
   }
   async #h() {
-    this.#c = Eu(this.element), await this.render({ force: !0 });
+    this.#c = Pu(this.element), await this.render({ force: !0 });
   }
   async _prepareContext(e) {
-    this.element?.isConnected && (this.#w = $u(this.element));
+    this.element?.isConnected && (this.#w = Vu(this.element));
     const t = await super._prepareContext(e), i = this.item.system, o = this.item.type === "skill", a = this.item.type === "ability", r = this.item.type === "weapon", s = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", c = this.item.type === "cypher", p = this.item.type === "artifact", h = this.item.type === "focus", m = this.item.type === "genre", y = this.item.type === "characterType", f = this.item.type === "descriptor", w = this.item.type === "species", C = y && String(i.genre ?? "none") === "superhero", P = y ? i.instance : void 0, Y = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type), k = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", H = Y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(k, {
       async: !0,
       relativeTo: this.item
-    }) : "", M = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", O = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", A = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), S = Array.isArray(i.contexts) ? i.contexts : [], K = a ? We(this.item) : [], j = a ? Au(i) : null, He = j ? {
+    }) : "", M = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", O = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", A = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), S = Array.isArray(i.contexts) ? i.contexts : [], K = a ? We(this.item) : [], j = a ? Iu(i) : null, He = j ? {
       ...j,
       rollModifierLabel: game.i18n.localize(
         j.rollModifierLabel === "task" ? "CYPHERV2.Ability.TaskModifier" : j.rollModifierLabel === "defense" ? "CYPHERV2.Ability.DefenseModifier" : "CYPHERV2.Ability.RollModifier"
       )
-    } : null, B = a ? this.item.flags?.cypherv2?.genreAbility : void 0, $ = B ? {
+    } : null, B = a ? this.item.flags?.cypherv2?.genreAbility : void 0, I = B ? {
       catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${B.catalog ?? "progression"}`),
       genresLabel: (B.genres ?? []).map((b) => game.i18n.localize(`CYPHERV2.Packages.Genre.${b}`)).join(" · "),
       progressionBandLabel: B.progressionBand === "origin" ? game.i18n.localize("CYPHERV2.Genre.CatalogKind.origin") : game.i18n.localize(`CYPHERV2.Genre.ProgressionBand.${B.progressionBand ?? "mid-tier"}`),
@@ -9922,12 +9922,12 @@ class F extends Vu {
       catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${b.catalog ?? "progression"}`),
       progressionBandLabel: (b.catalog ?? "progression") === "progression" ? b.minimumTier === 3 ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.mid-tier") : b.minimumTier === 6 ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.high-tier") : "" : "",
       minimumSuperheroRank: Number(b.minimumSuperheroRank ?? 0)
-    })) : [], J = o && Hu({
+    })) : [], J = o && $u({
       defaultPool: D,
       category: String(i.category ?? "general"),
       contexts: S,
       initiative: !!i.initiative
-    }), ie = i.grantedBy, pe = !!(ie?.sourceUuid || ie?.instanceId || ie?.grantId), le = h ? this.#$() : null, Be = le?.system.graph, $e = Be?.nodes.find((b) => b.id === this.#t.selectedNodeId), be = new Map(Be?.nodes.map((b) => [
+    }), ie = i.grantedBy, pe = !!(ie?.sourceUuid || ie?.instanceId || ie?.grantId), le = h ? this.#I() : null, Be = le?.system.graph, Ie = Be?.nodes.find((b) => b.id === this.#t.selectedNodeId), be = new Map(Be?.nodes.map((b) => [
       b.id,
       b.abilitySnapshot.name || b.id
     ]) ?? []);
@@ -9955,7 +9955,7 @@ class F extends Vu {
       typeSuperheroicsPoolLabel: P?.selections?.superheroicsPool && P.selections.superheroicsPool !== "none" ? game.i18n.localize(`CYPHERV2.Pools.${P.selections.superheroicsPool[0].toUpperCase()}${P.selections.superheroicsPool.slice(1)}`) : game.i18n.localize("CYPHERV2.Common.None"),
       typeWeaponFamiliesValue: y ? se(i.weaponFamilies).map(ht).join(", ") : "",
       speciesWeaponFamiliesValue: w ? se(i.weaponFamilies).map(ht).join(", ") : "",
-      weaponFamilySuggestions: Ba.map((b) => ({ value: ht(b) })),
+      weaponFamilySuggestions: La.map((b) => ({ value: ht(b) })),
       isDescriptor: f,
       isSpecies: w,
       isCompactRuleItem: a || o || r || s || l || u || c || p || m || y || w,
@@ -9970,7 +9970,7 @@ class F extends Vu {
       genreMinimumTierMax: Bt,
       genreCatalogEntries: W,
       abilityMechanics: He,
-      abilityGenreReview: $,
+      abilityGenreReview: I,
       skillOptionalMechanics: J,
       hasGrantProvenance: pe,
       packagePoolOptions: ["none", ...V].map((b) => ({
@@ -10026,8 +10026,8 @@ class F extends Vu {
         tierOptions: [1, 2, 3, 4, 5, 6],
         connecting: !!this.#t.connectionSourceNodeId,
         connectionSourceName: this.#t.connectionSourceNodeId ? be.get(this.#t.connectionSourceNodeId) : "",
-        selectedNode: $e ? {
-          ...$e,
+        selectedNode: Ie ? {
+          ...Ie,
           canMoveLeft: !0,
           canMoveRight: !0
         } : null,
@@ -10044,7 +10044,7 @@ class F extends Vu {
         }
       } : {})] : [],
       isHeavyWeapon: r && i.category === "heavy",
-      abilityActivationOptions: a ? Ta.map((b) => ({
+      abilityActivationOptions: a ? za.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.Activation.${b}`),
         selected: i.activation === b
@@ -10054,7 +10054,7 @@ class F extends Vu {
         label: game.i18n.localize(`CYPHERV2.Pools.${b[0].toUpperCase()}${b.slice(1)}`),
         selected: K.includes(b)
       })) : [],
-      abilityRollOptions: a ? za.map((b) => ({
+      abilityRollOptions: a ? Na.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.Roll.${b}`),
         selected: i.roll === b
@@ -10064,7 +10064,7 @@ class F extends Vu {
         label: game.i18n.localize(b === "none" ? "CYPHERV2.Common.None" : `CYPHERV2.Wounds.Severity.${b}`),
         selected: i.woundSeverity === b
       })) : [],
-      abilityTargetOptions: a ? Na.map((b) => ({
+      abilityTargetOptions: a ? Ma.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.TargetMode.${b}`),
         selected: i.targetMode === b
@@ -10124,7 +10124,7 @@ class F extends Vu {
         label: b === "none" ? game.i18n.localize("CYPHERV2.Common.None") : game.i18n.localize(`CYPHERV2.Pools.${b[0].toUpperCase()}${b.slice(1)}`),
         selected: i.defaultPool === b
       })) : [],
-      weaponAttackTypeOptions: r ? Fa.map((b) => ({
+      weaponAttackTypeOptions: r ? Da.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Combat.Weapon.AttackType.${b}`),
         selected: i.attackType === b
@@ -10148,13 +10148,13 @@ class F extends Vu {
       advancedExpanded: this.#d.has("advanced"),
       shieldWoundsExpanded: l && this.#d.has("shield-wounds"),
       combatDepletionSides: r || s || l ? Wt(i.depletion ?? { die: "d6" }) : 0,
-      combatDepletionThreshold: r || s || l ? kr(Number(i.depletion?.threshold ?? 1)) : "",
-      depletionDieOptions: r || p ? hs.map((b) => ({
+      combatDepletionThreshold: r || s || l ? Hr(Number(i.depletion?.threshold ?? 1)) : "",
+      depletionDieOptions: r || p ? bs.map((b) => ({
         value: b,
         label: `1 in 1${b}`,
         selected: i.depletion?.die === b
       })) : [],
-      armorCategoryOptions: s ? Ue.map((b) => ({
+      armorCategoryOptions: s ? Ge.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Combat.Armor.Category.${b}`),
         selected: i.category === b
@@ -10183,7 +10183,7 @@ function Qe(n, e) {
 function gi(n) {
   return n.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
-async function Br(n) {
+async function jr(n) {
   const e = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize(n ? "CYPHERV2.Combat.Modification.Edit" : "CYPHERV2.Combat.Modification.Create") },
     content: `<div class="cypherv2-dialog-fields">
@@ -10220,20 +10220,20 @@ async function Br(n) {
     description: Qe(e, "description")
   };
 }
-async function Yu(n) {
+async function Du(n) {
   try {
-    const e = await Br();
+    const e = await jr();
     if (!e) return;
     await n.update({ "system.modifications": [...n.system.modifications, e] });
   } catch (e) {
     ui.notifications.error(e instanceof Error ? e.message : String(e));
   }
 }
-async function Fu(n, e) {
+async function Tu(n, e) {
   try {
     const t = n.system.modifications.find((o) => o.id === e);
     if (!t) throw new Error(`NPC modification '${e}' was not found.`);
-    const i = await Br(t);
+    const i = await jr(t);
     if (!i) return;
     await n.update({
       "system.modifications": n.system.modifications.map((o) => o.id === e ? i : o)
@@ -10242,7 +10242,7 @@ async function Fu(n, e) {
     ui.notifications.error(t instanceof Error ? t.message : String(t));
   }
 }
-async function Du(n, e) {
+async function zu(n, e) {
   const t = n.system.modifications.find((o) => o.id === e);
   if (!t) throw new Error(`NPC modification '${e}' was not found.`);
   await foundry.applications.api.DialogV2.confirm({
@@ -10254,15 +10254,15 @@ async function Du(n, e) {
     "system.modifications": n.system.modifications.filter((o) => o.id !== e)
   });
 }
-function Tu(n) {
+function Nu(n) {
   const e = typeof n == "number" ? n : typeof n == "string" && n.trim() !== "" ? Number(n) : Number.NaN;
   return Number.isInteger(e) && e >= 0 ? e * 3 : null;
 }
-function zu(n, e) {
-  const t = Mr(n, e), i = t.ratio > 0.5 ? "healthy" : t.ratio > 0.25 ? "intermediate" : "low";
+function Mu(n, e) {
+  const t = xr(n, e), i = t.ratio > 0.5 ? "healthy" : t.ratio > 0.25 ? "intermediate" : "low";
   return { ...t, state: i };
 }
-const Nu = foundry.applications.api.HandlebarsApplicationMixin(
+const qu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 ), ga = /* @__PURE__ */ new Set([
   "requestDefense",
@@ -10270,7 +10270,7 @@ const Nu = foundry.applications.api.HandlebarsApplicationMixin(
   "editModification",
   "deleteModification"
 ]);
-class yt extends Nu {
+class yt extends qu {
   static DEFAULT_OPTIONS = {
     ...Xn,
     classes: ["cypherv2", "sheet", "actor", "npc-sheet"],
@@ -10287,20 +10287,20 @@ class yt extends Nu {
     main: { template: "systems/cypherv2/templates/actor/npc-sheet.hbs" }
   };
   static async #e() {
-    await zc(this.actor);
+    await Mc(this.actor);
   }
   static async #t() {
-    await Yu(this.actor);
+    await Du(this.actor);
   }
   static async #i(e, t) {
     const i = t.dataset.modificationId;
     if (!i) throw new Error("Missing NPC modification ID.");
-    await Fu(this.actor, i);
+    await Tu(this.actor, i);
   }
   static async #n(e, t) {
     const i = t.dataset.modificationId;
     if (!i) throw new Error("Missing NPC modification ID.");
-    await Du(this.actor, i);
+    await zu(this.actor, i);
   }
   async _onRender(e, t) {
     await super._onRender(e, t), Zn(this.element, this.isEditable, ga);
@@ -10321,8 +10321,8 @@ class yt extends Nu {
       editable: this.isEditable,
       isGM: game.user.isGM,
       enriched: { notes: r },
-      targetNumber: Tu(i.level) ?? "—",
-      healthGauge: zu(
+      targetNumber: Nu(i.level) ?? "—",
+      healthGauge: Mu(
         i.health.value,
         i.health.max ?? i.health.baseMax
       ),
@@ -10339,17 +10339,17 @@ class yt extends Nu {
     };
   }
 }
-function Mu() {
+function xu() {
   const { DocumentSheetConfig: n } = foundry.applications.apps;
-  n.registerSheet(foundry.documents.Actor, I, R, {
+  n.registerSheet(foundry.documents.Actor, $, R, {
     types: ["character"],
     makeDefault: !0,
     label: "CYPHERV2.Sheets.Character"
-  }), n.registerSheet(foundry.documents.Actor, I, yt, {
+  }), n.registerSheet(foundry.documents.Actor, $, yt, {
     types: ["npc"],
     makeDefault: !0,
     label: "CYPHERV2.Sheets.Npc"
-  }), n.registerSheet(foundry.documents.Item, I, F, {
+  }), n.registerSheet(foundry.documents.Item, $, F, {
     makeDefault: !0,
     label: "CYPHERV2.Sheets.Item"
   });
@@ -10359,10 +10359,10 @@ function Z(n, e, t = 0) {
     throw new Error(`${e} must be an integer of at least ${t}.`);
   return n;
 }
-function Lr(n, e, t) {
+function Wr(n, e, t) {
   return Math.min(t, Math.max(e, n));
 }
-function qu(n) {
+function Gu(n) {
   const e = Z(n, "Paid Effort");
   return e === 0 ? 0 : 3 + (e - 1) * 2;
 }
@@ -10376,17 +10376,17 @@ function Fn(n, e, t, i = !1) {
     poolCost: Math.max(0, r - l)
   };
 }
-function jr(n) {
+function _r(n) {
   if (Z(n, "Natural d20 result", 1), n > 20) throw new Error("Natural d20 result cannot exceed 20.");
   return [1, 17, 18, 19, 20].includes(n) ? [`natural-${n}`] : [];
 }
-function xu(n) {
-  return jr(n), Math.floor(n / 3);
+function Uu(n) {
+  return _r(n), Math.floor(n / 3);
 }
 function cn(n, e, t, i, o) {
   return { id: n, label: e, direction: t, steps: i, source: o };
 }
-function Uu(n) {
+function Ou(n) {
   const e = Z(n.limits.difficultyCeiling, "Difficulty ceiling"), t = Z(n.limits.assetLimit, "Asset limit"), i = Z(n.limits.paidEffortMaximum, "Maximum Effort"), o = Z(n.assets, "Assets"), a = Z(n.paidEffort, "Paid Effort"), r = Z(n.damageEffort ?? 0, "Damage Effort"), s = Z(n.freeDamageEffort ?? 0, "Free Damage Effort"), l = Z(n.freeEffort, "Free Effort"), u = n.limits.totalEffortMaximum === null ? null : Z(n.limits.totalEffortMaximum, "Maximum total Effort");
   if (Z(n.poolValue, "Pool value"), o > t) throw new Error(`Assets cannot exceed the current limit of ${t}.`);
   const c = r + s, p = a + c + l, h = a + r, m = l + s;
@@ -10418,7 +10418,7 @@ function Uu(n) {
     Z(H.steps, `Steps for '${H.id}'`), H.steps > 0 && y.push({ ...H });
   const f = y.filter((H) => H.direction === "ease").reduce((H, M) => H + M.steps, 0), w = y.filter((H) => H.direction === "hinder").reduce((H, M) => H + M.steps, 0), C = f - w, P = Fn(
     n.actionCost ?? 0,
-    qu(h),
+    Gu(h),
     n.edge,
     n.actionCostIgnoresEdge ?? !1
   );
@@ -10427,7 +10427,7 @@ function Uu(n) {
     const H = Z(n.difficulty.value, "Difficulty");
     if (H > e)
       throw new Error(`Difficulty cannot exceed the current ceiling of ${e}.`);
-    Y = Lr(H - C, 0, e), k = Y * 3;
+    Y = Wr(H - C, 0, e), k = Y * 3;
   }
   return {
     context: n,
@@ -10445,9 +10445,9 @@ function Uu(n) {
     targetNumber: k
   };
 }
-function Gu(n, e) {
-  if (n.finalDifficulty === 0) return Wr(n);
-  const t = jr(e), i = n.targetNumber === null ? null : e >= n.targetNumber, o = xu(e), a = Lr(
+function Bu(n, e) {
+  if (n.finalDifficulty === 0) return Kr(n);
+  const t = _r(e), i = n.targetNumber === null ? null : e >= n.targetNumber, o = Uu(e), a = Wr(
     o + n.netSteps,
     0,
     n.context.limits.difficultyCeiling
@@ -10465,7 +10465,7 @@ function Gu(n, e) {
     poolCostRefunded: 0
   };
 }
-function Wr(n) {
+function Kr(n) {
   if (n.finalDifficulty !== 0 || n.targetNumber !== 0)
     throw new Error("Automatic success requires a known final difficulty of 0.");
   return {
@@ -10484,7 +10484,7 @@ function Wr(n) {
 function dn(n) {
   return n === null ? "unresolved" : n ? "applied" : "inapplicable";
 }
-function Ou(n, e = 1) {
+function Lu(n, e = 1) {
   const t = n.naturalRoll;
   if (t === null) return [];
   const i = { sourceId: "cypherv2.core", naturalRoll: t }, o = Ht(e);
@@ -10609,37 +10609,37 @@ const Ze = {
     "focusBehaviors"
   ]
 };
-function Bu(n) {
+function ju(n) {
   n.register(Ze), n.registerDifficultyPolicy(Ze.id, (e) => ({
     ...e,
     assetLimit: 2
-  })), n.registerSkillRankRule(Ze.id, Wu), n.registerNaturalResultRule(Ze.id, (e, t) => [
+  })), n.registerSkillRankRule(Ze.id, Ku), n.registerNaturalResultRule(Ze.id, (e, t) => [
     ...t,
-    ...Ou(e, e.prepared.context.horrorIntrusionRange)
+    ...Lu(e, e.prepared.context.horrorIntrusionRange)
   ]), n.registerGMIntrusionPolicy(Ze.id, (e) => ({
     ...e,
     targetedXpToTarget: 1,
     targetedXpToShare: 1,
     groupXpPerTarget: 1,
     freeXp: 0
-  })), n.registerCombatPolicy(Ze.id, () => Lu), n.registerAdvancementPolicy(Ze.id, () => Oa);
+  })), n.registerCombatPolicy(Ze.id, () => Wu), n.registerAdvancementPolicy(Ze.id, () => Ba);
 }
-const Lu = Object.freeze({
+const Wu = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
   armorDefenseSteps: Object.freeze({ light: 1, medium: 2, heavy: 3 }),
   blockSeverityReduction: 1,
   damageEffortBonus: 3
-}), ju = Object.freeze({
+}), _u = Object.freeze({
   inability: -1,
   untrained: 0,
   trained: 1,
   specialized: 2,
   expert: 3
 });
-function Wu(n, e) {
-  const t = ju[n];
+function Ku(n, e) {
+  const t = _u[n];
   return t === 0 ? null : {
     id: `core.skill.${e.id}.rank`,
     label: `CYPHERV2.Skill.Ranks.${n}`,
@@ -10649,7 +10649,7 @@ function Wu(n, e) {
     sourceId: e.id
   };
 }
-class _u {
+class Xu {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Map();
   #i = /* @__PURE__ */ new Map();
@@ -10824,7 +10824,7 @@ class _u {
       throw new Error(`Rule module '${e}' does not declare '${t}'.`);
   }
 }
-async function Ku() {
+async function Ju() {
   const n = await new Roll("1d6").evaluate();
   return Number(n.total);
 }
@@ -10833,11 +10833,11 @@ function yi(n, e, t, i) {
     throw new Error(`${i} must be an integer from ${e} to ${t}.`);
   return n;
 }
-class Xu {
+class Qu {
   #e;
   #t;
   #i;
-  constructor(e = Ku, t = Oe, i = Date.now) {
+  constructor(e = Ju, t = Oe, i = Date.now) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   calculateRoll(e, t, i, o = !1, a = 0, r = "") {
@@ -10846,7 +10846,7 @@ class Xu {
     return { slotId: r, type: e, dieResult: i, tier: t, bonus: s, total: Math.max(0, i + t + s), lastAction: o };
   }
   availableTypes(e) {
-    return Ma(e);
+    return qa(e);
   }
   isAvailable(e, t) {
     return !e[_t[t]];
@@ -10943,7 +10943,7 @@ class Xu {
     };
   }
 }
-const Ju = {
+const Zu = {
   beforeComplete(n) {
     Hooks.callAll("cypherv2.preRecoveryWorkflow", n);
   },
@@ -10957,18 +10957,18 @@ const Ju = {
     Hooks.callAll("cypherv2.recoveryRefresh", n);
   }
 };
-function Qu(n) {
+function em(n) {
   return n === "one-action" ? null : n;
 }
 function ya(n, e) {
   const t = [n === "normal" ? "recovery" : "non-rest-recovery"];
   return e !== "one-action" && t.push("10-minute-or-longer"), (e === "1-hour" || e === "10-hours") && t.push("1-hour-or-longer"), e === "10-hours" && t.push("10-hour"), t;
 }
-class Zu {
+class tm {
   #e;
   #t;
   #i;
-  constructor(e, t, i = Ju) {
+  constructor(e, t, i = Zu) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async rollNormal(e, t, i = !1, o) {
@@ -10976,7 +10976,7 @@ class Zu {
   }
   async completeNormal(e, t, i, o = {}) {
     Ne(e);
-    const a = Qu(t.type), r = a ? this.#t.prepare(e, a, o) : null, s = this.#e.prepareNormal(e, t, i), l = {
+    const a = em(t.type), r = a ? this.#t.prepare(e, a, o) : null, s = this.#e.prepareNormal(e, t, i), l = {
       kind: "normal",
       type: t.type,
       recovery: s,
@@ -11007,7 +11007,7 @@ class Zu {
     }), await this.#i.processDurations(a), await this.#i.afterComplete(a), await this.#i.refresh(a), a;
   }
 }
-class em {
+class im {
   #e;
   #t;
   constructor(e = Oe, t = Date.now) {
@@ -11070,10 +11070,10 @@ function zt(n, e) {
     throw new Error(`${e} must be a non-negative integer.`);
   return n;
 }
-function tm(n) {
+function nm(n) {
   return zt(n, "Pool damage overflow"), n === 0 ? null : n <= 4 ? "minor" : n <= 8 ? "moderate" : "major";
 }
-class im {
+class om {
   #e;
   constructor(e = Oe) {
     this.#e = e;
@@ -11145,7 +11145,7 @@ class im {
     return { wounds: l, severity: t, previousCount: c, count: r, added: h, removed: p };
   }
   applyPoolDamage(e, t, i, o, a = ba, r = {}) {
-    const s = zt(i, "Pool value"), l = zt(o, "Pool damage"), u = Math.min(s, l), c = s - u, p = l - u, h = tm(p), m = h ? this.applyWound(e, h, a, {
+    const s = zt(i, "Pool value"), l = zt(o, "Pool damage"), u = Math.min(s, l), c = s - u, p = l - u, h = nm(p), m = h ? this.applyWound(e, h, a, {
       ...r,
       label: r.label ?? `${t} Pool overflow`
     }) : null;
@@ -11208,7 +11208,7 @@ class im {
     return a.wound?.applied && (r["system.wounds"] = a.wound.wounds), await e.update(r), a;
   }
 }
-function nm(n, e) {
+function am(n, e) {
   return n.naturalEffects.filter((t) => t.status !== "inapplicable").map((t) => ({
     kind: t.kind,
     label: e(t.label),
@@ -11217,7 +11217,7 @@ function nm(n, e) {
     ...t.damageBonus === void 0 ? {} : { damageBonus: t.damageBonus }
   }));
 }
-function om(n, e) {
+function rm(n, e) {
   const t = n.naturalEffects.filter((l) => l.status !== "inapplicable");
   if (t.some((l) => l.kind === "gm-intrusion"))
     return { label: e("CYPHERV2.Roll.NaturalEffects.GMIntrusion") };
@@ -11243,13 +11243,13 @@ function om(n, e) {
 function wa(n, e, t) {
   return `${ke(e, n)} ${t(e === "ease" ? n === 1 ? "CYPHERV2.Roll.EaseStep" : "CYPHERV2.Roll.EaseSteps" : n === 1 ? "CYPHERV2.Roll.HindranceStep" : "CYPHERV2.Roll.HindranceSteps")}`;
 }
-function am(n, e) {
+function sm(n, e) {
   return n.breakdown.map((t) => ({
     label: e(t.label),
     value: ke(t.direction, t.steps)
   }));
 }
-function rm(n, e) {
+function lm(n, e) {
   return n.breakdown.length === 0 && n.totalEase === 0 && n.totalHindrance === 0 ? [] : [{
     label: e("CYPHERV2.Roll.TotalEase"),
     value: n.totalEase === 0 ? 0 : ke("ease", n.totalEase)
@@ -11258,7 +11258,7 @@ function rm(n, e) {
     value: n.totalHindrance === 0 ? 0 : ke("hinder", n.totalHindrance)
   }];
 }
-function sm(n, e) {
+function cm(n, e) {
   const t = n.prepared, i = t.context;
   return [
     ...i.paidEffort > 0 ? [{
@@ -11283,7 +11283,7 @@ function sm(n, e) {
     }] : []
   ];
 }
-function lm(n, e) {
+function dm(n, e) {
   const t = n.prepared, i = t.actionCostBeforeEdge > 0 || t.effortCostBeforeEdge > 0 || n.poolCostPaid > 0;
   return [
     ...t.actionCostBeforeEdge > 0 ? [{
@@ -11304,15 +11304,15 @@ function lm(n, e) {
     }] : []
   ];
 }
-function cm(n, e) {
+function um(n, e) {
   const t = n.naturalEffects.find((i) => i.kind === "gm-intrusion" && i.status === "applied" && i.intrusionProvenance === "horror-mode" && i.horrorIntrusionRange !== void 0);
   return t?.horrorIntrusionRange === void 0 ? [] : [{
     label: e("CYPHERV2.Horror.Title"),
     value: `1–${t.horrorIntrusionRange}`
   }];
 }
-function _r(n, e) {
-  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, o = nm(n, e), a = o.filter((s) => !s.isIntrusion), r = [
+function Xr(n, e) {
+  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, o = am(n, e), a = o.filter((s) => !s.isIntrusion), r = [
     ...t.totalEase > 0 ? [wa(t.totalEase, "ease", e)] : [],
     ...t.totalHindrance > 0 ? [wa(t.totalHindrance, "hinder", e)] : []
   ].join(" · ");
@@ -11333,10 +11333,10 @@ function _r(n, e) {
       isEase: s.direction === "ease",
       modifier: ke(s.direction, s.steps)
     })),
-    modifierDetails: am(t, e),
-    modifierTotalDetails: rm(t, e),
-    effortDetails: sm(n, e),
-    costDetails: lm(n, e),
+    modifierDetails: sm(t, e),
+    modifierTotalDetails: lm(t, e),
+    effortDetails: cm(n, e),
+    costDetails: dm(n, e),
     stepSummary: r,
     showStepSummary: r.length > 0,
     paidEffort: t.context.paidEffort,
@@ -11349,7 +11349,7 @@ function _r(n, e) {
     totalHindrance: t.totalHindrance,
     netSteps: t.netSteps,
     naturalEffects: o,
-    specialRoll: om(n, e),
+    specialRoll: rm(n, e),
     hasNaturalResult: n.naturalMarkers.length > 0,
     hasNaturalEffectDisclosure: a.length > 0,
     gmIntrusion: o.some((s) => s.isIntrusion),
@@ -11373,17 +11373,17 @@ function _r(n, e) {
     } : {}
   };
 }
-function dm(n, e) {
+function mm(n, e) {
   return n ? { outcome: e("CYPHERV2.Roll.Success"), outcomeIcon: "✓", outcomeClass: "success" } : { outcome: e("CYPHERV2.Roll.Failure"), outcomeIcon: "✕", outcomeClass: "failure" };
 }
 function Dn(n, e, t = !0) {
-  return n.automaticSuccess && t ? { outcome: e("CYPHERV2.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : dm(n.success === !0, e);
+  return n.automaticSuccess && t ? { outcome: e("CYPHERV2.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : mm(n.success === !0, e);
 }
-function um(n, e, t = (i) => i) {
-  const i = _r(n, t), o = n.beatsDifficulty === null ? {} : {
+function pm(n, e, t = (i) => i) {
+  const i = Xr(n, t), o = n.beatsDifficulty === null ? {} : {
     beatsDifficulty: n.beatsDifficulty,
     showBeatsDifficulty: !0
-  }, a = cm(n, t), r = n.prepared.context.difficulty;
+  }, a = um(n, t), r = n.prepared.context.difficulty;
   if (r.mode === "unknown")
     return {
       ...i,
@@ -11421,7 +11421,7 @@ function um(n, e, t = (i) => i) {
     hasDetails: a.length > 0 || i.modifierDetails.length > 0 || i.modifierTotalDetails.length > 0 || i.effortDetails.length > 0 || i.costDetails.length > 0
   };
 }
-function mm(n, e = (t) => t) {
+function fm(n, e = (t) => t) {
   return n?.damage === void 0 ? { showFinalDamage: !1, damageDetails: [], damageTotalDetails: [] } : {
     showFinalDamage: !0,
     finalDamage: n.damage,
@@ -11434,20 +11434,20 @@ function mm(n, e = (t) => t) {
     damageTotalDetails: [{ label: e("CYPHERV2.Combat.FinalDamage"), value: n.damage }]
   };
 }
-function pm(n, e = (t) => t) {
+function hm(n, e = (t) => t) {
   const t = n.prepared.context.difficulty;
   if (t.mode !== "hidden") throw new Error("Only hidden-difficulty rolls require an audit card.");
   return {
-    ..._r(n, e),
+    ...Xr(n, e),
     originalDifficulty: t.value,
     finalDifficulty: n.prepared.finalDifficulty ?? 0,
     targetNumber: n.prepared.targetNumber ?? 0,
     ...Dn(n, e)
   };
 }
-class fm {
+class gm {
   async publish(e, t, i, o = {}) {
-    const a = (y) => game.i18n.localize(y), r = um(t.result, i, a), s = mm(o.combat, a), l = {
+    const a = (y) => game.i18n.localize(y), r = pm(t.result, i, a), s = fm(o.combat, a), l = {
       ...r,
       ...s,
       hasDetails: r.hasDetails || s.damageDetails.length > 0 || s.damageTotalDetails.length > 0,
@@ -11474,7 +11474,7 @@ class fm {
       content: u
     };
     if (o.combat?.action && (c.flags = { cypherv2: { combatAction: o.combat.action } }), t.chatRoll !== void 0 && (c.rolls = [t.chatRoll]), await ChatMessage.create(c), t.result.prepared.context.difficulty.mode !== "hidden") return;
-    const p = pm(t.result, a);
+    const p = hm(t.result, a);
     if (Hooks.callAll("cypherv2HiddenRollAudit", p, e, t), o.showGmAudit !== !0) return;
     const h = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/roll-audit-card.hbs",
@@ -11492,16 +11492,11 @@ class fm {
     await ChatMessage.create(m);
   }
 }
-const hm = async () => {
+const ym = async () => {
   const n = await new Roll("1d20").evaluate();
   if (n.total === null) throw new Error("The d20 roll did not produce a total.");
   return { naturalRoll: n.total, chatRoll: n };
-}, gm = (n) => {
-  const e = n.system.genre.sourceUuid;
-  if (!e || typeof fromUuidSync != "function") return "core";
-  const t = fromUuidSync(e);
-  return t?.type === "genre" ? t.system.options.totalEffortCapMode : "core";
-}, ym = () => En();
+}, bm = (n) => n.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core", wm = () => En();
 function va(n, e) {
   if (!Number.isInteger(n) || n < 0)
     throw new Error(`${e} must be a non-negative integer.`);
@@ -11517,12 +11512,12 @@ function un(n, e, t, i) {
     source: i
   };
 }
-class bm {
+class vm {
   #e;
   #t;
   #i;
   #n;
-  constructor(e, t = hm, i = gm, o = ym) {
+  constructor(e, t = ym, i = bm, o = wm) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o;
   }
   preview(e, t, i) {
@@ -11587,7 +11582,7 @@ class bm {
       limits: {
         ...m,
         paidEffortMaximum: e.system.derived.effort.max,
-        totalEffortMaximum: Ls(this.#i(e))
+        totalEffortMaximum: Ws(this.#i(e))
       },
       contributions: o,
       horrorIntrusionRange: Ht(this.#n()),
@@ -11596,7 +11591,7 @@ class bm {
       ...t.purpose ? { purpose: t.purpose } : {},
       ...t.origin ? { origin: t.origin } : {}
     }, f = this.#e.enrichRollContext(y, h);
-    return Uu(f);
+    return Ou(f);
   }
   async execute(e, t, i) {
     const [o] = await this.executeBatch(e, [t], i);
@@ -11615,7 +11610,7 @@ class bm {
       );
     a.poolCost > 0 && r !== null && await e.update({ [`system.stats.${r}.value`]: s - a.poolCost });
     const u = o.some((m) => m.finalDifficulty !== 0) ? await this.#t() : null, c = o.map((m) => {
-      const y = m.finalDifficulty === 0 ? Wr(m) : Gu(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
+      const y = m.finalDifficulty === 0 ? Kr(m) : Bu(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
         y,
         i.enabledRuleModuleIds ?? []
       );
@@ -11635,18 +11630,18 @@ class bm {
     });
   }
 }
-function wm(n) {
+function Cm(n) {
   return V.includes(n);
 }
-class vm {
+class Em {
   #e;
   constructor(e) {
     this.#e = e;
   }
   configuredPool(e) {
-    if (!Ya.includes(e.system.defaultPool))
+    if (!Fa.includes(e.system.defaultPool))
       throw new Error(`Unknown Skill default Pool '${e.system.defaultPool}'.`);
-    return wm(e.system.defaultPool) ? e.system.defaultPool : null;
+    return Cm(e.system.defaultPool) ? e.system.defaultPool : null;
   }
   rankContribution(e, t = []) {
     if (e.type !== "skill") throw new Error("Skill contributions require a Skill Item.");
@@ -11717,27 +11712,27 @@ class vm {
     };
   }
 }
-const Cm = Object.freeze({
+const Rm = Object.freeze({
   targetedXpToTarget: 0,
   targetedXpToShare: 0,
   groupXpPerTarget: 0,
   freeXp: 0
 });
-function Em(n) {
+function Pm(n) {
   return {
     actorId: n.id,
     actorName: n.name,
     ...n.img ? { actorImage: n.img } : {}
   };
 }
-class Rm {
+class Sm {
   #e;
   #t;
   constructor(e, t = Oe) {
     this.#e = e, this.#t = t;
   }
   policy(e = []) {
-    return this.#e.resolveGMIntrusionPolicy(Cm, e);
+    return this.#e.resolveGMIntrusionPolicy(Rm, e);
   }
   async createTargeted(e, t = []) {
     oe(e);
@@ -11790,7 +11785,7 @@ class Rm {
     return {
       id: this.#t(),
       mode: e,
-      targets: t.map(Em),
+      targets: t.map(Pm),
       targetXp: i,
       sharedXp: o,
       naturalRoll: a
@@ -11812,7 +11807,7 @@ const Ca = [
   "moderate",
   "major"
 ];
-function Pm(n, e) {
+function km(n, e) {
   const t = Ca.indexOf(n);
   return Ca[Math.max(0, t - Math.max(0, Math.trunc(e)))] ?? "none";
 }
@@ -11821,10 +11816,10 @@ function Ei(n, e, t) {
     throw new Error(`${e} must be an integer${t === void 0 ? "" : ` of at least ${t}`}.`);
   return n;
 }
-function Sm(n, e) {
+function Am(n, e) {
   return n.contexts.every((t) => e.tags.includes(t));
 }
-function km(n, e) {
+function Hm(n, e) {
   for (const [t, i] of Object.entries(n)) {
     if (t === "tagsAll") {
       if (!Array.isArray(i) || !i.every((a) => typeof a == "string" && e.tags.includes(a))) return !1;
@@ -11845,7 +11840,7 @@ function km(n, e) {
 function Ea(n) {
   return n.contexts.length + Object.keys(n.predicate).length;
 }
-function Am(n) {
+function Im(n) {
   return Ei(n.value, `NPC modification '${n.id}'`, 0), {
     id: `npc-modification.${n.id}`,
     label: "CYPHERV2.Combat.TargetModification",
@@ -11855,20 +11850,20 @@ function Am(n) {
     sourceId: n.id
   };
 }
-class Hm {
+class $m {
   #e;
   constructor(e) {
     this.#e = e;
   }
   resolve(e, t, i = []) {
     if (e.type !== "npc") throw new Error("Combat targets must be NPC Actors.");
-    const o = Ei(e.system.level, "NPC Level", 0), a = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Sm(c, t) && km(c.predicate, t)), r = a.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => Ea(p.modification) - Ea(c.modification) || p.index - c.index)[0]?.modification;
+    const o = Ei(e.system.level, "NPC Level", 0), a = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Am(c, t) && Hm(c.predicate, t)), r = a.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => Ea(p.modification) - Ea(c.modification) || p.index - c.index)[0]?.modification;
     let s = r ? Ei(r.value, `NPC modification '${r.id}'`, 0) : o;
     const l = r ? [r.id] : [];
     for (const { modification: c } of a)
       c.mode === "levelDelta" && (s += Ei(c.value, `NPC modification '${c.id}'`), l.push(c.id));
     s = Math.max(0, s);
-    const u = a.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), Am(c)));
+    const u = a.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), Im(c)));
     return this.#e.enrichTargetResolution({
       targetId: e.id,
       targetIdentity: St(e),
@@ -11880,16 +11875,16 @@ class Hm {
     }, e, t, i);
   }
   nativeNpcTargets() {
-    return [...game.user.targets ?? []].map((e) => wr(e)).filter((e) => e !== null);
+    return [...game.user.targets ?? []].map((e) => Cr(e)).filter((e) => e !== null);
   }
 }
-class $m {
+class Vm {
   async npcDamage() {
   }
   async characterWound() {
   }
 }
-async function Im(n) {
+async function Ym(n) {
   if (n.tokenId) {
     const e = canvas.tokens?.get(n.tokenId);
     if (e?.center) return { center: e.center };
@@ -11903,9 +11898,9 @@ async function Im(n) {
     }
   return null;
 }
-class Vm {
+class Fm {
   async #e(e, t, i) {
-    const o = await Im(e);
+    const o = await Ym(e);
     o && await canvas.interface.createScrollingText(o.center, t, {
       anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
       direction: CONST.TEXT_ANCHOR_POINTS.TOP,
@@ -11931,11 +11926,11 @@ class Vm {
     await this.#e(e, a, o ? "#ff5c5c" : "#7dcfff");
   }
 }
-class Ym {
+class Dm {
   async syncNpcDead() {
   }
 }
-class Fm {
+class Tm {
   async syncNpcDead(e, t) {
     const i = Si(e);
     let o = null;
@@ -11950,16 +11945,16 @@ class Fm {
     }));
   }
 }
-function Dm(n) {
+function zm(n) {
   if ("system.health.value" in n) return !0;
   const e = n.system;
   if (!e || typeof e != "object") return !1;
   const t = e.health;
   return !!(t && typeof t == "object" && "value" in t);
 }
-function Tm(n) {
+function Nm(n) {
   Hooks.on("updateActor", (e, t, i = {}) => {
-    if (i.cypherv2SkipDeadStatusSync === !0 || e.type !== "npc" || !Dm(t)) return;
+    if (i.cypherv2SkipDeadStatusSync === !0 || e.type !== "npc" || !zm(t)) return;
     const o = Number(e.system.health?.value);
     Number.isFinite(o) && n.syncNpcDead(e, o <= 0);
   });
@@ -11968,7 +11963,7 @@ function mn(n, e) {
   if (!Number.isInteger(n) || n < 0) throw new Error(`${e} must be a non-negative whole number.`);
   return n;
 }
-class Kr {
+class Jr {
   ammunition(e) {
     const t = e.system.ammo.enabled, i = mn(e.system.ammo.value, "Current ammunition"), o = mn(e.system.ammo.max, "Maximum ammunition"), a = mn(e.system.ammo.perAttack, "Ammunition per attack");
     return { tracked: t, current: i, maximum: o, perAttack: a, canAttack: !t || i >= a };
@@ -11990,7 +11985,7 @@ class Kr {
     await e.update({ "system.ammo.value": t.maximum }, { cypherv2WeaponReload: !0 });
   }
 }
-const zm = Object.freeze({
+const Mm = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
@@ -12015,7 +12010,7 @@ function Ra(n, e, t) {
 function Ot(n) {
   return n.naturalEffects.filter((e) => e.kind === "damage-bonus" && e.status === "applied").reduce((e, t) => e + (t.damageBonus ?? 0), 0);
 }
-function Xr(n, e) {
+function Qr(n, e) {
   return n.naturalEffects.filter((i) => i.status === "available").length === 0 ? n : {
     ...n,
     naturalEffects: n.naturalEffects.map((i) => {
@@ -12025,7 +12020,7 @@ function Xr(n, e) {
     })
   };
 }
-class Nm {
+class qm {
   #e;
   #t;
   #i;
@@ -12035,11 +12030,11 @@ class Nm {
   #l;
   #a;
   #c;
-  constructor(e, t, i, o, a, r = new $m(), s = new Ym(), l = new Or(a), u = new Kr()) {
+  constructor(e, t, i, o, a, r = new Vm(), s = new Dm(), l = new Lr(a), u = new Jr()) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o, this.#o = a, this.#r = r, this.#l = s, this.#a = l, this.#c = u;
   }
   policy(e = []) {
-    return this.#e.resolveCombatPolicy(zm, e);
+    return this.#e.resolveCombatPolicy(Mm, e);
   }
   weaponBaseDamage(e, t = this.policy()) {
     if (e.type !== "weapon") throw new Error("Weapon attacks require a Weapon Item.");
@@ -12205,7 +12200,7 @@ class Nm {
   chooseAttackOutcomes(e, t, i = []) {
     const o = this.policy(i);
     return e.map((a) => {
-      const r = Xr(a.execution.result, t), s = r.prepared.context.origin;
+      const r = Qr(a.execution.result, t), s = r.prepared.context.origin;
       if (s?.kind !== "weapon") return a;
       const l = s.baseDamage + r.prepared.damageEffortApplied * o.damageEffortBonus + Ot(r), u = r.prepared.damageEffortApplied * o.damageEffortBonus, c = Ot(r);
       return {
@@ -12219,7 +12214,7 @@ class Nm {
     });
   }
   buildDefenseRequest(e, t, i) {
-    if (!Da.includes(t)) throw new Error(`Unknown defense '${t}'.`);
+    if (!Ta.includes(t)) throw new Error(`Unknown defense '${t}'.`);
     const o = i.enabledRuleModuleIds ?? [], a = t === "dodge" ? "speed" : "might", r = e.system.derived.combat.armor, s = t === "dodge" ? r.dodgeContributions.map((u) => Ra(u, "hinder", "CYPHERV2.Combat.Armor.DodgeHindrance")) : r.blockContributions.map((u) => Ra(u, "ease", "CYPHERV2.Combat.Armor.BlockEase")), l = i.skill ? this.#i.rankContribution(i.skill, o) : null;
     return {
       label: t === "dodge" ? "CYPHERV2.Combat.Defense.DodgeRoll" : t === "blockWithShield" ? "CYPHERV2.Combat.Defense.BlockWithShieldRoll" : "CYPHERV2.Combat.Defense.BlockRoll",
@@ -12264,7 +12259,7 @@ class Nm {
     });
   }
   woundAfterDefense(e, t, i, o = []) {
-    return e.success !== !0 ? i : t === "dodge" || t === "blockWithShield" ? "none" : Pm(i, this.policy(o).blockSeverityReduction);
+    return e.success !== !0 ? i : t === "dodge" || t === "blockWithShield" ? "none" : km(i, this.policy(o).blockSeverityReduction);
   }
   async resolveDefenseWound(e, t, i, o, a, r = []) {
     if (i !== "blockWithShield" || t.success !== !0) {
@@ -12345,7 +12340,7 @@ function Hi(n) {
     ...n.tokenUuid ? { targetTokenUuid: n.tokenUuid } : {}
   };
 }
-class Mm {
+class xm {
   #e;
   #t;
   constructor(e, t) {
@@ -12455,14 +12450,14 @@ class Mm {
     });
   }
 }
-const qm = async (n) => {
+const Gm = async (n) => {
   const e = await new Roll(n).evaluate();
   if (e.total === null) throw new Error("The depletion roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class xm {
+class Um {
   #e;
-  constructor(e = qm) {
+  constructor(e = Gm) {
     this.#e = e;
   }
   async roll(e) {
@@ -12474,7 +12469,7 @@ class xm {
     const a = ["weapon", "shield", "armor"].includes(e.type) ? "" : t.formula?.trim() ?? "";
     if (Wt(t), !Number.isInteger(t.threshold) || t.threshold < 1)
       throw new Error("Depletion threshold must be a positive whole number.");
-    const r = a || Nc(t), s = Number(r.match(/^1d(\d+)$/i)?.[1]);
+    const r = a || qc(t), s = Number(r.match(/^1d(\d+)$/i)?.[1]);
     if (s > 0 && t.threshold > s)
       throw new Error(`Depletion threshold must be between 1 and ${s}.`);
     const l = await this.#e(r), u = {
@@ -12489,7 +12484,7 @@ class xm {
     return u.depleted && i && e.update && await e.update({ "system.depleted": !0 }), u;
   }
 }
-class Um {
+class Om {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/depletion-card.hbs",
@@ -12510,7 +12505,7 @@ class Um {
     t.chatRoll !== void 0 && (o.rolls = [t.chatRoll]), await ChatMessage.create(o);
   }
 }
-const Pa = 124, Gm = 58, Sa = 108, Om = 10, Bm = async (n) => {
+const Pa = 124, Bm = 58, Sa = 108, Lm = 10, jm = async (n) => {
   if (!n) return null;
   try {
     const e = await fromUuid(n);
@@ -12525,8 +12520,8 @@ const Pa = 124, Gm = 58, Sa = 108, Om = 10, Bm = async (n) => {
   } catch {
     return null;
   }
-}, Lm = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
-function jm(n) {
+}, Wm = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
+function _m(n) {
   const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map();
   for (const i of n) {
     const o = t.get(i.tier) ?? [];
@@ -12541,15 +12536,15 @@ function jm(n) {
   }
   return e;
 }
-function Wm(n, e = 120) {
+function Km(n, e = 120) {
   const t = n.replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/\s+/g, " ").trim();
   return t.length <= e ? t : `${t.slice(0, Math.max(0, e - 1)).trimEnd()}…`;
 }
-class _m {
+class Xm {
   #e;
   #t;
   #i;
-  constructor(e = new ao(), t = Bm, i = Lm) {
+  constructor(e = new ao(), t = jm, i = Wm) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async prepare(e, t = {}) {
@@ -12589,16 +12584,16 @@ class _m {
           invalid: !0
         };
     }
-    const s = jm(r.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...r.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
+    const s = _m(r.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...r.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
     for (const m of r.nodes)
       u.set(m.node.tier, (u.get(m.node.tier) ?? 0) + 1);
-    const c = Math.max(440, ...[...u.values()].map((m) => m * Pa + (m + 1) * Om)), p = await Promise.all(r.nodes.map(async (m) => {
+    const c = Math.max(440, ...[...u.values()].map((m) => m * Pa + (m + 1) * Lm)), p = await Promise.all(r.nodes.map(async (m) => {
       const y = await this.#t(m.node.abilityUuid), f = m.state === "owned" && a.has(m.node.id), w = y?.description ?? m.node.abilitySnapshot.description ?? "", C = r.diagnostics.some((M) => M.code === "invalid-owned-progression" && M.nodeId === m.node.id || M.severity === "error" && (!M.nodeId || M.nodeId === m.node.id)), P = m.state !== "owned" && m.node.tier > i, Y = m.state !== "owned" && m.reason === "no-owned-prerequisite", k = m.state !== "owned" && (m.state !== "available" || C), H = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
       return {
         id: m.node.id,
         abilityUuid: m.node.abilityUuid,
         abilityName: y?.name || m.node.abilitySnapshot.name || m.node.id,
-        descriptionExcerpt: Wm(w),
+        descriptionExcerpt: Km(w),
         descriptionHtml: await this.#i(w, y?.relativeTo ?? e),
         tier: m.node.tier,
         state: m.state,
@@ -12623,7 +12618,7 @@ class _m {
         connectionSource: t.editor?.connectionSourceNodeId === m.node.id,
         xPercent: s.get(m.node.id) ?? 50,
         width: Pa,
-        height: Gm
+        height: Bm
       };
     })), h = e.system.graph.connections.map(({ id: m, from: y, to: f }) => ({ id: m, from: y, to: f }));
     return {
@@ -12658,7 +12653,7 @@ function Re(n) {
 function fn(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, img: n.img, type: e, system: it(n.system) };
 }
-function Km(n, e) {
+function Jm(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, ...n.img ? { img: n.img } : {}, type: e, system: it(n.system) };
 }
 function ka(n, e, t, i, o) {
@@ -12707,17 +12702,17 @@ function gn(n, e) {
 function De(n) {
   return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
 }
-function Xm(n, e) {
+function Qm(n, e) {
   return [...n.items].filter((t) => t.system.grantedBy?.instanceId === e);
 }
 function Tn(n, e) {
-  return Xm(n, e).flatMap((i) => {
+  return Qm(n, e).flatMap((i) => {
     if (i.type !== "descriptor" && i.type !== "characterType" && i.type !== "species") return [i];
     const o = i.system.instance?.instanceId;
     return [i, ...o ? Tn(n, o) : []];
   });
 }
-class Jm {
+class Zm {
   #e;
   #t;
   #i;
@@ -12833,7 +12828,7 @@ class Jm {
     for (const A of M) {
       const D = A.descriptorUuid ? await this.#e(A.descriptorUuid) : null;
       if (D && D.type !== "descriptor") throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
-      const S = D ? Nt(D) : Km(A.snapshot, "descriptor");
+      const S = D ? Nt(D) : Jm(A.snapshot, "descriptor");
       if (!S) throw new Error(`Descriptor grant '${A.id}' has neither a source nor a usable snapshot.`);
       const K = it(S.system), j = K.instance?.sourceUuid || A.descriptorUuid, He = j || `snapshot:${String(S.name).trim().toLocaleLowerCase()}`;
       if (H.has(He)) {
@@ -12841,7 +12836,7 @@ class Jm {
         continue;
       }
       H.add(He);
-      const B = this.#t(), $ = this.#u(
+      const B = this.#t(), I = this.#u(
         K.poolBonusChoiceGroups ?? [],
         i.descriptorPoolChoices?.[A.id] ?? {}
       ), W = this.#f(
@@ -12889,8 +12884,8 @@ class Jm {
             edgePool: "none",
             superheroicsPool: "none",
             powerShifts: [],
-            poolChoices: Object.entries($).map(([$e, be]) => ({ groupId: $e, pools: be })),
-            skillChoices: Object.entries(W).map(([$e, be]) => ({ groupId: $e, optionIds: be })),
+            poolChoices: Object.entries(I).map(([Ie, be]) => ({ groupId: Ie, pools: be })),
+            skillChoices: Object.entries(W).map(([Ie, be]) => ({ groupId: Ie, optionIds: be })),
             abilityChoices: [],
             descriptorChoices: [],
             suppressedGrantIds: pe.skippedGrantIds
@@ -12966,7 +12961,7 @@ class Jm {
   async #o(e, t, i) {
     const o = {};
     for (const a of V)
-      o[`system.stats.${a}.value`] = Ka(e.system.stats[a].value, t[a], Math.max(0, i[a]));
+      o[`system.stats.${a}.value`] = Xa(e.system.stats[a].value, t[a], Math.max(0, i[a]));
     await e.update(o);
   }
   async #r(e, t, i, o) {
@@ -13039,7 +13034,7 @@ class Jm {
           allowGmOverride: !1,
           context: "package"
         }, P = await o(C);
-        if (P.action === "cancel") throw new Ge();
+        if (P.action === "cancel") throw new Ue();
         if (P.action === "suppress") {
           s.push(m.grantId);
           break;
@@ -13140,7 +13135,7 @@ class Jm {
     const u = /* @__PURE__ */ new Set();
     return a.filter((c) => {
       const p = Pe(i, c.name, c.itemUuid), h = p.contentUuid || p.contentKey;
-      return u.has(h) || Vr(e.items, p) ? !1 : (u.add(h), !0);
+      return u.has(h) || Fr(e.items, p) ? !1 : (u.add(h), !0);
     });
   }
   #f(e, t) {
@@ -13214,7 +13209,7 @@ function Aa(n, e, t) {
     sourceId: n.id
   };
 }
-function Qm(n) {
+function ep(n) {
   return n.type === "npc" ? St(n) : {
     actorId: n.id,
     ...n.actorUuid ?? n.uuid ? { actorUuid: n.actorUuid ?? n.uuid } : {},
@@ -13222,7 +13217,7 @@ function Qm(n) {
     ...n.tokenUuid ? { tokenUuid: n.tokenUuid } : {}
   };
 }
-class Zm {
+class tp {
   #e;
   #t;
   #i;
@@ -13338,7 +13333,7 @@ class Zm {
       },
       ...f ? {
         target: {
-          ...Qm(f),
+          ...ep(f),
           name: f.name,
           type: f.type === "npc" ? "npc" : "character"
         }
@@ -13366,7 +13361,7 @@ class Zm {
   chooseAttackOutcomes(e, t) {
     return e.map((i) => {
       if (i.ability.system.roll !== "attack") return i;
-      const o = Xr(i.execution.result, t), a = Ot(o);
+      const o = Qr(i.execution.result, t), a = Ot(o);
       return {
         ...i,
         execution: { ...i.execution, result: o },
@@ -13392,7 +13387,7 @@ class Zm {
 function Ha(n) {
   return n.type === "npc" ? St(n) : Si(n);
 }
-function $a(n, e) {
+function Ia(n, e) {
   const t = n.target;
   return t ? t.type === "npc" && n.grossDamage > 0 ? {
     damage: n.grossDamage,
@@ -13414,14 +13409,14 @@ function $a(n, e) {
     }
   } : {} : {};
 }
-class ep {
+class ip {
   #e;
   constructor(e) {
     this.#e = e;
   }
   async publishRoll(e, t, i, o = !1) {
     const a = t.execution.result.success === !0, r = t.execution.result.success !== !1, l = {
-      ...a ? $a(t, e.id) : {},
+      ...a ? Ia(t, e.id) : {},
       ...r && t.ability.system.roll === "attack" ? {
         damage: t.grossDamage,
         damageBreakdown: [
@@ -13436,7 +13431,7 @@ class ep {
   async publishNoRoll(e, t) {
     const i = t.targets.length ? t.targets : [null];
     for (const o of i) {
-      const a = o ? $a({
+      const a = o ? Ia({
         ability: t.ability,
         target: o,
         grossDamage: t.ability.system.damage,
@@ -13487,23 +13482,23 @@ class ep {
     });
   }
 }
-const tp = async (n) => {
+const np = async (n) => {
   const e = await new Roll(n).evaluate();
   if (e.total === null) throw new Error("The Artifact level roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class ip {
+class op {
   #e;
-  constructor(e = tp) {
+  constructor(e = np) {
     this.#e = e;
   }
   canRollLevel(e) {
-    return In(e.system) && Ai(e.system);
+    return $n(e.system) && Ai(e.system);
   }
   async rollLevel(e) {
-    if (!In(e.system)) throw new Error("This Artifact is depleted.");
+    if (!$n(e.system)) throw new Error("This Artifact is depleted.");
     if (!Ai(e.system)) throw new Error("This Artifact has a fixed Level.");
-    const t = Ui(e.system), i = await this.#e(t);
+    const t = Gi(e.system), i = await this.#e(t);
     return await e.update({ "system.level": String(i.total) }), {
       itemId: e.id,
       itemName: e.name,
@@ -13513,14 +13508,14 @@ class ip {
     };
   }
 }
-function np(n) {
+function ap(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function op(n) {
+function rp(n) {
   const e = n._source?.system?.description;
   return typeof e == "string" ? e : "";
 }
-function ap(n) {
+function sp(n) {
   const e = n.system;
   if (n.type === "equipment")
     return [
@@ -13529,7 +13524,7 @@ function ap(n) {
       ...e.equipped === !0 ? [{ label: game.i18n.localize("CYPHERV2.Combat.Equipped"), value: game.i18n.localize("CYPHERV2.Common.Yes") }] : []
     ];
   if (n.type === "cypher") {
-    const t = qr(e.manifestation), i = xr(e.power);
+    const t = Gr(e.manifestation), i = Ur(e.power);
     return [
       { label: game.i18n.localize("CYPHERV2.Cypher.Manifestation.Label"), value: game.i18n.localize(`CYPHERV2.Cypher.Manifestation.${t}`) },
       ...String(e.form ?? "").trim() ? [{ label: game.i18n.localize("CYPHERV2.Cypher.Form"), value: String(e.form) }] : [],
@@ -13540,7 +13535,7 @@ function ap(n) {
   if (n.type === "artifact") {
     const t = e.depletion;
     return [
-      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: Ui(e) },
+      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: Gi(e) },
       ...t?.enabled === !0 ? [{
         label: game.i18n.localize("CYPHERV2.Inventory.Depletion"),
         value: String(t.formula || `1${String(t.die ?? "d6")}`)
@@ -13573,7 +13568,7 @@ function ap(n) {
     ];
   }
   if (n.type === "ability") {
-    const t = n, i = We(t), o = lr(t.system.cost.amount, i, np, {
+    const t = n, i = We(t), o = dr(t.system.cost.amount, i, ap, {
       pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
       middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
       final: game.i18n.localize("CYPHERV2.Ability.CostDisplay.FinalOr")
@@ -13582,14 +13577,14 @@ function ap(n) {
   }
   return [];
 }
-function rp(n) {
-  return ap(n).filter(
+function lp(n) {
+  return sp(n).filter(
     ({ label: e, value: t }) => e.trim().length > 0 && (typeof t == "number" || t.trim().length > 0)
   );
 }
-class sp {
+class cp {
   async publish(e) {
-    const t = e.system, i = op(e), o = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
+    const t = e.system, i = rp(e), o = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
       async: !0,
       relativeTo: e
     }) : "", a = t.depletion, r = await foundry.applications.handlebars.renderTemplate(
@@ -13598,7 +13593,7 @@ class sp {
         itemName: e.name,
         ...Se(e.actor),
         itemType: game.i18n.localize(`TYPES.Item.${e.type}`),
-        properties: rp(e),
+        properties: lp(e),
         enrichedDescription: o,
         hasDescription: !!i.trim(),
         canRollDepletion: e.type === "artifact" && a?.enabled === !0 && t.depleted !== !0,
@@ -13628,7 +13623,7 @@ class sp {
     t.chatRoll !== void 0 && (o.rolls = [t.chatRoll]), await ChatMessage.create(o);
   }
 }
-class lp {
+class dp {
   canUse(e) {
     return e.type === "character" && e.system.xp >= 1;
   }
@@ -13644,15 +13639,15 @@ class lp {
     };
   }
 }
-function cp(n) {
+function up(n) {
   return { actorName: n.actorName, xpSpent: n.xpSpent };
 }
-class dp {
+class mp {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/player-intrusion-card.hbs",
       {
-        ...cp(e),
+        ...up(e),
         ...Se(t)
       }
     );
@@ -13663,8 +13658,8 @@ class dp {
     });
   }
 }
-function up(n) {
-  const e = new im(), t = new Xu(), i = new em(), o = new bm(n), a = new vm(n), r = new Hm(n), s = new fm(), l = new Vm(), u = new Fm(), c = new Or(e), p = new xm(), h = new Kr(), m = new ao(), y = new Nm(
+function pp(n) {
+  const e = new om(), t = new Qu(), i = new im(), o = new vm(n), a = new Em(n), r = new $m(n), s = new gm(), l = new Fm(), u = new Tm(), c = new Lr(e), p = new Um(), h = new Jr(), m = new ao(), y = new qm(
     n,
     o,
     a,
@@ -13677,38 +13672,38 @@ function up(n) {
   );
   return Object.freeze({
     wounds: e,
-    recovery: new Zu(t, i),
-    rally: new Jl(e),
+    recovery: new tm(t, i),
+    rally: new Zl(e),
     rolls: o,
     rollChat: s,
     skills: a,
-    intrusions: new Rm(n),
-    intrusionChat: new wc(),
-    playerIntrusions: new lp(),
-    playerIntrusionChat: new dp(),
+    intrusions: new Sm(n),
+    intrusionChat: new Cc(),
+    playerIntrusions: new dp(),
+    playerIntrusionChat: new mp(),
     targets: r,
     combat: y,
-    combatChat: new Mm(s, c),
-    abilities: new Zm(o, a, r, y),
-    abilityChat: new ep(s),
+    combatChat: new xm(s, c),
+    abilities: new tp(o, a, r, y),
+    abilityChat: new ip(s),
     shields: c,
-    artifacts: new ip(),
-    itemChat: new sp(),
-    genres: new wd(),
+    artifacts: new op(),
+    itemChat: new cp(),
+    genres: new Cd(),
     weapons: h,
     depletion: p,
-    depletionChat: new Um(),
+    depletionChat: new Om(),
     combatStatuses: u,
     focusEvaluator: m,
-    focusTrees: new _m(m),
-    focusAcquisition: new Kc(m),
-    advancement: new ed(n),
-    focusAssociations: new sd(),
-    characterInitialization: new dd(),
-    characterPackages: new Jm()
+    focusTrees: new Xm(m),
+    focusAcquisition: new Jc(m),
+    advancement: new id(n),
+    focusAssociations: new cd(),
+    characterInitialization: new md(),
+    characterPackages: new Zm()
   });
 }
-const mp = {
+const fp = {
   id: "core",
   label: "CYPHERV2.Themes.Core",
   sourceId: "cypherv2.core",
@@ -13758,7 +13753,7 @@ const mp = {
     "--cypherv2-scrollbar-track": "color-mix(in srgb, var(--cypherv2-color-bg) 70%, transparent)"
   }
 };
-class pp {
+class hp {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Set();
   register(e) {
@@ -13794,20 +13789,20 @@ class pp {
     return t.dataset.cypherv2Theme = i.id, i;
   }
 }
-function Ia(n) {
+function $a(n) {
   return n.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
-function fp(n) {
+function gp(n) {
   return n === !0 || n === "true" || n === "on";
 }
-async function hp() {
+async function yp() {
   if (!game.user.isGM) throw new Error("Only a GM can initiate a GM Intrusion.");
   const n = [...game.actors].filter((s) => s.type === "character").sort((s, l) => s.name.localeCompare(l.name));
   if (n.length === 0) {
     ui.notifications.warn(game.i18n.localize("CYPHERV2.Intrusion.NoCharacters"));
     return;
   }
-  const e = n.map((s) => '<option value="' + s.id + '">' + Ia(s.name) + "</option>").join(""), t = n.map((s) => '<label class="intrusion-character-choice"><input name="group-' + s.id + '" type="checkbox"> ' + Ia(s.name) + "</label>").join(""), i = [
+  const e = n.map((s) => '<option value="' + s.id + '">' + $a(s.name) + "</option>").join(""), t = n.map((s) => '<label class="intrusion-character-choice"><input name="group-' + s.id + '" type="checkbox"> ' + $a(s.name) + "</label>").join(""), i = [
     '<div class="cypherv2-dialog-fields cypherv2-intrusion-dialog">',
     "<label>" + game.i18n.localize("CYPHERV2.Intrusion.ModeLabel"),
     '<select name="mode">',
@@ -13835,7 +13830,7 @@ async function hp() {
     }
   });
   if (!o) return;
-  const a = o.mode === "group" || o.mode === "free" ? o.mode : "targeted", r = a === "group" ? n.filter((s) => fp(o["group-" + s.id])).map((s) => s.id) : [String(o.targetActorId ?? "")];
+  const a = o.mode === "group" || o.mode === "free" ? o.mode : "targeted", r = a === "group" ? n.filter((s) => gp(o["group-" + s.id])).map((s) => s.id) : [String(o.targetActorId ?? "")];
   try {
     await Xt().createManual({ mode: a, actorIds: r });
   } catch (s) {
@@ -13844,11 +13839,11 @@ async function hp() {
 }
 function yn(n, e, t) {
   const i = t > st, o = n.querySelector("[data-horror-summary]"), a = n.querySelector("[data-horror-explanation]"), r = n.querySelector("[data-horror-value]");
-  n.dataset.horrorBand = dr(t), n.style.setProperty("--cypherv2-horror-fill", `${ur(t)}%`), e.value = String(t), e.setAttribute("aria-valuetext", i ? `1–${t}` : "Natural 1"), r && (r.value = String(t)), o && (o.textContent = i ? game.i18n.format("CYPHERV2.Horror.RangeSummary", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalSummary")), a && (a.textContent = i ? game.i18n.format("CYPHERV2.Horror.Explanation", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalExplanation"));
+  n.dataset.horrorBand = mr(t), n.style.setProperty("--cypherv2-horror-fill", `${pr(t)}%`), e.value = String(t), e.setAttribute("aria-valuetext", i ? `1–${t}` : "Natural 1"), r && (r.value = String(t)), o && (o.textContent = i ? game.i18n.format("CYPHERV2.Horror.RangeSummary", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalSummary")), a && (a.textContent = i ? game.i18n.format("CYPHERV2.Horror.Explanation", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalExplanation"));
 }
-async function gp() {
+async function bp() {
   if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.GMOnly"));
-  const n = En(), e = `<div class="cypherv2 cypherv2-dialog cypherv2-horror-dialog" data-horror-dialog data-horror-band="${dr(n)}" style="--cypherv2-horror-fill: ${ur(n)}%">
+  const n = En(), e = `<div class="cypherv2 cypherv2-dialog cypherv2-horror-dialog" data-horror-dialog data-horror-band="${mr(n)}" style="--cypherv2-horror-fill: ${pr(n)}%">
     <header class="cypherv2-dialog-heading">
       <span>${game.i18n.localize("CYPHERV2.Horror.Title")}</span>
       <strong data-horror-summary></strong>
@@ -13871,14 +13866,14 @@ async function gp() {
       !o || !a || (yn(o, a, n), a.addEventListener("input", () => {
         yn(o, a, Number(a.value));
       }), a.addEventListener("change", () => {
-        Kl(Number(a.value)).catch((r) => {
+        Jl(Number(a.value)).catch((r) => {
           ui.notifications.error(r instanceof Error ? r.message : String(r)), yn(o, a, En());
         });
       }));
     }
   });
 }
-function yp() {
+function wp() {
   Hooks.on("getSceneControlButtons", (n) => {
     const e = n.tokens;
     if (!e) return;
@@ -13891,7 +13886,7 @@ function yp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        hp();
+        yp();
       }
     }, t.cypherv2HorrorMode = {
       name: "cypherv2HorrorMode",
@@ -13901,19 +13896,19 @@ function yp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        gp();
+        bp();
       }
     };
   });
 }
-const Jr = `system.${I}`;
-function $i(n) {
+const Zr = `system.${$}`;
+function Ii(n) {
   return game.user.isGM || n.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
 function zn(n) {
   (n.tokenId || n.tokenUuid) && ui.notifications.error(game.i18n.localize("CYPHERV2.Combat.Errors.OriginalTokenMissing"));
 }
-function Qr(n) {
+function es(n) {
   return {
     actorId: n.targetActorId,
     ...n.targetActorUuid ? { actorUuid: n.targetActorUuid } : {},
@@ -13921,7 +13916,7 @@ function Qr(n) {
     ...n.targetTokenUuid ? { tokenUuid: n.targetTokenUuid } : {}
   };
 }
-function Zr(n) {
+function ts(n) {
   return {
     actorId: n.targetActorId,
     ...n.targetActorUuid ? { actorUuid: n.targetActorUuid } : {},
@@ -13929,7 +13924,7 @@ function Zr(n) {
     ...n.targetTokenUuid ? { tokenUuid: n.targetTokenUuid } : {}
   };
 }
-function bp(n) {
+function vp(n) {
   return {
     actorId: n.sourceActorId,
     ...n.sourceActorUuid ? { actorUuid: n.sourceActorUuid } : {},
@@ -13937,27 +13932,27 @@ function bp(n) {
     ...n.sourceTokenUuid ? { tokenUuid: n.sourceTokenUuid } : {}
   };
 }
-function es(n) {
-  const e = n.getFlag(I, "combatAction");
+function is(n) {
+  const e = n.getFlag($, "combatAction");
   if (!e || typeof e != "object") return null;
   const t = e;
   return t.kind !== "npcDamage" && t.kind !== "characterWound" && t.kind !== "shieldWound" || typeof t.targetActorId != "string" || typeof t.applied != "boolean" ? null : e;
 }
-function ts(n) {
-  const e = n.getFlag(I, "defenseRequest");
+function ns(n) {
+  const e = n.getFlag($, "defenseRequest");
   if (!e || typeof e != "object") return null;
   const t = e;
   return t.kind !== "defenseRequest" || typeof t.sourceActorId != "string" || typeof t.targetActorId != "string" ? null : e;
 }
-async function wp(n, e) {
-  const t = es(n);
+async function Cp(n, e) {
+  const t = is(n);
   if (!t || t.applied) return;
-  const i = Qr(t), o = await Pn(i);
+  const i = es(t), o = await Pn(i);
   if (!o) {
     zn(i);
     return;
   }
-  if (!$i(o)) return;
+  if (!Ii(o)) return;
   const a = jt(o, i);
   e.disabled = !0;
   try {
@@ -13984,19 +13979,19 @@ async function wp(n, e) {
         s
       ), ui.notifications.info(game.i18n.localize("CYPHERV2.Combat.WoundApplied"));
     }
-    await n.setFlag(I, "combatAction", { ...t, applied: !0 }), e.textContent = game.i18n.localize("CYPHERV2.Combat.Applied");
+    await n.setFlag($, "combatAction", { ...t, applied: !0 }), e.textContent = game.i18n.localize("CYPHERV2.Combat.Applied");
   } catch (r) {
     e.disabled = !1, ui.notifications.error(r instanceof Error ? r.message : String(r));
   }
 }
-async function vp(n, e, t, i) {
+async function Ep(n, e, t, i) {
   if (e.resolved || !e.allowedDefenses.includes(t)) return;
-  const o = Zr(e), a = bp(e), r = await Pn(o), s = await Pn(a);
+  const o = ts(e), a = vp(e), r = await Pn(o), s = await Pn(a);
   if (!r || !s) {
     r || zn(o), s || zn(a);
     return;
   }
-  if (!$i(r)) return;
+  if (!Ii(r)) return;
   if (i.disabled = !0, !await Sn(
     jt(r, o),
     t,
@@ -14008,59 +14003,59 @@ async function vp(n, e, t, i) {
     i.disabled = !1;
     return;
   }
-  game.socket.emit(Jr, { type: "resolveDefenseRequest", messageId: n.id }), game.user.isGM && await n.setFlag(I, "defenseRequest", { ...e, resolved: !0 });
+  game.socket.emit(Zr, { type: "resolveDefenseRequest", messageId: n.id }), game.user.isGM && await n.setFlag($, "defenseRequest", { ...e, resolved: !0 });
 }
-function Cp(n, e) {
-  const t = es(n), i = e.querySelector("[data-action='applyCombatOutcome']");
+function Rp(n, e) {
+  const t = is(n), i = e.querySelector("[data-action='applyCombatOutcome']");
   if (i) {
-    const s = t ? Rn(Qr(t)) : null;
-    !t || !s || !$i(s) ? i.remove() : t.applied ? (i.disabled = !0, i.textContent = game.i18n.localize("CYPHERV2.Combat.Applied")) : i.addEventListener("click", () => {
-      wp(n, i);
+    const s = t ? Rn(es(t)) : null;
+    !t || !s || !Ii(s) ? i.remove() : t.applied ? (i.disabled = !0, i.textContent = game.i18n.localize("CYPHERV2.Combat.Applied")) : i.addEventListener("click", () => {
+      Cp(n, i);
     }, { once: !0 });
   }
-  const o = ts(n), a = [...e.querySelectorAll("[data-action='rollRequestedDefense']")];
+  const o = ns(n), a = [...e.querySelectorAll("[data-action='rollRequestedDefense']")];
   if (a.length === 0) return;
-  const r = o ? Rn(Zr(o)) : null;
-  if (!o || !r || !$i(r) || o.resolved) {
+  const r = o ? Rn(ts(o)) : null;
+  if (!o || !r || !Ii(r) || o.resolved) {
     for (const s of a) s.remove();
     return;
   }
   for (const s of a) {
     const l = s.dataset.defense;
-    if (!Da.includes(l)) {
+    if (!Ta.includes(l)) {
       s.remove();
       continue;
     }
     s.addEventListener(
       "click",
       () => {
-        vp(n, o, l, s);
+        Ep(n, o, l, s);
       },
       { once: !0 }
     );
   }
 }
-function Ep() {
+function Pp() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
-    Cp(n, e);
-  }), game.socket.on(Jr, (n) => {
+    Rp(n, e);
+  }), game.socket.on(Zr, (n) => {
     if (!game.user.isGM || n.type !== "resolveDefenseRequest") return;
     const e = game.messages.get(n.messageId);
     if (!e) return;
-    const t = ts(e);
-    !t || t.resolved || e.setFlag(I, "defenseRequest", { ...t, resolved: !0 });
+    const t = ns(e);
+    !t || t.resolved || e.setFlag($, "defenseRequest", { ...t, resolved: !0 });
   });
 }
-function Rp(n) {
+function Sp(n) {
   return n.actor ? n.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) : game.user.isGM;
 }
-function Pp() {
+function kp() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
     for (const t of e.querySelectorAll("[data-action='rollItemCardDepletion']"))
       t.addEventListener("click", async (i) => {
         i.preventDefault(), i.stopPropagation();
         const o = t.dataset.itemUuid, a = o ? await fromUuid(o) : null;
-        if (!a || a.type !== "artifact" || !Rp(a)) {
+        if (!a || a.type !== "artifact" || !Sp(a)) {
           ui.notifications.warn(game.i18n.localize("CYPHERV2.Inventory.NotAuthorized"));
           return;
         }
@@ -14068,7 +14063,7 @@ function Pp() {
       });
   });
 }
-async function Sp() {
+async function Ap() {
   if (!game.user.isGM) return;
   const n = [...game.items].filter((e) => e.type === "genre");
   if (n.length)
@@ -14077,7 +14072,7 @@ async function Sp() {
         if (e.type !== "character") continue;
         const t = e, i = [...e.items].find((a) => a.type === "characterType");
         if (!i || t.system.genre.sourceUuid) continue;
-        const o = await Dr(
+        const o = await zr(
           i.system,
           n,
           async (a) => await fromUuid(a)
@@ -14088,7 +14083,7 @@ async function Sp() {
         console.warn("cypherv2 | Could not migrate a legacy Type Genre suggestion", e.uuid, t);
       }
 }
-class kp {
+class Hp {
   #e = /* @__PURE__ */ new Set();
   constructor(e = []) {
     for (const t of e) this.#e.add(t.id);
@@ -14098,50 +14093,50 @@ class kp {
     return !i || this.#e.has(e.id) ? !1 : (this.#e.add(e.id), i.classList.add("cypherv2-chat-card-enter"), !0);
   }
 }
-function Ap() {
-  const n = new kp(game.messages);
+function Ip() {
+  const n = new Hp(game.messages);
   return Hooks.on("renderChatMessageHTML", (e, t) => {
     n.mark(e, t);
   }), n;
 }
-const Ii = "doneThisRound";
-function is(n, e) {
+const $i = "doneThisRound";
+function os(n, e) {
   return !!(e && (n.isGM || e.testUserPermission(n, "OWNER")));
 }
-function Hp(n, e) {
-  return e > 0 && n?.getFlag(I, Ii) === e;
+function $p(n, e) {
+  return e > 0 && n?.getFlag($, $i) === e;
 }
-async function $p(n, e, t) {
+async function Vp(n, e, t) {
   if (!n.started) return { ok: !1, reason: "not-started" };
   if (!n.turns.length) return { ok: !1, reason: "empty" };
   const i = n.combatant;
-  return n.turn === null || !i ? { ok: !1, reason: "no-current" } : i.id !== t ? { ok: !1, reason: "stale" } : is(e, i) ? (await i.setFlag(I, Ii, n.round), await n.nextTurn(), { ok: !0 }) : { ok: !1, reason: "not-authorized" };
+  return n.turn === null || !i ? { ok: !1, reason: "no-current" } : i.id !== t ? { ok: !1, reason: "stale" } : os(e, i) ? (await i.setFlag($, $i, n.round), await n.nextTurn(), { ok: !0 }) : { ok: !1, reason: "not-authorized" };
 }
-async function Ip(n) {
-  const e = Array.from(n.combatants).filter((t) => t.getFlag(I, Ii) !== void 0).map((t) => ({
+async function Yp(n) {
+  const e = Array.from(n.combatants).filter((t) => t.getFlag($, $i) !== void 0).map((t) => ({
     _id: t.id,
-    [`flags.${I}.-=${Ii}`]: null
+    [`flags.${$}.-=${$i}`]: null
   }));
   e.length && await n.updateEmbeddedDocuments("Combatant", e, { turnEvents: !1 });
 }
-function Vp(n, e, t, i) {
+function Fp(n, e, t, i) {
   if (!n.includes(e)) return [...n];
   const o = n.filter((r) => r !== e);
   if (!t) return [...o, e];
   const a = o.indexOf(t);
   return a < 0 ? [...n] : (o.splice(a + (i ? 1 : 0), 0, e), o);
 }
-function Yp(n) {
+function Dp(n) {
   return n.map((e, t) => ({
     _id: e,
     initiative: (n.length - t) * 10
   }));
 }
-const Fp = foundry.applications.sidebar.tabs.CombatTracker, Va = "application/x-cypherv2-combatant";
+const Tp = foundry.applications.sidebar.tabs.CombatTracker, Va = "application/x-cypherv2-combatant";
 function bn(n) {
   return n?.dataset.combatantId ?? null;
 }
-class mo extends Fp {
+class mo extends Tp {
   static DEFAULT_OPTIONS = {
     classes: ["cypherv2-combat-tracker"],
     actions: {
@@ -14168,7 +14163,7 @@ class mo extends Fp {
     }
     t.setAttribute("disabled", "");
     try {
-      const a = await $p(i, game.user, o);
+      const a = await Vp(i, game.user, o);
       a.ok || ui.notifications.warn(game.i18n.localize(`CYPHERV2.CombatTracker.Errors.${a.reason}`));
     } finally {
       t.removeAttribute("disabled");
@@ -14179,7 +14174,7 @@ class mo extends Fp {
     const i = this.viewed;
     for (const o of e.turns ?? []) {
       const a = i?.combatants.get(o.id);
-      o.doneThisRound = Hp(a, i?.round ?? 0), o.canEndTurn = !!(i?.started && o.active && !o.doneThisRound && is(game.user, a));
+      o.doneThisRound = $p(a, i?.round ?? 0), o.canEndTurn = !!(i?.started && o.active && !o.doneThisRound && os(game.user, a));
     }
   }
   async _onRender(e, t) {
@@ -14209,7 +14204,7 @@ class mo extends Fp {
     if (e.preventDefault(), !game.user.isGM || !e.dataTransfer) return;
     const t = this.viewed, i = e.dataTransfer.getData(Va) || e.dataTransfer.getData("text/plain");
     if (!t || !i || !t.combatants.get(i)) return;
-    const o = e.target?.closest(".combatant[data-combatant-id]") ?? null, a = bn(o), r = o?.getBoundingClientRect(), s = !!(r && e.clientY > r.top + r.height / 2), l = t.turns.map((h) => h.id), u = Vp(l, i, a, s);
+    const o = e.target?.closest(".combatant[data-combatant-id]") ?? null, a = bn(o), r = o?.getBoundingClientRect(), s = !!(r && e.clientY > r.top + r.height / 2), l = t.turns.map((h) => h.id), u = Fp(l, i, a, s);
     if (u.every((h, m) => h === l[m])) {
       this.#o();
       return;
@@ -14217,7 +14212,7 @@ class mo extends Fp {
     const c = t.combatant?.id, p = c ? u.indexOf(c) : void 0;
     await t.updateEmbeddedDocuments(
       "Combatant",
-      Yp(u),
+      Dp(u),
       {
         ...p === void 0 || p < 0 ? {} : { combatTurn: p },
         turnEvents: !1
@@ -14230,18 +14225,18 @@ class mo extends Fp {
     });
   }
 }
-function Dp() {
+function zp() {
   CONFIG.ui.combat = mo;
 }
-function Tp() {
+function Np() {
   Hooks.on("updateCombat", (n, e) => {
-    !("round" in e) || !game.user.isActiveGM || Ip(n).catch((t) => {
+    !("round" in e) || !game.user.isActiveGM || Yp(n).catch((t) => {
       console.error("cypherv2 | Failed to reset Combat Tracker DONE states", t);
     });
   });
 }
-const zp = CONFIG.ui.pause;
-class Np extends zp {
+const Mp = CONFIG.ui.pause;
+class qp extends Mp {
   static DEFAULT_OPTIONS = {
     classes: ["cypherv2-game-pause"]
   };
@@ -14253,38 +14248,57 @@ class Np extends zp {
     };
   }
 }
-function Mp() {
-  CONFIG.ui.pause = Np;
+function xp() {
+  CONFIG.ui.pause = qp;
 }
-function qp() {
+function Gp() {
   CONFIG.Combat.fallbackTurnMarker = _n.turnMarker;
 }
-const xp = "--cypherv2-blank-canvas-background-image";
-function Up(n) {
+const Up = "--cypherv2-blank-canvas-background-image";
+function Op(n) {
   return `url("${n.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replace(/[\n\r\f;]/g, "")}")`;
 }
-function Gp(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
-  const t = ir(_n.lobby, e);
-  n.style.setProperty(xp, Up(t));
+function Bp(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
+  const t = or(_n.lobby, e);
+  n.style.setProperty(Up, Op(t));
+}
+const as = ["system.options.totalEffortCapMode"];
+function Lp(n = CONFIG.Item.compendiumIndexFields) {
+  for (const e of as)
+    n.includes(e) || n.push(e);
+}
+function Ya(n) {
+  const e = n.split(".");
+  return e.length >= 5 && e[0] === "Compendium" && e[3] === "Item" ? `${e[1]}.${e[2]}` : null;
+}
+async function jp(n = game.actors, e = game.packs, t = (i, o) => console.warn(i, o)) {
+  const i = [...n].filter((a) => a.type === "character" && Ya(a.system.genre.sourceUuid) !== null), o = new Set(i.map((a) => Ya(a.system.genre.sourceUuid)));
+  for (const a of o)
+    try {
+      await e.get(a)?.getIndex({ fields: [...as] });
+    } catch (r) {
+      t(`cypherv2 | Could not enrich Genre Compendium index ${a}`, r);
+    }
+  for (const a of i) a.reset();
 }
 Hooks.once("init", async () => {
-  console.info(`${I} | Initializing`);
-  const n = new _u();
-  Bu(n);
-  const e = new pp();
-  e.register(mp), game.cypherv2 = bs(n, up(n), e), jl(), Nl(), Mu(), Dp(), Mp(), qp(), yp(), Hooks.callAll("cypherv2.registerRules", n), Hooks.callAll("cypherv2.registerThemes", e), _l(e), await foundry.applications.handlebars.loadTemplates([
+  console.info(`${$} | Initializing`);
+  const n = new Xu();
+  ju(n);
+  const e = new hp();
+  e.register(fp), Lp(), game.cypherv2 = Cs(n, pp(n), e), _l(), ql(), xu(), zp(), xp(), Gp(), wp(), Hooks.callAll("cypherv2.registerRules", n), Hooks.callAll("cypherv2.registerThemes", e), Xl(e), await foundry.applications.handlebars.loadTemplates([
     "systems/cypherv2/templates/focus/focus-tree.hbs"
   ]);
 });
 Hooks.once("ready", async () => {
-  Gp();
-  const n = String(game.settings.get(I, U.theme));
-  game.cypherv2.themes.apply(game.cypherv2.themes.has(n) ? n : "core"), Rc(
+  Bp();
+  const n = String(game.settings.get($, G.theme));
+  game.cypherv2.themes.apply(game.cypherv2.themes.has(n) ? n : "core"), Sc(
     game.cypherv2.services.intrusions,
     game.cypherv2.services.intrusionChat
-  ), pu(
+  ), hu(
     game.cypherv2.services.playerIntrusions,
     game.cypherv2.services.playerIntrusionChat
-  ), Ep(), Pp(), Ap(), Tm(game.cypherv2.services.combatStatuses), Tp(), await Sp(), console.info(`${I} | Ready`);
+  ), Pp(), kp(), Ip(), Nm(game.cypherv2.services.combatStatuses), Np(), await jp(), await Ap(), console.info(`${$} | Ready`);
 });
 //# sourceMappingURL=cypherv2.mjs.map

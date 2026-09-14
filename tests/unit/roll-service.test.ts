@@ -69,6 +69,47 @@ function equipArmor(
 }
 
 describe("RollService", () => {
+  it("uses prepared Actor Genre data when Foundry only has a Compendium index entry", () => {
+    const actor = character({effortBase: 10, poolValues: {might: 50}});
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    actor.system.derived.packages.totalEffortCapMode = "unlimited";
+    const previousResolver = globalThis.fromUuidSync;
+    globalThis.fromUuidSync = (() => ({
+      _id: "superhero",
+      uuid: actor.system.genre.sourceUuid,
+      name: "Superheroes",
+      type: "genre"
+    })) as typeof fromUuidSync;
+
+    try {
+      expect(serviceWithRoll(10).preview(
+        actor as RollCharacterDocumentLike,
+        request({paidEffort: 1, freeEffort: 6}),
+        policy
+      )).toMatchObject({totalEffortApplied: 7, totalEffortMaximum: null});
+    } finally {
+      globalThis.fromUuidSync = previousResolver;
+    }
+  });
+
+  it("does not resolve a Genre source for a Character without an optional Genre", () => {
+    const actor = character();
+    const previousResolver = globalThis.fromUuidSync;
+    const resolver = vi.fn(() => null);
+    globalThis.fromUuidSync = resolver as typeof fromUuidSync;
+
+    try {
+      expect(serviceWithRoll(10).preview(
+        actor as RollCharacterDocumentLike,
+        request(),
+        policy
+      ).totalEffortMaximum).toBe(6);
+      expect(resolver).not.toHaveBeenCalled();
+    } finally {
+      globalThis.fromUuidSync = previousResolver;
+    }
+  });
+
   it.each([[
     "light", 1
   ], [

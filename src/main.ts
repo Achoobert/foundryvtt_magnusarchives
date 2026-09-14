@@ -23,6 +23,10 @@ import {initializePlayerIntrusionController} from "./intrusions/player-intrusion
 import {initializeCombatTrackerDoneReset, registerCombatTracker} from "./applications/combat-tracker";
 import {registerCombatTurnMarker, registerGamePause} from "./applications/game-pause";
 import {initializeBlankCanvasBackground} from "./canvas/blank-canvas-background";
+import {
+  prepareCharacterGenreCompendiumIndexes,
+  registerGenreCompendiumIndexFields
+} from "./genre/genre-compendium-index";
 
 Hooks.once("init", async () => {
   console.info(`${SYSTEM_ID} | Initializing`);
@@ -31,6 +35,8 @@ Hooks.once("init", async () => {
   registerCoreRuleModule(rules);
   const themes = new ThemeRegistry();
   themes.register(CORE_THEME);
+
+  registerGenreCompendiumIndexFields();
 
   game.cypherv2 = createCypherV2Api(rules, createCoreServices(rules), themes);
 
@@ -67,6 +73,7 @@ Hooks.once("ready", async () => {
   initializeChatCardEntrance();
   initializeNpcDeadStatusSynchronization(game.cypherv2.services.combatStatuses);
   initializeCombatTrackerDoneReset();
+  await prepareCharacterGenreCompendiumIndexes();
   await migrateLegacyTypeGenres();
   console.info(`${SYSTEM_ID} | Ready`);
 });

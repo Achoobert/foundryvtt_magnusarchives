@@ -36,4 +36,25 @@ describe("Genre rules", () => {
     });
     expect(effectiveGenre({...association, sourceUuid: ""}, () => document)).toBeNull();
   });
+
+  it("rejects a synchronous Compendium index entry that has no Genre system data", () => {
+    const association = {
+      sourceUuid: "Compendium.cypherv2.genres.Item.superhero",
+      instanceId: "instance",
+      provenance: "manual" as const,
+      attachedAt: 1
+    };
+    const indexEntry = {
+      _id: "superhero",
+      uuid: association.sourceUuid,
+      name: "Superheroes",
+      type: "genre"
+    };
+
+    expect(() => effectiveGenre(
+      association,
+      () => indexEntry as never
+    )).not.toThrow();
+    expect(effectiveGenre(association, () => indexEntry as never)).toBeNull();
+  });
 });

@@ -1,7 +1,7 @@
 import type {RuleRegistry} from "../rules/rule-registry";
 import {assertCharacter, type CharacterDocumentLike} from "../rules/core/core-types";
 import {totalEffortCap} from "../genre/genre-rules";
-import type {GenreDocumentLike, GenreEffortCapMode} from "../genre/genre-types";
+import type {GenreEffortCapMode} from "../genre/genre-types";
 import {prepareRoll, resolveAutomaticSuccess, resolveRoll} from "../rolls/roll-engine";
 import type {
   CharacterRollRequest,
@@ -35,10 +35,7 @@ const foundryD20Roller: D20Roller = async () => {
 };
 
 const foundryGenreEffortCapMode: GenreEffortCapModeResolver = (actor) => {
-  const uuid = actor.system.genre.sourceUuid;
-  if (!uuid || typeof fromUuidSync !== "function") return "core";
-  const genre = fromUuidSync(uuid) as GenreDocumentLike | null;
-  return genre?.type === "genre" ? genre.system.options.totalEffortCapMode : "core";
+  return actor.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core";
 };
 
 const foundryHorrorIntrusionRange: HorrorIntrusionRangeResolver = () => currentHorrorIntrusionRange();
