@@ -1,6 +1,11 @@
 import {describe, expect, it} from "vitest";
 
-import type {CharacterAdvancementData} from "../../src/advancement/advancement-types";
+import type {
+  AdvancementPurchaseRecord,
+  CharacterAdvancementData,
+  PendingFocusChoice,
+  PendingGenreChoice
+} from "../../src/advancement/advancement-types";
 import {registerCoreRuleModule} from "../../src/rules/core-rule-module";
 import {RuleRegistry} from "../../src/rules/rule-registry";
 import {
@@ -479,5 +484,171 @@ describe("AdvancementService", () => {
     await service.resetProgressionGuidance(actor);
     expect(service.progressionGuidance(actor).completed).toBe(false);
     expect(actor.system.advancement.guidanceCompletedTiers).toEqual([1]);
+  });
+
+  describe("status-only purchase undo", () => {
+    it("removes only the exact purchase record and preserves payment and mechanical benefits", async () => {
+      const actor = new TestCharacter({xp: 8});
+      const service = makeService();
+      const purchased = await service.purchase(actor, {kind: "extraEffort"});
+      const beforeItems = [...actor.items];
+
+      await expect(service.undoPurchase(actor, purchased.record.id)).resolves.toEqual(purchased.record);
+
+      expect(actor.system.advancement.purchases).toEqual([]);
+      expect(actor.system.xp).toBe(4);
+      expect(actor.system.resourcePoints).toBe(1);
+      expect(actor.system.stats.effortBase).toBe(2);
+      expect(actor.items).toEqual(beforeItems);
+      expect(actor.updates.at(-1)).toEqual({"system.advancement.purchases": []});
+      expect(service.view(actor)).toMatchObject({purchasedCount: 0, remainingCount: 4, canAdvanceTier: false});
+      expect(service.view(actor).options.find((option) => option.kind === "extraEffort"))
+        .toMatchObject({purchased: false, available: true});
+    });
+
+    it("reopens a completed cycle, blocks Tier advancement, and permits a different purchase", async () => {
+      const actor = new TestCharacter();
+      const service = makeService();
+      await service.purchase(actor, {kind: "extraEffort"});
+      await service.purchase(actor, {kind: "moveTowardPerfection", pool: "might"});
+      await service.purchase(actor, {
+        kind: "increaseCapabilities", allocation: {might: 4, speed: 0, intellect: 0}
+      });
+      const skill = new TestSkill("skill-1", "Navigation", {
+        rank: "untrained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
+      });
+      actor.items.push(skill);
+      const fourth = await service.purchase(actor, {kind: "skillTraining", mode: "improve", skillId: skill.id});
+      expect(service.view(actor)).toMatchObject({purchasedCount: 4, canAdvanceTier: true});
+
+      await service.undoPurchase(actor, fourth.record.id);
+      expect(service.view(actor)).toMatchObject({purchasedCount: 3, remainingCount: 1, canAdvanceTier: false});
+      await expect(service.advanceTier(actor)).rejects.toMatchObject({code: "tier-not-ready"});
+      await service.purchase(actor, {kind: "other", otherKind: "recovery"});
+      expect(service.view(actor)).toMatchObject({purchasedCount: 4, canAdvanceTier: true});
+      expect(skill.system.rank).toBe("trained");
+    });
+
+    it("reopens the Other slot and permits take, undo, and retake without duplicate records", async () => {
+      const actor = new TestCharacter();
+      const service = makeService();
+      const first = await service.purchase(actor, {kind: "other", otherKind: "recovery"});
+      await service.undoPurchase(actor, first.record.id);
+      expect(service.view(actor).other).toEqual({purchased: false, available: true});
+
+      const second = await service.purchase(actor, {kind: "other", otherKind: "armor"});
+      expect(actor.system.advancement.purchases).toHaveLength(1);
+      expect(actor.system.advancement.purchases[0]?.id).toBe(second.record.id);
+      expect(actor.system.recovery.bonus).toBe(2);
+      expect(actor.system.proficiencies.armorCategories).toEqual(["light", "medium", "heavy"]);
+    });
+
+    it("preserves Skills, familiarities, pending choices, and acquired Items", async () => {
+      const skill = new TestSkill("skill-1", "Stealth", {
+        rank: "trained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
+      });
+      const actor = new TestCharacter({tier: 3, skills: [skill]});
+      (actor.system as unknown as {resourcePoints: number}).resourcePoints = 7;
+      (actor.system.recovery as {bonus: number}).bonus = 2;
+      (actor.system.proficiencies.weaponCategories as string[]).push("light", "medium", "heavy");
+      (actor.system.proficiencies.armorCategories as string[]).push("light", "medium", "heavy");
+      (actor.system.advancement.pendingFocusChoices as PendingFocusChoice[]).push({
+        id: "focus-choice", source: "otherAdvancement", grantTier: 3, focusUuid: ""
+      });
+      (actor.system.advancement.pendingGenreChoices as PendingGenreChoice[]).push({
+        id: "genre-choice", source: "otherAdvancement", grantTier: 3
+      });
+      (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push({
+        id: "legacy-current-id", kind: "other", otherKind: "focus", tier: 3,
+        xpCost: 4, resourcePointsGranted: 1, timestamp: 1
+      });
+      const service = makeService();
+
+      await service.undoPurchase(actor, "legacy-current-id");
+
+      expect(actor.items).toEqual([skill]);
+      expect(skill.system.rank).toBe("trained");
+      expect(actor.system.resourcePoints).toBe(7);
+      expect(actor.system.recovery.bonus).toBe(2);
+      expect(actor.system.proficiencies.weaponCategories).toEqual(["light", "medium", "heavy"]);
+      expect(actor.system.proficiencies.armorCategories).toEqual(["light", "medium", "heavy"]);
+      expect(actor.system.advancement.pendingFocusChoices).toHaveLength(1);
+      expect(actor.system.advancement.pendingGenreChoices).toHaveLength(1);
+    });
+
+    it("does not reverse Pool, Edge, Recovery, created Skill, or pending-choice benefits", async () => {
+      const capabilityActor = new TestCharacter();
+      const capabilityService = makeService();
+      const capability = await capabilityService.purchase(capabilityActor, {
+        kind: "increaseCapabilities", allocation: {might: 4, speed: 0, intellect: 0}
+      });
+      await capabilityService.undoPurchase(capabilityActor, capability.record.id);
+      expect(capabilityActor.system.stats.might).toMatchObject({baseMax: 14, value: 12});
+
+      const edgeActor = new TestCharacter();
+      const edgeService = makeService();
+      const edge = await edgeService.purchase(edgeActor, {kind: "moveTowardPerfection", pool: "speed"});
+      await edgeService.undoPurchase(edgeActor, edge.record.id);
+      expect(edgeActor.system.stats.speed.baseEdge).toBe(1);
+
+      const recoveryActor = new TestCharacter();
+      const recoveryService = makeService();
+      const recovery = await recoveryService.purchase(recoveryActor, {kind: "other", otherKind: "recovery"});
+      await recoveryService.undoPurchase(recoveryActor, recovery.record.id);
+      expect(recoveryActor.system.recovery.bonus).toBe(2);
+
+      const skillActor = new TestCharacter();
+      const skillService = makeService();
+      const learned = await skillService.purchase(skillActor, {
+        kind: "skillTraining", mode: "learn", customName: "Cartography", customCategory: "general"
+      });
+      await skillService.undoPurchase(skillActor, learned.record.id);
+      expect(skillActor.items).toHaveLength(1);
+      expect(skillActor.items[0]).toMatchObject({name: "Cartography", system: {rank: "trained"}});
+
+      const focusActor = new TestCharacter();
+      const focusService = makeService();
+      const focus = await focusService.purchase(focusActor, {kind: "other", otherKind: "focus"});
+      await focusService.undoPurchase(focusActor, focus.record.id);
+      expect(focusActor.system.advancement.pendingFocusChoices).toHaveLength(1);
+    });
+
+    it("rejects stale, duplicate, malformed, and previous-Tier IDs without removing another record", async () => {
+      const actor = new TestCharacter({tier: 2});
+      const current = {
+        id: "current", kind: "extraEffort" as const, otherKind: "none" as const, tier: 2,
+        xpCost: 4, resourcePointsGranted: 1, timestamp: 1
+      };
+      (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push(current);
+      const service = makeService();
+
+      await expect(service.undoPurchase(actor, "missing")).rejects.toMatchObject({code: "purchase-not-found"});
+      await expect(service.undoPurchase(actor, "")).rejects.toMatchObject({code: "purchase-not-found"});
+      expect(actor.system.advancement.purchases).toEqual([current]);
+
+      (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push({...current});
+      await expect(service.undoPurchase(actor, "current")).rejects.toMatchObject({code: "purchase-not-found"});
+      expect(actor.system.advancement.purchases).toHaveLength(2);
+
+      (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).splice(1, 1);
+      (actor.system.advancement.purchases as AdvancementPurchaseRecord[])[0] = {...current, tier: 1};
+      await expect(service.undoPurchase(actor, "current")).rejects.toMatchObject({code: "purchase-not-current"});
+      expect(actor.system.advancement.purchases).toHaveLength(1);
+    });
+
+    it("serializes double Undo so exactly one request succeeds", async () => {
+      const actor = new TestCharacter();
+      const service = makeService();
+      const {record} = await service.purchase(actor, {kind: "extraEffort"});
+
+      const results = await Promise.allSettled([
+        service.undoPurchase(actor, record.id),
+        service.undoPurchase(actor, record.id)
+      ]);
+
+      expect(results.filter((result) => result.status === "fulfilled")).toHaveLength(1);
+      expect(results.filter((result) => result.status === "rejected")).toHaveLength(1);
+      expect(actor.system.advancement.purchases).toEqual([]);
+    });
   });
 });

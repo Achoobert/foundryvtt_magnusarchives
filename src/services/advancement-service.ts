@@ -37,7 +37,9 @@ export type AdvancementErrorCode =
   | "skill-maximum"
   | "skill-tier"
   | "genre-tier"
-  | "tier-not-ready";
+  | "tier-not-ready"
+  | "purchase-not-found"
+  | "purchase-not-current";
 
 export class AdvancementError extends Error {
   constructor(readonly code: AdvancementErrorCode, message: string) {
@@ -310,6 +312,41 @@ export class AdvancementService {
     enabledRuleModuleIds: readonly string[] = []
   ): Promise<AdvancementPurchaseResult> {
     return this.#exclusive(actor, () => this.#purchaseLocked(actor, request, enabledRuleModuleIds, true));
+  }
+
+  /**
+   * Reopens an Advancement slot without attempting to reverse any benefit or payment.
+   * Only the exact, uniquely identified current-cycle purchase record is removed.
+   */
+  async undoPurchase(
+    actor: AdvancementCharacterLike,
+    purchaseId: string
+  ): Promise<AdvancementPurchaseRecord> {
+    return this.#exclusive(actor, async () => {
+      this.#assertCharacter(actor);
+      const normalizedId = typeof purchaseId === "string" ? purchaseId.trim() : "";
+      const purchases = actor.system.advancement.purchases;
+      const matches = normalizedId
+        ? purchases.filter((record) => record.id === normalizedId)
+        : [];
+      if (matches.length !== 1) {
+        throw new AdvancementError(
+          "purchase-not-found",
+          "That current-cycle Advancement purchase is unavailable."
+        );
+      }
+      const record = matches[0]!;
+      if (record.tier !== effectiveTier(actor.system)) {
+        throw new AdvancementError(
+          "purchase-not-current",
+          "Only an Advancement purchase from the current Tier can be undone."
+        );
+      }
+      await actor.update({
+        "system.advancement.purchases": purchases.filter((entry) => entry.id !== normalizedId)
+      });
+      return record;
+    });
   }
 
   async advanceTier(

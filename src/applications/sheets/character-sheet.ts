@@ -63,7 +63,8 @@ import {CORE_ADVANCEMENT_KINDS, type CoreAdvancementKind} from "../../advancemen
 import type {AdvancementCharacterLike} from "../../services/advancement-service";
 import {
   promptAdvanceTier,
-  promptPurchaseAdvancement
+  promptPurchaseAdvancement,
+  promptUndoAdvancement
 } from "../dialogs/advancement-dialogs";
 import {currentEnabledRuleModuleIds, currentRollPolicyRequest} from "../../config/settings";
 import {
@@ -225,7 +226,7 @@ const CHARACTER_MUTATING_ACTIONS = new Set([
   "createSkill", "rollSkill", "configureSkillRoll", "deleteSkill", "resetHeaderAppearance",
   "createWeapon", "createArmor", "createShield", "attackWeapon", "rollCombatDepletion", "reloadWeapon",
   "toggleShieldEquipped", "toggleArmorEquipped", "deleteCombatItem", "block", "dodge",
-  "acquireFocusNode", "gmAcquireFocusNode", "purchaseAdvancement", "advanceTier",
+  "acquireFocusNode", "gmAcquireFocusNode", "purchaseAdvancement", "undoAdvancement", "advanceTier",
   "completeProgressionGuidance", "resetProgressionGuidance", "addFocus", "removeFocus",
   "toggleGmProgressionEdit", "undoFocusAcquisition", "gmMarkFocusOwned", "gmRemoveFocusOwned",
   "beginCoreSetup", "skipCoreSetup", "markCoreInitialized", "restoreFocusAbility",
@@ -298,6 +299,7 @@ export class CharacterSheet extends ActorSheetV2 {
       acquireFocusNode: CharacterSheet.#onAcquireFocusNode,
       gmAcquireFocusNode: CharacterSheet.#onGmAcquireFocusNode,
       purchaseAdvancement: CharacterSheet.#onPurchaseAdvancement,
+      undoAdvancement: CharacterSheet.#onUndoAdvancement,
       advanceTier: CharacterSheet.#onAdvanceTier,
       completeProgressionGuidance: CharacterSheet.#onCompleteProgressionGuidance,
       resetProgressionGuidance: CharacterSheet.#onResetProgressionGuidance,
@@ -1352,6 +1354,19 @@ export class CharacterSheet extends ActorSheetV2 {
     await promptPurchaseAdvancement(
       this.actor as unknown as AdvancementCharacterLike,
       kind as CoreAdvancementKind | "other"
+    );
+  }
+
+  static async #onUndoAdvancement(
+    this: CharacterSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
+    const purchaseId = target.dataset.purchaseId;
+    if (!purchaseId) return;
+    await promptUndoAdvancement(
+      this.actor as unknown as AdvancementCharacterLike,
+      purchaseId
     );
   }
 

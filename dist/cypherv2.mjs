@@ -5,7 +5,7 @@ const ee = [
   "trained",
   "specialized",
   "expert"
-], Fa = ["choose", "might", "speed", "intellect"], xe = ["light", "medium", "heavy"], Da = ["melee", "ranged"], wn = ["immediate", "short", "long", "very-long", "specified"], Ge = ["light", "medium", "heavy"], Ta = ["block", "blockWithShield", "dodge"], bs = ["d6", "d10", "d20"], Nn = ["subtle", "manifest"], Mn = ["low", "medium", "advanced", "high", "ultra"], ae = ["minor", "moderate", "major"], za = [
+], Da = ["choose", "might", "speed", "intellect"], xe = ["light", "medium", "heavy"], za = ["melee", "ranged"], wn = ["immediate", "short", "long", "very-long", "specified"], Ue = ["light", "medium", "heavy"], Ta = ["block", "blockWithShield", "dodge"], bs = ["d6", "d10", "d20"], Nn = ["subtle", "manifest"], Mn = ["low", "medium", "advanced", "high", "ultra"], ae = ["minor", "moderate", "major"], Na = [
   "action",
   "firstAction",
   "lastAction",
@@ -15,7 +15,7 @@ const ee = [
   "perpetual",
   "passive",
   "special"
-], go = ["none", "might", "speed", "intellect", "choose"], Na = ["none", "task", "attack", "defense"], Ma = ["none", "single", "multiple"], Ae = ["one-action", "10-minutes", "1-hour", "10-hours"], ws = ["normal", "nonRest"], vs = ["10-minutes", "1-hour", "10-hours"];
+], yo = ["none", "might", "speed", "intellect", "choose"], Ma = ["none", "task", "attack", "defense"], qa = ["none", "single", "multiple"], Ae = ["one-action", "10-minutes", "1-hour", "10-hours"], ws = ["normal", "nonRest"], vs = ["10-minutes", "1-hour", "10-hours"];
 function Cs(n, e, t) {
   return Object.freeze({
     version: ys,
@@ -33,13 +33,13 @@ const V = ["might", "speed", "intellect"], _t = {
 function vt(n = !1) {
   return { oneAction: n, tenMinutes: n, oneHour: n, tenHours: n };
 }
-function qa(n) {
+function xa(n) {
   return Ae.filter((e) => !n[_t[e]]);
 }
-let yo = 0;
+let bo = 0;
 const Oe = () => {
   const n = globalThis.crypto?.randomUUID;
-  return n ? n.call(globalThis.crypto) : (yo += 1, `cypherv2-${Date.now()}-${yo}`);
+  return n ? n.call(globalThis.crypto) : (bo += 1, `cypherv2-${Date.now()}-${bo}`);
 };
 function oe(n) {
   if (n.type !== "character") throw new Error("Core Character services require a Character Actor.");
@@ -54,7 +54,7 @@ function pt(n) {
     major: n.major.map((e) => ({ ...e }))
   };
 }
-const Ui = [
+const Gi = [
   "tier",
   "effort",
   "mightMax",
@@ -110,7 +110,7 @@ function oi(n, e, t) {
     overrideActive: r
   };
 }
-function L(n) {
+function G(n) {
   return n.derived?.tier?.value ?? ft(n.tier, n.overrides?.tier);
 }
 function vn(n, e) {
@@ -173,7 +173,7 @@ function Ct(n) {
 function Mt(n) {
   return n.filter((e) => !e.used).map((e) => ({ ...e }));
 }
-function bo(n, e, t) {
+function wo(n, e, t) {
   const i = n.find((o) => o.id === e && o.type === t);
   if (!i) throw new Error(`Recovery slot '${e}' is not available for '${t}'.`);
   if (i.used) throw new Error(`Recovery slot '${e}' has already been used today.`);
@@ -300,13 +300,13 @@ function ks(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
       )
     );
   M.push(...i.hindrance ?? []);
-  const O = [...o].filter((I) => I.type === "armor" && I.system.equipped).filter((I) => Ge.includes(I.system.category)).sort((I, W) => Oi[W.system.category] - Oi[I.system.category] || I.id.localeCompare(W.id))[0], A = O?.system.category ?? "none", D = O ? Oi[O.system.category] : 0, S = O ? a.armorCategories.includes(O.system.category) : !0, K = (I, W, J) => O && J > 0 ? [ve(
-    `armor.${O.id}.${I}`,
-    O.id,
+  const B = [...o].filter((I) => I.type === "armor" && I.system.equipped).filter((I) => Ue.includes(I.system.category)).sort((I, W) => Oi[W.system.category] - Oi[I.system.category] || I.id.localeCompare(W.id))[0], A = B?.system.category ?? "none", D = B ? Oi[B.system.category] : 0, S = B ? a.armorCategories.includes(B.system.category) : !0, X = (I, W, J) => B && J > 0 ? [ve(
+    `armor.${B.id}.${I}`,
+    B.id,
     "item",
     W,
     J
-  )] : [], j = K("block", "Armor: Block", D), He = K("dodge", "Armor: Dodge", D), B = K(
+  )] : [], j = X("block", "Armor: Block", D), He = X("dodge", "Armor: Dodge", D), L = X(
     "speed-task",
     "Unfamiliar armor: Speed task",
     S ? 0 : D
@@ -331,38 +331,38 @@ function ks(n, e, t, i = {}, o = [], a = { armorCategories: [], freelyUse: [] },
       dead: e.major.length >= H.major
     },
     recovery: {
-      formula: wo(C + p),
-      calculatedFormula: wo(C),
+      formula: vo(C + p),
+      calculatedFormula: vo(C),
       calculatedBonus: C,
       manualModifier: p,
       bonus: C + p,
       bonusContributions: w,
-      availableTypes: h.length > 0 ? [...new Set(Mt(h).map((I) => I.type))] : qa(t)
+      availableTypes: h.length > 0 ? [...new Set(Mt(h).map((I) => I.type))] : xa(t)
     },
     cypherLimit: { max: Math.max(0, we(P)), contributions: P },
     combat: {
       armor: {
-        itemId: O?.id ?? "",
+        itemId: B?.id ?? "",
         category: A,
         freelyUsed: S,
         blockEase: we(j),
         dodgeHindrance: we(He),
-        speedTaskHindrance: we(B),
+        speedTaskHindrance: we(L),
         blockContributions: j,
         dodgeContributions: He,
-        speedTaskContributions: B
+        speedTaskContributions: L
       }
     },
     packages: s
   };
 }
-function wo(n) {
+function vo(n) {
   return n === 0 ? "1d6 + Tier" : `1d6 + Tier ${n > 0 ? "+" : "-"} ${Math.abs(n)}`;
 }
 const {
   ArrayField: xn,
   BooleanField: Vi,
-  HTMLField: xa,
+  HTMLField: Ua,
   NumberField: Et,
   ObjectField: As,
   SchemaField: kt,
@@ -370,7 +370,7 @@ const {
 } = foundry.data.fields, d = {
   ArrayField: xn,
   BooleanField: Vi,
-  HTMLField: xa,
+  HTMLField: Ua,
   NumberField: Et,
   ObjectField: As,
   SchemaField: kt,
@@ -412,7 +412,7 @@ function wt() {
   return new kt({
     id: new he({ required: !0, nullable: !1, blank: !1 }),
     label: new he({ required: !0, nullable: !1, initial: "" }),
-    description: new xa({ required: !0, nullable: !1, initial: "" }),
+    description: new Ua({ required: !0, nullable: !1, initial: "" }),
     sourceUuid: new he({ required: !0, nullable: !1, initial: "" }),
     treated: new Vi({ required: !0, nullable: !1, initial: !1 })
   });
@@ -484,23 +484,23 @@ class Ga extends foundry.abstract.TypeDataModel {
     };
   }
 }
-const Gn = [
+const Un = [
   "increaseCapabilities",
   "moveTowardPerfection",
   "extraEffort",
   "skillTraining"
-], Ua = [
+], Oa = [
   "recovery",
   "focus",
   "armor",
   "weapons",
   "genre"
-], $s = [...Gn, "other"], Oa = [
+], $s = [...Un, "other"], Ba = [
   "characterCreation",
   "additionalFocus",
   "otherAdvancement",
   "newTier"
-], Vs = ["otherAdvancement", "newTier"], Ba = Object.freeze({
+], Vs = ["otherAdvancement", "newTier"], La = Object.freeze({
   xpCost: 4,
   purchasesPerTier: 4,
   capabilityPoints: 4,
@@ -510,7 +510,7 @@ const Gn = [
   genreChoiceForTier: (n) => n >= 3 && n % 3 === 0,
   attackDefenseTrainingTier: 2,
   attackDefenseSpecializationTier: 4
-}), La = ["axes", "knives", "swords"];
+}), ja = ["axes", "knives", "swords"];
 function rt(n) {
   const e = String(n ?? "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").trim().toLocaleLowerCase("en-US").replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-+|-+$/g, "");
   return e === "none" ? "" : e;
@@ -540,7 +540,7 @@ const Ys = [
   "Savant",
   "Custom"
 ];
-function ja(n) {
+function Wa(n) {
   if (!n || typeof n != "object" || Array.isArray(n)) return null;
   const e = n, t = String(e.id ?? "").trim(), i = String(e.category ?? "").trim(), o = Number(e.shifts);
   return !t || !i || !Number.isInteger(o) || o < 1 ? null : {
@@ -551,11 +551,11 @@ function ja(n) {
     description: String(e.description ?? "").trim()
   };
 }
-function Wa(n) {
+function _a(n) {
   if (!Array.isArray(n)) return [];
   const e = /* @__PURE__ */ new Set(), t = [];
   for (const i of n) {
-    const o = ja(i);
+    const o = Wa(i);
     !o || e.has(o.id) || (e.add(o.id), t.push(o));
   }
   return t;
@@ -575,8 +575,8 @@ function Fs(n) {
     });
   });
 }
-function vo(n, e) {
-  const t = Wa(n);
+function Co(n, e) {
+  const t = _a(n);
   return t.length > 0 ? t : Fs(e);
 }
 function Ds(n) {
@@ -585,7 +585,7 @@ function Ds(n) {
     return e + (Number.isInteger(i) && i > 0 ? i : 0);
   }, 0);
 }
-function Ts(n, e) {
+function zs(n, e) {
   const t = n.reduce((o, a) => o + a.shifts, 0), i = /* @__PURE__ */ new Map();
   for (const o of n) {
     const a = o.category.trim().toLocaleLowerCase("en-US");
@@ -598,8 +598,8 @@ function Ts(n, e) {
     categoryWarnings: new Set([...i].filter(([, o]) => o > 3).map(([o]) => o))
   };
 }
-function zs(n, e, t = Oe) {
-  const i = e.id?.trim() || t(), o = ja({ ...e, id: i });
+function Ts(n, e, t = Oe) {
+  const i = e.id?.trim() || t(), o = Wa({ ...e, id: i });
   if (!o) throw new Error("A Power Shift requires a category and a positive whole-number value.");
   const a = n.findIndex((r) => r.id === i);
   return a < 0 ? [...n, o] : n.map((r, s) => s === a ? o : r);
@@ -610,47 +610,47 @@ function Ns(n, e) {
 function ai(n, e) {
   return Number.isInteger(n) && Number(n) >= e ? Number(n) : null;
 }
-function Co(n, e = !1) {
+function Eo(n, e = !1) {
   const t = {}, i = n.stats && typeof n.stats == "object" ? n.stats : {}, o = (a) => {
     const r = i[a] && typeof i[a] == "object" ? i[a] : {}, s = {};
-    return (!e || z(r, "max")) && (s.max = ai(r.max, 1)), (!e || z(r, "edge")) && (s.edge = ai(r.edge, -20)), s;
+    return (!e || T(r, "max")) && (s.max = ai(r.max, 1)), (!e || T(r, "edge")) && (s.edge = ai(r.edge, -20)), s;
   };
-  if ((!e || z(n, "tier")) && (t.tier = ai(n.tier, 1)), (!e || z(n, "effort")) && (t.effort = ai(n.effort, 0)), !e || z(n, "stats")) {
+  if ((!e || T(n, "tier")) && (t.tier = ai(n.tier, 1)), (!e || T(n, "effort")) && (t.effort = ai(n.effort, 0)), !e || T(n, "stats")) {
     const a = {};
     for (const r of ["might", "speed", "intellect"])
-      (!e || z(i, r)) && (a[r] = o(r));
+      (!e || T(i, r)) && (a[r] = o(r));
     t.stats = a;
   }
-  if (!e || z(n, "wounds")) {
+  if (!e || T(n, "wounds")) {
     const a = n.wounds && typeof n.wounds == "object" ? n.wounds : {}, r = {};
     for (const s of ["minor", "moderate", "major"])
-      (!e || z(a, s)) && (r[s] = Number.isInteger(a[s]) ? Number(a[s]) : 0);
+      (!e || T(a, s)) && (r[s] = Number.isInteger(a[s]) ? Number(a[s]) : 0);
     t.wounds = r;
   }
   return t;
 }
-function z(n, e) {
+function T(n, e) {
   return Object.prototype.hasOwnProperty.call(n, e);
 }
 function Ms(n, e) {
   const t = { ...n };
-  return (!e || z(n, "cycle")) && (t.cycle = Number.isInteger(n.cycle) ? n.cycle : 1), (!e || z(n, "purchases")) && (t.purchases = Array.isArray(n.purchases) ? n.purchases : []), (!e || z(n, "initializedFocusUuids")) && (t.initializedFocusUuids = Array.isArray(n.initializedFocusUuids) ? n.initializedFocusUuids : []), (!e || z(n, "pendingFocusChoices")) && (t.pendingFocusChoices = Array.isArray(n.pendingFocusChoices) ? n.pendingFocusChoices : []), (!e || z(n, "pendingGenreChoices")) && (t.pendingGenreChoices = Array.isArray(n.pendingGenreChoices) ? n.pendingGenreChoices : []), (!e || z(n, "guidanceCompletedTiers")) && (t.guidanceCompletedTiers = Array.isArray(n.guidanceCompletedTiers) ? [...new Set(n.guidanceCompletedTiers.filter((i) => Number.isInteger(i) && Number(i) >= 1).map(Number))].sort((i, o) => i - o) : []), (!e || z(n, "notes")) && (t.notes = typeof n.notes == "string" ? n.notes : ""), t;
+  return (!e || T(n, "cycle")) && (t.cycle = Number.isInteger(n.cycle) ? n.cycle : 1), (!e || T(n, "purchases")) && (t.purchases = Array.isArray(n.purchases) ? n.purchases : []), (!e || T(n, "initializedFocusUuids")) && (t.initializedFocusUuids = Array.isArray(n.initializedFocusUuids) ? n.initializedFocusUuids : []), (!e || T(n, "pendingFocusChoices")) && (t.pendingFocusChoices = Array.isArray(n.pendingFocusChoices) ? n.pendingFocusChoices : []), (!e || T(n, "pendingGenreChoices")) && (t.pendingGenreChoices = Array.isArray(n.pendingGenreChoices) ? n.pendingGenreChoices : []), (!e || T(n, "guidanceCompletedTiers")) && (t.guidanceCompletedTiers = Array.isArray(n.guidanceCompletedTiers) ? [...new Set(n.guidanceCompletedTiers.filter((i) => Number.isInteger(i) && Number(i) >= 1).map(Number))].sort((i, o) => i - o) : []), (!e || T(n, "notes")) && (t.notes = typeof n.notes == "string" ? n.notes : ""), t;
 }
 function qs(n, e) {
   const t = { ...n };
-  if ((!e || z(n, "coreInitialized")) && (t.coreInitialized = n.coreInitialized === !0), !e || z(n, "mode")) {
+  if ((!e || T(n, "coreInitialized")) && (t.coreInitialized = n.coreInitialized === !0), !e || T(n, "mode")) {
     const i = n.mode === "setup" ? "completed" : String(n.mode);
     t.mode = ["completed", "skipped", "manual"].includes(i) ? i : "uninitialized";
   }
-  return (!e || z(n, "initializedAt")) && (t.initializedAt = Number.isInteger(n.initializedAt) ? n.initializedAt : 0), t;
+  return (!e || T(n, "initializedAt")) && (t.initializedAt = Number.isInteger(n.initializedAt) ? n.initializedAt : 0), t;
 }
-function Eo(n, e) {
+function Ro(n, e) {
   const t = {};
-  if (!e || z(n, "backgroundMode")) {
+  if (!e || T(n, "backgroundMode")) {
     const i = String(n.backgroundMode ?? "theme");
     t.backgroundMode = ["theme", "portrait", "custom"].includes(i) ? i : "theme";
   }
-  if ((!e || z(n, "customImage")) && (t.customImage = typeof n.customImage == "string" ? n.customImage : ""), !e || z(n, "color")) {
+  if ((!e || T(n, "customImage")) && (t.customImage = typeof n.customImage == "string" ? n.customImage : ""), !e || T(n, "color")) {
     const i = typeof n.color == "string" ? n.color.trim() : "";
     t.color = /^#(?:[\da-f]{3}|[\da-f]{6})$/i.test(i) ? i.toLocaleLowerCase("en-US") : "";
   }
@@ -658,9 +658,9 @@ function Eo(n, e) {
 }
 function xs(n, e = {}) {
   const t = e.partial === !0;
-  if (t ? n.overrides && typeof n.overrides == "object" && (n.overrides = Co(n.overrides, !0)) : n.overrides = Co(
+  if (t ? n.overrides && typeof n.overrides == "object" && (n.overrides = Eo(n.overrides, !0)) : n.overrides = Eo(
     n.overrides && typeof n.overrides == "object" ? n.overrides : {}
-  ), !t && (!n.genre || typeof n.genre != "object") && (n.genre = { sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0 }), t ? n.appearance && typeof n.appearance == "object" && (n.appearance = Eo(n.appearance, !0)) : n.appearance = Eo(
+  ), !t && (!n.genre || typeof n.genre != "object") && (n.genre = { sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0 }), t ? n.appearance && typeof n.appearance == "object" && (n.appearance = Ro(n.appearance, !0)) : n.appearance = Ro(
     n.appearance && typeof n.appearance == "object" ? n.appearance : {},
     !1
   ), Array.isArray(n.focusProgress) && (n.focusProgress = n.focusProgress.map((i) => {
@@ -683,12 +683,12 @@ function xs(n, e = {}) {
     };
   })), n.advancement && typeof n.advancement == "object" && (n.advancement = Ms(n.advancement, t)), !t || n.recovery && typeof n.recovery == "object") {
     const i = n.recovery && typeof n.recovery == "object" ? n.recovery : {}, o = i.used && typeof i.used == "object" ? { ...vt(!1), ...i.used } : vt(!1), a = { ...i };
-    (!t || z(i, "bonus")) && (a.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || z(i, "slots")) && (a.slots = Ps(i.slots, o), a.used = Ct(a.slots)), (!t || z(i, "customized")) && (a.customized = i.customized === !0), (!t || z(i, "rollModifier")) && (a.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || z(i, "history")) && (a.history = Array.isArray(i.history) ? i.history.map((r) => r && typeof r == "object" ? { slotId: "", ...r } : r) : []), n.recovery = a;
+    (!t || T(i, "bonus")) && (a.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || T(i, "slots")) && (a.slots = Ps(i.slots, o), a.used = Ct(a.slots)), (!t || T(i, "customized")) && (a.customized = i.customized === !0), (!t || T(i, "rollModifier")) && (a.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || T(i, "history")) && (a.history = Array.isArray(i.history) ? i.history.map((r) => r && typeof r == "object" ? { slotId: "", ...r } : r) : []), n.recovery = a;
   }
   if (t) {
     if (n.presentation && typeof n.presentation == "object") {
       const i = n.presentation, o = { ...i };
-      z(i, "hideFocusInSentence") && (o.hideFocusInSentence = i.hideFocusInSentence === !0), z(i, "powerShiftsEnabled") && (o.powerShiftsEnabled = i.powerShiftsEnabled === !0), n.presentation = o;
+      T(i, "hideFocusInSentence") && (o.hideFocusInSentence = i.hideFocusInSentence === !0), T(i, "powerShiftsEnabled") && (o.powerShiftsEnabled = i.powerShiftsEnabled === !0), n.presentation = o;
     }
   } else {
     const i = n.presentation && typeof n.presentation == "object" ? n.presentation : {};
@@ -699,9 +699,9 @@ function xs(n, e = {}) {
   }
   if (!t || n.proficiencies && typeof n.proficiencies == "object") {
     const i = n.proficiencies && typeof n.proficiencies == "object" ? n.proficiencies : {}, o = { ...i };
-    (!t || z(i, "weaponFamilies")) && (o.weaponFamilies = se(i.weaponFamilies)), n.proficiencies = o;
+    (!t || T(i, "weaponFamilies")) && (o.weaponFamilies = se(i.weaponFamilies)), n.proficiencies = o;
   }
-  return (!t || z(n, "powerShifts")) && (n.powerShifts = Wa(n.powerShifts)), n.creation && typeof n.creation == "object" && (n.creation = qs(n.creation, t)), n;
+  return (!t || T(n, "powerShifts")) && (n.powerShifts = _a(n.powerShifts)), n.creation && typeof n.creation == "object" && (n.creation = qs(n.creation, t)), n;
 }
 function dt(n, e, t) {
   return {
@@ -715,7 +715,7 @@ function dt(n, e, t) {
 function je(n) {
   return Number.isInteger(n) && Number(n) > 0 ? Number(n) : 0;
 }
-function _a(n) {
+function Ka(n) {
   if (n.type !== "descriptor") return [];
   const e = n.system, t = e.instance?.selections?.poolChoices ?? [];
   return (e.poolBonusChoiceGroups ?? []).flatMap((i) => {
@@ -723,19 +723,19 @@ function _a(n) {
     return o ? s.map((l) => ({ groupId: i.id, pool: l, amount: o })) : [];
   });
 }
-function Ka(n) {
+function Xa(n) {
   if (n.type !== "characterType") return null;
   const e = n.system;
   if (!e.superhero?.superheroics?.enabled) return null;
   const t = e.instance?.selections?.superheroicsPool, i = je(e.superhero.superheroics.poolBonus);
   return t && t !== "none" && V.includes(t) && i > 0 ? { pool: t, amount: i } : null;
 }
-function Gs(n, e, t = []) {
+function Us(n, e, t = []) {
   const i = [...n, ...e].join(" ").trim(), o = t.length > 0 ? `who ${t.join(" and ")}` : "";
   return [i, o].filter(Boolean).join(" ");
 }
-function Us(n, e = [], t = [], i = [], o = []) {
-  const a = {}, r = {}, s = {}, l = new Set(e.filter((f) => xe.includes(f))), u = new Set(se(o)), c = new Set(t.filter((f) => Ge.includes(f))), p = [], h = [], m = [], y = [];
+function Gs(n, e = [], t = [], i = [], o = []) {
+  const a = {}, r = {}, s = {}, l = new Set(e.filter((f) => xe.includes(f))), u = new Set(se(o)), c = new Set(t.filter((f) => Ue.includes(f))), p = [], h = [], m = [], y = [];
   for (const f of n) {
     if (f.type === "characterType" || f.type === "species") {
       const P = f.system;
@@ -760,7 +760,7 @@ function Us(n, e = [], t = [], i = [], o = []) {
         k && (r[Y] ??= []).push(dt(f, `edge.${Y}`, k));
       }
       for (const k of xe) P.weaponUse[k] && l.add(k);
-      for (const k of Ge) P.armorUse[k] && c.add(k);
+      for (const k of Ue) P.armorUse[k] && c.add(k);
     } else
       h.push(f.name);
     const w = f.system.poolBonuses;
@@ -768,13 +768,13 @@ function Us(n, e = [], t = [], i = [], o = []) {
       const Y = je(w[P]);
       Y && (a[P] ??= []).push(dt(f, `pool.${P}`, Y));
     }
-    for (const P of _a(f))
+    for (const P of Ka(f))
       (a[P.pool] ??= []).push(dt(
         f,
         `pool-choice.${P.groupId}.${P.pool}`,
         P.amount
       ));
-    const C = Ka(f);
+    const C = Xa(f);
     C && (a[C.pool] ??= []).push(dt(
       f,
       `superheroics.${C.pool}`,
@@ -789,24 +789,24 @@ function Us(n, e = [], t = [], i = [], o = []) {
     typeNames: p,
     descriptorNames: h,
     speciesNames: m,
-    characterSentence: Gs(h, p, i)
+    characterSentence: Us(h, p, i)
   };
 }
 function Li(n) {
   const e = n.system, t = Object.fromEntries(V.map((o) => [o, je(e.poolBonuses[o])]));
-  for (const o of _a(n)) t[o.pool] += o.amount;
-  const i = Ka(n);
+  for (const o of Ka(n)) t[o.pool] += o.amount;
+  const i = Xa(n);
   return i && (t[i.pool] += i.amount), t;
 }
-function Xa(n, e, t) {
+function Ja(n, e, t) {
   const i = Math.max(0, e - n);
   return Math.max(0, Math.min(t, t - i));
 }
-const Ja = ["core", "unlimited"], Os = ["manual", "typeSuggestion", "migration"], Bs = ["progression", "origin"], Ls = 6;
+const Qa = ["core", "unlimited"], Os = ["manual", "typeSuggestion", "migration"], Bs = ["progression", "origin"], Ls = 6;
 function js(n, e) {
   if (!n.sourceUuid) return null;
   const t = e(n.sourceUuid);
-  return !t || t.type !== "genre" || !t.system || !t.system.options || !Ja.includes(t.system.options.totalEffortCapMode) ? null : {
+  return !t || t.type !== "genre" || !t.system || !t.system.options || !Qa.includes(t.system.options.totalEffortCapMode) ? null : {
     sourceUuid: n.sourceUuid,
     name: t.name,
     totalEffortCapMode: t.system.options.totalEffortCapMode
@@ -815,22 +815,22 @@ function js(n, e) {
 function Ws(n) {
   return n === "unlimited" ? null : Ls;
 }
-const Qa = ["theme", "portrait", "custom"], _s = "#96082a", Ks = { r: 23, g: 24, b: 27 };
-function Un(n) {
+const Za = ["theme", "portrait", "custom"], _s = "#96082a", Ks = { r: 23, g: 24, b: 27 };
+function Gn(n) {
   const e = n.trim().match(/^#([\da-f]{3}|[\da-f]{6})$/i);
   return e ? `#${(e[1].length === 3 ? [...e[1]].map((i) => `${i}${i}`).join("") : e[1]).toLocaleLowerCase("en-US")}` : null;
 }
-function Za(n) {
+function er(n) {
   return {
     r: Number.parseInt(n.slice(1, 3), 16),
     g: Number.parseInt(n.slice(3, 5), 16),
     b: Number.parseInt(n.slice(5, 7), 16)
   };
 }
-function er({ r: n, g: e, b: t }) {
+function tr({ r: n, g: e, b: t }) {
   return `#${[n, e, t].map((i) => Math.max(0, Math.min(255, Math.round(i))).toString(16).padStart(2, "0")).join("")}`;
 }
-function tr(n, e, t) {
+function ir(n, e, t) {
   const i = 1 - t;
   return {
     r: n.r * t + e.r * i,
@@ -839,26 +839,26 @@ function tr(n, e, t) {
   };
 }
 function Xs(n) {
-  const e = Za(n);
-  return Math.max(e.r, e.g, e.b) < 96 ? er(tr(e, { r: 255, g: 255, b: 255 }, 0.72)) : n;
-}
-function ir(n) {
-  const e = Un(n);
-  return e ? er(tr(Za(e), Ks, 0.2)) : null;
+  const e = er(n);
+  return Math.max(e.r, e.g, e.b) < 96 ? tr(ir(e, { r: 255, g: 255, b: 255 }, 0.72)) : n;
 }
 function nr(n) {
-  const e = Un(n);
+  const e = Gn(n);
+  return e ? tr(ir(er(e), Ks, 0.2)) : null;
+}
+function or(n) {
+  const e = Gn(n);
   return e ? Xs(e) : null;
 }
 function Js(n) {
   return `url("${n.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replace(/[\n\r\f;]/g, "")}")`;
 }
-function or(n, e = (t) => foundry.utils.getRoute(t)) {
+function ar(n, e = (t) => foundry.utils.getRoute(t)) {
   const t = n.trim();
   return t ? /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(t) ? t : e(t) : "";
 }
 function Qs(n, e, t) {
-  const i = Qa.includes(n.backgroundMode) ? n.backgroundMode : "theme", o = n.customImage.trim(), a = Un(n.color), r = a ? nr(a) : null, s = a ? ir(a) : null, l = i === "portrait" ? e.trim() : i === "custom" ? o : "", u = or(l, t), c = [
+  const i = Za.includes(n.backgroundMode) ? n.backgroundMode : "theme", o = n.customImage.trim(), a = Gn(n.color), r = a ? or(a) : null, s = a ? nr(a) : null, l = i === "portrait" ? e.trim() : i === "custom" ? o : "", u = ar(l, t), c = [
     ...r ? [`--cypherv2-character-accent: ${r}`] : [],
     ...s ? [`--cypherv2-character-tint: ${s}`] : [],
     ...u ? [`--cypherv2-character-background-image: ${Js(u)}`] : []
@@ -887,7 +887,7 @@ function Zs() {
       required: !0,
       nullable: !1,
       initial: "none",
-      choices: ["none", ...Ua]
+      choices: ["none", ...Oa]
     }),
     tier: E(1, 1),
     xpCost: E(),
@@ -898,7 +898,7 @@ function Zs() {
 function el() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    source: new d.StringField({ required: !0, nullable: !1, choices: [...Oa] }),
+    source: new d.StringField({ required: !0, nullable: !1, choices: [...Ba] }),
     grantTier: E(1, 1),
     focusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" })
   });
@@ -923,7 +923,7 @@ function il() {
       required: !0,
       nullable: !1,
       initial: "none",
-      choices: ["none", ...Oa]
+      choices: ["none", ...Ba]
     }),
     choiceGrantTier: E(1, 1),
     choiceFocusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1095,7 +1095,7 @@ class rl extends Ga {
           required: !0,
           nullable: !1,
           initial: "theme",
-          choices: [...Qa]
+          choices: [...Za]
         }),
         customImage: new d.StringField({
           required: !0,
@@ -1261,7 +1261,7 @@ class rl extends Ga {
       id: l.id,
       type: l.type,
       system: l.system
-    })), i = this.proficiencies, o = Us(
+    })), i = this.proficiencies, o = Gs(
       e.filter((l) => l.type === "characterType" || l.type === "descriptor" || l.type === "species"),
       i.weaponCategories,
       i.armorCategories,
@@ -1380,7 +1380,7 @@ class sl extends Ga {
     super.prepareDerivedData(), this.health.max = this.health.baseMax, this.dead = this.health.value <= 0;
   }
 }
-const ll = ["none", "fantasy", "scienceFiction", "superhero", "custom"], cl = ["primary", "additional", "speciesGranted", "custom"], ar = ["none", "fixed", "choice"], dl = ["type", "descriptor", "focus", "genre", "species", "other"], ul = ["active", "retained"], ml = ["fixed", "catalog"], pl = ["none", "descriptor"];
+const ll = ["none", "fantasy", "scienceFiction", "superhero", "custom"], cl = ["primary", "additional", "speciesGranted", "custom"], rr = ["none", "fixed", "choice"], dl = ["type", "descriptor", "focus", "genre", "species", "other"], ul = ["active", "retained"], ml = ["fixed", "catalog"], pl = ["none", "descriptor"];
 function At() {
   return new d.SchemaField({
     name: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1388,7 +1388,7 @@ function At() {
     system: new d.ObjectField({ required: !0, nullable: !1, initial: {} })
   });
 }
-function rr() {
+function sr() {
   return new d.SchemaField({
     kind: new d.StringField({ required: !0, nullable: !1, initial: "other", choices: [...dl] }),
     sourceUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1409,7 +1409,7 @@ function rr() {
     })
   });
 }
-function sr() {
+function lr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     itemUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1451,7 +1451,7 @@ function On() {
       descriptorChoices: new d.ArrayField(Wi(), { required: !0, nullable: !1, initial: [] }),
       suppressedGrantIds: new d.ArrayField(new d.StringField({ required: !0, nullable: !1, blank: !1 }), { required: !0, nullable: !1, initial: [] })
     }),
-    parent: rr()
+    parent: sr()
   });
 }
 function hl() {
@@ -1471,7 +1471,7 @@ function Bn() {
     abilityUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     notes: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     snapshot: At(),
-    alternatives: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] })
+    alternatives: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] })
   });
 }
 function gl() {
@@ -1491,7 +1491,7 @@ function Ln() {
     notes: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
     rank: new d.StringField({ required: !0, nullable: !1, initial: "trained", choices: [...ee] }),
     snapshot: At(),
-    alternatives: new d.ArrayField(sr(), { required: !0, nullable: !1, initial: [] })
+    alternatives: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] })
   });
 }
 function jn() {
@@ -1502,14 +1502,14 @@ function jn() {
     options: new d.ArrayField(gl(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function lr() {
+function cr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     choose: E(1, 1),
     options: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function cr() {
+function dr() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     descriptorUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1532,7 +1532,7 @@ function yl() {
       initial: "none",
       choices: [...pl]
     }),
-    options: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] })
+    options: new d.ArrayField(dr(), { required: !0, nullable: !1, initial: [] })
   });
 }
 function Ri() {
@@ -1572,7 +1572,7 @@ class me extends foundry.abstract.TypeDataModel {
         new d.StringField({ required: !0, nullable: !1, blank: !1 }),
         { required: !0, nullable: !1, initial: [] }
       ),
-      grantedBy: rr()
+      grantedBy: sr()
     };
   }
 }
@@ -1587,7 +1587,7 @@ function wl(n, e, t) {
   const i = V.filter((o) => n.includes(o));
   return i.length === 0 ? "" : i.length === 1 ? e(i[0]) : i.length === 2 ? `${e(i[0])}${t.pair}${e(i[1])}` : `${e(i[0])}${t.middle}${e(i[1])}${t.final}${e(i[2])}`;
 }
-function dr(n, e, t, i, o = !1) {
+function ur(n, e, t, i, o = !1) {
   return !Number.isInteger(n) || n <= 0 || e.length === 0 ? "" : `${n}${o ? "+" : ""} ${wl(e, t, i)}`;
 }
 class vl extends me {
@@ -1601,7 +1601,7 @@ class vl extends me {
         required: !0,
         nullable: !1,
         initial: "action",
-        choices: [...za]
+        choices: [...Na]
       }),
       // Legacy V1 single-Pool source retained for safe document migration.
       // Runtime and UI use cost.allowedPools as the normalized authority.
@@ -1609,7 +1609,7 @@ class vl extends me {
         required: !0,
         nullable: !1,
         initial: "none",
-        choices: [...go]
+        choices: [...yo]
       }),
       cost: new d.SchemaField({
         amount: E(),
@@ -1624,7 +1624,7 @@ class vl extends me {
         required: !0,
         nullable: !1,
         initial: "none",
-        choices: [...Na]
+        choices: [...Ma]
       }),
       rollModifier: new d.NumberField({
         required: !0,
@@ -1654,7 +1654,7 @@ class vl extends me {
         required: !0,
         nullable: !1,
         initial: "none",
-        choices: [...Ma]
+        choices: [...qa]
       }),
       // Reserved for the later Focus acquisition workflow. Phase 1 never writes these fields.
       sourceFocusUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1676,7 +1676,7 @@ class vl extends me {
     }
     if (i.pool === void 0) {
       const a = String(o.pool ?? "none");
-      i.pool = go.includes(a) ? a : "none";
+      i.pool = yo.includes(a) ? a : "none";
     }
     return i.archived = !!(i.archived ?? !1), i.cost = {
       amount: Number(o.amount ?? 0),
@@ -1733,7 +1733,7 @@ class El extends me {
         required: !0,
         nullable: !1,
         initial: "light",
-        choices: [...Ge]
+        choices: [...Ue]
       }),
       // Legacy compatibility only. Effective Armor familiarity is derived from the Character.
       freelyUsed: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
@@ -1776,7 +1776,7 @@ class Pl extends me {
       poolBonuses: new d.SchemaField({ might: E(), speed: E(), intellect: E() }),
       woundBonuses: new d.SchemaField({ minor: E(), moderate: E(), major: E() }),
       edgeGrant: new d.SchemaField({
-        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ar] }),
+        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...rr] }),
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: E(1)
       }),
@@ -1795,7 +1795,7 @@ class Pl extends me {
         })
       }),
       abilityGrants: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] }),
       skillGrants: new d.ArrayField(Ln(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(jn(), { required: !0, nullable: !1, initial: [] }),
       genre: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ll] }),
@@ -1955,7 +1955,7 @@ class Wn extends Error {
   }
   code;
 }
-function ur(n) {
+function mr(n) {
   const e = Number(n);
   if (!Number.isInteger(e) || e < nt || e > Bt)
     throw new Wn(
@@ -1965,7 +1965,7 @@ function ur(n) {
   return e;
 }
 function Vl(n, e, t) {
-  const i = ur(t);
+  const i = mr(t);
   let o = !1;
   const a = n.map((r) => r.id !== e ? r : (o = !0, { ...r, minimumTier: i }));
   if (!o) throw new Wn("entry-missing", "Genre Ability catalog entry not found.");
@@ -2009,7 +2009,7 @@ function Dl() {
     snapshot: At()
   });
 }
-class Tl extends me {
+class zl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -2023,14 +2023,14 @@ class Tl extends me {
           required: !0,
           nullable: !1,
           initial: "core",
-          choices: [...Ja]
+          choices: [...Qa]
         })
       }),
       legacyKey: new d.StringField({ required: !0, nullable: !1, initial: "" })
     };
   }
 }
-class zl extends me {
+class Tl extends me {
   static defineSchema() {
     return {
       ...super.defineSchema(),
@@ -2044,7 +2044,7 @@ class zl extends me {
         required: !0,
         nullable: !1,
         initial: "choose",
-        choices: [...Fa]
+        choices: [...Da]
       }),
       category: new d.StringField({ required: !0, nullable: !1, initial: "general" }),
       contexts: new d.ArrayField(
@@ -2071,7 +2071,7 @@ class Nl extends me {
       poolBonuses: new d.SchemaField({ might: E(), speed: E(), intellect: E() }),
       woundBonuses: new d.SchemaField({ minor: E(), moderate: E(), major: E() }),
       edgeGrant: new d.SchemaField({
-        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...ar] }),
+        mode: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: [...rr] }),
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: E(1)
       }),
@@ -2085,8 +2085,8 @@ class Nl extends me {
       skillGrants: new d.ArrayField(Ln(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(jn(), { required: !0, nullable: !1, initial: [] }),
       abilityGrants: new d.ArrayField(Bn(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new d.ArrayField(lr(), { required: !0, nullable: !1, initial: [] }),
-      descriptorGrants: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new d.ArrayField(cr(), { required: !0, nullable: !1, initial: [] }),
+      descriptorGrants: new d.ArrayField(dr(), { required: !0, nullable: !1, initial: [] }),
       descriptorChoiceGroups: new d.ArrayField(yl(), { required: !0, nullable: !1, initial: [] }),
       instance: On()
     };
@@ -2114,7 +2114,7 @@ class Ml extends me {
         required: !0,
         nullable: !1,
         initial: "melee",
-        choices: [...Da]
+        choices: [...za]
       }),
       rangeCategory: new d.StringField({
         required: !0,
@@ -2202,7 +2202,7 @@ function ql() {
     npc: sl
   }), Object.assign(CONFIG.Item.dataModels, {
     ability: vl,
-    skill: zl,
+    skill: Tl,
     weapon: Ml,
     armor: El,
     shield: Cl,
@@ -2212,7 +2212,7 @@ function ql() {
     descriptor: kl,
     characterType: Pl,
     focus: $l,
-    genre: Tl,
+    genre: zl,
     species: Nl
   }), CONFIG.Actor.trackableAttributes = {
     character: {
@@ -2225,41 +2225,41 @@ function ql() {
     }
   };
 }
-const _ = "systems/cypherv2/assets", Ro = {
-  character: `${_}/icons/cypherpc.png`,
-  npc: `${_}/icons/cyphernpc.png`
-}, Po = {
-  ability: `${_}/icons/cypherability.png`,
-  armor: `${_}/icons/cypherarmor.png`,
-  artifact: `${_}/icons/cypherartefact.png`,
-  cypher: `${_}/icons/cyphercypher.png`,
-  descriptor: `${_}/icons/cypherdescriptor.png`,
-  equipment: `${_}/icons/cypherequipment.png`,
-  focus: `${_}/icons/cypherfocus.png`,
-  genre: `${_}/icons/cyphergenre.png`,
-  shield: `${_}/icons/cyphershield.png`,
-  skill: `${_}/icons/cypherskill.png`,
-  species: `${_}/icons/cypherspecies.png`,
-  characterType: `${_}/icons/cyphertype.png`,
-  weapon: `${_}/icons/cypherweapons.png`
+const K = "systems/cypherv2/assets", Po = {
+  character: `${K}/icons/cypherpc.png`,
+  npc: `${K}/icons/cyphernpc.png`
+}, So = {
+  ability: `${K}/icons/cypherability.png`,
+  armor: `${K}/icons/cypherarmor.png`,
+  artifact: `${K}/icons/cypherartefact.png`,
+  cypher: `${K}/icons/cyphercypher.png`,
+  descriptor: `${K}/icons/cypherdescriptor.png`,
+  equipment: `${K}/icons/cypherequipment.png`,
+  focus: `${K}/icons/cypherfocus.png`,
+  genre: `${K}/icons/cyphergenre.png`,
+  shield: `${K}/icons/cyphershield.png`,
+  skill: `${K}/icons/cypherskill.png`,
+  species: `${K}/icons/cypherspecies.png`,
+  characterType: `${K}/icons/cyphertype.png`,
+  weapon: `${K}/icons/cypherweapons.png`
 }, _n = {
-  gamePaused: `${_}/ui/cyphergamepaused.png`,
-  lobby: `${_}/cypherlobby.png`,
-  turnMarker: `${_}/ui/cypherturnmarker.png`
+  gamePaused: `${K}/ui/cyphergamepaused.png`,
+  lobby: `${K}/cypherlobby.png`,
+  turnMarker: `${K}/ui/cypherturnmarker.png`
 };
 function xl(n) {
-  return n in Ro ? Ro[n] : null;
-}
-function Gl(n) {
   return n in Po ? Po[n] : null;
 }
 function Ul(n) {
+  return n in So ? So[n] : null;
+}
+function Gl(n) {
   if ("prototypeToken.actorLink" in n) return !0;
   const e = n.prototypeToken;
   return !!(e && typeof e == "object" && "actorLink" in e);
 }
 function Ol(n, e) {
-  return n === "character" && !Ul(e);
+  return n === "character" && !Gl(e);
 }
 class Bl extends Actor {
   static getDefaultArtwork(e) {
@@ -2285,7 +2285,7 @@ function jl(n) {
 }
 class Wl extends Item {
   static getDefaultArtwork(e) {
-    const t = Gl(String(e.type ?? ""));
+    const t = Ul(String(e.type ?? ""));
     return t ? { img: t } : super.getDefaultArtwork(e);
   }
   async update(e, t = {}) {
@@ -2306,7 +2306,7 @@ class Wl extends Item {
       const l = {};
       for (const u of V) {
         const c = Number(i.system.derived.pools[u].max);
-        l[`system.stats.${u}.value`] = Xa(r[u], a[u], c);
+        l[`system.stats.${u}.value`] = Ja(r[u], a[u], c);
       }
       await i.update(l, { cypherv2PackagePoolSync: !0 });
     }
@@ -2327,14 +2327,14 @@ function Ht(n) {
 function Kl(n) {
   return Number.isInteger(n) && Number(n) >= st && Number(n) <= Kt;
 }
-function mr(n) {
+function pr(n) {
   const e = Ht(n);
   return e === 1 ? "neutral" : e <= 3 ? "low" : e <= 5 ? "elevated" : e <= 8 ? "severe" : e <= 12 ? "extreme" : e <= 16 ? "catastrophic" : "maximum";
 }
-function pr(n) {
+function fr(n) {
   return (Ht(n) - st) / (Kt - st) * 100;
 }
-const G = {
+const U = {
   difficultyVisibility: "difficultyVisibility",
   showGmRollAudit: "showGmRollAudit",
   defaultDifficultyCeiling: "defaultDifficultyCeiling",
@@ -2347,7 +2347,7 @@ const G = {
   pendingIntrusionXP: "gmIntrusions"
 };
 function Xl(n) {
-  game.settings.register($, G.difficultyVisibility, {
+  game.settings.register($, U.difficultyVisibility, {
     name: "CYPHERV2.Settings.DifficultyVisibility.Name",
     hint: "CYPHERV2.Settings.DifficultyVisibility.Hint",
     scope: "world",
@@ -2360,14 +2360,14 @@ function Xl(n) {
       rollOnly: "CYPHERV2.Settings.DifficultyVisibility.RollOnly"
     },
     default: "full"
-  }), game.settings.register($, G.showGmRollAudit, {
+  }), game.settings.register($, U.showGmRollAudit, {
     name: "CYPHERV2.Settings.ShowGmRollAudit.Name",
     hint: "CYPHERV2.Settings.ShowGmRollAudit.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register($, G.defaultDifficultyCeiling, {
+  }), game.settings.register($, U.defaultDifficultyCeiling, {
     name: "CYPHERV2.Settings.DifficultyCeiling.Name",
     hint: "CYPHERV2.Settings.DifficultyCeiling.Hint",
     scope: "world",
@@ -2375,31 +2375,31 @@ function Xl(n) {
     type: Number,
     default: 10,
     range: { min: 0, max: 15, step: 1 }
-  }), game.settings.register($, G.interfaceHiddenDifficulty, {
+  }), game.settings.register($, U.interfaceHiddenDifficulty, {
     name: "CYPHERV2.Settings.HiddenDifficulty.Name",
     hint: "CYPHERV2.Settings.HiddenDifficulty.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !0
-  }), game.settings.register($, G.enabledRuleModules, {
+  }), game.settings.register($, U.enabledRuleModules, {
     scope: "world",
     config: !1,
     type: Array,
     default: []
-  }), game.settings.register($, G.debugRules, {
+  }), game.settings.register($, U.debugRules, {
     name: "CYPHERV2.Settings.DebugRules.Name",
     hint: "CYPHERV2.Settings.DebugRules.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register($, G.worldSchemaVersion, {
+  }), game.settings.register($, U.worldSchemaVersion, {
     scope: "world",
     config: !1,
     type: Number,
     default: 1
-  }), game.settings.register($, G.theme, {
+  }), game.settings.register($, U.theme, {
     name: "CYPHERV2.Settings.Theme.Name",
     hint: "CYPHERV2.Settings.Theme.Hint",
     scope: "world",
@@ -2408,7 +2408,7 @@ function Xl(n) {
     choices: n.choices(),
     default: "core",
     onChange: (e) => n.apply(e)
-  }), game.settings.register($, G.horrorIntrusionRange, {
+  }), game.settings.register($, U.horrorIntrusionRange, {
     name: "CYPHERV2.Horror.SettingName",
     hint: "CYPHERV2.Horror.SettingHint",
     scope: "world",
@@ -2424,7 +2424,7 @@ function Xl(n) {
       "cypherv2HorrorIntrusionRangeChanged",
       Ht(e)
     )
-  }), game.settings.register($, G.pendingIntrusionXP, {
+  }), game.settings.register($, U.pendingIntrusionXP, {
     scope: "world",
     config: !1,
     type: Array,
@@ -2437,7 +2437,7 @@ function Me() {
   return {
     base: {
       difficultyCeiling: Number(
-        game.settings.get($, G.defaultDifficultyCeiling)
+        game.settings.get($, U.defaultDifficultyCeiling)
       ),
       assetLimit: 0
     },
@@ -2445,29 +2445,29 @@ function Me() {
   };
 }
 function ot() {
-  const n = game.settings.get($, G.enabledRuleModules);
+  const n = game.settings.get($, U.enabledRuleModules);
   return Array.isArray(n) ? n.filter((e) => typeof e == "string") : [];
 }
 function Di() {
-  const n = game.settings.get($, G.difficultyVisibility);
+  const n = game.settings.get($, U.difficultyVisibility);
   return n === "resultOnly" || n === "rollOnly" ? n : "full";
 }
-function fr() {
-  return game.settings.get($, G.interfaceHiddenDifficulty) === !0;
+function hr() {
+  return game.settings.get($, U.interfaceHiddenDifficulty) === !0;
 }
-function Ti() {
-  return game.settings.get($, G.showGmRollAudit) === !0;
+function zi() {
+  return game.settings.get($, U.showGmRollAudit) === !0;
 }
 function En() {
   return typeof game > "u" ? Kn : Ht(
-    game.settings.get($, G.horrorIntrusionRange)
+    game.settings.get($, U.horrorIntrusionRange)
   );
 }
 async function Jl(n) {
   if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.GMOnly"));
   if (!Kl(n))
     throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.InvalidRange"));
-  return await game.settings.set($, G.horrorIntrusionRange, n), n;
+  return await game.settings.set($, U.horrorIntrusionRange, n), n;
 }
 const Xn = {
   tag: "form",
@@ -2499,7 +2499,7 @@ function Zn(n, e, t) {
       t.has(i.dataset.action ?? "") && (i.setAttribute("aria-disabled", "true"), i instanceof HTMLButtonElement ? i.disabled = !0 : (i.removeAttribute("tabindex"), i.setAttribute("inert", "")));
   }
 }
-const Ql = Object.freeze({ minor: 2, moderate: 5 }), hr = 10;
+const Ql = Object.freeze({ minor: 2, moderate: 5 }), gr = 10;
 class Zl {
   #e;
   constructor(e) {
@@ -2551,7 +2551,7 @@ class Zl {
         failure: "major-not-rallyable"
       };
     const r = a ?? this.costFor(i);
-    if (!Number.isInteger(r) || r < 0 || r > hr)
+    if (!Number.isInteger(r) || r < 0 || r > gr)
       return {
         success: !1,
         severity: i,
@@ -2603,11 +2603,11 @@ class Zl {
     }), a;
   }
 }
-function gr(n) {
+function yr(n) {
   return n === "one-action" ? ["normal", "lastAction", "nonRest"] : ["normal", "nonRest"];
 }
 function ec(n, e) {
-  if (!gr(n).includes(e))
+  if (!yr(n).includes(e))
     throw new Error(`Recovery mode '${e}' is not available for '${n}'.`);
   return e === "nonRest" ? { kind: "nonRest", lastAction: !1 } : { kind: "normal", lastAction: e === "lastAction" };
 }
@@ -2617,7 +2617,7 @@ function qt(n, e) {
 function qe(n, e) {
   return String(n[e] ?? "");
 }
-function So(n, e) {
+function ko(n, e) {
   const t = n[e];
   return t === !0 || t === "true" || t === "on";
 }
@@ -2742,7 +2742,7 @@ async function oc(n) {
       _e(t);
     }
 }
-async function ko(n, e, t) {
+async function Ao(n, e, t) {
   const i = n.system.recovery.slots?.length ? n.system.recovery.slots : at(n.system.recovery.used), o = Mt(i);
   if (o.length === 0) {
     ui.notifications.warn(game.i18n.localize("CYPHERV2.Recovery.NoneAvailable"));
@@ -2773,7 +2773,7 @@ async function ko(n, e, t) {
       return;
     }
   }
-  const s = gr(a), l = await foundry.applications.api.DialogV2.input({
+  const s = yr(a), l = await foundry.applications.api.DialogV2.input({
     window: { title: `${game.i18n.localize("CYPHERV2.Actions.Recovery")} — ${game.i18n.localize(`CYPHERV2.Recovery.${a}`)}` },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-dialog">
       <header class="cypherv2-dialog-heading">
@@ -2840,8 +2840,8 @@ async function ko(n, e, t) {
         },
         {
           oneHourChoice: qe(h, "oneHourChoice"),
-          removeMinorsInsteadOfOneModerate: So(h, "exchange"),
-          majorTaskSucceeded: So(h, "majorSuccess")
+          removeMinorsInsteadOfOneModerate: ko(h, "exchange"),
+          majorTaskSucceeded: ko(h, "majorSuccess")
         }
       ), y = c.total - m.recovery.unspent, f = m.rest?.result.removed.length ?? 0;
       ui.notifications.info(
@@ -2889,7 +2889,7 @@ function rc(n, e, t = 2, i = 5, o = null) {
         <label class="cypherv2-dialog-toggle"><input type="radio" name="severity" value="moderate" data-default-cost="${i}"><span>${r}</span></label>
       </div>
       <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Rally.Cost")}
-        <input name="cost" type="number" min="0" max="${hr}" step="1" value="${t}">
+        <input name="cost" type="number" min="0" max="${gr}" step="1" value="${t}">
       </label>
     </section>
     <section class="cypherv2-dialog-section" aria-label="${game.i18n.localize("CYPHERV2.Roll.Summary")}">
@@ -2935,7 +2935,7 @@ async function lc(n, e) {
   }
   await n.update({ [t.path]: o });
 }
-function Ao(n) {
+function Ho(n) {
   return n.replace(/[&<>"']/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -2949,7 +2949,7 @@ function wi(n, e) {
   if (!Number.isInteger(t)) throw new Error(`${e} must be a whole number.`);
   return t;
 }
-function yr(n) {
+function br(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
 function cc(n, e) {
@@ -2986,16 +2986,16 @@ async function dc(n) {
       });
       await n.update({ "system.overrides.wounds": o });
     } catch (o) {
-      yr(o);
+      br(o);
     }
 }
 function uc(n) {
   return Ae.map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Recovery.${e}`)}</option>`).join("");
 }
-function br(n) {
-  return `<div class="recovery-override-slot" data-recovery-slot-id="${Ao(n.id)}">
+function wr(n) {
+  return `<div class="recovery-override-slot" data-recovery-slot-id="${Ho(n.id)}">
     <i class="fa-solid fa-grip-lines" aria-hidden="true"></i>
-    <select name="slotType__${Ao(n.id)}" aria-label="${game.i18n.localize("CYPHERV2.Overrides.RecoverySlotType")}">${uc(n.type)}</select>
+    <select name="slotType__${Ho(n.id)}" aria-label="${game.i18n.localize("CYPHERV2.Overrides.RecoverySlotType")}">${uc(n.type)}</select>
     <span class="recovery-slot-state">${n.used ? game.i18n.localize("CYPHERV2.Overrides.Used") : game.i18n.localize("CYPHERV2.Overrides.Available")}</span>
     <span class="character-settings-row-actions">
       <button type="button" class="cypherv2-icon-action" data-recovery-slot-move="up" title="${game.i18n.localize("CYPHERV2.Actions.MoveUp")}"><i class="fa-solid fa-arrow-up"></i></button>
@@ -3009,7 +3009,7 @@ function mc(n, e) {
     <section class="cypherv2-dialog-section">
       <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Overrides.RecoveryTrack")}</span>
       <input type="hidden" name="slotOrder" value="${n.map((t) => t.id).join(",")}">
-      <div class="recovery-override-slots">${n.map(br).join("")}</div>
+      <div class="recovery-override-slots">${n.map(wr).join("")}</div>
       <button type="button" class="compact-inline-action recovery-slot-add" data-recovery-slot-add><i class="fa-solid fa-plus"></i> ${game.i18n.localize("CYPHERV2.Overrides.AddRecoverySlot")}</button>
     </section>
     <section class="cypherv2-dialog-section">
@@ -3034,7 +3034,7 @@ function pc(n) {
     const i = t.closest("[data-recovery-slot-id]"), o = n.querySelector(".recovery-override-slots");
     if (t.hasAttribute("data-recovery-slot-add") && o) {
       const a = { id: Oe(), type: "one-action", used: !1 };
-      o.insertAdjacentHTML("beforeend", br(a)), _i(n);
+      o.insertAdjacentHTML("beforeend", wr(a)), _i(n);
       return;
     }
     !i || !o || (t.hasAttribute("data-recovery-slot-remove") && i.remove(), t.dataset.recoverySlotMove === "up" && i.previousElementSibling && o.insertBefore(i, i.previousElementSibling), t.dataset.recoverySlotMove === "down" && i.nextElementSibling && o.insertBefore(i.nextElementSibling, i), _i(n));
@@ -3069,7 +3069,7 @@ async function hc(n) {
         "system.recovery.rollModifier": i.rollModifier
       });
     } catch (i) {
-      yr(i);
+      br(i);
     }
 }
 async function gc(n) {
@@ -3091,7 +3091,7 @@ function bc(n) {
   return typeof t == "string" ? t.trim() : "";
 }
 function Se(n) {
-  const e = bc(n), t = n?.system && typeof n.system == "object" ? n.system : null, i = t?.appearance && typeof t.appearance == "object" ? t.appearance : null, o = typeof i?.color == "string" ? i.color : "", a = nr(o), r = ir(o), s = [
+  const e = bc(n), t = n?.system && typeof n.system == "object" ? n.system : null, i = t?.appearance && typeof t.appearance == "object" ? t.appearance : null, o = typeof i?.color == "string" ? i.color : "", a = or(o), r = nr(o), s = [
     ...a ? [`--cypherv2-chat-accent: ${a}`] : [],
     ...r ? [`--cypherv2-chat-tint: ${r}`] : []
   ].join("; ");
@@ -3177,7 +3177,7 @@ const Vt = "system." + $;
 function Lt() {
   return [...game.users];
 }
-function wr() {
+function vr() {
   return Lt().filter((n) => n.active);
 }
 function ri() {
@@ -3188,7 +3188,7 @@ function Ve(n) {
   return e?.type === "character" ? e : null;
 }
 function Xi() {
-  return wr().filter((n) => n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
+  return vr().filter((n) => n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
 }
 function Yt(n, e) {
   return Lt().filter((t) => !t.isGM && (!e || t.active)).filter((t) => n.testUserPermission(t, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)).sort((t, i) => t.id.localeCompare(i.id));
@@ -3201,7 +3201,7 @@ function si(n, e) {
   const t = new Set(Lt().filter((o) => !o.isGM).map((o) => o.character?.id).filter((o) => typeof o == "string" && o.length > 0));
   return [...new Map(n.filter((o) => o.type === "character").map((o) => [o.id, o])).values()].filter((o) => o.id !== e).filter((o) => t.has(o.id)).map((o) => ({ actorId: o.id, actorName: o.name, actorImage: o.img ?? "" })).sort((o, a) => o.actorName.localeCompare(a.actorName));
 }
-function Ho(n) {
+function Io(n) {
   if (!n || typeof n != "object") return !1;
   const e = n;
   return typeof e.intrusionId == "string" && e.intrusionId.length > 0 && typeof e.messageId == "string" && e.messageId.length > 0 && typeof e.sourceActorId == "string" && e.sourceActorId.length > 0 && Number.isInteger(e.amount) && Number(e.amount) > 0 && (e.responderUserId === void 0 || typeof e.responderUserId == "string");
@@ -3231,18 +3231,18 @@ class Pc {
     }), Hooks.on("renderChatMessageHTML", (e, t) => {
       this.#l(e, t);
     }), Hooks.on("updateUser", () => {
-      this.#u() && this.retryPendingDistributions();
+      this.#m() && this.retryPendingDistributions();
     }), Hooks.on("createActor", () => {
-      this.#u() && this.retryPendingDistributions();
+      this.#m() && this.retryPendingDistributions();
     }), Hooks.on("deleteActor", () => {
-      this.#u() && setTimeout(() => {
+      this.#m() && setTimeout(() => {
         this.#g();
       }, 0);
     }), Hooks.on("updateActor", () => {
-      this.#u() && this.retryPendingDistributions();
+      this.#m() && this.retryPendingDistributions();
     }), Hooks.on("cypherv2IntrusionPendingChanged", () => {
-      this.#u() && this.retryPendingDistributions();
-    }), this.#u() && setTimeout(() => {
+      this.#m() && this.retryPendingDistributions();
+    }), this.#m() && setTimeout(() => {
       this.#g().then(() => this.retryPendingDistributions());
     }, 1e3);
   }
@@ -3282,7 +3282,7 @@ class Pc {
     if (!(!t.naturalEffects.some(
       (o) => o.status === "applied" && o.triggersGMIntrusion === !0
     ) || t.naturalRoll === null)) {
-      if (this.#u()) {
+      if (this.#m()) {
         await this.#r(e.id, t.naturalRoll);
         return;
       }
@@ -3294,14 +3294,14 @@ class Pc {
     }
   }
   async retryPendingDistributions() {
-    if (this.#u())
-      for (const e of this.#m()) await this.#c(e);
+    if (this.#m())
+      for (const e of this.#u()) await this.#c(e);
   }
   async requestDistribution(e, t) {
     const i = this.#w(e), o = Ve(i.sourceActorId);
     if (!o || !this.#a(o, i))
       throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NotAuthorized"));
-    if (this.#u()) {
+    if (this.#m()) {
       await this.#s(e, t, game.user.id);
       return;
     }
@@ -3329,7 +3329,7 @@ class Pc {
   #l(e, t) {
     const i = e.getFlag($, "gmIntrusion");
     if (!Ki(i)) return;
-    const o = this.#m().find((s) => s.intrusionId === i.intrusionId), a = o ? Ve(o.sourceActorId) : null, r = i.status === "pending" && (game.user.isGM || !!(o && a && this.#a(a, o)));
+    const o = this.#u().find((s) => s.intrusionId === i.intrusionId), a = o ? Ve(o.sourceActorId) : null, r = i.status === "pending" && (game.user.isGM || !!(o && a && this.#a(a, o)));
     for (const s of t.querySelectorAll("[data-action='assignSharedIntrusionXp']")) {
       if (!r) {
         s.remove();
@@ -3375,7 +3375,7 @@ class Pc {
       if (!Ki(c) || c.intrusionId !== e || c.status !== "pending")
         throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
       a = c;
-      const p = wr().find((f) => f.id === i);
+      const p = vr().find((f) => f.id === i);
       if (!(p?.isGM === !0 || !!(p && p.id === l.responderUserId && Yt(s, !0).some((f) => f.id === p.id)))) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NotAuthorized"));
       const y = si(ri(), s.id).find((f) => f.actorId === u.id);
       if (!y) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.RecipientUnavailable"));
@@ -3399,7 +3399,7 @@ class Pc {
       clearTimeout(t.timeout), this.#n.delete(e.requestId), e.success ? t.resolve() : t.reject(new Error(e.error ?? game.i18n.localize("CYPHERV2.Intrusion.Errors.RecipientUnavailable")));
       return;
     }
-    if (this.#u()) {
+    if (this.#m()) {
       if (e.type === "create-free") await this.#r(e.actorId, e.naturalRoll);
       else if (e.type === "distribution-choice")
         try {
@@ -3420,9 +3420,9 @@ class Pc {
         }
     }
   }
-  #m() {
-    const e = game.settings.get($, G.pendingIntrusionXP);
-    return Array.isArray(e) ? e.filter(Ho).map((t) => ({
+  #u() {
+    const e = game.settings.get($, U.pendingIntrusionXP);
+    return Array.isArray(e) ? e.filter(Io).map((t) => ({
       intrusionId: t.intrusionId,
       messageId: t.messageId,
       sourceActorId: t.sourceActorId,
@@ -3431,25 +3431,25 @@ class Pc {
     })) : [];
   }
   #w(e) {
-    const t = this.#m().find((i) => i.intrusionId === e);
+    const t = this.#u().find((i) => i.intrusionId === e);
     if (!t) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
     return t;
   }
   async #f(e) {
-    const t = this.#m(), i = t.findIndex((o) => o.intrusionId === e.intrusionId);
-    i < 0 ? t.push(e) : t[i] = e, await game.settings.set($, G.pendingIntrusionXP, t);
+    const t = this.#u(), i = t.findIndex((o) => o.intrusionId === e.intrusionId);
+    i < 0 ? t.push(e) : t[i] = e, await game.settings.set($, U.pendingIntrusionXP, t);
   }
   async #p(e) {
     await game.settings.set(
       $,
-      G.pendingIntrusionXP,
-      this.#m().filter((t) => t.intrusionId !== e)
+      U.pendingIntrusionXP,
+      this.#u().filter((t) => t.intrusionId !== e)
     );
   }
   async #g() {
-    const e = game.settings.get($, G.pendingIntrusionXP), t = [];
+    const e = game.settings.get($, U.pendingIntrusionXP), t = [];
     for (const i of Array.isArray(e) ? e : []) {
-      if (Ho(i)) {
+      if (Io(i)) {
         Ve(i.sourceActorId) && game.messages.get(i.messageId) && t.push({
           intrusionId: i.intrusionId,
           messageId: i.messageId,
@@ -3483,9 +3483,9 @@ class Pc {
         ...r ? { responderUserId: r.id } : {}
       });
     }
-    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set($, G.pendingIntrusionXP, t);
+    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set($, U.pendingIntrusionXP, t);
   }
-  #u() {
+  #m() {
     return game.user.isGM && Xi()?.id === game.user.id;
   }
 }
@@ -3499,7 +3499,7 @@ function Xt() {
 }
 async function to(n, e) {
   await game.cypherv2.services.rollChat.publish(n, e, Di(), {
-    showGmAudit: Ti()
+    showGmAudit: zi()
   }), await Xt().requestFreeFromNaturalResult(n, e.result);
 }
 function ke(n, e) {
@@ -3511,7 +3511,7 @@ function kc(n) {
   if (!Number.isFinite(n)) throw new Error("Net step modifier must be finite.");
   return n === 0 ? "0" : ke(n > 0 ? "ease" : "hinder", n);
 }
-const Io = /* @__PURE__ */ new Set([
+const $o = /* @__PURE__ */ new Set([
   "manual.skill",
   "manual.other-ease",
   "manual.other-hindrance",
@@ -3528,10 +3528,10 @@ function io(n) {
 function no(n, e) {
   return e(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function $o(n, e) {
+function Vo(n, e) {
   return e.context.difficulty.mode === "hidden" && n.id.startsWith("npc-modification.");
 }
-function Vo(n, e) {
+function Yo(n, e) {
   return {
     id: n.id,
     label: e(n.label),
@@ -3540,7 +3540,7 @@ function Vo(n, e) {
   };
 }
 function Ac(n, e, t) {
-  const i = n.breakdown.filter((c) => $o(c, n)), o = n.breakdown.filter((c) => !$o(c, n)), a = o.filter((c) => Io.has(c.id)).map((c) => Vo(c, t)), r = o.filter((c) => !Io.has(c.id)).map((c) => Vo(c, t)), s = n.context.difficulty.mode === "known", l = n.context.pool;
+  const i = n.breakdown.filter((c) => Vo(c, n)), o = n.breakdown.filter((c) => !Vo(c, n)), a = o.filter((c) => $o.has(c.id)).map((c) => Yo(c, t)), r = o.filter((c) => !$o.has(c.id)).map((c) => Yo(c, t)), s = n.context.difficulty.mode === "known", l = n.context.pool;
   if (l === null) throw new Error("Configured rolls require a Pool.");
   const u = e.system.stats[l].value;
   return {
@@ -3570,7 +3570,7 @@ function Ac(n, e, t) {
     freeEffortApplied: n.freeEffortApplied
   };
 }
-function Yo(n) {
+function Fo(n) {
   const e = {};
   for (const t of n.querySelectorAll("[name]"))
     e[t.name] = t instanceof HTMLInputElement && t.type === "checkbox" ? t.checked : t.value;
@@ -3579,7 +3579,7 @@ function Yo(n) {
 function re(n, e) {
   return String(n[e] ?? "");
 }
-function U(n, e) {
+function O(n, e) {
   return Number(n[e] ?? 0);
 }
 function Hc(n, e) {
@@ -3594,13 +3594,13 @@ function Jt(n, e) {
   } : { mode: "unknown" };
 }
 function Qt(n) {
-  const e = U(n, "situationalSteps");
+  const e = O(n, "situationalSteps");
   return re(n, "situationalDirection") === "hinder" ? { otherEase: 0, otherHindrance: e } : { otherEase: e, otherHindrance: 0 };
 }
 function ge(n, e = 0) {
   return Array.from({ length: n + 1 }, (t, i) => `<option value="${i}"${i === e ? " selected" : ""}>${i}</option>`).join("");
 }
-function vr(n) {
+function Cr(n) {
   return ["might", "speed", "intellect"].map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${lt(no(e, io))}</option>`).join("");
 }
 const Ic = Object.freeze({
@@ -3690,7 +3690,7 @@ function ti(n) {
 function ne(n, e, t = "") {
   return `<div class="roll-summary-row ${t}"><span>${lt(n)}</span><strong>${lt(e)}</strong></div>`;
 }
-function Fo(n) {
+function Do(n) {
   return n.length === 0 ? `<p class="roll-summary-empty">${game.i18n.localize("CYPHERV2.Common.None")}</p>` : n.map((e) => ne(
     e.label,
     e.modifier,
@@ -3706,9 +3706,9 @@ function Dt(n, e, t) {
   i && (i.textContent = t);
 }
 function $c(n, e, t) {
-  Dt(n, "label", e.rollLabel), Dt(n, "pool", e.poolLabel), Ke(n, "modifiers", Fo(e.modifiers)), Dt(n, "net", e.netModifier ?? game.i18n.localize("CYPHERV2.Roll.HiddenValue"));
+  Dt(n, "label", e.rollLabel), Dt(n, "pool", e.poolLabel), Ke(n, "modifiers", Do(e.modifiers)), Dt(n, "net", e.netModifier ?? game.i18n.localize("CYPHERV2.Roll.HiddenValue"));
   const i = n.querySelector('[data-roll-summary-section="automatic"]');
-  i && (i.hidden = e.automaticModifiers.length === 0), Ke(n, "automatic", Fo(e.automaticModifiers));
+  i && (i.hidden = e.automaticModifiers.length === 0), Ke(n, "automatic", Do(e.automaticModifiers));
   const o = n.querySelector('[data-roll-summary-section="effort"]');
   o && (o.hidden = e.totalEffortApplied === 0), Ke(n, "effort", [
     ne(
@@ -3758,11 +3758,11 @@ function ii(n, e) {
   }
   const t = () => {
     try {
-      const i = e.buildRequest(Yo(n)), o = game.cypherv2.services.rolls.preview(e.actor, i, e.policyRequest);
+      const i = e.buildRequest(Fo(n)), o = game.cypherv2.services.rolls.preview(e.actor, i, e.policyRequest);
       $c(
         n,
         Ac(o, e.actor, io),
-        e.attackSummary?.(Yo(n), o)
+        e.attackSummary?.(Fo(n), o)
       );
     } catch (i) {
       Dt(n, "error", i instanceof Error ? i.message : String(i));
@@ -3770,15 +3770,15 @@ function ii(n, e) {
   };
   return n.addEventListener("input", t), n.addEventListener("change", t), t(), t;
 }
-function Do(n) {
+function zo(n) {
   return {
     label: "CYPHERV2.Roll.TaskRoll",
     pool: re(n, "pool"),
     difficulty: Jt(n),
-    skillSteps: U(n, "skillSteps"),
-    assets: U(n, "assets"),
-    paidEffort: U(n, "paidEffort"),
-    freeEffort: U(n, "freeEffort"),
+    skillSteps: O(n, "skillSteps"),
+    assets: O(n, "assets"),
+    paidEffort: O(n, "paidEffort"),
+    freeEffort: O(n, "freeEffort"),
     ...Qt(n),
     purpose: "task"
   };
@@ -3791,9 +3791,9 @@ async function Yc(n, e = "might") {
     t.base,
     t.enabledRuleModuleIds ?? []
   ), o = `
-    ${ei(i.difficultyCeiling, fr())}
+    ${ei(i.difficultyCeiling, hr())}
     <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}
-      <select name="pool">${vr(e)}</select>
+      <select name="pool">${Cr(e)}</select>
     </label>
     <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}
       <select name="skillSteps">${oo()}</select>
@@ -3820,7 +3820,7 @@ async function Yc(n, e = "might") {
       ii(s.element, {
         actor: n,
         policyRequest: t,
-        buildRequest: Do
+        buildRequest: zo
       });
     }
   });
@@ -3828,7 +3828,7 @@ async function Yc(n, e = "might") {
     try {
       const r = await game.cypherv2.services.rolls.execute(
         n,
-        Do(a),
+        zo(a),
         t
       );
       await to(n, r);
@@ -3849,9 +3849,9 @@ function To(n, e, t) {
     ...i === "might" || i === "speed" || i === "intellect" ? { pool: i } : {},
     rankOverride: Fc(e, n.system.rank),
     difficulty: Jt(e),
-    assets: U(e, "assets"),
-    paidEffort: U(e, "paidEffort"),
-    freeEffort: U(e, "freeEffort"),
+    assets: O(e, "assets"),
+    paidEffort: O(e, "paidEffort"),
+    freeEffort: O(e, "freeEffort"),
     ...Qt(e),
     enabledRuleModuleIds: t
   });
@@ -3862,7 +3862,7 @@ async function Dc(n, e) {
     <option value="might"${Qi(a, "might")}>${game.i18n.localize("CYPHERV2.Pools.Might")}</option>
     <option value="speed"${Qi(a, "speed")}>${game.i18n.localize("CYPHERV2.Pools.Speed")}</option>
     <option value="intellect"${Qi(a, "intellect")}>${game.i18n.localize("CYPHERV2.Pools.Intellect")}</option>`, s = ee.map((c) => `<option value="${c}"${c === e.system.rank ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Skill.Ranks.${c}`)} · ${gt(c) === 0 ? game.i18n.localize("CYPHERV2.Roll.Unmodified") : gt(c) > 0 ? `+${gt(c)}` : gt(c)}</option>`).join(""), l = `
-    ${ei(o.difficultyCeiling, fr())}
+    ${ei(o.difficultyCeiling, hr())}
     <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${r}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillRank">${s}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
@@ -3908,7 +3908,7 @@ function jt(n, e) {
     testUserPermission: n.testUserPermission.bind(n)
   });
 }
-function Cr(n) {
+function Er(n) {
   const e = n.document ?? n, t = n.actor ?? e.actor ?? null;
   return !(t instanceof Actor) || t.type !== "npc" ? null : jt(t, {
     actorId: t.id,
@@ -3917,7 +3917,7 @@ function Cr(n) {
     ...e.uuid ? { tokenUuid: e.uuid } : {}
   });
 }
-function Er(n) {
+function Rr(n) {
   const e = n.document ?? n, t = n.actor ?? e.actor ?? null;
   return !(t instanceof Actor) || t.type !== "character" ? null : jt(t, {
     actorId: t.id,
@@ -3946,29 +3946,29 @@ async function Pn(n) {
   }
   return n.tokenId || n.tokenUuid ? null : Rn(n);
 }
-function Tc(n, e) {
+function zc(n, e) {
   return String(n[e] ?? "");
 }
-function Rr(n) {
+function Pr(n) {
   return [...n.items].filter((e) => e instanceof Item && e.type === "skill").map((e) => e).sort((e, t) => e.name.localeCompare(t.name));
 }
-function Pr(n, e = "manual:0") {
+function Sr(n, e = "manual:0") {
   const t = e.startsWith("manual:") ? Number(e.slice(7)) : null;
   return [
     `<optgroup label="${game.i18n.localize("CYPHERV2.Roll.ManualSkillLevel")}">${oo(t, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("CYPHERV2.Skill.Title")}">`,
-    ...Rr(n).map((i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${i.system.rank}`)}</option>`),
+    ...Pr(n).map((i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${i.system.rank}`)}</option>`),
     "</optgroup>"
   ].join("");
 }
-function Sr(n, e) {
-  return Rr(n).find((t) => t.id === e);
+function kr(n, e) {
+  return Pr(n).find((t) => t.id === e);
 }
-function kr(n) {
+function Ar(n) {
   const e = re(n, "skillId");
   return e.startsWith("manual:") ? Number(e.slice(7)) : 0;
 }
-function zc(n, e) {
+function Tc(n, e) {
   const t = e === "dodge";
   return {
     pool: t ? "speed" : "might",
@@ -3976,7 +3976,7 @@ function zc(n, e) {
     armorSteps: t ? n.system.derived.combat.armor.dodgeHindrance : n.system.derived.combat.armor.blockEase
   };
 }
-async function Ar(n) {
+async function Hr(n) {
   if (!n.flatMap((o) => o.execution.result.naturalEffects).find((o) => o.status === "available")) return null;
   const t = n[0]?.execution.result.naturalRoll ?? 19, i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Combat.NaturalChoice.Title") },
@@ -3992,22 +3992,22 @@ async function Ar(n) {
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Apply") }
   });
-  return i && Tc(i, "choice") === "damage" ? "damage" : "effect";
+  return i && zc(i, "choice") === "damage" ? "damage" : "effect";
 }
 async function Nc(n, e) {
   const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = game.cypherv2.services.combat.policy(i), r = game.cypherv2.services.targets.nativeNpcTargets(), l = r.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${r.map((w) => w.name).join(", ")}</span><small>${game.i18n.localize("CYPHERV2.Combat.HiddenTargetDifficulty")}</small></div>` : ei(o.difficultyCeiling, !0), u = game.cypherv2.services.combat.weaponAttackPool(e), c = `manual:${gt(e.system.skillLevel ?? "untrained")}`, p = (w) => {
-    const C = Sr(n, re(w, "skillId"));
+    const C = kr(n, re(w, "skillId"));
     return {
       pool: re(w, "pool"),
       targets: r,
       difficulty: Jt(w),
       ...C ? { skill: C } : {},
-      skillSteps: kr(w),
-      assets: U(w, "assets"),
-      paidEffort: U(w, "paidEffort"),
-      damageEffort: U(w, "damageEffort"),
-      freeDamageEffort: U(w, "freeDamageEffort"),
-      freeEffort: U(w, "freeEffort"),
+      skillSteps: Ar(w),
+      assets: O(w, "assets"),
+      paidEffort: O(w, "paidEffort"),
+      damageEffort: O(w, "damageEffort"),
+      freeDamageEffort: O(w, "freeDamageEffort"),
+      freeEffort: O(w, "freeEffort"),
       ...Qt(w),
       extremeRange: re(w, "extremeRange") === "true" || w.extremeRange === !0 || w.extremeRange === "on",
       enabledRuleModuleIds: i
@@ -4018,8 +4018,8 @@ async function Nc(n, e) {
     return C;
   }, m = game.cypherv2.services.combat.weaponBaseDamage(e, a), y = `
     ${l}
-    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${vr(u)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Pr(n, c)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${Cr(u)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Sr(n, c)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Combat.DamageEffort")}<select name="damageEffort">${ge(n.system.derived.effort.max)}</select></label>
@@ -4057,7 +4057,7 @@ async function Nc(n, e) {
         p(f),
         t
       );
-      const C = await Ar(w);
+      const C = await Hr(w);
       C && (w = game.cypherv2.services.combat.chooseAttackOutcomes(
         w,
         C,
@@ -4068,7 +4068,7 @@ async function Nc(n, e) {
           n,
           Y,
           Di(),
-          Ti()
+          zi()
         );
       const P = w[0];
       P && await Xt().requestFreeFromNaturalResult(n, P.execution.result);
@@ -4089,14 +4089,14 @@ async function Sn(n, e, t) {
     n,
     e,
     o
-  )[0], l = zc(n, e), u = (m) => {
-    const y = Sr(n, re(m, "skillId"));
+  )[0], l = Tc(n, e), u = (m) => {
+    const y = kr(n, re(m, "skillId"));
     return {
       ...y ? { skill: y } : {},
-      skillSteps: kr(m),
-      assets: U(m, "assets"),
-      paidEffort: U(m, "paidEffort"),
-      freeEffort: U(m, "freeEffort"),
+      skillSteps: Ar(m),
+      assets: O(m, "assets"),
+      paidEffort: O(m, "paidEffort"),
+      freeEffort: O(m, "freeEffort"),
       ...Qt(m),
       enabledRuleModuleIds: o
     };
@@ -4111,7 +4111,7 @@ async function Sn(n, e, t) {
   }), p = `
     ${r}
     <div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("CYPHERV2.Pools.Pool")}</strong><span>${game.i18n.localize(`CYPHERV2.Pools.${l.pool === "speed" ? "Speed" : "Might"}`)}</span></div>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Pr(n, s?.id)}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Sr(n, s?.id)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(a.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
@@ -4147,7 +4147,7 @@ async function Sn(n, e, t) {
       w,
       t?.source ?? null,
       Di(),
-      Ti()
+      zi()
     ), await Xt().requestFreeFromNaturalResult(n, y.result), !0;
   } catch (m) {
     return ui.notifications.error(m instanceof Error ? m.message : String(m)), !1;
@@ -4155,7 +4155,7 @@ async function Sn(n, e, t) {
 }
 async function Mc(n) {
   if (!game.user.isGM) return;
-  const e = [...game.user.targets ?? []].map((i) => Er(i)).filter((i) => i !== null).map((i) => i);
+  const e = [...game.user.targets ?? []].map((i) => Rr(i)).filter((i) => i !== null).map((i) => i);
   if (e.length === 0) {
     ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.NoCharacterTargets"));
     return;
@@ -4181,11 +4181,11 @@ async function ki(n) {
     ui.notifications.error(e instanceof Error ? e.message : String(e));
   }
 }
-const zo = 2, No = 1e3;
+const No = 2, Mo = 1e3;
 function Wt(n) {
   const e = String(n.die).trim().match(/^d(\d+)$/i), t = Number(e?.[1]);
-  if (!Number.isInteger(t) || t < zo || t > No)
-    throw new Error(`Depletion die must have ${zo} to ${No} sides.`);
+  if (!Number.isInteger(t) || t < No || t > Mo)
+    throw new Error(`Depletion die must have ${No} to ${Mo} sides.`);
   return t;
 }
 function qc(n) {
@@ -4195,9 +4195,9 @@ function Zi(n) {
   const e = Wt(n), t = Number(n.threshold);
   if (!Number.isInteger(t) || t < 1 || t > e)
     throw new Error(`Depletion threshold must be between 1 and ${e}.`);
-  return `${Hr(t)} in 1d${e}`;
+  return `${Ir(t)} in 1d${e}`;
 }
-function Hr(n) {
+function Ir(n) {
   return n === 1 ? "1" : `1-${n}`;
 }
 function xc(n) {
@@ -4215,7 +4215,7 @@ function xc(n) {
     ]))
   };
 }
-function Gc(n, e) {
+function Uc(n, e) {
   for (const t of n.querySelectorAll(
     ".cypherv2-sheet.cypherv2-character > .tab[data-tab]"
   ))
@@ -4227,7 +4227,7 @@ function Gc(n, e) {
     Object.hasOwn(e.disclosures, i) && (t.open = e.disclosures[i] ?? !1);
   }
 }
-function Uc(n) {
+function Gc(n) {
   return n.replace(/[&<>'"]/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -4236,7 +4236,7 @@ function Uc(n) {
     '"': "&quot;"
   })[e]);
 }
-async function Ir(n, e) {
+async function $r(n, e) {
   const t = n.system.graph.nodes.find((r) => r.id === e);
   if (!t) throw new Error(`Focus node '${e}' was not found.`);
   if (t.abilityUuid)
@@ -4248,7 +4248,7 @@ async function Ir(n, e) {
       }
     } catch {
     }
-  const i = t.abilitySnapshot.name || t.id, o = Uc(i), a = t.abilitySnapshot.description || game.i18n.localize("CYPHERV2.Focus.MissingAbility");
+  const i = t.abilitySnapshot.name || t.id, o = Gc(i), a = t.abilitySnapshot.description || game.i18n.localize("CYPHERV2.Focus.MissingAbility");
   await foundry.applications.api.DialogV2.input({
     window: { title: i },
     content: `<div class="cypherv2 cypherv2-dialog cypherv2-focus-snapshot"><h3>${o}</h3><div>${a}</div></div>`,
@@ -4256,7 +4256,7 @@ async function Ir(n, e) {
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Close") }
   });
 }
-function Mo(n, e) {
+function qo(n, e) {
   return {
     left: n.left - e.left,
     top: n.top - e.top,
@@ -4304,13 +4304,13 @@ function Bc(n) {
     const l = r.get(s.dataset.from ?? ""), u = r.get(s.dataset.to ?? "");
     if (!l || !u) continue;
     const c = Oc(
-      Mo(l.getBoundingClientRect(), i),
-      Mo(u.getBoundingClientRect(), i)
+      qo(l.getBoundingClientRect(), i),
+      qo(u.getBoundingClientRect(), i)
     );
     s.setAttribute("x1", String(c.x1)), s.setAttribute("y1", String(c.y1)), s.setAttribute("x2", String(c.x2)), s.setAttribute("y2", String(c.y2));
   }
 }
-class $r {
+class Vr {
   #e = null;
   #t = null;
   #i = [];
@@ -4346,7 +4346,7 @@ function Lc(n, e, t, i = 8) {
     top: Math.max(i, Math.min(n.top, t.height - e.height - i))
   };
 }
-class Vr {
+class Yr {
   #e = null;
   #t = null;
   #i = null;
@@ -4528,16 +4528,16 @@ class ao {
     return this.evaluate(e, { tier: t, ownedNodeIds: i }).diagnostics.filter((o) => o.code === "invalid-owned-progression" && o.nodeId).map((o) => o.nodeId);
   }
 }
-class Ue extends Error {
+class Ge extends Error {
   constructor() {
     super("Grant conflict resolution was cancelled."), this.name = "GrantConflictCancelledError";
   }
 }
-function Yr(n, e) {
+function Fr(n, e) {
   return `${n}:${String(e ?? "").trim().toLocaleLowerCase().replace(/\s+/g, " ")}`;
 }
 function Pe(n, e, t = "") {
-  return { type: n, contentUuid: t, contentKey: Yr(n, e) };
+  return { type: n, contentUuid: t, contentKey: Fr(n, e) };
 }
 function _c(n) {
   if (n.type !== "ability" && n.type !== "skill") return null;
@@ -4545,16 +4545,16 @@ function _c(n) {
   return {
     type: n.type,
     contentUuid: String(e.contentUuid ?? ""),
-    contentKey: String(e.contentKey || Yr(n.type, n.name))
+    contentKey: String(e.contentKey || Fr(n.type, n.name))
   };
 }
 function Kc(n, e) {
   return n.type !== e.type ? !1 : n.contentUuid && e.contentUuid ? n.contentUuid === e.contentUuid : n.contentKey === e.contentKey;
 }
-function Fr(n, e) {
-  return !!zi(n, e);
+function Dr(n, e) {
+  return !!Ti(n, e);
 }
-function zi(n, e) {
+function Ti(n, e) {
   return [...n].find((t) => {
     const i = _c(t);
     return i ? Kc(i, e) : !1;
@@ -4581,7 +4581,7 @@ const Xc = async (n) => {
 function li(n, e) {
   return n.focusUuid === e.uuid || n.focusUuid === e.id;
 }
-function qo(n, e, t) {
+function xo(n, e, t) {
   return n.type === "ability" && n.system.sourceFocusUuid === e && n.system.sourceNodeId === t;
 }
 function en(n, e) {
@@ -4603,7 +4603,7 @@ class Jc {
   }
   missingOwnedNodeIds(e, t, i) {
     const o = [...e.items];
-    return new Set(i.ownedNodeIds.filter((a) => !o.some((r) => qo(r, t.uuid, a))));
+    return new Set(i.ownedNodeIds.filter((a) => !o.some((r) => xo(r, t.uuid, a))));
   }
   async acquire(e, t, i, o) {
     return this.#C(this.#b(e), () => this.#o(e, t, i, !1, !0, o));
@@ -4630,13 +4630,13 @@ class Jc {
     return this.#C(this.#b(e), () => this.#c(e, t, i));
   }
   async #o(e, t, i, o, a, r) {
-    this.#u(e);
+    this.#m(e);
     const s = this.#g(t, i), l = this.#p(e, t);
     if (l.ownedNodeIds.includes(i))
       return { status: "already-owned", abilityCreated: !1 };
     let u;
     try {
-      u = this.#e.evaluateProgress(t.system.graph, L(e.system), l).nodes.find((w) => w.node.id === i);
+      u = this.#e.evaluateProgress(t.system.graph, G(e.system), l).nodes.find((w) => w.node.id === i);
     } catch (w) {
       if (!(w instanceof Rt)) throw w;
     }
@@ -4653,7 +4653,7 @@ class Jc {
               `Focus node '${i}' grants an Ability already present on this Character; choose a replacement with the GM.`
             );
           const P = await r(C);
-          if (P.action === "cancel") throw new Ue();
+          if (P.action === "cancel") throw new Ge();
           if (P.action !== "gmOverride")
             throw new de(
               "duplicate-grant",
@@ -4670,7 +4670,7 @@ class Jc {
         ownedNodeIds: [...C.ownedNodeIds, i],
         acquisitions: [
           ...C.acquisitions ?? [],
-          this.#m(
+          this.#u(
             i,
             o || m ? "gmOverride" : p ? "choice" : "manualOverride",
             p ? c : null
@@ -4691,7 +4691,7 @@ class Jc {
     return { status: "acquired", abilityCreated: h };
   }
   async #r(e, t, i) {
-    this.#u(e);
+    this.#m(e);
     const o = this.#g(t, i);
     if (this.#p(e, t).ownedNodeIds.includes(i))
       return { status: "already-owned", abilityCreated: !1 };
@@ -4705,7 +4705,7 @@ class Jc {
       ownedNodeIds: [...l.ownedNodeIds, i],
       acquisitions: [
         ...l.acquisitions ?? [],
-        this.#m(i, "gmManual", null)
+        this.#u(i, "gmManual", null)
       ]
     } : { ...l, ownedNodeIds: [...l.ownedNodeIds], acquisitions: [...l.acquisitions ?? []] });
     try {
@@ -4716,15 +4716,15 @@ class Jc {
     return { status: "acquired", abilityCreated: !!r };
   }
   async #l(e, t, i, o) {
-    this.#u(e), this.#g(t, i);
+    this.#m(e), this.#g(t, i);
     const a = this.#p(e, t);
     if (!a.ownedNodeIds.includes(i))
       throw new de("undo-not-owned", `Focus node '${i}' is not owned.`);
     const r = a.ownedNodeIds.filter((f) => f !== i), s = new Set(this.#a(
       t,
-      L(e.system),
+      G(e.system),
       a.ownedNodeIds
-    )), l = this.#a(t, L(e.system), r), u = l.filter((f) => !s.has(f));
+    )), l = this.#a(t, G(e.system), r), u = l.filter((f) => !s.has(f));
     if (u.length > 0 && !o.force)
       throw new de(
         "undo-dependent-nodes",
@@ -4761,7 +4761,7 @@ class Jc {
     }
   }
   async #c(e, t, i) {
-    this.#u(e);
+    this.#m(e);
     const o = this.#g(t, i);
     if (!this.#p(e, t).ownedNodeIds.includes(i))
       throw new de(
@@ -4816,9 +4816,9 @@ class Jc {
     };
   }
   #d(e, t, i) {
-    return [...e.items].find((o) => qo(o, t, i)) ?? null;
+    return [...e.items].find((o) => xo(o, t, i)) ?? null;
   }
-  #m(e, t, i) {
+  #u(e, t, i) {
     return {
       nodeId: e,
       mode: t,
@@ -4830,7 +4830,7 @@ class Jc {
     };
   }
   #w(e, t, i, o) {
-    const r = (o.system ?? {}).grantedBy ?? {}, s = Pe("ability", String(o.name ?? i.abilitySnapshot.name), String(r.contentUuid ?? i.abilityUuid)), l = zi(e.items, s);
+    const r = (o.system ?? {}).grantedBy ?? {}, s = Pe("ability", String(o.name ?? i.abilitySnapshot.name), String(r.contentUuid ?? i.abilityUuid)), l = Ti(e.items, s);
     if (!l) return null;
     const c = (l.system ?? {}).grantedBy ?? {}, p = Pe("ability", l.name ?? "", String(c.contentUuid ?? ""));
     return {
@@ -4864,7 +4864,7 @@ class Jc {
   }
   async #f(e, t, i, o) {
     const r = (o.system ?? {}).grantedBy ?? {};
-    if (Fr(e.items, {
+    if (Dr(e.items, {
       type: "ability",
       contentUuid: String(r.contentUuid ?? ""),
       contentKey: String(r.contentKey ?? `ability:${String(o.name ?? "").trim().toLocaleLowerCase()}`)
@@ -4900,7 +4900,7 @@ class Jc {
       throw new de("node-not-found", `Focus node '${t}' was not found.`);
     return i;
   }
-  #u(e) {
+  #m(e) {
     if (e.type !== "character")
       throw new de("not-character", "Focus acquisition requires a Character.");
   }
@@ -4918,7 +4918,7 @@ class Jc {
     }
   }
 }
-class X extends Error {
+class _ extends Error {
   constructor(e, t) {
     super(t), this.code = e, this.name = "AdvancementError";
   }
@@ -4940,7 +4940,7 @@ function ed(n) {
 function td(n) {
   return n === "inability" ? "untrained" : n === "untrained" ? "trained" : n === "trained" ? "specialized" : null;
 }
-function xo(n) {
+function Uo(n) {
   return [...new Set(n)];
 }
 class id {
@@ -4953,7 +4953,7 @@ class id {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o;
   }
   policy(e = []) {
-    return this.#e.resolveAdvancementPolicy(Ba, e);
+    return this.#e.resolveAdvancementPolicy(La, e);
   }
   view(e, t = []) {
     const i = this.policy(t), o = e.system.advancement.purchases, a = o.length >= i.purchasesPerTier;
@@ -4962,7 +4962,7 @@ class id {
       purchasedCount: o.length,
       remainingCount: Math.max(0, i.purchasesPerTier - o.length),
       canAdvanceTier: o.length === i.purchasesPerTier,
-      options: Gn.map((r) => {
+      options: Un.map((r) => {
         const s = o.some((u) => u.kind === r), l = r === "extraEffort" ? this.#s(e) < i.effortMaximum : !0;
         return { kind: r, purchased: s, available: !a && !s && l };
       }),
@@ -4973,7 +4973,7 @@ class id {
     };
   }
   progressionGuidance(e, t = []) {
-    const i = L(e.system);
+    const i = G(e.system);
     return {
       tier: i,
       completed: (e.system.advancement.guidanceCompletedTiers ?? []).includes(i),
@@ -4982,25 +4982,25 @@ class id {
     };
   }
   async completeProgressionGuidance(e) {
-    return this.#m(e, async () => {
+    return this.#u(e, async () => {
       this.#c(e);
       const t = new Set(e.system.advancement.guidanceCompletedTiers ?? []);
-      t.add(L(e.system)), await e.update({
+      t.add(G(e.system)), await e.update({
         "system.advancement.guidanceCompletedTiers": [...t].sort((i, o) => i - o)
       });
     });
   }
   async resetProgressionGuidance(e) {
-    return this.#m(e, async () => {
+    return this.#u(e, async () => {
       this.#c(e), await e.update({
-        "system.advancement.guidanceCompletedTiers": (e.system.advancement.guidanceCompletedTiers ?? []).filter((t) => t !== L(e.system))
+        "system.advancement.guidanceCompletedTiers": (e.system.advancement.guidanceCompletedTiers ?? []).filter((t) => t !== G(e.system))
       });
     });
   }
   skillTrainingOptions(e, t = []) {
     const i = this.policy(t);
     return [...e.items].filter((o) => o.type === "skill" && ee.includes(o.system.rank)).map((o) => {
-      const a = td(o.system.rank), r = a === "trained" ? i.attackDefenseTrainingTier : a === "specialized" ? i.attackDefenseSpecializationTier : 0, s = !!(a && ed(o) && L(e.system) < r);
+      const a = td(o.system.rank), r = a === "trained" ? i.attackDefenseTrainingTier : a === "specialized" ? i.attackDefenseSpecializationTier : 0, s = !!(a && ed(o) && G(e.system) < r);
       return {
         id: o.id,
         name: o.name,
@@ -5013,18 +5013,42 @@ class id {
     }).sort((o, a) => o.name.localeCompare(a.name));
   }
   async purchase(e, t, i = []) {
-    return this.#m(e, () => this.#r(e, t, i, !1));
+    return this.#u(e, () => this.#r(e, t, i, !1));
   }
   /** Explicit integration point for GM tooling; Core slot and benefit validation still applies. */
   async purchaseWithGmOverride(e, t, i = []) {
-    return this.#m(e, () => this.#r(e, t, i, !0));
+    return this.#u(e, () => this.#r(e, t, i, !0));
+  }
+  /**
+   * Reopens an Advancement slot without attempting to reverse any benefit or payment.
+   * Only the exact, uniquely identified current-cycle purchase record is removed.
+   */
+  async undoPurchase(e, t) {
+    return this.#u(e, async () => {
+      this.#c(e);
+      const i = typeof t == "string" ? t.trim() : "", o = e.system.advancement.purchases, a = i ? o.filter((s) => s.id === i) : [];
+      if (a.length !== 1)
+        throw new _(
+          "purchase-not-found",
+          "That current-cycle Advancement purchase is unavailable."
+        );
+      const r = a[0];
+      if (r.tier !== G(e.system))
+        throw new _(
+          "purchase-not-current",
+          "Only an Advancement purchase from the current Tier can be undone."
+        );
+      return await e.update({
+        "system.advancement.purchases": o.filter((s) => s.id !== i)
+      }), r;
+    });
   }
   async advanceTier(e, t = []) {
-    return this.#m(e, async () => {
+    return this.#u(e, async () => {
       this.#c(e);
       const i = this.policy(t);
       if (e.system.advancement.purchases.length !== i.purchasesPerTier)
-        throw new X("tier-not-ready", "Four Advancements are required before advancing Tier.");
+        throw new _("tier-not-ready", "Four Advancements are required before advancing Tier.");
       const o = oi(e.system, "tier", 1), a = o.value, r = {
         id: this.#t(),
         source: "newTier",
@@ -5056,16 +5080,16 @@ class id {
     this.#c(e);
     const a = this.policy(i), r = e.system.advancement.purchases;
     if (r.length >= a.purchasesPerTier)
-      throw new X("cycle-complete", "This advancement cycle is complete.");
+      throw new _("cycle-complete", "This advancement cycle is complete.");
     if (t.kind === "other") {
       if (r.some((f) => f.kind === "other"))
-        throw new X("other-already-purchased", "Other Advancement is unique per cycle.");
+        throw new _("other-already-purchased", "Other Advancement is unique per cycle.");
     } else if (r.some((f) => f.kind === t.kind))
-      throw new X("already-purchased", "That Advancement was already purchased this cycle.");
+      throw new _("already-purchased", "That Advancement was already purchased this cycle.");
     const s = o ? 0 : a.xpCost;
     if (e.system.xp < s)
-      throw new X("insufficient-xp", "This Character does not have enough XP.");
-    const l = L(e.system), u = a.resourcePointsForTier(l);
+      throw new _("insufficient-xp", "This Character does not have enough XP.");
+    const l = G(e.system), u = a.resourcePointsForTier(l);
     if (!Number.isInteger(u) || u < 0)
       throw new Error("Advancement policy Resource Points must be a non-negative integer.");
     const c = {};
@@ -5073,7 +5097,7 @@ class id {
     if (t.kind === "increaseCapabilities") {
       const f = Object.values(t.allocation);
       if (f.some((w) => !Number.isInteger(w) || w < 0) || f.reduce((w, C) => w + C, 0) !== a.capabilityPoints)
-        throw new X("invalid-allocation", "Pool allocation must distribute exactly four points.");
+        throw new _("invalid-allocation", "Pool allocation must distribute exactly four points.");
       for (const w of ["might", "speed", "intellect"]) {
         const C = t.allocation[w], P = oi(
           e.system,
@@ -5096,17 +5120,17 @@ class id {
       c[f.path] = f.value;
     } else if (t.kind === "extraEffort") {
       if (this.#s(e) >= a.effortMaximum)
-        throw new X("effort-maximum", "Core Effort is already at its maximum.");
+        throw new _("effort-maximum", "Core Effort is already at its maximum.");
       const f = oi(e.system, "effort", 1);
       c[f.path] = f.value;
     } else if (t.kind === "skillTraining")
       if (t.mode === "improve") {
         const f = this.skillTrainingOptions(e, i).find((C) => C.id === t.skillId), w = [...e.items].find((C) => C.id === t.skillId && C.type === "skill");
-        if (!f || !w) throw new X("skill-not-found", "Skill Item not found.");
+        if (!f || !w) throw new _("skill-not-found", "Skill Item not found.");
         if (f.reason === "maximum" || !f.nextRank)
-          throw new X("skill-maximum", "This Skill cannot be improved by Core Advancement.");
+          throw new _("skill-maximum", "This Skill cannot be improved by Core Advancement.");
         if (f.reason === "tier")
-          throw new X("skill-tier", "Attack and defense training is not available at this Tier.");
+          throw new _("skill-tier", "Attack and defense training is not available at this Tier.");
         p = { skill: w, rank: w.system.rank }, m = f.nextRank;
       } else {
         const f = await this.#l(e, t, a);
@@ -5139,14 +5163,14 @@ class id {
   async #l(e, t, i) {
     const o = t.sourceUuid ? await this.#n(t.sourceUuid) : null;
     if (t.sourceUuid && !o)
-      throw new X("skill-not-found", "The selected Skill source is unavailable.");
+      throw new _("skill-not-found", "The selected Skill source is unavailable.");
     const a = o?.name.trim() || t.customName?.trim() || "";
-    if (!a) throw new X("skill-not-found", "A new custom Skill requires a name.");
+    if (!a) throw new _("skill-not-found", "A new custom Skill requires a name.");
     if ([...e.items].some((c) => c.type === "skill" && (c.name.trim().toLocaleLowerCase() === a.toLocaleLowerCase() || !!(o?.uuid && c.system.acquisition?.grantedByUuid === o.uuid))))
-      throw new X("duplicate-skill", "This Character already owns that Skill.");
+      throw new _("duplicate-skill", "This Character already owns that Skill.");
     const s = o?.system.category ?? t.customCategory ?? "general", l = o?.system.contexts ?? (s === "general" ? [] : [s]), u = s === "attack" || s === "defense" || l.some((c) => c === "attack" || c.startsWith("attack.") || c === "defense" || c.startsWith("defense."));
-    if (u && L(e.system) < i.attackDefenseTrainingTier)
-      throw new X("skill-tier", "Attack and defense training is not available at this Tier.");
+    if (u && G(e.system) < i.attackDefenseTrainingTier)
+      throw new _("skill-tier", "Attack and defense training is not available at this Tier.");
     return {
       name: a,
       type: "skill",
@@ -5171,7 +5195,7 @@ class id {
       const a = {
         id: this.#t(),
         source: "otherAdvancement",
-        grantTier: L(e.system),
+        grantTier: G(e.system),
         focusUuid: ""
       };
       o["system.advancement.pendingFocusChoices"] = [
@@ -5179,22 +5203,22 @@ class id {
         a
       ];
     } else if (t === "armor")
-      o["system.proficiencies.armorCategories"] = xo([
+      o["system.proficiencies.armorCategories"] = Uo([
         ...e.system.proficiencies.armorCategories,
-        ...Ge
+        ...Ue
       ]);
     else if (t === "weapons")
-      o["system.proficiencies.weaponCategories"] = xo([
+      o["system.proficiencies.weaponCategories"] = Uo([
         ...e.system.proficiencies.weaponCategories,
         ...xe
       ]);
     else {
-      if (L(e.system) < 3)
-        throw new X("genre-tier", "Genre Advancement requires Tier 3 or higher.");
+      if (G(e.system) < 3)
+        throw new _("genre-tier", "Genre Advancement requires Tier 3 or higher.");
       const a = {
         id: this.#t(),
         source: "otherAdvancement",
-        grantTier: L(e.system)
+        grantTier: G(e.system)
       };
       o["system.advancement.pendingGenreChoices"] = [
         ...e.system.advancement.pendingGenreChoices,
@@ -5204,7 +5228,7 @@ class id {
   }
   #c(e) {
     if (e.type !== "character")
-      throw new X("not-character", "Advancement requires a Character.");
+      throw new _("not-character", "Advancement requires a Character.");
   }
   #s(e) {
     return e.system.derived.effort?.max ?? ft(e.system.stats.effortBase, e.system.overrides?.effort);
@@ -5212,7 +5236,7 @@ class id {
   #d(e) {
     return e.uuid ?? e.id;
   }
-  async #m(e, t) {
+  async #u(e, t) {
     const i = this.#d(e), a = (this.#o.get(i) ?? Promise.resolve()).catch(() => {
     }).then(t);
     this.#o.set(i, a);
@@ -5245,7 +5269,9 @@ const nd = {
   "skill-maximum": "CYPHERV2.Advancement.Errors.SkillMaximum",
   "skill-tier": "CYPHERV2.Advancement.Errors.SkillTier",
   "genre-tier": "CYPHERV2.Advancement.Errors.GenreTier",
-  "tier-not-ready": "CYPHERV2.Advancement.Errors.TierNotReady"
+  "tier-not-ready": "CYPHERV2.Advancement.Errors.TierNotReady",
+  "purchase-not-found": "CYPHERV2.Advancement.Errors.PurchaseNotFound",
+  "purchase-not-current": "CYPHERV2.Advancement.Errors.PurchaseNotCurrent"
 };
 function Xe(n, e) {
   return String(n[e] ?? "");
@@ -5264,8 +5290,8 @@ async function ut(n, e) {
     ok: { label: game.i18n.localize("CYPHERV2.Advancement.Purchase") }
   });
 }
-function Dr(n) {
-  n instanceof X ? ui.notifications.error(game.i18n.localize(nd[n.code])) : (console.error(n), ui.notifications.error(game.i18n.localize("CYPHERV2.Advancement.Errors.Unexpected")));
+function ro(n) {
+  n instanceof _ ? ui.notifications.error(game.i18n.localize(nd[n.code])) : (console.error(n), ui.notifications.error(game.i18n.localize("CYPHERV2.Advancement.Errors.Unexpected")));
 }
 async function ad(n, e) {
   const t = game.i18n.localize(`CYPHERV2.Advancement.Option.${e}`);
@@ -5322,7 +5348,7 @@ async function ad(n, e) {
     return r ? { kind: e, mode: "improve", skillId: Xe(r, "skillId") } : null;
   }
   if (e === "other") {
-    const i = Ua.filter((a) => a !== "genre" || L(n.system) >= 3), o = await ut(t, `<label>${game.i18n.localize("CYPHERV2.Advancement.OtherType")}<select name="otherKind">${i.map((a) => `<option value="${a}">${game.i18n.localize(`CYPHERV2.Advancement.Other.${a}`)}</option>`).join("")}</select></label>`);
+    const i = Oa.filter((a) => a !== "genre" || G(n.system) >= 3), o = await ut(t, `<label>${game.i18n.localize("CYPHERV2.Advancement.OtherType")}<select name="otherKind">${i.map((a) => `<option value="${a}">${game.i18n.localize(`CYPHERV2.Advancement.Other.${a}`)}</option>`).join("")}</select></label>`);
     return o ? { kind: e, otherKind: Xe(o, "otherKind") } : null;
   }
   return { kind: e };
@@ -5340,10 +5366,43 @@ async function rd(n, e) {
         resourcePoints: i.resourcePointsGranted
       }));
     } catch (i) {
-      Dr(i);
+      ro(i);
     }
 }
-async function sd(n) {
+async function sd(n, e) {
+  if (!await foundry.applications.api.DialogV2.wait({
+    window: { title: game.i18n.localize("CYPHERV2.Advancement.Undo.Title") },
+    content: `<div class="cypherv2 cypherv2-dialog advancement-undo-dialog">
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ReopenWarning")}</p>
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.NoRollbackWarning")}</p>
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ManualReviewWarning")}</p>
+    </div>`,
+    rejectClose: !1,
+    modal: !0,
+    defaultYes: !1,
+    buttons: [
+      {
+        action: "no",
+        label: game.i18n.localize("CYPHERV2.Actions.Cancel"),
+        icon: "fa-solid fa-xmark",
+        default: !0,
+        callback: () => !1
+      },
+      {
+        action: "yes",
+        label: game.i18n.localize("CYPHERV2.Advancement.Undo.Confirm"),
+        icon: "fa-solid fa-check",
+        callback: () => !0
+      }
+    ]
+  })) return !1;
+  try {
+    return await game.cypherv2.services.advancement.undoPurchase(n, e), ui.notifications.info(game.i18n.localize("CYPHERV2.Advancement.Undo.Success")), !0;
+  } catch (i) {
+    return ro(i), !1;
+  }
+}
+async function ld(n) {
   try {
     const e = await game.cypherv2.services.advancement.advanceTier(
       n,
@@ -5351,32 +5410,32 @@ async function sd(n) {
     );
     ui.notifications.info(game.i18n.format("CYPHERV2.Advancement.TierAdvancedNotice", { tier: e.tier }));
   } catch (e) {
-    Dr(e);
+    ro(e);
   }
 }
-class Te extends Error {
+class ze extends Error {
   constructor(e, t) {
     super(t), this.code = e, this.name = "FocusAssociationError";
   }
   code;
 }
-const ld = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-class cd {
+const cd = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+class dd {
   #e;
   #t;
   #i = /* @__PURE__ */ new Map();
-  constructor(e = ld, t = Date.now) {
+  constructor(e = cd, t = Date.now) {
     this.#e = e, this.#t = t;
   }
   async attach(e, t, i) {
     return this.#l(e, async () => {
       if (this.#n(e, t), e.system.focusProgress.some((l) => this.#o(l, t)))
-        throw new Te("duplicate", "This Focus is already attached.");
+        throw new ze("duplicate", "This Focus is already attached.");
       if (i === "creation") {
-        if (L(e.system) !== 1)
-          throw new Te("creation-tier", "A creation Focus requires a Tier 1 Character.");
+        if (G(e.system) !== 1)
+          throw new ze("creation-tier", "A creation Focus requires a Tier 1 Character.");
         if (e.system.focusProgress.some((l) => l.provenance === "creation"))
-          throw new Te("creation-focus-exists", "This Character already has a creation Focus.");
+          throw new ze("creation-focus-exists", "This Character already has a creation Focus.");
       }
       const o = e.system.advancement.initializedFocusUuids.includes(t.uuid), a = {
         focusUuid: t.uuid,
@@ -5404,9 +5463,9 @@ class cd {
   async remove(e, t) {
     return this.#l(e, async () => {
       if (e.type !== "character")
-        throw new Te("not-character", "Focus association requires a Character.");
+        throw new ze("not-character", "Focus association requires a Character.");
       const i = e.system.focusProgress.find((a) => a.focusUuid === t);
-      if (!i) throw new Te("progress-missing", "Focus progression was not found.");
+      if (!i) throw new ze("progress-missing", "Focus progression was not found.");
       const o = e.system.advancement.pendingFocusChoices.filter((a) => a.focusUuid === t).map((a) => a.id);
       return await e.update({
         "system.focusProgress": e.system.focusProgress.filter((a) => a !== i),
@@ -5416,9 +5475,9 @@ class cd {
   }
   #n(e, t) {
     if (e.type !== "character")
-      throw new Te("not-character", "Focus association requires a Character.");
+      throw new ze("not-character", "Focus association requires a Character.");
     if (t.type !== "focus" || !t.uuid)
-      throw new Te("not-focus", "Only a Focus Item can be attached.");
+      throw new ze("not-focus", "Only a Focus Item can be attached.");
   }
   #o(e, t) {
     return e.focusUuid === t.uuid || e.focusUuid === t.id;
@@ -5446,9 +5505,9 @@ function nn(n) {
     "'": "&#039;"
   })[e]);
 }
-function Tr(n) {
-  const e = n instanceof Te ? `CYPHERV2.Focus.Association.Errors.${n.code}` : "CYPHERV2.Focus.Errors.Unexpected";
-  n instanceof Te || console.error(n), ui.notifications.error(game.i18n.localize(e));
+function zr(n) {
+  const e = n instanceof ze ? `CYPHERV2.Focus.Association.Errors.${n.code}` : "CYPHERV2.Focus.Errors.Unexpected";
+  n instanceof ze || console.error(n), ui.notifications.error(game.i18n.localize(e));
 }
 async function Go(n, e) {
   let t = e;
@@ -5468,7 +5527,7 @@ async function Go(n, e) {
     t = await fromUuid(String(r.focusUuid ?? "")) ?? void 0;
   }
   if (!t) return;
-  const i = L(n.system) === 1 && !n.system.focusProgress.some((a) => a.provenance === "creation"), o = await foundry.applications.api.DialogV2.input({
+  const i = G(n.system) === 1 && !n.system.focusProgress.some((a) => a.provenance === "creation"), o = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Focus.Association.Add") },
     content: `<div class="cypherv2-dialog-fields">
       <p><strong>${nn(t.name)}</strong></p>
@@ -5492,10 +5551,10 @@ async function Go(n, e) {
         a.choicesGranted.length > 0 ? "CYPHERV2.Focus.Association.Added" : "CYPHERV2.Focus.Association.Reattached"
       ));
     } catch (a) {
-      Tr(a);
+      zr(a);
     }
 }
-async function dd(n, e) {
+async function ud(n, e) {
   const t = n.system.focusProgress.find((a) => a.focusUuid === e);
   if (!t) return;
   const i = t.ownedNodeIds.length > 0 ? game.i18n.format("CYPHERV2.Focus.Association.RemoveOwnedWarning", { count: t.ownedNodeIds.length }) : game.i18n.localize("CYPHERV2.Focus.Association.RemoveWarning");
@@ -5508,7 +5567,7 @@ async function dd(n, e) {
     try {
       await game.cypherv2.services.focusAssociations.remove(n, e), ui.notifications.info(game.i18n.localize("CYPHERV2.Focus.Association.Removed"));
     } catch (a) {
-      Tr(a);
+      zr(a);
     }
 }
 class ue extends Error {
@@ -5517,7 +5576,7 @@ class ue extends Error {
   }
   code;
 }
-const ud = async (n) => {
+const md = async (n) => {
   try {
     const e = await fromUuid(n);
     if (!e || typeof e != "object" || !("type" in e)) return null;
@@ -5527,13 +5586,13 @@ const ud = async (n) => {
     return null;
   }
 };
-function Uo(n) {
+function Oo(n) {
   return n.trim().replace(/\s+/g, " ").toLocaleLowerCase();
 }
-class md {
+class pd {
   #e;
   #t;
-  constructor(e = ud, t = Date.now) {
+  constructor(e = md, t = Date.now) {
     this.#e = e, this.#t = t;
   }
   async setup(e, t) {
@@ -5547,9 +5606,9 @@ class md {
         "invalid-skills",
         "Core Setup requires two trained Skills, or three trained Skills and one different Inability."
       );
-    const s = await Promise.all(t.skills.map((p) => this.#i(p))), l = new Set([...e.items].filter((p) => p.type === "skill").map((p) => Uo(p.name))), u = /* @__PURE__ */ new Set();
+    const s = await Promise.all(t.skills.map((p) => this.#i(p))), l = new Set([...e.items].filter((p) => p.type === "skill").map((p) => Oo(p.name))), u = /* @__PURE__ */ new Set();
     for (const p of s) {
-      const h = Uo(String(p.name));
+      const h = Oo(String(p.name));
       if (!h || l.has(h) || u.has(h))
         throw new ue("duplicate-skill", "Starting Skills must all be different.");
       u.add(h);
@@ -5641,7 +5700,7 @@ class md {
 function on(n, e) {
   return Number(n[e] ?? 0);
 }
-function Oo(n, e) {
+function Bo(n, e) {
   return String(n[e] ?? "").trim();
 }
 function An(n) {
@@ -5653,7 +5712,7 @@ function An(n) {
     "'": "&#039;"
   })[e]);
 }
-function pd() {
+function fd() {
   return [
     `<option value="custom">${game.i18n.localize("CYPHERV2.Creation.CustomSkill")}</option>`,
     ...[...game.items].filter((n) => n.type === "skill").sort((n, e) => n.name.localeCompare(e.name)).map((n) => `<option value="${An(n.uuid)}">${An(n.name)}</option>`)
@@ -5661,13 +5720,13 @@ function pd() {
 }
 function di(n, e) {
   return `<fieldset><legend>${e}</legend>
-    <label>${game.i18n.localize("CYPHERV2.Creation.SkillSource")}<select name="source${n}">${pd()}</select></label>
+    <label>${game.i18n.localize("CYPHERV2.Creation.SkillSource")}<select name="source${n}">${fd()}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Creation.CustomSkillName")}<input name="name${n}" type="text"></label>
   </fieldset>`;
 }
 function mi(n, e, t) {
-  const i = Oo(n, `source${e}`);
-  return i === "custom" ? { customName: Oo(n, `name${e}`), category: "general", rank: t } : { sourceUuid: i, rank: t };
+  const i = Bo(n, `source${e}`);
+  return i === "custom" ? { customName: Bo(n, `name${e}`), category: "general", rank: t } : { sourceUuid: i, rank: t };
 }
 async function an(n, e, t) {
   return foundry.applications.api.DialogV2.input({
@@ -5678,7 +5737,7 @@ async function an(n, e, t) {
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Apply") }
   });
 }
-function fd(n) {
+function hd(n) {
   const e = [...n.querySelectorAll(
     'input[name="might"], input[name="speed"], input[name="intellect"]'
   )], t = n.querySelector("[data-core-points-remaining]"), i = n.querySelector('button[data-action="ok"]'), o = () => {
@@ -5691,7 +5750,7 @@ function Hn(n) {
   const e = n instanceof ue ? `CYPHERV2.Creation.Errors.${n.code}` : "CYPHERV2.Creation.Errors.Unexpected";
   n instanceof ue || console.error(n), ui.notifications.error(game.i18n.localize(e));
 }
-async function hd(n) {
+async function gd(n) {
   const e = await an(
     game.i18n.localize("CYPHERV2.Creation.StepPools"),
     `<p>${game.i18n.localize("CYPHERV2.Creation.PoolsPrompt")}</p>
@@ -5699,7 +5758,7 @@ async function hd(n) {
      <label>${game.i18n.localize("CYPHERV2.Pools.Speed")} 8 + <input name="speed" type="number" min="0" max="6" value="0"></label>
      <label>${game.i18n.localize("CYPHERV2.Pools.Intellect")} 8 + <input name="intellect" type="number" min="0" max="6" value="0"></label>
      <p>${game.i18n.localize("CYPHERV2.Creation.PointsRemaining")}: <output data-core-points-remaining>6</output> / 6</p>`,
-    fd
+    hd
   );
   if (!e) return;
   const t = { might: on(e, "might"), speed: on(e, "speed"), intellect: on(e, "intellect") };
@@ -5743,7 +5802,7 @@ async function hd(n) {
     Hn(u);
   }
 }
-async function Bo(n, e) {
+async function Lo(n, e) {
   try {
     await game.cypherv2.services.characterInitialization.markInitialized(n, e), await n.sheet?.render({ force: !0 }), ui.notifications.info(game.i18n.localize(
       e === "skipped" ? "CYPHERV2.Creation.Skipped" : "CYPHERV2.Creation.Marked"
@@ -5755,7 +5814,7 @@ async function Bo(n, e) {
 function pi(n, e) {
   return e.map((t) => n.system.graph.nodes.find((i) => i.id === t)?.abilitySnapshot.name || t).join(", ");
 }
-async function gd(n, e, t) {
+async function yd(n, e, t) {
   return game.cypherv2.services.focusAcquisition.hasEmbeddedAbility(n, e.uuid, t) ? !!await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Focus.UndoDeleteTitle") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Focus.UndoDeletePrompt")}</p></div>`,
@@ -5763,7 +5822,7 @@ async function gd(n, e, t) {
     no: { label: game.i18n.localize("CYPHERV2.Focus.UndoKeepAbility") }
   }) : !1;
 }
-async function Lo(n, e, t, i = !1) {
+async function jo(n, e, t, i = !1) {
   const o = e.system.graph.nodes.find((s) => s.id === t);
   if (!o || !await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Focus.UndoAcquisition") },
@@ -5771,7 +5830,7 @@ async function Lo(n, e, t, i = !1) {
     yes: { label: game.i18n.localize("CYPHERV2.Focus.UndoAcquisition") },
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
   })) return;
-  const r = await gd(n, e, t);
+  const r = await yd(n, e, t);
   try {
     const s = await game.cypherv2.services.focusAcquisition.undo(
       n,
@@ -5813,7 +5872,7 @@ async function Lo(n, e, t, i = !1) {
     console.error(s), ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.Unexpected"));
   }
 }
-async function yd(n, e, t) {
+async function bd(n, e, t) {
   if (!game.user.isGM) return;
   const i = e.system.graph.nodes.find((a) => a.id === t);
   !i || !await foundry.applications.api.DialogV2.confirm({
@@ -5832,10 +5891,10 @@ function Ce(n) {
     "'": "&#039;"
   })[e]);
 }
-function jo(n) {
+function Wo(n) {
   return n ? game.i18n.localize(`CYPHERV2.Skill.Ranks.${n}`) : "";
 }
-function bd(n) {
+function wd(n) {
   const e = n.toObject();
   return {
     name: n.name,
@@ -5843,7 +5902,7 @@ function bd(n) {
     system: structuredClone(e.system ?? {})
   };
 }
-async function Wo(n, e, t) {
+async function _o(n, e, t) {
   const i = e ? await fromUuid(e) : null;
   return !(i instanceof Item) || i.type !== n.type ? (ui.notifications.warn(game.i18n.localize("CYPHERV2.GrantConflict.InvalidReplacement")), null) : {
     action: "replace",
@@ -5853,7 +5912,7 @@ async function Wo(n, e, t) {
       type: n.type,
       name: i.name,
       itemUuid: i.uuid,
-      snapshot: bd(i),
+      snapshot: wd(i),
       reason: game.i18n.localize(t === "compendium" ? "CYPHERV2.GrantConflict.CompendiumItem" : "CYPHERV2.GrantConflict.WorldItem"),
       reasonSourceUuid: i.uuid
     }
@@ -5864,7 +5923,7 @@ async function It(n) {
       <label class="grant-conflict-option">
         <input type="radio" name="resolution" value="suggestion:${Ce(u.id)}">
         <span><strong>${Ce(u.name)}</strong><small>${Ce(u.reason)}</small></span>
-      </label>`).join("") : `<p class="empty-list">${game.i18n.localize("CYPHERV2.GrantConflict.NoSuggestions")}</p>`, i = game.i18n.localize(n.type === "skill" ? "CYPHERV2.GrantConflict.Skill" : "CYPHERV2.GrantConflict.Ability"), o = n.existing.rank ? ` — ${Ce(jo(n.existing.rank))}` : "", a = n.proposed.rank ? ` — ${Ce(jo(n.proposed.rank))}` : "", r = game.user.isGM ? `
+      </label>`).join("") : `<p class="empty-list">${game.i18n.localize("CYPHERV2.GrantConflict.NoSuggestions")}</p>`, i = game.i18n.localize(n.type === "skill" ? "CYPHERV2.GrantConflict.Skill" : "CYPHERV2.GrantConflict.Ability"), o = n.existing.rank ? ` — ${Ce(Wo(n.existing.rank))}` : "", a = n.proposed.rank ? ` — ${Ce(Wo(n.proposed.rank))}` : "", r = game.user.isGM ? `
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="world"><span>${game.i18n.localize("CYPHERV2.GrantConflict.WorldItem")}</span></label>
       <select name="worldUuid">${e.map((u) => `<option value="${Ce(u.uuid)}">${Ce(u.name)}</option>`).join("")}</select>
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="uuid"><span>${game.i18n.localize("CYPHERV2.GrantConflict.CompendiumUuid")}</span></label>
@@ -5896,11 +5955,11 @@ async function It(n) {
       if (p) return { action: "replace", replacement: p, selectionKind: "suggested" };
     }
     if (c === "world") {
-      const p = await Wo(n, String(u.worldUuid ?? ""), "world");
+      const p = await _o(n, String(u.worldUuid ?? ""), "world");
       if (p) return p;
     }
     if (c === "uuid") {
-      const p = String(u.documentUuid ?? "").trim(), h = await Wo(n, p, p.startsWith("Compendium.") ? "compendium" : "world");
+      const p = String(u.documentUuid ?? "").trim(), h = await _o(n, p, p.startsWith("Compendium.") ? "compendium" : "world");
       if (h) return h;
     }
     if (c === "custom" && n.type === "skill" && n.allowCustom) {
@@ -5926,20 +5985,20 @@ async function It(n) {
 function mt(n) {
   return n.trim().toLocaleLowerCase().replace(/[^a-z0-9]+/g, "");
 }
-function wd(n, e) {
+function vd(n, e) {
   const t = n.genre === "custom" ? String(n.customGenreId ?? "") : String(n.genre ?? "");
   if (!t || t === "none") return null;
   const i = [...e].sort((o, a) => o.uuid.localeCompare(a.uuid));
   return i.find((o) => o.uuid === t) ?? i.find((o) => mt(o.system.legacyKey) === mt(t)) ?? i.find((o) => mt(String(o.system.slug ?? "")) === mt(t)) ?? i.find((o) => mt(o.name) === mt(t)) ?? null;
 }
-async function zr(n, e, t) {
+async function Tr(n, e, t) {
   if (n.genre === "custom" && n.customGenreId) {
     const i = await t(n.customGenreId);
     if (i?.type === "genre") return i;
   }
-  return wd(n, e);
+  return vd(n, e);
 }
-class Tt extends Error {
+class zt extends Error {
   constructor(e, t) {
     super(t), this.code = e, this.name = "GenreAssociationError";
   }
@@ -5951,7 +6010,7 @@ class x extends Error {
   }
   code;
 }
-function vd() {
+function Cd() {
   return {
     active: !1,
     originalName: "",
@@ -5963,10 +6022,10 @@ function vd() {
     selectionKind: "none"
   };
 }
-function _o(n) {
+function Ko(n) {
   return structuredClone(n);
 }
-class Cd {
+class Ed {
   #e;
   #t;
   #i;
@@ -5978,9 +6037,9 @@ class Cd {
   async attach(e, t, i = "manual") {
     return this.#s(e, async () => {
       if (this.#c(e), t.type !== "genre" || !t.uuid)
-        throw new Tt("not-genre", "Only a Genre Item can be attached.");
+        throw new zt("not-genre", "Only a Genre Item can be attached.");
       if (e.system.genre.sourceUuid === t.uuid)
-        throw new Tt("duplicate", "This Genre is already attached.");
+        throw new zt("duplicate", "This Genre is already attached.");
       const o = {
         sourceUuid: t.uuid,
         instanceId: this.#i(),
@@ -5993,8 +6052,8 @@ class Cd {
   async remove(e) {
     return this.#s(e, async () => {
       this.#c(e);
-      const t = _o(e.system.genre);
-      if (!t.sourceUuid) throw new Tt("missing", "No Genre is attached.");
+      const t = Ko(e.system.genre);
+      if (!t.sourceUuid) throw new zt("missing", "No Genre is attached.");
       return await e.update({
         "system.genre.sourceUuid": "",
         "system.genre.instanceId": "",
@@ -6007,14 +6066,14 @@ class Cd {
     return e.system.genre.sourceUuid ? this.#e(e.system.genre.sourceUuid) : null;
   }
   eligibleEntries(e, t, i) {
-    return t.system.abilityCatalog.filter((o) => (o.catalog ?? "progression") === "progression" && o.minimumTier <= L(e.system) && o.minimumTier <= i.grantTier);
+    return t.system.abilityCatalog.filter((o) => (o.catalog ?? "progression") === "progression" && o.minimumTier <= G(e.system) && o.minimumTier <= i.grantTier);
   }
   manualCatalog(e, t) {
     return t.system.abilityCatalog.filter((i) => (i.catalog ?? "progression") === "progression").map((i) => ({
       id: i.id,
       name: i.snapshot.name || i.id,
       minimumTier: i.minimumTier,
-      normallyAvailable: i.minimumTier <= L(e.system),
+      normallyAvailable: i.minimumTier <= G(e.system),
       owned: !!this.#l(e, t, e.system.genre, i, "active")
     })).sort((i, o) => i.minimumTier - o.minimumTier || i.name.localeCompare(o.name));
   }
@@ -6038,7 +6097,7 @@ class Cd {
       if (c) {
         if (!i) throw new x("duplicate-grant", "This Ability is already present on the Character.");
         const m = await i(c);
-        if (m.action === "cancel") throw new Ue();
+        if (m.action === "cancel") throw new Ge();
         if (m.action !== "gmOverride")
           throw new x("duplicate-grant", "A Genre acquisition must use an Ability from its Genre catalog.");
         p = !0;
@@ -6084,7 +6143,7 @@ class Cd {
       if (c) {
         if (!o) throw new x("duplicate-grant", "This Ability is already present on the Character.");
         const m = await o(c);
-        if (m.action === "cancel") throw new Ue();
+        if (m.action === "cancel") throw new Ge();
         if (m.action !== "gmOverride")
           throw new x("duplicate-grant", "A Genre choice must grant an Ability from its Genre catalog.");
         p = !0;
@@ -6113,9 +6172,9 @@ class Cd {
       status: "active",
       contentUuid: c.contentUuid,
       contentKey: c.contentKey,
-      replacement: vd()
+      replacement: Cd()
     };
-    return { name: s, img: l, type: "ability", system: { ..._o(u), grantedBy: p } };
+    return { name: s, img: l, type: "ability", system: { ...Ko(u), grantedBy: p } };
   }
   #l(e, t, i, o, a) {
     return [...e.items].find((r) => {
@@ -6125,7 +6184,7 @@ class Cd {
     }) ?? null;
   }
   #a(e, t, i, o) {
-    const r = o.system.grantedBy, s = Pe("ability", String(o.name), r.contentUuid), l = zi(e.items, s);
+    const r = o.system.grantedBy, s = Pe("ability", String(o.name), r.contentUuid), l = Ti(e.items, s);
     if (!l) return null;
     const u = l.system.grantedBy ?? {}, c = Pe("ability", l.name, String(u.contentUuid ?? "")), p = (h, m, y) => ({
       id: m,
@@ -6151,7 +6210,7 @@ class Cd {
     };
   }
   #c(e) {
-    if (e.type !== "character") throw new Tt("not-character", "Genre association requires a Character.");
+    if (e.type !== "character") throw new zt("not-character", "Genre association requires a Character.");
   }
   async #s(e, t) {
     const i = e.uuid ?? e.id, a = (this.#o.get(i) ?? Promise.resolve()).catch(() => {
@@ -6164,7 +6223,7 @@ class Cd {
     }
   }
 }
-function ze(n) {
+function Te(n) {
   return n.replace(/[&<>"']/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -6174,9 +6233,9 @@ function ze(n) {
   })[e]);
 }
 function Ni(n) {
-  if (n instanceof Ue) return;
+  if (n instanceof Ge) return;
   console.error(n);
-  const e = n instanceof Tt ? `CYPHERV2.Genre.Errors.${n.code}` : n instanceof x ? `CYPHERV2.Genre.Errors.${n.code}` : "CYPHERV2.Genre.Errors.unexpected";
+  const e = n instanceof zt ? `CYPHERV2.Genre.Errors.${n.code}` : n instanceof x ? `CYPHERV2.Genre.Errors.${n.code}` : "CYPHERV2.Genre.Errors.unexpected";
   ui.notifications.error(game.i18n.localize(e));
 }
 async function In(n, e, t = "manual") {
@@ -6189,7 +6248,7 @@ async function In(n, e, t = "manual") {
     }
     const a = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize("CYPHERV2.Genre.Add") },
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Genre.Label")}<select name="uuid">${o.map((r) => `<option value="${ze(r.uuid)}">${ze(r.name)}</option>`).join("")}</select></label></div>`,
+      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Genre.Label")}<select name="uuid">${o.map((r) => `<option value="${Te(r.uuid)}">${Te(r.name)}</option>`).join("")}</select></label></div>`,
       ok: { label: game.i18n.localize("CYPHERV2.Actions.Add") }
     });
     if (!a) return;
@@ -6207,7 +6266,7 @@ async function In(n, e, t = "manual") {
       Ni(o);
     }
 }
-async function Ed(n) {
+async function Rd(n) {
   if (await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Genre.Remove") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Genre.RemoveConfirm")}</p></div>`,
@@ -6220,7 +6279,7 @@ async function Ed(n) {
       Ni(t);
     }
 }
-async function Rd(n, e) {
+async function Pd(n, e) {
   try {
     const t = await game.cypherv2.services.genres.active(n);
     if (!t) throw new x("genre-required", "Attach a Genre first.");
@@ -6230,7 +6289,7 @@ async function Rd(n, e) {
     if (!o.length) throw new x("entry-ineligible", "No eligible Genre Ability is available.");
     const a = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize("CYPHERV2.Genre.ChooseAbility") },
-      content: `<div class="cypherv2-dialog-fields"><p><strong>${ze(t.name)}</strong></p><label>${game.i18n.localize("CYPHERV2.Genre.Ability")}<select name="entryId">${o.map((r) => `<option value="${ze(r.id)}">${ze(r.snapshot.name)} (${game.i18n.localize("CYPHERV2.Focus.Tier")} ${r.minimumTier})</option>`).join("")}</select></label></div>`,
+      content: `<div class="cypherv2-dialog-fields"><p><strong>${Te(t.name)}</strong></p><label>${game.i18n.localize("CYPHERV2.Genre.Ability")}<select name="entryId">${o.map((r) => `<option value="${Te(r.id)}">${Te(r.snapshot.name)} (${game.i18n.localize("CYPHERV2.Focus.Tier")} ${r.minimumTier})</option>`).join("")}</select></label></div>`,
       ok: { label: game.i18n.localize("CYPHERV2.Genre.Acquire") }
     });
     if (!a) return;
@@ -6244,7 +6303,7 @@ async function Rd(n, e) {
     Ni(t);
   }
 }
-async function Pd(n) {
+async function Sd(n) {
   try {
     const e = await game.cypherv2.services.genres.active(n);
     if (!e) throw new x("genre-required", "Attach a Genre first.");
@@ -6254,11 +6313,11 @@ async function Pd(n) {
       return;
     }
     const i = `<div class="cypherv2 genre-ability-browser">
-      <p class="genre-browser-source"><strong>${ze(e.name)}</strong></p>
+      <p class="genre-browser-source"><strong>${Te(e.name)}</strong></p>
       <div class="genre-browser-list">${t.map((u, c) => `
         <label class="genre-browser-entry${u.owned ? " is-owned" : ""}${u.normallyAvailable ? "" : " is-future"}">
-          <input type="radio" name="entryId" value="${ze(u.id)}"${c === 0 ? " checked" : ""}>
-          <span><strong>${ze(u.name)}</strong><small>${game.i18n.localize("CYPHERV2.Genre.MinimumTier")} ${u.minimumTier}</small></span>
+          <input type="radio" name="entryId" value="${Te(u.id)}"${c === 0 ? " checked" : ""}>
+          <span><strong>${Te(u.name)}</strong><small>${game.i18n.localize("CYPHERV2.Genre.MinimumTier")} ${u.minimumTier}</small></span>
           <em>${game.i18n.localize(u.owned ? "CYPHERV2.Genre.Browser.Owned" : u.normallyAvailable ? "CYPHERV2.Genre.Browser.Available" : "CYPHERV2.Genre.Browser.HigherTier")}</em>
         </label>`).join("")}</div>
       <p class="hint">${game.i18n.localize("CYPHERV2.Genre.Browser.GuidanceOnly")}</p>
@@ -6280,7 +6339,7 @@ async function Pd(n) {
     }
     if (!await foundry.applications.api.DialogV2.confirm({
       window: { title: game.i18n.localize("CYPHERV2.Genre.Browser.Undo") },
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Genre.Browser.UndoConfirm", { name: ze(r.name) })}</p></div>`,
+      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Genre.Browser.UndoConfirm", { name: Te(r.name) })}</p></div>`,
       yes: { label: game.i18n.localize("CYPHERV2.Genre.Browser.Undo") },
       no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
     })) return;
@@ -6295,7 +6354,7 @@ async function Pd(n) {
     Ni(e);
   }
 }
-function Gt(n) {
+function Ut(n) {
   return n.replace(/[&<>"']/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -6304,25 +6363,25 @@ function Gt(n) {
     "'": "&#039;"
   })[e]);
 }
-function Sd(n, e, t) {
+function kd(n, e, t) {
   return n.includes(e) ? n.filter((i) => i !== e) : n.length >= t ? [...n] : [...n, e];
 }
-function kd() {
+function Ad() {
   let n = !1;
   return () => n ? !1 : (n = !0, !0);
 }
-function Ad(n, e) {
-  return n.map((t, i) => `<button type="button" class="package-choice-option"${e ? ` data-action="package-choice-${i}"` : ""} data-package-choice-option data-option-id="${Gt(t.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${Gt(t.label)}</span></button>`).join("");
+function Hd(n, e) {
+  return n.map((t, i) => `<button type="button" class="package-choice-option"${e ? ` data-action="package-choice-${i}"` : ""} data-package-choice-option data-option-id="${Ut(t.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${Ut(t.label)}</span></button>`).join("");
 }
 async function Mi(n) {
   const e = n.options.filter((l, u, c) => l.id && c.findIndex((p) => p.id === l.id) === u);
   if (!Number.isInteger(n.choose) || n.choose < 1 || n.choose > e.length) return null;
-  const t = n.choose === 1, i = kd();
+  const t = n.choose === 1, i = Ad();
   let o = [];
   const a = `<div class="cypherv2 cypherv2-dialog package-choice-dialog ${t ? "package-choice-single" : "package-choice-multiple"}" data-package-choice-required="${n.choose}">
-    <header class="cypherv2-dialog-heading package-choice-heading"><strong>${Gt(n.title)}</strong></header>
-    <p class="cypherv2-dialog-help package-choice-prompt">${Gt(n.prompt)}</p>
-    <div class="package-choice-options" role="group" aria-label="${Gt(n.ariaLabel)}">${Ad(e, t)}</div>
+    <header class="cypherv2-dialog-heading package-choice-heading"><strong>${Ut(n.title)}</strong></header>
+    <p class="cypherv2-dialog-help package-choice-prompt">${Ut(n.prompt)}</p>
+    <div class="package-choice-options" role="group" aria-label="${Ut(n.ariaLabel)}">${Hd(e, t)}</div>
     ${t ? "" : `<div class="package-choice-selection-status" aria-live="polite"><span data-package-choice-count>0 / ${n.choose} ${game.i18n.localize("CYPHERV2.Packages.Selected")}</span></div>`}
   </div>`, r = t ? e.map((l, u) => ({
     action: `package-choice-${u}`,
@@ -6353,49 +6412,49 @@ async function Mi(n) {
       };
       for (const y of c)
         y.addEventListener("click", () => {
-          o = Sd(o, y.dataset.optionId ?? "", n.choose), m();
+          o = kd(o, y.dataset.optionId ?? "", n.choose), m();
         });
       m();
     }
   });
   return Array.isArray(s) && s.length === n.choose ? s : null;
 }
-const Hd = "cypherv2.descriptors";
-function Id(n) {
+const Id = "cypherv2.descriptors";
+function $d(n) {
   return structuredClone(n);
 }
-function $d(n) {
+function Vd(n) {
   const e = n.toObject?.() ?? {};
   return {
     name: String(e.name ?? n.name),
     ...String(e.img ?? n.img ?? "") ? { img: String(e.img ?? n.img) } : {},
-    system: Id(e.system ?? n.system)
+    system: $d(e.system ?? n.system)
   };
 }
-function Vd(n, e) {
+function Yd(n, e) {
   const t = n.name.toLocaleLowerCase(), i = e.name.toLocaleLowerCase();
   return t < i ? -1 : t > i ? 1 : n.uuid < e.uuid ? -1 : n.uuid > e.uuid ? 1 : 0;
 }
-function Yd(n, e) {
+function Fd(n, e) {
   const t = /* @__PURE__ */ new Map();
   for (const o of e)
     o.type !== "descriptor" || !o.uuid || t.has(o.uuid) || t.set(o.uuid, o);
-  const i = [...t.values()].sort(Vd).map((o) => ({
+  const i = [...t.values()].sort(Yd).map((o) => ({
     id: o.uuid,
     descriptorUuid: o.uuid,
-    snapshot: $d(o)
+    snapshot: Vd(o)
   }));
   return n.map((o) => (o.sourceMode ?? "fixed") !== "catalog" ? o : {
     ...o,
     options: o.catalogItemType === "descriptor" ? i : []
   });
 }
-async function Fd() {
-  const n = game, e = n.packs?.get(Hd), t = e ? await e.getDocuments() : [], i = [...n.items].filter((o) => o.type === "descriptor");
+async function Dd() {
+  const n = game, e = n.packs?.get(Id), t = e ? await e.getDocuments() : [], i = [...n.items].filter((o) => o.type === "descriptor");
   return [...t, ...i];
 }
-async function Dd(n) {
-  return n.some((e) => (e.sourceMode ?? "fixed") === "catalog") ? Yd(n, await Fd()) : [...n];
+async function zd(n) {
+  return n.some((e) => (e.sourceMode ?? "fixed") === "catalog") ? Fd(n, await Dd()) : [...n];
 }
 function Pt(n) {
   return n.replace(/[&<>"']/g, (e) => ({
@@ -6409,7 +6468,7 @@ function Pt(n) {
 function qi(n) {
   return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
 }
-async function ro(n) {
+async function so(n) {
   const e = [...game.items].filter((i) => i.type === n).sort((i, o) => i.name.localeCompare(o.name));
   if (!e.length)
     return ui.notifications.warn(game.i18n.localize(`CYPHERV2.Packages.NoWorld${n === "characterType" ? "Types" : n === "descriptor" ? "Descriptors" : "Species"}`)), null;
@@ -6422,7 +6481,7 @@ async function ro(n) {
   });
   return t ? await fromUuid(String(t.uuid ?? "")) : null;
 }
-async function so(n) {
+async function lo(n) {
   const e = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Packages.Remove") },
     content: `<div class="cypherv2-dialog-fields"><p>${game.i18n.format("CYPHERV2.Packages.RemoveConfirm", { name: Pt(n) })}</p>
@@ -6436,7 +6495,7 @@ async function so(n) {
 function xi(n) {
   console.error(n), ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-function lo(n) {
+function co(n) {
   return n.map((e) => ({
     id: e,
     label: game.i18n.localize(`CYPHERV2.Pools.${e[0].toUpperCase()}${e.slice(1)}`)
@@ -6450,7 +6509,7 @@ async function Nr(n) {
     }),
     ariaLabel: game.i18n.localize("CYPHERV2.Packages.EdgeChoice"),
     choose: 1,
-    options: lo(V)
+    options: co(V)
   }))?.[0];
   return V.includes(t) ? t : null;
 }
@@ -6460,12 +6519,12 @@ async function Td(n) {
     prompt: game.i18n.localize("CYPHERV2.Packages.SuperheroicsPoolPrompt"),
     ariaLabel: game.i18n.localize("CYPHERV2.Packages.SuperheroicsPool"),
     choose: 1,
-    options: lo(V)
+    options: co(V)
   }))?.[0];
   return V.includes(t) ? t : null;
 }
-async function Ko(n, e) {
-  const t = e ?? await ro("characterType");
+async function Xo(n, e) {
+  const t = e ?? await so("characterType");
   if (!t) return;
   const i = qi(n).find((p) => p.type === "characterType");
   let o, a;
@@ -6474,7 +6533,7 @@ async function Ko(n, e) {
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Packages.ReplaceTypeConfirm", { name: Pt(i.name) })}</p></div>`,
     yes: { label: game.i18n.localize("CYPHERV2.Packages.Replace") },
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
-  }) || (o = i.id, a = await so(i.name) ?? void 0, !a)))
+  }) || (o = i.id, a = await lo(i.name) ?? void 0, !a)))
     return;
   const r = t.system;
   let s;
@@ -6499,7 +6558,7 @@ async function Ko(n, e) {
       }), ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.TypeAttached"));
       const p = n;
       if (!p.system.genre.sourceUuid) {
-        const h = [...game.items].filter((y) => y.type === "genre"), m = await zr(
+        const h = [...game.items].filter((y) => y.type === "genre"), m = await Tr(
           r,
           h,
           async (y) => await fromUuid(y)
@@ -6512,11 +6571,11 @@ async function Ko(n, e) {
         }) && await In(p, m, "typeSuggestion");
       }
     } catch (p) {
-      p instanceof Ue || xi(p);
+      p instanceof Ge || xi(p);
     }
 }
-async function Xo(n, e) {
-  const t = e ?? await ro("descriptor");
+async function Jo(n, e) {
+  const t = e ?? await so("descriptor");
   if (!t) return;
   const i = qi(n).some((l) => l.type === "descriptor" && l.system.instance.role === "primary"), o = await foundry.applications.api.DialogV2.input({
     window: { title: t.name },
@@ -6542,7 +6601,7 @@ async function Xo(n, e) {
         conflictResolver: It
       }), ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.DescriptorAttached"));
     } catch (l) {
-      l instanceof Ue || xi(l);
+      l instanceof Ge || xi(l);
     }
 }
 async function Mr(n, e) {
@@ -6556,7 +6615,7 @@ async function Mr(n, e) {
       prompt: i.choose === 1 ? game.i18n.localize("CYPHERV2.Packages.ChooseOnePool") : game.i18n.format("CYPHERV2.Packages.ChooseManyPools", { count: i.choose }),
       ariaLabel: game.i18n.localize("CYPHERV2.Packages.AllowedPools"),
       choose: i.choose,
-      options: lo(o)
+      options: co(o)
     });
     if (!a) return null;
     t[i.id] = a.filter((r) => V.includes(r));
@@ -6587,8 +6646,8 @@ async function tt(n, e, t) {
   }
   return i;
 }
-async function Jo(n, e) {
-  const t = e ?? await ro("species");
+async function Qo(n, e) {
+  const t = e ?? await so("species");
   if (!t) return;
   const i = qi(n).find((f) => f.type === "species");
   let o, a;
@@ -6597,7 +6656,7 @@ async function Jo(n, e) {
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Species.ReplaceConfirm", { name: Pt(i.name) })}</p></div>`,
     yes: { label: game.i18n.localize("CYPHERV2.Packages.Replace") },
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
-  }) || (o = i.id, a = await so(i.name) ?? void 0, !a)))
+  }) || (o = i.id, a = await lo(i.name) ?? void 0, !a)))
     return;
   const r = t.system;
   let s;
@@ -6607,7 +6666,7 @@ async function Jo(n, e) {
   if (l === null) return;
   const u = await tt(t.name, r.abilityChoiceGroups ?? [], game.i18n.localize("CYPHERV2.Species.AbilityChoice"));
   if (u === null) return;
-  const c = await Dd(r.descriptorChoiceGroups ?? []), p = await tt(
+  const c = await zd(r.descriptorChoiceGroups ?? []), p = await tt(
     t.name,
     c,
     game.i18n.localize("CYPHERV2.Species.DescriptorChoice")
@@ -6638,13 +6697,13 @@ async function Jo(n, e) {
       ...a ? { replaceGrantedItemsMode: a } : {}
     }), ui.notifications.info(game.i18n.localize("CYPHERV2.Species.Attached"));
   } catch (f) {
-    f instanceof Ue || xi(f);
+    f instanceof Ge || xi(f);
   }
 }
-async function zd(n, e) {
+async function Nd(n, e) {
   const t = qi(n).find((o) => o.id === e);
   if (!t) return;
-  const i = await so(t.name);
+  const i = await lo(t.name);
   if (i)
     try {
       await game.cypherv2.services.characterPackages.remove(n, e, i), ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.Removed"));
@@ -6655,15 +6714,15 @@ async function zd(n, e) {
 function qr(n) {
   return [...n.items].filter((e) => e instanceof Item && e.type === "skill").map((e) => e).sort((e, t) => e.name.localeCompare(t.name));
 }
-function Nd() {
+function Md() {
   return [...game.user.targets ?? []].flatMap((n) => {
-    const e = Cr(n);
+    const e = Er(n);
     if (e) return [e];
-    const t = Er(n);
+    const t = Rr(n);
     return t ? [t] : [];
   });
 }
-function Qo(n, e) {
+function Zo(n, e) {
   const t = We(n);
   if (t.length === 1) {
     const o = t[0];
@@ -6673,7 +6732,7 @@ function Qo(n, e) {
   const i = t.length > 1 ? t : bl;
   return `<label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${i.map((o) => `<option value="${o}">${game.i18n.localize(`CYPHERV2.Pools.${o[0].toUpperCase()}${o.slice(1)}`)}</option>`).join("")}</select></label>`;
 }
-function Md(n) {
+function qd(n) {
   return [
     `<optgroup label="${game.i18n.localize("CYPHERV2.Roll.ManualSkillLevel")}">${oo(0, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("CYPHERV2.Skill.Title")}">`,
@@ -6681,31 +6740,31 @@ function Md(n) {
     "</optgroup>"
   ].join("");
 }
-function qd(n, e) {
+function xd(n, e) {
   const t = re(e, "skillId");
   return qr(n).find((i) => i.id === t);
 }
-function xd(n) {
+function Ud(n) {
   const e = re(n, "skillId");
   return e.startsWith("manual:") ? Number(e.slice(7)) : 0;
 }
-function Zo(n) {
+function ea(n) {
   const e = re(n, "pool");
   return e === "might" || e === "speed" || e === "intellect" ? e : void 0;
 }
 async function Gd(n, e) {
   if (!game.cypherv2.services.abilities.canUse(e)) return;
-  const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = e.system.targetMode === "none" ? [] : Nd(), r = a.filter((f) => f.type === "npc"), s = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${a.length ? a.map((f) => f.name).join(", ") : game.i18n.localize("CYPHERV2.Common.None")}</span></div>`;
+  const t = Me(), i = t.enabledRuleModuleIds ?? [], o = game.cypherv2.rules.resolveDifficultyPolicy(t.base, i), a = e.system.targetMode === "none" ? [] : Md(), r = a.filter((f) => f.type === "npc"), s = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${a.length ? a.map((f) => f.name).join(", ") : game.i18n.localize("CYPHERV2.Common.None")}</span></div>`;
   if (!s) {
     const f = await foundry.applications.api.DialogV2.input({
       window: { title: `${game.i18n.localize("CYPHERV2.Ability.Use")}: ${e.name}` },
-      content: `<div class="cypherv2 cypherv2-dialog-fields"><p><strong>${e.name}</strong></p>${l}${Qo(e, !1)}</div>`,
+      content: `<div class="cypherv2 cypherv2-dialog-fields"><p><strong>${e.name}</strong></p>${l}${Zo(e, !1)}</div>`,
       rejectClose: !1,
       ok: { label: game.i18n.localize("CYPHERV2.Ability.Use") }
     });
     if (!f) return;
     try {
-      const w = Zo(f), C = await game.cypherv2.services.abilities.executeNoRoll(n, e, {
+      const w = ea(f), C = await game.cypherv2.services.abilities.executeNoRoll(n, e, {
         ...w ? { pool: w } : {},
         targets: a,
         enabledRuleModuleIds: i
@@ -6717,18 +6776,18 @@ async function Gd(n, e) {
     return;
   }
   const u = r.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Roll.Difficulty")}</strong><span>${game.i18n.localize("CYPHERV2.Roll.HiddenValue")}</span></div>` : ei(o.difficultyCeiling, !0), c = (f) => {
-    const w = qd(n, f), C = Zo(f);
+    const w = xd(n, f), C = ea(f);
     return {
       ...C ? { pool: C } : {},
       targets: a,
       difficulty: Jt(f),
       ...w ? { skill: w } : {},
-      skillSteps: xd(f),
-      assets: U(f, "assets"),
-      paidEffort: U(f, "paidEffort"),
-      damageEffort: U(f, "damageEffort"),
-      freeDamageEffort: U(f, "freeDamageEffort"),
-      freeEffort: U(f, "freeEffort"),
+      skillSteps: Ud(f),
+      assets: O(f, "assets"),
+      paidEffort: O(f, "paidEffort"),
+      damageEffort: O(f, "damageEffort"),
+      freeDamageEffort: O(f, "freeDamageEffort"),
+      freeEffort: O(f, "freeEffort"),
       ...Qt(f),
       enabledRuleModuleIds: i
     };
@@ -6739,8 +6798,8 @@ async function Gd(n, e) {
   }, h = `
     ${l}
     ${u}
-    ${Qo(e, !0)}
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${Md(n)}</select></label>
+    ${Zo(e, !0)}
+    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${qd(n)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${ge(o.assetLimit)}</select></label>
     <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${ge(n.system.derived.effort.max)}</select></label>
     ${e.system.roll === "attack" ? `<label>${game.i18n.localize("CYPHERV2.Combat.DamageEffort")}<select name="damageEffort">${ge(n.system.derived.effort.max)}</select></label>
@@ -6784,7 +6843,7 @@ async function Gd(n, e) {
         t
       );
       if (e.system.roll === "attack") {
-        const C = await Ar(f);
+        const C = await Hr(f);
         C && (f = game.cypherv2.services.abilities.chooseAttackOutcomes(f, C));
       }
       for (const C of f)
@@ -6792,7 +6851,7 @@ async function Gd(n, e) {
           n,
           C,
           Di(),
-          Ti()
+          zi()
         );
       const w = f[0];
       w && await Xt().requestFreeFromNaturalResult(n, w.execution.result);
@@ -6800,14 +6859,14 @@ async function Gd(n, e) {
       ui.notifications.error(f instanceof Error ? f.message : String(f));
     }
 }
-function Ud(n) {
+function Od(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function Od(n) {
+function Bd(n) {
   const e = String(n.pool ?? "");
   return e === "might" || e === "speed" || e === "intellect" ? e : null;
 }
-async function Bd(n, e) {
+async function Ld(n, e) {
   const t = We(e);
   if (e.system.cost.amount <= 0 || t.length === 0)
     throw new Error(game.i18n.localize("CYPHERV2.Ability.Payment.NoCost"));
@@ -6818,7 +6877,7 @@ async function Bd(n, e) {
     ).map((l, u) => `
       <label class="ability-payment-choice">
         <input type="radio" name="pool" value="${l.pool}" ${u === 0 ? "checked" : ""}>
-        <strong>${Ud(l.pool)}</strong>
+        <strong>${Od(l.pool)}</strong>
         <span>${game.i18n.localize("CYPHERV2.Ability.Payment.Current")}: ${l.currentBefore}</span>
         <span>${game.i18n.localize("CYPHERV2.Pools.Edge")}: ${l.edge}</span>
         <span>${game.i18n.localize("CYPHERV2.Ability.Payment.Pay")}: ${l.costPaid}</span>
@@ -6829,24 +6888,24 @@ async function Bd(n, e) {
       ok: { label: game.i18n.localize("CYPHERV2.Ability.Payment.Pay") }
     });
     if (!s) return;
-    if (i = Od(s), !i || !t.includes(i)) throw new Error("Invalid Ability payment Pool.");
+    if (i = Bd(s), !i || !t.includes(i)) throw new Error("Invalid Ability payment Pool.");
   }
   const o = await game.cypherv2.services.abilities.payCost(n, e, i);
   await game.cypherv2.services.abilityChat.publishPayment(n, o);
 }
-const Ld = {
+const jd = {
   descriptor: { accepts: "descriptor", placeholder: "[DESCRIPTOR]" },
   species: { accepts: "species", placeholder: "[SPECIES]" },
   type: { accepts: "characterType", placeholder: "[TYPE]" },
   focus: { accepts: "focus", placeholder: "[FOCUS]" }
-}, jd = {
+}, Wd = {
   "one-action": "CYPHERV2.Hud.Recovery.Action",
   "10-minutes": "CYPHERV2.Hud.Recovery.TenMinutes",
   "1-hour": "CYPHERV2.Hud.Recovery.OneHour",
   "10-hours": "CYPHERV2.Hud.Recovery.TenHours"
 };
 function Ft(n, e) {
-  const t = Ld[n];
+  const t = jd[n];
   return {
     kind: n,
     accepts: t.accepts,
@@ -6860,7 +6919,7 @@ function Ft(n, e) {
     ...e?.attachedAt !== void 0 ? { attachedAt: e.attachedAt } : {}
   };
 }
-const ea = {
+const ta = {
   primary: 0,
   additional: 1,
   custom: 1,
@@ -6869,22 +6928,22 @@ const ea = {
 function rn(n) {
   return n.instanceId || n.id || n.uuid || `${n.role ?? "custom"}:${n.name.trim().toLocaleLowerCase("en-US")}`;
 }
-function Wd(n = []) {
+function _d(n = []) {
   const e = /* @__PURE__ */ new Map();
   for (const t of n) {
     const i = rn(t);
     e.has(i) || e.set(i, t);
   }
-  return [...e.values()].sort((t, i) => ea[t.role ?? "custom"] - ea[i.role ?? "custom"] || (t.attachedAt ?? 0) - (i.attachedAt ?? 0) || t.name.localeCompare(i.name, "en-US") || rn(t).localeCompare(rn(i), "en-US"));
+  return [...e.values()].sort((t, i) => ta[t.role ?? "custom"] - ta[i.role ?? "custom"] || (t.attachedAt ?? 0) - (i.attachedAt ?? 0) || t.name.localeCompare(i.name, "en-US") || rn(t).localeCompare(rn(i), "en-US"));
 }
-function _d(n) {
+function Kd(n) {
   const e = n.trim().replace(/^[^a-z]+/i, "").toLocaleLowerCase("en-US");
   return /^(honest|honor|hour|heir)/.test(e) ? "AN" : /^(one|once|euro|user|use|uni(?:t|v|q))/.test(e) ? "A" : /^[aeiou]/.test(e) ? "AN" : "A";
 }
-function Kd(n = {}) {
-  const e = Wd(n.descriptors), t = e.map((c) => Ft("descriptor", c));
+function Xd(n = {}) {
+  const e = _d(n.descriptors), t = e.map((c) => Ft("descriptor", c));
   e.some((c) => c.role === "primary") || t.unshift(Ft("descriptor"));
-  const i = n.species ? Ft("species", n.species) : null, o = Ft("type", n.type), a = Ft("focus", n.focus), r = n.hideFocus !== !0, s = _d(t[0].displayName), u = [t.map((c) => c.displayName).join(" AND "), i?.displayName, o.displayName].filter(Boolean).join(" ");
+  const i = n.species ? Ft("species", n.species) : null, o = Ft("type", n.type), a = Ft("focus", n.focus), r = n.hideFocus !== !0, s = Kd(t[0].displayName), u = [t.map((c) => c.displayName).join(" AND "), i?.displayName, o.displayName].filter(Boolean).join(" ");
   return {
     article: s,
     descriptors: t,
@@ -6895,7 +6954,7 @@ function Kd(n = {}) {
     sentence: r ? `I AM ${s} ${u} WHO ${a.displayName}` : `I AM ${s} ${u}`
   };
 }
-function Xd(n, e) {
+function Jd(n, e) {
   const t = Math.max(0, Math.trunc(e)), i = Math.max(0, Math.min(t, Math.trunc(n)));
   return Array.from({ length: t }, (o, a) => ({
     index: a,
@@ -6909,37 +6968,37 @@ function vi(n, e) {
     count: n[t],
     capacity: e[t],
     overCapacity: Math.max(0, n[t] - e[t]),
-    pips: Xd(n[t], e[t])
+    pips: Jd(n[t], e[t])
   }));
 }
-function Jd(n) {
+function Qd(n) {
   return (Array.isArray(n) ? n : at(n)).map((t) => {
     const i = t.used;
-    return { id: t.id, type: t.type, used: i, available: !i, shortLabel: jd[t.type] };
+    return { id: t.id, type: t.type, used: i, available: !i, shortLabel: Wd[t.type] };
   });
 }
 function xr(n, e) {
   const t = Number.isFinite(e) ? Math.max(0, e) : 0, i = Number.isFinite(n) ? Math.max(0, Math.min(t, n)) : 0, o = t > 0 ? i / t : 0;
   return { current: i, max: t, ratio: o, percent: o * 100 };
 }
-const Qd = ["name", "rank"], ta = {
+const Zd = ["name", "rank"], ia = {
   expert: 0,
   specialized: 1,
   trained: 2,
   untrained: 3,
   inability: 4
 };
-function Zd(n) {
-  return Qd.includes(n);
+function eu(n) {
+  return Zd.includes(n);
 }
-function eu(n, e) {
-  return [...n].sort((t, i) => (e === "rank" ? ta[t.rank] - ta[i.rank] : 0) || t.name.localeCompare(i.name, "en-US"));
+function tu(n, e) {
+  return [...n].sort((t, i) => (e === "rank" ? ia[t.rank] - ia[i.rank] : 0) || t.name.localeCompare(i.name, "en-US"));
 }
-function tu(n) {
+function iu(n) {
   const e = n.system.grantedBy;
   return !e || e.status === "retained" ? !0 : !e.sourceUuid && !e.instanceId && !e.grantId;
 }
-function ia(n) {
+function na(n) {
   const e = We(n), t = Number.isInteger(n.system.cost.amount) && n.system.cost.amount > 0 ? n.system.cost.amount : 0;
   return {
     archived: n.system.archived === !0,
@@ -6950,14 +7009,14 @@ function ia(n) {
       payable: t > 0 && e.length > 0
     },
     description: n.system.description.trim(),
-    canDelete: tu(n)
+    canDelete: iu(n)
   };
 }
-function iu(n) {
+function nu(n) {
   const e = new Intl.Collator("en-US", { sensitivity: "base", numeric: !0 });
   return n.map((t, i) => ({ ability: t, index: i })).sort((t, i) => +(t.ability.system.archived === !0) - +(i.ability.system.archived === !0) || e.compare(t.ability.name, i.ability.name) || t.index - i.index).map(({ ability: t }) => t);
 }
-class nu {
+class ou {
   #e = /* @__PURE__ */ new Set();
   isExpanded(e) {
     return this.#e.has(e);
@@ -6974,44 +7033,44 @@ class nu {
       t.has(i) || this.#e.delete(i);
   }
 }
-function Gi(n) {
+function Ui(n) {
   return String(n.level ?? "1").trim() || "1";
 }
 function Ai(n) {
-  return !/^\d+$/.test(Gi(n));
+  return !/^\d+$/.test(Ui(n));
 }
 function $n(n) {
   return n.depleted !== !0;
 }
-function Gr(n) {
+function Ur(n) {
   return Nn.includes(n) ? n : "subtle";
 }
-function Ur(n) {
+function Gr(n) {
   return Mn.includes(n) ? n : "low";
 }
-function co(n) {
+function uo(n) {
   const e = Number(n.level);
-  return n.levelOverride === !0 && Number.isInteger(e) && e >= 1 ? e : Gr(n.manifestation) === "manifest" ? 6 : 4;
+  return n.levelOverride === !0 && Number.isInteger(e) && e >= 1 ? e : Ur(n.manifestation) === "manifest" ? 6 : 4;
 }
 const Vn = ["equipment", "cypher", "artifact"];
-function na(n, e) {
+function oa(n, e) {
   const t = Number(n);
   return Number.isInteger(t) && t >= 0 ? t : e;
 }
 function Ci(n) {
   return Vn.includes(n);
 }
-function ou(n) {
+function au(n) {
   if (!Ci(n.type)) return null;
   const e = n.system.depletion && typeof n.system.depletion == "object" ? n.system.depletion : null;
   return {
     id: n.id,
     name: n.name,
     type: n.type,
-    level: n.type === "cypher" ? co(n.system) : n.type === "artifact" ? Gi(n.system) : null,
+    level: n.type === "cypher" ? uo(n.system) : n.type === "artifact" ? Ui(n.system) : null,
     levelRollable: n.type === "artifact" && Ai(n.system),
-    power: n.type === "cypher" ? Ur(n.system.power) : null,
-    quantity: n.type === "equipment" ? na(n.system.quantity, 1) : null,
+    power: n.type === "cypher" ? Gr(n.system.power) : null,
+    quantity: n.type === "equipment" ? oa(n.system.quantity, 1) : null,
     equipped: n.type === "equipment" && typeof n.system.equipped == "boolean" ? n.system.equipped : null,
     description: typeof n.system.description == "string" ? n.system.description.trim() : "",
     depleted: n.type === "artifact" && n.system.depleted === !0,
@@ -7019,11 +7078,11 @@ function ou(n) {
     depletion: n.type === "artifact" && e ? {
       enabled: !!e.enabled,
       formula: String(e.formula || `1${String(e.die ?? "d6")}`),
-      threshold: na(e.threshold, 1)
+      threshold: oa(e.threshold, 1)
     } : null
   };
 }
-class oa {
+class aa {
   #e = /* @__PURE__ */ new Set();
   isExpanded(e) {
     return this.#e.has(e);
@@ -7050,40 +7109,40 @@ function Yn(n) {
   }
   return { track: e, severity: t, count: o };
 }
-async function au(n, e) {
+async function ru(n, e) {
   const t = rt(e);
   if (!t) throw new Error("Weapon family must not be blank.");
   const i = se([...n.system.proficiencies.weaponFamilies, t]);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
-async function ru(n, e) {
+async function su(n, e) {
   const t = rt(e), i = se(n.system.proficiencies.weaponFamilies).filter((o) => o !== t);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
-async function su(n) {
+async function lu(n) {
   const e = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Settings.Character.AddWeaponFamily") },
     content: `<div class="cypherv2 cypherv2-dialog"><label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Settings.Character.WeaponFamily")}
       <input name="family" type="text" list="cypherv2-character-weapon-families" required autofocus>
-      <datalist id="cypherv2-character-weapon-families">${La.map((t) => `<option value="${ht(t)}"></option>`).join("")}</datalist>
+      <datalist id="cypherv2-character-weapon-families">${ja.map((t) => `<option value="${ht(t)}"></option>`).join("")}</datalist>
     </label></div>`,
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Add") }
   });
-  e && await au(n, e.family);
+  e && await ru(n, e.family);
 }
-function lu(n) {
+function cu(n) {
   const e = n.family, t = n.category;
   if (e !== "weapon" && e !== "armor") throw new Error("Invalid familiarity action data.");
-  if (!t || !(e === "weapon" ? xe : Ge).includes(t)) throw new Error("Invalid familiarity action data.");
+  if (!t || !(e === "weapon" ? xe : Ue).includes(t)) throw new Error("Invalid familiarity action data.");
   return { family: e, category: t };
 }
-function cu(n, e) {
-  const t = /* @__PURE__ */ new Set([...xe, ...Ge]), i = new Set(n.filter((o) => t.has(o)));
+function du(n, e) {
+  const t = /* @__PURE__ */ new Set([...xe, ...Ue]), i = new Set(n.filter((o) => t.has(o)));
   return i.has(e) ? i.delete(e) : i.add(e), [...i];
 }
-async function du(n, e, t) {
-  const i = e === "weapon" ? "weaponCategories" : "armorCategories", o = cu(n.system.proficiencies[i], t);
+async function uu(n, e, t) {
+  const i = e === "weapon" ? "weaponCategories" : "armorCategories", o = du(n.system.proficiencies[i], t);
   return await n.update({ [`system.proficiencies.${i}`]: o }), o;
 }
 function fi(n) {
@@ -7095,7 +7154,7 @@ function fi(n) {
     "'": "&#039;"
   })[e]);
 }
-function uu(n) {
+function mu(n) {
   const e = n ?? { category: "Accuracy", shifts: 1, specification: "", description: "" };
   return `<div class="cypherv2 cypherv2-dialog cypherv2-power-shift-dialog">
     <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.PowerShifts.Category")}
@@ -7113,15 +7172,15 @@ function uu(n) {
     </label>
   </div>`;
 }
-async function aa(n, e, t) {
+async function ra(n, e, t) {
   const i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize(t ? "CYPHERV2.PowerShifts.Edit" : "CYPHERV2.PowerShifts.Add") },
-    content: uu(t),
+    content: mu(t),
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Save") }
   });
   if (!i) return;
-  const o = zs(e, {
+  const o = Ts(e, {
     ...t ? { id: t.id } : {},
     category: String(i.category ?? ""),
     shifts: Number(i.shifts),
@@ -7130,26 +7189,26 @@ async function aa(n, e, t) {
   });
   await n.update({ "system.powerShifts": o });
 }
-async function mu(n, e, t) {
+async function pu(n, e, t) {
   await n.update({ "system.powerShifts": Ns(e, t) });
 }
 const hi = "system." + $;
 function Or() {
   return [...game.users];
 }
-function ra() {
+function sa() {
   return Or().filter((n) => n.active && n.isGM).sort((n, e) => n.id.localeCompare(e.id))[0] ?? null;
 }
-function sa(n, e) {
+function la(n, e) {
   return e.isGM || n.testUserPermission(e, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
-function pu(n) {
+function fu(n) {
   return [...game.messages].some((e) => {
     const t = e.getFlag($, "playerIntrusion");
     return !!(t && typeof t == "object" && t.requestId === n);
   });
 }
-class fu {
+class hu {
   #e;
   #t;
   #i = /* @__PURE__ */ new Set();
@@ -7163,7 +7222,7 @@ class fu {
     });
   }
   async activate(e) {
-    if (!sa(e, game.user))
+    if (!la(e, game.user))
       throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.NotAuthorized"));
     if (!this.#e.canUse(e))
       throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.RequiresXP"));
@@ -7176,7 +7235,7 @@ class fu {
         yes: { label: game.i18n.localize("CYPHERV2.Intrusion.Player.Confirm") },
         no: { label: game.i18n.localize("CYPHERV2.Intrusion.Player.Cancel") }
       })) return !1;
-      const i = Oe(), o = ra();
+      const i = Oe(), o = sa();
       return o && o.id !== game.user.id ? game.socket.emit(hi, {
         type: "player-intrusion-request",
         requestId: i,
@@ -7188,14 +7247,14 @@ class fu {
     }
   }
   async #o(e, t, i) {
-    if (!(this.#n.has(e) || pu(e))) {
+    if (!(this.#n.has(e) || fu(e))) {
       this.#n.add(e);
       try {
         const a = await fromUuid(t);
         if (!a || a.type !== "character" || a.uuid !== t)
           throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.CharacterMissing"));
         const r = Or().find((l) => l.id === i && l.active);
-        if (!r || !sa(a, r))
+        if (!r || !la(a, r))
           throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.NotAuthorized"));
         const s = await this.#e.spend(a, e);
         await this.#t.publish(s, a), Hooks.callAll("cypherv2PlayerIntrusionCreated", s, a);
@@ -7213,7 +7272,7 @@ class fu {
       i.recipientUserId === game.user.id && !i.success && i.error && ui.notifications.error(i.error);
       return;
     }
-    const o = ra();
+    const o = sa();
     if (!(!game.user.isGM || o?.id !== game.user.id))
       try {
         await this.#o(i.requestId, i.actorUuid, i.requesterUserId), game.socket.emit(hi, {
@@ -7233,24 +7292,24 @@ class fu {
       }
   }
 }
-let Ut = null;
-function hu(n, e) {
-  return Ut = new fu(n, e), Ut.initialize(), Ut;
+let Gt = null;
+function gu(n, e) {
+  return Gt = new hu(n, e), Gt.initialize(), Gt;
 }
-function gu() {
-  if (!Ut) throw new Error("Player Intrusion controller is not ready.");
-  return Ut;
+function yu() {
+  if (!Gt) throw new Error("Player Intrusion controller is not ready.");
+  return Gt;
 }
 const sn = "is-quick-roll-pulse";
-function yu(n) {
+function bu(n) {
   n.classList.remove(sn), n.offsetWidth, n.classList.add(sn), n.addEventListener("animationend", () => {
     n.classList.remove(sn);
   }, { once: !0 });
 }
-const bu = foundry.applications.api.HandlebarsApplicationMixin(
+const wu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 );
-function la(n) {
+function ca(n) {
   const e = n.dataset.severity, t = n.dataset.woundId;
   if (!ae.includes(e) || !t)
     throw new Error("Invalid Wound action data.");
@@ -7261,7 +7320,7 @@ function q(n) {
   if (!e) throw new Error("Missing Item ID.");
   return e;
 }
-function wu(n) {
+function vu(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
 function ln(n) {
@@ -7272,7 +7331,7 @@ function Je(n) {
   if (!e || !t) throw new Error("Missing Focus node action data.");
   return { focusUuid: e, nodeId: t };
 }
-const vu = {
+const Cu = {
   "not-character": "CYPHERV2.Focus.Errors.NotCharacter",
   "node-not-found": "CYPHERV2.Focus.Errors.NodeNotFound",
   "progress-missing": "CYPHERV2.Focus.Errors.ProgressMissing",
@@ -7294,7 +7353,7 @@ async function Ye(n, e) {
   const t = n.items.get(e);
   return t?.type === "focus" ? t : null;
 }
-const ca = /* @__PURE__ */ new Set([
+const da = /* @__PURE__ */ new Set([
   "applyWound",
   "setCharacterWoundCount",
   "setShieldWoundCount",
@@ -7334,6 +7393,7 @@ const ca = /* @__PURE__ */ new Set([
   "acquireFocusNode",
   "gmAcquireFocusNode",
   "purchaseAdvancement",
+  "undoAdvancement",
   "advanceTier",
   "completeProgressionGuidance",
   "resetProgressionGuidance",
@@ -7370,15 +7430,15 @@ const ca = /* @__PURE__ */ new Set([
   "rollArtifactLevel",
   "playerIntrusion"
 ]);
-class R extends bu {
-  #e = new $r();
-  #t = new Vr();
+class R extends wu {
+  #e = new Vr();
+  #t = new Yr();
   #i = null;
   #n = !1;
   #o = "name";
-  #r = new nu();
-  #l = new oa();
-  #a = new oa();
+  #r = new ou();
+  #l = new aa();
+  #a = new aa();
   #c = null;
   #s = null;
   #d = "skills";
@@ -7431,36 +7491,37 @@ class R extends bu {
       acquireFocusNode: R.#Ye,
       gmAcquireFocusNode: R.#Fe,
       purchaseAdvancement: R.#De,
+      undoAdvancement: R.#ze,
       advanceTier: R.#Te,
-      completeProgressionGuidance: R.#ze,
-      resetProgressionGuidance: R.#Ne,
-      addFocus: R.#Me,
-      removeFocus: R.#qe,
-      toggleGmProgressionEdit: R.#xe,
+      completeProgressionGuidance: R.#Ne,
+      resetProgressionGuidance: R.#Me,
+      addFocus: R.#qe,
+      removeFocus: R.#xe,
+      toggleGmProgressionEdit: R.#Ue,
       undoFocusAcquisition: R.#Ge,
-      gmMarkFocusOwned: R.#Ue,
-      gmRemoveFocusOwned: R.#Oe,
-      beginCoreSetup: R.#Be,
-      skipCoreSetup: R.#Le,
-      markCoreInitialized: R.#je,
-      restoreFocusAbility: R.#We,
+      gmMarkFocusOwned: R.#Oe,
+      gmRemoveFocusOwned: R.#Be,
+      beginCoreSetup: R.#Le,
+      skipCoreSetup: R.#je,
+      markCoreInitialized: R.#We,
+      restoreFocusAbility: R.#_e,
       addType: R.#w,
       addDescriptor: R.#f,
       addSpecies: R.#p,
       addGenre: R.#g,
-      inspectGenre: R.#u,
+      inspectGenre: R.#m,
       removeGenre: R.#b,
       acquireGenreAbility: R.#C,
       browseGenreAbilities: R.#D,
-      inspectPackage: R.#T,
-      removePackage: R.#z,
+      inspectPackage: R.#z,
+      removePackage: R.#T,
       inspectGrantedItem: R.#N,
       createAbility: R.#q,
       useAbility: R.#M,
-      payAbilityCost: R.#U,
+      payAbilityCost: R.#G,
       toggleAbilityArchived: R.#O,
       toggleAbilityDetails: R.#x,
-      inspectAbility: R.#G,
+      inspectAbility: R.#U,
       deleteAbility: R.#B,
       addPowerShift: R.#ne,
       editPowerShift: R.#oe,
@@ -7473,7 +7534,7 @@ class R extends bu {
       rollInventoryDepletion: R.#A,
       rollArtifactLevel: R.#K,
       playerIntrusion: R.#pe
-    }, ca),
+    }, da),
     position: { width: 760, height: 760 },
     window: { resizable: !0 }
   };
@@ -7495,17 +7556,17 @@ class R extends bu {
     }
   };
   async _onRender(e, t) {
-    if (await super._onRender(e, t), Zn(this.element, this.isEditable, ca), this.#s) {
+    if (await super._onRender(e, t), Zn(this.element, this.isEditable, da), this.#s) {
       this.#d = this.#s.activeTab;
       const i = this.changeTab;
-      typeof i == "function" && i.call(this, this.#d, "primary"), Gc(this.element, this.#s), this.#s = null;
+      typeof i == "function" && i.call(this, this.#d, "primary"), Uc(this.element, this.#s), this.#s = null;
     }
-    this.#e.bind(this.element), this.#t.bind(this.element), this.#be(), this.#m();
+    this.#e.bind(this.element), this.#t.bind(this.element), this.#be(), this.#u();
   }
   _onClose(e) {
     this.#i?.abort(), this.#i = null, this.#e.disconnect(), this.#t.disconnect(), this.#c?.abort(), this.#c = null, super._onClose(e);
   }
-  #m() {
+  #u() {
     this.#c?.abort(), this.#c = null;
     const e = [...this.element.querySelectorAll("input[data-inventory-quantity]")], t = [...this.element.querySelectorAll(
       ".combat-weapon-row[data-action], .combat-shield-row[data-action], .combat-armor-row[data-action]"
@@ -7535,39 +7596,39 @@ class R extends bu {
   async _onDropDocument(e, t) {
     if (!this.isEditable) return null;
     const i = t, a = (e.target instanceof Element ? e.target.closest("[data-hud-drop]") : null)?.dataset.hudDrop;
-    return a && i?.type !== a ? (ui.notifications.warn(game.i18n.localize("CYPHERV2.Hud.InvalidIdentityDrop")), null) : i?.type === "focus" ? (await Go(this.actor, i), i) : i?.type === "characterType" ? (await Ko(this.actor, i), i) : i?.type === "descriptor" ? (await Xo(this.actor, i), i) : i?.type === "species" ? (await Jo(this.actor, i), i) : i?.type === "genre" ? (await In(this.actor, i), i) : super._onDropDocument(e, t);
+    return a && i?.type !== a ? (ui.notifications.warn(game.i18n.localize("CYPHERV2.Hud.InvalidIdentityDrop")), null) : i?.type === "focus" ? (await Go(this.actor, i), i) : i?.type === "characterType" ? (await Xo(this.actor, i), i) : i?.type === "descriptor" ? (await Jo(this.actor, i), i) : i?.type === "species" ? (await Qo(this.actor, i), i) : i?.type === "genre" ? (await In(this.actor, i), i) : super._onDropDocument(e, t);
   }
   static async #w() {
-    await Ko(this.actor);
-  }
-  static async #f() {
     await Xo(this.actor);
   }
-  static async #p() {
+  static async #f() {
     await Jo(this.actor);
+  }
+  static async #p() {
+    await Qo(this.actor);
   }
   static async #g() {
     await In(this.actor);
   }
-  static async #u() {
+  static async #m() {
     await (await game.cypherv2.services.genres.active(this.actor))?.sheet?.render(!0);
   }
   static async #b() {
-    await Ed(this.actor);
+    await Rd(this.actor);
   }
   static async #C(e, t) {
     const i = t.dataset.choiceId;
-    i && await Rd(this.actor, i);
+    i && await Pd(this.actor, i);
   }
   static async #D() {
-    await Pd(this.actor), await this.render({ force: !0 });
+    await Sd(this.actor), await this.render({ force: !0 });
   }
-  static async #T(e, t) {
+  static async #z(e, t) {
     const i = this.actor.items.get(q(t));
     i?.type !== "characterType" && i?.type !== "descriptor" && i?.type !== "species" || await i.sheet?.render(!0);
   }
-  static async #z(e, t) {
-    await zd(this.actor, q(t));
+  static async #T(e, t) {
+    await Nd(this.actor, q(t));
   }
   static async #N(e, t) {
     await this.actor.items.get(q(t))?.sheet?.render(!0);
@@ -7596,18 +7657,18 @@ class R extends bu {
     for (const s of a.querySelectorAll("[data-action='toggleAbilityDetails']"))
       s.setAttribute("aria-expanded", String(o));
   }
-  static async #G(e, t) {
+  static async #U(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
     await i.sheet?.render(!0);
   }
-  static async #U(e, t) {
+  static async #G(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
     try {
-      await Bd(
+      await Ld(
         this.actor,
         i
       );
@@ -7626,7 +7687,7 @@ class R extends bu {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
-    if (!ia(i).canDelete) {
+    if (!na(i).canDelete) {
       ui.notifications.warn(game.i18n.localize("CYPHERV2.Ability.DeleteGranted"));
       return;
     }
@@ -7726,57 +7787,57 @@ class R extends bu {
       game.user,
       CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
     )) return;
-    const { family: i, category: o } = lu(t.dataset);
-    await du(this.actor, i, o), await this.render({ force: !0 });
+    const { family: i, category: o } = cu(t.dataset);
+    await uu(this.actor, i, o), await this.render({ force: !0 });
   }
   static async #te() {
-    await su(this.actor), await this.render({ force: !0 });
+    await lu(this.actor), await this.render({ force: !0 });
   }
   static async #ie(e, t) {
-    e.preventDefault(), e.stopPropagation(), await ru(
+    e.preventDefault(), e.stopPropagation(), await su(
       this.actor,
       t.dataset.weaponFamily
     ), await this.render({ force: !0 });
   }
   static #S(e) {
     const t = e.actor.system, i = [...e.actor.items].filter((o) => o.type === "characterType");
-    return vo(t.powerShifts ?? [], i);
+    return Co(t.powerShifts ?? [], i);
   }
   static async #ne() {
-    await aa(
+    await ra(
       this.actor,
       R.#S(this)
     );
   }
   static async #oe(e, t) {
     const i = R.#S(this), o = i.find((a) => a.id === t.dataset.powerShiftId);
-    o && await aa(this.actor, i, o);
+    o && await ra(this.actor, i, o);
   }
   static async #ae(e, t) {
     const i = t.dataset.powerShiftId;
-    i && await mu(
+    i && await pu(
       this.actor,
       R.#S(this),
       i
     );
   }
   static async #re(e, t) {
-    const { severity: i, woundId: o } = la(t);
+    const { severity: i, woundId: o } = ca(t);
     await tc(this.actor, i, o);
   }
   static async #se(e, t) {
-    const { severity: i, woundId: o } = la(t);
+    const { severity: i, woundId: o } = ca(t);
     await ic(this.actor, i, o);
   }
   static async #le() {
     await oc(this.actor);
   }
   static async #ce() {
-    await ko(this.actor);
+    await Ao(this.actor);
   }
   static async #de(e, t) {
     const i = t.dataset.recoveryType, o = t.dataset.recoverySlotId;
-    !i || !Ae.includes(i) || await ko(this.actor, i, o);
+    !i || !Ae.includes(i) || await Ao(this.actor, i, o);
   }
   static async #ue() {
     if (!game.user.isGM || !await foundry.applications.api.DialogV2.confirm({
@@ -7797,7 +7858,7 @@ class R extends bu {
   static async #pe(e, t) {
     e.preventDefault(), e.stopPropagation(), t instanceof HTMLButtonElement && (t.disabled = !0);
     try {
-      await gu().activate(
+      await yu().activate(
         this.actor
       );
     } catch (i) {
@@ -7809,12 +7870,12 @@ class R extends bu {
   static async #fe(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
-    !i || !Ui.includes(i) || await lc(this.actor, i);
+    !i || !Gi.includes(i) || await lc(this.actor, i);
   }
   static async #he(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
-    if (!i || !Ui.includes(i)) return;
+    if (!i || !Gi.includes(i)) return;
     const o = vn(
       this.actor.system,
       i
@@ -7863,13 +7924,13 @@ class R extends bu {
   }
   static #V(e, t) {
     const i = t.dataset.sortMode;
-    !Zd(i) || i === this.#o || (this.#o = i, this.render({ force: !0 }));
+    !eu(i) || i === this.#o || (this.#o = i, this.render({ force: !0 }));
   }
   static async #Y(e, t) {
     e.stopPropagation();
     const i = this.actor.items.get(q(t));
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
-    yu(t);
+    bu(t);
     try {
       const o = ot(), a = game.cypherv2.services.skills.buildQuickRollRequest(
         i,
@@ -8005,7 +8066,7 @@ class R extends bu {
   static async #Ve(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
     if (!a) throw new Error("Focus Item not found.");
-    await Ir(a, o);
+    await $r(a, o);
   }
   static async #Ye(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
@@ -8048,46 +8109,44 @@ class R extends bu {
   }
   static async #De(e, t) {
     const i = t.dataset.kind;
-    i !== "other" && !Gn.includes(i) || await rd(
+    i !== "other" && !Un.includes(i) || await rd(
+      this.actor,
+      i
+    );
+  }
+  static async #ze(e, t) {
+    const i = t.dataset.purchaseId;
+    i && await sd(
       this.actor,
       i
     );
   }
   static async #Te() {
-    await sd(this.actor);
+    await ld(this.actor);
   }
-  static async #ze() {
+  static async #Ne() {
     await game.cypherv2.services.advancement.completeProgressionGuidance(
       this.actor
     ), await this.render({ force: !0 });
   }
-  static async #Ne() {
+  static async #Me() {
     await game.cypherv2.services.advancement.resetProgressionGuidance(
       this.actor
     ), await this.render({ force: !0 });
   }
-  static async #Me() {
+  static async #qe() {
     await Go(this.actor);
   }
-  static async #qe(e, t) {
+  static async #xe(e, t) {
     const i = t.dataset.focusUuid;
-    i && await dd(this.actor, i);
+    i && await ud(this.actor, i);
   }
-  static async #xe() {
+  static async #Ue() {
     game.user.isGM && (this.#n = !this.#n, await this.render({ force: !0 }));
   }
   static async #Ge(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
-    a && (await Lo(
-      this.actor,
-      a,
-      o
-    ), await this.render({ force: !0 }));
-  }
-  static async #Ue(e, t) {
-    if (!game.user.isGM || !this.#n) return;
-    const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
-    a && (await yd(
+    a && (await jo(
       this.actor,
       a,
       o
@@ -8096,22 +8155,31 @@ class R extends bu {
   static async #Oe(e, t) {
     if (!game.user.isGM || !this.#n) return;
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
-    a && (await Lo(
+    a && (await bd(
       this.actor,
       a,
       o
     ), await this.render({ force: !0 }));
   }
-  static async #Be() {
-    await hd(this.actor);
+  static async #Be(e, t) {
+    if (!game.user.isGM || !this.#n) return;
+    const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
+    a && (await jo(
+      this.actor,
+      a,
+      o
+    ), await this.render({ force: !0 }));
   }
   static async #Le() {
-    game.user.isGM && await Bo(this.actor, "skipped");
+    await gd(this.actor);
   }
   static async #je() {
-    game.user.isGM && await Bo(this.actor, "manual");
+    game.user.isGM && await Lo(this.actor, "skipped");
   }
-  static async #We(e, t) {
+  static async #We() {
+    game.user.isGM && await Lo(this.actor, "manual");
+  }
+  static async #_e(e, t) {
     const { focusUuid: i, nodeId: o } = Je(t), a = await Ye(this.actor, i);
     if (!a) {
       ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.FocusUnavailable"));
@@ -8131,9 +8199,9 @@ class R extends bu {
     }
   }
   static #ve(e) {
-    if (!(e instanceof Ue)) {
+    if (!(e instanceof Ge)) {
       if (e instanceof de) {
-        ui.notifications.error(game.i18n.localize(vu[e.code]));
+        ui.notifications.error(game.i18n.localize(Cu[e.code]));
         return;
       }
       console.error(e), ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.Unexpected"));
@@ -8141,22 +8209,22 @@ class R extends bu {
   }
   async _prepareContext(e) {
     this.element?.isConnected && (this.#s = xc(this.element), this.#d = this.#s.activeTab);
-    const t = await super._prepareContext(e), i = eu([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
-      const v = g, T = game.cypherv2.services.skills.configuredPool(v);
+    const t = await super._prepareContext(e), i = tu([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
+      const v = g, z = game.cypherv2.services.skills.configuredPool(v);
       return {
         id: v.id,
         name: v.name,
         rank: v.system.rank,
         rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${v.system.rank}`),
-        poolLabel: T ? game.i18n.localize(`CYPHERV2.Pools.${T[0].toUpperCase()}${T.slice(1)}`) : game.i18n.localize("CYPHERV2.Skill.ChoosePool")
+        poolLabel: z ? game.i18n.localize(`CYPHERV2.Pools.${z[0].toUpperCase()}${z.slice(1)}`) : game.i18n.localize("CYPHERV2.Skill.ChoosePool")
       };
-    }), this.#o), o = iu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
+    }), this.#o), o = nu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
     this.#r.retain(o.map((g) => g.id));
     const a = await Promise.all(o.map(async (g, v) => {
-      const T = g, N = ia(g), ce = this.#r.isExpanded(g.id), $e = dr(
+      const z = g, N = na(g), ce = this.#r.isExpanded(g.id), $e = ur(
         N.cost.amount,
         N.cost.pools,
-        wu,
+        vu,
         {
           pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
           middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
@@ -8165,7 +8233,7 @@ class R extends bu {
         N.cost.scalable
       ), ct = N.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         N.description,
-        { async: !0, relativeTo: T }
+        { async: !0, relativeTo: z }
       ) : "";
       return {
         id: g.id,
@@ -8184,7 +8252,7 @@ class R extends bu {
       r
     ), this.#a.retain(s.map((g) => g.id));
     const u = async (g, v) => v ? foundry.applications.ux.TextEditor.implementation.enrichHTML(v, { async: !0, relativeTo: g }) : "", c = (await Promise.all(s.filter((g) => g.type === "weapon").map(async (g) => {
-      const v = g, T = v.system.description.trim();
+      const v = g, z = v.system.description.trim();
       return {
         id: v.id,
         name: v.name,
@@ -8200,11 +8268,11 @@ class R extends bu {
         depleted: !!v.system.depleted,
         freelyUsed: game.cypherv2.services.combat.weaponFreelyUsed(r, v),
         expanded: this.#a.isExpanded(v.id),
-        hasDescription: !!T,
-        enrichedDescription: await u(g, T)
+        hasDescription: !!z,
+        enrichedDescription: await u(g, z)
       };
     }))).sort((g, v) => g.name.localeCompare(v.name)), p = (await Promise.all(s.filter((g) => g.type === "armor").map(async (g) => {
-      const v = g, T = v.system.description.trim(), N = v.system.depletion;
+      const v = g, z = v.system.description.trim(), N = v.system.depletion;
       return {
         id: v.id,
         name: v.name,
@@ -8215,11 +8283,11 @@ class R extends bu {
         depletionLabel: N?.enabled ? Zi(N) : "",
         depleted: !!v.system.depleted,
         expanded: this.#a.isExpanded(v.id),
-        hasDescription: !!T,
-        enrichedDescription: await u(g, T)
+        hasDescription: !!z,
+        enrichedDescription: await u(g, z)
       };
     }))).sort((g, v) => g.name.localeCompare(v.name)), h = (await Promise.all(s.filter((g) => g.type === "shield").map(async (g) => {
-      const v = g, T = v.system.description.trim(), N = v.system.depletion, ce = vi({
+      const v = g, z = v.system.description.trim(), N = v.system.depletion, ce = vi({
         minor: v.system.wounds.minor.length,
         moderate: v.system.wounds.moderate.length,
         major: v.system.wounds.major.length
@@ -8242,8 +8310,8 @@ class R extends bu {
         depletionLabel: N?.enabled ? Zi(N) : "",
         depleted: !!v.system.depleted,
         expanded: this.#a.isExpanded(v.id),
-        hasDescription: !!T,
-        enrichedDescription: await u(g, T)
+        hasDescription: !!z,
+        enrichedDescription: await u(g, z)
       };
     }))).sort((g, v) => g.name.localeCompare(v.name)), m = h.filter((g) => g.equipped).length > 1, y = this.actor.system, f = [], w = [], C = [];
     for (const g of y.focusProgress ?? []) {
@@ -8257,8 +8325,8 @@ class R extends bu {
         name: v.name,
         provenance: g.provenance ?? "additional"
       });
-      const T = await game.cypherv2.services.focusTrees.prepare(v, {
-        characterTier: L(this.actor.system),
+      const z = await game.cypherv2.services.focusTrees.prepare(v, {
+        characterTier: G(this.actor.system),
         progress: g,
         editable: this.isEditable,
         missingOwnedNodeIds: game.cypherv2.services.focusAcquisition.missingOwnedNodeIds(
@@ -8270,7 +8338,7 @@ class R extends bu {
         gmProgressionEdit: this.#n
       });
       f.push({
-        ...T,
+        ...z,
         provenance: g.provenance ?? "additional",
         provenanceLabel: `CYPHERV2.Focus.Association.${g.provenance === "creation" ? "Creation" : "Additional"}`,
         ownedCount: g.ownedNodeIds.length
@@ -8282,15 +8350,15 @@ class R extends bu {
     ), Y = game.cypherv2.services.advancement.progressionGuidance(
       this.actor,
       ot()
-    ), k = [...this.actor.items].filter((g) => g.type === "characterType"), H = k.map((g) => ({ id: g.id, name: g.name })), M = [...this.actor.items].filter((g) => g.type === "species").map((g) => ({ id: g.id, name: g.name })), O = [...this.actor.items].filter((g) => g.type === "descriptor").map((g) => {
-      const v = g.system.instance, T = v?.role ?? "custom";
+    ), k = [...this.actor.items].filter((g) => g.type === "characterType"), H = k.map((g) => ({ id: g.id, name: g.name })), M = [...this.actor.items].filter((g) => g.type === "species").map((g) => ({ id: g.id, name: g.name })), B = [...this.actor.items].filter((g) => g.type === "descriptor").map((g) => {
+      const v = g.system.instance, z = v?.role ?? "custom";
       return {
         id: g.id,
         name: g.name,
-        role: T,
+        role: z,
         instanceId: v?.instanceId ?? g.id,
         attachedAt: v?.attachedAt ?? 0,
-        roleLabel: game.i18n.localize(`CYPHERV2.Packages.Role.${T}`)
+        roleLabel: game.i18n.localize(`CYPHERV2.Packages.Role.${z}`)
       };
     }), A = new Map([...this.actor.items].filter((g) => g.type === "characterType" || g.type === "descriptor" || g.type === "species").map((g) => [g.system.instance?.instanceId ?? "", g.name])), D = [...this.actor.items].filter((g) => {
       const v = g.system.grantedBy;
@@ -8306,34 +8374,34 @@ class R extends bu {
         status: v.status,
         replacementLabel: v.replacement?.active ? `${v.replacement.originalName} → ${v.replacement.replacementName}` : ""
       };
-    }), S = this.actor.system, K = vo(
+    }), S = this.actor.system, X = Co(
       S.powerShifts ?? [],
       k
-    ), j = Ts(
-      K,
+    ), j = zs(
+      X,
       Ds(k)
     ), He = {
       enabled: S.presentation.powerShiftsEnabled,
       allocated: j.allocated,
       available: j.available,
       overBudget: j.overBudget,
-      legacy: (S.powerShifts ?? []).length === 0 && K.some((g) => g.id.startsWith("legacy-")),
-      entries: K.map((g) => ({
+      legacy: (S.powerShifts ?? []).length === 0 && X.some((g) => g.id.startsWith("legacy-")),
+      entries: X.map((g) => ({
         ...g,
         categoryWarning: j.categoryWarnings.has(g.category.trim().toLocaleLowerCase("en-US"))
       }))
-    }, B = await game.cypherv2.services.genres.active(
+    }, L = await game.cypherv2.services.genres.active(
       this.actor
-    ), I = B ? {
+    ), I = L ? {
       attached: !0,
       available: !0,
-      name: B.name,
-      uuid: B.uuid,
-      img: B.img,
+      name: L.name,
+      uuid: L.uuid,
+      img: L.img,
       provenance: S.genre.provenance,
-      totalEffortCapMode: B.system.options.totalEffortCapMode,
+      totalEffortCapMode: L.system.options.totalEffortCapMode,
       totalEffortCapLabel: game.i18n.localize(
-        `CYPHERV2.Genre.EffortCap.${B.system.options.totalEffortCapMode}`
+        `CYPHERV2.Genre.EffortCap.${L.system.options.totalEffortCapMode}`
       )
     } : {
       attached: !!S.genre.sourceUuid,
@@ -8347,15 +8415,15 @@ class R extends bu {
     }, W = [...this.actor.items].filter((g) => Vn.includes(g.type)).sort((g, v) => g.name.localeCompare(v.name, "en-US"));
     this.#l.retain(W.map((g) => g.id));
     const J = (await Promise.all(W.map(async (g) => {
-      const v = ou(g);
+      const v = au(g);
       if (!v) return null;
-      const T = this.#l.isExpanded(g.id), N = v.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      const z = this.#l.isExpanded(g.id), N = v.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         v.description,
         { async: !0, relativeTo: g }
       ) : "";
       return {
         ...v,
-        expanded: T,
+        expanded: z,
         hasDescription: !!v.description,
         enrichedDescription: N,
         depletionLabel: v.depletion?.enabled ? v.depletion.formula : "",
@@ -8368,8 +8436,8 @@ class R extends bu {
       equipment: J.filter((g) => g.type === "equipment"),
       cyphers: J.filter((g) => g.type === "cypher"),
       artifacts: J.filter((g) => g.type === "artifact")
-    }, pe = C.find((g) => g.provenance === "creation") ?? C[0], le = Kd({
-      descriptors: O,
+    }, pe = C.find((g) => g.provenance === "creation") ?? C[0], le = Xd({
+      descriptors: B,
       ...M[0] ? { species: { id: M[0].id, name: M[0].name } } : {},
       ...H[0] ? { type: { id: H[0].id, name: H[0].name } } : {},
       ...pe ? { focus: { uuid: pe.uuid, name: pe.name } } : {},
@@ -8468,7 +8536,7 @@ class R extends bu {
         hindranceModifier: ke("hinder", S.derived.wounds.hindrance),
         dead: S.derived.wounds.dead
       },
-      recoveries: Jd(S.recovery.slots).map((g) => ({
+      recoveries: Qd(S.recovery.slots).map((g) => ({
         ...g,
         label: game.i18n.localize(`CYPHERV2.Recovery.${g.type}`)
       })),
@@ -8477,8 +8545,8 @@ class R extends bu {
       shield: Le
     }, ls = (g, v) => [
       ...this.actor.items
-    ].filter((T) => T.type !== "characterType" && T.type !== "species" ? !1 : T.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[v] === !0).map((T) => T.name), po = (g, v, T, N) => v.map((ce) => {
-      const $e = ls(g, ce), ct = T.includes(ce), ni = $e.length > 0, hs = N.includes(ce), gs = ct && ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityManualAndGranted", { sources: $e.join(", ") }) : ct ? game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual") : ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: $e.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityAbsent");
+    ].filter((z) => z.type !== "characterType" && z.type !== "species" ? !1 : z.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[v] === !0).map((z) => z.name), fo = (g, v, z, N) => v.map((ce) => {
+      const $e = ls(g, ce), ct = z.includes(ce), ni = $e.length > 0, hs = N.includes(ce), gs = ct && ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityManualAndGranted", { sources: $e.join(", ") }) : ct ? game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual") : ni ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: $e.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityAbsent");
       return {
         family: g,
         category: ce,
@@ -8490,15 +8558,15 @@ class R extends bu {
         sourceHint: gs
       };
     }), cs = {
-      weapons: po(
+      weapons: fo(
         "weapon",
         xe,
         S.proficiencies.weaponCategories,
         S.derived.packages.weaponCategories
       ),
-      armor: po(
+      armor: fo(
         "armor",
-        Ge,
+        Ue,
         S.proficiencies.armorCategories,
         S.derived.packages.armorCategories
       ),
@@ -8512,13 +8580,13 @@ class R extends bu {
             ...ce.weaponFamilies ?? [],
             ...Fi(ce.weaponFamilyUse)
           ]).includes(g);
-        }).map((N) => N.name), T = S.proficiencies.weaponFamilies.includes(g);
+        }).map((N) => N.name), z = S.proficiencies.weaponFamilies.includes(g);
         return {
           id: g,
           label: ht(g),
-          manual: T,
+          manual: z,
           packageGranted: v.length > 0,
-          canRemove: this.isEditable && T,
+          canRemove: this.isEditable && z,
           sourceHint: v.length > 0 ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", { sources: v.join(", ") }) : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual")
         };
       })
@@ -8531,7 +8599,7 @@ class R extends bu {
       speedEdge: "CYPHERV2.Overrides.SpeedEdge",
       intellectMax: "CYPHERV2.Overrides.IntellectMax",
       intellectEdge: "CYPHERV2.Overrides.IntellectEdge"
-    }, us = Ui.map((g) => {
+    }, us = Gi.map((g) => {
       const v = vn(S, g);
       return { ...v, label: game.i18n.localize(ds[g]), hasOverride: v.override !== null };
     }), $t = S.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, ms = {
@@ -8551,9 +8619,9 @@ class R extends bu {
       effectiveSlots: S.recovery.slots.length,
       effectiveFormula: S.derived.recovery.formula,
       modifier: S.recovery.rollModifier
-    }, fo = [game.i18n.localize(Y.focusAbilityCount === 2 ? "CYPHERV2.Advancement.Guidance.TwoFocusAbilities" : "CYPHERV2.Advancement.Guidance.FocusAbility")];
-    Y.includesGenreAbility && fo.push(game.i18n.localize("CYPHERV2.Advancement.Guidance.GenreAbility"));
-    const ho = typeof this.actor._source?.system?.notes == "string" ? this.actor._source.system.notes : "", fs = ho ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(ho, {
+    }, ho = [game.i18n.localize(Y.focusAbilityCount === 2 ? "CYPHERV2.Advancement.Guidance.TwoFocusAbilities" : "CYPHERV2.Advancement.Guidance.FocusAbility")];
+    Y.includesGenreAbility && ho.push(game.i18n.localize("CYPHERV2.Advancement.Guidance.GenreAbility"));
+    const go = typeof this.actor._source?.system?.notes == "string" ? this.actor._source.system.notes : "", fs = go ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(go, {
       async: !0,
       relativeTo: this.actor
     }) : "";
@@ -8607,17 +8675,17 @@ class R extends bu {
         guidance: {
           ...Y,
           title: game.i18n.format("CYPHERV2.Advancement.Guidance.Title", { tier: Y.tier }),
-          reminder: fo.join(" · ")
+          reminder: ho.join(" · ")
         }
       },
       isGM: game.user.isGM,
       gmProgressionEdit: game.user.isGM && this.#n,
       typeItems: H,
       speciesItems: M,
-      descriptorItems: O,
-      primaryDescriptorItems: O.filter((g) => g.role === "primary"),
-      additionalDescriptorItems: O.filter((g) => g.role === "additional" || g.role === "custom"),
-      speciesDescriptorItems: O.filter((g) => g.role === "speciesGranted"),
+      descriptorItems: B,
+      primaryDescriptorItems: B.filter((g) => g.role === "primary"),
+      additionalDescriptorItems: B.filter((g) => g.role === "additional" || g.role === "custom"),
+      speciesDescriptorItems: B.filter((g) => g.role === "speciesGranted"),
       packageGrantedItems: D,
       coreCreation: this.actor.system.creation,
       activeArmorCategoryLabel: game.i18n.localize(
@@ -8634,7 +8702,7 @@ class ye extends Error {
   }
   code;
 }
-class Cu {
+class Eu {
   #e = null;
   #t = null;
   get selectedNodeId() {
@@ -8669,7 +8737,7 @@ class Cu {
     this.#e = null, this.#t = null;
   }
 }
-function Eu() {
+function Ru() {
   return globalThis.crypto?.randomUUID?.().replaceAll("-", "") ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
 }
 function Fe(n) {
@@ -8688,35 +8756,35 @@ function Fe(n) {
     connections: n.connections.map((e) => ({ ...e }))
   };
 }
-function da(n) {
+function ua(n) {
   const e = n._source?.system?.description ?? n.system?.description;
   return {
     name: n.name,
     description: typeof e == "string" ? e : ""
   };
 }
-function ua(n) {
+function ma(n) {
   if (n.type !== "ability")
     throw new ye("not-ability", "Only Ability Items can be added to a Focus Tree.");
   if (!n.uuid.trim())
     throw new ye("ability-uuid-missing", "The Ability must have a resolvable UUID.");
 }
-function ma(n) {
+function pa(n) {
   if (!Number.isInteger(n) || n < 1 || n > 6)
     throw new ye("invalid-tier", "Focus node Tier must be an integer from 1 to 6.");
 }
-function pa(n, e) {
+function fa(n, e) {
   return n.nodes.filter((t) => t.tier === e).sort((t, i) => {
     const o = t.position.x ?? Number.MAX_SAFE_INTEGER, a = i.position.x ?? Number.MAX_SAFE_INTEGER;
     return o - a || t.id.localeCompare(i.id);
   });
 }
-class Ru {
+class Pu {
   #e;
   #t;
   #i;
   #n = !1;
-  constructor(e, t = Eu) {
+  constructor(e, t = Ru) {
     this.#e = t, this.#t = Fe(e), this.#i = Fe(e);
   }
   get graph() {
@@ -8729,21 +8797,21 @@ class Ru {
     return kn(this.#i);
   }
   addAbility(e, t = 1) {
-    ua(e), ma(t);
-    const o = pa(this.#i, t).reduce((r, s) => Math.max(r, s.position.x ?? -1), -1), a = {
+    ma(e), pa(t);
+    const o = fa(this.#i, t).reduce((r, s) => Math.max(r, s.position.x ?? -1), -1), a = {
       id: this.#l("node", new Set(this.#i.nodes.map((r) => r.id))),
       abilityUuid: e.uuid,
-      abilitySnapshot: da(e),
+      abilitySnapshot: ua(e),
       tier: t,
       position: { x: o + 1, y: null }
     };
     return this.#i = { ...this.#i, nodes: [...this.#i.nodes, a] }, this.#n = !0, Fe({ ...this.#i, nodes: [a] }).nodes[0];
   }
   setTier(e, t) {
-    return ma(t), this.#r(e, (i) => ({ ...i, tier: t }));
+    return pa(t), this.#r(e, (i) => ({ ...i, tier: t }));
   }
   moveNode(e, t) {
-    const i = this.#o(e), o = pa(this.#i, i.tier), a = o.findIndex((h) => h.id === e), r = t === "left" ? a - 1 : a + 1;
+    const i = this.#o(e), o = fa(this.#i, i.tier), a = o.findIndex((h) => h.id === e), r = t === "left" ? a - 1 : a + 1;
     if (r < 0 || r >= o.length) return Fe({
       version: this.#i.version,
       nodes: [i],
@@ -8801,7 +8869,7 @@ class Ru {
     return e === 0 ? 0 : (this.#i = { ...this.#i, connections: [] }, this.#n = !0, e);
   }
   refreshSnapshot(e, t) {
-    ua(t);
+    ma(t);
     const i = this.#o(e);
     if (t.uuid !== i.abilityUuid)
       throw new ye(
@@ -8810,7 +8878,7 @@ class Ru {
       );
     return this.#r(e, (o) => ({
       ...o,
-      abilitySnapshot: da(t)
+      abilitySnapshot: ua(t)
     }));
   }
   cancel() {
@@ -8846,7 +8914,7 @@ class Ru {
     );
   }
 }
-function Pu(n) {
+function Su(n) {
   const e = n.querySelector(".cypherv2-sheet.cypherv2-item"), t = n.querySelector(".window-content"), i = [...n.querySelectorAll(
     ".cypherv2-focus-tree-section[data-focus-uuid]"
   )].map((o) => {
@@ -8863,7 +8931,7 @@ function Pu(n) {
     trees: i
   };
 }
-function Su(n, e) {
+function ku(n, e) {
   const t = n.querySelector(".cypherv2-sheet.cypherv2-item");
   t && (t.scrollTop = e.vertical);
   const i = n.querySelector(".window-content");
@@ -8876,7 +8944,7 @@ function Su(n, e) {
     s && (s.scrollLeft = a.left, s.scrollTop = a.top);
   }
 }
-class ku extends Error {
+class Au extends Error {
   constructor(e) {
     super("Only one Shield may be equipped at a time."), this.shieldIds = e, this.name = "MultipleEquippedShieldsError";
   }
@@ -8903,7 +8971,7 @@ class Lr {
   }
   equipped(e) {
     const t = this.shields(e).filter((i) => i.system.equipped);
-    if (t.length > 1) throw new ku(t.map((i) => i.id));
+    if (t.length > 1) throw new Au(t.map((i) => i.id));
     return t[0] ?? null;
   }
   async normalizeEquipped(e) {
@@ -8978,7 +9046,7 @@ class Lr {
     return { ...o, broken: o.wounds.major.length >= this.capacities(e).major };
   }
 }
-function fa(n) {
+function ha(n) {
   return n.replace(/[&<>"']/g, (e) => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -8987,14 +9055,14 @@ function fa(n) {
     "'": "&#039;"
   })[e]);
 }
-async function Au(n, e, t) {
+async function Hu(n, e, t) {
   const i = n.system.wounds[e].find((a) => a.id === t);
   if (!i) throw new Error(`Shield Wound '${t}' was not found.`);
   const o = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("CYPHERV2.Wounds.EditTitle") },
     content: `<div class="cypherv2-dialog-fields">
-      <label>${game.i18n.localize("CYPHERV2.Wounds.Label")}<input name="label" type="text" value="${fa(i.label)}"></label>
-      <label>${game.i18n.localize("CYPHERV2.Wounds.Description")}<textarea name="description">${fa(i.description)}</textarea></label>
+      <label>${game.i18n.localize("CYPHERV2.Wounds.Label")}<input name="label" type="text" value="${ha(i.label)}"></label>
+      <label>${game.i18n.localize("CYPHERV2.Wounds.Description")}<textarea name="description">${ha(i.description)}</textarea></label>
     </div>`,
     rejectClose: !1,
     ok: { label: game.i18n.localize("CYPHERV2.Actions.Save") }
@@ -9004,7 +9072,7 @@ async function Au(n, e, t) {
     description: String(o.description ?? "")
   });
 }
-async function Hu(n, e, t) {
+async function Iu(n, e, t) {
   await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("CYPHERV2.Wounds.DeleteTitle") },
     content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Wounds.DeleteConfirm")}</p></div>`,
@@ -9014,7 +9082,7 @@ async function Hu(n, e, t) {
     no: { label: game.i18n.localize("CYPHERV2.Actions.Cancel") }
   }) && await game.cypherv2.services.shields.delete(n, e, t);
 }
-function Iu(n) {
+function $u(n) {
   const e = n.roll === "attack", t = n.roll === "task", i = n.roll === "defense", o = t || i || n.rollModifier !== 0, a = e || n.attackModifier !== 0, r = e || n.damage !== 0, s = e || n.woundSeverity !== "none", l = e || n.range.trim() !== "", u = e || n.targetMode !== "none";
   return {
     showIgnoresEdge: n.cost.amount > 0 && !!n.cost.allowedPools?.length || n.cost.ignoresEdge,
@@ -9028,10 +9096,10 @@ function Iu(n) {
     hasConditionalFields: o || a || r || s || l || u
   };
 }
-function $u(n) {
+function Vu(n) {
   return n.defaultPool !== "choose" || n.category !== "general" || n.contexts.length > 0 || n.initiative;
 }
-function Vu(n) {
+function Yu(n) {
   const e = n.querySelector("[data-item-sheet-scroll]"), t = n.querySelector("[data-item-focus-key]:focus"), i = t?.dataset.itemFocusKey;
   if (!t || !i) return { scrollTop: e?.scrollTop ?? 0 };
   let o = null, a = null, r = null;
@@ -9049,7 +9117,7 @@ function Vu(n) {
     }
   };
 }
-function Yu(n, e) {
+function Fu(n, e) {
   const t = n.querySelector("[data-item-sheet-scroll]");
   if (t && (t.scrollTop = e.scrollTop), !e.focusedInput) return;
   const i = [...n.querySelectorAll("[data-item-focus-key]")].find((s) => s.dataset.itemFocusKey === e.focusedInput?.key);
@@ -9074,9 +9142,9 @@ function Ee(n) {
 function te(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-const Fu = foundry.applications.api.HandlebarsApplicationMixin(
+const Du = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ItemSheetV2
-), ha = /* @__PURE__ */ new Set([
+), ga = /* @__PURE__ */ new Set([
   "rollDepletion",
   "reloadWeapon",
   "editFocusTree",
@@ -9109,10 +9177,10 @@ const Fu = foundry.applications.api.HandlebarsApplicationMixin(
   "refreshGenreAbility",
   "removeGenreAbility"
 ]);
-class F extends Fu {
-  #e = new $r();
-  #t = new Cu();
-  #i = new Vr();
+class F extends Du {
+  #e = new Vr();
+  #t = new Eu();
+  #i = new Yr();
   #n = null;
   #o = null;
   #r = null;
@@ -9121,12 +9189,12 @@ class F extends Fu {
   #c = null;
   #s = null;
   #d = /* @__PURE__ */ new Set();
-  #m = /* @__PURE__ */ new Set();
+  #u = /* @__PURE__ */ new Set();
   #w = null;
   #f = null;
   #p = null;
   #g = null;
-  static #u(e) {
+  static #m(e) {
     const t = e.dataset.severity, i = e.dataset.woundId;
     if (!ae.includes(t) || !i)
       throw new Error("Invalid Shield Wound action data.");
@@ -9147,14 +9215,14 @@ class F extends Fu {
     ), await this.render({ force: !0 });
   }
   static async #C(e, t) {
-    const i = F.#u(t);
-    await Au(this.item, i.severity, i.woundId);
-  }
-  static async #D(e, t) {
-    const i = F.#u(t);
+    const i = F.#m(t);
     await Hu(this.item, i.severity, i.woundId);
   }
-  static async #T() {
+  static async #D(e, t) {
+    const i = F.#m(t);
+    await Iu(this.item, i.severity, i.woundId);
+  }
+  static async #z() {
     !this.isEditable || this.item.type !== "weapon" || (await game.cypherv2.services.weapons.reload(this.item), await this.render({ force: !0 }));
   }
   static DEFAULT_OPTIONS = {
@@ -9162,7 +9230,7 @@ class F extends Fu {
     classes: ["cypherv2", "sheet", "item", "item-sheet"],
     actions: Qn({
       rollDepletion: F.#S,
-      reloadWeapon: F.#T,
+      reloadWeapon: F.#z,
       openFocusNode: F.#ne,
       editFocusTree: F.#oe,
       addFocusAbility: F.#ae,
@@ -9195,7 +9263,7 @@ class F extends Fu {
       inspectGenreAbility: F.#L,
       refreshGenreAbility: F.#j,
       removeGenreAbility: F.#W
-    }, ha),
+    }, ga),
     position: { width: 620, height: 680 },
     window: { resizable: !0 }
   };
@@ -9203,26 +9271,26 @@ class F extends Fu {
     main: { template: "systems/cypherv2/templates/item/item-sheet.hbs" }
   };
   async _onRender(e, t) {
-    if (await super._onRender(e, t), Zn(this.element, this.isEditable, ha), this.#s?.abort(), this.#s = null, this.#c && (Su(this.element, this.#c), this.#c = null), this.#w && (Yu(this.element, this.#w), this.#w = null), this.#t.connectionSourceNodeId) {
+    if (await super._onRender(e, t), Zn(this.element, this.isEditable, ga), this.#s?.abort(), this.#s = null, this.#c && (ku(this.element, this.#c), this.#c = null), this.#w && (Fu(this.element, this.#w), this.#w = null), this.#t.connectionSourceNodeId) {
       const i = new AbortController();
       this.#s = i, this.element.addEventListener("keydown", (o) => {
         o.key === "Escape" && (o.preventDefault(), o.stopPropagation(), this.#t.cancelConnection(), this.#h());
       }, { signal: i.signal }), this.element.querySelector(".focus-tree-node-editor")?.focus({ preventScroll: !0 });
     }
-    this.#e.bind(this.element), this.#i.bind(this.element), this.#q(), this.#x(), this.#G(), this.#U(), this.#z(), this.#N(), this.#M();
+    this.#e.bind(this.element), this.#i.bind(this.element), this.#q(), this.#x(), this.#U(), this.#G(), this.#T(), this.#N(), this.#M();
   }
   _onClose(e) {
     this.#e.disconnect(), this.#i.disconnect(), this.#n?.abort(), this.#n = null, this.#o?.abort(), this.#o = null, this.#r?.abort(), this.#r = null, this.#l?.abort(), this.#l = null, this.#f?.abort(), this.#f = null, this.#p?.abort(), this.#p = null, this.#g?.abort(), this.#g = null, this.#a?.cancel(), this.#a = null, this.#t.reset(), this.#c = null, this.#s?.abort(), this.#s = null, super._onClose(e);
   }
-  #z() {
+  #T() {
     this.#f?.abort();
     const e = new AbortController();
     this.#f = e;
     const t = [...this.element.querySelectorAll("details")];
     for (const [i, o] of t.entries()) {
       const a = o.dataset.persistentDisclosure ?? `item-details-${i}`;
-      this.#d.has(a) ? o.open = !0 : this.#m.has(a) && (o.open = !1), o.addEventListener("toggle", () => {
-        o.open ? (this.#d.add(a), this.#m.delete(a)) : (this.#d.delete(a), this.#m.add(a));
+      this.#d.has(a) ? o.open = !0 : this.#u.has(a) && (o.open = !1), o.addEventListener("toggle", () => {
+        o.open ? (this.#d.add(a), this.#u.delete(a)) : (this.#d.delete(a), this.#u.add(a));
       }, { signal: e.signal });
     }
   }
@@ -9311,7 +9379,7 @@ class F extends Fu {
         }
       }, { signal: t.signal });
   }
-  #G() {
+  #U() {
     if (this.#r?.abort(), this.#r = null, this.item.type !== "characterType") return;
     const e = this.element.querySelector("select[data-type-genre-select]"), t = this.element.querySelector("[data-type-custom-genre]"), i = this.element.querySelector("[data-type-superhero]");
     if (!e || !t) return;
@@ -9322,7 +9390,7 @@ class F extends Fu {
     };
     e.addEventListener("change", a, { signal: o.signal }), a();
   }
-  #U() {
+  #G() {
     if (this.#l?.abort(), this.#l = null, this.item.type !== "characterType" && this.item.type !== "species" || !this.isEditable) return;
     const e = this.element.querySelector("input[data-package-weapon-families]");
     if (!e) return;
@@ -9602,11 +9670,11 @@ class F extends Fu {
   static async #ne(e, t) {
     const i = t.dataset.nodeId;
     if (!i) throw new Error("Missing Focus node ID.");
-    await Ir(this.#I(), i);
+    await $r(this.#I(), i);
   }
   static async #oe() {
     try {
-      this.#H(), this.#a = new Ru(
+      this.#H(), this.#a = new Pu(
         this.item.system.graph
       ), this.#t.reset(), await this.#h();
     } catch (e) {
@@ -9803,7 +9871,7 @@ class F extends Fu {
     const o = {
       id: crypto.randomUUID(),
       abilityUuid: e.uuid,
-      minimumTier: ur(t),
+      minimumTier: mr(t),
       catalog: "progression",
       minimumSuperheroRank: 0,
       snapshot: this.#v(e)
@@ -9900,29 +9968,29 @@ class F extends Fu {
     return t;
   }
   async #h() {
-    this.#c = Pu(this.element), await this.render({ force: !0 });
+    this.#c = Su(this.element), await this.render({ force: !0 });
   }
   async _prepareContext(e) {
-    this.element?.isConnected && (this.#w = Vu(this.element));
+    this.element?.isConnected && (this.#w = Yu(this.element));
     const t = await super._prepareContext(e), i = this.item.system, o = this.item.type === "skill", a = this.item.type === "ability", r = this.item.type === "weapon", s = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", c = this.item.type === "cypher", p = this.item.type === "artifact", h = this.item.type === "focus", m = this.item.type === "genre", y = this.item.type === "characterType", f = this.item.type === "descriptor", w = this.item.type === "species", C = y && String(i.genre ?? "none") === "superhero", P = y ? i.instance : void 0, Y = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type), k = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", H = Y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(k, {
       async: !0,
       relativeTo: this.item
-    }) : "", M = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", O = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", A = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), S = Array.isArray(i.contexts) ? i.contexts : [], K = a ? We(this.item) : [], j = a ? Iu(i) : null, He = j ? {
+    }) : "", M = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", B = y ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", A = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), S = Array.isArray(i.contexts) ? i.contexts : [], X = a ? We(this.item) : [], j = a ? $u(i) : null, He = j ? {
       ...j,
       rollModifierLabel: game.i18n.localize(
         j.rollModifierLabel === "task" ? "CYPHERV2.Ability.TaskModifier" : j.rollModifierLabel === "defense" ? "CYPHERV2.Ability.DefenseModifier" : "CYPHERV2.Ability.RollModifier"
       )
-    } : null, B = a ? this.item.flags?.cypherv2?.genreAbility : void 0, I = B ? {
-      catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${B.catalog ?? "progression"}`),
-      genresLabel: (B.genres ?? []).map((b) => game.i18n.localize(`CYPHERV2.Packages.Genre.${b}`)).join(" · "),
-      progressionBandLabel: B.progressionBand === "origin" ? game.i18n.localize("CYPHERV2.Genre.CatalogKind.origin") : game.i18n.localize(`CYPHERV2.Genre.ProgressionBand.${B.progressionBand ?? "mid-tier"}`),
-      minimumSuperheroRank: Number(B.minimumSuperheroRank ?? 0)
+    } : null, L = a ? this.item.flags?.cypherv2?.genreAbility : void 0, I = L ? {
+      catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${L.catalog ?? "progression"}`),
+      genresLabel: (L.genres ?? []).map((b) => game.i18n.localize(`CYPHERV2.Packages.Genre.${b}`)).join(" · "),
+      progressionBandLabel: L.progressionBand === "origin" ? game.i18n.localize("CYPHERV2.Genre.CatalogKind.origin") : game.i18n.localize(`CYPHERV2.Genre.ProgressionBand.${L.progressionBand ?? "mid-tier"}`),
+      minimumSuperheroRank: Number(L.minimumSuperheroRank ?? 0)
     } : null, W = m ? i.abilityCatalog.map((b) => ({
       ...b,
       catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${b.catalog ?? "progression"}`),
       progressionBandLabel: (b.catalog ?? "progression") === "progression" ? b.minimumTier === 3 ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.mid-tier") : b.minimumTier === 6 ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.high-tier") : "" : "",
       minimumSuperheroRank: Number(b.minimumSuperheroRank ?? 0)
-    })) : [], J = o && $u({
+    })) : [], J = o && Vu({
       defaultPool: D,
       category: String(i.category ?? "general"),
       contexts: S,
@@ -9936,7 +10004,7 @@ class F extends Fu {
       item: this.item,
       system: this.item.system,
       systemFields: Jn(this.item),
-      enriched: { description: H, backgroundOptions: M, equipmentNotes: O },
+      enriched: { description: H, backgroundOptions: M, equipmentNotes: B },
       usesRichDescription: Y,
       isSkill: o,
       isAbility: a,
@@ -9955,7 +10023,7 @@ class F extends Fu {
       typeSuperheroicsPoolLabel: P?.selections?.superheroicsPool && P.selections.superheroicsPool !== "none" ? game.i18n.localize(`CYPHERV2.Pools.${P.selections.superheroicsPool[0].toUpperCase()}${P.selections.superheroicsPool.slice(1)}`) : game.i18n.localize("CYPHERV2.Common.None"),
       typeWeaponFamiliesValue: y ? se(i.weaponFamilies).map(ht).join(", ") : "",
       speciesWeaponFamiliesValue: w ? se(i.weaponFamilies).map(ht).join(", ") : "",
-      weaponFamilySuggestions: La.map((b) => ({ value: ht(b) })),
+      weaponFamilySuggestions: ja.map((b) => ({ value: ht(b) })),
       isDescriptor: f,
       isSpecies: w,
       isCompactRuleItem: a || o || r || s || l || u || c || p || m || y || w,
@@ -10044,7 +10112,7 @@ class F extends Fu {
         }
       } : {})] : [],
       isHeavyWeapon: r && i.category === "heavy",
-      abilityActivationOptions: a ? za.map((b) => ({
+      abilityActivationOptions: a ? Na.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.Activation.${b}`),
         selected: i.activation === b
@@ -10052,9 +10120,9 @@ class F extends Fu {
       abilityAllowedPoolOptions: a ? V.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Pools.${b[0].toUpperCase()}${b.slice(1)}`),
-        selected: K.includes(b)
+        selected: X.includes(b)
       })) : [],
-      abilityRollOptions: a ? Na.map((b) => ({
+      abilityRollOptions: a ? Ma.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.Roll.${b}`),
         selected: i.roll === b
@@ -10064,7 +10132,7 @@ class F extends Fu {
         label: game.i18n.localize(b === "none" ? "CYPHERV2.Common.None" : `CYPHERV2.Wounds.Severity.${b}`),
         selected: i.woundSeverity === b
       })) : [],
-      abilityTargetOptions: a ? Ma.map((b) => ({
+      abilityTargetOptions: a ? qa.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Ability.TargetMode.${b}`),
         selected: i.targetMode === b
@@ -10079,7 +10147,7 @@ class F extends Fu {
         label: game.i18n.localize(`CYPHERV2.Cypher.Power.${b}`),
         selected: i.power === b
       })) : [],
-      cypherEffectiveLevel: c ? co(i) : 0,
+      cypherEffectiveLevel: c ? uo(i) : 0,
       artifactLevelRollable: p ? Ai(i) : !1,
       skillRankOptions: o ? ee.map((b) => ({
         value: b,
@@ -10124,7 +10192,7 @@ class F extends Fu {
         label: b === "none" ? game.i18n.localize("CYPHERV2.Common.None") : game.i18n.localize(`CYPHERV2.Pools.${b[0].toUpperCase()}${b.slice(1)}`),
         selected: i.defaultPool === b
       })) : [],
-      weaponAttackTypeOptions: r ? Da.map((b) => ({
+      weaponAttackTypeOptions: r ? za.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Combat.Weapon.AttackType.${b}`),
         selected: i.attackType === b
@@ -10148,13 +10216,13 @@ class F extends Fu {
       advancedExpanded: this.#d.has("advanced"),
       shieldWoundsExpanded: l && this.#d.has("shield-wounds"),
       combatDepletionSides: r || s || l ? Wt(i.depletion ?? { die: "d6" }) : 0,
-      combatDepletionThreshold: r || s || l ? Hr(Number(i.depletion?.threshold ?? 1)) : "",
+      combatDepletionThreshold: r || s || l ? Ir(Number(i.depletion?.threshold ?? 1)) : "",
       depletionDieOptions: r || p ? bs.map((b) => ({
         value: b,
         label: `1 in 1${b}`,
         selected: i.depletion?.die === b
       })) : [],
-      armorCategoryOptions: s ? Ge.map((b) => ({
+      armorCategoryOptions: s ? Ue.map((b) => ({
         value: b,
         label: game.i18n.localize(`CYPHERV2.Combat.Armor.Category.${b}`),
         selected: i.category === b
@@ -10220,7 +10288,7 @@ async function jr(n) {
     description: Qe(e, "description")
   };
 }
-async function Du(n) {
+async function zu(n) {
   try {
     const e = await jr();
     if (!e) return;
@@ -10242,7 +10310,7 @@ async function Tu(n, e) {
     ui.notifications.error(t instanceof Error ? t.message : String(t));
   }
 }
-async function zu(n, e) {
+async function Nu(n, e) {
   const t = n.system.modifications.find((o) => o.id === e);
   if (!t) throw new Error(`NPC modification '${e}' was not found.`);
   await foundry.applications.api.DialogV2.confirm({
@@ -10254,23 +10322,23 @@ async function zu(n, e) {
     "system.modifications": n.system.modifications.filter((o) => o.id !== e)
   });
 }
-function Nu(n) {
+function Mu(n) {
   const e = typeof n == "number" ? n : typeof n == "string" && n.trim() !== "" ? Number(n) : Number.NaN;
   return Number.isInteger(e) && e >= 0 ? e * 3 : null;
 }
-function Mu(n, e) {
+function qu(n, e) {
   const t = xr(n, e), i = t.ratio > 0.5 ? "healthy" : t.ratio > 0.25 ? "intermediate" : "low";
   return { ...t, state: i };
 }
-const qu = foundry.applications.api.HandlebarsApplicationMixin(
+const xu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
-), ga = /* @__PURE__ */ new Set([
+), ya = /* @__PURE__ */ new Set([
   "requestDefense",
   "createModification",
   "editModification",
   "deleteModification"
 ]);
-class yt extends qu {
+class yt extends xu {
   static DEFAULT_OPTIONS = {
     ...Xn,
     classes: ["cypherv2", "sheet", "actor", "npc-sheet"],
@@ -10279,7 +10347,7 @@ class yt extends qu {
       createModification: yt.#t,
       editModification: yt.#i,
       deleteModification: yt.#n
-    }, ga),
+    }, ya),
     position: { width: 680, height: 700 },
     window: { resizable: !0 }
   };
@@ -10290,7 +10358,7 @@ class yt extends qu {
     await Mc(this.actor);
   }
   static async #t() {
-    await Du(this.actor);
+    await zu(this.actor);
   }
   static async #i(e, t) {
     const i = t.dataset.modificationId;
@@ -10300,10 +10368,10 @@ class yt extends qu {
   static async #n(e, t) {
     const i = t.dataset.modificationId;
     if (!i) throw new Error("Missing NPC modification ID.");
-    await zu(this.actor, i);
+    await Nu(this.actor, i);
   }
   async _onRender(e, t) {
-    await super._onRender(e, t), Zn(this.element, this.isEditable, ga);
+    await super._onRender(e, t), Zn(this.element, this.isEditable, ya);
   }
   _onClose(e) {
     super._onClose(e);
@@ -10321,8 +10389,8 @@ class yt extends qu {
       editable: this.isEditable,
       isGM: game.user.isGM,
       enriched: { notes: r },
-      targetNumber: Nu(i.level) ?? "—",
-      healthGauge: Mu(
+      targetNumber: Mu(i.level) ?? "—",
+      healthGauge: qu(
         i.health.value,
         i.health.max ?? i.health.baseMax
       ),
@@ -10339,7 +10407,7 @@ class yt extends qu {
     };
   }
 }
-function xu() {
+function Uu() {
   const { DocumentSheetConfig: n } = foundry.applications.apps;
   n.registerSheet(foundry.documents.Actor, $, R, {
     types: ["character"],
@@ -10380,13 +10448,13 @@ function _r(n) {
   if (Z(n, "Natural d20 result", 1), n > 20) throw new Error("Natural d20 result cannot exceed 20.");
   return [1, 17, 18, 19, 20].includes(n) ? [`natural-${n}`] : [];
 }
-function Uu(n) {
+function Ou(n) {
   return _r(n), Math.floor(n / 3);
 }
 function cn(n, e, t, i, o) {
   return { id: n, label: e, direction: t, steps: i, source: o };
 }
-function Ou(n) {
+function Bu(n) {
   const e = Z(n.limits.difficultyCeiling, "Difficulty ceiling"), t = Z(n.limits.assetLimit, "Asset limit"), i = Z(n.limits.paidEffortMaximum, "Maximum Effort"), o = Z(n.assets, "Assets"), a = Z(n.paidEffort, "Paid Effort"), r = Z(n.damageEffort ?? 0, "Damage Effort"), s = Z(n.freeDamageEffort ?? 0, "Free Damage Effort"), l = Z(n.freeEffort, "Free Effort"), u = n.limits.totalEffortMaximum === null ? null : Z(n.limits.totalEffortMaximum, "Maximum total Effort");
   if (Z(n.poolValue, "Pool value"), o > t) throw new Error(`Assets cannot exceed the current limit of ${t}.`);
   const c = r + s, p = a + c + l, h = a + r, m = l + s;
@@ -10445,9 +10513,9 @@ function Ou(n) {
     targetNumber: k
   };
 }
-function Bu(n, e) {
+function Lu(n, e) {
   if (n.finalDifficulty === 0) return Kr(n);
-  const t = _r(e), i = n.targetNumber === null ? null : e >= n.targetNumber, o = Uu(e), a = Wr(
+  const t = _r(e), i = n.targetNumber === null ? null : e >= n.targetNumber, o = Ou(e), a = Wr(
     o + n.netSteps,
     0,
     n.context.limits.difficultyCeiling
@@ -10484,7 +10552,7 @@ function Kr(n) {
 function dn(n) {
   return n === null ? "unresolved" : n ? "applied" : "inapplicable";
 }
-function Lu(n, e = 1) {
+function ju(n, e = 1) {
   const t = n.naturalRoll;
   if (t === null) return [];
   const i = { sourceId: "cypherv2.core", naturalRoll: t }, o = Ht(e);
@@ -10609,37 +10677,37 @@ const Ze = {
     "focusBehaviors"
   ]
 };
-function ju(n) {
+function Wu(n) {
   n.register(Ze), n.registerDifficultyPolicy(Ze.id, (e) => ({
     ...e,
     assetLimit: 2
-  })), n.registerSkillRankRule(Ze.id, Ku), n.registerNaturalResultRule(Ze.id, (e, t) => [
+  })), n.registerSkillRankRule(Ze.id, Xu), n.registerNaturalResultRule(Ze.id, (e, t) => [
     ...t,
-    ...Lu(e, e.prepared.context.horrorIntrusionRange)
+    ...ju(e, e.prepared.context.horrorIntrusionRange)
   ]), n.registerGMIntrusionPolicy(Ze.id, (e) => ({
     ...e,
     targetedXpToTarget: 1,
     targetedXpToShare: 1,
     groupXpPerTarget: 1,
     freeXp: 0
-  })), n.registerCombatPolicy(Ze.id, () => Wu), n.registerAdvancementPolicy(Ze.id, () => Ba);
+  })), n.registerCombatPolicy(Ze.id, () => _u), n.registerAdvancementPolicy(Ze.id, () => La);
 }
-const Wu = Object.freeze({
+const _u = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
   armorDefenseSteps: Object.freeze({ light: 1, medium: 2, heavy: 3 }),
   blockSeverityReduction: 1,
   damageEffortBonus: 3
-}), _u = Object.freeze({
+}), Ku = Object.freeze({
   inability: -1,
   untrained: 0,
   trained: 1,
   specialized: 2,
   expert: 3
 });
-function Ku(n, e) {
-  const t = _u[n];
+function Xu(n, e) {
+  const t = Ku[n];
   return t === 0 ? null : {
     id: `core.skill.${e.id}.rank`,
     label: `CYPHERV2.Skill.Ranks.${n}`,
@@ -10649,7 +10717,7 @@ function Ku(n, e) {
     sourceId: e.id
   };
 }
-class Xu {
+class Ju {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Map();
   #i = /* @__PURE__ */ new Map();
@@ -10824,7 +10892,7 @@ class Xu {
       throw new Error(`Rule module '${e}' does not declare '${t}'.`);
   }
 }
-async function Ju() {
+async function Qu() {
   const n = await new Roll("1d6").evaluate();
   return Number(n.total);
 }
@@ -10833,11 +10901,11 @@ function yi(n, e, t, i) {
     throw new Error(`${i} must be an integer from ${e} to ${t}.`);
   return n;
 }
-class Qu {
+class Zu {
   #e;
   #t;
   #i;
-  constructor(e = Ju, t = Oe, i = Date.now) {
+  constructor(e = Qu, t = Oe, i = Date.now) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   calculateRoll(e, t, i, o = !1, a = 0, r = "") {
@@ -10846,7 +10914,7 @@ class Qu {
     return { slotId: r, type: e, dieResult: i, tier: t, bonus: s, total: Math.max(0, i + t + s), lastAction: o };
   }
   availableTypes(e) {
-    return qa(e);
+    return xa(e);
   }
   isAvailable(e, t) {
     return !e[_t[t]];
@@ -10864,7 +10932,7 @@ class Qu {
       throw new Error(`The '${t}' Core Recovery has already been used today.`);
     return this.calculateRoll(
       t,
-      L(e.system),
+      G(e.system),
       await this.#e(),
       i,
       e.system.derived.recovery.bonus,
@@ -10891,7 +10959,7 @@ class Qu {
   }
   prepareNormal(e, t, i) {
     Ne(e);
-    const o = this.slots(e), a = t.slotId || Mt(o).find((c) => c.type === t.type)?.id || "", r = bo(o, a, t.type), s = this.distribute(e, t, i), l = Ct(r), u = {
+    const o = this.slots(e), a = t.slotId || Mt(o).find((c) => c.type === t.type)?.id || "", r = wo(o, a, t.type), s = this.distribute(e, t, i), l = Ct(r), u = {
       id: this.#t(),
       slotId: a,
       kind: "normal",
@@ -10913,14 +10981,14 @@ class Qu {
     const o = this.slots(e), a = Mt(o).find((c) => c.type === t && (!i || c.id === i));
     if (!a)
       throw new Error(`The '${t}' Core Recovery has already been used today.`);
-    const r = bo(o, a.id, t), s = Ct(r), l = { might: 0, speed: 0, intellect: 0 }, u = {
+    const r = wo(o, a.id, t), s = Ct(r), l = { might: 0, speed: 0, intellect: 0 }, u = {
       id: this.#t(),
       slotId: a.id,
       kind: "nonRest",
       type: t,
       rolled: !1,
       dieResult: 0,
-      tier: L(e.system),
+      tier: G(e.system),
       bonus: 0,
       total: 0,
       ...l,
@@ -10943,7 +11011,7 @@ class Qu {
     };
   }
 }
-const Zu = {
+const em = {
   beforeComplete(n) {
     Hooks.callAll("cypherv2.preRecoveryWorkflow", n);
   },
@@ -10957,18 +11025,18 @@ const Zu = {
     Hooks.callAll("cypherv2.recoveryRefresh", n);
   }
 };
-function em(n) {
+function tm(n) {
   return n === "one-action" ? null : n;
 }
-function ya(n, e) {
+function ba(n, e) {
   const t = [n === "normal" ? "recovery" : "non-rest-recovery"];
   return e !== "one-action" && t.push("10-minute-or-longer"), (e === "1-hour" || e === "10-hours") && t.push("1-hour-or-longer"), e === "10-hours" && t.push("10-hour"), t;
 }
-class tm {
+class im {
   #e;
   #t;
   #i;
-  constructor(e, t, i = Zu) {
+  constructor(e, t, i = em) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async rollNormal(e, t, i = !1, o) {
@@ -10976,12 +11044,12 @@ class tm {
   }
   async completeNormal(e, t, i, o = {}) {
     Ne(e);
-    const a = em(t.type), r = a ? this.#t.prepare(e, a, o) : null, s = this.#e.prepareNormal(e, t, i), l = {
+    const a = tm(t.type), r = a ? this.#t.prepare(e, a, o) : null, s = this.#e.prepareNormal(e, t, i), l = {
       kind: "normal",
       type: t.type,
       recovery: s,
       rest: r,
-      durationTriggers: ya("normal", t.type)
+      durationTriggers: ba("normal", t.type)
     };
     await this.#i.beforeComplete(l);
     const u = {
@@ -10998,7 +11066,7 @@ class tm {
       type: t,
       recovery: o,
       rest: null,
-      durationTriggers: ya("nonRest", t)
+      durationTriggers: ba("nonRest", t)
     };
     return await this.#i.beforeComplete(a), await e.update({
       "system.recovery.used": o.used,
@@ -11007,7 +11075,7 @@ class tm {
     }), await this.#i.processDurations(a), await this.#i.afterComplete(a), await this.#i.refresh(a), a;
   }
 }
-class im {
+class nm {
   #e;
   #t;
   constructor(e = Oe, t = Date.now) {
@@ -11064,21 +11132,21 @@ class im {
     }), o;
   }
 }
-const ba = { minor: 3, moderate: 3, major: 3 };
-function zt(n, e) {
+const wa = { minor: 3, moderate: 3, major: 3 };
+function Tt(n, e) {
   if (!Number.isInteger(n) || n < 0)
     throw new Error(`${e} must be a non-negative integer.`);
   return n;
 }
-function nm(n) {
-  return zt(n, "Pool damage overflow"), n === 0 ? null : n <= 4 ? "minor" : n <= 8 ? "moderate" : "major";
+function om(n) {
+  return Tt(n, "Pool damage overflow"), n === 0 ? null : n <= 4 ? "minor" : n <= 8 ? "moderate" : "major";
 }
-class om {
+class am {
   #e;
   constructor(e = Oe) {
     this.#e = e;
   }
-  applyWound(e, t, i = ba, o = {}) {
+  applyWound(e, t, i = wa, o = {}) {
     const a = pt(e), r = {
       id: o.id ?? this.#e(),
       label: o.label ?? `${t[0]?.toUpperCase()}${t.slice(1)} Wound`,
@@ -11129,7 +11197,7 @@ class om {
     return i[t] = [], { wounds: i, removed: o };
   }
   setWoundCount(e, t, i, o, a = {}) {
-    const r = zt(i, "Wound count"), s = zt(o, "Wound capacity");
+    const r = Tt(i, "Wound count"), s = Tt(o, "Wound capacity");
     if (r > s) throw new Error("Wound count cannot exceed its capacity.");
     const l = pt(e), u = l[t], c = u.length, p = r < c ? u.splice(r) : [], h = [];
     for (; u.length < r; ) {
@@ -11144,8 +11212,8 @@ class om {
     }
     return { wounds: l, severity: t, previousCount: c, count: r, added: h, removed: p };
   }
-  applyPoolDamage(e, t, i, o, a = ba, r = {}) {
-    const s = zt(i, "Pool value"), l = zt(o, "Pool damage"), u = Math.min(s, l), c = s - u, p = l - u, h = nm(p), m = h ? this.applyWound(e, h, a, {
+  applyPoolDamage(e, t, i, o, a = wa, r = {}) {
+    const s = Tt(i, "Pool value"), l = Tt(o, "Pool damage"), u = Math.min(s, l), c = s - u, p = l - u, h = om(p), m = h ? this.applyWound(e, h, a, {
       ...r,
       label: r.label ?? `${t} Pool overflow`
     }) : null;
@@ -11208,7 +11276,7 @@ class om {
     return a.wound?.applied && (r["system.wounds"] = a.wound.wounds), await e.update(r), a;
   }
 }
-function am(n, e) {
+function rm(n, e) {
   return n.naturalEffects.filter((t) => t.status !== "inapplicable").map((t) => ({
     kind: t.kind,
     label: e(t.label),
@@ -11217,7 +11285,7 @@ function am(n, e) {
     ...t.damageBonus === void 0 ? {} : { damageBonus: t.damageBonus }
   }));
 }
-function rm(n, e) {
+function sm(n, e) {
   const t = n.naturalEffects.filter((l) => l.status !== "inapplicable");
   if (t.some((l) => l.kind === "gm-intrusion"))
     return { label: e("CYPHERV2.Roll.NaturalEffects.GMIntrusion") };
@@ -11240,16 +11308,16 @@ function rm(n, e) {
   const s = t[0];
   return s ? { label: e(s.label) } : null;
 }
-function wa(n, e, t) {
+function va(n, e, t) {
   return `${ke(e, n)} ${t(e === "ease" ? n === 1 ? "CYPHERV2.Roll.EaseStep" : "CYPHERV2.Roll.EaseSteps" : n === 1 ? "CYPHERV2.Roll.HindranceStep" : "CYPHERV2.Roll.HindranceSteps")}`;
 }
-function sm(n, e) {
+function lm(n, e) {
   return n.breakdown.map((t) => ({
     label: e(t.label),
     value: ke(t.direction, t.steps)
   }));
 }
-function lm(n, e) {
+function cm(n, e) {
   return n.breakdown.length === 0 && n.totalEase === 0 && n.totalHindrance === 0 ? [] : [{
     label: e("CYPHERV2.Roll.TotalEase"),
     value: n.totalEase === 0 ? 0 : ke("ease", n.totalEase)
@@ -11258,7 +11326,7 @@ function lm(n, e) {
     value: n.totalHindrance === 0 ? 0 : ke("hinder", n.totalHindrance)
   }];
 }
-function cm(n, e) {
+function dm(n, e) {
   const t = n.prepared, i = t.context;
   return [
     ...i.paidEffort > 0 ? [{
@@ -11283,7 +11351,7 @@ function cm(n, e) {
     }] : []
   ];
 }
-function dm(n, e) {
+function um(n, e) {
   const t = n.prepared, i = t.actionCostBeforeEdge > 0 || t.effortCostBeforeEdge > 0 || n.poolCostPaid > 0;
   return [
     ...t.actionCostBeforeEdge > 0 ? [{
@@ -11304,7 +11372,7 @@ function dm(n, e) {
     }] : []
   ];
 }
-function um(n, e) {
+function mm(n, e) {
   const t = n.naturalEffects.find((i) => i.kind === "gm-intrusion" && i.status === "applied" && i.intrusionProvenance === "horror-mode" && i.horrorIntrusionRange !== void 0);
   return t?.horrorIntrusionRange === void 0 ? [] : [{
     label: e("CYPHERV2.Horror.Title"),
@@ -11312,9 +11380,9 @@ function um(n, e) {
   }];
 }
 function Xr(n, e) {
-  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, o = am(n, e), a = o.filter((s) => !s.isIntrusion), r = [
-    ...t.totalEase > 0 ? [wa(t.totalEase, "ease", e)] : [],
-    ...t.totalHindrance > 0 ? [wa(t.totalHindrance, "hinder", e)] : []
+  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, o = rm(n, e), a = o.filter((s) => !s.isIntrusion), r = [
+    ...t.totalEase > 0 ? [va(t.totalEase, "ease", e)] : [],
+    ...t.totalHindrance > 0 ? [va(t.totalHindrance, "hinder", e)] : []
   ].join(" · ");
   return {
     actorName: t.context.actor.name,
@@ -11333,10 +11401,10 @@ function Xr(n, e) {
       isEase: s.direction === "ease",
       modifier: ke(s.direction, s.steps)
     })),
-    modifierDetails: sm(t, e),
-    modifierTotalDetails: lm(t, e),
-    effortDetails: cm(n, e),
-    costDetails: dm(n, e),
+    modifierDetails: lm(t, e),
+    modifierTotalDetails: cm(t, e),
+    effortDetails: dm(n, e),
+    costDetails: um(n, e),
     stepSummary: r,
     showStepSummary: r.length > 0,
     paidEffort: t.context.paidEffort,
@@ -11349,7 +11417,7 @@ function Xr(n, e) {
     totalHindrance: t.totalHindrance,
     netSteps: t.netSteps,
     naturalEffects: o,
-    specialRoll: rm(n, e),
+    specialRoll: sm(n, e),
     hasNaturalResult: n.naturalMarkers.length > 0,
     hasNaturalEffectDisclosure: a.length > 0,
     gmIntrusion: o.some((s) => s.isIntrusion),
@@ -11373,17 +11441,17 @@ function Xr(n, e) {
     } : {}
   };
 }
-function mm(n, e) {
+function pm(n, e) {
   return n ? { outcome: e("CYPHERV2.Roll.Success"), outcomeIcon: "✓", outcomeClass: "success" } : { outcome: e("CYPHERV2.Roll.Failure"), outcomeIcon: "✕", outcomeClass: "failure" };
 }
 function Dn(n, e, t = !0) {
-  return n.automaticSuccess && t ? { outcome: e("CYPHERV2.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : mm(n.success === !0, e);
+  return n.automaticSuccess && t ? { outcome: e("CYPHERV2.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : pm(n.success === !0, e);
 }
-function pm(n, e, t = (i) => i) {
+function fm(n, e, t = (i) => i) {
   const i = Xr(n, t), o = n.beatsDifficulty === null ? {} : {
     beatsDifficulty: n.beatsDifficulty,
     showBeatsDifficulty: !0
-  }, a = um(n, t), r = n.prepared.context.difficulty;
+  }, a = mm(n, t), r = n.prepared.context.difficulty;
   if (r.mode === "unknown")
     return {
       ...i,
@@ -11421,7 +11489,7 @@ function pm(n, e, t = (i) => i) {
     hasDetails: a.length > 0 || i.modifierDetails.length > 0 || i.modifierTotalDetails.length > 0 || i.effortDetails.length > 0 || i.costDetails.length > 0
   };
 }
-function fm(n, e = (t) => t) {
+function hm(n, e = (t) => t) {
   return n?.damage === void 0 ? { showFinalDamage: !1, damageDetails: [], damageTotalDetails: [] } : {
     showFinalDamage: !0,
     finalDamage: n.damage,
@@ -11434,7 +11502,7 @@ function fm(n, e = (t) => t) {
     damageTotalDetails: [{ label: e("CYPHERV2.Combat.FinalDamage"), value: n.damage }]
   };
 }
-function hm(n, e = (t) => t) {
+function gm(n, e = (t) => t) {
   const t = n.prepared.context.difficulty;
   if (t.mode !== "hidden") throw new Error("Only hidden-difficulty rolls require an audit card.");
   return {
@@ -11445,9 +11513,9 @@ function hm(n, e = (t) => t) {
     ...Dn(n, e)
   };
 }
-class gm {
+class ym {
   async publish(e, t, i, o = {}) {
-    const a = (y) => game.i18n.localize(y), r = pm(t.result, i, a), s = fm(o.combat, a), l = {
+    const a = (y) => game.i18n.localize(y), r = fm(t.result, i, a), s = hm(o.combat, a), l = {
       ...r,
       ...s,
       hasDetails: r.hasDetails || s.damageDetails.length > 0 || s.damageTotalDetails.length > 0,
@@ -11474,7 +11542,7 @@ class gm {
       content: u
     };
     if (o.combat?.action && (c.flags = { cypherv2: { combatAction: o.combat.action } }), t.chatRoll !== void 0 && (c.rolls = [t.chatRoll]), await ChatMessage.create(c), t.result.prepared.context.difficulty.mode !== "hidden") return;
-    const p = hm(t.result, a);
+    const p = gm(t.result, a);
     if (Hooks.callAll("cypherv2HiddenRollAudit", p, e, t), o.showGmAudit !== !0) return;
     const h = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/roll-audit-card.hbs",
@@ -11492,12 +11560,12 @@ class gm {
     await ChatMessage.create(m);
   }
 }
-const ym = async () => {
+const bm = async () => {
   const n = await new Roll("1d20").evaluate();
   if (n.total === null) throw new Error("The d20 roll did not produce a total.");
   return { naturalRoll: n.total, chatRoll: n };
-}, bm = (n) => n.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core", wm = () => En();
-function va(n, e) {
+}, wm = (n) => n.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core", vm = () => En();
+function Ca(n, e) {
   if (!Number.isInteger(n) || n < 0)
     throw new Error(`${e} must be a non-negative integer.`);
   return n;
@@ -11512,16 +11580,16 @@ function un(n, e, t, i) {
     source: i
   };
 }
-class vm {
+class Cm {
   #e;
   #t;
   #i;
   #n;
-  constructor(e, t = ym, i = bm, o = wm) {
+  constructor(e, t = bm, i = wm, o = vm) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o;
   }
   preview(e, t, i) {
-    oe(e), va(t.otherEase, "Other Ease"), va(t.otherHindrance, "Other Hindrance");
+    oe(e), Ca(t.otherEase, "Other Ease"), Ca(t.otherHindrance, "Other Hindrance");
     const o = [], a = un(
       "manual.skill",
       "CYPHERV2.Roll.Breakdown.Skill",
@@ -11591,7 +11659,7 @@ class vm {
       ...t.purpose ? { purpose: t.purpose } : {},
       ...t.origin ? { origin: t.origin } : {}
     }, f = this.#e.enrichRollContext(y, h);
-    return Ou(f);
+    return Bu(f);
   }
   async execute(e, t, i) {
     const [o] = await this.executeBatch(e, [t], i);
@@ -11610,7 +11678,7 @@ class vm {
       );
     a.poolCost > 0 && r !== null && await e.update({ [`system.stats.${r}.value`]: s - a.poolCost });
     const u = o.some((m) => m.finalDifficulty !== 0) ? await this.#t() : null, c = o.map((m) => {
-      const y = m.finalDifficulty === 0 ? Kr(m) : Bu(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
+      const y = m.finalDifficulty === 0 ? Kr(m) : Lu(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
         y,
         i.enabledRuleModuleIds ?? []
       );
@@ -11630,18 +11698,18 @@ class vm {
     });
   }
 }
-function Cm(n) {
+function Em(n) {
   return V.includes(n);
 }
-class Em {
+class Rm {
   #e;
   constructor(e) {
     this.#e = e;
   }
   configuredPool(e) {
-    if (!Fa.includes(e.system.defaultPool))
+    if (!Da.includes(e.system.defaultPool))
       throw new Error(`Unknown Skill default Pool '${e.system.defaultPool}'.`);
-    return Cm(e.system.defaultPool) ? e.system.defaultPool : null;
+    return Em(e.system.defaultPool) ? e.system.defaultPool : null;
   }
   rankContribution(e, t = []) {
     if (e.type !== "skill") throw new Error("Skill contributions require a Skill Item.");
@@ -11712,27 +11780,27 @@ class Em {
     };
   }
 }
-const Rm = Object.freeze({
+const Pm = Object.freeze({
   targetedXpToTarget: 0,
   targetedXpToShare: 0,
   groupXpPerTarget: 0,
   freeXp: 0
 });
-function Pm(n) {
+function Sm(n) {
   return {
     actorId: n.id,
     actorName: n.name,
     ...n.img ? { actorImage: n.img } : {}
   };
 }
-class Sm {
+class km {
   #e;
   #t;
   constructor(e, t = Oe) {
     this.#e = e, this.#t = t;
   }
   policy(e = []) {
-    return this.#e.resolveGMIntrusionPolicy(Rm, e);
+    return this.#e.resolveGMIntrusionPolicy(Pm, e);
   }
   async createTargeted(e, t = []) {
     oe(e);
@@ -11785,7 +11853,7 @@ class Sm {
     return {
       id: this.#t(),
       mode: e,
-      targets: t.map(Pm),
+      targets: t.map(Sm),
       targetXp: i,
       sharedXp: o,
       naturalRoll: a
@@ -11801,25 +11869,25 @@ function St(n) {
     ...t ? { tokenUuid: t } : {}
   };
 }
-const Ca = [
+const Ea = [
   "none",
   "minor",
   "moderate",
   "major"
 ];
-function km(n, e) {
-  const t = Ca.indexOf(n);
-  return Ca[Math.max(0, t - Math.max(0, Math.trunc(e)))] ?? "none";
+function Am(n, e) {
+  const t = Ea.indexOf(n);
+  return Ea[Math.max(0, t - Math.max(0, Math.trunc(e)))] ?? "none";
 }
 function Ei(n, e, t) {
   if (!Number.isInteger(n) || t !== void 0 && n < t)
     throw new Error(`${e} must be an integer${t === void 0 ? "" : ` of at least ${t}`}.`);
   return n;
 }
-function Am(n, e) {
+function Hm(n, e) {
   return n.contexts.every((t) => e.tags.includes(t));
 }
-function Hm(n, e) {
+function Im(n, e) {
   for (const [t, i] of Object.entries(n)) {
     if (t === "tagsAll") {
       if (!Array.isArray(i) || !i.every((a) => typeof a == "string" && e.tags.includes(a))) return !1;
@@ -11837,10 +11905,10 @@ function Hm(n, e) {
   }
   return !0;
 }
-function Ea(n) {
+function Ra(n) {
   return n.contexts.length + Object.keys(n.predicate).length;
 }
-function Im(n) {
+function $m(n) {
   return Ei(n.value, `NPC modification '${n.id}'`, 0), {
     id: `npc-modification.${n.id}`,
     label: "CYPHERV2.Combat.TargetModification",
@@ -11850,20 +11918,20 @@ function Im(n) {
     sourceId: n.id
   };
 }
-class $m {
+class Vm {
   #e;
   constructor(e) {
     this.#e = e;
   }
   resolve(e, t, i = []) {
     if (e.type !== "npc") throw new Error("Combat targets must be NPC Actors.");
-    const o = Ei(e.system.level, "NPC Level", 0), a = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Am(c, t) && Hm(c.predicate, t)), r = a.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => Ea(p.modification) - Ea(c.modification) || p.index - c.index)[0]?.modification;
+    const o = Ei(e.system.level, "NPC Level", 0), a = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Hm(c, t) && Im(c.predicate, t)), r = a.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => Ra(p.modification) - Ra(c.modification) || p.index - c.index)[0]?.modification;
     let s = r ? Ei(r.value, `NPC modification '${r.id}'`, 0) : o;
     const l = r ? [r.id] : [];
     for (const { modification: c } of a)
       c.mode === "levelDelta" && (s += Ei(c.value, `NPC modification '${c.id}'`), l.push(c.id));
     s = Math.max(0, s);
-    const u = a.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), Im(c)));
+    const u = a.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), $m(c)));
     return this.#e.enrichTargetResolution({
       targetId: e.id,
       targetIdentity: St(e),
@@ -11875,16 +11943,16 @@ class $m {
     }, e, t, i);
   }
   nativeNpcTargets() {
-    return [...game.user.targets ?? []].map((e) => Cr(e)).filter((e) => e !== null);
+    return [...game.user.targets ?? []].map((e) => Er(e)).filter((e) => e !== null);
   }
 }
-class Vm {
+class Ym {
   async npcDamage() {
   }
   async characterWound() {
   }
 }
-async function Ym(n) {
+async function Fm(n) {
   if (n.tokenId) {
     const e = canvas.tokens?.get(n.tokenId);
     if (e?.center) return { center: e.center };
@@ -11898,9 +11966,9 @@ async function Ym(n) {
     }
   return null;
 }
-class Fm {
+class Dm {
   async #e(e, t, i) {
-    const o = await Ym(e);
+    const o = await Fm(e);
     o && await canvas.interface.createScrollingText(o.center, t, {
       anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
       direction: CONST.TEXT_ANCHOR_POINTS.TOP,
@@ -11926,7 +11994,7 @@ class Fm {
     await this.#e(e, a, o ? "#ff5c5c" : "#7dcfff");
   }
 }
-class Dm {
+class zm {
   async syncNpcDead() {
   }
 }
@@ -11945,16 +12013,16 @@ class Tm {
     }));
   }
 }
-function zm(n) {
+function Nm(n) {
   if ("system.health.value" in n) return !0;
   const e = n.system;
   if (!e || typeof e != "object") return !1;
   const t = e.health;
   return !!(t && typeof t == "object" && "value" in t);
 }
-function Nm(n) {
+function Mm(n) {
   Hooks.on("updateActor", (e, t, i = {}) => {
-    if (i.cypherv2SkipDeadStatusSync === !0 || e.type !== "npc" || !zm(t)) return;
+    if (i.cypherv2SkipDeadStatusSync === !0 || e.type !== "npc" || !Nm(t)) return;
     const o = Number(e.system.health?.value);
     Number.isFinite(o) && n.syncNpcDead(e, o <= 0);
   });
@@ -11985,7 +12053,7 @@ class Jr {
     await e.update({ "system.ammo.value": t.maximum }, { cypherv2WeaponReload: !0 });
   }
 }
-const Mm = Object.freeze({
+const qm = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
@@ -11997,7 +12065,7 @@ function pn(n, e) {
   if (!Number.isInteger(n) || n < 0) throw new Error(`${e} must be a non-negative integer.`);
   return n;
 }
-function Ra(n, e, t) {
+function Pa(n, e, t) {
   return {
     id: n.id,
     label: t,
@@ -12020,7 +12088,7 @@ function Qr(n, e) {
     })
   };
 }
-class qm {
+class xm {
   #e;
   #t;
   #i;
@@ -12030,11 +12098,11 @@ class qm {
   #l;
   #a;
   #c;
-  constructor(e, t, i, o, a, r = new Vm(), s = new Dm(), l = new Lr(a), u = new Jr()) {
+  constructor(e, t, i, o, a, r = new Ym(), s = new zm(), l = new Lr(a), u = new Jr()) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = o, this.#o = a, this.#r = r, this.#l = s, this.#a = l, this.#c = u;
   }
   policy(e = []) {
-    return this.#e.resolveCombatPolicy(Mm, e);
+    return this.#e.resolveCombatPolicy(qm, e);
   }
   weaponBaseDamage(e, t = this.policy()) {
     if (e.type !== "weapon") throw new Error("Weapon attacks require a Weapon Item.");
@@ -12215,7 +12283,7 @@ class qm {
   }
   buildDefenseRequest(e, t, i) {
     if (!Ta.includes(t)) throw new Error(`Unknown defense '${t}'.`);
-    const o = i.enabledRuleModuleIds ?? [], a = t === "dodge" ? "speed" : "might", r = e.system.derived.combat.armor, s = t === "dodge" ? r.dodgeContributions.map((u) => Ra(u, "hinder", "CYPHERV2.Combat.Armor.DodgeHindrance")) : r.blockContributions.map((u) => Ra(u, "ease", "CYPHERV2.Combat.Armor.BlockEase")), l = i.skill ? this.#i.rankContribution(i.skill, o) : null;
+    const o = i.enabledRuleModuleIds ?? [], a = t === "dodge" ? "speed" : "might", r = e.system.derived.combat.armor, s = t === "dodge" ? r.dodgeContributions.map((u) => Pa(u, "hinder", "CYPHERV2.Combat.Armor.DodgeHindrance")) : r.blockContributions.map((u) => Pa(u, "ease", "CYPHERV2.Combat.Armor.BlockEase")), l = i.skill ? this.#i.rankContribution(i.skill, o) : null;
     return {
       label: t === "dodge" ? "CYPHERV2.Combat.Defense.DodgeRoll" : t === "blockWithShield" ? "CYPHERV2.Combat.Defense.BlockWithShieldRoll" : "CYPHERV2.Combat.Defense.BlockRoll",
       pool: a,
@@ -12259,7 +12327,7 @@ class qm {
     });
   }
   woundAfterDefense(e, t, i, o = []) {
-    return e.success !== !0 ? i : t === "dodge" || t === "blockWithShield" ? "none" : km(i, this.policy(o).blockSeverityReduction);
+    return e.success !== !0 ? i : t === "dodge" || t === "blockWithShield" ? "none" : Am(i, this.policy(o).blockSeverityReduction);
   }
   async resolveDefenseWound(e, t, i, o, a, r = []) {
     if (i !== "blockWithShield" || t.success !== !0) {
@@ -12340,7 +12408,7 @@ function Hi(n) {
     ...n.tokenUuid ? { targetTokenUuid: n.tokenUuid } : {}
   };
 }
-class xm {
+class Um {
   #e;
   #t;
   constructor(e, t) {
@@ -12455,7 +12523,7 @@ const Gm = async (n) => {
   if (e.total === null) throw new Error("The depletion roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class Um {
+class Om {
   #e;
   constructor(e = Gm) {
     this.#e = e;
@@ -12484,7 +12552,7 @@ class Um {
     return u.depleted && i && e.update && await e.update({ "system.depleted": !0 }), u;
   }
 }
-class Om {
+class Bm {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/depletion-card.hbs",
@@ -12505,7 +12573,7 @@ class Om {
     t.chatRoll !== void 0 && (o.rolls = [t.chatRoll]), await ChatMessage.create(o);
   }
 }
-const Pa = 124, Bm = 58, Sa = 108, Lm = 10, jm = async (n) => {
+const Sa = 124, Lm = 58, ka = 108, jm = 10, Wm = async (n) => {
   if (!n) return null;
   try {
     const e = await fromUuid(n);
@@ -12520,8 +12588,8 @@ const Pa = 124, Bm = 58, Sa = 108, Lm = 10, jm = async (n) => {
   } catch {
     return null;
   }
-}, Wm = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
-function _m(n) {
+}, _m = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
+function Km(n) {
   const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map();
   for (const i of n) {
     const o = t.get(i.tier) ?? [];
@@ -12536,15 +12604,15 @@ function _m(n) {
   }
   return e;
 }
-function Km(n, e = 120) {
+function Xm(n, e = 120) {
   const t = n.replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/\s+/g, " ").trim();
   return t.length <= e ? t : `${t.slice(0, Math.max(0, e - 1)).trimEnd()}…`;
 }
-class Xm {
+class Jm {
   #e;
   #t;
   #i;
-  constructor(e = new ao(), t = jm, i = Wm) {
+  constructor(e = new ao(), t = Wm, i = _m) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async prepare(e, t = {}) {
@@ -12584,16 +12652,16 @@ class Xm {
           invalid: !0
         };
     }
-    const s = _m(r.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...r.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
+    const s = Km(r.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...r.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
     for (const m of r.nodes)
       u.set(m.node.tier, (u.get(m.node.tier) ?? 0) + 1);
-    const c = Math.max(440, ...[...u.values()].map((m) => m * Pa + (m + 1) * Lm)), p = await Promise.all(r.nodes.map(async (m) => {
+    const c = Math.max(440, ...[...u.values()].map((m) => m * Sa + (m + 1) * jm)), p = await Promise.all(r.nodes.map(async (m) => {
       const y = await this.#t(m.node.abilityUuid), f = m.state === "owned" && a.has(m.node.id), w = y?.description ?? m.node.abilitySnapshot.description ?? "", C = r.diagnostics.some((M) => M.code === "invalid-owned-progression" && M.nodeId === m.node.id || M.severity === "error" && (!M.nodeId || M.nodeId === m.node.id)), P = m.state !== "owned" && m.node.tier > i, Y = m.state !== "owned" && m.reason === "no-owned-prerequisite", k = m.state !== "owned" && (m.state !== "available" || C), H = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
       return {
         id: m.node.id,
         abilityUuid: m.node.abilityUuid,
         abilityName: y?.name || m.node.abilitySnapshot.name || m.node.id,
-        descriptionExcerpt: Km(w),
+        descriptionExcerpt: Xm(w),
         descriptionHtml: await this.#i(w, y?.relativeTo ?? e),
         tier: m.node.tier,
         state: m.state,
@@ -12617,8 +12685,8 @@ class Xm {
         selected: t.editor?.selectedNodeId === m.node.id,
         connectionSource: t.editor?.connectionSourceNodeId === m.node.id,
         xPercent: s.get(m.node.id) ?? 50,
-        width: Pa,
-        height: Bm
+        width: Sa,
+        height: Lm
       };
     })), h = e.system.graph.connections.map(({ id: m, from: y, to: f }) => ({ id: m, from: y, to: f }));
     return {
@@ -12628,14 +12696,14 @@ class Xm {
       mode: t.editor ? "editor" : t.progress ? "progression" : "focus",
       editor: !!t.editor,
       width: c,
-      height: l * Sa,
+      height: l * ka,
       nodes: p,
       connections: h,
       tiers: Array.from({ length: l }, (m, y) => {
         const f = y + 1;
         return {
           tier: f,
-          top: y * Sa,
+          top: y * ka,
           nodes: p.filter((w) => w.tier === f).sort((w, C) => w.xPercent - C.xPercent || w.id.localeCompare(C.id))
         };
       }),
@@ -12653,10 +12721,10 @@ function Re(n) {
 function fn(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, img: n.img, type: e, system: it(n.system) };
 }
-function Jm(n, e) {
+function Qm(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, ...n.img ? { img: n.img } : {}, type: e, system: it(n.system) };
 }
-function ka(n, e, t, i, o) {
+function Aa(n, e, t, i, o) {
   return {
     kind: n,
     sourceUuid: e,
@@ -12665,10 +12733,10 @@ function ka(n, e, t, i, o) {
     status: "active",
     contentUuid: o.contentUuid,
     contentKey: o.contentKey,
-    replacement: uo()
+    replacement: mo()
   };
 }
-function uo() {
+function mo() {
   return {
     active: !1,
     originalName: "",
@@ -12689,7 +12757,7 @@ function hn() {
     status: "active",
     contentUuid: "",
     contentKey: "",
-    replacement: uo()
+    replacement: mo()
   };
 }
 function Nt(n) {
@@ -12702,17 +12770,17 @@ function gn(n, e) {
 function De(n) {
   return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
 }
-function Qm(n, e) {
+function Zm(n, e) {
   return [...n.items].filter((t) => t.system.grantedBy?.instanceId === e);
 }
-function Tn(n, e) {
-  return Qm(n, e).flatMap((i) => {
+function zn(n, e) {
+  return Zm(n, e).flatMap((i) => {
     if (i.type !== "descriptor" && i.type !== "characterType" && i.type !== "species") return [i];
     const o = i.system.instance?.instanceId;
-    return [i, ...o ? Tn(n, o) : []];
+    return [i, ...o ? zn(n, o) : []];
   });
 }
-class Zm {
+class ep {
   #e;
   #t;
   #i;
@@ -12767,7 +12835,7 @@ class Zm {
     const o = it(t.system), a = o.instance?.sourceUuid || t.uuid;
     if (De(e).some((m) => m.type === "descriptor" && m.system.instance.sourceUuid === a)) throw new Error("This Descriptor is already attached.");
     if (i.role === "primary" && De(e).some((m) => m.type === "descriptor" && m.system.instance.role === "primary")) throw new Error("This Character already has a primary Descriptor.");
-    const r = this.#t(), s = this.#u(o.poolBonusChoiceGroups ?? [], i.poolChoices ?? {}), l = this.#f(o.choiceGroups ?? [], i.skillChoices ?? {}), u = [
+    const r = this.#t(), s = this.#m(o.poolBonusChoiceGroups ?? [], i.poolChoices ?? {}), l = this.#f(o.choiceGroups ?? [], i.skillChoices ?? {}), u = [
       ...await this.#l(o.skillGrants ?? [], "descriptor", a, r),
       ...await this.#a(o.choiceGroups ?? [], l, "descriptor", a, r)
     ], { grants: c, skippedGrantIds: p } = await this.#s(
@@ -12828,30 +12896,30 @@ class Zm {
     for (const A of M) {
       const D = A.descriptorUuid ? await this.#e(A.descriptorUuid) : null;
       if (D && D.type !== "descriptor") throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
-      const S = D ? Nt(D) : Jm(A.snapshot, "descriptor");
+      const S = D ? Nt(D) : Qm(A.snapshot, "descriptor");
       if (!S) throw new Error(`Descriptor grant '${A.id}' has neither a source nor a usable snapshot.`);
-      const K = it(S.system), j = K.instance?.sourceUuid || A.descriptorUuid, He = j || `snapshot:${String(S.name).trim().toLocaleLowerCase()}`;
+      const X = it(S.system), j = X.instance?.sourceUuid || A.descriptorUuid, He = j || `snapshot:${String(S.name).trim().toLocaleLowerCase()}`;
       if (H.has(He)) {
         Y.push(A.id), k.push(A.id);
         continue;
       }
       H.add(He);
-      const B = this.#t(), I = this.#u(
-        K.poolBonusChoiceGroups ?? [],
+      const L = this.#t(), I = this.#m(
+        X.poolBonusChoiceGroups ?? [],
         i.descriptorPoolChoices?.[A.id] ?? {}
       ), W = this.#f(
-        K.choiceGroups ?? [],
+        X.choiceGroups ?? [],
         i.descriptorSkillChoices?.[A.id] ?? {}
       ), J = [
-        ...await this.#l(K.skillGrants ?? [], "descriptor", j, B),
-        ...await this.#a(K.choiceGroups ?? [], W, "descriptor", j, B)
+        ...await this.#l(X.skillGrants ?? [], "descriptor", j, L),
+        ...await this.#a(X.choiceGroups ?? [], W, "descriptor", j, L)
       ], ie = {
         id: String(D?.id ?? A.id),
         uuid: j,
         name: String(S.name),
         type: "descriptor",
         ...S.img ? { img: String(S.img) } : {},
-        system: K
+        system: X
       }, pe = await this.#s(
         e,
         J,
@@ -12870,14 +12938,14 @@ class Zm {
         grantId: A.id,
         status: "active",
         ...le,
-        replacement: uo()
+        replacement: mo()
       };
       S.system = {
-        ...K,
+        ...X,
         grantedBy: Be,
         instance: {
           sourceUuid: j,
-          instanceId: B,
+          instanceId: L,
           role: "speciesGranted",
           attachedAt: this.#i(),
           selections: {
@@ -12894,8 +12962,8 @@ class Zm {
         }
       }, P.push(S, ...pe.grants);
     }
-    const O = Nt(t);
-    return O.system = {
+    const B = Nt(t);
+    return B.system = {
       ...a,
       instance: {
         sourceUuid: m,
@@ -12916,7 +12984,7 @@ class Zm {
       }
     }, this.#n(
       e,
-      O,
+      B,
       P,
       o,
       i.replaceGrantedItemsMode ?? "delete",
@@ -12926,7 +12994,7 @@ class Zm {
   async remove(e, t, i) {
     const o = De(e).find((c) => c.id === t);
     if (!o) throw new Error("Character Package not found.");
-    const a = o.system.instance.instanceId, r = Tn(e, a), s = Object.fromEntries(V.map((c) => [c, e.system.derived.pools[c].max])), l = Li(o), u = i === "delete" ? r.map((c) => c.id) : [];
+    const a = o.system.instance.instanceId, r = zn(e, a), s = Object.fromEntries(V.map((c) => [c, e.system.derived.pools[c].max])), l = Li(o), u = i === "delete" ? r.map((c) => c.id) : [];
     return i === "keep" && await Promise.all(r.map((c) => c.update({
       "system.grantedBy.status": "retained",
       ...c.type === "descriptor" || c.type === "characterType" || c.type === "species" ? { "system.instance.parent.status": "retained" } : {}
@@ -12940,7 +13008,7 @@ class Zm {
     const s = Object.fromEntries(V.map((h) => [h, e.system.derived.pools[h].max])), l = Li(t), u = o ? Li(o) : { might: 0, speed: 0, intellect: 0 }, c = await e.createEmbeddedDocuments("Item", [t, ...i]);
     try {
       if (o) {
-        const m = Tn(e, o.system.instance.instanceId);
+        const m = zn(e, o.system.instance.instanceId);
         a === "keep" && await Promise.all(m.map((y) => y.update({
           "system.grantedBy.status": "retained",
           ...y.type === "descriptor" || y.type === "characterType" || y.type === "species" ? { "system.instance.parent.status": "retained" } : {}
@@ -12961,7 +13029,7 @@ class Zm {
   async #o(e, t, i) {
     const o = {};
     for (const a of V)
-      o[`system.stats.${a}.value`] = Xa(e.system.stats[a].value, t[a], Math.max(0, i[a]));
+      o[`system.stats.${a}.value`] = Ja(e.system.stats[a].value, t[a], Math.max(0, i[a]));
     await e.update(o);
   }
   async #r(e, t, i, o) {
@@ -12972,7 +13040,7 @@ class Zm {
       const s = r ? gn(r, "ability") : fn(a.snapshot, "ability");
       if (!s) throw new Error(`Ability grant '${a.id}' has neither a source nor a usable snapshot.`);
       const l = Pe("ability", String(s.name ?? a.snapshot.name), a.abilityUuid);
-      return s.system = { ...s.system, grantedBy: ka(t, i, o, a.id, l) }, s;
+      return s.system = { ...s.system, grantedBy: Aa(t, i, o, a.id, l) }, s;
     }));
   }
   async #l(e, t, i, o) {
@@ -12998,7 +13066,7 @@ class Zm {
       ...c,
       ...h ? { acquisition: { ...p, notes: h } } : {},
       rank: t,
-      grantedBy: ka(i, o, a, r, u)
+      grantedBy: Aa(i, o, a, r, u)
     }, l;
   }
   async #s(e, t, i, o, a = []) {
@@ -13011,7 +13079,7 @@ class Zm {
         continue;
       }
       for (; ; ) {
-        const m = p.system.grantedBy ?? {}, y = { type: h, contentUuid: m.contentUuid, contentKey: m.contentKey }, f = [...l, ...u, ...r], w = zi(f, y);
+        const m = p.system.grantedBy ?? {}, y = { type: h, contentUuid: m.contentUuid, contentKey: m.contentKey }, f = [...l, ...u, ...r], w = Ti(f, y);
         if (!w) {
           r.push(p);
           break;
@@ -13034,14 +13102,14 @@ class Zm {
           allowGmOverride: !1,
           context: "package"
         }, P = await o(C);
-        if (P.action === "cancel") throw new Ue();
+        if (P.action === "cancel") throw new Ge();
         if (P.action === "suppress") {
           s.push(m.grantId);
           break;
         }
         if (P.action !== "replace")
           throw new Error("GM Override is not a valid Character Package grant resolution.");
-        p = await this.#m(p, P.replacement, P.selectionKind);
+        p = await this.#u(p, P.replacement, P.selectionKind);
       }
     }
     return { grants: r, skippedGrantIds: s };
@@ -13057,7 +13125,7 @@ class Zm {
       contentKey: String(a.contentKey ?? r.contentKey)
     };
   }
-  async #m(e, t, i) {
+  async #u(e, t, i) {
     const o = e.type;
     if (o !== "ability" && o !== "skill") throw new Error("Only Skill and Ability grants can be replaced.");
     if (t.type !== o) throw new Error("A grant replacement must use the same Item type.");
@@ -13135,7 +13203,7 @@ class Zm {
     const u = /* @__PURE__ */ new Set();
     return a.filter((c) => {
       const p = Pe(i, c.name, c.itemUuid), h = p.contentUuid || p.contentKey;
-      return u.has(h) || Fr(e.items, p) ? !1 : (u.add(h), !0);
+      return u.has(h) || Dr(e.items, p) ? !1 : (u.add(h), !0);
     });
   }
   #f(e, t) {
@@ -13172,7 +13240,7 @@ class Zm {
     }
     return i;
   }
-  #u(e, t) {
+  #m(e, t) {
     if (!Re(e.map((o) => o.id)))
       throw new Error("Descriptor Pool bonus choice group IDs must be unique.");
     const i = {};
@@ -13197,7 +13265,7 @@ function bi(n, e, t = 0) {
     throw new Error(`${e} must be an integer of at least ${t}.`);
   return n;
 }
-function Aa(n, e, t) {
+function Ha(n, e, t) {
   if (!Number.isInteger(e) || e < -10 || e > 10)
     throw new Error(`${t} modifier must be an integer from -10 to +10.`);
   return e === 0 ? null : {
@@ -13209,7 +13277,7 @@ function Aa(n, e, t) {
     sourceId: n.id
   };
 }
-function ep(n) {
+function tp(n) {
   return n.type === "npc" ? St(n) : {
     actorId: n.id,
     ...n.actorUuid ?? n.uuid ? { actorUuid: n.actorUuid ?? n.uuid } : {},
@@ -13217,7 +13285,7 @@ function ep(n) {
     ...n.tokenUuid ? { tokenUuid: n.tokenUuid } : {}
   };
 }
-class tp {
+class ip {
   #e;
   #t;
   #i;
@@ -13294,9 +13362,9 @@ class tp {
       ...t.system.roll === "attack" ? ["attack", "attack.ability", "defense.speed"] : [],
       ...t.system.roll === "defense" ? ["defense"] : [],
       ...o === "speed" ? ["speed-task"] : []
-    ], u = { tags: l, pool: o }, c = s.map((f) => f?.type === "npc" ? this.#i.resolve(f, u, a) : null), p = [], h = Aa(t, t.system.rollModifier, "roll");
+    ], u = { tags: l, pool: o }, c = s.map((f) => f?.type === "npc" ? this.#i.resolve(f, u, a) : null), p = [], h = Ha(t, t.system.rollModifier, "roll");
     if (h && p.push(h), t.system.roll === "attack") {
-      const f = Aa(t, t.system.attackModifier, "attack");
+      const f = Ha(t, t.system.attackModifier, "attack");
       f && p.push(f);
     }
     const m = i.skill ? this.#t.rankContribution(i.skill, a) : null;
@@ -13333,7 +13401,7 @@ class tp {
       },
       ...f ? {
         target: {
-          ...ep(f),
+          ...tp(f),
           name: f.name,
           type: f.type === "npc" ? "npc" : "character"
         }
@@ -13384,16 +13452,16 @@ class tp {
     return We(e).length > 0 ? t : 0;
   }
 }
-function Ha(n) {
+function Ia(n) {
   return n.type === "npc" ? St(n) : Si(n);
 }
-function Ia(n, e) {
+function $a(n, e) {
   const t = n.target;
   return t ? t.type === "npc" && n.grossDamage > 0 ? {
     damage: n.grossDamage,
     action: {
       kind: "npcDamage",
-      ...Hi(Ha(t)),
+      ...Hi(Ia(t)),
       requestedDamage: n.grossDamage,
       applied: !1
     }
@@ -13401,7 +13469,7 @@ function Ia(n, e) {
     woundSeverity: n.woundSeverity,
     action: {
       kind: "characterWound",
-      ...Hi(Ha(t)),
+      ...Hi(Ia(t)),
       severity: n.woundSeverity,
       sourceActorId: e,
       sourceName: n.ability.name,
@@ -13409,14 +13477,14 @@ function Ia(n, e) {
     }
   } : {} : {};
 }
-class ip {
+class np {
   #e;
   constructor(e) {
     this.#e = e;
   }
   async publishRoll(e, t, i, o = !1) {
     const a = t.execution.result.success === !0, r = t.execution.result.success !== !1, l = {
-      ...a ? Ia(t, e.id) : {},
+      ...a ? $a(t, e.id) : {},
       ...r && t.ability.system.roll === "attack" ? {
         damage: t.grossDamage,
         damageBreakdown: [
@@ -13431,7 +13499,7 @@ class ip {
   async publishNoRoll(e, t) {
     const i = t.targets.length ? t.targets : [null];
     for (const o of i) {
-      const a = o ? Ia({
+      const a = o ? $a({
         ability: t.ability,
         target: o,
         grossDamage: t.ability.system.damage,
@@ -13482,14 +13550,14 @@ class ip {
     });
   }
 }
-const np = async (n) => {
+const op = async (n) => {
   const e = await new Roll(n).evaluate();
   if (e.total === null) throw new Error("The Artifact level roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class op {
+class ap {
   #e;
-  constructor(e = np) {
+  constructor(e = op) {
     this.#e = e;
   }
   canRollLevel(e) {
@@ -13498,7 +13566,7 @@ class op {
   async rollLevel(e) {
     if (!$n(e.system)) throw new Error("This Artifact is depleted.");
     if (!Ai(e.system)) throw new Error("This Artifact has a fixed Level.");
-    const t = Gi(e.system), i = await this.#e(t);
+    const t = Ui(e.system), i = await this.#e(t);
     return await e.update({ "system.level": String(i.total) }), {
       itemId: e.id,
       itemName: e.name,
@@ -13508,14 +13576,14 @@ class op {
     };
   }
 }
-function ap(n) {
+function rp(n) {
   return game.i18n.localize(`CYPHERV2.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function rp(n) {
+function sp(n) {
   const e = n._source?.system?.description;
   return typeof e == "string" ? e : "";
 }
-function sp(n) {
+function lp(n) {
   const e = n.system;
   if (n.type === "equipment")
     return [
@@ -13524,18 +13592,18 @@ function sp(n) {
       ...e.equipped === !0 ? [{ label: game.i18n.localize("CYPHERV2.Combat.Equipped"), value: game.i18n.localize("CYPHERV2.Common.Yes") }] : []
     ];
   if (n.type === "cypher") {
-    const t = Gr(e.manifestation), i = Ur(e.power);
+    const t = Ur(e.manifestation), i = Gr(e.power);
     return [
       { label: game.i18n.localize("CYPHERV2.Cypher.Manifestation.Label"), value: game.i18n.localize(`CYPHERV2.Cypher.Manifestation.${t}`) },
       ...String(e.form ?? "").trim() ? [{ label: game.i18n.localize("CYPHERV2.Cypher.Form"), value: String(e.form) }] : [],
       { label: game.i18n.localize("CYPHERV2.Cypher.Power.Label"), value: game.i18n.localize(`CYPHERV2.Cypher.Power.${i}`) },
-      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: co(e) }
+      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: uo(e) }
     ];
   }
   if (n.type === "artifact") {
     const t = e.depletion;
     return [
-      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: Gi(e) },
+      { label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: Ui(e) },
       ...t?.enabled === !0 ? [{
         label: game.i18n.localize("CYPHERV2.Inventory.Depletion"),
         value: String(t.formula || `1${String(t.die ?? "d6")}`)
@@ -13568,7 +13636,7 @@ function sp(n) {
     ];
   }
   if (n.type === "ability") {
-    const t = n, i = We(t), o = dr(t.system.cost.amount, i, ap, {
+    const t = n, i = We(t), o = ur(t.system.cost.amount, i, rp, {
       pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
       middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
       final: game.i18n.localize("CYPHERV2.Ability.CostDisplay.FinalOr")
@@ -13577,14 +13645,14 @@ function sp(n) {
   }
   return [];
 }
-function lp(n) {
-  return sp(n).filter(
+function cp(n) {
+  return lp(n).filter(
     ({ label: e, value: t }) => e.trim().length > 0 && (typeof t == "number" || t.trim().length > 0)
   );
 }
-class cp {
+class dp {
   async publish(e) {
-    const t = e.system, i = rp(e), o = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
+    const t = e.system, i = sp(e), o = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
       async: !0,
       relativeTo: e
     }) : "", a = t.depletion, r = await foundry.applications.handlebars.renderTemplate(
@@ -13593,7 +13661,7 @@ class cp {
         itemName: e.name,
         ...Se(e.actor),
         itemType: game.i18n.localize(`TYPES.Item.${e.type}`),
-        properties: lp(e),
+        properties: cp(e),
         enrichedDescription: o,
         hasDescription: !!i.trim(),
         canRollDepletion: e.type === "artifact" && a?.enabled === !0 && t.depleted !== !0,
@@ -13623,7 +13691,7 @@ class cp {
     t.chatRoll !== void 0 && (o.rolls = [t.chatRoll]), await ChatMessage.create(o);
   }
 }
-class dp {
+class up {
   canUse(e) {
     return e.type === "character" && e.system.xp >= 1;
   }
@@ -13639,15 +13707,15 @@ class dp {
     };
   }
 }
-function up(n) {
+function mp(n) {
   return { actorName: n.actorName, xpSpent: n.xpSpent };
 }
-class mp {
+class pp {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/cypherv2/templates/chat/player-intrusion-card.hbs",
       {
-        ...up(e),
+        ...mp(e),
         ...Se(t)
       }
     );
@@ -13658,8 +13726,8 @@ class mp {
     });
   }
 }
-function pp(n) {
-  const e = new om(), t = new Qu(), i = new im(), o = new vm(n), a = new Em(n), r = new $m(n), s = new gm(), l = new Fm(), u = new Tm(), c = new Lr(e), p = new Um(), h = new Jr(), m = new ao(), y = new qm(
+function fp(n) {
+  const e = new am(), t = new Zu(), i = new nm(), o = new Cm(n), a = new Rm(n), r = new Vm(n), s = new ym(), l = new Dm(), u = new Tm(), c = new Lr(e), p = new Om(), h = new Jr(), m = new ao(), y = new xm(
     n,
     o,
     a,
@@ -13672,38 +13740,38 @@ function pp(n) {
   );
   return Object.freeze({
     wounds: e,
-    recovery: new tm(t, i),
+    recovery: new im(t, i),
     rally: new Zl(e),
     rolls: o,
     rollChat: s,
     skills: a,
-    intrusions: new Sm(n),
+    intrusions: new km(n),
     intrusionChat: new Cc(),
-    playerIntrusions: new dp(),
-    playerIntrusionChat: new mp(),
+    playerIntrusions: new up(),
+    playerIntrusionChat: new pp(),
     targets: r,
     combat: y,
-    combatChat: new xm(s, c),
-    abilities: new tp(o, a, r, y),
-    abilityChat: new ip(s),
+    combatChat: new Um(s, c),
+    abilities: new ip(o, a, r, y),
+    abilityChat: new np(s),
     shields: c,
-    artifacts: new op(),
-    itemChat: new cp(),
-    genres: new Cd(),
+    artifacts: new ap(),
+    itemChat: new dp(),
+    genres: new Ed(),
     weapons: h,
     depletion: p,
-    depletionChat: new Om(),
+    depletionChat: new Bm(),
     combatStatuses: u,
     focusEvaluator: m,
-    focusTrees: new Xm(m),
+    focusTrees: new Jm(m),
     focusAcquisition: new Jc(m),
     advancement: new id(n),
-    focusAssociations: new cd(),
-    characterInitialization: new md(),
-    characterPackages: new Zm()
+    focusAssociations: new dd(),
+    characterInitialization: new pd(),
+    characterPackages: new ep()
   });
 }
-const fp = {
+const hp = {
   id: "core",
   label: "CYPHERV2.Themes.Core",
   sourceId: "cypherv2.core",
@@ -13753,7 +13821,7 @@ const fp = {
     "--cypherv2-scrollbar-track": "color-mix(in srgb, var(--cypherv2-color-bg) 70%, transparent)"
   }
 };
-class hp {
+class gp {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Set();
   register(e) {
@@ -13789,20 +13857,20 @@ class hp {
     return t.dataset.cypherv2Theme = i.id, i;
   }
 }
-function $a(n) {
+function Va(n) {
   return n.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
-function gp(n) {
+function yp(n) {
   return n === !0 || n === "true" || n === "on";
 }
-async function yp() {
+async function bp() {
   if (!game.user.isGM) throw new Error("Only a GM can initiate a GM Intrusion.");
   const n = [...game.actors].filter((s) => s.type === "character").sort((s, l) => s.name.localeCompare(l.name));
   if (n.length === 0) {
     ui.notifications.warn(game.i18n.localize("CYPHERV2.Intrusion.NoCharacters"));
     return;
   }
-  const e = n.map((s) => '<option value="' + s.id + '">' + $a(s.name) + "</option>").join(""), t = n.map((s) => '<label class="intrusion-character-choice"><input name="group-' + s.id + '" type="checkbox"> ' + $a(s.name) + "</label>").join(""), i = [
+  const e = n.map((s) => '<option value="' + s.id + '">' + Va(s.name) + "</option>").join(""), t = n.map((s) => '<label class="intrusion-character-choice"><input name="group-' + s.id + '" type="checkbox"> ' + Va(s.name) + "</label>").join(""), i = [
     '<div class="cypherv2-dialog-fields cypherv2-intrusion-dialog">',
     "<label>" + game.i18n.localize("CYPHERV2.Intrusion.ModeLabel"),
     '<select name="mode">',
@@ -13830,7 +13898,7 @@ async function yp() {
     }
   });
   if (!o) return;
-  const a = o.mode === "group" || o.mode === "free" ? o.mode : "targeted", r = a === "group" ? n.filter((s) => gp(o["group-" + s.id])).map((s) => s.id) : [String(o.targetActorId ?? "")];
+  const a = o.mode === "group" || o.mode === "free" ? o.mode : "targeted", r = a === "group" ? n.filter((s) => yp(o["group-" + s.id])).map((s) => s.id) : [String(o.targetActorId ?? "")];
   try {
     await Xt().createManual({ mode: a, actorIds: r });
   } catch (s) {
@@ -13839,11 +13907,11 @@ async function yp() {
 }
 function yn(n, e, t) {
   const i = t > st, o = n.querySelector("[data-horror-summary]"), a = n.querySelector("[data-horror-explanation]"), r = n.querySelector("[data-horror-value]");
-  n.dataset.horrorBand = mr(t), n.style.setProperty("--cypherv2-horror-fill", `${pr(t)}%`), e.value = String(t), e.setAttribute("aria-valuetext", i ? `1–${t}` : "Natural 1"), r && (r.value = String(t)), o && (o.textContent = i ? game.i18n.format("CYPHERV2.Horror.RangeSummary", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalSummary")), a && (a.textContent = i ? game.i18n.format("CYPHERV2.Horror.Explanation", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalExplanation"));
+  n.dataset.horrorBand = pr(t), n.style.setProperty("--cypherv2-horror-fill", `${fr(t)}%`), e.value = String(t), e.setAttribute("aria-valuetext", i ? `1–${t}` : "Natural 1"), r && (r.value = String(t)), o && (o.textContent = i ? game.i18n.format("CYPHERV2.Horror.RangeSummary", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalSummary")), a && (a.textContent = i ? game.i18n.format("CYPHERV2.Horror.Explanation", { range: t }) : game.i18n.localize("CYPHERV2.Horror.NormalExplanation"));
 }
-async function bp() {
+async function wp() {
   if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.GMOnly"));
-  const n = En(), e = `<div class="cypherv2 cypherv2-dialog cypherv2-horror-dialog" data-horror-dialog data-horror-band="${mr(n)}" style="--cypherv2-horror-fill: ${pr(n)}%">
+  const n = En(), e = `<div class="cypherv2 cypherv2-dialog cypherv2-horror-dialog" data-horror-dialog data-horror-band="${pr(n)}" style="--cypherv2-horror-fill: ${fr(n)}%">
     <header class="cypherv2-dialog-heading">
       <span>${game.i18n.localize("CYPHERV2.Horror.Title")}</span>
       <strong data-horror-summary></strong>
@@ -13873,7 +13941,7 @@ async function bp() {
     }
   });
 }
-function wp() {
+function vp() {
   Hooks.on("getSceneControlButtons", (n) => {
     const e = n.tokens;
     if (!e) return;
@@ -13886,7 +13954,7 @@ function wp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        yp();
+        bp();
       }
     }, t.cypherv2HorrorMode = {
       name: "cypherv2HorrorMode",
@@ -13896,7 +13964,7 @@ function wp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        bp();
+        wp();
       }
     };
   });
@@ -13905,7 +13973,7 @@ const Zr = `system.${$}`;
 function Ii(n) {
   return game.user.isGM || n.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
-function zn(n) {
+function Tn(n) {
   (n.tokenId || n.tokenUuid) && ui.notifications.error(game.i18n.localize("CYPHERV2.Combat.Errors.OriginalTokenMissing"));
 }
 function es(n) {
@@ -13924,7 +13992,7 @@ function ts(n) {
     ...n.targetTokenUuid ? { tokenUuid: n.targetTokenUuid } : {}
   };
 }
-function vp(n) {
+function Cp(n) {
   return {
     actorId: n.sourceActorId,
     ...n.sourceActorUuid ? { actorUuid: n.sourceActorUuid } : {},
@@ -13944,12 +14012,12 @@ function ns(n) {
   const t = e;
   return t.kind !== "defenseRequest" || typeof t.sourceActorId != "string" || typeof t.targetActorId != "string" ? null : e;
 }
-async function Cp(n, e) {
+async function Ep(n, e) {
   const t = is(n);
   if (!t || t.applied) return;
   const i = es(t), o = await Pn(i);
   if (!o) {
-    zn(i);
+    Tn(i);
     return;
   }
   if (!Ii(o)) return;
@@ -13984,11 +14052,11 @@ async function Cp(n, e) {
     e.disabled = !1, ui.notifications.error(r instanceof Error ? r.message : String(r));
   }
 }
-async function Ep(n, e, t, i) {
+async function Rp(n, e, t, i) {
   if (e.resolved || !e.allowedDefenses.includes(t)) return;
-  const o = ts(e), a = vp(e), r = await Pn(o), s = await Pn(a);
+  const o = ts(e), a = Cp(e), r = await Pn(o), s = await Pn(a);
   if (!r || !s) {
-    r || zn(o), s || zn(a);
+    r || Tn(o), s || Tn(a);
     return;
   }
   if (!Ii(r)) return;
@@ -14005,12 +14073,12 @@ async function Ep(n, e, t, i) {
   }
   game.socket.emit(Zr, { type: "resolveDefenseRequest", messageId: n.id }), game.user.isGM && await n.setFlag($, "defenseRequest", { ...e, resolved: !0 });
 }
-function Rp(n, e) {
+function Pp(n, e) {
   const t = is(n), i = e.querySelector("[data-action='applyCombatOutcome']");
   if (i) {
     const s = t ? Rn(es(t)) : null;
     !t || !s || !Ii(s) ? i.remove() : t.applied ? (i.disabled = !0, i.textContent = game.i18n.localize("CYPHERV2.Combat.Applied")) : i.addEventListener("click", () => {
-      Cp(n, i);
+      Ep(n, i);
     }, { once: !0 });
   }
   const o = ns(n), a = [...e.querySelectorAll("[data-action='rollRequestedDefense']")];
@@ -14029,15 +14097,15 @@ function Rp(n, e) {
     s.addEventListener(
       "click",
       () => {
-        Ep(n, o, l, s);
+        Rp(n, o, l, s);
       },
       { once: !0 }
     );
   }
 }
-function Pp() {
+function Sp() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
-    Rp(n, e);
+    Pp(n, e);
   }), game.socket.on(Zr, (n) => {
     if (!game.user.isGM || n.type !== "resolveDefenseRequest") return;
     const e = game.messages.get(n.messageId);
@@ -14046,16 +14114,16 @@ function Pp() {
     !t || t.resolved || e.setFlag($, "defenseRequest", { ...t, resolved: !0 });
   });
 }
-function Sp(n) {
+function kp(n) {
   return n.actor ? n.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) : game.user.isGM;
 }
-function kp() {
+function Ap() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
     for (const t of e.querySelectorAll("[data-action='rollItemCardDepletion']"))
       t.addEventListener("click", async (i) => {
         i.preventDefault(), i.stopPropagation();
         const o = t.dataset.itemUuid, a = o ? await fromUuid(o) : null;
-        if (!a || a.type !== "artifact" || !Sp(a)) {
+        if (!a || a.type !== "artifact" || !kp(a)) {
           ui.notifications.warn(game.i18n.localize("CYPHERV2.Inventory.NotAuthorized"));
           return;
         }
@@ -14063,7 +14131,7 @@ function kp() {
       });
   });
 }
-async function Ap() {
+async function Hp() {
   if (!game.user.isGM) return;
   const n = [...game.items].filter((e) => e.type === "genre");
   if (n.length)
@@ -14072,7 +14140,7 @@ async function Ap() {
         if (e.type !== "character") continue;
         const t = e, i = [...e.items].find((a) => a.type === "characterType");
         if (!i || t.system.genre.sourceUuid) continue;
-        const o = await zr(
+        const o = await Tr(
           i.system,
           n,
           async (a) => await fromUuid(a)
@@ -14083,7 +14151,7 @@ async function Ap() {
         console.warn("cypherv2 | Could not migrate a legacy Type Genre suggestion", e.uuid, t);
       }
 }
-class Hp {
+class Ip {
   #e = /* @__PURE__ */ new Set();
   constructor(e = []) {
     for (const t of e) this.#e.add(t.id);
@@ -14093,8 +14161,8 @@ class Hp {
     return !i || this.#e.has(e.id) ? !1 : (this.#e.add(e.id), i.classList.add("cypherv2-chat-card-enter"), !0);
   }
 }
-function Ip() {
-  const n = new Hp(game.messages);
+function $p() {
+  const n = new Ip(game.messages);
   return Hooks.on("renderChatMessageHTML", (e, t) => {
     n.mark(e, t);
   }), n;
@@ -14103,44 +14171,44 @@ const $i = "doneThisRound";
 function os(n, e) {
   return !!(e && (n.isGM || e.testUserPermission(n, "OWNER")));
 }
-function $p(n, e) {
+function Vp(n, e) {
   return e > 0 && n?.getFlag($, $i) === e;
 }
-async function Vp(n, e, t) {
+async function Yp(n, e, t) {
   if (!n.started) return { ok: !1, reason: "not-started" };
   if (!n.turns.length) return { ok: !1, reason: "empty" };
   const i = n.combatant;
   return n.turn === null || !i ? { ok: !1, reason: "no-current" } : i.id !== t ? { ok: !1, reason: "stale" } : os(e, i) ? (await i.setFlag($, $i, n.round), await n.nextTurn(), { ok: !0 }) : { ok: !1, reason: "not-authorized" };
 }
-async function Yp(n) {
+async function Fp(n) {
   const e = Array.from(n.combatants).filter((t) => t.getFlag($, $i) !== void 0).map((t) => ({
     _id: t.id,
     [`flags.${$}.-=${$i}`]: null
   }));
   e.length && await n.updateEmbeddedDocuments("Combatant", e, { turnEvents: !1 });
 }
-function Fp(n, e, t, i) {
+function Dp(n, e, t, i) {
   if (!n.includes(e)) return [...n];
   const o = n.filter((r) => r !== e);
   if (!t) return [...o, e];
   const a = o.indexOf(t);
   return a < 0 ? [...n] : (o.splice(a + (i ? 1 : 0), 0, e), o);
 }
-function Dp(n) {
+function zp(n) {
   return n.map((e, t) => ({
     _id: e,
     initiative: (n.length - t) * 10
   }));
 }
-const Tp = foundry.applications.sidebar.tabs.CombatTracker, Va = "application/x-cypherv2-combatant";
+const Tp = foundry.applications.sidebar.tabs.CombatTracker, Ya = "application/x-cypherv2-combatant";
 function bn(n) {
   return n?.dataset.combatantId ?? null;
 }
-class mo extends Tp {
+class po extends Tp {
   static DEFAULT_OPTIONS = {
     classes: ["cypherv2-combat-tracker"],
     actions: {
-      endCypherTurn: mo.#e
+      endCypherTurn: po.#e
     }
   };
   static PARTS = {
@@ -14163,7 +14231,7 @@ class mo extends Tp {
     }
     t.setAttribute("disabled", "");
     try {
-      const a = await Vp(i, game.user, o);
+      const a = await Yp(i, game.user, o);
       a.ok || ui.notifications.warn(game.i18n.localize(`CYPHERV2.CombatTracker.Errors.${a.reason}`));
     } finally {
       t.removeAttribute("disabled");
@@ -14174,7 +14242,7 @@ class mo extends Tp {
     const i = this.viewed;
     for (const o of e.turns ?? []) {
       const a = i?.combatants.get(o.id);
-      o.doneThisRound = $p(a, i?.round ?? 0), o.canEndTurn = !!(i?.started && o.active && !o.doneThisRound && os(game.user, a));
+      o.doneThisRound = Vp(a, i?.round ?? 0), o.canEndTurn = !!(i?.started && o.active && !o.doneThisRound && os(game.user, a));
     }
   }
   async _onRender(e, t) {
@@ -14195,16 +14263,16 @@ class mo extends Tp {
   #t(e) {
     if (!game.user.isGM || !e.dataTransfer) return;
     const t = e.currentTarget?.closest("[data-combatant-id]") ?? null, i = bn(t);
-    i && (e.dataTransfer.effectAllowed = "move", e.dataTransfer.setData(Va, i), e.dataTransfer.setData("text/plain", i), t?.classList.add("cypherv2-combatant-dragging"));
+    i && (e.dataTransfer.effectAllowed = "move", e.dataTransfer.setData(Ya, i), e.dataTransfer.setData("text/plain", i), t?.classList.add("cypherv2-combatant-dragging"));
   }
   #i(e) {
     !game.user.isGM || !e.dataTransfer || (e.preventDefault(), e.dataTransfer.dropEffect = "move");
   }
   async #n(e) {
     if (e.preventDefault(), !game.user.isGM || !e.dataTransfer) return;
-    const t = this.viewed, i = e.dataTransfer.getData(Va) || e.dataTransfer.getData("text/plain");
+    const t = this.viewed, i = e.dataTransfer.getData(Ya) || e.dataTransfer.getData("text/plain");
     if (!t || !i || !t.combatants.get(i)) return;
-    const o = e.target?.closest(".combatant[data-combatant-id]") ?? null, a = bn(o), r = o?.getBoundingClientRect(), s = !!(r && e.clientY > r.top + r.height / 2), l = t.turns.map((h) => h.id), u = Fp(l, i, a, s);
+    const o = e.target?.closest(".combatant[data-combatant-id]") ?? null, a = bn(o), r = o?.getBoundingClientRect(), s = !!(r && e.clientY > r.top + r.height / 2), l = t.turns.map((h) => h.id), u = Dp(l, i, a, s);
     if (u.every((h, m) => h === l[m])) {
       this.#o();
       return;
@@ -14212,7 +14280,7 @@ class mo extends Tp {
     const c = t.combatant?.id, p = c ? u.indexOf(c) : void 0;
     await t.updateEmbeddedDocuments(
       "Combatant",
-      Dp(u),
+      zp(u),
       {
         ...p === void 0 || p < 0 ? {} : { combatTurn: p },
         turnEvents: !1
@@ -14225,18 +14293,18 @@ class mo extends Tp {
     });
   }
 }
-function zp() {
-  CONFIG.ui.combat = mo;
-}
 function Np() {
+  CONFIG.ui.combat = po;
+}
+function Mp() {
   Hooks.on("updateCombat", (n, e) => {
-    !("round" in e) || !game.user.isActiveGM || Yp(n).catch((t) => {
+    !("round" in e) || !game.user.isActiveGM || Fp(n).catch((t) => {
       console.error("cypherv2 | Failed to reset Combat Tracker DONE states", t);
     });
   });
 }
-const Mp = CONFIG.ui.pause;
-class qp extends Mp {
+const qp = CONFIG.ui.pause;
+class xp extends qp {
   static DEFAULT_OPTIONS = {
     classes: ["cypherv2-game-pause"]
   };
@@ -14248,31 +14316,31 @@ class qp extends Mp {
     };
   }
 }
-function xp() {
-  CONFIG.ui.pause = qp;
+function Up() {
+  CONFIG.ui.pause = xp;
 }
 function Gp() {
   CONFIG.Combat.fallbackTurnMarker = _n.turnMarker;
 }
-const Up = "--cypherv2-blank-canvas-background-image";
-function Op(n) {
+const Op = "--cypherv2-blank-canvas-background-image";
+function Bp(n) {
   return `url("${n.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replace(/[\n\r\f;]/g, "")}")`;
 }
-function Bp(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
-  const t = or(_n.lobby, e);
-  n.style.setProperty(Up, Op(t));
+function Lp(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
+  const t = ar(_n.lobby, e);
+  n.style.setProperty(Op, Bp(t));
 }
 const as = ["system.options.totalEffortCapMode"];
-function Lp(n = CONFIG.Item.compendiumIndexFields) {
+function jp(n = CONFIG.Item.compendiumIndexFields) {
   for (const e of as)
     n.includes(e) || n.push(e);
 }
-function Ya(n) {
+function Fa(n) {
   const e = n.split(".");
   return e.length >= 5 && e[0] === "Compendium" && e[3] === "Item" ? `${e[1]}.${e[2]}` : null;
 }
-async function jp(n = game.actors, e = game.packs, t = (i, o) => console.warn(i, o)) {
-  const i = [...n].filter((a) => a.type === "character" && Ya(a.system.genre.sourceUuid) !== null), o = new Set(i.map((a) => Ya(a.system.genre.sourceUuid)));
+async function Wp(n = game.actors, e = game.packs, t = (i, o) => console.warn(i, o)) {
+  const i = [...n].filter((a) => a.type === "character" && Fa(a.system.genre.sourceUuid) !== null), o = new Set(i.map((a) => Fa(a.system.genre.sourceUuid)));
   for (const a of o)
     try {
       await e.get(a)?.getIndex({ fields: [...as] });
@@ -14283,22 +14351,22 @@ async function jp(n = game.actors, e = game.packs, t = (i, o) => console.warn(i,
 }
 Hooks.once("init", async () => {
   console.info(`${$} | Initializing`);
-  const n = new Xu();
-  ju(n);
-  const e = new hp();
-  e.register(fp), Lp(), game.cypherv2 = Cs(n, pp(n), e), _l(), ql(), xu(), zp(), xp(), Gp(), wp(), Hooks.callAll("cypherv2.registerRules", n), Hooks.callAll("cypherv2.registerThemes", e), Xl(e), await foundry.applications.handlebars.loadTemplates([
+  const n = new Ju();
+  Wu(n);
+  const e = new gp();
+  e.register(hp), jp(), game.cypherv2 = Cs(n, fp(n), e), _l(), ql(), Uu(), Np(), Up(), Gp(), vp(), Hooks.callAll("cypherv2.registerRules", n), Hooks.callAll("cypherv2.registerThemes", e), Xl(e), await foundry.applications.handlebars.loadTemplates([
     "systems/cypherv2/templates/focus/focus-tree.hbs"
   ]);
 });
 Hooks.once("ready", async () => {
-  Bp();
-  const n = String(game.settings.get($, G.theme));
+  Lp();
+  const n = String(game.settings.get($, U.theme));
   game.cypherv2.themes.apply(game.cypherv2.themes.has(n) ? n : "core"), Sc(
     game.cypherv2.services.intrusions,
     game.cypherv2.services.intrusionChat
-  ), hu(
+  ), gu(
     game.cypherv2.services.playerIntrusions,
     game.cypherv2.services.playerIntrusionChat
-  ), Pp(), kp(), Ip(), Nm(game.cypherv2.services.combatStatuses), Np(), await jp(), await Ap(), console.info(`${$} | Ready`);
+  ), Sp(), Ap(), $p(), Mm(game.cypherv2.services.combatStatuses), Mp(), await Wp(), await Hp(), console.info(`${$} | Ready`);
 });
 //# sourceMappingURL=cypherv2.mjs.map

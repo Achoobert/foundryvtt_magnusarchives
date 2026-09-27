@@ -406,7 +406,25 @@
 
     .advancement-purchases {
       margin-top: var(--cypherv2-space-tight);
-      padding-left: 1.1rem;
+      display: grid;
+      gap: 0.12rem;
+
+      li {
+        display: flex;
+        gap: var(--cypherv2-space-tight);
+        align-items: center;
+        justify-content: space-between;
+        min-width: 0;
+      }
+
+      li > span {
+        min-width: 0;
+      }
+
+      .advancement-undo-action {
+        flex: 0 0 auto;
+        color: var(--cypherv2-danger);
+      }
     }
   }
 

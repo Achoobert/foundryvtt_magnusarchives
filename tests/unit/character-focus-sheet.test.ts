@@ -78,6 +78,18 @@ describe("Character Focus association UI", () => {
     expect(source).toContain("xpCost: advancement.policy.xpCost");
   });
 
+  it("offers one compact, stable-ID Undo action for each current-cycle purchase", () => {
+    const template = readFileSync(resolve(root, "templates/actor/character-sheet.hbs"), "utf8");
+    const source = readFileSync(resolve(root, "src/applications/sheets/character-sheet.ts"), "utf8");
+
+    expect(template).toContain('class="cypherv2-icon-action advancement-undo-action"');
+    expect(template).toContain('data-action="undoAdvancement"');
+    expect(template).toContain('data-purchase-id="{{purchase.id}}"');
+    expect(template).toContain('fa-arrow-rotate-left');
+    expect(source).toContain('undoAdvancement: CharacterSheet.#onUndoAdvancement');
+    expect(source).toContain('target.dataset.purchaseId');
+  });
+
   it("shows the Genre browser action only inside the active-Genre condition", () => {
     const template = readFileSync(resolve(root, "templates/actor/character-sheet.hbs"), "utf8");
     expect(template).toContain('{{#if genre.available}}<button type="button" class="compact-inline-action" data-action="browseGenreAbilities"');

@@ -33,7 +33,9 @@ const ERROR_KEYS: Record<AdvancementError["code"], string> = {
   "skill-maximum": "CYPHERV2.Advancement.Errors.SkillMaximum",
   "skill-tier": "CYPHERV2.Advancement.Errors.SkillTier",
   "genre-tier": "CYPHERV2.Advancement.Errors.GenreTier",
-  "tier-not-ready": "CYPHERV2.Advancement.Errors.TierNotReady"
+  "tier-not-ready": "CYPHERV2.Advancement.Errors.TierNotReady",
+  "purchase-not-found": "CYPHERV2.Advancement.Errors.PurchaseNotFound",
+  "purchase-not-current": "CYPHERV2.Advancement.Errors.PurchaseNotCurrent"
 };
 
 function value(data: DialogData, name: string): string {
@@ -162,6 +164,47 @@ export async function promptPurchaseAdvancement(
     }));
   } catch (error) {
     notifyError(error);
+  }
+}
+
+export async function promptUndoAdvancement(
+  actor: AdvancementCharacterLike,
+  purchaseId: string
+): Promise<boolean> {
+  const confirmed = await foundry.applications.api.DialogV2.wait({
+    window: {title: game.i18n.localize("CYPHERV2.Advancement.Undo.Title")},
+    content: `<div class="cypherv2 cypherv2-dialog advancement-undo-dialog">
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ReopenWarning")}</p>
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.NoRollbackWarning")}</p>
+      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ManualReviewWarning")}</p>
+    </div>`,
+    rejectClose: false,
+    modal: true,
+    defaultYes: false,
+    buttons: [
+      {
+        action: "no",
+        label: game.i18n.localize("CYPHERV2.Actions.Cancel"),
+        icon: "fa-solid fa-xmark",
+        default: true,
+        callback: () => false
+      },
+      {
+        action: "yes",
+        label: game.i18n.localize("CYPHERV2.Advancement.Undo.Confirm"),
+        icon: "fa-solid fa-check",
+        callback: () => true
+      }
+    ]
+  });
+  if (!confirmed) return false;
+  try {
+    await game.cypherv2.services.advancement.undoPurchase(actor, purchaseId);
+    ui.notifications.info(game.i18n.localize("CYPHERV2.Advancement.Undo.Success"));
+    return true;
+  } catch (error) {
+    notifyError(error);
+    return false;
   }
 }
 

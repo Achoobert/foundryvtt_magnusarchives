@@ -502,7 +502,12 @@
           <details class="advancement-cycle-details">
             <summary>{{localize "CYPHERV2.Advancement.ThisCycle"}}</summary>
             <ul class="advancement-purchases">
-              {{#each advancement.purchases as |purchase|}}<li>{{localize purchase.label}} · {{purchase.xpCost}} XP · +{{purchase.resourcePointsGranted}} {{localize "CYPHERV2.Character.ResourcePoints"}}</li>{{/each}}
+              {{#each advancement.purchases as |purchase|}}
+                <li>
+                  <span>{{localize purchase.label}} · {{purchase.xpCost}} XP · +{{purchase.resourcePointsGranted}} {{localize "CYPHERV2.Character.ResourcePoints"}}</span>
+                  {{#if ../editable}}<button type="button" class="cypherv2-icon-action advancement-undo-action" data-action="undoAdvancement" data-purchase-id="{{purchase.id}}" title="{{localize 'CYPHERV2.Advancement.Undo.Action'}}" aria-label="{{localize 'CYPHERV2.Advancement.Undo.Action'}}: {{localize purchase.label}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>{{/if}}
+                </li>
+              {{/each}}
             </ul>
           </details>
         {{/if}}
