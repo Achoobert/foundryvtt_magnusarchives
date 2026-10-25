@@ -32,7 +32,7 @@ The public ChatMessage has no secret flags. Hidden difficulty remains interface
 confidentiality rather than protection against a hostile client.
 
 Hidden audit data remains available to the internal
-`cypherv2HiddenRollAudit` hook. The optional world setting `Show GM Roll Audit`
+`magnusarchivesHiddenRollAudit` hook. The optional world setting `Show GM Roll Audit`
 creates a separate blind GM ChatMessage when enabled; it is disabled by
 default. Secret data is deliberately not attached to the shared main-message
 flags, since those flags are part of the public message payload.

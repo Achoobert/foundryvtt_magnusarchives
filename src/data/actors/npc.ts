@@ -1,3 +1,4 @@
+import {CHARACTER_DAMAGE_EFFECTS} from "../../constants/system";
 import {fields, integerField} from "../common/schema";
 import {ActorDataModelBase} from "./actor-base";
 
@@ -34,12 +35,16 @@ export class NpcDataModel extends ActorDataModelBase {
       armorBase: integerField(),
       damage: new fields.SchemaField({
         amount: integerField(1),
-        woundSeverity: new fields.StringField({
+        // What this NPC's attack does to a PC. The book writes these as, for
+        // example, "Knife deals 3 points of Stress" or "short-range firearm
+        // attack deals serious injury".
+        effect: new fields.StringField({
           required: true,
           nullable: false,
-          initial: "minor",
-          choices: ["minor", "moderate", "major"]
+          initial: "stress",
+          choices: [...CHARACTER_DAMAGE_EFFECTS]
         }),
+        stressAmount: integerField(3),
         defense: new fields.SchemaField({
           allowBlock: new fields.BooleanField({required: true, nullable: false, initial: true}),
           allowDodge: new fields.BooleanField({required: true, nullable: false, initial: true})
@@ -79,6 +84,21 @@ export class NpcDataModel extends ActorDataModelBase {
       ),
       gmIntrusion: new fields.HTMLField({required: true, nullable: false, initial: ""})
     };
+  }
+
+  static override migrateData(
+    source: Record<string, unknown>,
+    options: {readonly partial?: boolean} = {}
+  ): Record<string, unknown> {
+    const migrated = super.migrateData(source, options);
+    const damage = migrated.damage as Record<string, unknown> | undefined;
+    // Cypher Wound severities become Magnus effects: minor Wounds were the
+    // everyday hits, which here are Stress; anything worse is a serious injury.
+    if (damage && damage.effect === undefined && typeof damage.woundSeverity === "string") {
+      damage.effect = damage.woundSeverity === "minor" ? "stress" : "seriousInjury";
+      delete damage.woundSeverity;
+    }
+    return migrated;
   }
 
   override prepareDerivedData(): void {

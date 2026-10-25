@@ -2,8 +2,16 @@ import {
   ARMOR_CATEGORIES,
   WOUND_SEVERITIES,
   type ArmorCategory,
+  type DamageTrackStep,
   type WoundSeverity
 } from "../../constants/system";
+import {
+  damageTrackEffects,
+  damageTrackSteps,
+  normalizeDamageTrackStep,
+  stressLevel,
+  stressToNextLevel
+} from "./condition-track";
 import {
   POOL_KEYS,
   availableRecoveryTypes,
@@ -27,7 +35,21 @@ export interface CharacterDerivedExtensions {
   effortMax?: readonly DerivedContribution[];
   recoveryBonus?: readonly DerivedContribution[];
   cypherLimit?: readonly DerivedContribution[];
+  /** Sources that grant the extra "hurt" damage-track step. */
+  hurtStep?: readonly DerivedContribution[];
 }
+
+export interface CharacterConditionsLike {
+  readonly stressPoints: number;
+  readonly damageTrackStep: DamageTrackStep | string;
+  readonly hurtAvailable: boolean;
+}
+
+const DEFAULT_CONDITIONS: CharacterConditionsLike = Object.freeze({
+  stressPoints: 0,
+  damageTrackStep: "hale",
+  hurtAvailable: false
+});
 
 export interface ArmorItemDataLike {
   readonly id: string;
@@ -35,6 +57,10 @@ export interface ArmorItemDataLike {
   readonly system: {
     readonly category: ArmorCategory;
     readonly equipped: boolean;
+    /** Body armor gives an extra step in the damage track (p100). */
+    readonly grantsHurtStep?: boolean;
+    /** Wearing it hinders every Speed-based task (p100). */
+    readonly speedTaskHindrance?: number;
     /** @deprecated Retained only so legacy Armor data remains readable. */
     readonly freelyUsed: boolean;
     readonly slug?: string;
@@ -82,7 +108,8 @@ export function deriveCharacterData(
   tier = 1,
   overrides: CharacterOverrides = emptyCharacterOverrides(),
   recoveryRollModifier = 0,
-  recoverySlots: readonly RecoverySlotData[] = []
+  recoverySlots: readonly RecoverySlotData[] = [],
+  conditions: CharacterConditionsLike = DEFAULT_CONDITIONS
 ): CharacterDerivedData {
   const pools = {} as CharacterDerivedData["pools"];
 
@@ -153,7 +180,7 @@ export function deriveCharacterData(
     const contributions = [
       contribution(
         `wound.${severity}.capacity.core`,
-        "cypherv2.core",
+        "magnusarchives.core",
         "core",
         `${severity} Wound capacity`,
         3
@@ -178,7 +205,7 @@ export function deriveCharacterData(
     hindranceContributions.push(
       contribution(
         "wound.moderate.full.hindrance",
-        "cypherv2.core",
+        "magnusarchives.core",
         "core",
         "Moderate Wounds full",
         1
@@ -196,7 +223,28 @@ export function deriveCharacterData(
       )
     );
   }
+  const stressPoints = Math.max(0, conditions.stressPoints);
+  const level = stressLevel(stressPoints);
+  if (level > 0) {
+    hindranceContributions.push(
+      contribution(
+        "stress.level.hindrance",
+        "magnusarchives.core",
+        "stress",
+        `Stress Level ${level}`,
+        level
+      )
+    );
+  }
   hindranceContributions.push(...(extensions.hindrance ?? []));
+
+  const equippedArmor = [...armorItems].filter((item) => item.type === "armor" && item.system.equipped);
+  const armorGrantsHurtStep = equippedArmor.some((item) => item.system.grantsHurtStep !== false);
+  const hurtAvailable = conditions.hurtAvailable
+    || armorGrantsHurtStep
+    || (extensions.hurtStep?.length ?? 0) > 0;
+  const step = normalizeDamageTrackStep(conditions.damageTrackStep, hurtAvailable);
+  const effects = damageTrackEffects(step);
 
   const armor = [...armorItems]
     .filter((item) => item.type === "armor" && item.system.equipped)
@@ -223,10 +271,11 @@ export function deriveCharacterData(
   )] : [];
   const blockContributions = armorContribution("block", "Armor: Block", armorSteps);
   const dodgeContributions = armorContribution("dodge", "Armor: Dodge", armorSteps);
+  // Magnus body armor hinders every Speed-based task, familiar or not (p100).
   const speedTaskContributions = armorContribution(
     "speed-task",
-    "Unfamiliar armor: Speed task",
-    freelyUsed ? 0 : armorSteps
+    "Armor: Speed task",
+    Math.max(armor?.system.speedTaskHindrance ?? 0, freelyUsed ? 0 : armorSteps)
   );
 
   return {
@@ -240,6 +289,23 @@ export function deriveCharacterData(
       max: Math.max(0, resolveNumericOverride(calculatedEffort, overrides.effort)),
       contributions: effortContributions
     },
+    stress: {
+      value: stressPoints,
+      level,
+      toNextLevel: stressToNextLevel(stressPoints),
+      hindrance: level
+    },
+    damageTrack: {
+      step,
+      hurtAvailable,
+      steps: [...damageTrackSteps(hurtAvailable)],
+      effortSurcharge: effects.effortSurcharge,
+      ignoresSpecialEffects: effects.ignoresSpecialEffects,
+      reducedSpecialDamage: effects.reducedSpecialDamage,
+      moveOnly: effects.moveOnly,
+      dead: effects.dead
+    },
+    totalHindrance: total(hindranceContributions),
     wounds: {
       calculatedCapacities,
       capacities,

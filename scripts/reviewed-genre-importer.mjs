@@ -29,7 +29,7 @@ export const REVIEWED_GENRE_PACKS = Object.freeze({
 
 const FOUNDRY_ID = /^[A-Za-z0-9]{16}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const PUBLIC_ABILITY_UUID = /^Compendium\.cypherv2\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
+const PUBLIC_ABILITY_UUID = /^Compendium\.magnusarchives\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
 const GENRE_IDS = new Map([
   ["The Real World", "ed82d7be559e5bf8"],
   ["Fantasy", "964ba40da91df8bc"],
@@ -117,7 +117,7 @@ export async function createReviewedGenreSources({candidatePath, abilityCandidat
   const abilities = {
     schemaVersion: REVIEWED_GENRE_SCHEMA_VERSION,
     source: {...sharedSource, note: "Human-reviewed Genre Ability documents promoted losslessly from the private Working pack."},
-    target: {systemId: "cypherv2", packId: GENRE_ABILITY_PACK_ID},
+    target: {systemId: "magnusarchives", packId: GENRE_ABILITY_PACK_ID},
     counts: structuredClone(GENRE_ABILITY_COUNTS),
     review: {...structuredClone(abilityCandidate.review), status: "reviewed"},
     abilities: workingAbilities.map(normalizedDocument).sort(compareDocuments)
@@ -125,7 +125,7 @@ export async function createReviewedGenreSources({candidatePath, abilityCandidat
   const genres = {
     schemaVersion: REVIEWED_GENRE_SCHEMA_VERSION,
     source: sharedSource,
-    target: {systemId: "cypherv2", packId: GENRE_PACK_ID, abilityPackId: GENRE_ABILITY_PACK_ID},
+    target: {systemId: "magnusarchives", packId: GENRE_PACK_ID, abilityPackId: GENRE_ABILITY_PACK_ID},
     counts: structuredClone(GENRE_COUNTS),
     review: {...structuredClone(candidate.review), status: "reviewed"},
     genres: normalizeGenreReviewDocuments(workingGenres).map(normalizedDocument).sort(compareDocuments)
@@ -166,13 +166,13 @@ export function validateReviewedGenreAbilitySource(source) {
   const errors = [];
   if (source?.schemaVersion !== REVIEWED_GENRE_SCHEMA_VERSION) errors.push("schemaVersion must be 1.");
   if (source?.source?.kind !== "reviewed-world-compendium-export" || source?.review?.status !== "reviewed") errors.push("Source must identify the completed human review.");
-  if (source?.target?.systemId !== "cypherv2" || source?.target?.packId !== GENRE_ABILITY_PACK_ID) errors.push("Target must identify the public Genre Abilities pack.");
+  if (source?.target?.systemId !== "magnusarchives" || source?.target?.packId !== GENRE_ABILITY_PACK_ID) errors.push("Target must identify the public Genre Abilities pack.");
   const abilities = Array.isArray(source?.abilities) ? source.abilities : [];
   const ids = new Set();
   const slugs = new Set();
   abilities.forEach((document, index) => validateIdentity(document, "ability", `abilities[${index}]`, ids, slugs, errors));
-  const progression = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "progression");
-  const origin = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "origin");
+  const progression = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "progression");
+  const origin = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "origin");
   if (abilities.length !== 69 || progression.length !== 43 || origin.length !== 26) errors.push(`Expected 69 Abilities (43 progression, 26 origin); found ${abilities.length} (${progression.length}/${origin.length}).`);
   if (source?.counts?.abilities !== 69 || source?.counts?.progression !== 43 || source?.counts?.origin !== 26) errors.push("Stored Ability counts are invalid.");
   for (const [slug, id] of Object.entries(REAL_WORLD_IDS)) {
@@ -181,7 +181,7 @@ export function validateReviewedGenreAbilitySource(source) {
     if (ability?._id !== id || ability?.system?.tier !== tier) errors.push(`${slug} must preserve stable ID '${id}' and Tier ${tier}.`);
   }
   const armored = abilities.find((entry) => entry.name === "Armored Body");
-  if (armored?.flags?.cypherv2?.genreAbility?.minimumSuperheroRank !== 2) errors.push("Armored Body must preserve minimum Superhero Rank 2.");
+  if (armored?.flags?.magnusarchives?.genreAbility?.minimumSuperheroRank !== 2) errors.push("Armored Body must preserve minimum Superhero Rank 2.");
   for (const name of ["Incredible Instinct", "Skill Exemplar"]) {
     const ability = abilities.find((entry) => entry.name === name);
     if (!ability?.system?.tags?.includes("tier-3-improvement") || !/At tier 3:/i.test(ability?.system?.description ?? "")) errors.push(`${name} must preserve its Tier 3 improvement.`);
@@ -198,7 +198,7 @@ export function validateReviewedGenreSource(source, abilitySource) {
   const errors = [];
   if (source?.schemaVersion !== REVIEWED_GENRE_SCHEMA_VERSION) errors.push("schemaVersion must be 1.");
   if (source?.source?.kind !== "reviewed-world-compendium-export" || source?.review?.status !== "reviewed") errors.push("Source must identify the completed human review.");
-  if (source?.target?.systemId !== "cypherv2" || source?.target?.packId !== GENRE_PACK_ID || source?.target?.abilityPackId !== GENRE_ABILITY_PACK_ID) errors.push("Target must identify both public Genre packs.");
+  if (source?.target?.systemId !== "magnusarchives" || source?.target?.packId !== GENRE_PACK_ID || source?.target?.abilityPackId !== GENRE_ABILITY_PACK_ID) errors.push("Target must identify both public Genre packs.");
   const genres = Array.isArray(source?.genres) ? source.genres : [];
   const ids = new Set();
   const slugs = new Set();
@@ -244,7 +244,7 @@ export function validateReviewedGenreSource(source, abilitySource) {
   const union = new Set([...progressionUuids(fantasy), ...progressionUuids(scienceFiction)]);
   if (union.size !== 41 || JSON.stringify([...progressionUuids(superheroes)].sort()) !== JSON.stringify([...union].sort())) errors.push("Superheroes progression must be the deduplicated 41-Ability Fantasy/Science Fiction union.");
   for (const name of SHARED_PROGRESSION) {
-    const matches = abilitySource.abilities.filter((entry) => entry.name === name && entry.flags?.cypherv2?.genreAbility?.catalog === "progression");
+    const matches = abilitySource.abilities.filter((entry) => entry.name === name && entry.flags?.magnusarchives?.genreAbility?.catalog === "progression");
     if (matches.length !== 1) errors.push(`${name} must remain one shared canonical progression Ability document.`);
   }
   const armoredRelation = superheroes?.system?.abilityCatalog?.find((entry) => entry.snapshot?.name === "Armored Body");
@@ -351,8 +351,8 @@ export function reviewedGenreSummary({genres, abilities}) {
   return {
     genres: genres.genres.length,
     abilities: abilities.abilities.length,
-    progression: abilities.abilities.filter((entry) => entry.flags.cypherv2.genreAbility.catalog === "progression").length,
-    origin: abilities.abilities.filter((entry) => entry.flags.cypherv2.genreAbility.catalog === "origin").length,
+    progression: abilities.abilities.filter((entry) => entry.flags.magnusarchives.genreAbility.catalog === "progression").length,
+    origin: abilities.abilities.filter((entry) => entry.flags.magnusarchives.genreAbility.catalog === "origin").length,
     relations: genres.genres.reduce((total, genre) => total + genre.system.abilityCatalog.length, 0)
   };
 }

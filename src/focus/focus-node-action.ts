@@ -28,11 +28,11 @@ export async function openFocusNode(focus: FocusDocumentLike, nodeId: string): P
   }
   const rawName = node.abilitySnapshot.name || node.id;
   const name = escapeHtml(rawName);
-  const description = node.abilitySnapshot.description || game.i18n.localize("CYPHERV2.Focus.MissingAbility");
+  const description = node.abilitySnapshot.description || game.i18n.localize("MAGNUSARCHIVES.Focus.MissingAbility");
   await foundry.applications.api.DialogV2.input({
     window: {title: rawName},
-    content: `<div class="cypherv2 cypherv2-dialog cypherv2-focus-snapshot"><h3>${name}</h3><div>${description}</div></div>`,
+    content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-focus-snapshot"><h3>${name}</h3><div>${description}</div></div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Close")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}
   });
 }

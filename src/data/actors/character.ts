@@ -1,8 +1,10 @@
-import {RECOVERY_KINDS, RECOVERY_TYPES, REST_TYPES} from "../../constants/system";
+import {DAMAGE_TRACK_STEPS, RECOVERY_KINDS, RECOVERY_TYPES, REST_TYPES} from "../../constants/system";
 import type {
   CharacterDerivedData,
   CharacterOverrides,
   CharacterPools,
+  DamageTrackData,
+  StressData,
   RecoveryUsage,
   RecoverySlotData,
   RecoveryHistoryEntry,
@@ -154,6 +156,8 @@ export class CharacterDataModel extends ActorDataModelBase {
   declare overrides: CharacterOverrides;
   declare cypherLimitBase: number;
   declare stats: CharacterPools & {effortBase: number};
+  declare stress: StressData;
+  declare damageTrack: DamageTrackData;
   declare wounds: WoundCollection;
   declare recovery: {
     bonus: number;
@@ -240,6 +244,18 @@ export class CharacterDataModel extends ActorDataModelBase {
         minor: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []}),
         moderate: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []}),
         major: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []})
+      }),
+      stress: new fields.SchemaField({
+        value: integerField(0, 0)
+      }),
+      damageTrack: new fields.SchemaField({
+        step: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "hale",
+          choices: [...DAMAGE_TRACK_STEPS]
+        }),
+        hurtAvailable: new fields.BooleanField({required: true, nullable: false, initial: false})
       }),
       cypherLimitBase: integerField(2),
       build: new fields.SchemaField({
@@ -371,6 +387,31 @@ export class CharacterDataModel extends ActorDataModelBase {
             max: integerField(),
             contributions: contributionArrayField()
           }),
+          stress: new fields.SchemaField({
+            value: integerField(),
+            level: integerField(),
+            toNextLevel: integerField(3),
+            hindrance: integerField()
+          }),
+          damageTrack: new fields.SchemaField({
+            step: new fields.StringField({
+              required: true,
+              nullable: false,
+              initial: "hale",
+              choices: [...DAMAGE_TRACK_STEPS]
+            }),
+            hurtAvailable: new fields.BooleanField({required: true, nullable: false, initial: false}),
+            steps: new fields.ArrayField(
+              new fields.StringField({required: true, nullable: false, choices: [...DAMAGE_TRACK_STEPS]}),
+              {required: true, nullable: false, initial: []}
+            ),
+            effortSurcharge: integerField(),
+            ignoresSpecialEffects: new fields.BooleanField({required: true, nullable: false, initial: false}),
+            reducedSpecialDamage: new fields.BooleanField({required: true, nullable: false, initial: false}),
+            moveOnly: new fields.BooleanField({required: true, nullable: false, initial: false}),
+            dead: new fields.BooleanField({required: true, nullable: false, initial: false})
+          }),
+          totalHindrance: integerField(),
           wounds: new fields.SchemaField({
             calculatedCapacities: new fields.SchemaField({
               minor: integerField(3, 1),
@@ -509,7 +550,12 @@ export class CharacterDataModel extends ActorDataModelBase {
       this.tier,
       this.overrides,
       this.recovery.rollModifier,
-      this.recovery.slots
+      this.recovery.slots,
+      {
+        stressPoints: this.stress.value,
+        damageTrackStep: this.damageTrack.step,
+        hurtAvailable: this.damageTrack.hurtAvailable
+      }
     );
 
     Object.assign(this.derived.tier, derived.tier);
@@ -517,6 +563,9 @@ export class CharacterDataModel extends ActorDataModelBase {
     Object.assign(this.derived.pools.speed, derived.pools.speed);
     Object.assign(this.derived.pools.intellect, derived.pools.intellect);
     Object.assign(this.derived.effort, derived.effort);
+    Object.assign(this.derived.stress, derived.stress);
+    Object.assign(this.derived.damageTrack, derived.damageTrack);
+    this.derived.totalHindrance = derived.totalHindrance;
     Object.assign(this.derived.wounds.calculatedCapacities, derived.wounds.calculatedCapacities);
     Object.assign(this.derived.wounds.capacities, derived.wounds.capacities);
     Object.assign(this.derived.wounds.capacityContributions, derived.wounds.capacityContributions);

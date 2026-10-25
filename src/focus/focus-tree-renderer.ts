@@ -262,7 +262,7 @@ export class FocusTreeRenderer {
         descriptionHtml: await this.#enrichDescription(description, ability?.relativeTo ?? focus),
         tier: entry.node.tier,
         state: entry.state,
-        stateLabel: `CYPHERV2.Focus.State.${entry.state}`,
+        stateLabel: `MAGNUSARCHIVES.Focus.State.${entry.state}`,
         reason: entry.reason,
         requiredTier: entry.requiredTier,
         reachableFrom: entry.reachableFrom,

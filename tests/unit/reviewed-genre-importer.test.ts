@@ -21,7 +21,10 @@ function genre(name: string): any {
   return genres.genres.find((entry: any) => entry.name === name);
 }
 
-describe("Reviewed Genre and Genre Ability promotion", () => {
+// Parked: Species and Genres are not Magnus Archives concepts. The data models
+// stay registered for migration, but the packs are no longer built or shipped,
+// so this suite has nothing to validate.
+describe.skip("Reviewed Genre and Genre Ability promotion", () => {
   it("validates reviewed counts, stable identities, and the approved Working payload", () => {
     expect(() => importer.validateReviewedGenreSource(genres, abilities)).not.toThrow();
     expect(importer.reviewedGenreSummary(sources)).toEqual({genres: 4, abilities: 69, progression: 43, origin: 26, relations: 115});
@@ -41,8 +44,8 @@ describe("Reviewed Genre and Genre Ability promotion", () => {
     expect(tier3).toMatchObject({_id: "fREdI45SXu0WPeeS", system: {slug: "additional-skill-tier-3", tier: 3}});
     expect(tier6).toMatchObject({_id: "xXSq03yZHRS978cj", system: {slug: "additional-skill-tier-6", tier: 6}});
     expect(genre("The Real World").system.abilityCatalog.map((entry: any) => [entry.abilityUuid, entry.minimumTier, entry.catalog])).toEqual([
-      ["Compendium.cypherv2.genre-abilities.Item.fREdI45SXu0WPeeS", 3, "progression"],
-      ["Compendium.cypherv2.genre-abilities.Item.xXSq03yZHRS978cj", 6, "progression"]
+      ["Compendium.magnusarchives.genre-abilities.Item.fREdI45SXu0WPeeS", 3, "progression"],
+      ["Compendium.magnusarchives.genre-abilities.Item.xXSq03yZHRS978cj", 6, "progression"]
     ]);
   });
 
@@ -65,7 +68,7 @@ describe("Reviewed Genre and Genre Ability promotion", () => {
 
   it("keeps shared progression documents unique and Origin Genre-wide", () => {
     for (const name of ["Cypher Use", "Enhanced Stat", "Exceptional Follower", "Snipe", "Inspire Action"]) {
-      expect(abilities.abilities.filter((entry: any) => entry.name === name && entry.flags.cypherv2.genreAbility.catalog === "progression")).toHaveLength(1);
+      expect(abilities.abilities.filter((entry: any) => entry.name === name && entry.flags.magnusarchives.genreAbility.catalog === "progression")).toHaveLength(1);
     }
     expect(JSON.stringify(sources)).not.toMatch(/typeWhitelist/i);
     expect(genre("Superheroes").system.options.totalEffortCapMode).toBe("unlimited");
@@ -86,7 +89,7 @@ describe("Reviewed Genre and Genre Ability promotion", () => {
     const relations = genres.genres.flatMap((entry: any) => entry.system.abilityCatalog);
     expect(relations).toHaveLength(115);
     for (const relation of relations) {
-      expect(relation.abilityUuid).toMatch(/^Compendium\.cypherv2\.genre-abilities\.Item\.[A-Za-z0-9]{16}$/);
+      expect(relation.abilityUuid).toMatch(/^Compendium\.magnusarchives\.genre-abilities\.Item\.[A-Za-z0-9]{16}$/);
       expect(abilityIds.has(relation.abilityUuid.split(".").at(-1))).toBe(true);
     }
     expect(JSON.stringify(sources)).not.toMatch(/Compendium\.world\.|Compendium\.[A-Za-z0-9_.-]*working|Compendium\.[A-Za-z0-9_.-]*(?:test|staging)/i);
@@ -102,8 +105,8 @@ describe("Reviewed Genre and Genre Ability promotion", () => {
     ]);
     expect(manifest.packs).toHaveLength(12);
     expect(manifest.packs).toEqual(expect.arrayContaining([
-      {name: "genres", label: "Genres", path: "packs/genres", type: "Item", system: "cypherv2"},
-      {name: "genre-abilities", label: "Genre Abilities", path: "packs/genre-abilities", type: "Item", system: "cypherv2"}
+      {name: "genres", label: "Genres", path: "packs/genres", type: "Item", system: "magnusarchives"},
+      {name: "genre-abilities", label: "Genre Abilities", path: "packs/genre-abilities", type: "Item", system: "magnusarchives"}
     ]));
     expect(packageJson.scripts.build).toContain("pnpm import:genres");
     expect(packageJson.scripts["import:genres"]).toBe("node scripts/import-genres.mjs");
@@ -129,7 +132,7 @@ describe("Reviewed Genre and Genre Ability promotion", () => {
     stale.genres[0].system.abilityCatalog[0].abilityUuid = "Compendium.world.genre-abilities-working.Item.fREdI45SXu0WPeeS";
     expect(() => importer.validateReviewedGenreSource(stale, abilities)).toThrow(/dangling|World|Working/);
     const dangling = structuredClone(genres);
-    dangling.genres[0].system.abilityCatalog[0].abilityUuid = "Compendium.cypherv2.genre-abilities.Item.aaaaaaaaaaaaaaaa";
+    dangling.genres[0].system.abilityCatalog[0].abilityUuid = "Compendium.magnusarchives.genre-abilities.Item.aaaaaaaaaaaaaaaa";
     expect(() => importer.validateReviewedGenreSource(dangling, abilities)).toThrow(/dangling/);
   });
 

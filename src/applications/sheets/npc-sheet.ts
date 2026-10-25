@@ -1,3 +1,4 @@
+import {CHARACTER_DAMAGE_EFFECTS} from "../../constants/system";
 import {DOCUMENT_SHEET_FORM_OPTIONS, documentSystemFields} from "./document-sheet-options";
 import {requestNpcAttack} from "../dialogs/combat-dialogs";
 import {
@@ -23,7 +24,7 @@ const NPC_MUTATING_ACTIONS = new Set([
 export class NpcSheet extends ActorSheetV2 {
   static DEFAULT_OPTIONS = {
     ...DOCUMENT_SHEET_FORM_OPTIONS,
-    classes: ["cypherv2", "sheet", "actor", "npc-sheet"],
+    classes: ["magnusarchives", "sheet", "actor", "npc-sheet"],
     actions: guardEditableActions({
       requestDefense: NpcSheet.#onRequestDefense,
       createModification: NpcSheet.#onCreateModification,
@@ -35,7 +36,7 @@ export class NpcSheet extends ActorSheetV2 {
   };
 
   static PARTS = {
-    main: {template: "systems/cypherv2/templates/actor/npc-sheet.hbs"}
+    main: {template: "systems/magnusarchives/templates/actor/npc-sheet.hbs"}
   };
 
   static async #onRequestDefense(this: NpcSheet): Promise<void> {
@@ -102,15 +103,16 @@ export class NpcSheet extends ActorSheetV2 {
         npcSystem.health.value,
         npcSystem.health.max ?? npcSystem.health.baseMax
       ),
-      woundSeverityOptions: (["minor", "moderate", "major"] as const).map((value) => ({
+      damageEffectOptions: CHARACTER_DAMAGE_EFFECTS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Wounds.Severity.${value}`),
-        selected: npcSystem.damage.woundSeverity === value
+        label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${value}`),
+        selected: npcSystem.damage.effect === value
       })),
+      showStressAmount: npcSystem.damage.effect === "stress",
       modifications: npcSystem.modifications.map((entry) => ({
         ...entry,
         contextsLabel: entry.contexts.join(", "),
-        modeLabel: game.i18n.localize(`CYPHERV2.Combat.Modification.Mode.${entry.mode}`)
+        modeLabel: game.i18n.localize(`MAGNUSARCHIVES.Combat.Modification.Mode.${entry.mode}`)
       }))
     };
   }

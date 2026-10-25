@@ -11,10 +11,10 @@ export class ChatCardEntranceTracker {
   }
 
   mark(message: ChatCardMessageLike, html: ParentNode): boolean {
-    const card = html.querySelector<HTMLElement>(".cypherv2-roll-card[data-cypherv2-entrance]");
+    const card = html.querySelector<HTMLElement>(".magnusarchives-roll-card[data-magnusarchives-entrance]");
     if (!card || this.#seenMessageIds.has(message.id)) return false;
     this.#seenMessageIds.add(message.id);
-    card.classList.add("cypherv2-chat-card-enter");
+    card.classList.add("magnusarchives-chat-card-enter");
     return true;
   }
 }

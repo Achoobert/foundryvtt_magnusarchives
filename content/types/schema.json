@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/SebsokK/cypherv2/main/content/types/schema.json",
+  "$id": "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/content/types/schema.json",
   "title": "Cypher V2 candidate Types and Type Abilities",
   "type": "object",
   "additionalProperties": false,
@@ -26,7 +26,7 @@
       "additionalProperties": false,
       "required": ["systemId", "typePackId", "abilityPackId"],
       "properties": {
-        "systemId": {"const": "cypherv2"},
+        "systemId": {"const": "magnusarchives"},
         "typePackId": {"const": "types"},
         "abilityPackId": {"const": "type-abilities"}
       }
@@ -128,7 +128,7 @@
                     "required": ["id", "abilityUuid", "notes", "snapshot", "alternatives"],
                     "properties": {
                       "id": {"$ref": "#/$defs/foundryId"},
-                      "abilityUuid": {"type": "string", "pattern": "^Compendium\\.cypherv2\\.type-abilities\\.Item\\.[A-Za-z0-9]{16}$"},
+                      "abilityUuid": {"type": "string", "pattern": "^Compendium\\.magnusarchives\\.type-abilities\\.Item\\.[A-Za-z0-9]{16}$"},
                       "notes": {"type": "string"},
                       "snapshot": {"type": "object"},
                       "alternatives": {"type": "array"}

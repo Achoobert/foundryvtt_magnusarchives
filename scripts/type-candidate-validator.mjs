@@ -6,7 +6,7 @@ export const TYPE_CANDIDATE_SCHEMA_VERSION = 1;
 export const TYPE_CANDIDATE_COUNTS = Object.freeze({types: 49, abilities: 106, assignments: 155});
 export const TYPE_PACK_ID = "types";
 export const TYPE_ABILITY_PACK_ID = "type-abilities";
-export const TYPE_ABILITY_UUID_PREFIX = `Compendium.cypherv2.${TYPE_ABILITY_PACK_ID}.Item.`;
+export const TYPE_ABILITY_UUID_PREFIX = `Compendium.magnusarchives.${TYPE_ABILITY_PACK_ID}.Item.`;
 export const TYPE_NAMES = Object.freeze([
   "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Mage", "Monk",
   "Necromancer", "Paladin", "Ranger", "Rogue", "Archer", "Axe Fighter",
@@ -21,7 +21,7 @@ export const TYPE_NAMES = Object.freeze([
 
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const TYPE_ABILITY_UUID_PATTERN = /^Compendium\.cypherv2\.type-abilities\.Item\.([A-Za-z0-9]{16})$/;
+const TYPE_ABILITY_UUID_PATTERN = /^Compendium\.magnusarchives\.type-abilities\.Item\.([A-Za-z0-9]{16})$/;
 const ABILITY_ACTIVATIONS = new Set([
   "action", "firstAction", "lastAction", "enabler", "reaction", "timed",
   "perpetual", "passive", "special"
@@ -144,7 +144,7 @@ export function validateTypeCandidateSource(source) {
     throw new TypeCandidateValidationError(["Source root must be an object."]);
   }
   if (source.schemaVersion !== TYPE_CANDIDATE_SCHEMA_VERSION) errors.push(`schemaVersion must be ${TYPE_CANDIDATE_SCHEMA_VERSION}.`);
-  if (source.target?.systemId !== "cypherv2") errors.push("target.systemId must be 'cypherv2'.");
+  if (source.target?.systemId !== "magnusarchives") errors.push("target.systemId must be 'magnusarchives'.");
   if (source.target?.typePackId !== TYPE_PACK_ID) errors.push(`target.typePackId must be '${TYPE_PACK_ID}'.`);
   if (source.target?.abilityPackId !== TYPE_ABILITY_PACK_ID) errors.push(`target.abilityPackId must be '${TYPE_ABILITY_PACK_ID}'.`);
   if (!/^[a-f0-9]{64}$/.test(source.source?.sha256 ?? "")) errors.push("source.sha256 must identify the exact CRD input.");
@@ -191,7 +191,7 @@ export function validateTypeCandidateSource(source) {
     if (/Compendium\.(?:world\.|cypher-v2-test\.)/i.test(value) || /Compendium\.[A-Za-z0-9_.-]*working/i.test(value)) {
       errors.push(`Candidate source contains a World/Working reference: '${value}'.`);
     }
-    for (const match of value.matchAll(/Compendium\.cypherv2\.type-abilities\.Item\.([A-Za-z0-9]{16})/g)) {
+    for (const match of value.matchAll(/Compendium\.magnusarchives\.type-abilities\.Item\.([A-Za-z0-9]{16})/g)) {
       if (!abilityIds.has(match[1])) errors.push(`Candidate source contains dangling Type Ability UUID '${match[0]}'.`);
     }
     if (/origin superhero abilit/i.test(value) && !value.includes("intentionally absent")) {

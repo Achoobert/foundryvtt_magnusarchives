@@ -11,10 +11,10 @@ const root = resolve(process.cwd());
 describe("Character Sheet overflow", () => {
   it("gives every active tab an independent themed vertical scroll area", () => {
     const sheets = readFileSync(resolve(root, "styles/sheets/_sheets.scss"), "utf8");
-    expect(sheets).toMatch(/\.cypherv2-sheet\.cypherv2-character[\s\S]*> \.tab\.active[\s\S]*overflow-y:\s*auto/);
-    expect(sheets).toContain("var(--cypherv2-scrollbar-thumb)");
-    expect(sheets).toContain("var(--cypherv2-scrollbar-track)");
-    expect(sheets).toContain("var(--cypherv2-scrollbar-size)");
+    expect(sheets).toMatch(/\.magnusarchives-sheet\.magnusarchives-character[\s\S]*> \.tab\.active[\s\S]*overflow-y:\s*auto/);
+    expect(sheets).toContain("var(--magnusarchives-scrollbar-thumb)");
+    expect(sheets).toContain("var(--magnusarchives-scrollbar-track)");
+    expect(sheets).toContain("var(--magnusarchives-scrollbar-size)");
   });
 
   it("retains independent horizontal scrolling inside wide Focus Trees", () => {

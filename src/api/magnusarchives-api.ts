@@ -3,18 +3,18 @@ import type {RuleRegistry} from "../rules/rule-registry";
 import type {CoreServices} from "../services";
 import type {ThemeRegistry} from "../themes/theme-registry";
 
-export interface CypherV2Api {
+export interface MagnusArchivesApi {
   readonly version: string;
   readonly rules: RuleRegistry;
   readonly services: CoreServices;
   readonly themes: ThemeRegistry;
 }
 
-export function createCypherV2Api(
+export function createMagnusArchivesApi(
   rules: RuleRegistry,
   services: CoreServices,
   themes: ThemeRegistry
-): CypherV2Api {
+): MagnusArchivesApi {
   return Object.freeze({
     version: SYSTEM_VERSION,
     rules,

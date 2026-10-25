@@ -47,14 +47,14 @@ describe("Genre UI", () => {
     expect(itemTemplate).toContain('data-entry-id="{{entry.id}}"');
     expect(itemTemplate).not.toContain('name="system.abilityCatalog.{{@index}}.minimumTier"');
     expect(itemTemplate).toContain('name="system.options.totalEffortCapMode"');
-    expect(itemTemplate).toContain("CYPHERV2.Item.AdvancedTechnical");
+    expect(itemTemplate).toContain("MAGNUSARCHIVES.Item.AdvancedTechnical");
     expect(itemSheet).toContain('this.item.type === "genre" && (document as Item)?.type === "ability"');
     expect(itemSheet).toContain("updateGenreMinimumTier(catalog, entryId, Number(input.value))");
   });
 
   it("uses the shared compact package presentation for Genre catalog authoring", () => {
     expect(genreSection.match(/class="compact-package-header"/g)).toHaveLength(2);
-    expect(genreSection).toContain('class="compact-package-add-action cypherv2-icon-action"');
+    expect(genreSection).toContain('class="compact-package-add-action magnusarchives-icon-action"');
     expect(genreSection).toContain('class="genre-ability-row compact-package-grant-row"');
     expect(genreSection).toContain('class="genre-ability-list compact-package-grant-list"');
     expect(genreSection).toContain('class="compact-package-row-actions"');

@@ -19,8 +19,8 @@ export const SCIENCE_FICTION_SPECIES_NAMES = Object.freeze([
 
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const SKILL_UUID_PATTERN = /^Compendium\.cypherv2\.skills\.Item\.([A-Za-z0-9]{16})$/;
-const DESCRIPTOR_UUID_PATTERN = /^Compendium\.cypherv2\.descriptors\.Item\.([A-Za-z0-9]{16})$/;
+const SKILL_UUID_PATTERN = /^Compendium\.magnusarchives\.skills\.Item\.([A-Za-z0-9]{16})$/;
+const DESCRIPTOR_UUID_PATTERN = /^Compendium\.magnusarchives\.descriptors\.Item\.([A-Za-z0-9]{16})$/;
 
 export class SpeciesCandidateValidationError extends Error {
   constructor(errors) {
@@ -162,7 +162,7 @@ export function validateSpeciesCandidateSource(source, references) {
   }
   if (!references?.skills || !references?.descriptors) errors.push("Public Skills and Descriptors reference catalogs are required.");
   if (source.schemaVersion !== SPECIES_CANDIDATE_SCHEMA_VERSION) errors.push(`schemaVersion must be ${SPECIES_CANDIDATE_SCHEMA_VERSION}.`);
-  if (source.target?.systemId !== "cypherv2" || source.target?.futurePackId !== "species") errors.push("Candidate target metadata is invalid.");
+  if (source.target?.systemId !== "magnusarchives" || source.target?.futurePackId !== "species") errors.push("Candidate target metadata is invalid.");
   if (!/^[a-f0-9]{64}$/.test(source.source?.sha256 ?? "")) errors.push("source.sha256 must identify the exact CRD input.");
   if (JSON.stringify(source.inventory?.fantasy) !== JSON.stringify(FANTASY_SPECIES_NAMES)) errors.push("Fantasy Species inventory does not match the CRD.");
   if (JSON.stringify(source.inventory?.scienceFiction) !== JSON.stringify(SCIENCE_FICTION_SPECIES_NAMES)) errors.push("Science Fiction Species inventory does not match the CRD.");

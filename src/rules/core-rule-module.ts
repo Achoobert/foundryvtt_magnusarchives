@@ -6,8 +6,8 @@ import type {CombatPolicy} from "../combat/combat-types";
 import {CORE_ADVANCEMENT_POLICY} from "../advancement/advancement-types";
 
 export const CORE_RULE_MODULE: RuleModuleDefinition = {
-  id: "cypherv2.core",
-  title: "CYPHERV2.Rules.Core",
+  id: "magnusarchives.core",
+  title: "MAGNUSARCHIVES.Rules.Core",
   version: "0.1.0",
   core: true,
   priority: -1000,
@@ -79,7 +79,7 @@ function coreSkillRankContribution(
   if (steps === 0) return null;
   return {
     id: `core.skill.${source.id}.rank`,
-    label: `CYPHERV2.Skill.Ranks.${rank}`,
+    label: `MAGNUSARCHIVES.Skill.Ranks.${rank}`,
     direction: steps > 0 ? "ease" : "hinder",
     steps: Math.abs(steps),
     source: "skill",

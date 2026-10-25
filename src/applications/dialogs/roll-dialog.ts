@@ -82,7 +82,7 @@ function foundryLocalize(key: string): string {
 }
 
 function poolLabel(pool: PoolKey, localize: (key: string) => string): string {
-  return localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
+  return localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
 }
 
 function privateHiddenContribution(entry: RollStepContribution, prepared: PreparedRoll): boolean {
@@ -219,9 +219,9 @@ export function skillRankSteps(rank: SkillRank): number {
 export function skillRankOptions(selectedSteps: number | null = 0, valuePrefix = ""): string {
   return SKILL_RANKS.map((rank) => {
     const steps = skillRankSteps(rank);
-    const label = game.i18n.localize(`CYPHERV2.Skill.Ranks.${rank}`);
+    const label = game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`);
     const modifier = steps === 0
-      ? game.i18n.localize("CYPHERV2.Roll.Unmodified")
+      ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified")
       : formatStepModifier(steps > 0 ? "ease" : "hinder", steps);
     return `<option value="${valuePrefix}${steps}"${selectedSteps !== null && steps === selectedSteps ? " selected" : ""}>${escapeHtml(label)} · ${modifier}</option>`;
   }).join("");
@@ -229,67 +229,67 @@ export function skillRankOptions(selectedSteps: number | null = 0, valuePrefix =
 
 export function situationalModifierFields(): string {
   return `<div class="roll-dialog-inline-field roll-dialog-situational">
-    <span class="roll-dialog-field-label">${game.i18n.localize("CYPHERV2.Roll.SituationalModifier")}</span>
-    <select name="situationalDirection" aria-label="${game.i18n.localize("CYPHERV2.Roll.ModifierDirection")}">
-      <option value="ease">${game.i18n.localize("CYPHERV2.Roll.Ease")}</option>
-      <option value="hinder">${game.i18n.localize("CYPHERV2.Roll.Hinder")}</option>
+    <span class="roll-dialog-field-label">${game.i18n.localize("MAGNUSARCHIVES.Roll.SituationalModifier")}</span>
+    <select name="situationalDirection" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ModifierDirection")}">
+      <option value="ease">${game.i18n.localize("MAGNUSARCHIVES.Roll.Ease")}</option>
+      <option value="hinder">${game.i18n.localize("MAGNUSARCHIVES.Roll.Hinder")}</option>
     </select>
-    <input name="situationalSteps" type="number" value="0" min="0" max="10" step="1" aria-label="${game.i18n.localize("CYPHERV2.Roll.ModifierSteps")}">
+    <input name="situationalSteps" type="number" value="0" min="0" max="10" step="1" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ModifierSteps")}">
   </div>`;
 }
 
 export function difficultyFields(maximum: number, hiddenControl: boolean): string {
   return `<div class="roll-dialog-inline-field roll-dialog-difficulty-field">
-    <label>${game.i18n.localize("CYPHERV2.Roll.BaseDifficulty")}
-      <input name="difficulty" type="number" min="0" max="${maximum}" step="1" placeholder="${game.i18n.localize("CYPHERV2.Roll.Optional")}">
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty")}
+      <input name="difficulty" type="number" min="0" max="${maximum}" step="1" placeholder="${game.i18n.localize("MAGNUSARCHIVES.Roll.Optional")}">
     </label>
-    ${hiddenControl ? `<label class="roll-dialog-checkbox"><input name="hidden" type="checkbox"> ${game.i18n.localize("CYPHERV2.Roll.HiddenDifficulty")}</label>` : ""}
+    ${hiddenControl ? `<label class="roll-dialog-checkbox"><input name="hidden" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenDifficulty")}</label>` : ""}
   </div>`;
 }
 
 export function rollDialogShell(options: RollDialogShellOptions): string {
-  return `<div class="cypherv2 cypherv2-dialog cypherv2-dialog-fields cypherv2-roll-dialog">
+  return `<div class="magnusarchives magnusarchives-dialog magnusarchives-dialog-fields magnusarchives-roll-dialog">
     <div class="roll-dialog-layout">
-      <section class="roll-dialog-settings" aria-labelledby="cypherv2-roll-settings-heading">
+      <section class="roll-dialog-settings" aria-labelledby="magnusarchives-roll-settings-heading">
         <header class="roll-dialog-panel-header">
-          <span class="roll-dialog-kicker" id="cypherv2-roll-settings-heading">${game.i18n.localize("CYPHERV2.Roll.Settings")}</span>
+          <span class="roll-dialog-kicker" id="magnusarchives-roll-settings-heading">${game.i18n.localize("MAGNUSARCHIVES.Roll.Settings")}</span>
           <strong>${escapeHtml(options.identity)}</strong>
         </header>
         <div class="roll-dialog-settings-grid">${options.settings}</div>
       </section>
-      <aside class="roll-dialog-summary" aria-labelledby="cypherv2-roll-summary-heading" aria-live="polite">
+      <aside class="roll-dialog-summary" aria-labelledby="magnusarchives-roll-summary-heading" aria-live="polite">
         <header class="roll-dialog-panel-header">
-          <span class="roll-dialog-kicker" id="cypherv2-roll-summary-heading">${game.i18n.localize("CYPHERV2.Roll.Summary")}</span>
+          <span class="roll-dialog-kicker" id="magnusarchives-roll-summary-heading">${game.i18n.localize("MAGNUSARCHIVES.Roll.Summary")}</span>
           <strong data-roll-summary="label">${escapeHtml(options.identity)}</strong>
           <span data-roll-summary="pool"></span>
         </header>
         <section class="roll-summary-section" data-roll-summary-section="automatic" hidden>
-          <h4>${game.i18n.localize("CYPHERV2.Roll.AutomaticModifiers")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.AutomaticModifiers")}</h4>
           <div class="roll-summary-rows" data-roll-summary="automatic"></div>
         </section>
         <section class="roll-summary-section" data-roll-summary-section="modifiers">
-          <h4>${game.i18n.localize("CYPHERV2.Roll.Modifiers")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.Modifiers")}</h4>
           <div class="roll-summary-rows" data-roll-summary="modifiers"></div>
-          <div class="roll-summary-total"><span>${game.i18n.localize("CYPHERV2.Roll.NetSteps")}</span><strong data-roll-summary="net">0</strong></div>
+          <div class="roll-summary-total"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.NetSteps")}</span><strong data-roll-summary="net">0</strong></div>
         </section>
         <section class="roll-summary-section" data-roll-summary-section="effort" hidden>
-          <h4>${game.i18n.localize("CYPHERV2.Roll.Effort")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.Effort")}</h4>
           <div class="roll-summary-rows" data-roll-summary="effort"></div>
         </section>
         <section class="roll-summary-section" data-roll-summary-section="difficulty">
-          <h4>${game.i18n.localize("CYPHERV2.Roll.Difficulty")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.Difficulty")}</h4>
           <div class="roll-summary-rows" data-roll-summary="difficulty"></div>
         </section>
         <section class="roll-summary-section" data-roll-summary-section="attack"${options.attackSummary ? "" : " hidden"}>
-          <h4>${game.i18n.localize("CYPHERV2.Combat.Attack")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Combat.Attack")}</h4>
           <div class="roll-summary-rows" data-roll-summary="attack">${options.attackSummary ?? ""}</div>
         </section>
         <section class="roll-summary-section" data-roll-summary-section="cost">
-          <h4>${game.i18n.localize("CYPHERV2.Roll.Cost")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.Cost")}</h4>
           <div class="roll-summary-rows" data-roll-summary="cost"></div>
         </section>
         <section class="roll-summary-section roll-summary-character">
-          <h4>${game.i18n.localize("CYPHERV2.Roll.Character")}</h4>
+          <h4>${game.i18n.localize("MAGNUSARCHIVES.Roll.Character")}</h4>
           <div class="roll-summary-pools" data-roll-summary="character"></div>
         </section>
         <p class="roll-preview-error" data-roll-summary="error"></p>
@@ -304,7 +304,7 @@ function summaryRow(label: string, value: string, className = ""): string {
 
 function modifierRows(rows: readonly RollDialogModifierRow[]): string {
   if (rows.length === 0) {
-    return `<p class="roll-summary-empty">${game.i18n.localize("CYPHERV2.Common.None")}</p>`;
+    return `<p class="roll-summary-empty">${game.i18n.localize("MAGNUSARCHIVES.Common.None")}</p>`;
   }
   return rows.map((row) => summaryRow(
     row.label,
@@ -331,7 +331,7 @@ function renderPreview(
   setText(root, "label", view.rollLabel);
   setText(root, "pool", view.poolLabel);
   setHtml(root, "modifiers", modifierRows(view.modifiers));
-  setText(root, "net", view.netModifier ?? game.i18n.localize("CYPHERV2.Roll.HiddenValue"));
+  setText(root, "net", view.netModifier ?? game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue"));
 
   const automaticSection = root.querySelector<HTMLElement>('[data-roll-summary-section="automatic"]');
   if (automaticSection) automaticSection.hidden = view.automaticModifiers.length === 0;
@@ -341,32 +341,32 @@ function renderPreview(
   if (effortSection) effortSection.hidden = view.totalEffortApplied === 0;
   setHtml(root, "effort", [
     summaryRow(
-      game.i18n.localize("CYPHERV2.Roll.PaidAppliedEffort"),
+      game.i18n.localize("MAGNUSARCHIVES.Roll.PaidAppliedEffort"),
       `${view.paidEffortApplied} / ${view.effortMaximum}`
     ),
-    summaryRow(game.i18n.localize("CYPHERV2.Roll.FreeAppliedEffort"), String(view.freeEffortApplied)),
+    summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.FreeAppliedEffort"), String(view.freeEffortApplied)),
     summaryRow(
-      game.i18n.localize("CYPHERV2.Roll.TotalAppliedEffort"),
+      game.i18n.localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
       view.totalEffortMaximum === null
-        ? `${view.totalEffortApplied} / ${game.i18n.localize("CYPHERV2.Genre.Unlimited")}`
+        ? `${view.totalEffortApplied} / ${game.i18n.localize("MAGNUSARCHIVES.Genre.Unlimited")}`
         : `${view.totalEffortApplied} / ${view.totalEffortMaximum}`,
       view.totalEffortMaximum !== null && view.totalEffortApplied === view.totalEffortMaximum ? "is-total" : ""
     )
   ].join(""));
 
   const difficulty = view.difficultyMode === "hidden"
-    ? summaryRow(game.i18n.localize("CYPHERV2.Roll.BaseDifficulty"), game.i18n.localize("CYPHERV2.Roll.HiddenValue"))
+    ? summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue"))
     : view.difficultyMode === "unknown"
-      ? summaryRow(game.i18n.localize("CYPHERV2.Roll.BaseDifficulty"), game.i18n.localize("CYPHERV2.Roll.NotProvided"))
+      ? summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.NotProvided"))
       : [
-          summaryRow(game.i18n.localize("CYPHERV2.Roll.BaseDifficulty"), String(view.baseDifficulty)),
+          summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), String(view.baseDifficulty)),
           summaryRow(
-            game.i18n.localize("CYPHERV2.Roll.FinalDifficulty"),
+            game.i18n.localize("MAGNUSARCHIVES.Roll.FinalDifficulty"),
             view.automaticSuccess
-              ? game.i18n.localize("CYPHERV2.Roll.AutomaticSuccess")
+              ? game.i18n.localize("MAGNUSARCHIVES.Roll.AutomaticSuccess")
               : String(view.finalDifficulty)
           ),
-          summaryRow(game.i18n.localize("CYPHERV2.Roll.TargetNumber"), String(view.targetNumber))
+          summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.TargetNumber"), String(view.targetNumber))
         ].join("");
   setHtml(root, "difficulty", difficulty);
 
@@ -377,11 +377,11 @@ function renderPreview(
   }
 
   const costRows = [
-    ...(view.actionCost > 0 ? [summaryRow(game.i18n.localize("CYPHERV2.Roll.ActionCost"), String(view.actionCost))] : []),
-    ...(view.effortCost > 0 ? [summaryRow(game.i18n.localize("CYPHERV2.Roll.EffortCost"), String(view.effortCost))] : []),
-    ...(view.edgeApplied > 0 ? [summaryRow(game.i18n.localize("CYPHERV2.Roll.EdgeApplied"), `-${view.edgeApplied}`)] : []),
-    summaryRow(game.i18n.localize("CYPHERV2.Roll.TotalCost"), `${view.totalCost} ${view.poolLabel}`, "is-total"),
-    summaryRow(game.i18n.localize("CYPHERV2.Roll.PoolAfterRoll"), `${view.poolValue} → ${view.poolAfter}`)
+    ...(view.actionCost > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.ActionCost"), String(view.actionCost))] : []),
+    ...(view.effortCost > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EffortCost"), String(view.effortCost))] : []),
+    ...(view.edgeApplied > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EdgeApplied"), `-${view.edgeApplied}`)] : []),
+    summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.TotalCost"), `${view.totalCost} ${view.poolLabel}`, "is-total"),
+    summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.PoolAfterRoll"), `${view.poolValue} → ${view.poolAfter}`)
   ];
   setHtml(root, "cost", costRows.join(""));
 
@@ -394,11 +394,11 @@ function renderPreview(
     return `<div class="roll-summary-pool${view.pool === pool ? " is-selected" : ""}">
       <span>${escapeHtml(poolLabel(pool, foundryLocalize))}</span>
       <strong>${current === null ? actorPool : `${current} → ${value}`} / ${actorMax}</strong>
-      <small>${game.i18n.localize("CYPHERV2.Pools.Edge")} ${actorEdge}</small>
+      <small>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")} ${actorEdge}</small>
     </div>`;
   }).join("");
-  setHtml(root, "character", `${pools}<div class="roll-summary-effort"><span>${game.i18n.localize("CYPHERV2.Character.Effort")}</span><strong>${view.effortUsed} / ${view.effortMaximum}</strong></div>`);
-  setText(root, "error", view.poolValue < view.totalCost ? game.i18n.localize("CYPHERV2.Roll.InsufficientPool") : "");
+  setHtml(root, "character", `${pools}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${view.effortUsed} / ${view.effortMaximum}</strong></div>`);
+  setText(root, "error", view.poolValue < view.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : "");
 }
 
 export function bindRollDialogPreview(
@@ -414,7 +414,7 @@ export function bindRollDialogPreview(
   const update = (): void => {
     try {
       const request = options.buildRequest(readRollDialogData(root));
-      const preview = game.cypherv2.services.rolls.preview(options.actor, request, options.policyRequest);
+      const preview = game.magnusarchives.services.rolls.preview(options.actor, request, options.policyRequest);
       renderPreview(
         root,
         buildRollDialogPreview(preview, options.actor, foundryLocalize),

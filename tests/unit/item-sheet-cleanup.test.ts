@@ -16,7 +16,7 @@ describe("Item Sheet Cleanup V1.1", () => {
     expect(template).toContain("usesCleanItemHeader");
     expect(focus).toContain('name="system.description"');
     expect(focus).toContain("focus-item-tree");
-    expect(focus).not.toContain("CYPHERV2.Focus.Editor.GeneralInformation");
+    expect(focus).not.toContain("MAGNUSARCHIVES.Focus.Editor.GeneralInformation");
     const advanced = focus.indexOf("focus-technical-area");
     expect(advanced).toBeGreaterThan(focus.indexOf("focus-item-tree"));
     expect(focus.indexOf('name="system.slug"')).toBeGreaterThan(advanced);
@@ -28,7 +28,7 @@ describe("Item Sheet Cleanup V1.1", () => {
     const descriptor = section("{{#if isDescriptor}}", "{{#if isSpecies}}");
     expect(descriptor.indexOf('name="system.description"')).toBeLessThan(descriptor.indexOf("descriptor-benefits"));
     expect(descriptor).toContain('<details class="descriptor-benefits" data-persistent-disclosure="descriptor-benefits" open>');
-    expect(descriptor).toContain("CYPHERV2.Packages.FixedPoolGrants");
+    expect(descriptor).toContain("MAGNUSARCHIVES.Packages.FixedPoolGrants");
     for (const functionality of [
       'name="system.poolBonuses.might"',
       'name="system.poolBonuses.speed"',
@@ -51,11 +51,11 @@ describe("Item Sheet Cleanup V1.1", () => {
   it("uses compact Descriptor section headers, add controls, and icon-only grant actions", () => {
     const descriptor = section("{{#if isDescriptor}}", "{{#if isSpecies}}");
     expect(descriptor.match(/class="descriptor-benefit-header"/g)).toHaveLength(4);
-    expect(descriptor.match(/class="descriptor-add-action cypherv2-icon-action"/g)).toHaveLength(3);
+    expect(descriptor.match(/class="descriptor-add-action magnusarchives-icon-action"/g)).toHaveLength(3);
     expect(descriptor).toContain('class="fa-solid fa-magnifying-glass"');
     expect(descriptor).toContain('class="fa-solid fa-arrows-rotate"');
     expect(descriptor).toContain('class="fa-solid fa-trash"');
-    expect(descriptor).toContain("CYPHERV2.Packages.RefreshFromSource");
+    expect(descriptor).toContain("MAGNUSARCHIVES.Packages.RefreshFromSource");
     expect(descriptor).not.toMatch(/data-action="inspectPackageGrant"[^>]*>\s*\{\{localize/);
     expect(descriptor).not.toMatch(/data-action="refreshPackageGrant"[^>]*>\s*\{\{localize/);
     expect(descriptor).not.toMatch(/data-action="removePackageGrant"[^>]*>\s*\{\{localize/);
@@ -80,12 +80,12 @@ describe("Item Sheet Cleanup V1.1", () => {
       ["inspectPackageGrant", "#onInspectPackageGrant"],
       ["refreshPackageGrant", "#onRefreshPackageGrant"],
       ["removePackageGrant", "#onRemovePackageGrant"]
-    ]) expect(sheet).toContain(`${action}: CypherV2ItemSheet.${handler}`);
+    ]) expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
     for (const [action, handler] of [
       ["addPoolBonusChoiceGroup", "#onAddPoolBonusChoiceGroup"],
       ["editPoolBonusChoiceGroup", "#onEditPoolBonusChoiceGroup"],
       ["removePoolBonusChoiceGroup", "#onRemovePoolBonusChoiceGroup"]
-    ]) expect(sheet).toContain(`${action}: CypherV2ItemSheet.${handler}`);
+    ]) expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
   });
 
   it("refreshes only the selected package snapshot from its source UUID", () => {
@@ -95,7 +95,7 @@ describe("Item Sheet Cleanup V1.1", () => {
     );
     expect(refresh).toContain("const entry = this.#packageEntry(target)");
     expect(refresh).toContain("await fromUuid(uuid)");
-    expect(refresh).toContain("CYPHERV2.Packages.SourceUnavailable");
+    expect(refresh).toContain("MAGNUSARCHIVES.Packages.SourceUnavailable");
     expect(refresh).toContain("{...entry, snapshot: this.#snapshot(source)}");
     expect(refresh).not.toContain("skillUuid:");
     expect(refresh).not.toContain("rank:");
@@ -161,6 +161,6 @@ describe("Ability multi-Pool Item and use UI", () => {
   it("renders multi-Pool costs in the Character Ability list without a combination enum", () => {
     const characterSheet = readFileSync("src/applications/sheets/character-sheet.ts", "utf8");
     expect(characterSheet).toContain("formatAbilityCost(");
-    expect(characterSheet).toContain('CYPHERV2.Ability.CostDisplay.FinalOr');
+    expect(characterSheet).toContain('MAGNUSARCHIVES.Ability.CostDisplay.FinalOr');
   });
 });

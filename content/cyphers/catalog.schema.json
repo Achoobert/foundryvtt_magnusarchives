@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/SebsokK/cypherv2/main/content/cyphers/catalog.schema.json",
+  "$id": "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/content/cyphers/catalog.schema.json",
   "title": "Cypher V2 canonical Cypher and RollTable catalog",
   "type": "object",
   "additionalProperties": false,

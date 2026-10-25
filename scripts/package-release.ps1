@@ -20,12 +20,12 @@ if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
 }
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-$expectedManifestUrl = "https://raw.githubusercontent.com/SebsokK/cypherv2/main/system.json"
+$expectedManifestUrl = "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/system.json"
 $effectiveTag = if ([string]::IsNullOrWhiteSpace($Tag)) { "v$($manifest.version)" } else { $Tag }
-$expectedDownloadUrl = "https://github.com/SebsokK/cypherv2/releases/download/$effectiveTag/cypherv2.zip"
+$expectedDownloadUrl = "https://github.com/SebsokK/magnusarchives/releases/download/$effectiveTag/magnusarchives.zip"
 
-if ($manifest.id -ne "cypherv2") {
-  throw "Unexpected system id '$($manifest.id)'; expected 'cypherv2'."
+if ($manifest.id -ne "magnusarchives") {
+  throw "Unexpected system id '$($manifest.id)'; expected 'magnusarchives'."
 }
 
 if ($effectiveTag -ne "v$($manifest.version)") {
@@ -64,13 +64,7 @@ $requiredGeneratedPacks = @(
   "packs/descriptors",
   "packs/skills",
   "packs/weapons-and-armors",
-  "packs/type-abilities",
-  "packs/types",
-  "packs/species",
-  "packs/genre-abilities",
-  "packs/genres",
-  "packs/focus-abilities",
-  "packs/foci",
+  "packs/equipment",
   "packs/cyphers",
   "packs/cypher-tables"
 )
@@ -87,7 +81,7 @@ if (Test-Path -LiteralPath $releaseRoot) {
 }
 
 $stageRoot = Join-Path $releaseRoot "stage"
-$archivePath = Join-Path $releaseRoot "cypherv2.zip"
+$archivePath = Join-Path $releaseRoot "magnusarchives.zip"
 New-Item -ItemType Directory -Path $stageRoot -Force | Out-Null
 
 foreach ($relativePath in $requiredRuntimePaths) {
@@ -133,8 +127,8 @@ try {
     throw "Archive layout is invalid: system.json is not at the archive root."
   }
 
-  if ($entries | Where-Object { $_ -like "cypherv2/*" }) {
-    throw "Archive layout is invalid: an extra cypherv2/ wrapper directory was found."
+  if ($entries | Where-Object { $_ -like "magnusarchives/*" }) {
+    throw "Archive layout is invalid: an extra magnusarchives/ wrapper directory was found."
   }
 
   foreach ($relativePath in $requiredRuntimePaths) {

@@ -22,14 +22,14 @@ describe("compact Character Settings UI", () => {
   it("starts with useful compact configuration and removes the oversized legacy introduction", () => {
     expect(settings).toContain('class="character-settings-panel"');
     expect(settings).not.toContain("character-settings-intro");
-    expect(settings).not.toContain("CYPHERV2.Settings.Character.Title");
-    expect(settings).not.toContain("CYPHERV2.Settings.Character.Placeholder");
+    expect(settings).not.toContain("MAGNUSARCHIVES.Settings.Character.Title");
+    expect(settings).not.toContain("MAGNUSARCHIVES.Settings.Character.Placeholder");
     expect(styles).toContain(".character-settings-section-header");
   });
 
   it("keeps compact Weapon and Armor familiarity toggles with provenance tooltips", () => {
     expect(settings).toContain('class="character-settings-section character-familiarity-settings"');
-    expect(settings).toContain("CYPHERV2.Settings.Character.FamiliarityHint");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.FamiliarityHint");
     expect(settings).toContain('data-action="toggleFamiliarity"');
     expect(settings).toContain('data-family="weapon"');
     expect(settings).toContain('data-family="armor"');
@@ -38,8 +38,8 @@ describe("compact Character Settings UI", () => {
   });
 
   it("separates Weapon Categories from extensible Weapon Family tags", () => {
-    expect(settings).toContain("CYPHERV2.Settings.Character.WeaponCategories");
-    expect(settings).toContain("CYPHERV2.Settings.Character.WeaponFamilies");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.WeaponCategories");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.WeaponFamilies");
     expect(settings).toContain('class="character-familiarity-tags"');
     expect(settings).toContain('data-action="addWeaponFamily"');
     expect(settings).toContain('data-action="removeWeaponFamily"');
@@ -81,11 +81,11 @@ describe("compact Character Settings UI", () => {
 
   it("keeps optional Power Shifts disabled by default and controlled by a Character setting", () => {
     expect(settings).toContain('name="system.presentation.powerShiftsEnabled"');
-    expect(settings).toContain("CYPHERV2.PowerShifts.Activate");
+    expect(settings).toContain("MAGNUSARCHIVES.PowerShifts.Activate");
   });
 
   it("keeps every package relationship and action in compact source rows", () => {
-    expect(settings).toContain("CYPHERV2.Settings.Character.Sources");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.Sources");
     for (const collection of [
       "typeItems",
       "primaryDescriptorItems",
@@ -104,7 +104,7 @@ describe("compact Character Settings UI", () => {
 
   it("moves granted Items and provenance behind a collapsed native disclosure", () => {
     expect(settings).toContain('<details class="character-granted-disclosure">');
-    expect(settings).toContain("CYPHERV2.Settings.Character.GrantedProvenance");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.GrantedProvenance");
     expect(settings).toContain("packageGrantedItems");
     expect(settings).toContain('data-action="inspectGrantedItem"');
     expect(settings).not.toContain('<details class="character-granted-disclosure" open>');
@@ -123,7 +123,7 @@ describe("compact Character Settings UI", () => {
     }
     expect(settings.match(/class="derived-breakdown"/g)).toHaveLength(3);
     expect(styles).toContain("grid-template-columns: repeat(3, minmax(0, 1fr))");
-    expect(styles).toContain("@container cypherv2-character-sheet (max-width: 560px)");
+    expect(styles).toContain("@container magnusarchives-character-sheet (max-width: 560px)");
     expect(styles).toContain(".character-base-values-grid");
   });
 
@@ -142,7 +142,7 @@ describe("compact Character Settings UI", () => {
     expect(settings).not.toContain('data-action="recovery"');
     expect(settings).not.toContain('data-action="rally"');
     expect(settings).not.toContain('data-action="applyWound"');
-    expect(settings).not.toContain("CYPHERV2.Settings.Character.AdvancedActions");
+    expect(settings).not.toContain("MAGNUSARCHIVES.Settings.Character.AdvancedActions");
     expect(settings).not.toContain('data-action="poolDamage"');
     expect(settings).not.toContain('data-action="editWound"');
     expect(settings).not.toContain('data-action="deleteWound"');
@@ -165,7 +165,7 @@ describe("compact Character Settings UI", () => {
     expect(appearance).toBeGreaterThan(baseValues);
     expect(appearance).toBeGreaterThan(overrides);
     expect(settings.slice(appearance + 1)).not.toContain('class="character-settings-section ');
-    expect(settings).toContain("CYPHERV2.Settings.Character.CharacterAppearance");
-    expect(settings).not.toContain("CYPHERV2.Settings.Character.HeaderAppearance");
+    expect(settings).toContain("MAGNUSARCHIVES.Settings.Character.CharacterAppearance");
+    expect(settings).not.toContain("MAGNUSARCHIVES.Settings.Character.HeaderAppearance");
   });
 });

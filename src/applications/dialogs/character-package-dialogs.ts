@@ -39,27 +39,27 @@ function embeddedPackages(actor: PackageCharacterLike): CharacterPackageItemLike
 async function selectWorldPackage(type: "characterType" | "descriptor" | "species"): Promise<PackageSourceLike | null> {
   const items = [...game.items].filter((item) => item.type === type).sort((a, b) => a.name.localeCompare(b.name));
   if (!items.length) {
-    ui.notifications.warn(game.i18n.localize(`CYPHERV2.Packages.NoWorld${type === "characterType" ? "Types" : type === "descriptor" ? "Descriptors" : "Species"}`));
+    ui.notifications.warn(game.i18n.localize(`MAGNUSARCHIVES.Packages.NoWorld${type === "characterType" ? "Types" : type === "descriptor" ? "Descriptors" : "Species"}`));
     return null;
   }
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize(type === "characterType" ? "CYPHERV2.Packages.AddType" : type === "descriptor" ? "CYPHERV2.Packages.AddDescriptor" : "CYPHERV2.Packages.AddSpecies")},
-    content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.Source")}
+    window: {title: game.i18n.localize(type === "characterType" ? "MAGNUSARCHIVES.Packages.AddType" : type === "descriptor" ? "MAGNUSARCHIVES.Packages.AddDescriptor" : "MAGNUSARCHIVES.Packages.AddSpecies")},
+    content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}
       <select name="uuid">${items.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select>
     </label></div>`,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
   }) as DialogData | null;
   return data ? await fromUuid(String(data.uuid ?? "")) as PackageSourceLike | null : null;
 }
 
 async function removalMode(name: string): Promise<RemoveGrantedItemsMode | null> {
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Packages.Remove")},
-    content: `<div class="cypherv2-dialog-fields"><p>${game.i18n.format("CYPHERV2.Packages.RemoveConfirm", {name: escapeHtml(name)})}</p>
-      <label>${game.i18n.localize("CYPHERV2.Packages.GrantedItems")}
-        <select name="mode"><option value="delete">${game.i18n.localize("CYPHERV2.Packages.RemoveWithGrants")}</option><option value="keep">${game.i18n.localize("CYPHERV2.Packages.KeepGrants")}</option></select>
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.Remove")},
+    content: `<div class="magnusarchives-dialog-fields"><p>${game.i18n.format("MAGNUSARCHIVES.Packages.RemoveConfirm", {name: escapeHtml(name)})}</p>
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Packages.GrantedItems")}
+        <select name="mode"><option value="delete">${game.i18n.localize("MAGNUSARCHIVES.Packages.RemoveWithGrants")}</option><option value="keep">${game.i18n.localize("MAGNUSARCHIVES.Packages.KeepGrants")}</option></select>
       </label></div>`,
-    ok: {label: game.i18n.localize("CYPHERV2.Packages.Remove")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Packages.Remove")}
   }) as DialogData | null;
   return data && (data.mode === "delete" || data.mode === "keep") ? data.mode : null;
 }
@@ -72,17 +72,17 @@ function notify(error: unknown): void {
 function poolChoiceOptions(pools: readonly PoolKey[]): PackageChoiceOption[] {
   return pools.map((pool) => ({
     id: pool,
-    label: game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)
+    label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)
   }));
 }
 
 async function promptEdgePool(title: string): Promise<PoolKey | null> {
   const result = await promptPackageChoice({
     title,
-    prompt: game.i18n.format("CYPHERV2.Packages.ChooseOne", {
-      label: game.i18n.localize("CYPHERV2.Packages.EdgeChoice")
+    prompt: game.i18n.format("MAGNUSARCHIVES.Packages.ChooseOne", {
+      label: game.i18n.localize("MAGNUSARCHIVES.Packages.EdgeChoice")
     }),
-    ariaLabel: game.i18n.localize("CYPHERV2.Packages.EdgeChoice"),
+    ariaLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.EdgeChoice"),
     choose: 1,
     options: poolChoiceOptions(POOL_KEYS)
   });
@@ -93,8 +93,8 @@ async function promptEdgePool(title: string): Promise<PoolKey | null> {
 async function promptSuperheroicsPool(title: string): Promise<PoolKey | null> {
   const result = await promptPackageChoice({
     title,
-    prompt: game.i18n.localize("CYPHERV2.Packages.SuperheroicsPoolPrompt"),
-    ariaLabel: game.i18n.localize("CYPHERV2.Packages.SuperheroicsPool"),
+    prompt: game.i18n.localize("MAGNUSARCHIVES.Packages.SuperheroicsPoolPrompt"),
+    ariaLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.SuperheroicsPool"),
     choose: 1,
     options: poolChoiceOptions(POOL_KEYS)
   });
@@ -110,10 +110,10 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
   let replaceGrantedItemsMode: RemoveGrantedItemsMode | undefined;
   if (existing) {
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Packages.ReplaceType")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Packages.ReplaceTypeConfirm", {name: escapeHtml(existing.name)})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Packages.Replace")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.ReplaceType")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Packages.ReplaceTypeConfirm", {name: escapeHtml(existing.name)})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Packages.Replace")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     replaceItemId = existing.id;
@@ -131,12 +131,12 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
     superheroicsPool = await promptSuperheroicsPool(source.name) ?? undefined;
     if (!superheroicsPool) return;
   }
-  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("CYPHERV2.Packages.SkillChoice"));
+  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
   if (skillChoices === null) return;
-  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("CYPHERV2.Species.AbilityChoice"));
+  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
   if (abilityChoices === null) return;
   try {
-    await game.cypherv2.services.characterPackages.attachType(actor, source, {
+    await game.magnusarchives.services.characterPackages.attachType(actor, source, {
       conflictResolver: resolveGrantConflictWithDialog,
       skillChoices,
       abilityChoices,
@@ -145,7 +145,7 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
       ...(replaceItemId ? {replaceItemId} : {}),
       ...(replaceGrantedItemsMode ? {replaceGrantedItemsMode} : {})
     });
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.TypeAttached"));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.TypeAttached"));
     const genreActor = actor as unknown as GenreCharacterLike;
     if (!genreActor.system.genre.sourceUuid) {
       const genres = [...game.items].filter((item) => item.type === "genre") as unknown as GenreDocumentLike[];
@@ -156,10 +156,10 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
       );
       if (suggestion) {
         const useSuggestion = await foundry.applications.api.DialogV2.confirm({
-          window: {title: game.i18n.localize("CYPHERV2.Genre.TypeSuggestion")},
-          content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Genre.TypeSuggestionPrompt", {genre: escapeHtml(suggestion.name)})}</p></div>`,
-          yes: {label: game.i18n.localize("CYPHERV2.Genre.AttachSuggestion")},
-          no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+          window: {title: game.i18n.localize("MAGNUSARCHIVES.Genre.TypeSuggestion")},
+          content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Genre.TypeSuggestionPrompt", {genre: escapeHtml(suggestion.name)})}</p></div>`,
+          yes: {label: game.i18n.localize("MAGNUSARCHIVES.Genre.AttachSuggestion")},
+          no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
         });
         if (useSuggestion) await promptAttachGenre(genreActor, suggestion, "typeSuggestion");
       }
@@ -173,10 +173,10 @@ export async function promptAttachDescriptor(actor: PackageCharacterLike, droppe
   const hasPrimary = embeddedPackages(actor).some((item) => item.type === "descriptor" && item.system.instance.role === "primary");
   const roleData = await foundry.applications.api.DialogV2.input({
     window: {title: source.name},
-    content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.DescriptorRole")}
-      <select name="role">${hasPrimary ? "" : `<option value="primary">${game.i18n.localize("CYPHERV2.Packages.Role.primary")}</option>`}<option value="additional">${game.i18n.localize("CYPHERV2.Packages.Role.additional")}</option><option value="custom">${game.i18n.localize("CYPHERV2.Packages.Role.custom")}</option></select>
+    content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorRole")}
+      <select name="role">${hasPrimary ? "" : `<option value="primary">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.primary")}</option>`}<option value="additional">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.additional")}</option><option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.custom")}</option></select>
     </label></div>`,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Next")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Next")}
   }) as DialogData | null;
   if (!roleData) return;
   const system = source.system as unknown as DescriptorSystemData;
@@ -185,17 +185,17 @@ export async function promptAttachDescriptor(actor: PackageCharacterLike, droppe
   const skillChoices = await promptGroupChoices(
     source.name,
     system.choiceGroups ?? [],
-    game.i18n.localize("CYPHERV2.Packages.SkillChoice")
+    game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
   );
   if (skillChoices === null) return;
   try {
-    await game.cypherv2.services.characterPackages.attachDescriptor(actor, source, {
+    await game.magnusarchives.services.characterPackages.attachDescriptor(actor, source, {
       role: String(roleData.role) as PackageRole,
       poolChoices,
       skillChoices,
       conflictResolver: resolveGrantConflictWithDialog
     });
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.DescriptorAttached"));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorAttached"));
   } catch (error) { if (!(error instanceof GrantConflictCancelledError)) notify(error); }
 }
 
@@ -207,15 +207,15 @@ async function promptPoolBonusChoices(
   for (const group of groups) {
     const allowed = [...new Set(group.pools)].filter((pool): pool is PoolKey => POOL_KEYS.includes(pool));
     if (group.choose < 1 || group.choose > allowed.length) {
-      ui.notifications.error(game.i18n.localize("CYPHERV2.Packages.InvalidPoolBonusChoice"));
+      ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Packages.InvalidPoolBonusChoice"));
       return null;
     }
     const selected = await promptPackageChoice({
       title,
       prompt: group.choose === 1
-        ? game.i18n.localize("CYPHERV2.Packages.ChooseOnePool")
-        : game.i18n.format("CYPHERV2.Packages.ChooseManyPools", {count: group.choose}),
-      ariaLabel: game.i18n.localize("CYPHERV2.Packages.AllowedPools"),
+        ? game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseOnePool")
+        : game.i18n.format("MAGNUSARCHIVES.Packages.ChooseManyPools", {count: group.choose}),
+      ariaLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllowedPools"),
       choose: group.choose,
       options: poolChoiceOptions(allowed)
     });
@@ -244,12 +244,12 @@ async function promptGroupChoices(
   const selections: Record<string, string[]> = {};
   for (const group of groups) {
     const prompt = group.rank
-      ? game.i18n.format("CYPHERV2.Packages.ChooseSkills", {
+      ? game.i18n.format("MAGNUSARCHIVES.Packages.ChooseSkills", {
         count: group.choose,
-        rank: game.i18n.localize(`CYPHERV2.Skill.Ranks.${group.rank}`)
+        rank: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
       })
       : game.i18n.format(
-        group.choose === 1 ? "CYPHERV2.Packages.ChooseOne" : "CYPHERV2.Packages.ChooseMany",
+        group.choose === 1 ? "MAGNUSARCHIVES.Packages.ChooseOne" : "MAGNUSARCHIVES.Packages.ChooseMany",
         {count: group.choose, label}
       );
     const selected = await promptPackageChoice({
@@ -276,10 +276,10 @@ export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?:
   let replaceGrantedItemsMode: RemoveGrantedItemsMode | undefined;
   if (existing) {
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Species.Replace")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Species.ReplaceConfirm", {name: escapeHtml(existing.name)})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Packages.Replace")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Species.Replace")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Species.ReplaceConfirm", {name: escapeHtml(existing.name)})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Packages.Replace")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     replaceItemId = existing.id;
@@ -292,15 +292,15 @@ export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?:
     edgePool = await promptEdgePool(source.name) ?? undefined;
     if (!edgePool) return;
   }
-  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("CYPHERV2.Packages.SkillChoice"));
+  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
   if (skillChoices === null) return;
-  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("CYPHERV2.Species.AbilityChoice"));
+  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
   if (abilityChoices === null) return;
   const descriptorChoiceGroups = await prepareDescriptorChoiceGroups(system.descriptorChoiceGroups ?? []);
   const descriptorChoices = await promptGroupChoices(
     source.name,
     descriptorChoiceGroups,
-    game.i18n.localize("CYPHERV2.Species.DescriptorChoice")
+    game.i18n.localize("MAGNUSARCHIVES.Species.DescriptorChoice")
   );
   if (descriptorChoices === null) return;
   const selectedDescriptors: DescriptorGrant[] = descriptorChoiceGroups.flatMap((group) => (
@@ -318,20 +318,20 @@ export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?:
       descriptorSystem.poolBonusChoiceGroups ?? []
     );
     if (poolSelections === null) return;
-    const selections = await promptGroupChoices(grant.snapshot.name || descriptor?.name || source.name, descriptorSystem.choiceGroups ?? [], game.i18n.localize("CYPHERV2.Packages.SkillChoice"));
+    const selections = await promptGroupChoices(grant.snapshot.name || descriptor?.name || source.name, descriptorSystem.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
     if (selections === null) return;
     descriptorSkillChoices[grant.id] = selections;
     descriptorPoolChoices[grant.id] = poolSelections;
   }
   try {
-    await game.cypherv2.services.characterPackages.attachSpecies(actor, source, {
+    await game.magnusarchives.services.characterPackages.attachSpecies(actor, source, {
       ...(edgePool ? {edgePool} : {}), skillChoices, abilityChoices, descriptorChoices,
       resolvedDescriptorChoiceGroups: descriptorChoiceGroups, descriptorSkillChoices, descriptorPoolChoices,
       conflictResolver: resolveGrantConflictWithDialog,
       ...(replaceItemId ? {replaceItemId} : {}),
       ...(replaceGrantedItemsMode ? {replaceGrantedItemsMode} : {})
     });
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Species.Attached"));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Species.Attached"));
   } catch (error) { if (!(error instanceof GrantConflictCancelledError)) notify(error); }
 }
 
@@ -341,7 +341,7 @@ export async function promptRemovePackage(actor: PackageCharacterLike, packageIt
   const mode = await removalMode(item.name);
   if (!mode) return;
   try {
-    await game.cypherv2.services.characterPackages.remove(actor, packageItemId, mode);
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Packages.Removed"));
+    await game.magnusarchives.services.characterPackages.remove(actor, packageItemId, mode);
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.Removed"));
   } catch (error) { notify(error); }
 }

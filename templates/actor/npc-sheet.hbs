@@ -1,21 +1,73 @@
-<div class="cypherv2-sheet cypherv2-npc">
+<div class="magnusarchives-sheet magnusarchives-npc">
   <header class="npc-header">
-    <img class="portrait npc-avatar" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" {{#if editable}}data-action="editImage" role="button" tabindex="0" title="{{localize 'CYPHERV2.Common.EditImage'}}"{{/if}}>
+    <img class="portrait npc-avatar" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" {{#if editable}}data-action="editImage" role="button" tabindex="0" title="{{localize 'MAGNUSARCHIVES.Common.EditImage'}}"{{/if}}>
     <div class="npc-header-content">
       <div class="npc-title-row">
-        <input class="document-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CYPHERV2.Common.Name'}}" {{#unless editable}}readonly{{/unless}}>
-        <span class="npc-level-field npc-stat-line"><label class="npc-level-label" for="npc-level-{{actor.id}}">{{localize "CYPHERV2.Npc.Level"}}</label><input id="npc-level-{{actor.id}}" class="npc-level-input" name="system.level" type="number" data-dtype="Number" value="{{system.level}}" min="0" {{#unless editable}}disabled{{/unless}}><output class="npc-tn-value" aria-label="{{localize 'CYPHERV2.Npc.TargetNumber'}}">({{targetNumber}})</output></span>
+        <input class="document-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MAGNUSARCHIVES.Common.Name'}}" {{#unless editable}}readonly{{/unless}}>
+        <span class="npc-level-field npc-stat-line"><label class="npc-level-label" for="npc-level-{{actor.id}}">{{localize "MAGNUSARCHIVES.Npc.Level"}}</label><input id="npc-level-{{actor.id}}" class="npc-level-input" name="system.level" type="number" data-dtype="Number" value="{{system.level}}" min="0" {{#unless editable}}disabled{{/unless}}><output class="npc-tn-value" aria-label="{{localize 'MAGNUSARCHIVES.Npc.TargetNumber'}}">({{targetNumber}})</output></span>
       </div>
       <div class="npc-health-row">
-        <span class="npc-armor-field"><label for="npc-armor-{{actor.id}}">{{localize "CYPHERV2.Npc.Armor"}}</label><input id="npc-armor-{{actor.id}}" class="npc-armor-input" name="system.armor" type="number" data-dtype="Number" value="{{system.armor}}" min="0" {{#unless editable}}disabled{{/unless}}></span>
-        <span class="npc-health-field npc-stat-line"><span class="npc-health-label">{{localize "CYPHERV2.Npc.Health"}}</span><input name="system.health.value" type="number" data-dtype="Number" value="{{system.health.value}}" min="0" aria-label="{{localize 'CYPHERV2.Npc.Health'}}" {{#unless editable}}disabled{{/unless}}><i>/</i><input name="system.health.baseMax" type="number" data-dtype="Number" value="{{system.health.baseMax}}" min="1" aria-label="{{localize 'CYPHERV2.Npc.HealthMax'}}" {{#unless editable}}disabled{{/unless}}></span>
+        <span class="npc-armor-field"><label for="npc-armor-{{actor.id}}">{{localize "MAGNUSARCHIVES.Npc.Armor"}}</label><input id="npc-armor-{{actor.id}}" class="npc-armor-input" name="system.armor" type="number" data-dtype="Number" value="{{system.armor}}" min="0" {{#unless editable}}disabled{{/unless}}></span>
+        <span class="npc-health-field npc-stat-line"><span class="npc-health-label">{{localize "MAGNUSARCHIVES.Npc.Health"}}</span><input name="system.health.value" type="number" data-dtype="Number" value="{{system.health.value}}" min="0" aria-label="{{localize 'MAGNUSARCHIVES.Npc.Health'}}" {{#unless editable}}disabled{{/unless}}><i>/</i><input name="system.health.baseMax" type="number" data-dtype="Number" value="{{system.health.baseMax}}" min="1" aria-label="{{localize 'MAGNUSARCHIVES.Npc.HealthMax'}}" {{#unless editable}}disabled{{/unless}}></span>
       </div>
     </div>
-    <span class="npc-health-gauge is-{{healthGauge.state}}" style="--cypherv2-npc-health-ratio: {{healthGauge.ratio}}" aria-hidden="true"><i></i></span>
+    <span class="npc-health-gauge is-{{healthGauge.state}}" style="--magnusarchives-npc-health-ratio: {{healthGauge.ratio}}" aria-hidden="true"><i></i></span>
   </header>
 
+  <section class="npc-attack-section">
+    <header class="npc-section-heading">
+      <h2>{{localize "MAGNUSARCHIVES.Npc.Attack"}}</h2>
+      {{#if editable}}<button type="button" class="magnusarchives-primary-action" data-action="requestDefense">{{localize "MAGNUSARCHIVES.Combat.RequestDefense"}}</button>{{/if}}
+    </header>
+    <div class="npc-attack-fields">
+      <label class="npc-field">{{localize "MAGNUSARCHIVES.Npc.DamageEffect"}}
+        <select name="system.damage.effect" {{#unless editable}}disabled{{/unless}}>
+          {{#each damageEffectOptions as |option|}}<option value="{{option.value}}" {{#if option.selected}}selected{{/if}}>{{option.label}}</option>{{/each}}
+        </select>
+      </label>
+      {{#if showStressAmount}}
+        <label class="npc-field">{{localize "MAGNUSARCHIVES.Npc.StressAmount"}}
+          <input name="system.damage.stressAmount" type="number" data-dtype="Number" value="{{system.damage.stressAmount}}" min="0" {{#unless editable}}disabled{{/unless}}>
+        </label>
+      {{/if}}
+      <label class="npc-field npc-field-checkbox">
+        <input type="checkbox" name="system.damage.defense.allowBlock" {{#if system.damage.defense.allowBlock}}checked{{/if}} {{#unless editable}}disabled{{/unless}}>
+        {{localize "MAGNUSARCHIVES.Combat.Defense.block"}}
+      </label>
+      <label class="npc-field npc-field-checkbox">
+        <input type="checkbox" name="system.damage.defense.allowDodge" {{#if system.damage.defense.allowDodge}}checked{{/if}} {{#unless editable}}disabled{{/unless}}>
+        {{localize "MAGNUSARCHIVES.Combat.Defense.dodge"}}
+      </label>
+    </div>
+  </section>
+
+  <section class="npc-modifications-section">
+    <header class="npc-section-heading">
+      <h2>{{localize "MAGNUSARCHIVES.Npc.Modifications"}}</h2>
+      {{#if editable}}<button type="button" class="magnusarchives-primary-action" data-action="createModification">{{localize "MAGNUSARCHIVES.Common.Add"}}</button>{{/if}}
+    </header>
+    {{#if modifications.length}}
+      <ul class="npc-modification-list">
+        {{#each modifications as |modification|}}
+          <li class="npc-modification" data-modification-id="{{modification.id}}">
+            <span class="npc-modification-label">{{modification.label}}</span>
+            <span class="npc-modification-meta">{{modification.modeLabel}} {{modification.value}}{{#if modification.contextsLabel}} — {{modification.contextsLabel}}{{/if}}</span>
+            {{#if @root.editable}}
+              <span class="npc-modification-actions">
+                <button type="button" class="magnusarchives-icon-action" data-action="editModification" data-modification-id="{{modification.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Common.Edit'}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>
+                <button type="button" class="magnusarchives-icon-action" data-action="deleteModification" data-modification-id="{{modification.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Common.Delete'}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+              </span>
+            {{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p class="npc-modification-empty">{{localize "MAGNUSARCHIVES.Npc.NoModifications"}}</p>
+    {{/if}}
+  </section>
+
   <section class="npc-notes-section">
-    <header class="npc-notes-heading"><h2>{{localize "CYPHERV2.Tabs.Notes"}}</h2></header>
-    <div class="cypherv2-rich-description npc-notes-editor">{{formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid}}</div>
+    <header class="npc-notes-heading"><h2>{{localize "MAGNUSARCHIVES.Tabs.Notes"}}</h2></header>
+    <div class="magnusarchives-rich-description npc-notes-editor">{{formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid}}</div>
   </section>
 </div>

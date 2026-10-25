@@ -82,7 +82,7 @@ describe("GM Intrusion Chat presentation", () => {
     expect(template).toContain('class="intrusion-card-identity intrusion-free-identity"');
     expect(template).toContain("sourceCharacter.actorImage");
     expect(template).toContain("sourceCharacter.actorName");
-    expect(template).toContain("CYPHERV2.Intrusion.Chat.FreeHint");
+    expect(template).toContain("MAGNUSARCHIVES.Intrusion.Chat.FreeHint");
     expect(template.slice(template.indexOf("{{else}}", template.indexOf("{{else if isGroup}}"))))
       .not.toContain("assignSharedIntrusionXp");
   });
@@ -95,7 +95,7 @@ describe("GM Intrusion Chat presentation", () => {
     expect(template).toContain('class="intrusion-recipient-list"');
     expect(template).toContain('class="intrusion-group-list"');
     expect(template).toContain('class="intrusion-group-character"');
-    expect(template).toContain('CYPHERV2.Intrusion.Chat.XPAmount');
+    expect(template).toContain('MAGNUSARCHIVES.Intrusion.Chat.XPAmount');
     expect(template).toContain('xp=../targetXp');
     expect(styles).toMatch(/\.intrusion-recipient-list\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
     expect(styles).toMatch(/button\.intrusion-recipient\s*\{[\s\S]*?width:\s*100%/);
@@ -119,7 +119,7 @@ describe("GM Intrusion Chat presentation", () => {
     const message = await new GMIntrusionChatService().publish(record(), undefined, [recipient]);
     expect(message.id).toBe("message-1");
     expect(messages[0]).toHaveProperty(
-      "flags.cypherv2.gmIntrusion",
+      "flags.magnusarchives.gmIntrusion",
       expect.objectContaining({status: "pending", recipients: [recipient]})
     );
     expect(JSON.stringify(messages[0])).not.toMatch(/gmNotes|timestamp/);
@@ -139,7 +139,7 @@ describe("GM Intrusion Chat presentation", () => {
     await new GMIntrusionChatService().update({update} as unknown as ChatMessage, state);
     expect(update).toHaveBeenCalledWith({
       content: "<article>resolved</article>",
-      "flags.cypherv2.gmIntrusion": state
+      "flags.magnusarchives.gmIntrusion": state
     });
   });
 });

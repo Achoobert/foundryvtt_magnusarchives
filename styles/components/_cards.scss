@@ -1,21 +1,21 @@
-.cypherv2 {
+.magnusarchives {
   .pool-card,
   .status-card {
-    padding: var(--cypherv2-space);
-    background: var(--cypherv2-color-surface);
-    border: 1px solid var(--cypherv2-color-border);
-    border-radius: var(--cypherv2-radius);
+    padding: var(--magnusarchives-space);
+    background: var(--magnusarchives-color-surface);
+    border: 1px solid var(--magnusarchives-color-border);
+    border-radius: var(--magnusarchives-radius);
   }
 
   .pool-card h2,
   .status-card h2 {
     margin: 0 0 0.5rem;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 1rem;
   }
 
   .placeholder {
-    color: var(--cypherv2-color-muted);
+    color: var(--magnusarchives-color-muted);
     font-style: italic;
   }
 }

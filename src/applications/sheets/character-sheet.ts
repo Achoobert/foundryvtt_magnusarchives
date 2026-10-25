@@ -5,6 +5,7 @@ import {
   ARMOR_CATEGORIES,
   WEAPON_CATEGORIES,
   WOUND_SEVERITIES,
+  type DamageTrackStep,
   type RecoveryType,
   type WoundSeverity
 } from "../../constants/system";
@@ -98,7 +99,9 @@ import {
   characterHeaderIdentity,
   headerPoolGauge,
   headerRecoveries,
-  headerWoundTracks
+  headerWoundTracks,
+  headerDamageTrack,
+  headerStress
 } from "./character-header";
 import {resolveCharacterAppearance} from "../../themes/character-appearance";
 import {isSkillSortMode, sortSkillList, type SkillSortMode} from "./skill-list";
@@ -178,7 +181,7 @@ function itemId(target: HTMLElement): string {
 }
 
 function abilityPoolLabel(pool: PoolKey): string {
-  return game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
+  return game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
 }
 
 function signedInteger(value: number): string {
@@ -193,17 +196,17 @@ function focusActionData(target: HTMLElement): {focusUuid: string; nodeId: strin
 }
 
 const FOCUS_ERROR_KEYS: Record<FocusAcquisitionErrorCode, string> = {
-  "not-character": "CYPHERV2.Focus.Errors.NotCharacter",
-  "node-not-found": "CYPHERV2.Focus.Errors.NodeNotFound",
-  "progress-missing": "CYPHERV2.Focus.Errors.ProgressMissing",
-  "progress-duplicated": "CYPHERV2.Focus.Errors.ProgressDuplicated",
-  "not-eligible": "CYPHERV2.Focus.Errors.NotEligible",
-  "choice-required": "CYPHERV2.Focus.Errors.ChoiceRequired",
-  "restore-not-owned": "CYPHERV2.Focus.Errors.RestoreNotOwned",
-  "undo-not-owned": "CYPHERV2.Focus.Errors.UndoNotOwned",
-  "undo-dependent-nodes": "CYPHERV2.Focus.Errors.UndoDependencies",
-  "duplicate-grant": "CYPHERV2.Focus.Errors.DuplicateGrant",
-  "ability-data-unavailable": "CYPHERV2.Focus.Errors.AbilityDataUnavailable"
+  "not-character": "MAGNUSARCHIVES.Focus.Errors.NotCharacter",
+  "node-not-found": "MAGNUSARCHIVES.Focus.Errors.NodeNotFound",
+  "progress-missing": "MAGNUSARCHIVES.Focus.Errors.ProgressMissing",
+  "progress-duplicated": "MAGNUSARCHIVES.Focus.Errors.ProgressDuplicated",
+  "not-eligible": "MAGNUSARCHIVES.Focus.Errors.NotEligible",
+  "choice-required": "MAGNUSARCHIVES.Focus.Errors.ChoiceRequired",
+  "restore-not-owned": "MAGNUSARCHIVES.Focus.Errors.RestoreNotOwned",
+  "undo-not-owned": "MAGNUSARCHIVES.Focus.Errors.UndoNotOwned",
+  "undo-dependent-nodes": "MAGNUSARCHIVES.Focus.Errors.UndoDependencies",
+  "duplicate-grant": "MAGNUSARCHIVES.Focus.Errors.DuplicateGrant",
+  "ability-data-unavailable": "MAGNUSARCHIVES.Focus.Errors.AbilityDataUnavailable"
 };
 
 async function resolveFocus(actor: Actor, uuid: string): Promise<FocusDocumentLike | null> {
@@ -219,6 +222,7 @@ async function resolveFocus(actor: Actor, uuid: string): Promise<FocusDocumentLi
 
 const CHARACTER_MUTATING_ACTIONS = new Set([
   "applyWound", "setCharacterWoundCount", "setShieldWoundCount", "toggleFamiliarity", "addWeaponFamily", "removeWeaponFamily",
+  "adjustStress", "setDamageTrackStep", "applySeriousInjury", "healDamageTrack",
   "editWound", "deleteWound", "poolDamage", "recovery", "recoveryType", "resetRecoveries", "rally",
   "editCharacterOverride", "clearCharacterOverride", "rollPool",
   "editWoundCapacityOverride", "resetWoundCapacityOverride",
@@ -252,9 +256,13 @@ export class CharacterSheet extends ActorSheetV2 {
 
   static DEFAULT_OPTIONS = {
     ...DOCUMENT_SHEET_FORM_OPTIONS,
-    classes: ["cypherv2", "sheet", "actor", "character-sheet"],
+    classes: ["magnusarchives", "sheet", "actor", "character-sheet"],
     actions: guardEditableActions({
       applyWound: CharacterSheet.#onApplyWound,
+      adjustStress: CharacterSheet.#onAdjustStress,
+      setDamageTrackStep: CharacterSheet.#onSetDamageTrackStep,
+      applySeriousInjury: CharacterSheet.#onApplySeriousInjury,
+      healDamageTrack: CharacterSheet.#onHealDamageTrack,
       setCharacterWoundCount: CharacterSheet.#onSetCharacterWoundCount,
       setShieldWoundCount: CharacterSheet.#onSetShieldWoundCount,
       toggleFamiliarity: CharacterSheet.#onToggleFamiliarity,
@@ -348,19 +356,19 @@ export class CharacterSheet extends ActorSheetV2 {
   };
 
   static PARTS = {
-    main: {template: "systems/cypherv2/templates/actor/character-sheet.hbs"}
+    main: {template: "systems/magnusarchives/templates/actor/character-sheet.hbs"}
   };
 
   static TABS = {
     primary: {
       tabs: [
-        {id: "skills", icon: "fa-solid fa-graduation-cap", label: "CYPHERV2.Tabs.Skills"},
-        {id: "abilities", icon: "fa-solid fa-bolt", label: "CYPHERV2.Tabs.Abilities"},
-        {id: "combat", icon: "fa-solid fa-swords", label: "CYPHERV2.Tabs.Combat"},
-        {id: "inventory", icon: "fa-solid fa-backpack", label: "CYPHERV2.Tabs.Inventory"},
-        {id: "advancement", icon: "fa-solid fa-arrow-up-right-dots", label: "CYPHERV2.Tabs.Advancement"},
-        {id: "notes", icon: "fa-solid fa-book-open", label: "CYPHERV2.Tabs.Notes"},
-        {id: "settings", icon: "fa-solid fa-sliders", label: "CYPHERV2.Tabs.Settings"}
+        {id: "skills", icon: "fa-solid fa-graduation-cap", label: "MAGNUSARCHIVES.Tabs.Skills"},
+        {id: "abilities", icon: "fa-solid fa-bolt", label: "MAGNUSARCHIVES.Tabs.Abilities"},
+        {id: "combat", icon: "fa-solid fa-swords", label: "MAGNUSARCHIVES.Tabs.Combat"},
+        {id: "inventory", icon: "fa-solid fa-backpack", label: "MAGNUSARCHIVES.Tabs.Inventory"},
+        {id: "advancement", icon: "fa-solid fa-arrow-up-right-dots", label: "MAGNUSARCHIVES.Tabs.Advancement"},
+        {id: "notes", icon: "fa-solid fa-book-open", label: "MAGNUSARCHIVES.Tabs.Notes"},
+        {id: "settings", icon: "fa-solid fa-sliders", label: "MAGNUSARCHIVES.Tabs.Settings"}
       ],
       initial: "skills"
     }
@@ -443,7 +451,7 @@ export class CharacterSheet extends ActorSheetV2 {
       : null;
     const expectedType = dropTarget?.dataset.hudDrop;
     if (expectedType && item?.type !== expectedType) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Hud.InvalidIdentityDrop"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Hud.InvalidIdentityDrop"));
       return null;
     }
     if (item?.type === "focus") {
@@ -486,7 +494,7 @@ export class CharacterSheet extends ActorSheetV2 {
   }
 
   static async #onInspectGenre(this: CharacterSheet): Promise<void> {
-    const genre = await game.cypherv2.services.genres.active(this.actor as unknown as GenreCharacterLike);
+    const genre = await game.magnusarchives.services.genres.active(this.actor as unknown as GenreCharacterLike);
     await genre?.sheet?.render(true);
   }
 
@@ -538,7 +546,7 @@ export class CharacterSheet extends ActorSheetV2 {
 
   static async #onCreateAbility(this: CharacterSheet): Promise<void> {
     const created = await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("CYPHERV2.Ability.New"),
+      name: game.i18n.localize("MAGNUSARCHIVES.Ability.New"),
       type: "ability"
     }]);
     const ability = created[0] as Item | undefined;
@@ -619,14 +627,14 @@ export class CharacterSheet extends ActorSheetV2 {
     if (!ability || ability.type !== "ability") throw new Error("Ability Item not found.");
     const presentation = abilityListPresentation(ability as unknown as AbilityItemLike);
     if (!presentation.canDelete) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Ability.DeleteGranted"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Ability.DeleteGranted"));
       return;
     }
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Ability.DeleteTitle")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Ability.DeleteConfirm", {name: ability.name})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Ability.DeleteTitle")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Ability.DeleteConfirm", {name: ability.name})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     this.#abilityAccordion.remove(ability.id);
@@ -641,7 +649,7 @@ export class CharacterSheet extends ActorSheetV2 {
     const type = target.dataset.itemType;
     if (!isInventoryItemType(type)) throw new Error("Invalid Inventory Item type.");
     const created = await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize(`CYPHERV2.Inventory.New.${type}`),
+      name: game.i18n.localize(`MAGNUSARCHIVES.Inventory.New.${type}`),
       type
     }]);
     const item = created[0] as Item | undefined;
@@ -683,10 +691,10 @@ export class CharacterSheet extends ActorSheetV2 {
     const item = this.actor.items.get(itemId(target));
     if (!item || !isInventoryItemType(item.type)) throw new Error("Inventory Item not found.");
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Inventory.DeleteTitle")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Inventory.DeleteConfirm", {name: item.name})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Inventory.DeleteTitle")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Inventory.DeleteConfirm", {name: item.name})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     this.#inventoryAccordion.remove(item.id);
@@ -711,8 +719,8 @@ export class CharacterSheet extends ActorSheetV2 {
     const item = this.actor.items.get(itemId(target));
     if (!item || item.type !== "artifact") throw new Error("Artifact Item not found.");
     try {
-      const result = await game.cypherv2.services.artifacts.rollLevel(item as unknown as ArtifactItemLike);
-      await game.cypherv2.services.itemChat.publishArtifactLevelRoll(item, result);
+      const result = await game.magnusarchives.services.artifacts.rollLevel(item as unknown as ArtifactItemLike);
+      await game.magnusarchives.services.itemChat.publishArtifactLevelRoll(item, result);
     } catch (error) {
       ui.notifications.error(error instanceof Error ? error.message : String(error));
     }
@@ -730,11 +738,41 @@ export class CharacterSheet extends ActorSheetV2 {
       .includes(item.type as InventoryItemType | "ability" | "weapon" | "shield" | "armor")) {
       throw new Error("Chat Item not found.");
     }
-    await game.cypherv2.services.itemChat.publish(item);
+    await game.magnusarchives.services.itemChat.publish(item);
   }
 
   static async #onApplyWound(this: CharacterSheet): Promise<void> {
     await promptApplyWound(this.actor as unknown as CharacterDocumentLike);
+  }
+
+  static async #onAdjustStress(this: CharacterSheet, _event: Event, target: HTMLElement): Promise<void> {
+    const delta = Number(target.dataset.delta ?? "0");
+    if (!Number.isFinite(delta) || delta === 0) return;
+    const actor = this.actor as unknown as CharacterDocumentLike;
+    const conditions = game.magnusarchives.services.conditions;
+    if (delta > 0) await conditions.applyStress(actor, delta);
+    else await conditions.relieveStress(actor, Math.abs(delta));
+  }
+
+  static async #onSetDamageTrackStep(this: CharacterSheet, _event: Event, target: HTMLElement): Promise<void> {
+    const step = target.dataset.step;
+    if (!step) return;
+    await game.magnusarchives.services.conditions.setDamageTrackStep(
+      this.actor as unknown as CharacterDocumentLike,
+      step as DamageTrackStep
+    );
+  }
+
+  static async #onApplySeriousInjury(this: CharacterSheet): Promise<void> {
+    await game.magnusarchives.services.conditions.applySeriousInjury(
+      this.actor as unknown as CharacterDocumentLike
+    );
+  }
+
+  static async #onHealDamageTrack(this: CharacterSheet): Promise<void> {
+    await game.magnusarchives.services.conditions.healDamageTrack(
+      this.actor as unknown as CharacterDocumentLike
+    );
   }
 
   static async #onSetCharacterWoundCount(
@@ -750,7 +788,7 @@ export class CharacterSheet extends ActorSheetV2 {
     ))) return;
     const data = parseWoundCountActionData(target.dataset);
     if (data.track !== "character") throw new Error("Invalid Character Wound count action data.");
-    await game.cypherv2.services.wounds.setCount(
+    await game.magnusarchives.services.wounds.setCount(
       this.actor as unknown as CharacterDocumentLike,
       data.severity,
       data.count
@@ -773,7 +811,7 @@ export class CharacterSheet extends ActorSheetV2 {
     if (data.track !== "shield") throw new Error("Invalid Shield Wound count action data.");
     const shield = this.actor.items.get(data.shieldId);
     if (!shield || shield.type !== "shield") throw new Error("Shield Item not found.");
-    await game.cypherv2.services.shields.setCount(
+    await game.magnusarchives.services.shields.setCount(
       shield as unknown as ShieldItemLike,
       data.severity,
       data.count
@@ -894,10 +932,10 @@ export class CharacterSheet extends ActorSheetV2 {
   static async #onResetRecoveries(this: CharacterSheet): Promise<void> {
     if (!game.user.isGM) return;
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Hud.ResetRecoveries")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Hud.ResetRecoveriesConfirm")}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Hud.ResetRecoveries")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Hud.ResetRecoveries")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Hud.ResetRecoveriesConfirm")}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Hud.ResetRecoveries")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     const slots = (this.actor.system as unknown as CharacterDocumentLike["system"]).recovery.slots
@@ -906,7 +944,7 @@ export class CharacterSheet extends ActorSheetV2 {
       "system.recovery.slots": slots,
       "system.recovery.used": recoveryUsageFromSlots(slots)
     });
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Hud.RecoveriesReset"));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Hud.RecoveriesReset"));
   }
 
   static async #onRally(this: CharacterSheet, event?: Event): Promise<void> {
@@ -1034,7 +1072,7 @@ export class CharacterSheet extends ActorSheetV2 {
 
   static async #onCreateSkill(this: CharacterSheet): Promise<void> {
     await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("CYPHERV2.Skill.New"),
+      name: game.i18n.localize("MAGNUSARCHIVES.Skill.New"),
       type: "skill"
     }]);
   }
@@ -1057,11 +1095,11 @@ export class CharacterSheet extends ActorSheetV2 {
     pulseSkillQuickRoll(target);
     try {
       const enabledRuleModuleIds = currentEnabledRuleModuleIds();
-      const request = game.cypherv2.services.skills.buildQuickRollRequest(
+      const request = game.magnusarchives.services.skills.buildQuickRollRequest(
         skill as unknown as SkillItemLike,
         {enabledRuleModuleIds}
       );
-      const execution = await game.cypherv2.services.rolls.execute(
+      const execution = await game.magnusarchives.services.rolls.execute(
         this.actor as unknown as RollCharacterDocumentLike,
         request,
         currentRollPolicyRequest()
@@ -1114,25 +1152,25 @@ export class CharacterSheet extends ActorSheetV2 {
     const skill = this.actor.items.get(itemId(target));
     if (!skill || skill.type !== "skill") throw new Error("Skill Item not found.");
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Skill.DeleteTitle")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Skill.DeleteConfirm", {name: skill.name})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Skill.DeleteTitle")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Skill.DeleteConfirm", {name: skill.name})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (confirmed) await skill.delete();
   }
 
   static async #onCreateWeapon(this: CharacterSheet): Promise<void> {
-    await this.actor.createEmbeddedDocuments("Item", [{name: game.i18n.localize("CYPHERV2.Combat.Weapon.New"), type: "weapon"}]);
+    await this.actor.createEmbeddedDocuments("Item", [{name: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.New"), type: "weapon"}]);
   }
 
   static async #onCreateArmor(this: CharacterSheet): Promise<void> {
-    await this.actor.createEmbeddedDocuments("Item", [{name: game.i18n.localize("CYPHERV2.Combat.Armor.New"), type: "armor"}]);
+    await this.actor.createEmbeddedDocuments("Item", [{name: game.i18n.localize("MAGNUSARCHIVES.Combat.Armor.New"), type: "armor"}]);
   }
 
   static async #onCreateShield(this: CharacterSheet): Promise<void> {
     await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("CYPHERV2.Shield.New"),
+      name: game.i18n.localize("MAGNUSARCHIVES.Shield.New"),
       type: "shield"
     }]);
   }
@@ -1146,9 +1184,9 @@ export class CharacterSheet extends ActorSheetV2 {
     event.stopPropagation();
     const weapon = this.actor.items.get(itemId(target));
     if (!weapon || weapon.type !== "weapon") throw new Error("Weapon Item not found.");
-    const ammunition = game.cypherv2.services.weapons.ammunition(weapon as unknown as WeaponItemLike);
+    const ammunition = game.magnusarchives.services.weapons.ammunition(weapon as unknown as WeaponItemLike);
     if (!ammunition.canAttack) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.Weapon.InsufficientAmmo"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.InsufficientAmmo"));
       return;
     }
     await promptWeaponAttack(
@@ -1198,7 +1236,7 @@ export class CharacterSheet extends ActorSheetV2 {
     if (!this.isEditable) return;
     const weapon = this.actor.items.get(itemId(target));
     if (!weapon || weapon.type !== "weapon") throw new Error("Weapon Item not found.");
-    await game.cypherv2.services.weapons.reload(weapon as unknown as WeaponItemLike);
+    await game.magnusarchives.services.weapons.reload(weapon as unknown as WeaponItemLike);
   }
 
   static async #onToggleShieldEquipped(
@@ -1211,7 +1249,7 @@ export class CharacterSheet extends ActorSheetV2 {
     if (!this.isEditable) return;
     const shield = this.actor.items.get(itemId(target));
     if (!shield || shield.type !== "shield") throw new Error("Shield Item not found.");
-    await game.cypherv2.services.shields.setEquipped(
+    await game.magnusarchives.services.shields.setEquipped(
       this.actor as unknown as import("../../services/shield-service").ShieldCharacterLike,
       shield as unknown as import("../../services/shield-service").ShieldItemLike,
       !(shield.system as {equipped: boolean}).equipped
@@ -1257,10 +1295,10 @@ export class CharacterSheet extends ActorSheetV2 {
       throw new Error("Combat Item not found.");
     }
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Combat.DeleteItem")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Combat.DeleteItemConfirm", {name: item.name})}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Combat.DeleteItem")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Combat.DeleteItemConfirm", {name: item.name})}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     this.#combatAccordion.remove(item.id);
@@ -1294,11 +1332,11 @@ export class CharacterSheet extends ActorSheetV2 {
     const {focusUuid, nodeId} = focusActionData(target);
     const focus = await resolveFocus(this.actor, focusUuid);
     if (!focus) {
-      ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.FocusUnavailable"));
+      ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Focus.Errors.FocusUnavailable"));
       return;
     }
     try {
-      const result = await game.cypherv2.services.focusAcquisition.acquireManual(
+      const result = await game.magnusarchives.services.focusAcquisition.acquireManual(
         this.actor as unknown as FocusCharacterLike,
         focus,
         nodeId,
@@ -1306,8 +1344,8 @@ export class CharacterSheet extends ActorSheetV2 {
       );
       ui.notifications.info(game.i18n.localize(
         result.status === "acquired"
-          ? "CYPHERV2.Focus.Acquired"
-          : "CYPHERV2.Focus.AlreadyOwned"
+          ? "MAGNUSARCHIVES.Focus.Acquired"
+          : "MAGNUSARCHIVES.Focus.AlreadyOwned"
       ));
       if (result.status === "acquired") await this.actor.sheet?.render(true);
     } catch (error) {
@@ -1325,19 +1363,19 @@ export class CharacterSheet extends ActorSheetV2 {
     const focus = await resolveFocus(this.actor, focusUuid);
     if (!focus) return;
     const confirmed = await foundry.applications.api.DialogV2.confirm({
-      window: {title: game.i18n.localize("CYPHERV2.Focus.GmOverrideAcquire")},
-      content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Focus.GmOverrideConfirm")}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Focus.GmOverrideAcquire")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.GmOverrideAcquire")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Focus.GmOverrideConfirm")}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.GmOverrideAcquire")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
     });
     if (!confirmed) return;
     try {
-      await game.cypherv2.services.focusAcquisition.acquireWithGmOverride(
+      await game.magnusarchives.services.focusAcquisition.acquireWithGmOverride(
         this.actor as unknown as FocusCharacterLike,
         focus,
         nodeId
       );
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Focus.Acquired"));
+      ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Focus.Acquired"));
       await this.actor.sheet?.render(true);
     } catch (error) {
       CharacterSheet.#notifyFocusError(error);
@@ -1375,14 +1413,14 @@ export class CharacterSheet extends ActorSheetV2 {
   }
 
   static async #onCompleteProgressionGuidance(this: CharacterSheet): Promise<void> {
-    await game.cypherv2.services.advancement.completeProgressionGuidance(
+    await game.magnusarchives.services.advancement.completeProgressionGuidance(
       this.actor as unknown as AdvancementCharacterLike
     );
     await this.render({force: true});
   }
 
   static async #onResetProgressionGuidance(this: CharacterSheet): Promise<void> {
-    await game.cypherv2.services.advancement.resetProgressionGuidance(
+    await game.magnusarchives.services.advancement.resetProgressionGuidance(
       this.actor as unknown as AdvancementCharacterLike
     );
     await this.render({force: true});
@@ -1480,19 +1518,19 @@ export class CharacterSheet extends ActorSheetV2 {
     const {focusUuid, nodeId} = focusActionData(target);
     const focus = await resolveFocus(this.actor, focusUuid);
     if (!focus) {
-      ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.FocusUnavailable"));
+      ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Focus.Errors.FocusUnavailable"));
       return;
     }
     try {
-      const result = await game.cypherv2.services.focusAcquisition.restoreAbility(
+      const result = await game.magnusarchives.services.focusAcquisition.restoreAbility(
         this.actor as unknown as FocusCharacterLike,
         focus,
         nodeId
       );
       ui.notifications.info(game.i18n.localize(
         result.status === "restored"
-          ? "CYPHERV2.Focus.AbilityRestored"
-          : "CYPHERV2.Focus.AbilityAlreadyPresent"
+          ? "MAGNUSARCHIVES.Focus.AbilityRestored"
+          : "MAGNUSARCHIVES.Focus.AbilityAlreadyPresent"
       ));
       if (result.status === "restored") await this.actor.sheet?.render(true);
     } catch (error) {
@@ -1507,7 +1545,7 @@ export class CharacterSheet extends ActorSheetV2 {
       return;
     }
     console.error(error);
-    ui.notifications.error(game.i18n.localize("CYPHERV2.Focus.Errors.Unexpected"));
+    ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Focus.Errors.Unexpected"));
   }
 
   override async _prepareContext(options: Record<string, unknown>): Promise<Record<string, unknown>> {
@@ -1520,15 +1558,15 @@ export class CharacterSheet extends ActorSheetV2 {
       .filter((item) => item.type === "skill")
       .map((item) => {
         const skill = item as unknown as SkillItemLike;
-        const configuredPool = game.cypherv2.services.skills.configuredPool(skill);
+        const configuredPool = game.magnusarchives.services.skills.configuredPool(skill);
         return {
           id: skill.id,
           name: skill.name,
           rank: skill.system.rank,
-          rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${skill.system.rank}`),
+          rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`),
           poolLabel: configuredPool
-            ? game.i18n.localize(`CYPHERV2.Pools.${configuredPool[0]!.toUpperCase()}${configuredPool.slice(1)}`)
-            : game.i18n.localize("CYPHERV2.Skill.ChoosePool")
+            ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${configuredPool[0]!.toUpperCase()}${configuredPool.slice(1)}`)
+            : game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")
         };
       }), this.#skillSortMode);
     const abilityDocuments = sortAbilityList([...this.actor.items]
@@ -1544,9 +1582,9 @@ export class CharacterSheet extends ActorSheetV2 {
         presentation.cost.pools,
         abilityPoolLabel,
         {
-          pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
-          middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
-          final: game.i18n.localize("CYPHERV2.Ability.CostDisplay.FinalOr")
+          pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
+          middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
+          final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
         },
         presentation.cost.scalable
       );
@@ -1577,7 +1615,7 @@ export class CharacterSheet extends ActorSheetV2 {
       item.type === "shield" && Boolean((item.system as {equipped?: boolean}).equipped)
     ));
     if (equippedShieldDocuments.length > 1 && this.isEditable) {
-      await game.cypherv2.services.shields.normalizeEquipped(
+      await game.magnusarchives.services.shields.normalizeEquipped(
         combatActor as unknown as import("../../services/shield-service").ShieldCharacterLike
       );
     }
@@ -1593,10 +1631,10 @@ export class CharacterSheet extends ActorSheetV2 {
         return {
           id: weapon.id,
           name: weapon.name,
-          category: game.i18n.localize(`CYPHERV2.Combat.Weapon.Category.${weapon.system.category}`),
-          attackType: game.i18n.localize(`CYPHERV2.Combat.Weapon.AttackType.${weapon.system.attackType}`),
-          range: game.i18n.localize(`CYPHERV2.Combat.Range.${weapon.system.rangeCategory}`),
-          damage: game.cypherv2.services.combat.weaponBaseDamage(weapon),
+          category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${weapon.system.category}`),
+          attackType: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${weapon.system.attackType}`),
+          range: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${weapon.system.rangeCategory}`),
+          damage: game.magnusarchives.services.combat.weaponBaseDamage(weapon),
           depletionEnabled: weapon.system.depletion.enabled,
           depletionLabel: weapon.system.depletion.enabled
             ? depletionLabel(weapon.system.depletion)
@@ -1605,9 +1643,9 @@ export class CharacterSheet extends ActorSheetV2 {
           ammoLabel: weapon.system.ammo.enabled
             ? `${weapon.system.ammo.value} / ${weapon.system.ammo.max}`
             : "",
-          canAttack: game.cypherv2.services.weapons.ammunition(weapon).canAttack,
+          canAttack: game.magnusarchives.services.weapons.ammunition(weapon).canAttack,
           depleted: Boolean(weapon.system.depleted),
-          freelyUsed: game.cypherv2.services.combat.weaponFreelyUsed(combatActor, weapon),
+          freelyUsed: game.magnusarchives.services.combat.weaponFreelyUsed(combatActor, weapon),
           expanded: this.#combatAccordion.isExpanded(weapon.id),
           hasDescription: Boolean(description),
           enrichedDescription: await enrichCombatDescription(item, description)
@@ -1623,9 +1661,9 @@ export class CharacterSheet extends ActorSheetV2 {
         return {
           id: armor.id,
           name: armor.name,
-          category: game.i18n.localize(`CYPHERV2.Combat.Armor.Category.${armor.system.category}`),
+          category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${armor.system.category}`),
           equipped: armor.system.equipped,
-          freelyUsed: game.cypherv2.services.combat.armorFreelyUsed(combatActor, armor),
+          freelyUsed: game.magnusarchives.services.combat.armorFreelyUsed(combatActor, armor),
           depletionEnabled: Boolean(depletion?.enabled),
           depletionLabel: depletion?.enabled ? depletionLabel(depletion) : "",
           depleted: Boolean(armor.system.depleted),
@@ -1647,14 +1685,14 @@ export class CharacterSheet extends ActorSheetV2 {
           major: shield.system.wounds.major.length
         }, shield.system.derived.capacities).map((track) => ({
           ...track,
-          label: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
-          shortLabel: game.i18n.localize(`CYPHERV2.Hud.Wounds.${track.severity}`)
+          label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
+          shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${track.severity}`)
         }));
         return {
           id: shield.id,
           name: shield.name,
           equipped: shield.system.equipped,
-          broken: game.cypherv2.services.shields.isBroken(shield),
+          broken: game.magnusarchives.services.shields.isBroken(shield),
           minor: shield.system.wounds.minor.length,
           moderate: shield.system.wounds.moderate.length,
           major: shield.system.wounds.major.length,
@@ -1689,11 +1727,11 @@ export class CharacterSheet extends ActorSheetV2 {
         name: focus.name,
         provenance: progress.provenance ?? "additional"
       });
-      const tree = await game.cypherv2.services.focusTrees.prepare(focus, {
+      const tree = await game.magnusarchives.services.focusTrees.prepare(focus, {
         characterTier: effectiveTier(this.actor.system as unknown as CharacterDocumentLike["system"]),
         progress,
         editable: this.isEditable,
-        missingOwnedNodeIds: game.cypherv2.services.focusAcquisition.missingOwnedNodeIds(
+        missingOwnedNodeIds: game.magnusarchives.services.focusAcquisition.missingOwnedNodeIds(
           this.actor as unknown as FocusCharacterLike,
           focus,
           progress
@@ -1704,15 +1742,15 @@ export class CharacterSheet extends ActorSheetV2 {
       focusTrees.push({
         ...tree,
         provenance: progress.provenance ?? "additional",
-        provenanceLabel: `CYPHERV2.Focus.Association.${progress.provenance === "creation" ? "Creation" : "Additional"}`,
+        provenanceLabel: `MAGNUSARCHIVES.Focus.Association.${progress.provenance === "creation" ? "Creation" : "Additional"}`,
         ownedCount: progress.ownedNodeIds.length
       });
     }
-    const advancement = game.cypherv2.services.advancement.view(
+    const advancement = game.magnusarchives.services.advancement.view(
       this.actor as unknown as AdvancementCharacterLike,
       currentEnabledRuleModuleIds()
     );
-    const guidance = game.cypherv2.services.advancement.progressionGuidance(
+    const guidance = game.magnusarchives.services.advancement.progressionGuidance(
       this.actor as unknown as AdvancementCharacterLike,
       currentEnabledRuleModuleIds()
     );
@@ -1737,7 +1775,7 @@ export class CharacterSheet extends ActorSheetV2 {
           role,
           instanceId: instance?.instanceId ?? item.id,
           attachedAt: instance?.attachedAt ?? 0,
-          roleLabel: game.i18n.localize(`CYPHERV2.Packages.Role.${role}`)
+          roleLabel: game.i18n.localize(`MAGNUSARCHIVES.Packages.Role.${role}`)
         };
       });
     const packageNames = new Map([...this.actor.items]
@@ -1759,7 +1797,7 @@ export class CharacterSheet extends ActorSheetV2 {
           id: item.id,
           name: item.name,
           type: item.type,
-          sourceName: packageNames.get(provenance.instanceId) ?? game.i18n.localize("CYPHERV2.Packages.Retained"),
+          sourceName: packageNames.get(provenance.instanceId) ?? game.i18n.localize("MAGNUSARCHIVES.Packages.Retained"),
           grantId: provenance.grantId,
           status: provenance.status,
           replacementLabel: provenance.replacement?.active
@@ -1787,7 +1825,7 @@ export class CharacterSheet extends ActorSheetV2 {
         categoryWarning: powerShiftBudget.categoryWarnings.has(entry.category.trim().toLocaleLowerCase("en-US"))
       }))
     };
-    const activeGenreDocument = await game.cypherv2.services.genres.active(
+    const activeGenreDocument = await game.magnusarchives.services.genres.active(
       this.actor as unknown as GenreCharacterLike
     );
     const genre = activeGenreDocument ? {
@@ -1799,7 +1837,7 @@ export class CharacterSheet extends ActorSheetV2 {
       provenance: coreSystem.genre.provenance,
       totalEffortCapMode: activeGenreDocument.system.options.totalEffortCapMode,
       totalEffortCapLabel: game.i18n.localize(
-        `CYPHERV2.Genre.EffortCap.${activeGenreDocument.system.options.totalEffortCapMode}`
+        `MAGNUSARCHIVES.Genre.EffortCap.${activeGenreDocument.system.options.totalEffortCapMode}`
       )
     } : {
       attached: Boolean(coreSystem.genre.sourceUuid),
@@ -1809,7 +1847,7 @@ export class CharacterSheet extends ActorSheetV2 {
       img: "",
       provenance: coreSystem.genre.provenance,
       totalEffortCapMode: "core",
-      totalEffortCapLabel: game.i18n.localize("CYPHERV2.Genre.EffortCap.core")
+      totalEffortCapLabel: game.i18n.localize("MAGNUSARCHIVES.Genre.EffortCap.core")
     };
     const inventoryDocuments = [...this.actor.items]
       .filter((item) => INVENTORY_ITEM_TYPES.includes(item.type as InventoryItemType))
@@ -1834,7 +1872,7 @@ export class CharacterSheet extends ActorSheetV2 {
           ? presentation.depletion.formula
           : "",
         powerLabel: presentation.power
-          ? game.i18n.localize(`CYPHERV2.Cypher.Power.${presentation.power}`)
+          ? game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${presentation.power}`)
           : "",
         canRollLevel: presentation.levelRollable && presentation.usable,
         canRollDepletion: Boolean(presentation.depletion?.enabled && presentation.usable)
@@ -1860,19 +1898,19 @@ export class CharacterSheet extends ActorSheetV2 {
       descriptors: identitySource.descriptors.map((descriptor) => ({
         ...descriptor,
         displayName: descriptor.missing
-          ? game.i18n.localize("CYPHERV2.Hud.Placeholder.Descriptor")
+          ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Descriptor")
           : descriptor.displayName
       })),
       type: {
         ...identitySource.type,
         displayName: identitySource.type.missing
-          ? game.i18n.localize("CYPHERV2.Hud.Placeholder.Type")
+          ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Type")
           : identitySource.type.displayName
       },
       focus: {
         ...identitySource.focus,
         displayName: identitySource.focus.missing
-          ? game.i18n.localize("CYPHERV2.Hud.Placeholder.Focus")
+          ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Focus")
           : identitySource.focus.displayName
       }
     };
@@ -1882,16 +1920,16 @@ export class CharacterSheet extends ActorSheetV2 {
       major: coreSystem.wounds.major.length
     }, coreSystem.derived.wounds.capacities).map((track) => ({
       ...track,
-      shortLabel: game.i18n.localize(`CYPHERV2.Hud.Wounds.${track.severity}`),
+      shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${track.severity}`),
       pips: track.pips.map((pip) => ({
         ...pip,
-        tooltip: game.i18n.format("CYPHERV2.Hud.SetWoundCount", {
-          severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+        tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
+          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
           count: pip.targetCount
         })
       })),
-      tooltip: game.i18n.format("CYPHERV2.Hud.CharacterWoundTooltip", {
-        severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+      tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.CharacterWoundTooltip", {
+        severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
         count: track.count,
         capacity: track.capacity
       })
@@ -1907,18 +1945,18 @@ export class CharacterSheet extends ActorSheetV2 {
       }, activeShield.capacities).map((track) => ({
         ...track,
         itemId: activeShield.id,
-        shortLabel: game.i18n.localize(`CYPHERV2.Hud.Wounds.${track.severity}`),
+        shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${track.severity}`),
         pips: track.pips.map((pip) => ({
           ...pip,
-          tooltip: game.i18n.format("CYPHERV2.Hud.SetShieldWoundCount", {
+          tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetShieldWoundCount", {
             shield: activeShield.name,
-            severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
             count: pip.targetCount
           })
         })),
-        tooltip: game.i18n.format("CYPHERV2.Hud.ShieldWoundTooltip", {
+        tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.ShieldWoundTooltip", {
           shield: activeShield.name,
-          severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
           count: track.count,
           capacity: track.capacity
         })
@@ -1939,19 +1977,19 @@ export class CharacterSheet extends ActorSheetV2 {
       },
       playerIntrusion: {
         visible: this.isEditable,
-        canUse: this.isEditable && game.cypherv2.services.playerIntrusions.canUse(
+        canUse: this.isEditable && game.magnusarchives.services.playerIntrusions.canUse(
           this.actor as unknown as PlayerIntrusionCharacterLike
         ),
         tooltip: game.i18n.localize(coreSystem.xp >= 1
-          ? "CYPHERV2.Intrusion.Player.Tooltip"
-          : "CYPHERV2.Intrusion.Player.RequiresTooltip")
+          ? "MAGNUSARCHIVES.Intrusion.Player.Tooltip"
+          : "MAGNUSARCHIVES.Intrusion.Player.RequiresTooltip")
       },
       pools: POOL_KEYS.map((pool) => ({
         key: pool,
         isMight: pool === "might",
         canRally: pool === "might"
-          && game.cypherv2.services.rally.canApply(this.actor as unknown as CharacterDocumentLike),
-        label: game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`),
+          && game.magnusarchives.services.rally.canApply(this.actor as unknown as CharacterDocumentLike),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`),
         value: coreSystem.stats[pool].value,
         max: coreSystem.derived.pools[pool].max,
         edge: coreSystem.derived.pools[pool].edge,
@@ -1964,9 +2002,27 @@ export class CharacterSheet extends ActorSheetV2 {
         hindranceModifier: formatStepModifier("hinder", coreSystem.derived.wounds.hindrance),
         dead: coreSystem.derived.wounds.dead
       },
+      stress: {
+        ...headerStress(coreSystem.stress.value),
+        hindranceModifier: formatStepModifier("hinder", coreSystem.derived.stress.level),
+        canEdit: this.isEditable
+      },
+      damageTrack: {
+        hurtAvailable: coreSystem.derived.damageTrack.hurtAvailable,
+        dead: coreSystem.derived.damageTrack.dead,
+        canEdit: this.isEditable,
+        steps: headerDamageTrack(
+          coreSystem.damageTrack.step,
+          coreSystem.derived.damageTrack.hurtAvailable
+        ).map((entry) => ({
+          ...entry,
+          label: game.i18n.localize(entry.label),
+          hint: game.i18n.localize(entry.hintLabel)
+        }))
+      },
       recoveries: headerRecoveries(coreSystem.recovery.slots).map((recovery) => ({
         ...recovery,
-        label: game.i18n.localize(`CYPHERV2.Recovery.${recovery.type}`)
+        label: game.i18n.localize(`MAGNUSARCHIVES.Recovery.${recovery.type}`)
       })),
       recoveryFormulaLabel: coreSystem.derived.recovery.formula,
       canResetRecoveries: game.user.isGM,
@@ -1991,16 +2047,16 @@ export class CharacterSheet extends ActorSheetV2 {
       const packageGranted = sources.length > 0;
       const effective = effectiveCategories.includes(category);
       const sourceHint = manual && packageGranted
-        ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityManualAndGranted", {sources: sources.join(", ")})
+        ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityManualAndGranted", {sources: sources.join(", ")})
         : manual
-          ? game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual")
+          ? game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual")
           : packageGranted
-            ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", {sources: sources.join(", ")})
-            : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityAbsent");
+            ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", {sources: sources.join(", ")})
+            : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityAbsent");
       return {
         family,
         category,
-        label: game.i18n.localize(`CYPHERV2.Combat.${family === "weapon" ? "Weapon" : "Armor"}.Category.${category}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.${family === "weapon" ? "Weapon" : "Armor"}.Category.${category}`),
         manual,
         packageGranted,
         effective,
@@ -2040,20 +2096,20 @@ export class CharacterSheet extends ActorSheetV2 {
           packageGranted: sources.length > 0,
           canRemove: this.isEditable && manual,
           sourceHint: sources.length > 0
-            ? game.i18n.format("CYPHERV2.Settings.Character.FamiliarityGranted", {sources: sources.join(", ")})
-            : game.i18n.localize("CYPHERV2.Settings.Character.FamiliarityManual")
+            ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", {sources: sources.join(", ")})
+            : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual")
         };
       })
     };
     const overrideLabelKeys: Record<CharacterOverrideKey, string> = {
-      tier: "CYPHERV2.Character.Tier",
-      effort: "CYPHERV2.Character.Effort",
-      mightMax: "CYPHERV2.Overrides.MightMax",
-      mightEdge: "CYPHERV2.Overrides.MightEdge",
-      speedMax: "CYPHERV2.Overrides.SpeedMax",
-      speedEdge: "CYPHERV2.Overrides.SpeedEdge",
-      intellectMax: "CYPHERV2.Overrides.IntellectMax",
-      intellectEdge: "CYPHERV2.Overrides.IntellectEdge"
+      tier: "MAGNUSARCHIVES.Character.Tier",
+      effort: "MAGNUSARCHIVES.Character.Effort",
+      mightMax: "MAGNUSARCHIVES.Overrides.MightMax",
+      mightEdge: "MAGNUSARCHIVES.Overrides.MightEdge",
+      speedMax: "MAGNUSARCHIVES.Overrides.SpeedMax",
+      speedEdge: "MAGNUSARCHIVES.Overrides.SpeedEdge",
+      intellectMax: "MAGNUSARCHIVES.Overrides.IntellectMax",
+      intellectEdge: "MAGNUSARCHIVES.Overrides.IntellectEdge"
     };
     const characterOverrides = CHARACTER_OVERRIDE_KEYS.map((key) => {
       const view = characterOverrideView(coreSystem, key);
@@ -2080,10 +2136,10 @@ export class CharacterSheet extends ActorSheetV2 {
       modifier: coreSystem.recovery.rollModifier
     };
     const guidanceParts = [game.i18n.localize(guidance.focusAbilityCount === 2
-      ? "CYPHERV2.Advancement.Guidance.TwoFocusAbilities"
-      : "CYPHERV2.Advancement.Guidance.FocusAbility")];
+      ? "MAGNUSARCHIVES.Advancement.Guidance.TwoFocusAbilities"
+      : "MAGNUSARCHIVES.Advancement.Guidance.FocusAbility")];
     if (guidance.includesGenreAbility) {
-      guidanceParts.push(game.i18n.localize("CYPHERV2.Advancement.Guidance.GenreAbility"));
+      guidanceParts.push(game.i18n.localize("MAGNUSARCHIVES.Advancement.Guidance.GenreAbility"));
     }
     const sourceNotes = typeof this.actor._source?.system?.notes === "string"
       ? this.actor._source.system.notes
@@ -2127,25 +2183,25 @@ export class CharacterSheet extends ActorSheetV2 {
         ...advancement,
         options: advancement.options.map((option) => ({
           ...option,
-          label: `CYPHERV2.Advancement.Option.${option.kind}`,
-          shortLabel: `CYPHERV2.Advancement.Short.${option.kind}`,
+          label: `MAGNUSARCHIVES.Advancement.Option.${option.kind}`,
+          shortLabel: `MAGNUSARCHIVES.Advancement.Short.${option.kind}`,
           xpCost: advancement.policy.xpCost
         })),
         other: {
           ...advancement.other,
-          label: "CYPHERV2.Advancement.OtherAdvancement",
-          shortLabel: "CYPHERV2.Advancement.Short.other",
+          label: "MAGNUSARCHIVES.Advancement.OtherAdvancement",
+          shortLabel: "MAGNUSARCHIVES.Advancement.Short.other",
           xpCost: advancement.policy.xpCost
         },
         purchases: characterSystem.advancement.purchases.map((record) => ({
           ...record,
           label: record.kind === "other"
-            ? `CYPHERV2.Advancement.Other.${record.otherKind}`
-            : `CYPHERV2.Advancement.Option.${record.kind}`
+            ? `MAGNUSARCHIVES.Advancement.Other.${record.otherKind}`
+            : `MAGNUSARCHIVES.Advancement.Option.${record.kind}`
         })),
         guidance: {
           ...guidance,
-          title: game.i18n.format("CYPHERV2.Advancement.Guidance.Title", {tier: guidance.tier}),
+          title: game.i18n.format("MAGNUSARCHIVES.Advancement.Guidance.Title", {tier: guidance.tier}),
           reminder: guidanceParts.join(" · ")
         }
       },
@@ -2162,11 +2218,11 @@ export class CharacterSheet extends ActorSheetV2 {
         creation: {coreInitialized: boolean; mode: string}
       }).creation,
       activeArmorCategoryLabel: game.i18n.localize(
-        `CYPHERV2.Combat.Armor.Category.${combatActor.system.derived.combat.armor.category}`
+        `MAGNUSARCHIVES.Combat.Armor.Category.${combatActor.system.derived.combat.armor.category}`
       ),
       recoveryAvailableLabels: (this.actor.system as unknown as CharacterDocumentLike["system"])
         .derived.recovery.availableTypes
-        .map((type) => game.i18n.localize(`CYPHERV2.Recovery.${type}`))
+        .map((type) => game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`))
         .join(", "),
       phase: "0.1.0"
     };

@@ -48,29 +48,29 @@ describe("Recovery dialog presentation", () => {
   });
 
   it("uses shared scoped Cypher V2 dialog primitives and semantic Theme tokens", () => {
-    expect(dialogSource).toContain("cypherv2 cypherv2-dialog cypherv2-recovery-dialog");
-    expect(rollDialogSource).toContain("cypherv2 cypherv2-dialog cypherv2-dialog-fields cypherv2-roll-dialog");
+    expect(dialogSource).toContain("magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog");
+    expect(rollDialogSource).toContain("magnusarchives magnusarchives-dialog magnusarchives-dialog-fields magnusarchives-roll-dialog");
     for (const className of [
-      ".cypherv2-dialog-section",
-      ".cypherv2-dialog-section-heading",
-      ".cypherv2-dialog-button-group",
-      ".cypherv2-dialog-toggle",
-      ".cypherv2-dialog-field",
-      ".cypherv2-dialog-actions",
-      ".cypherv2-dialog-callout"
+      ".magnusarchives-dialog-section",
+      ".magnusarchives-dialog-section-heading",
+      ".magnusarchives-dialog-button-group",
+      ".magnusarchives-dialog-toggle",
+      ".magnusarchives-dialog-field",
+      ".magnusarchives-dialog-actions",
+      ".magnusarchives-dialog-callout"
     ]) expect(dialogStyles).toContain(className);
     for (const token of [
-      "--cypherv2-surface-primary",
-      "--cypherv2-surface-secondary",
-      "--cypherv2-surface-raised",
-      "--cypherv2-text-primary",
-      "--cypherv2-text-muted",
-      "--cypherv2-accent",
-      "--cypherv2-border",
-      "--cypherv2-success",
-      "--cypherv2-danger"
+      "--magnusarchives-surface-primary",
+      "--magnusarchives-surface-secondary",
+      "--magnusarchives-surface-raised",
+      "--magnusarchives-text-primary",
+      "--magnusarchives-text-muted",
+      "--magnusarchives-accent",
+      "--magnusarchives-border",
+      "--magnusarchives-success",
+      "--magnusarchives-danger"
     ]) expect(dialogStyles).toContain(`var(${token})`);
-    expect(dialogStyles).toContain(".application.dialog:has(.cypherv2-dialog, .cypherv2-dialog-fields)");
+    expect(dialogStyles).toContain(".application.dialog:has(.magnusarchives-dialog, .magnusarchives-dialog-fields)");
     expect(dialogStyles).not.toMatch(/\.application\.dialog\s*\{/);
   });
 });

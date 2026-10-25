@@ -13,6 +13,7 @@ export type RollStepSource =
   | "effort"
   | "free-effort"
   | "wound"
+  | "condition"
   | "other"
   | "rule-module";
 
@@ -44,6 +45,8 @@ export interface RollContext {
   readonly freeDamageEffort?: number;
   readonly freeEffort: number;
   readonly edge: number;
+  /** Extra Pool points each level of Effort costs (impaired and below). */
+  readonly effortSurcharge?: number;
   readonly poolValue: number;
   /** Fixed Pool cost of the action before Edge, separate from Effort. */
   readonly actionCost?: number;
@@ -97,7 +100,8 @@ export interface RollContext {
         readonly activation: import("../constants/system").AbilityActivation;
         readonly rollType: import("../constants/system").AbilityRollType;
         readonly damage: number;
-        readonly woundSeverity: import("../constants/system").WoundSeverity | "none";
+        readonly damageEffect: import("../constants/system").CharacterDamageEffect;
+        readonly stressAmount: number;
       };
 }
 

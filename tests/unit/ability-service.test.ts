@@ -31,7 +31,8 @@ function ability(overrides: Partial<AbilityItemLike["system"]> = {}): AbilityIte
       rollModifier: 0,
       attackModifier: 0,
       damage: 0,
-      woundSeverity: "none",
+      damageEffect: "none",
+      stressAmount: 3,
       range: "",
       targetMode: "none",
       description: "<p>Descriptive text.</p>",
@@ -57,7 +58,8 @@ function npc(level = 4, tokenId = "token-npc"): NpcTargetLike {
       modifications: [],
       damage: {
         amount: 4,
-        woundSeverity: "moderate",
+        effect: "seriousInjury",
+        stressAmount: 3,
         defense: {allowBlock: true, allowDodge: true},
         notes: ""
       }
@@ -315,10 +317,10 @@ describe("AbilityService", () => {
     expect((insufficient.actor as unknown as {updates: unknown[]}).updates).toHaveLength(0);
   });
 
-  it("builds a task roll through RollService with Ability, Assets, Effort, and Wound contributions", async () => {
+  it("builds a task roll through RollService with Ability, Assets, Effort, and Stress contributions", async () => {
     const {actor, service} = setup(12);
-    actor.system.wounds.major.push({id: "major", label: "", description: "", sourceUuid: "", treated: false});
-    actor.system.derived.wounds.hindrance = 1;
+    actor.system.stress.value = 3;
+    actor.system.derived.totalHindrance = 1;
     const [outcome] = await service.executeRoll(actor, ability({
       pool: "intellect",
       roll: "task",
@@ -416,7 +418,8 @@ describe("AbilityService", () => {
     const retained = ability({
       pool: "speed",
       roll: "task",
-      woundSeverity: "moderate",
+      damageEffect: "seriousInjury",
+      stressAmount: 3,
       targetMode: "single",
       grantedBy: {kind: "descriptor", status: "retained"}
     });
@@ -424,7 +427,8 @@ describe("AbilityService", () => {
       targets: [target],
       difficulty: {mode: "known", value: 2}
     }, policy);
-    expect(outcome).toMatchObject({target: {id: "character-target"}, woundSeverity: "moderate"});
+    expect(outcome).toMatchObject({target: {id: "character-target"}, damageEffect: "seriousInjury",
+ stressAmount: 3});
     expect(retained.system.grantedBy).toEqual({kind: "descriptor", status: "retained"});
   });
 

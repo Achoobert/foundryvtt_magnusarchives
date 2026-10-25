@@ -42,12 +42,12 @@ boundary without coupling Core calculations to future modules.
 The Recovery workflow reserves these Foundry hooks for future ongoing effects,
 duration expiry, and refresh contributions:
 
-- `cypherv2.preRecoveryWorkflow`;
-- `cypherv2.processRecoveryDurations`;
-- `cypherv2.recoveryCompleted`;
-- `cypherv2.restCompleted` for Normal Recoveries with Rest benefits;
-- `cypherv2.nonRestRecoveryCompleted`;
-- `cypherv2.recoveryRefresh`.
+- `magnusarchives.preRecoveryWorkflow`;
+- `magnusarchives.processRecoveryDurations`;
+- `magnusarchives.recoveryCompleted`;
+- `magnusarchives.restCompleted` for Normal Recoveries with Rest benefits;
+- `magnusarchives.nonRestRecoveryCompleted`;
+- `magnusarchives.recoveryRefresh`.
 
 Hook context includes the `normal`/`nonRest` kind, Recovery duration, calculated
 result, optional Rest preparation, and the matching duration trigger list.

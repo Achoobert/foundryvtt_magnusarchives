@@ -69,7 +69,7 @@ describe("RallyService", () => {
   });
 
   it("does not allow Rally after death", async () => {
-    const actor = character({wounds: wounds({minor: 1, major: 3})});
+    const actor = character({damageTrackStep: "dead"});
     await expect(service.apply(actor, "minor")).rejects.toThrow(/dead/i);
   });
 
@@ -78,6 +78,6 @@ describe("RallyService", () => {
     expect(service.canApply(character({poolValues: {might: 5}, wounds: wounds({moderate: 1})}))).toBe(true);
     expect(service.canApply(character({poolValues: {might: 1}, wounds: wounds({minor: 1})}))).toBe(false);
     expect(service.canApply(character({poolValues: {might: 10}, wounds: wounds({major: 1})}))).toBe(false);
-    expect(service.canApply(character({poolValues: {might: 10}, wounds: wounds({minor: 1, major: 3})}))).toBe(false);
+    expect(service.canApply(character({poolValues: {might: 10}, damageTrackStep: "dead"}))).toBe(false);
   });
 });

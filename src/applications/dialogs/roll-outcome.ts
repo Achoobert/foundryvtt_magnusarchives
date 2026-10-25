@@ -7,7 +7,7 @@ export async function publishRollOutcome(
   actor: GMIntrusionCharacterLike,
   execution: RollExecution
 ): Promise<void> {
-  await game.cypherv2.services.rollChat.publish(actor, execution, currentDifficultyVisibility(), {
+  await game.magnusarchives.services.rollChat.publish(actor, execution, currentDifficultyVisibility(), {
     showGmAudit: showGmRollAuditEnabled()
   });
   await gmIntrusionController().requestFreeFromNaturalResult(actor, execution.result);

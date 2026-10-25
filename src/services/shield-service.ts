@@ -89,7 +89,7 @@ export class ShieldService {
     });
     await Promise.all(duplicates.map((shield) => shield.update(
       {"system.equipped": false},
-      {cypherv2ShieldEquipmentSync: true}
+      {magnusarchivesShieldEquipmentSync: true}
     )));
     return active ?? null;
   }
@@ -103,15 +103,15 @@ export class ShieldService {
       throw new Error("Shield does not belong to this Character.");
     }
     if (!equipped) {
-      await shield.update({"system.equipped": false}, {cypherv2ShieldEquipmentSync: true});
+      await shield.update({"system.equipped": false}, {magnusarchivesShieldEquipmentSync: true});
       return null;
     }
-    await shield.update({"system.equipped": true}, {cypherv2ShieldEquipmentSync: true});
+    await shield.update({"system.equipped": true}, {magnusarchivesShieldEquipmentSync: true});
     await Promise.all(this.shields(actor)
       .filter((candidate) => candidate.id !== shield.id && candidate.system.equipped)
       .map((candidate) => candidate.update(
         {"system.equipped": false},
-        {cypherv2ShieldEquipmentSync: true}
+        {magnusarchivesShieldEquipmentSync: true}
       )));
     return shield;
   }
@@ -170,7 +170,7 @@ export class ShieldService {
     const result = await this.#wounds.applyTrack(shield, severity, capacities, {
       ...input,
       label: input.label ?? `${severity[0]!.toUpperCase()}${severity.slice(1)} Shield Wound`,
-      sourceUuid: input.sourceUuid ?? "cypherv2.shield"
+      sourceUuid: input.sourceUuid ?? "magnusarchives.shield"
     });
     const {dead: _trackCapacityReached, ...trackResult} = result;
     return {
@@ -199,7 +199,7 @@ export class ShieldService {
       severity,
       count,
       this.capacities(shield)[severity],
-      {sourceUuid: "cypherv2.manual.shield"}
+      {sourceUuid: "magnusarchives.manual.shield"}
     );
   }
 

@@ -21,21 +21,21 @@ function escapeHtml(value: string): string {
 }
 
 const ERROR_KEYS: Record<AdvancementError["code"], string> = {
-  "not-character": "CYPHERV2.Advancement.Errors.NotCharacter",
-  "cycle-complete": "CYPHERV2.Advancement.Errors.CycleComplete",
-  "already-purchased": "CYPHERV2.Advancement.Errors.AlreadyPurchased",
-  "other-already-purchased": "CYPHERV2.Advancement.Errors.OtherAlreadyPurchased",
-  "insufficient-xp": "CYPHERV2.Advancement.Errors.InsufficientXP",
-  "invalid-allocation": "CYPHERV2.Advancement.Errors.InvalidAllocation",
-  "effort-maximum": "CYPHERV2.Advancement.Errors.EffortMaximum",
-  "skill-not-found": "CYPHERV2.Advancement.Errors.SkillNotFound",
-  "duplicate-skill": "CYPHERV2.Advancement.Errors.DuplicateSkill",
-  "skill-maximum": "CYPHERV2.Advancement.Errors.SkillMaximum",
-  "skill-tier": "CYPHERV2.Advancement.Errors.SkillTier",
-  "genre-tier": "CYPHERV2.Advancement.Errors.GenreTier",
-  "tier-not-ready": "CYPHERV2.Advancement.Errors.TierNotReady",
-  "purchase-not-found": "CYPHERV2.Advancement.Errors.PurchaseNotFound",
-  "purchase-not-current": "CYPHERV2.Advancement.Errors.PurchaseNotCurrent"
+  "not-character": "MAGNUSARCHIVES.Advancement.Errors.NotCharacter",
+  "cycle-complete": "MAGNUSARCHIVES.Advancement.Errors.CycleComplete",
+  "already-purchased": "MAGNUSARCHIVES.Advancement.Errors.AlreadyPurchased",
+  "other-already-purchased": "MAGNUSARCHIVES.Advancement.Errors.OtherAlreadyPurchased",
+  "insufficient-xp": "MAGNUSARCHIVES.Advancement.Errors.InsufficientXP",
+  "invalid-allocation": "MAGNUSARCHIVES.Advancement.Errors.InvalidAllocation",
+  "effort-maximum": "MAGNUSARCHIVES.Advancement.Errors.EffortMaximum",
+  "skill-not-found": "MAGNUSARCHIVES.Advancement.Errors.SkillNotFound",
+  "duplicate-skill": "MAGNUSARCHIVES.Advancement.Errors.DuplicateSkill",
+  "skill-maximum": "MAGNUSARCHIVES.Advancement.Errors.SkillMaximum",
+  "skill-tier": "MAGNUSARCHIVES.Advancement.Errors.SkillTier",
+  "genre-tier": "MAGNUSARCHIVES.Advancement.Errors.GenreTier",
+  "tier-not-ready": "MAGNUSARCHIVES.Advancement.Errors.TierNotReady",
+  "purchase-not-found": "MAGNUSARCHIVES.Advancement.Errors.PurchaseNotFound",
+  "purchase-not-current": "MAGNUSARCHIVES.Advancement.Errors.PurchaseNotCurrent"
 };
 
 function value(data: DialogData, name: string): string {
@@ -48,16 +48,16 @@ function number(data: DialogData, name: string): number {
 
 function poolOptions(): string {
   return (["might", "speed", "intellect"] as const).map((pool) => (
-    `<option value="${pool}">${game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</option>`
+    `<option value="${pool}">${game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</option>`
   )).join("");
 }
 
 async function input(title: string, content: string): Promise<DialogData | null> {
   return foundry.applications.api.DialogV2.input({
     window: {title},
-    content: `<div class="cypherv2-dialog-fields">${content}</div>`,
+    content: `<div class="magnusarchives-dialog-fields">${content}</div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Advancement.Purchase")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Advancement.Purchase")}
   }) as Promise<DialogData | null>;
 }
 
@@ -66,7 +66,7 @@ function notifyError(error: unknown): void {
     ui.notifications.error(game.i18n.localize(ERROR_KEYS[error.code]));
   } else {
     console.error(error);
-    ui.notifications.error(game.i18n.localize("CYPHERV2.Advancement.Errors.Unexpected"));
+    ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Advancement.Errors.Unexpected"));
   }
 }
 
@@ -74,25 +74,25 @@ async function requestFor(
   actor: AdvancementCharacterLike,
   kind: CoreAdvancementKind | "other"
 ): Promise<AdvancementRequest | null> {
-  const title = game.i18n.localize(`CYPHERV2.Advancement.Option.${kind}`);
+  const title = game.i18n.localize(`MAGNUSARCHIVES.Advancement.Option.${kind}`);
   if (kind === "increaseCapabilities") {
     const data = await input(title, `
-      <p>${game.i18n.localize("CYPHERV2.Advancement.CapabilitiesPrompt")}</p>
-      <label>${game.i18n.localize("CYPHERV2.Pools.Might")}<input name="might" type="number" min="0" max="4" value="0"></label>
-      <label>${game.i18n.localize("CYPHERV2.Pools.Speed")}<input name="speed" type="number" min="0" max="4" value="0"></label>
-      <label>${game.i18n.localize("CYPHERV2.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`);
+      <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.CapabilitiesPrompt")}</p>
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}<input name="might" type="number" min="0" max="4" value="0"></label>
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}<input name="speed" type="number" min="0" max="4" value="0"></label>
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`);
     return data ? {kind, allocation: {
       might: number(data, "might"), speed: number(data, "speed"), intellect: number(data, "intellect")
     }} : null;
   }
   if (kind === "moveTowardPerfection") {
-    const data = await input(title, `<label>${game.i18n.localize("CYPHERV2.Advancement.ChoosePool")}<select name="pool">${poolOptions()}</select></label>`);
+    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChoosePool")}<select name="pool">${poolOptions()}</select></label>`);
     return data ? {kind, pool: value(data, "pool") as PoolKey} : null;
   }
   if (kind === "skillTraining") {
-    const modeData = await input(title, `<label>${game.i18n.localize("CYPHERV2.Advancement.SkillMode")}<select name="mode">
-      <option value="learn">${game.i18n.localize("CYPHERV2.Advancement.LearnNewSkill")}</option>
-      <option value="improve">${game.i18n.localize("CYPHERV2.Advancement.ImproveExistingSkill")}</option>
+    const modeData = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillMode")}<select name="mode">
+      <option value="learn">${game.i18n.localize("MAGNUSARCHIVES.Advancement.LearnNewSkill")}</option>
+      <option value="improve">${game.i18n.localize("MAGNUSARCHIVES.Advancement.ImproveExistingSkill")}</option>
     </select></label>`);
     if (!modeData) return null;
     if (value(modeData, "mode") === "learn") {
@@ -100,15 +100,15 @@ async function requestFor(
         .filter((item) => item.type === "skill")
         .sort((left, right) => left.name.localeCompare(right.name));
       const data = await input(title, `
-        <label>${game.i18n.localize("CYPHERV2.Advancement.SkillSource")}<select name="sourceUuid">
-          <option value="custom">${game.i18n.localize("CYPHERV2.Advancement.CustomSkill")}</option>
+        <label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillSource")}<select name="sourceUuid">
+          <option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Advancement.CustomSkill")}</option>
           ${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}
         </select></label>
-        <label>${game.i18n.localize("CYPHERV2.Advancement.CustomSkillName")}<input name="customName" type="text"></label>
-        <label>${game.i18n.localize("CYPHERV2.Skill.Category")}<select name="customCategory">
-          <option value="general">${game.i18n.localize("CYPHERV2.Advancement.SkillCategory.general")}</option>
-          <option value="attack">${game.i18n.localize("CYPHERV2.Advancement.SkillCategory.attack")}</option>
-          <option value="defense">${game.i18n.localize("CYPHERV2.Advancement.SkillCategory.defense")}</option>
+        <label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.CustomSkillName")}<input name="customName" type="text"></label>
+        <label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Category")}<select name="customCategory">
+          <option value="general">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.general")}</option>
+          <option value="attack">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.attack")}</option>
+          <option value="defense">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.defense")}</option>
         </select></label>`);
       if (!data) return null;
       const sourceUuid = value(data, "sourceUuid");
@@ -121,17 +121,17 @@ async function requestFor(
         }
         : {kind, mode: "learn", sourceUuid};
     }
-    const options = game.cypherv2.services.advancement.skillTrainingOptions(
+    const options = game.magnusarchives.services.advancement.skillTrainingOptions(
       actor,
       currentEnabledRuleModuleIds()
     );
     const eligible = options.filter((entry) => entry.eligible);
     if (eligible.length === 0) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Advancement.NoEligibleSkills"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Advancement.NoEligibleSkills"));
       return null;
     }
-    const data = await input(title, `<label>${game.i18n.localize("CYPHERV2.Advancement.ChooseSkill")}<select name="skillId">${eligible.map((entry) => (
-      `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.name)} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${entry.currentRank}`)} → ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${entry.nextRank}`)}</option>`
+    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChooseSkill")}<select name="skillId">${eligible.map((entry) => (
+      `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.currentRank}`)} → ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.nextRank}`)}</option>`
     )).join("")}</select></label>`);
     return data ? {kind, mode: "improve", skillId: value(data, "skillId")} : null;
   }
@@ -139,8 +139,8 @@ async function requestFor(
     const availableKinds = OTHER_ADVANCEMENT_KINDS.filter((entry) => (
       entry !== "genre" || effectiveTier(actor.system) >= 3
     ));
-    const data = await input(title, `<label>${game.i18n.localize("CYPHERV2.Advancement.OtherType")}<select name="otherKind">${availableKinds.map((entry) => (
-      `<option value="${entry}">${game.i18n.localize(`CYPHERV2.Advancement.Other.${entry}`)}</option>`
+    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.OtherType")}<select name="otherKind">${availableKinds.map((entry) => (
+      `<option value="${entry}">${game.i18n.localize(`MAGNUSARCHIVES.Advancement.Other.${entry}`)}</option>`
     )).join("")}</select></label>`);
     return data ? {kind, otherKind: value(data, "otherKind") as OtherAdvancementKind} : null;
   }
@@ -154,12 +154,12 @@ export async function promptPurchaseAdvancement(
   const request = await requestFor(actor, kind);
   if (!request) return;
   try {
-    const result = await game.cypherv2.services.advancement.purchase(
+    const result = await game.magnusarchives.services.advancement.purchase(
       actor,
       request,
       currentEnabledRuleModuleIds()
     );
-    ui.notifications.info(game.i18n.format("CYPHERV2.Advancement.PurchasedNotice", {
+    ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.PurchasedNotice", {
       resourcePoints: result.resourcePointsGranted
     }));
   } catch (error) {
@@ -172,11 +172,11 @@ export async function promptUndoAdvancement(
   purchaseId: string
 ): Promise<boolean> {
   const confirmed = await foundry.applications.api.DialogV2.wait({
-    window: {title: game.i18n.localize("CYPHERV2.Advancement.Undo.Title")},
-    content: `<div class="cypherv2 cypherv2-dialog advancement-undo-dialog">
-      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ReopenWarning")}</p>
-      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.NoRollbackWarning")}</p>
-      <p>${game.i18n.localize("CYPHERV2.Advancement.Undo.ManualReviewWarning")}</p>
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.Title")},
+    content: `<div class="magnusarchives magnusarchives-dialog advancement-undo-dialog">
+      <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.ReopenWarning")}</p>
+      <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.NoRollbackWarning")}</p>
+      <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.ManualReviewWarning")}</p>
     </div>`,
     rejectClose: false,
     modal: true,
@@ -184,14 +184,14 @@ export async function promptUndoAdvancement(
     buttons: [
       {
         action: "no",
-        label: game.i18n.localize("CYPHERV2.Actions.Cancel"),
+        label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel"),
         icon: "fa-solid fa-xmark",
         default: true,
         callback: () => false
       },
       {
         action: "yes",
-        label: game.i18n.localize("CYPHERV2.Advancement.Undo.Confirm"),
+        label: game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.Confirm"),
         icon: "fa-solid fa-check",
         callback: () => true
       }
@@ -199,8 +199,8 @@ export async function promptUndoAdvancement(
   });
   if (!confirmed) return false;
   try {
-    await game.cypherv2.services.advancement.undoPurchase(actor, purchaseId);
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Advancement.Undo.Success"));
+    await game.magnusarchives.services.advancement.undoPurchase(actor, purchaseId);
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.Success"));
     return true;
   } catch (error) {
     notifyError(error);
@@ -210,11 +210,11 @@ export async function promptUndoAdvancement(
 
 export async function promptAdvanceTier(actor: AdvancementCharacterLike): Promise<void> {
   try {
-    const result = await game.cypherv2.services.advancement.advanceTier(
+    const result = await game.magnusarchives.services.advancement.advanceTier(
       actor,
       currentEnabledRuleModuleIds()
     );
-    ui.notifications.info(game.i18n.format("CYPHERV2.Advancement.TierAdvancedNotice", {tier: result.tier}));
+    ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.TierAdvancedNotice", {tier: result.tier}));
   } catch (error) {
     notifyError(error);
   }

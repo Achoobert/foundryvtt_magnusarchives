@@ -21,7 +21,7 @@ const [source, candidate, coreSource] = await Promise.all([
 const references = candidateValidator.createSpeciesReferenceCatalogs(coreSource);
 
 async function extractedDocuments() {
-  const temporary = await mkdtemp(path.join(tmpdir(), "cypherv2-species-"));
+  const temporary = await mkdtemp(path.join(tmpdir(), "magnusarchives-species-"));
   try {
     const isolatedPack = path.join(temporary, "pack");
     const extracted = path.join(temporary, "documents");
@@ -38,7 +38,10 @@ function findSpecies(name: string): any {
   return source.species.find((document: any) => document.name === name);
 }
 
-describe("Reviewed Species promotion", () => {
+// Parked: Species and Genres are not Magnus Archives concepts. The data models
+// stay registered for migration, but the packs are no longer built or shipped,
+// so this suite has nothing to validate.
+describe.skip("Reviewed Species promotion", () => {
   it("validates the exact reviewed inventory and stable candidate identities", () => {
     expect(() => importer.validateReviewedSpeciesSource(source, references)).not.toThrow();
     expect(importer.reviewedSpeciesSummary(source, references)).toEqual({
@@ -90,7 +93,7 @@ describe("Reviewed Species promotion", () => {
       catalogItemType: "descriptor",
       options: []
     }]);
-    expect(JSON.stringify(source.species)).not.toContain("Compendium.cypherv2.descriptors.Item.");
+    expect(JSON.stringify(source.species)).not.toContain("Compendium.magnusarchives.descriptors.Item.");
   });
 
   it("uses only valid public Skill references and no review-only references", () => {
@@ -101,7 +104,7 @@ describe("Reviewed Species promotion", () => {
       ...entry.system.choiceGroups.flatMap((group: any) => group.options)
     ]);
     for (const grant of grants) {
-      expect(grant.skillUuid).toMatch(/^Compendium\.cypherv2\.skills\.Item\.[A-Za-z0-9]{16}$/);
+      expect(grant.skillUuid).toMatch(/^Compendium\.magnusarchives\.skills\.Item\.[A-Za-z0-9]{16}$/);
       expect(references.skills.has(grant.skillUuid.split(".").at(-1))).toBe(true);
     }
   });
@@ -111,7 +114,7 @@ describe("Reviewed Species promotion", () => {
     const packageJson = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
     const release = await readFile(path.join(root, "scripts/package-release.ps1"), "utf8");
     expect(manifest.packs).toHaveLength(12);
-    expect(manifest.packs).toContainEqual({name: "species", label: "Species", path: "packs/species", type: "Item", system: "cypherv2"});
+    expect(manifest.packs).toContainEqual({name: "species", label: "Species", path: "packs/species", type: "Item", system: "magnusarchives"});
     expect(packageJson.scripts.build).toContain("pnpm import:species");
     expect(packageJson.scripts["import:species"]).toBe("node scripts/import-species.mjs");
     expect(release).toContain('"packs/species"');
@@ -138,7 +141,7 @@ describe("Reviewed Species promotion", () => {
     baked.species.find((entry: any) => entry.name === "Human").system.descriptorChoiceGroups[0].options.push({id: "aaaaaaaaaaaaaaaa"});
     expect(() => importer.validateReviewedSpeciesSource(baked, references)).toThrow(/must not freeze|dynamic Descriptor/);
     const dangling = structuredClone(source);
-    dangling.species.find((entry: any) => entry.system.skillGrants.length).system.skillGrants[0].skillUuid = "Compendium.cypherv2.skills.Item.aaaaaaaaaaaaaaaa";
+    dangling.species.find((entry: any) => entry.system.skillGrants.length).system.skillGrants[0].skillUuid = "Compendium.magnusarchives.skills.Item.aaaaaaaaaaaaaaaa";
     expect(() => importer.validateReviewedSpeciesSource(dangling, references)).toThrow(/missing Skill/);
     const duplicate = structuredClone(source);
     duplicate.species[1]._id = duplicate.species[0]._id;

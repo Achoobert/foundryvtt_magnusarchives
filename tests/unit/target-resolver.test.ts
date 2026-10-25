@@ -16,7 +16,8 @@ function npc(modifications: readonly NpcModificationData[] = [], level = 4): Npc
       health: {value: 12, baseMax: 12},
       damage: {
         amount: 4,
-        woundSeverity: "moderate",
+        effect: "seriousInjury",
+        stressAmount: 3,
         defense: {allowBlock: true, allowDodge: true},
         notes: ""
       },
@@ -83,7 +84,7 @@ describe("TargetResolver", () => {
     expect(result.contributions).toContainEqual(expect.objectContaining({
       direction: "hinder",
       steps: 1,
-      label: "CYPHERV2.Combat.TargetModification"
+      label: "MAGNUSARCHIVES.Combat.TargetModification"
     }));
   });
 

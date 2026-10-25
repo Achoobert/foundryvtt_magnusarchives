@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/SebsokK/cypherv2/main/content/species/schema.json",
+  "$id": "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/content/species/schema.json",
   "title": "Cypher V2 candidate Species",
   "type": "object",
   "additionalProperties": false,
@@ -24,7 +24,7 @@
       "type": "object",
       "required": ["systemId", "futurePackId"],
       "properties": {
-        "systemId": {"const": "cypherv2"},
+        "systemId": {"const": "magnusarchives"},
         "futurePackId": {"const": "species"}
       }
     },

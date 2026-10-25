@@ -28,8 +28,8 @@ export function chatCardActorImageData(
   const accent = safeCharacterAccent(color);
   const tint = safeCharacterTint(color);
   const chatCardStyle = [
-    ...(accent ? [`--cypherv2-chat-accent: ${accent}`] : []),
-    ...(tint ? [`--cypherv2-chat-tint: ${tint}`] : [])
+    ...(accent ? [`--magnusarchives-chat-accent: ${accent}`] : []),
+    ...(tint ? [`--magnusarchives-chat-tint: ${tint}`] : [])
   ].join("; ");
   return {
     ...(actorImage ? {actorImage} : {}),

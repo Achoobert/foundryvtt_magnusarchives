@@ -19,9 +19,15 @@ function clamp(value: number, minimum: number, maximum: number): number {
   return Math.min(maximum, Math.max(minimum, value));
 }
 
-export function effortCost(levels: number): number {
+/**
+ * 3 points for the first level of Effort, 2 for each level after that (p11).
+ * An impaired Character pays `surcharge` extra points per level (p12).
+ */
+export function effortCost(levels: number, surcharge = 0): number {
   const safeLevels = integer(levels, "Paid Effort");
-  return safeLevels === 0 ? 0 : 3 + ((safeLevels - 1) * 2);
+  if (safeLevels === 0) return 0;
+  const safeSurcharge = Math.max(0, Math.trunc(surcharge));
+  return 3 + ((safeLevels - 1) * 2) + (safeLevels * safeSurcharge);
 }
 
 export interface PoolCostCalculation {
@@ -106,7 +112,7 @@ export function prepareRoll(context: RollContext): PreparedRoll {
   if (assets > 0) {
     breakdown.push(contribution(
       "core.assets",
-      "CYPHERV2.Roll.Breakdown.Assets",
+      "MAGNUSARCHIVES.Roll.Breakdown.Assets",
       "ease",
       assets,
       "asset"
@@ -115,7 +121,7 @@ export function prepareRoll(context: RollContext): PreparedRoll {
   if (paidEffort > 0) {
     breakdown.push(contribution(
       "core.effort.paid",
-      "CYPHERV2.Roll.Breakdown.PaidEffort",
+      "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort",
       "ease",
       paidEffort,
       "effort"
@@ -124,7 +130,7 @@ export function prepareRoll(context: RollContext): PreparedRoll {
   if (freeEffort > 0) {
     breakdown.push(contribution(
       "core.effort.free",
-      "CYPHERV2.Roll.Breakdown.FreeEffort",
+      "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort",
       "ease",
       freeEffort,
       "free-effort"
@@ -144,7 +150,7 @@ export function prepareRoll(context: RollContext): PreparedRoll {
   const netSteps = totalEase - totalHindrance;
   const costs = calculatePoolCost(
     context.actionCost ?? 0,
-    effortCost(paidEffortApplied),
+    effortCost(paidEffortApplied, context.effortSurcharge ?? 0),
     context.edge,
     context.actionCostIgnoresEdge ?? false
   );
@@ -231,7 +237,7 @@ export function coreNaturalEffects(
 ): readonly NaturalEffect[] {
   const natural = result.naturalRoll;
   if (natural === null) return [];
-  const base = {sourceId: "cypherv2.core", naturalRoll: natural} as const;
+  const base = {sourceId: "magnusarchives.core", naturalRoll: natural} as const;
   const horrorRange = normalizeHorrorIntrusionRange(horrorIntrusionRange);
   if (natural === 1) {
     return [{
@@ -239,18 +245,18 @@ export function coreNaturalEffects(
       id: "core.natural-1.intrusion",
       kind: "gm-intrusion",
       status: "applied",
-      label: "CYPHERV2.Roll.NaturalEffects.GMIntrusion",
+      label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
       triggersGMIntrusion: true,
       intrusionProvenance: "natural-1"
     }];
   }
   const intrusionEffects: NaturalEffect[] = natural <= horrorRange ? [{
     id: `core.horror-mode.natural-${natural}.intrusion`,
-    sourceId: "cypherv2.horror-mode",
+    sourceId: "magnusarchives.horror-mode",
     naturalRoll: natural,
     kind: "gm-intrusion",
     status: "applied",
-    label: "CYPHERV2.Roll.NaturalEffects.GMIntrusion",
+    label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
     triggersGMIntrusion: true,
     intrusionProvenance: "horror-mode",
     horrorIntrusionRange: horrorRange
@@ -262,7 +268,7 @@ export function coreNaturalEffects(
       id: `core.natural-${natural}.damage`,
       kind: "damage-bonus",
       status: damageRoll ? effectStatus(result.success) : "inapplicable",
-      label: `CYPHERV2.Roll.NaturalEffects.Damage${natural}`,
+      label: `MAGNUSARCHIVES.Roll.NaturalEffects.Damage${natural}`,
       damageBonus: natural === 17 ? 1 : 2
     }];
   }
@@ -275,7 +281,7 @@ export function coreNaturalEffects(
         id: "core.natural-19.damage",
         kind: "damage-bonus",
         status: choiceStatus,
-        label: "CYPHERV2.Roll.NaturalEffects.Damage19",
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19",
         damageBonus: 3,
         choiceGroup: "core.natural-19.choice"
       }, {
@@ -283,7 +289,7 @@ export function coreNaturalEffects(
         id: "core.natural-19.minor",
         kind: "minor-effect",
         status: choiceStatus,
-        label: "CYPHERV2.Roll.NaturalEffects.Minor",
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor",
         choiceGroup: "core.natural-19.choice"
       }];
     }
@@ -292,7 +298,7 @@ export function coreNaturalEffects(
       id: "core.natural-19.minor",
       kind: "minor-effect",
       status,
-      label: "CYPHERV2.Roll.NaturalEffects.Minor"
+      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
     }];
   }
   if (natural === 20) {
@@ -303,7 +309,7 @@ export function coreNaturalEffects(
           id: "core.natural-20.damage",
           kind: "damage-bonus",
           status: status === "applied" ? "available" : status,
-          label: "CYPHERV2.Roll.NaturalEffects.Damage20",
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20",
           damageBonus: 4,
           choiceGroup: "core.natural-20.choice"
         }, {
@@ -311,7 +317,7 @@ export function coreNaturalEffects(
           id: "core.natural-20.major",
           kind: "major-effect",
           status: status === "applied" ? "available" : status,
-          label: "CYPHERV2.Roll.NaturalEffects.Major",
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major",
           choiceGroup: "core.natural-20.choice"
         }]
       : [{
@@ -319,7 +325,7 @@ export function coreNaturalEffects(
           id: "core.natural-20.major",
           kind: "major-effect",
           status,
-          label: "CYPHERV2.Roll.NaturalEffects.Major"
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major"
         }];
     if (result.prepared.poolCost > 0) {
       effects.push({
@@ -327,7 +333,7 @@ export function coreNaturalEffects(
         id: "core.natural-20.refund",
         kind: "pool-cost-refund",
         status: "applied",
-        label: "CYPHERV2.Roll.NaturalEffects.Refund",
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Refund",
         refundsPoolCost: true
       });
     }

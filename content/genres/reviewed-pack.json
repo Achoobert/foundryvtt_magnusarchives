@@ -9,7 +9,7 @@
     "note": "Human-reviewed Genre documents promoted losslessly from the private Working packs."
   },
   "target": {
-    "systemId": "cypherv2",
+    "systemId": "magnusarchives",
     "packId": "genres",
     "abilityPackId": "genre-abilities"
   },
@@ -57,7 +57,7 @@
       "name": "The Real World",
       "type": "genre",
       "_id": "ed82d7be559e5bf8",
-      "img": "systems/cypherv2/assets/icons/cyphergenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
       "system": {
         "schemaVersion": 1,
         "slug": "the-real-world",
@@ -103,13 +103,13 @@
         "abilityCatalog": [
           {
             "id": "a7931cffba7dfddc",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.fREdI45SXu0WPeeS",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.fREdI45SXu0WPeeS",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Additional Skill (Tier 3)",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "additional-skill-tier-3",
@@ -179,13 +179,13 @@
           },
           {
             "id": "b2db9663f94f59a6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.xXSq03yZHRS978cj",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.xXSq03yZHRS978cj",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Additional Skill (Tier 6)",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "additional-skill-tier-6",
@@ -283,7 +283,7 @@
       "name": "Fantasy",
       "type": "genre",
       "_id": "964ba40da91df8bc",
-      "img": "systems/cypherv2/assets/icons/cyphergenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
       "system": {
         "schemaVersion": 1,
         "slug": "fantasy",
@@ -329,13 +329,13 @@
         "abilityCatalog": [
           {
             "id": "570defa61eb6b740",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.70ebf93fb927781d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.70ebf93fb927781d",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "A Bit of Magic",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-bit-of-magic",
@@ -406,13 +406,13 @@
           },
           {
             "id": "ad2cc57d233c0b32",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f88e4f9b047bfc11",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f88e4f9b047bfc11",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -483,13 +483,13 @@
           },
           {
             "id": "f409ce8c9aa4fcb6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d69a791efb656ff7",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d69a791efb656ff7",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Danger Instinct",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "danger-instinct",
@@ -561,13 +561,13 @@
           },
           {
             "id": "4d7432a1169b2ec3",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.bb75238658643f6e",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.bb75238658643f6e",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disappear Into Shadow",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disappear-into-shadow",
@@ -637,13 +637,13 @@
           },
           {
             "id": "1d9f66f0f9fa36f8",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.05cf9198c1c0167f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.05cf9198c1c0167f",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Discerning Mind",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "discerning-mind",
@@ -715,13 +715,13 @@
           },
           {
             "id": "e7aba94c23651bb5",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.3dfdff02330dadcd",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.3dfdff02330dadcd",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Elemental Protection",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "elemental-protection",
@@ -793,13 +793,13 @@
           },
           {
             "id": "85cc2fd2539a426f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7d85e7390513bd53",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7d85e7390513bd53",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -870,13 +870,13 @@
           },
           {
             "id": "572197024f6e379b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.554debaf8e2221f4",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.554debaf8e2221f4",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -947,13 +947,13 @@
           },
           {
             "id": "4fda4e43561ab3e9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e0b494b87dae1389",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e0b494b87dae1389",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "From the Shadows",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "from-the-shadows",
@@ -1023,13 +1023,13 @@
           },
           {
             "id": "7fad6d22c68884d9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1f4fb856d17d54cf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1f4fb856d17d54cf",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fury",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fury",
@@ -1101,13 +1101,13 @@
           },
           {
             "id": "4ff0ad6aabc6c87e",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1064e654442c645f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1064e654442c645f",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Pry Open Defense",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "pry-open-defense",
@@ -1179,13 +1179,13 @@
           },
           {
             "id": "a8f98e349e1b77e3",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.795e8d51bb289c33",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.795e8d51bb289c33",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Puncturing Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "puncturing-attack",
@@ -1255,13 +1255,13 @@
           },
           {
             "id": "af18a1e0876dee36",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2f26a99602ee91bf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2f26a99602ee91bf",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -1334,13 +1334,13 @@
           },
           {
             "id": "8c19e8b44c097ec6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.8364aa43a9af4742",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.8364aa43a9af4742",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Strategize",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "strategize",
@@ -1412,13 +1412,13 @@
           },
           {
             "id": "c9da39b68927ff50",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.059b916628512d48",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.059b916628512d48",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Tough",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tough",
@@ -1488,13 +1488,13 @@
           },
           {
             "id": "83cbbc6891e09bc7",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7ce111adf414996d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7ce111adf414996d",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Winning Smile",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "winning-smile",
@@ -1566,13 +1566,13 @@
           },
           {
             "id": "6872f03788372ded",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.fdc914fefd6765ae",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.fdc914fefd6765ae",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Assassin Strike",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "assassin-strike",
@@ -1644,13 +1644,13 @@
           },
           {
             "id": "6023f51b3e8bf940",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f9df8d55bddbd930",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f9df8d55bddbd930",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Concussive Force",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "concussive-force",
@@ -1722,13 +1722,13 @@
           },
           {
             "id": "72b223024972d9a9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.70d9f6302a10b5aa",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.70d9f6302a10b5aa",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -1801,13 +1801,13 @@
           },
           {
             "id": "8fe39db61d64577f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.712d16116838761f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.712d16116838761f",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisibility",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisibility",
@@ -1879,13 +1879,13 @@
           },
           {
             "id": "3211976ab1b2eb0f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d6061f86c07c0c64",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d6061f86c07c0c64",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Jump Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "jump-attack",
@@ -1957,13 +1957,13 @@
           },
           {
             "id": "478920e16ba425b4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.9b86a9fe8d1e0724",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.9b86a9fe8d1e0724",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Magic Portal",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "magic-portal",
@@ -2035,13 +2035,13 @@
           },
           {
             "id": "5c2c2776ca80a7fa",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.b79d388dc74d6276",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.b79d388dc74d6276",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mask",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mask",
@@ -2113,13 +2113,13 @@
           },
           {
             "id": "b4160cd9e280fdae",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f0c7702dfe540dae",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f0c7702dfe540dae",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Resilience",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "resilience",
@@ -2189,13 +2189,13 @@
           },
           {
             "id": "02faf6af3723028d",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.0495f7c7fa3b770d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.0495f7c7fa3b770d",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spellbreaker",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spellbreaker",
@@ -2267,13 +2267,13 @@
           },
           {
             "id": "8544530918f38a67",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d87bf62c48064c2b",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d87bf62c48064c2b",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spin Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-attack",
@@ -2345,13 +2345,13 @@
           },
           {
             "id": "e706a1d1e0a1553e",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.13efb2bb5bef1714",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.13efb2bb5bef1714",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Will of a Leader",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "will-of-a-leader",
@@ -2451,7 +2451,7 @@
       "name": "Science Fiction",
       "type": "genre",
       "_id": "ede94ba279072596",
-      "img": "systems/cypherv2/assets/icons/cyphergenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
       "system": {
         "schemaVersion": 1,
         "slug": "science-fiction",
@@ -2497,13 +2497,13 @@
         "abilityCatalog": [
           {
             "id": "f770830d24f74508",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.918e5bd35094ecc5",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.918e5bd35094ecc5",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Black Thumb",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "black-thumb",
@@ -2573,13 +2573,13 @@
           },
           {
             "id": "8a3800f3cd1e979d",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f88e4f9b047bfc11",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f88e4f9b047bfc11",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -2650,13 +2650,13 @@
           },
           {
             "id": "85d408b9c45a5e6c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.b70bdf39450a03a1",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.b70bdf39450a03a1",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disable Mechanism",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disable-mechanism",
@@ -2728,13 +2728,13 @@
           },
           {
             "id": "d74d39c77351e23a",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7d85e7390513bd53",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7d85e7390513bd53",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -2805,13 +2805,13 @@
           },
           {
             "id": "170fc02e9d1777d7",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.554debaf8e2221f4",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.554debaf8e2221f4",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -2882,13 +2882,13 @@
           },
           {
             "id": "ab75bfb0b2f99338",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.a3a73ccf5e612724",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.a3a73ccf5e612724",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Hands on the Wheel",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hands-on-the-wheel",
@@ -2960,13 +2960,13 @@
           },
           {
             "id": "ff6b2cf725e30cc7",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.30939e9c4fbab325",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.30939e9c4fbab325",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Health",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-health",
@@ -3036,13 +3036,13 @@
           },
           {
             "id": "56d0a9df370f0207",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.72290f664f9c6751",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.72290f664f9c6751",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Machine Companion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-companion",
@@ -3112,13 +3112,13 @@
           },
           {
             "id": "badf23e4c1809a4c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.bc1201de2ed3e205",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.bc1201de2ed3e205",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -3190,13 +3190,13 @@
           },
           {
             "id": "3810a6ceff7594e1",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2f26a99602ee91bf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2f26a99602ee91bf",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -3269,13 +3269,13 @@
           },
           {
             "id": "ec35873aabd783c8",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.c7f1ed6cee33fa94",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.c7f1ed6cee33fa94",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spray",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spray",
@@ -3347,13 +3347,13 @@
           },
           {
             "id": "27eae8657f48263b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.4c4a51a440e3f1ee",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.4c4a51a440e3f1ee",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Arc Spray",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "arc-spray",
@@ -3425,13 +3425,13 @@
           },
           {
             "id": "33ae0aed3010d42d",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.fce706ab35e469cd",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.fce706ab35e469cd",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Improved Machine Companion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "improved-machine-companion",
@@ -3501,13 +3501,13 @@
           },
           {
             "id": "f60b6f3a146dfebc",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.70d9f6302a10b5aa",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.70d9f6302a10b5aa",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -3580,13 +3580,13 @@
           },
           {
             "id": "f8c65c8d3c4e4782",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2af1fe465f5f65ac",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2af1fe465f5f65ac",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Knowledge Expert",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "knowledge-expert",
@@ -3656,13 +3656,13 @@
           },
           {
             "id": "7bff85360b5f5150",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.22fc17deb01f860a",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.22fc17deb01f860a",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Lethal Capability",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lethal-capability",
@@ -3732,13 +3732,13 @@
           },
           {
             "id": "d094d63eb0cdea7b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e97c9f9b98ae9db0",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e97c9f9b98ae9db0",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Severe Machine Disruption",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "severe-machine-disruption",
@@ -3810,13 +3810,13 @@
           },
           {
             "id": "6d242a65bb6026bf",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e5679da29490211e",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e5679da29490211e",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Technology Expert",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "technology-expert",
@@ -3886,13 +3886,13 @@
           },
           {
             "id": "68e9e946bf50a5d4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f5f0bbacf4069d4c",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f5f0bbacf4069d4c",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Network",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-network",
@@ -3992,7 +3992,7 @@
       "name": "Superheroes",
       "type": "genre",
       "_id": "d130fc72b7866db1",
-      "img": "systems/cypherv2/assets/icons/cyphergenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
       "system": {
         "schemaVersion": 1,
         "slug": "superheroes",
@@ -4038,13 +4038,13 @@
         "abilityCatalog": [
           {
             "id": "570defa61eb6b740",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.70ebf93fb927781d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.70ebf93fb927781d",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "A Bit of Magic",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-bit-of-magic",
@@ -4115,13 +4115,13 @@
           },
           {
             "id": "ad2cc57d233c0b32",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f88e4f9b047bfc11",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f88e4f9b047bfc11",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -4192,13 +4192,13 @@
           },
           {
             "id": "f409ce8c9aa4fcb6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d69a791efb656ff7",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d69a791efb656ff7",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Danger Instinct",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "danger-instinct",
@@ -4270,13 +4270,13 @@
           },
           {
             "id": "4d7432a1169b2ec3",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.bb75238658643f6e",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.bb75238658643f6e",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disappear Into Shadow",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disappear-into-shadow",
@@ -4346,13 +4346,13 @@
           },
           {
             "id": "1d9f66f0f9fa36f8",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.05cf9198c1c0167f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.05cf9198c1c0167f",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Discerning Mind",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "discerning-mind",
@@ -4424,13 +4424,13 @@
           },
           {
             "id": "e7aba94c23651bb5",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.3dfdff02330dadcd",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.3dfdff02330dadcd",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Elemental Protection",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "elemental-protection",
@@ -4502,13 +4502,13 @@
           },
           {
             "id": "85cc2fd2539a426f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7d85e7390513bd53",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7d85e7390513bd53",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -4579,13 +4579,13 @@
           },
           {
             "id": "572197024f6e379b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.554debaf8e2221f4",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.554debaf8e2221f4",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -4656,13 +4656,13 @@
           },
           {
             "id": "4fda4e43561ab3e9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e0b494b87dae1389",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e0b494b87dae1389",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "From the Shadows",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "from-the-shadows",
@@ -4732,13 +4732,13 @@
           },
           {
             "id": "7fad6d22c68884d9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1f4fb856d17d54cf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1f4fb856d17d54cf",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fury",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fury",
@@ -4810,13 +4810,13 @@
           },
           {
             "id": "4ff0ad6aabc6c87e",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1064e654442c645f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1064e654442c645f",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Pry Open Defense",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "pry-open-defense",
@@ -4888,13 +4888,13 @@
           },
           {
             "id": "a8f98e349e1b77e3",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.795e8d51bb289c33",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.795e8d51bb289c33",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Puncturing Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "puncturing-attack",
@@ -4964,13 +4964,13 @@
           },
           {
             "id": "af18a1e0876dee36",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2f26a99602ee91bf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2f26a99602ee91bf",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -5043,13 +5043,13 @@
           },
           {
             "id": "8c19e8b44c097ec6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.8364aa43a9af4742",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.8364aa43a9af4742",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Strategize",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "strategize",
@@ -5121,13 +5121,13 @@
           },
           {
             "id": "c9da39b68927ff50",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.059b916628512d48",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.059b916628512d48",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Tough",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tough",
@@ -5197,13 +5197,13 @@
           },
           {
             "id": "83cbbc6891e09bc7",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7ce111adf414996d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7ce111adf414996d",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Winning Smile",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "winning-smile",
@@ -5275,13 +5275,13 @@
           },
           {
             "id": "6872f03788372ded",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.fdc914fefd6765ae",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.fdc914fefd6765ae",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Assassin Strike",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "assassin-strike",
@@ -5353,13 +5353,13 @@
           },
           {
             "id": "6023f51b3e8bf940",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f9df8d55bddbd930",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f9df8d55bddbd930",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Concussive Force",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "concussive-force",
@@ -5431,13 +5431,13 @@
           },
           {
             "id": "72b223024972d9a9",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.70d9f6302a10b5aa",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.70d9f6302a10b5aa",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -5510,13 +5510,13 @@
           },
           {
             "id": "8fe39db61d64577f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.712d16116838761f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.712d16116838761f",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisibility",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisibility",
@@ -5588,13 +5588,13 @@
           },
           {
             "id": "3211976ab1b2eb0f",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d6061f86c07c0c64",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d6061f86c07c0c64",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Jump Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "jump-attack",
@@ -5666,13 +5666,13 @@
           },
           {
             "id": "478920e16ba425b4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.9b86a9fe8d1e0724",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.9b86a9fe8d1e0724",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Magic Portal",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "magic-portal",
@@ -5744,13 +5744,13 @@
           },
           {
             "id": "5c2c2776ca80a7fa",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.b79d388dc74d6276",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.b79d388dc74d6276",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mask",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mask",
@@ -5822,13 +5822,13 @@
           },
           {
             "id": "b4160cd9e280fdae",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f0c7702dfe540dae",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f0c7702dfe540dae",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Resilience",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "resilience",
@@ -5898,13 +5898,13 @@
           },
           {
             "id": "02faf6af3723028d",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.0495f7c7fa3b770d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.0495f7c7fa3b770d",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spellbreaker",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spellbreaker",
@@ -5976,13 +5976,13 @@
           },
           {
             "id": "8544530918f38a67",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.d87bf62c48064c2b",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.d87bf62c48064c2b",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spin Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-attack",
@@ -6054,13 +6054,13 @@
           },
           {
             "id": "e706a1d1e0a1553e",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.13efb2bb5bef1714",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.13efb2bb5bef1714",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Will of a Leader",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "will-of-a-leader",
@@ -6132,13 +6132,13 @@
           },
           {
             "id": "f770830d24f74508",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.918e5bd35094ecc5",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.918e5bd35094ecc5",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Black Thumb",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "black-thumb",
@@ -6208,13 +6208,13 @@
           },
           {
             "id": "85d408b9c45a5e6c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.b70bdf39450a03a1",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.b70bdf39450a03a1",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disable Mechanism",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disable-mechanism",
@@ -6286,13 +6286,13 @@
           },
           {
             "id": "ab75bfb0b2f99338",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.a3a73ccf5e612724",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.a3a73ccf5e612724",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Hands on the Wheel",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hands-on-the-wheel",
@@ -6364,13 +6364,13 @@
           },
           {
             "id": "ff6b2cf725e30cc7",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.30939e9c4fbab325",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.30939e9c4fbab325",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Health",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-health",
@@ -6440,13 +6440,13 @@
           },
           {
             "id": "56d0a9df370f0207",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.72290f664f9c6751",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.72290f664f9c6751",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Machine Companion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-companion",
@@ -6516,13 +6516,13 @@
           },
           {
             "id": "badf23e4c1809a4c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.bc1201de2ed3e205",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.bc1201de2ed3e205",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -6594,13 +6594,13 @@
           },
           {
             "id": "ec35873aabd783c8",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.c7f1ed6cee33fa94",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.c7f1ed6cee33fa94",
             "minimumTier": 3,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spray",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spray",
@@ -6672,13 +6672,13 @@
           },
           {
             "id": "27eae8657f48263b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.4c4a51a440e3f1ee",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.4c4a51a440e3f1ee",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Arc Spray",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "arc-spray",
@@ -6750,13 +6750,13 @@
           },
           {
             "id": "33ae0aed3010d42d",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.fce706ab35e469cd",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.fce706ab35e469cd",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Improved Machine Companion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "improved-machine-companion",
@@ -6826,13 +6826,13 @@
           },
           {
             "id": "f8c65c8d3c4e4782",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2af1fe465f5f65ac",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2af1fe465f5f65ac",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Knowledge Expert",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "knowledge-expert",
@@ -6902,13 +6902,13 @@
           },
           {
             "id": "7bff85360b5f5150",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.22fc17deb01f860a",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.22fc17deb01f860a",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Lethal Capability",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lethal-capability",
@@ -6978,13 +6978,13 @@
           },
           {
             "id": "d094d63eb0cdea7b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e97c9f9b98ae9db0",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e97c9f9b98ae9db0",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Severe Machine Disruption",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "severe-machine-disruption",
@@ -7056,13 +7056,13 @@
           },
           {
             "id": "6d242a65bb6026bf",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e5679da29490211e",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e5679da29490211e",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Technology Expert",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "technology-expert",
@@ -7132,13 +7132,13 @@
           },
           {
             "id": "68e9e946bf50a5d4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.f5f0bbacf4069d4c",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.f5f0bbacf4069d4c",
             "minimumTier": 6,
             "catalog": "progression",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Network",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-network",
@@ -7210,13 +7210,13 @@
           },
           {
             "id": "877b4226bfd5282b",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.a99aa4af5c69ddd3",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.a99aa4af5c69ddd3",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Adhesive Mobility",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "adhesive-mobility",
@@ -7285,13 +7285,13 @@
           },
           {
             "id": "d7b2c759a3f4f682",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.2aaf5c0fccf76b07",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.2aaf5c0fccf76b07",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Amazing Invulnerability",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "amazing-invulnerability",
@@ -7360,13 +7360,13 @@
           },
           {
             "id": "0f48ac9211c334b4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.5d4b7128baeeaa9a",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.5d4b7128baeeaa9a",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Amazing Tools",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "amazing-tools",
@@ -7437,13 +7437,13 @@
           },
           {
             "id": "76fbbb05a56d910a",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.39bfe9653c29b05f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.39bfe9653c29b05f",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 2,
             "snapshot": {
               "name": "Armored Body",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "armored-body",
@@ -7513,13 +7513,13 @@
           },
           {
             "id": "f08147d0046a5bce",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.3f4ceddb2999f919",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.3f4ceddb2999f919",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Astonishing Teleport",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "astonishing-teleport",
@@ -7588,13 +7588,13 @@
           },
           {
             "id": "b63168350ca0d4e1",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7f926ceeb8351d10",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7f926ceeb8351d10",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Awesome Force Field",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "awesome-force-field",
@@ -7664,13 +7664,13 @@
           },
           {
             "id": "4007aac185435dd6",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.40180c3ab63e1438",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.40180c3ab63e1438",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Duplicate",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "duplicate",
@@ -7741,13 +7741,13 @@
           },
           {
             "id": "04220d33199cd591",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.b456bd2fdc0659a7",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.b456bd2fdc0659a7",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Extraordinary Leap",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "extraordinary-leap",
@@ -7816,13 +7816,13 @@
           },
           {
             "id": "4c0821be2f5b0ee4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.bed1667965bf527a",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.bed1667965bf527a",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fantastic Armament",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fantastic-armament",
@@ -7892,13 +7892,13 @@
           },
           {
             "id": "1c3a30f1ae9ec3ae",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.3beb6ce330cf8d75",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.3beb6ce330cf8d75",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fantastic Vehicle",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fantastic-vehicle",
@@ -7968,13 +7968,13 @@
           },
           {
             "id": "7ef50ec574cb473c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.4f70bdea4f184946",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.4f70bdea4f184946",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Instinct",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-instinct",
@@ -8044,13 +8044,13 @@
           },
           {
             "id": "36f0881aa69be84a",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1bcf59993fbb57bf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1bcf59993fbb57bf",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Velocity",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-velocity",
@@ -8119,13 +8119,13 @@
           },
           {
             "id": "caf10c374e8aff38",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.c6dbab3b2878c8da",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.c6dbab3b2878c8da",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Intangible",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "intangible",
@@ -8194,13 +8194,13 @@
           },
           {
             "id": "5e5e925baf043ca4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.1edbaf601e7b4403",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.1edbaf601e7b4403",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisible Knack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisible-knack",
@@ -8269,13 +8269,13 @@
           },
           {
             "id": "5929010b19ca098c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.db9afc32351eed8f",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.db9afc32351eed8f",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Power Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "power-cypher-use",
@@ -8344,13 +8344,13 @@
           },
           {
             "id": "10c6f3eb5c520133",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.9bb7f1e1db828c68",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.9bb7f1e1db828c68",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Powerful Blast",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "powerful-blast",
@@ -8419,13 +8419,13 @@
           },
           {
             "id": "7809483af01b75ce",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.6f5a81cd3c1e6aaf",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.6f5a81cd3c1e6aaf",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Regenerative Healing",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "regenerative-healing",
@@ -8495,13 +8495,13 @@
           },
           {
             "id": "e8cfebcd8580e0a1",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.5c39ea281072807d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.5c39ea281072807d",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Shrink",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "shrink",
@@ -8572,13 +8572,13 @@
           },
           {
             "id": "b4f3c845ad2de76c",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.ab8f0d26c753a28b",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.ab8f0d26c753a28b",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Skill Exemplar",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "skill-exemplar",
@@ -8648,13 +8648,13 @@
           },
           {
             "id": "3f602b724b502b96",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.c98180e94c38fbd9",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.c98180e94c38fbd9",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Stretchy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "stretchy",
@@ -8723,13 +8723,13 @@
           },
           {
             "id": "6739a0c5cb69beb4",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.6a6a7b329482c86d",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.6a6a7b329482c86d",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Superhero Versatility",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superhero-versatility",
@@ -8798,13 +8798,13 @@
           },
           {
             "id": "b1bd77b0cb8e5823",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.7b05f4239961248a",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.7b05f4239961248a",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Team-Up Ally",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "team-up-ally",
@@ -8873,13 +8873,13 @@
           },
           {
             "id": "e411b633cd76e357",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.e020965bcdf76f21",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.e020965bcdf76f21",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Prodigy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-prodigy",
@@ -8948,13 +8948,13 @@
           },
           {
             "id": "af0d063e1f8d7aa5",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.580b2c69bf03d05b",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.580b2c69bf03d05b",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Unbelievable Transformation",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "unbelievable-transformation",
@@ -9023,13 +9023,13 @@
           },
           {
             "id": "d17a14e33554049e",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.01d59eb4a61614ee",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.01d59eb4a61614ee",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Uncanny Flight",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "uncanny-flight",
@@ -9098,13 +9098,13 @@
           },
           {
             "id": "78ad22212357b0cb",
-            "abilityUuid": "Compendium.cypherv2.genre-abilities.Item.a4669c7063631702",
+            "abilityUuid": "Compendium.magnusarchives.genre-abilities.Item.a4669c7063631702",
             "minimumTier": 1,
             "catalog": "origin",
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Unyielding Shield",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "unyielding-shield",

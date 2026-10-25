@@ -17,7 +17,8 @@ function ability(allowedPools: readonly ("might" | "speed" | "intellect")[]): Ab
       rollModifier: 0,
       attackModifier: 0,
       damage: 4,
-      woundSeverity: "none",
+      damageEffect: "none",
+      stressAmount: 3,
       range: "long",
       targetMode: "single",
       description: ""
@@ -35,7 +36,7 @@ describe("Ability payment dialog", () => {
     vi.stubGlobal("foundry", {applications: {api: {DialogV2: {input}}}});
     vi.stubGlobal("game", {
       i18n: {localize: (key: string) => key, format: (key: string) => key},
-      cypherv2: {services: {abilities: {payCost}, abilityChat: {publishPayment}}}
+      magnusarchives: {services: {abilities: {payCost}, abilityChat: {publishPayment}}}
     });
     const actor = {id: "actor", name: "Arthur"} as CombatCharacterLike;
     await promptAbilityCostPayment(actor, ability(["might"]));
@@ -54,13 +55,13 @@ describe("Ability payment dialog", () => {
       expect(options.content).toContain('value="might"');
       expect(options.content).toContain('value="intellect"');
       expect(options.content).not.toContain('value="speed"');
-      expect(options.content).toContain("CYPHERV2.Ability.Payment.WholeCost");
+      expect(options.content).toContain("MAGNUSARCHIVES.Ability.Payment.WholeCost");
       return {pool: "intellect"};
     });
     vi.stubGlobal("foundry", {applications: {api: {DialogV2: {input}}}});
     vi.stubGlobal("game", {
       i18n: {localize: (key: string) => key, format: (key: string) => key},
-      cypherv2: {services: {abilities: {previewPayment, payCost}, abilityChat: {publishPayment}}}
+      magnusarchives: {services: {abilities: {previewPayment, payCost}, abilityChat: {publishPayment}}}
     });
     const actor = {id: "actor", name: "Arthur"} as CombatCharacterLike;
     await promptAbilityCostPayment(actor, ability(["might", "intellect"]));
@@ -74,7 +75,7 @@ describe("Ability payment dialog", () => {
     vi.stubGlobal("foundry", {applications: {api: {DialogV2: {input: vi.fn(async () => null)}}}});
     vi.stubGlobal("game", {
       i18n: {localize: (key: string) => key, format: (key: string) => key},
-      cypherv2: {services: {
+      magnusarchives: {services: {
         abilities: {previewPayment: vi.fn((_actor, _ability, pool) => ({pool, currentBefore: 10, edge: 0, costPaid: 7})), payCost},
         abilityChat: {publishPayment}
       }}

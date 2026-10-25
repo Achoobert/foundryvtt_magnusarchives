@@ -5,10 +5,10 @@ import {fileURLToPath} from "node:url";
 import {ABILITY_PACK_ID, FOCUS_PACK_ID} from "./focus-importer.mjs";
 
 export const REVIEWED_FOCUS_SCHEMA_VERSION = 1;
-export const SYSTEM_ABILITY_UUID_PREFIX = `Compendium.cypherv2.${ABILITY_PACK_ID}.Item.`;
+export const SYSTEM_ABILITY_UUID_PREFIX = `Compendium.magnusarchives.${ABILITY_PACK_ID}.Item.`;
 
 const LEGACY_WORKING_ABILITY_UUID_PATTERN = /^Compendium\.world\.focus-abilities-working\.Item\.([A-Za-z0-9]+)$/;
-const SYSTEM_ABILITY_UUID_PATTERN = /^Compendium\.cypherv2\.focus-abilities\.Item\.([A-Za-z0-9]+)$/;
+const SYSTEM_ABILITY_UUID_PATTERN = /^Compendium\.magnusarchives\.focus-abilities\.Item\.([A-Za-z0-9]+)$/;
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;
 
 export class ReviewedFocusValidationError extends Error {
@@ -74,7 +74,7 @@ export async function createReviewedFocusSource({focusDirectory, abilityDirector
       note: "Lossless reviewed Item documents; do not regenerate from content/foci/catalog.json."
     },
     target: {
-      systemId: "cypherv2",
+      systemId: "magnusarchives",
       focusPackId: FOCUS_PACK_ID,
       abilityPackId: ABILITY_PACK_ID
     },
@@ -130,7 +130,7 @@ export function validateReviewedFocusSource(source) {
     throw new ReviewedFocusValidationError(["Source root must be an object."]);
   }
   if (source.schemaVersion !== REVIEWED_FOCUS_SCHEMA_VERSION) errors.push(`schemaVersion must be ${REVIEWED_FOCUS_SCHEMA_VERSION}.`);
-  if (source.target?.systemId !== "cypherv2") errors.push("target.systemId must be 'cypherv2'.");
+  if (source.target?.systemId !== "magnusarchives") errors.push("target.systemId must be 'magnusarchives'.");
   if (source.target?.focusPackId !== FOCUS_PACK_ID) errors.push(`target.focusPackId must be '${FOCUS_PACK_ID}'.`);
   if (source.target?.abilityPackId !== ABILITY_PACK_ID) errors.push(`target.abilityPackId must be '${ABILITY_PACK_ID}'.`);
   if (!Array.isArray(source.foci)) errors.push("foci must be an array.");

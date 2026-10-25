@@ -96,6 +96,10 @@ export class WeaponDataModel extends ItemDataModelBase {
         max: integerField(),
         perAttack: integerField(1, 1)
       }),
+      // Assault rifles and submachine guns are rapid-fire weapons (p103-104).
+      rapidFire: new fields.BooleanField({required: true, nullable: false, initial: false}),
+      // Explosives hit every target in an area and always leave a mark (p100).
+      explosive: new fields.BooleanField({required: true, nullable: false, initial: false}),
       depletion: depletionRuleField(),
       depleted: new fields.BooleanField({required: true, nullable: false, initial: false}),
       equipped: new fields.BooleanField({required: true, nullable: false, initial: false})

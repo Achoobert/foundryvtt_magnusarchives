@@ -1,6 +1,6 @@
-![Cypher V2 for Foundry VTT](assets/cypherreadme.png)
+![The Magnus Archives for Foundry VTT](assets/magnusreadme.png)
 
-# Cypher V2 for Foundry VTT
+# The Magnus Archives for Foundry VTT
 
 > [!IMPORTANT]
 > ## AI-ASSISTED PROJECT
@@ -9,141 +9,150 @@
 > If you do not want to use software made with AI assistance, **do not use this system.**
 
 > [!WARNING]
-> ## PUBLIC BETA
-> **Cypher V2 is currently a BETA release.** Expect bugs, rough edges and changes while it is tested by real groups.
->
-> This beta includes reviewed system Compendiums, but it does not yet represent every Cypher rule or content category.
+> ## EARLY BETA
+> **Expect bugs, rough edges and changes.** Character types, foci and the Entities are not in the
+> compendiums yet — see [What is not here yet](#what-is-not-here-yet).
 
 > [!NOTE]
-> ## FORK & THANKS
-> **Cypher V2 is a fork of Marko's [Cypher System for Foundry VTT](https://github.com/mrkwnzl/cyphersystem-foundryvtt).**
+> ## FORKS & THANKS
+> This system is a fork of **SokK's [Cypher V2](https://github.com/SebsokK/cypherv2)**, which is itself
+> a fork of Marko's [Cypher System for Foundry VTT](https://github.com/mrkwnzl/cyphersystem-foundryvtt).
 >
-> A huge thank you to **Marko (mrkwnzl)** for the original system, and for all the hours of happiness I had using it to run **The Magnus Archives**. ❤️
+> Thank you to **Marko (mrkwnzl)** and **SokK** — this system exists because of their work. ❤️
 
-**Cypher V2** (`cypherv2`) is an unofficial Foundry VTT v14 game system for the new edition of Cypher, built around Foundry Application V2 with a modern, compact interface and a rules engine designed to guide play without over-enforcing it.
+**The Magnus Archives** (`magnusarchives`) is an unofficial Foundry VTT v14 game system for
+*The Magnus Archives Roleplaying Game*, built on Foundry Application V2 with a compact interface
+and a rules engine designed to guide play without over-enforcing it.
 
-![Cypher V2 character sheet](assets/cypher2screenshot.png)
+## How this differs from Cypher V2
+
+The Magnus Archives RPG uses the classic Cypher damage track rather than the new edition's Wounds,
+so the core health model here is different from its upstream:
+
+- **Stress** accumulates in points. Every 3 points is one Stress Level, and each Stress Level
+  hinders every task (p12).
+- **The damage track** runs Hale → Hurt → Impaired → Debilitated → Dead (p132). Hurt is an extra
+  step only some characters have — the Tough ability, the Never Says Die focus, or body armor.
+- **PCs never take Pool damage from an attack.** An attack gives them Stress, or a serious injury
+  that moves them one step down the track.
+- **Body armor has no damage-reduction value.** It grants the extra Hurt step and hinders every
+  Speed-based task (p100).
+- **Prices are categories, not currency** — inexpensive through priceless (p98).
+- Species and Genres are not Magnus concepts, and are not shipped.
 
 ## Features
 
 - **Foundry VTT v14** native system using Application V2 sheets.
-- Modern dark Cypher interface with character accent colors and accessibility-conscious presentation.
-- Character, NPC and Item sheets for Abilities, Skills, Weapons, Armor, Shields, Equipment, Cyphers, Artifacts, Descriptors, Types, Foci, Genres and Species.
+- Character and NPC sheets, and Item sheets for Abilities, Skills, Weapons, Armor, Equipment,
+  Cyphers, Artefacts, Descriptors and Types.
 - **Might, Speed and Intellect Pools**, Edge, Effort and derived package contributions.
-- **Wound system** with Minor, Moderate and Major Wounds, including Shield Wounds.
-- Recovery, Rest, Rally and Non-Rest Recovery workflows.
+- **Stress and the damage track**, with the impaired Effort surcharge applied to rolls automatically.
+- Recovery, Rest, Rally and Non-Rest Recovery workflows. Rest removes 3 points of Stress per hour.
 - Skills with quick rolls, configured rolls and mastery levels.
-- Shared Roll Dialog and detailed Roll Cards with Effort, modifiers, costs, natural results and attack damage breakdowns.
+- Shared Roll Dialog and detailed Roll Cards with Effort, modifiers, costs and natural results.
 - Hidden/unknown difficulty support for GM-facing NPC difficulties.
-- Weapons, Armor and Shields with familiarity, ammo and optional depletion rolls.
-- Dodge, Block and Block With Shield defense workflows.
-- Manual, player-driven **Combat Tracker** with drag-and-drop ordering and `DONE` turns instead of automated initiative rolls.
+- NPCs as the book writes them: a Level, a derived target number, and a list of Modifications.
+- Dodge and Block defense workflows, with the attack's effect on a PC declared up front.
+- Manual, player-driven **Combat Tracker** with drag-and-drop ordering and `DONE` turns.
 - GM Intrusions, Free GM Intrusions and Player Intrusions.
 - **Horror Mode** with a GM-controlled Intrusion Range from 1 to 20.
-- Descriptor, Type and Species package automation with provenance-aware grants and interactive choice dialogs.
-- Fixed and choice-based Pool bonuses, Skill grants, Ability grants and Edge choices.
-- Multiple Descriptors and multiple Foci per Character.
-- Focus progression graph, acquisition workflow and GM Focus Tree Editor.
-- Character Advancement with Tier progression and Resource Points.
-- Genre Ability catalogues and configurable Core/Unlimited total Effort cap.
+- Descriptor and Type package automation with provenance-aware grants and choice dialogs.
+- Character Advancement with Tier progression.
 - Native ProseMirror rich-text editing on Application V2 sheets.
-- Custom Cypher default Actor/Item artwork, pause screen, turn marker and no-Scene lobby artwork.
-- English interface and localization catalogue.
 
 ## Included compendiums
 
-The beta currently distributes seven system Compendiums:
+- **Descriptors** (`descriptors`) — the 27 descriptors from chapter 2
+- **Skills** (`skills`) — the 47 skills from the skill list, plus the three defense tasks
+- **Weapons & Armor** (`weapons-and-armors`) — the weapons from the price tables, and body armor
+- **Equipment** (`equipment`) — the rest of the price tables, by price category
+- **Cyphers** (`cyphers`) and **Cypher Tables** (`cypher-tables`) — carried over from Cypher V2
 
-- **Descriptors** (`descriptors`)
-- **Skills** (`skills`)
-- **Weapons & Armors** (`weapons-and-armors`)
-- **Foci** (`foci`)
-- **Focus Abilities** (`focus-abilities`)
-- **Cyphers** (`cyphers`)
-- **Cypher Tables** (`cypher-tables`)
+## What is not here yet
 
-These packs contain reviewed beta content. They are not a claim that every Cypher rule, option, or content category is complete.
+These are the next pieces of content, in order:
 
-## Beta status
+1. **Character types** — Investigator, Protector, Elocutionist, Occultist (chapter 3)
+2. **Foci** (chapter 4) and **becoming an Avatar** (p89)
+3. **Magnus cyphers** (chapter 6), replacing the Cypher V2 catalogue
+4. **NPCs and monsters** (FREE PREVIEW p15, chapter 12) and **artefacts** (chapter 13)
 
-This repository is being opened publicly so other GMs can test the system in real games and find the things its author and automated test suite did not.
-
-The current priority is **stability, feedback and continued content review**, not adding large new feature sets. Existing data structures and UI may still evolve during the beta.
-
-Bug reports and useful feedback are welcome through GitHub Issues. You can also find **SokK** on the **Cypher Unlimited Discord**.
-
-## Design philosophy
-
-Cypher V2 generally follows a **“Guide, Don’t Enforce”** approach. The system automates repetitive bookkeeping and exposes useful rules information, but deliberately leaves room for the GM and players to make decisions at the table instead of trying to encode every possible Cypher ruling.
-
-Some important principles:
-
-- Source data is kept separate from derived data.
-- Characters may own multiple Descriptors and multiple Foci.
-- Package bonuses are derived from attached package Items and retain provenance for safe removal/replacement.
-- NPCs use Health; Characters use Wounds.
-- Players roll defenses; NPC difficulty can remain hidden from public Chat data.
-- Hidden difficulties provide interface confidentiality, not hostile-client security.
-- The distributed product UI is English-only for now.
+The `types`, `type-abilities`, `foci`, `focus-abilities`, `species`, `genres` and `genre-abilities`
+content and importers are still in the repository, but those packs are not built or shipped: their
+Cypher content references skills that are not in the Magnus skill list.
 
 ## Development
 
 Requirements:
 
-- Node.js 22.13 or later.
-- pnpm 11.19.0 (the version pinned by the repository).
-- Foundry VTT 14.360 for runtime testing.
+- Node.js 22.13 or later
+- pnpm 11.19.0 (the version pinned by the repository)
+- Foundry VTT 14.360 for runtime testing
+- Docker, for the local Foundry container
 
 Install and verify:
 
 ```bash
 pnpm install
-pnpm check
+pnpm check          # typecheck + unit tests + build
 ```
 
-Useful commands:
+### Local Foundry loop
+
+Copy `fvtt.config.example.js` to `fvtt.config.js` and fill in your paths, then:
 
 ```bash
-pnpm dev
-pnpm typecheck
-pnpm test
-pnpm build
+pnpm build              # Vite bundle + compendium packs
+pnpm dev:world          # create the dev world
+pnpm dev:sync           # copy the system into Data/systems/magnusarchives
+pnpm test:quench:sync   # copy the Quench test module into Data/modules
+pnpm dev:seed           # enable Quench and set the dev GM password (Foundry must be stopped)
+pnpm watch              # vite build --watch + re-sync on every change
 ```
 
-`pnpm dev` rebuilds the bundle when TypeScript or SCSS files change. Foundry must be restarted or refreshed to load a newly built JavaScript bundle.
+`pnpm dev:seed` exists because Foundry v14 refuses to join a user with no password, so the dev
+world needs a known one for the Cypress suite. It writes directly to the world's LevelDB, so stop
+Foundry first.
 
-For architecture notes, see:
+### Tests
 
-- [Architecture decisions](docs/architecture/DECISIONS.md)
-- [Roll Engine](docs/architecture/ROLL-ENGINE.md)
-- [Combat Core](docs/architecture/COMBAT-CORE.md)
-- [Focus Tree](docs/architecture/FOCUS-TREE.md)
+| Command | What it runs |
+| --- | --- |
+| `pnpm test` | vitest unit tests |
+| `pnpm test:e2e` | Cypress against a live Foundry, including the Quench suite |
+| `pnpm test:e2e:open` | the same, in the Cypress UI |
 
-## Manual development installation
+Quench batches live in `tests/quench/` and run inside a live world. Cypress drives them and fails
+if the pass count is zero, because a broken `registerBatch` fails silently.
 
-Clone or copy the repository as `cypherv2` directly under the Foundry data directory:
+## Manual installation
+
+Clone or copy the repository as `magnusarchives` directly under the Foundry data directory:
 
 ```text
-Data/systems/cypherv2
+Data/systems/magnusarchives
 ```
 
-Then run the build if required and restart Foundry. The repository already tracks the generated `dist` bundle used by the system.
-
-For normal installation and updates, use the public manifest:
+Then run the build and restart Foundry. For normal installation and updates, use the manifest:
 
 ```text
-https://raw.githubusercontent.com/SebsokK/cypherv2/main/system.json
+https://raw.githubusercontent.com/Achoobert/foundryvtt_magnusarchives/main/system.json
 ```
 
 ## Content and licensing
 
-This is an **unofficial fan-made system** and is not an official Monte Cook Games or Foundry Virtual Tabletop product.
+This is an **unofficial fan-made system**. It is not an official Rusty Quill, Monte Cook Games or
+Foundry Virtual Tabletop product, and is not affiliated with any of them.
 
-This product is an independent production and is not affiliated with Monte Cook Games, LLC. It is published under the Cypher Open License, found at https://col.montecookgames.com.
+*The Magnus Archives* is co-created by Jonathan Sims and Alexander J Newall and distributed by
+Rusty Quill Ltd. The Magnus Archives Roleplaying Game is © 2024 Rusty Quill. Cypher System content
+is © 2024 Monte Cook Games, LLC, published under the Cypher Open License at
+https://col.montecookgames.com.
 
-The project code is MIT licensed. Monte Cook Games rules content is separately identified in the legal documentation and redistributed on the stated 2026 Cypher Reference Document / Cypher Open License basis. Third-party and project-specific assets are documented separately where provenance information is available.
+Rusty Quill's intellectual property is **not** covered by the Cypher Open License. Entity names,
+artefacts and podcast characters need separate permission before they are distributed here.
 
-See:
+The project code is MIT licensed. See:
 
 - [LICENSE.md](LICENSE.md)
 - [Content Sources](legal/CONTENT-SOURCES.md)

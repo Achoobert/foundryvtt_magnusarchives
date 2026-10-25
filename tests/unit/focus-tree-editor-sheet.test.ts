@@ -75,7 +75,7 @@ describe("Focus Tree Editor Item Sheet integration", () => {
     expect(template.match(/data-action="clearFocusConnections"/g)).toHaveLength(1);
     expect(template).toMatch(/data-action="saveFocusTree"[\s\S]*data-action="clearFocusConnections"[\s\S]*data-action="cancelFocusTree"/);
     expect(template).toMatch(/data-action="clearFocusConnections"[^>]*#unless focusEditor\.connections\.length|#unless focusEditor\.connections\.length[^>]*data-action="clearFocusConnections"/);
-    expect(tree).toContain("data-cypherv2-tooltip");
+    expect(tree).toContain("data-magnusarchives-tooltip");
     expect(tree).toContain("{{{node.descriptionHtml}}}");
     expect(tree).not.toMatch(/focus-tree-node-inspect[^>]*title=/);
   });

@@ -7,7 +7,7 @@
 ## Guarantees
 
 - Foundry Item documents use deterministic 16-character IDs and stable slugs.
-- Type grants target `Compendium.cypherv2.type-abilities.Item.<id>` identities.
+- Type grants target `Compendium.magnusarchives.type-abilities.Item.<id>` identities.
 - All direct Type Ability assignments are Tier 1.
 - No World, Working, test, or dangling Compendium references are allowed.
 - Origin Superhero Ability choices are intentionally absent; those belong to the future Genre Ability content phase.

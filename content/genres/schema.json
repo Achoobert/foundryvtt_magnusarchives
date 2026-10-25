@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/SebsokK/cypherv2/main/content/genres/schema.json",
+  "$id": "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/content/genres/schema.json",
   "title": "Cypher V2 candidate Genres",
   "type": "object",
   "additionalProperties": false,
@@ -24,7 +24,7 @@
       "type": "object",
       "required": ["systemId", "futurePackId", "abilityPackId"],
       "properties": {
-        "systemId": {"const": "cypherv2"},
+        "systemId": {"const": "magnusarchives"},
         "futurePackId": {"const": "genres"},
         "abilityPackId": {"const": "genre-abilities"}
       }
@@ -64,7 +64,7 @@
       "required": ["id", "abilityUuid", "minimumTier", "catalog", "minimumSuperheroRank", "snapshot"],
       "properties": {
         "id": {"$ref": "#/$defs/foundryId"},
-        "abilityUuid": {"type": "string", "pattern": "^Compendium\\.cypherv2\\.genre-abilities\\.Item\\.[A-Za-z0-9]{16}$"},
+        "abilityUuid": {"type": "string", "pattern": "^Compendium\\.magnusarchives\\.genre-abilities\\.Item\\.[A-Za-z0-9]{16}$"},
         "minimumTier": {"type": "integer", "minimum": 1, "maximum": 6},
         "catalog": {"enum": ["progression", "origin"]},
         "minimumSuperheroRank": {"type": "integer", "minimum": 0, "maximum": 5},

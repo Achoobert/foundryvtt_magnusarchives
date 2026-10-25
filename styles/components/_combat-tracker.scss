@@ -1,4 +1,4 @@
-.cypherv2-combat-tracker {
+.magnusarchives-combat-tracker {
   .combatant[draggable="true"] {
     cursor: grab;
 
@@ -7,11 +7,11 @@
     }
   }
 
-  .combatant.cypherv2-combatant-dragging {
+  .combatant.magnusarchives-combatant-dragging {
     opacity: 0.55;
   }
 
-  .combat-tracker .token-initiative.cypherv2-turn-action {
+  .combat-tracker .token-initiative.magnusarchives-turn-action {
     align-items: center;
     display: flex;
     flex: 0 0 3.4rem;
@@ -19,13 +19,13 @@
     min-width: 3.4rem;
   }
 
-  .combat-tracker .token-initiative button.cypherv2-done-control,
-  .combat-tracker .token-initiative .cypherv2-done-status {
+  .combat-tracker .token-initiative button.magnusarchives-done-control,
+  .combat-tracker .token-initiative .magnusarchives-done-status {
     align-items: center;
-    background: color-mix(in srgb, var(--cypherv2-danger) 16%, transparent);
-    border: 1px solid color-mix(in srgb, var(--cypherv2-danger) 62%, transparent);
+    background: color-mix(in srgb, var(--magnusarchives-danger) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--magnusarchives-danger) 62%, transparent);
     border-radius: 0.25rem;
-    color: var(--cypherv2-danger);
+    color: var(--magnusarchives-danger);
     display: inline-flex;
     font-size: var(--font-size-10, 0.625rem);
     font-weight: 700;
@@ -42,19 +42,19 @@
 
   }
 
-  .combat-tracker .token-initiative button.cypherv2-done-control {
+  .combat-tracker .token-initiative button.magnusarchives-done-control {
     cursor: pointer;
 
     &:hover,
     &:focus-visible {
-      background: color-mix(in srgb, var(--cypherv2-danger) 28%, transparent);
-      border-color: var(--cypherv2-danger);
-      box-shadow: 0 0 0.45rem color-mix(in srgb, var(--cypherv2-danger) 32%, transparent);
-      color: var(--cypherv2-text-primary);
+      background: color-mix(in srgb, var(--magnusarchives-danger) 28%, transparent);
+      border-color: var(--magnusarchives-danger);
+      box-shadow: 0 0 0.45rem color-mix(in srgb, var(--magnusarchives-danger) 32%, transparent);
+      color: var(--magnusarchives-text-primary);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--cypherv2-danger);
+      outline: 2px solid var(--magnusarchives-danger);
       outline-offset: 1px;
     }
 
@@ -64,9 +64,9 @@
     }
   }
 
-  .combat-tracker .token-initiative .cypherv2-done-status {
-    background: color-mix(in srgb, var(--cypherv2-danger) 9%, transparent);
-    border-color: color-mix(in srgb, var(--cypherv2-danger) 38%, transparent);
+  .combat-tracker .token-initiative .magnusarchives-done-status {
+    background: color-mix(in srgb, var(--magnusarchives-danger) 9%, transparent);
+    border-color: color-mix(in srgb, var(--magnusarchives-danger) 38%, transparent);
     cursor: default;
     opacity: 0.78;
     pointer-events: none;

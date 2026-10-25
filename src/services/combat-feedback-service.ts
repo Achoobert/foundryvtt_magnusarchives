@@ -1,4 +1,4 @@
-import type {WoundSeverity} from "../constants/system";
+import type {DamageTrackStep, WoundSeverity} from "../constants/system";
 import type {CombatTargetDocumentIdentity} from "../combat/combat-types";
 import type {NpcDamageApplication} from "./combat-service";
 
@@ -9,6 +9,8 @@ export interface CombatFeedbackTarget extends CombatTargetDocumentIdentity {
 export interface CombatFeedbackService {
   npcDamage(target: CombatFeedbackTarget, result: NpcDamageApplication): Promise<void>;
   characterWound(target: CombatFeedbackTarget, severity: WoundSeverity): Promise<void>;
+  characterStress?(target: CombatFeedbackTarget, points: number, level: number): Promise<void>;
+  characterSeriousInjury?(target: CombatFeedbackTarget, step: DamageTrackStep): Promise<void>;
   shieldWound?(
     target: CombatFeedbackTarget,
     shieldName: string,
@@ -63,14 +65,28 @@ export class TokenCombatFeedbackService implements CombatFeedbackService {
       await this.#show(target, `-${result.appliedDamage}`, "#ff5c5c");
     }
     if (result.previousHealth > 0 && result.health === 0) {
-      await this.#show(target, game.i18n.localize("CYPHERV2.Combat.Feedback.Dead"), "#ff3030");
+      await this.#show(target, game.i18n.localize("MAGNUSARCHIVES.Combat.Feedback.Dead"), "#ff3030");
     }
   }
 
   async characterWound(target: CombatFeedbackTarget, severity: WoundSeverity): Promise<void> {
-    await this.#show(target, game.i18n.format("CYPHERV2.Combat.Feedback.Wound", {
-      severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${severity}`)
+    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Wound", {
+      severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)
     }), "#ffb347");
+  }
+
+  async characterStress(target: CombatFeedbackTarget, points: number, level: number): Promise<void> {
+    if (points <= 0) return;
+    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Stress", {
+      points,
+      level
+    }), "#d6b24a");
+  }
+
+  async characterSeriousInjury(target: CombatFeedbackTarget, step: DamageTrackStep): Promise<void> {
+    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.SeriousInjury", {
+      step: game.i18n.localize(`MAGNUSARCHIVES.DamageTrack.${step}`)
+    }), step === "dead" ? "#ff3030" : "#ff5c5c");
   }
 
   async shieldWound(
@@ -80,10 +96,10 @@ export class TokenCombatFeedbackService implements CombatFeedbackService {
     broken: boolean
   ): Promise<void> {
     const text = broken
-      ? game.i18n.format("CYPHERV2.Shield.Feedback.Broken", {shield: shieldName})
-      : game.i18n.format("CYPHERV2.Shield.Feedback.Wound", {
+      ? game.i18n.format("MAGNUSARCHIVES.Shield.Feedback.Broken", {shield: shieldName})
+      : game.i18n.format("MAGNUSARCHIVES.Shield.Feedback.Wound", {
           shield: shieldName,
-          severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${severity}`)
+          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)
         });
     await this.#show(target, text, broken ? "#ff5c5c" : "#7dcfff");
   }

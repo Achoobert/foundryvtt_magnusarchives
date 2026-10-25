@@ -23,8 +23,8 @@ export class ThemeRegistry {
     if (this.#themes.has(id)) throw new Error(`Theme '${id}' is already registered.`);
     const properties = Object.freeze({...definition.properties});
     for (const name of Object.keys(properties)) {
-      if (!name.startsWith("--cypherv2-")) {
-        throw new Error(`Theme property '${name}' must use the --cypherv2- prefix.`);
+      if (!name.startsWith("--magnusarchives-")) {
+        throw new Error(`Theme property '${name}' must use the --magnusarchives- prefix.`);
       }
     }
     const normalized = Object.freeze({...definition, id, properties});
@@ -57,7 +57,7 @@ export class ThemeRegistry {
       target.style.setProperty(property, value);
       this.#appliedProperties.add(property);
     }
-    target.dataset.cypherv2Theme = theme.id;
+    target.dataset.magnusarchivesTheme = theme.id;
     return theme;
   }
 }

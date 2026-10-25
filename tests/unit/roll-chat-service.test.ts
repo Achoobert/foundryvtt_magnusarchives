@@ -14,7 +14,7 @@ import type {RollCharacterDocumentLike} from "../../src/services/roll-service";
 function context(difficulty: RollContext["difficulty"]): RollContext {
   return {
     actor: {id: "actor-1", name: "Ada"},
-    label: "CYPHERV2.Roll.TestRoll",
+    label: "MAGNUSARCHIVES.Roll.TestRoll",
     pool: "speed",
     difficulty,
     assets: 1,
@@ -146,7 +146,7 @@ describe("Roll Chat presentation", () => {
 
     expect(data).toMatchObject({
       presentation: "concealed",
-      outcome: "loc:CYPHERV2.Roll.Success",
+      outcome: "loc:MAGNUSARCHIVES.Roll.Success",
       showNaturalRoll: false,
       naturalRoll: null
     });
@@ -172,12 +172,12 @@ describe("Roll Chat presentation", () => {
 
     expect(data).toMatchObject({
       skillName: "Climbing",
-      skillRank: "loc:CYPHERV2.Skill.Ranks.specialized",
+      skillRank: "loc:MAGNUSARCHIVES.Skill.Ranks.specialized",
       naturalRoll: 19,
       poolCost: 2
     });
     expect(data.naturalEffects).toContainEqual(expect.objectContaining({
-      label: "loc:CYPHERV2.Roll.NaturalEffects.Minor"
+      label: "loc:MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
     }));
   });
 
@@ -230,7 +230,7 @@ describe("Roll Chat presentation", () => {
     expect(publicPayload).not.toHaveProperty("targetNumber");
     expect(publicPayload).toMatchObject({outcomeClass: "failure", beatsDifficulty: 6});
     expect(callAll).toHaveBeenCalledWith(
-      "cypherv2HiddenRollAudit",
+      "magnusarchivesHiddenRollAudit",
       expect.objectContaining({originalDifficulty: 7, finalDifficulty: 5, targetNumber: 15}),
       expect.anything(),
       expect.anything()

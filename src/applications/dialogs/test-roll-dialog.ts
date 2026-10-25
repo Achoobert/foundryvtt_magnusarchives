@@ -23,7 +23,7 @@ import {
 
 export function genericTaskRequest(data: RollDialogData): CharacterRollRequest {
   return {
-    label: "CYPHERV2.Roll.TaskRoll",
+    label: "MAGNUSARCHIVES.Roll.TaskRoll",
     pool: rollDialogText(data, "pool") as PoolKey,
     difficulty: rollDialogDifficulty(data),
     skillSteps: rollDialogNumber(data, "skillSteps"),
@@ -44,37 +44,37 @@ export async function promptTestRoll(
   selectedPool: PoolKey = "might"
 ): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
-  const policy = game.cypherv2.rules.resolveDifficultyPolicy(
+  const policy = game.magnusarchives.rules.resolveDifficultyPolicy(
     policyRequest.base,
     policyRequest.enabledRuleModuleIds ?? []
   );
   const settings = `
     ${difficultyFields(policy.difficultyCeiling, hiddenDifficultyEnabled())}
-    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}
       <select name="pool">${poolOptions(selectedPool)}</select>
     </label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}
       <select name="skillSteps">${skillRankOptions()}</select>
     </label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}
       <select name="assets">${selectOptions(policy.assetLimit)}</select>
     </label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}
       <select name="paidEffort">${selectOptions(actor.system.derived.effort.max)}</select>
     </label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}
       <input name="freeEffort" type="number" value="0" min="0" step="1">
     </label>
     ${situationalModifierFields()}`;
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Roll.TaskRoll"), resizable: true},
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Roll.TaskRoll"), resizable: true},
     position: {width: 800},
     content: rollDialogShell({
-      identity: `${actor.name} · ${game.i18n.localize("CYPHERV2.Roll.Task")}`,
+      identity: `${actor.name} · ${game.i18n.localize("MAGNUSARCHIVES.Roll.Task")}`,
       settings
     }),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Roll.Roll")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Roll.Roll")},
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       bindRollDialogPreview(dialog.element, {
         actor,
@@ -86,7 +86,7 @@ export async function promptTestRoll(
   if (!data) return;
 
   try {
-    const execution = await game.cypherv2.services.rolls.execute(
+    const execution = await game.magnusarchives.services.rolls.execute(
       actor,
       genericTaskRequest(data),
       policyRequest

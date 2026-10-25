@@ -50,7 +50,7 @@ export async function prepareCharacterGenreCompendiumIndexes(
     try {
       await packs.get(packId)?.getIndex({fields: [...GENRE_COMPENDIUM_INDEX_FIELDS]});
     } catch (error) {
-      warn(`cypherv2 | Could not enrich Genre Compendium index ${packId}`, error);
+      warn(`magnusarchives | Could not enrich Genre Compendium index ${packId}`, error);
     }
   }
   for (const actor of affected) actor.reset();

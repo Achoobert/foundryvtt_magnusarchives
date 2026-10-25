@@ -15,6 +15,6 @@ The importer validates source IDs, source ordering, manifestations, power classi
 
 It refuses every other destination. It does not read or write World compendiums and does not touch the Focus packs.
 
-Cypher rules remain descriptive. Catalog-only source distinctions such as the nonstandard marker and Power Boost classification are retained in tags and `flags.cypherv2.cypherImport` without extending the runtime DataModel.
+Cypher rules remain descriptive. Catalog-only source distinctions such as the nonstandard marker and Power Boost classification are retained in tags and `flags.magnusarchives.cypherImport` without extending the runtime DataModel.
 
 The supplied chapter excerpt does not contain its publication license notice. Resolve the `source-license` review issue before publicly redistributing the generated text.

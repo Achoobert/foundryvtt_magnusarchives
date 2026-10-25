@@ -4,7 +4,7 @@ import {
   showGmRollAuditEnabled
 } from "../../config/settings";
 import {gmIntrusionController} from "../../intrusions/gm-intrusion-controller";
-import type {DefenseType, WoundSeverity} from "../../constants/system";
+import type {CharacterDamageEffect, DefenseType} from "../../constants/system";
 import type {NpcTargetLike, WeaponItemLike} from "../../combat/combat-types";
 import type {
   CombatCharacterLike,
@@ -12,6 +12,7 @@ import type {
   WeaponAttackOptions,
   WeaponAttackOutcome
 } from "../../services/combat-service";
+import type {DefenseWoundResolution} from "../../services/combat-service";
 import type {SkillItemLike} from "../../services/skill-service";
 import {characterTargetFromToken} from "../../combat/combat-targets";
 import {
@@ -48,10 +49,10 @@ function skillOptions(actor: CombatCharacterLike, selectedValue = "manual:0"): s
     ? Number(selectedValue.slice(7))
     : null;
   return [
-    `<optgroup label="${game.i18n.localize("CYPHERV2.Roll.ManualSkillLevel")}">${skillRankOptions(manualSteps, "manual:")}</optgroup>`,
-    `<optgroup label="${game.i18n.localize("CYPHERV2.Skill.Title")}">`,
+    `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ManualSkillLevel")}">${skillRankOptions(manualSteps, "manual:")}</optgroup>`,
+    `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Skill.Title")}">`,
     ...skills(actor).map((skill) => (
-      `<option value="${skill.id}"${skill.id === selectedValue ? " selected" : ""}>${skill.name} — ${game.i18n.localize(`CYPHERV2.Skill.Ranks.${skill.system.rank}`)}</option>`
+      `<option value="${skill.id}"${skill.id === selectedValue ? " selected" : ""}>${skill.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`)}</option>`
     )),
     "</optgroup>"
   ].join("");
@@ -88,18 +89,18 @@ export async function promptNaturalAttackChoice(
   if (!available) return null;
   const natural = outcomes[0]?.execution.result.naturalRoll ?? 19;
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Combat.NaturalChoice.Title")},
-    content: `<div class="cypherv2-dialog-fields">
-      <p>${game.i18n.format("CYPHERV2.Combat.NaturalChoice.Prompt", {natural})}</p>
-      <label>${game.i18n.localize("CYPHERV2.Combat.NaturalChoice.Label")}
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Combat.NaturalChoice.Title")},
+    content: `<div class="magnusarchives-dialog-fields">
+      <p>${game.i18n.format("MAGNUSARCHIVES.Combat.NaturalChoice.Prompt", {natural})}</p>
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Combat.NaturalChoice.Label")}
         <select name="choice">
-          <option value="damage">${game.i18n.localize(natural === 19 ? "CYPHERV2.Roll.NaturalEffects.Damage19" : "CYPHERV2.Roll.NaturalEffects.Damage20")}</option>
-          <option value="effect">${game.i18n.localize(natural === 19 ? "CYPHERV2.Roll.NaturalEffects.Minor" : "CYPHERV2.Roll.NaturalEffects.Major")}</option>
+          <option value="damage">${game.i18n.localize(natural === 19 ? "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19" : "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20")}</option>
+          <option value="effect">${game.i18n.localize(natural === 19 ? "MAGNUSARCHIVES.Roll.NaturalEffects.Minor" : "MAGNUSARCHIVES.Roll.NaturalEffects.Major")}</option>
         </select>
       </label>
     </div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Apply")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")}
   }) as DialogData | null;
   if (!data) return "effect";
   return stringValue(data, "choice") === "damage" ? "damage" : "effect";
@@ -111,14 +112,14 @@ export async function promptWeaponAttack(
 ): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
-  const policy = game.cypherv2.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
-  const combatPolicy = game.cypherv2.services.combat.policy(enabled);
-  const targets = game.cypherv2.services.targets.nativeNpcTargets();
+  const policy = game.magnusarchives.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
+  const combatPolicy = game.magnusarchives.services.combat.policy(enabled);
+  const targets = game.magnusarchives.services.targets.nativeNpcTargets();
   const hasTargets = targets.length > 0;
   const targetContent = hasTargets
-    ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("CYPHERV2.Combat.Targets")}</strong><span>${targets.map((target) => target.name).join(", ")}</span><small>${game.i18n.localize("CYPHERV2.Combat.HiddenTargetDifficulty")}</small></div>`
+    ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Combat.Targets")}</strong><span>${targets.map((target) => target.name).join(", ")}</span><small>${game.i18n.localize("MAGNUSARCHIVES.Combat.HiddenTargetDifficulty")}</small></div>`
     : difficultyFields(policy.difficultyCeiling, true);
-  const defaultPool = game.cypherv2.services.combat.weaponAttackPool(weapon);
+  const defaultPool = game.magnusarchives.services.combat.weaponAttackPool(weapon);
   const defaultSkillValue = `manual:${skillRankSteps(weapon.system.skillLevel ?? "untrained")}`;
   const buildOptions = (data: RollDialogData): WeaponAttackOptions => {
     const selectedSkill = findSkill(actor, rollDialogText(data, "skillId"));
@@ -141,41 +142,41 @@ export async function promptWeaponAttack(
     };
   };
   const buildRequest = (data: RollDialogData) => {
-    const request = game.cypherv2.services.combat.buildWeaponAttackPlan(actor, weapon, buildOptions(data)).requests[0];
+    const request = game.magnusarchives.services.combat.buildWeaponAttackPlan(actor, weapon, buildOptions(data)).requests[0];
     if (!request) throw new Error("Weapon attack preview did not produce a roll request.");
     return request;
   };
-  const baseDamage = game.cypherv2.services.combat.weaponBaseDamage(weapon, combatPolicy);
+  const baseDamage = game.magnusarchives.services.combat.weaponBaseDamage(weapon, combatPolicy);
   const settings = `
     ${targetContent}
-    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${poolOptions(defaultPool)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${skillOptions(actor, defaultSkillValue)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${rollSelectOptions(policy.assetLimit)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Combat.DamageEffort")}<select name="damageEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}<select name="pool">${poolOptions(defaultPool)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillId">${skillOptions(actor, defaultSkillValue)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}<select name="assets">${rollSelectOptions(policy.assetLimit)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamageEffort")}<select name="damageEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}
-    ${weapon.system.attackType === "ranged" ? `<label class="roll-dialog-checkbox"><input name="extremeRange" type="checkbox"> ${game.i18n.localize("CYPHERV2.Combat.Weapon.ExtremeRange")}</label>` : ""}`;
+    ${weapon.system.attackType === "ranged" ? `<label class="roll-dialog-checkbox"><input name="extremeRange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</label>` : ""}`;
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: `${game.i18n.localize("CYPHERV2.Combat.Attack")}: ${weapon.name}`, resizable: true},
+    window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Combat.Attack")}: ${weapon.name}`, resizable: true},
     position: {width: 800},
     content: rollDialogShell({identity: weapon.name, settings, attackSummary: " "}),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Combat.Attack")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Attack")},
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       bindRollDialogPreview(dialog.element, {
         actor,
         policyRequest,
         buildRequest,
         attackSummary: (formData, prepared) => [
-          `<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Combat.BaseDamage")}</span><strong>${baseDamage}</strong></div>`,
-          `<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
-          ...((prepared.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`] : []),
-          `<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
-          `<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
-          ...(weapon.system.rangeCategory !== "immediate" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("CYPHERV2.Combat.Range.Label")}</span><strong>${game.i18n.localize(`CYPHERV2.Combat.Range.${weapon.system.rangeCategory}`)}</strong></div>`] : []),
-          ...(rollDialogText(formData, "extremeRange") === "true" || formData.extremeRange === true ? [`<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("CYPHERV2.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`] : [])
+          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${baseDamage}</strong></div>`,
+          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
+          ...((prepared.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`] : []),
+          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
+          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
+          ...(weapon.system.rangeCategory !== "immediate" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${weapon.system.rangeCategory}`)}</strong></div>`] : []),
+          ...(rollDialogText(formData, "extremeRange") === "true" || formData.extremeRange === true ? [`<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`] : [])
         ].join("")
       });
     }
@@ -183,20 +184,20 @@ export async function promptWeaponAttack(
   if (!data) return;
 
   try {
-    let outcomes = await game.cypherv2.services.combat.executeWeaponAttack(
+    let outcomes = await game.magnusarchives.services.combat.executeWeaponAttack(
       actor,
       weapon,
       buildOptions(data),
       policyRequest
     );
     const choice = await promptNaturalAttackChoice(outcomes);
-    if (choice) outcomes = game.cypherv2.services.combat.chooseAttackOutcomes(
+    if (choice) outcomes = game.magnusarchives.services.combat.chooseAttackOutcomes(
       outcomes,
       choice,
       enabled
     );
     for (const outcome of outcomes) {
-      await game.cypherv2.services.combatChat.publishWeaponAttack(
+      await game.magnusarchives.services.combatChat.publishWeaponAttack(
         actor,
         outcome,
         currentDifficultyVisibility(),
@@ -213,13 +214,17 @@ export async function promptWeaponAttack(
 export async function promptDefenseRoll(
   actor: CombatCharacterLike,
   defenseType: DefenseType,
-  request?: {readonly source: NpcTargetLike; readonly woundSeverity: WoundSeverity}
+  request?: {
+    readonly source: NpcTargetLike;
+    readonly effect: Exclude<CharacterDamageEffect, "none">;
+    readonly stressAmount: number;
+  }
 ): Promise<boolean> {
   if (defenseType === "blockWithShield") {
     try {
-      const shield = await game.cypherv2.services.shields.normalizeEquipped(actor);
-      if (!shield || game.cypherv2.services.shields.isBroken(shield)) {
-        ui.notifications.warn(game.i18n.localize("CYPHERV2.Shield.BlockUnavailable"));
+      const shield = await game.magnusarchives.services.shields.normalizeEquipped(actor);
+      if (!shield || game.magnusarchives.services.shields.isBroken(shield)) {
+        ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Shield.BlockUnavailable"));
         return false;
       }
     } catch (error) {
@@ -229,11 +234,11 @@ export async function promptDefenseRoll(
   }
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
-  const policy = game.cypherv2.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
+  const policy = game.magnusarchives.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
   const difficultyControl = request
-    ? `<div class="roll-dialog-context"><strong>${request.source.name} → ${actor.name}</strong><small>${game.i18n.localize("CYPHERV2.Combat.HiddenTargetDifficulty")}</small></div>`
+    ? `<div class="roll-dialog-context"><strong>${request.source.name} → ${actor.name}</strong><small>${game.i18n.localize("MAGNUSARCHIVES.Combat.HiddenTargetDifficulty")}</small></div>`
     : difficultyFields(policy.difficultyCeiling, true);
-  const defaultSkill = game.cypherv2.services.combat.applicableDefenseSkills(
+  const defaultSkill = game.magnusarchives.services.combat.applicableDefenseSkills(
     actor,
     defenseType,
     enabled
@@ -252,33 +257,33 @@ export async function promptDefenseRoll(
     };
   };
   const buildRequest = (data: RollDialogData) => request
-    ? game.cypherv2.services.combat.buildDefenseAgainstNpcRequest(
+    ? game.magnusarchives.services.combat.buildDefenseAgainstNpcRequest(
         actor,
         request.source,
         defenseType,
         buildOptions(data)
       )
-    : game.cypherv2.services.combat.buildDefenseRequest(actor, defenseType, {
+    : game.magnusarchives.services.combat.buildDefenseRequest(actor, defenseType, {
         ...buildOptions(data),
         difficulty: rollDialogDifficulty(data)
       });
   const settings = `
     ${difficultyControl}
-    <div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("CYPHERV2.Pools.Pool")}</strong><span>${game.i18n.localize(`CYPHERV2.Pools.${defaults.pool === "speed" ? "Speed" : "Might"}`)}</span></div>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillId">${skillOptions(actor, defaultSkill?.id)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${rollSelectOptions(policy.assetLimit)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
+    <div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}</strong><span>${game.i18n.localize(`MAGNUSARCHIVES.Pools.${defaults.pool === "speed" ? "Speed" : "Might"}`)}</span></div>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillId">${skillOptions(actor, defaultSkill?.id)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}<select name="assets">${rollSelectOptions(policy.assetLimit)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}`;
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize(`CYPHERV2.Combat.Defense.${defenseType}`), resizable: true},
+    window: {title: game.i18n.localize(`MAGNUSARCHIVES.Combat.Defense.${defenseType}`), resizable: true},
     position: {width: 800},
     content: rollDialogShell({
-      identity: game.i18n.localize(`CYPHERV2.Combat.Defense.${defenseType}`),
+      identity: game.i18n.localize(`MAGNUSARCHIVES.Combat.Defense.${defenseType}`),
       settings
     }),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Roll.Roll")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Roll.Roll")},
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       bindRollDialogPreview(dialog.element, {actor, policyRequest, buildRequest});
     }
@@ -287,22 +292,20 @@ export async function promptDefenseRoll(
 
   try {
     const requestData = buildRequest(data);
-    const execution = await game.cypherv2.services.rolls.execute(actor, requestData, policyRequest);
-    const woundResolution = request
-      ? await game.cypherv2.services.combat.resolveDefenseWound(
+    const execution = await game.magnusarchives.services.rolls.execute(actor, requestData, policyRequest);
+    const damageResolution = request
+      ? await game.magnusarchives.services.combat.resolveDefenseDamage(
           actor,
           execution.result,
           defenseType,
-          request.woundSeverity,
+          request.effect,
+          request.stressAmount,
           request.source,
           enabled
         )
       : null;
-    const resolvedConsequence = woundResolution ?? {
-      recipient: "none" as const,
-      severity: "none" as const
-    };
-    await game.cypherv2.services.combatChat.publishDefense(
+    const resolvedConsequence: DefenseWoundResolution = damageResolution ?? {recipient: "none"};
+    await game.magnusarchives.services.combatChat.publishDefense(
       actor,
       execution,
       resolvedConsequence,
@@ -325,21 +328,22 @@ export async function requestNpcAttack(source: NpcTargetLike): Promise<void> {
     .filter((actor): actor is Actor & import("../../combat/combat-types").CombatTargetDocumentIdentity => actor !== null)
     .map((actor) => actor as unknown as CombatCharacterLike);
   if (targets.length === 0) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.NoCharacterTargets"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.NoCharacterTargets"));
     return;
   }
   const allowed: DefenseType[] = [];
   if (source.system.damage.defense.allowBlock) allowed.push("block");
   if (source.system.damage.defense.allowDodge) allowed.push("dodge");
   if (allowed.length === 0) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.Combat.NoDefenseAllowed"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.NoDefenseAllowed"));
     return;
   }
   for (const target of targets) {
-    await game.cypherv2.services.combatChat.createDefenseRequest(
+    await game.magnusarchives.services.combatChat.createDefenseRequest(
       source,
       target,
-      source.system.damage.woundSeverity,
+      source.system.damage.effect === "none" ? "stress" : source.system.damage.effect,
+      source.system.damage.stressAmount,
       allowed
     );
   }

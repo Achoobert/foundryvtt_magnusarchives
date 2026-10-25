@@ -25,23 +25,23 @@ export const SETTING_KEYS = {
 
 export function registerSettings(themes: ThemeRegistry): void {
   game.settings.register(SYSTEM_ID, SETTING_KEYS.difficultyVisibility, {
-    name: "CYPHERV2.Settings.DifficultyVisibility.Name",
-    hint: "CYPHERV2.Settings.DifficultyVisibility.Hint",
+    name: "MAGNUSARCHIVES.Settings.DifficultyVisibility.Name",
+    hint: "MAGNUSARCHIVES.Settings.DifficultyVisibility.Hint",
     scope: "world",
     // Legacy compatibility only. Roll cards now have fixed, unambiguous disclosure rules.
     config: false,
     type: String,
     choices: {
-      full: "CYPHERV2.Settings.DifficultyVisibility.Full",
-      resultOnly: "CYPHERV2.Settings.DifficultyVisibility.ResultOnly",
-      rollOnly: "CYPHERV2.Settings.DifficultyVisibility.RollOnly"
+      full: "MAGNUSARCHIVES.Settings.DifficultyVisibility.Full",
+      resultOnly: "MAGNUSARCHIVES.Settings.DifficultyVisibility.ResultOnly",
+      rollOnly: "MAGNUSARCHIVES.Settings.DifficultyVisibility.RollOnly"
     },
     default: "full"
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.showGmRollAudit, {
-    name: "CYPHERV2.Settings.ShowGmRollAudit.Name",
-    hint: "CYPHERV2.Settings.ShowGmRollAudit.Hint",
+    name: "MAGNUSARCHIVES.Settings.ShowGmRollAudit.Name",
+    hint: "MAGNUSARCHIVES.Settings.ShowGmRollAudit.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -49,8 +49,8 @@ export function registerSettings(themes: ThemeRegistry): void {
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.defaultDifficultyCeiling, {
-    name: "CYPHERV2.Settings.DifficultyCeiling.Name",
-    hint: "CYPHERV2.Settings.DifficultyCeiling.Hint",
+    name: "MAGNUSARCHIVES.Settings.DifficultyCeiling.Name",
+    hint: "MAGNUSARCHIVES.Settings.DifficultyCeiling.Hint",
     scope: "world",
     config: true,
     type: Number,
@@ -59,8 +59,8 @@ export function registerSettings(themes: ThemeRegistry): void {
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.interfaceHiddenDifficulty, {
-    name: "CYPHERV2.Settings.HiddenDifficulty.Name",
-    hint: "CYPHERV2.Settings.HiddenDifficulty.Hint",
+    name: "MAGNUSARCHIVES.Settings.HiddenDifficulty.Name",
+    hint: "MAGNUSARCHIVES.Settings.HiddenDifficulty.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -75,8 +75,8 @@ export function registerSettings(themes: ThemeRegistry): void {
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.debugRules, {
-    name: "CYPHERV2.Settings.DebugRules.Name",
-    hint: "CYPHERV2.Settings.DebugRules.Hint",
+    name: "MAGNUSARCHIVES.Settings.DebugRules.Name",
+    hint: "MAGNUSARCHIVES.Settings.DebugRules.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -91,8 +91,8 @@ export function registerSettings(themes: ThemeRegistry): void {
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.theme, {
-    name: "CYPHERV2.Settings.Theme.Name",
-    hint: "CYPHERV2.Settings.Theme.Hint",
+    name: "MAGNUSARCHIVES.Settings.Theme.Name",
+    hint: "MAGNUSARCHIVES.Settings.Theme.Hint",
     scope: "world",
     config: true,
     type: String,
@@ -102,8 +102,8 @@ export function registerSettings(themes: ThemeRegistry): void {
   });
 
   game.settings.register(SYSTEM_ID, SETTING_KEYS.horrorIntrusionRange, {
-    name: "CYPHERV2.Horror.SettingName",
-    hint: "CYPHERV2.Horror.SettingHint",
+    name: "MAGNUSARCHIVES.Horror.SettingName",
+    hint: "MAGNUSARCHIVES.Horror.SettingHint",
     scope: "world",
     config: false,
     type: Number,
@@ -114,7 +114,7 @@ export function registerSettings(themes: ThemeRegistry): void {
       step: 1
     },
     onChange: (range: number) => Hooks.callAll(
-      "cypherv2HorrorIntrusionRangeChanged",
+      "magnusarchivesHorrorIntrusionRangeChanged",
       normalizeHorrorIntrusionRange(range)
     )
   });
@@ -126,7 +126,7 @@ export function registerSettings(themes: ThemeRegistry): void {
     config: false,
     type: Array,
     default: [],
-    onChange: (records: unknown) => Hooks.callAll("cypherv2IntrusionPendingChanged", records)
+    onChange: (records: unknown) => Hooks.callAll("magnusarchivesIntrusionPendingChanged", records)
   });
 }
 
@@ -171,9 +171,9 @@ export function currentHorrorIntrusionRange(): number {
 }
 
 export async function setHorrorIntrusionRange(range: number): Promise<number> {
-  if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.GMOnly"));
+  if (!game.user.isGM) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.GMOnly"));
   if (!isValidHorrorIntrusionRange(range)) {
-    throw new Error(game.i18n.localize("CYPHERV2.Horror.Errors.InvalidRange"));
+    throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.InvalidRange"));
   }
   await game.settings.set(SYSTEM_ID, SETTING_KEYS.horrorIntrusionRange, range);
   return range;

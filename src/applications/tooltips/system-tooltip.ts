@@ -37,7 +37,7 @@ export class SystemTooltip {
     const showFromEvent = (event: Event): void => {
       const eventTarget = event.target;
       if (!(eventTarget instanceof Element)) return;
-      const target = eventTarget.closest<HTMLElement>("[data-cypherv2-tooltip]");
+      const target = eventTarget.closest<HTMLElement>("[data-magnusarchives-tooltip]");
       if (!target || !root.contains(target)) return;
       this.#show(target);
     };
@@ -78,13 +78,13 @@ export class SystemTooltip {
     if (this.#target === target && this.#tooltip) return;
     this.hide();
     const template = target.parentElement?.querySelector<HTMLTemplateElement>(
-      ":scope > .cypherv2-tooltip-template"
+      ":scope > .magnusarchives-tooltip-template"
     );
     if (!template) return;
 
     const tooltip = target.ownerDocument.createElement("div");
-    tooltip.className = "cypherv2-system-tooltip";
-    tooltip.id = target.getAttribute("aria-describedby") ?? `cypherv2-tooltip-${crypto.randomUUID()}`;
+    tooltip.className = "magnusarchives-system-tooltip";
+    tooltip.id = target.getAttribute("aria-describedby") ?? `magnusarchives-tooltip-${crypto.randomUUID()}`;
     tooltip.role = "tooltip";
     tooltip.append(template.content.cloneNode(true));
     target.ownerDocument.body.append(tooltip);

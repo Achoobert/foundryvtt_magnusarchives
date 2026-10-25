@@ -41,14 +41,15 @@ describe("Item Send to Chat", () => {
     ["equipment", {quantity: 2, description: "<p>@UUID[Item.rope]</p>"}],
     ["cypher", {manifestation: "subtle", power: "advanced", form: "injector", description: "<p>Cypher</p>"}],
     ["artifact", {level: "1d6+2", depleted: false, depletion: {enabled: true, formula: "1d100", threshold: 1}, description: "<p>Artifact</p>"}],
-    ["ability", {activation: "action", pool: "might", cost: {amount: 2, ignoresEdge: false, allowedPools: ["might"]}, roll: "task", damage: 0, woundSeverity: "none", range: "", description: "<p>Ability</p>"}],
+    ["ability", {activation: "action", pool: "might", cost: {amount: 2, ignoresEdge: false, allowedPools: ["might"]}, roll: "task", damage: 0, damageEffect: "none",
+ stressAmount: 3, range: "", description: "<p>Ability</p>"}],
     ["weapon", {category: "medium", attackType: "ranged", rangeCategory: "long", baseDamage: 5, description: "<p>Weapon</p>"}],
     ["shield", {equipped: true, wounds: {minor: [], moderate: [], major: []}, derived: {capacities: {minor: 3, moderate: 2, major: 1}, broken: false}, description: "<p>Shield</p>"}],
     ["armor", {category: "light", equipped: true, description: "<p>Armor</p>"}]
   ])("publishes an enriched %s card without executing the Item", async (type, system) => {
     await new ItemChatService().publish(item(type, system));
     expect(renderTemplate).toHaveBeenCalledWith(
-      "systems/cypherv2/templates/chat/item-card.hbs",
+      "systems/magnusarchives/templates/chat/item-card.hbs",
       expect.objectContaining({itemName: `Test ${type}`, enrichedDescription: expect.stringContaining("<enriched>")})
     );
     expect(create).toHaveBeenCalledOnce();
@@ -62,8 +63,8 @@ describe("Item Send to Chat", () => {
       levelOverride: false
     }));
     expect(properties).toEqual(expect.arrayContaining([
-      {label: "CYPHERV2.Cypher.Power.Label", value: "CYPHERV2.Cypher.Power.ultra"},
-      {label: "CYPHERV2.Inventory.Level", value: 6}
+      {label: "MAGNUSARCHIVES.Cypher.Power.Label", value: "MAGNUSARCHIVES.Cypher.Power.ultra"},
+      {label: "MAGNUSARCHIVES.Inventory.Level", value: 6}
     ]));
   });
 
@@ -79,21 +80,21 @@ describe("Item Send to Chat", () => {
     expect(itemChatProperties(item("weapon", {
       category: "medium", attackType: "ranged", rangeCategory: "long", baseDamage: 5
     }))).toEqual([
-      {label: "CYPHERV2.Combat.Category", value: "CYPHERV2.Combat.Weapon.Category.medium"},
-      {label: "CYPHERV2.Combat.Damage", value: 5},
-      {label: "CYPHERV2.Combat.Weapon.AttackType.Label", value: "CYPHERV2.Combat.Weapon.AttackType.ranged"},
-      {label: "CYPHERV2.Combat.Range.Label", value: "CYPHERV2.Combat.Range.long"}
+      {label: "MAGNUSARCHIVES.Combat.Category", value: "MAGNUSARCHIVES.Combat.Weapon.Category.medium"},
+      {label: "MAGNUSARCHIVES.Combat.Damage", value: 5},
+      {label: "MAGNUSARCHIVES.Combat.Weapon.AttackType.Label", value: "MAGNUSARCHIVES.Combat.Weapon.AttackType.ranged"},
+      {label: "MAGNUSARCHIVES.Combat.Range.Label", value: "MAGNUSARCHIVES.Combat.Range.long"}
     ]);
     expect(itemChatProperties(item("shield", {
       equipped: true,
       wounds: {minor: [{}], moderate: [], major: []},
       derived: {capacities: {minor: 3, moderate: 2, major: 1}, broken: false}
     }))).toEqual(expect.arrayContaining([
-      {label: "CYPHERV2.Shield.Status", value: "CYPHERV2.Shield.Functional"},
-      {label: "CYPHERV2.Shield.WoundTrack", value: "1/3 · 0/2 · 0/1"}
+      {label: "MAGNUSARCHIVES.Shield.Status", value: "MAGNUSARCHIVES.Shield.Functional"},
+      {label: "MAGNUSARCHIVES.Shield.WoundTrack", value: "1/3 · 0/2 · 0/1"}
     ]));
     expect(itemChatProperties(item("armor", {category: "heavy", equipped: false})))
-      .toContainEqual({label: "CYPHERV2.Combat.Category", value: "CYPHERV2.Combat.Armor.Category.heavy"});
+      .toContainEqual({label: "MAGNUSARCHIVES.Combat.Category", value: "MAGNUSARCHIVES.Combat.Armor.Category.heavy"});
   });
 
   it("omits genuinely empty optional properties before rendering", () => {
@@ -103,11 +104,12 @@ describe("Item Send to Chat", () => {
       cost: {amount: 0, ignoresEdge: false, allowedPools: []},
       roll: "none",
       damage: 0,
-      woundSeverity: "none",
+      damageEffect: "none",
+      stressAmount: 3,
       range: ""
     }));
     expect(properties.some(({label, value}) => !label.trim() || (typeof value === "string" && !value.trim()))).toBe(false);
-    expect(properties.map(({label}) => label)).not.toContain("CYPHERV2.Combat.Range.Label");
+    expect(properties.map(({label}) => label)).not.toContain("MAGNUSARCHIVES.Combat.Range.Label");
   });
 
   it("keeps Ability Send to Chat descriptive with only a natural cost reference", () => {
@@ -117,14 +119,15 @@ describe("Item Send to Chat", () => {
       cost: {amount: 3, ignoresEdge: false, allowedPools: ["might", "speed", "intellect"]},
       roll: "attack",
       damage: 9,
-      woundSeverity: "major",
+      damageEffect: "seriousInjury",
+      stressAmount: 3,
       range: "long"
     }));
     expect(properties).toEqual([{
-      label: "CYPHERV2.Ability.Cost",
-      value: "3 CYPHERV2.Pools.MightCYPHERV2.Ability.CostDisplay.SeparatorCYPHERV2.Pools.SpeedCYPHERV2.Ability.CostDisplay.FinalOrCYPHERV2.Pools.Intellect"
+      label: "MAGNUSARCHIVES.Ability.Cost",
+      value: "3 MAGNUSARCHIVES.Pools.MightMAGNUSARCHIVES.Ability.CostDisplay.SeparatorMAGNUSARCHIVES.Pools.SpeedMAGNUSARCHIVES.Ability.CostDisplay.FinalOrMAGNUSARCHIVES.Pools.Intellect"
     }]);
-    expect(properties.map(({label}) => label)).not.toContain("CYPHERV2.Ability.Roll.Label");
+    expect(properties.map(({label}) => label)).not.toContain("MAGNUSARCHIVES.Ability.Roll.Label");
     expect(itemChatProperties(item("ability", {
       cost: {amount: 0, ignoresEdge: false, allowedPools: []}, pool: "none"
     }))).toEqual([]);
@@ -132,18 +135,18 @@ describe("Item Send to Chat", () => {
       pool: "intellect",
       cost: {amount: 2, scalable: true, ignoresEdge: false, allowedPools: ["intellect"]}
     }))).toEqual([{
-      label: "CYPHERV2.Ability.Cost",
-      value: "2+ CYPHERV2.Pools.Intellect"
+      label: "MAGNUSARCHIVES.Ability.Cost",
+      value: "2+ MAGNUSARCHIVES.Pools.Intellect"
     }]);
   });
 
   it("renders every supported Item family through the common readable card structure", () => {
     const template = readFileSync("templates/chat/item-card.hbs", "utf8");
     const styles = readFileSync("styles/components/_roll-card.scss", "utf8");
-    expect(template).toContain("cypherv2-chat-card");
+    expect(template).toContain("magnusarchives-chat-card");
     expect(template).toContain('class="item-card-properties"');
-    expect(styles).toMatch(/\.item-card-properties[\s\S]*dt[\s\S]*var\(--cypherv2-text-muted\)/);
-    expect(styles).toMatch(/\.item-card-properties[\s\S]*dd[\s\S]*var\(--cypherv2-text-primary\)/);
+    expect(styles).toMatch(/\.item-card-properties[\s\S]*dt[\s\S]*var\(--magnusarchives-text-muted\)/);
+    expect(styles).toMatch(/\.item-card-properties[\s\S]*dd[\s\S]*var\(--magnusarchives-text-primary\)/);
   });
 
   it("uses an embedded Actor watermark and leaves a world Item card unwatermarked", async () => {

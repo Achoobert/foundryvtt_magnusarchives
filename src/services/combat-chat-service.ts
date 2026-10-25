@@ -1,4 +1,4 @@
-import type {DefenseType, WoundSeverity} from "../constants/system";
+import type {CharacterDamageEffect, DefenseType} from "../constants/system";
 import type {DefenseRequestData, RollChatCombatPresentation} from "../combat/combat-chat-types";
 import {actionTargetIdentity} from "../combat/combat-chat-types";
 import {combatTargetIdentity, type NpcTargetLike} from "../combat/combat-types";
@@ -31,19 +31,19 @@ export class CombatChatService {
       ...(damageCanBePresented ? {
         damage: outcome.grossDamage,
         damageBreakdown: [
-          {label: "CYPHERV2.Combat.DamageBreakdown.Category", value: outcome.categoryDamage},
+          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: outcome.categoryDamage},
           ...(outcome.weaponBonusDamage === 0 ? [] : [{
-            label: "CYPHERV2.Combat.DamageBreakdown.WeaponBonus",
+            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.WeaponBonus",
             value: outcome.weaponBonusDamage,
             additive: true
           }]),
           ...(outcome.effortDamage === 0 ? [] : [{
-            label: "CYPHERV2.Combat.DamageBreakdown.Effort",
+            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort",
             value: outcome.effortDamage,
             additive: true
           }]),
           ...(outcome.naturalDamage === 0 ? [] : [{
-            label: "CYPHERV2.Combat.DamageBreakdown.Natural",
+            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
             value: outcome.naturalDamage,
             additive: true
           }])
@@ -69,31 +69,32 @@ export class CombatChatService {
     visibility: DifficultyVisibility,
     showGmAudit = false,
   ): Promise<void> {
-    const woundSeverity = resolution.recipient === "character" ? resolution.severity : "none";
     const targetIdentity = actionTargetIdentity(targetIdentityFromDocument(actor));
     const sourceData = source ? {sourceActorId: source.id, sourceName: source.name} : {};
     const combat: RollChatCombatPresentation = {
-      ...(woundSeverity === "none" ? {} : {
-        woundSeverity,
+      ...(resolution.recipient === "character" ? {
+        damageEffect: resolution.effect,
+        stressAmount: resolution.stressAmount,
         action: {
-          kind: "characterWound" as const,
+          kind: "characterDamage" as const,
           ...targetIdentity,
-          severity: woundSeverity,
+          effect: resolution.effect,
+          stressAmount: resolution.stressAmount,
           ...sourceData,
           applied: false
         }
-      }),
-      ...(resolution.recipient === "shield" && resolution.shieldId && resolution.shieldName ? {
+      } : {}),
+      ...(resolution.recipient === "shield" ? {
         shieldTransfer: {
           shieldName: resolution.shieldName,
-          severity: resolution.severity as WoundSeverity
+          severity: resolution.severity
         },
         action: {
           kind: "shieldWound" as const,
           ...targetIdentity,
           shieldId: resolution.shieldId,
           shieldName: resolution.shieldName,
-          severity: resolution.severity as WoundSeverity,
+          severity: resolution.severity,
           ...sourceData,
           applied: false
         }
@@ -105,7 +106,8 @@ export class CombatChatService {
   async createDefenseRequest(
     source: NpcTargetLike,
     target: CombatCharacterLike,
-    woundSeverity: WoundSeverity,
+    effect: Exclude<CharacterDamageEffect, "none">,
+    stressAmount: number,
     allowedDefenses: readonly DefenseType[]
   ): Promise<void> {
     const sourceIdentity = combatTargetIdentity(source);
@@ -127,17 +129,19 @@ export class CombatChatService {
       ...(targetIdentity.tokenId ? {targetTokenId: targetIdentity.tokenId} : {}),
       ...(targetIdentity.tokenUuid ? {targetTokenUuid: targetIdentity.tokenUuid} : {}),
       targetName: target.name,
-      woundSeverity,
+      effect,
+      stressAmount,
       allowedDefenses: defenses,
       resolved: false
     };
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/defense-request-card.hbs",
+      "systems/magnusarchives/templates/chat/defense-request-card.hbs",
       {
         sourceName: source.name,
         ...chatCardActorImageData(source as unknown as import("./chat-card-presentation").ChatCardActorLike),
         targetName: target.name,
-        woundSeverity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${woundSeverity}`),
+        damageEffect: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${effect}`),
+        stressAmount: effect === "stress" ? stressAmount : 0,
         allowBlock: defenses.includes("block"),
         allowBlockWithShield: defenses.includes("blockWithShield"),
         allowDodge: defenses.includes("dodge")
@@ -146,7 +150,7 @@ export class CombatChatService {
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({actor: source as unknown as Actor}),
       content,
-      flags: {cypherv2: {defenseRequest: request}}
+      flags: {magnusarchives: {defenseRequest: request}}
     });
   }
 }

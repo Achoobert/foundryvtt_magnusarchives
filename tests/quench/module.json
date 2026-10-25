@@ -1,0 +1,32 @@
+{
+  "id": "magnusarchives-quench-tests",
+  "title": "Magnus Archives Quench Tests",
+  "description": "Development-only Quench batches for the Magnus Archives system. Not for distribution.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.360"
+  },
+  "authors": [
+    {
+      "name": "Magnus Archives Contributors"
+    }
+  ],
+  "esmodules": ["module.js"],
+  "relationships": {
+    "requires": [
+      {
+        "id": "magnusarchives",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.1.0"
+        }
+      },
+      {
+        "id": "quench",
+        "type": "module"
+      }
+    ]
+  },
+  "socket": false
+}

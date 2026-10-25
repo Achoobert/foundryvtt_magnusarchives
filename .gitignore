@@ -19,3 +19,13 @@ packs/focus-abilities/
 packs/foci/
 packs/cyphers/
 packs/cypher-tables/
+
+# Local Foundry dev config (copy fvtt.config.example.js)
+/fvtt.config.js
+/local_scripts/
+
+# Cypress artifacts
+tests/e2e/cypress/videos/
+tests/e2e/cypress/screenshots/
+tests/e2e/cypress/downloads/
+packs/equipment/

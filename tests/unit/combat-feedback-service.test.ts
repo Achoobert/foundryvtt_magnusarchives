@@ -19,7 +19,7 @@ describe("Token combat feedback", () => {
     vi.stubGlobal("CONST", {TEXT_ANCHOR_POINTS: {CENTER: 0, TOP: 1}});
     vi.stubGlobal("game", {
       i18n: {
-        localize: (key: string) => key === "CYPHERV2.Combat.Feedback.Dead" ? "DEAD" : key,
+        localize: (key: string) => key === "MAGNUSARCHIVES.Combat.Feedback.Dead" ? "DEAD" : key,
         format: (key: string) => key
       }
     });

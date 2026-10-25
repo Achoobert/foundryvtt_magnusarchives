@@ -26,8 +26,8 @@ describe("Grant Conflict Resolver UI", () => {
 
   it("scopes its visual integration to the Theme Registry variables", () => {
     const styles = readFileSync(resolve(root, "styles/sheets/_sheets.scss"), "utf8");
-    expect(styles).toContain(".cypherv2.grant-conflict-dialog");
-    expect(styles).toContain("var(--cypherv2-color-surface)");
-    expect(styles).toContain("var(--cypherv2-color-border)");
+    expect(styles).toContain(".magnusarchives.grant-conflict-dialog");
+    expect(styles).toContain("var(--magnusarchives-color-surface)");
+    expect(styles).toContain("var(--magnusarchives-color-border)");
   });
 });

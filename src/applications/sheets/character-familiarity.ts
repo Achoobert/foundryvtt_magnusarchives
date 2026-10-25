@@ -48,13 +48,13 @@ export async function removeManualWeaponFamily(actor: FamiliarityActorLike, valu
 
 export async function promptAddManualWeaponFamily(actor: FamiliarityActorLike): Promise<void> {
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Settings.Character.AddWeaponFamily")},
-    content: `<div class="cypherv2 cypherv2-dialog"><label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Settings.Character.WeaponFamily")}
-      <input name="family" type="text" list="cypherv2-character-weapon-families" required autofocus>
-      <datalist id="cypherv2-character-weapon-families">${BUILT_IN_WEAPON_FAMILIES.map((family) => `<option value="${weaponFamilyLabel(family)}"></option>`).join("")}</datalist>
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Settings.Character.AddWeaponFamily")},
+    content: `<div class="magnusarchives magnusarchives-dialog"><label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Settings.Character.WeaponFamily")}
+      <input name="family" type="text" list="magnusarchives-character-weapon-families" required autofocus>
+      <datalist id="magnusarchives-character-weapon-families">${BUILT_IN_WEAPON_FAMILIES.map((family) => `<option value="${weaponFamilyLabel(family)}"></option>`).join("")}</datalist>
     </label></div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
   }) as Record<string, unknown> | null;
   if (data) await addManualWeaponFamily(actor, data.family);
 }

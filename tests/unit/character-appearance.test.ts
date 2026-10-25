@@ -56,7 +56,7 @@ describe("Character Header appearance", () => {
     expect(theme).toMatchObject({hasBackgroundImage: false, hasCharacterColor: false, isTheme: true});
     expect(portrait).toMatchObject({backgroundImage: "/foundry/portrait.webp", hasBackgroundImage: true, isPortrait: true});
     expect(custom).toMatchObject({backgroundImage: "/foundry/custom.webp", hasBackgroundImage: true, isCustom: true});
-    expect(custom.style).toContain("--cypherv2-character-background-image");
+    expect(custom.style).toContain("--magnusarchives-character-background-image");
   });
 
   it("resolves a Custom Image containing spaces from the Foundry Data route", () => {
@@ -70,7 +70,7 @@ describe("Character Header appearance", () => {
     expect(appearance.customImage).toBe(storedPath);
     expect(appearance.backgroundImage).toBe(`/foundry/${storedPath}`);
     expect(appearance.style).toContain(`url("/foundry/${storedPath}")`);
-    expect(appearance.style).not.toContain("systems/cypherv2/dist/");
+    expect(appearance.style).not.toContain("systems/magnusarchives/dist/");
   });
 
   it("resolves Character Portrait from Actor.img without double-encoding it", () => {
@@ -84,7 +84,7 @@ describe("Character Header appearance", () => {
     expect(appearance.backgroundImage).toBe(`/foundry/${portraitPath}`);
     expect(appearance.style).toContain(`url("/foundry/${portraitPath}")`);
     expect(appearance.style).not.toContain("%2520");
-    expect(appearance.style).not.toContain("systems/cypherv2/dist/");
+    expect(appearance.style).not.toContain("systems/magnusarchives/dist/");
   });
 
   it("preserves already absolute asset URLs", () => {
@@ -118,9 +118,9 @@ describe("Character Header appearance", () => {
 
   it("keeps image readability and identity accents scoped to the Character Header", () => {
     expect(styles).toContain("&.has-header-background");
-    expect(styles).toContain("color-mix(in srgb, var(--cypherv2-character-tint) 94%, transparent)");
+    expect(styles).toContain("color-mix(in srgb, var(--magnusarchives-character-tint) 94%, transparent)");
     expect(styles).toContain("background-size: cover");
     expect(styles).toContain("&.has-character-color");
-    expect(styles).not.toMatch(/\.roll-card|cypherv2-chat-card/);
+    expect(styles).not.toMatch(/\.roll-card|magnusarchives-chat-card/);
   });
 });

@@ -333,11 +333,13 @@ export function validateFocusImportSource(catalog) {
 }
 
 export function stableDocumentId(kind, sourceId) {
+  // Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+  // generated document _id and breaks ~4,000 @UUID cross-references in content/.
   return createHash("sha256").update(`cypherv2\u0000${kind}\u0000${sourceId}`).digest("hex").slice(0, 16);
 }
 
 export function abilityCompendiumUuid(abilityId) {
-  return `Compendium.cypherv2.${ABILITY_PACK_ID}.Item.${stableDocumentId("ability", abilityId)}`;
+  return `Compendium.magnusarchives.${ABILITY_PACK_ID}.Item.${stableDocumentId("ability", abilityId)}`;
 }
 
 function emptyProvenance() {
@@ -423,13 +425,13 @@ function generatedAbilityDocument(catalog, ability, sort) {
     _id: id,
     name: ability.name,
     type: "ability",
-    img: "systems/cypherv2/assets/icons/cypherability.png",
+    img: "systems/magnusarchives/assets/icons/magnusability.png",
     system,
     effects: [],
     folder: null,
     sort,
     flags: {
-      cypherv2: {
+      magnusarchives: {
         focusImport: {
           sourceId: ability.id,
           actionClassification: ability.actionClassification ?? null,
@@ -476,13 +478,13 @@ function generatedFocusDocument(catalog, focus, abilitiesById, sort) {
     _id: id,
     name: focus.name,
     type: "focus",
-    img: "systems/cypherv2/assets/icons/cypherfocus.png",
+    img: "systems/magnusarchives/assets/icons/magnusfocus.png",
     system,
     effects: [],
     folder: null,
     sort,
     flags: {
-      cypherv2: {
+      magnusarchives: {
         focusImport: {
           sourceId: focus.id,
           genreThemes: focus.genreThemes,
@@ -637,7 +639,7 @@ async function writeDocumentDirectory(directory, documents) {
   await rm(directory, {recursive: true, force: true});
   await mkdir(directory, {recursive: true});
   for (const document of documents) {
-    const sourceId = document.flags.cypherv2.focusImport.sourceId;
+    const sourceId = document.flags.magnusarchives.focusImport.sourceId;
     await writeFile(path.join(directory, `${sourceId}.json`), `${JSON.stringify(document, null, 2)}\n`, "utf8");
   }
 }

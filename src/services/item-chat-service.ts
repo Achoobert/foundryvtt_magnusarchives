@@ -11,7 +11,7 @@ interface ItemProperty {
 }
 
 function poolLabel(pool: string): string {
-  return game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
+  return game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`);
 }
 
 function sourceDescription(item: Item): string {
@@ -23,30 +23,30 @@ function rawItemChatProperties(item: Item): ItemProperty[] {
   const system = item.system as Record<string, unknown>;
   if (item.type === "equipment") {
     return [
-      {label: game.i18n.localize("CYPHERV2.Inventory.Quantity"), value: Number(system.quantity ?? 1)},
-      ...(Number(system.level) > 0 ? [{label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: Number(system.level)}] : []),
-      ...(system.equipped === true ? [{label: game.i18n.localize("CYPHERV2.Combat.Equipped"), value: game.i18n.localize("CYPHERV2.Common.Yes")}] : [])
+      {label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Quantity"), value: Number(system.quantity ?? 1)},
+      ...(Number(system.level) > 0 ? [{label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: Number(system.level)}] : []),
+      ...(system.equipped === true ? [{label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes")}] : [])
     ];
   }
   if (item.type === "cypher") {
     const manifestation = normalizeCypherManifestation(system.manifestation);
     const power = normalizeCypherPower(system.power);
     return [
-      {label: game.i18n.localize("CYPHERV2.Cypher.Manifestation.Label"), value: game.i18n.localize(`CYPHERV2.Cypher.Manifestation.${manifestation}`)},
-      ...(String(system.form ?? "").trim() ? [{label: game.i18n.localize("CYPHERV2.Cypher.Form"), value: String(system.form)}] : []),
-      {label: game.i18n.localize("CYPHERV2.Cypher.Power.Label"), value: game.i18n.localize(`CYPHERV2.Cypher.Power.${power}`)},
-      {label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: cypherLevel(system)}
+      {label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Manifestation.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${manifestation}`)},
+      ...(String(system.form ?? "").trim() ? [{label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Form"), value: String(system.form)}] : []),
+      {label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Power.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${power}`)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: cypherLevel(system)}
     ];
   }
   if (item.type === "artifact") {
     const depletion = system.depletion as Record<string, unknown> | undefined;
     return [
-      {label: game.i18n.localize("CYPHERV2.Inventory.Level"), value: artifactLevelFormula(system)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: artifactLevelFormula(system)},
       ...(depletion?.enabled === true ? [{
-        label: game.i18n.localize("CYPHERV2.Inventory.Depletion"),
+        label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Depletion"),
         value: String(depletion.formula || `1${String(depletion.die ?? "d6")}`)
       }] : []),
-      ...(system.depleted === true ? [{label: game.i18n.localize("CYPHERV2.Artifact.Depleted"), value: game.i18n.localize("CYPHERV2.Common.Yes")}] : [])
+      ...(system.depleted === true ? [{label: game.i18n.localize("MAGNUSARCHIVES.Artifact.Depleted"), value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes")}] : [])
     ];
   }
   if (item.type === "weapon") {
@@ -54,10 +54,10 @@ function rawItemChatProperties(item: Item): ItemProperty[] {
     const attackType = String(system.attackType ?? "melee");
     const range = String(system.rangeCategory ?? "immediate");
     return [
-      {label: game.i18n.localize("CYPHERV2.Combat.Category"), value: game.i18n.localize(`CYPHERV2.Combat.Weapon.Category.${category}`)},
-      {label: game.i18n.localize("CYPHERV2.Combat.Damage"), value: Number(system.baseDamage ?? 0)},
-      {label: game.i18n.localize("CYPHERV2.Combat.Weapon.AttackType.Label"), value: game.i18n.localize(`CYPHERV2.Combat.Weapon.AttackType.${attackType}`)},
-      {label: game.i18n.localize("CYPHERV2.Combat.Range.Label"), value: game.i18n.localize(`CYPHERV2.Combat.Range.${range}`)}
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${category}`)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Damage"), value: Number(system.baseDamage ?? 0)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.AttackType.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${attackType}`)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${range}`)}
     ];
   }
   if (item.type === "shield") {
@@ -66,27 +66,27 @@ function rawItemChatProperties(item: Item): ItemProperty[] {
     const capacities = derived?.capacities as Record<string, number> | undefined;
     const broken = derived?.broken === true;
     return [
-      {label: game.i18n.localize("CYPHERV2.Shield.Status"), value: game.i18n.localize(broken ? "CYPHERV2.Shield.Broken" : "CYPHERV2.Shield.Functional")},
-      {label: game.i18n.localize("CYPHERV2.Combat.Equipped"), value: game.i18n.localize(system.equipped === true ? "CYPHERV2.Common.Yes" : "CYPHERV2.Common.No")},
-      {label: game.i18n.localize("CYPHERV2.Shield.WoundTrack"), value: ["minor", "moderate", "major"].map((severity) => `${wounds?.[severity]?.length ?? 0}/${capacities?.[severity] ?? 0}`).join(" · ")}
+      {label: game.i18n.localize("MAGNUSARCHIVES.Shield.Status"), value: game.i18n.localize(broken ? "MAGNUSARCHIVES.Shield.Broken" : "MAGNUSARCHIVES.Shield.Functional")},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize(system.equipped === true ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No")},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Shield.WoundTrack"), value: ["minor", "moderate", "major"].map((severity) => `${wounds?.[severity]?.length ?? 0}/${capacities?.[severity] ?? 0}`).join(" · ")}
     ];
   }
   if (item.type === "armor") {
     const category = String(system.category ?? "light");
     return [
-      {label: game.i18n.localize("CYPHERV2.Combat.Category"), value: game.i18n.localize(`CYPHERV2.Combat.Armor.Category.${category}`)},
-      {label: game.i18n.localize("CYPHERV2.Combat.Equipped"), value: game.i18n.localize(system.equipped === true ? "CYPHERV2.Common.Yes" : "CYPHERV2.Common.No")}
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${category}`)},
+      {label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize(system.equipped === true ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No")}
     ];
   }
   if (item.type === "ability") {
     const ability = item as unknown as AbilityItemLike;
     const pools = abilityAllowedPools(ability);
     const cost = formatAbilityCost(ability.system.cost.amount, pools, poolLabel, {
-      pair: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Or"),
-      middle: game.i18n.localize("CYPHERV2.Ability.CostDisplay.Separator"),
-      final: game.i18n.localize("CYPHERV2.Ability.CostDisplay.FinalOr")
+      pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
+      middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
+      final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
     }, ability.system.cost.scalable === true);
-    return cost ? [{label: game.i18n.localize("CYPHERV2.Ability.Cost"), value: cost}] : [];
+    return cost ? [{label: game.i18n.localize("MAGNUSARCHIVES.Ability.Cost"), value: cost}] : [];
   }
   return [];
 }
@@ -111,7 +111,7 @@ export class ItemChatService {
       : "";
     const depletion = system.depletion as Record<string, unknown> | undefined;
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/item-card.hbs",
+      "systems/magnusarchives/templates/chat/item-card.hbs",
       {
         itemName: item.name,
         ...chatCardActorImageData(item.actor),
@@ -132,11 +132,11 @@ export class ItemChatService {
 
   async publishArtifactLevelRoll(item: Item, result: ArtifactLevelRollResult): Promise<void> {
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/item-formula-roll-card.hbs",
+      "systems/magnusarchives/templates/chat/item-formula-roll-card.hbs",
       {
         itemName: result.itemName,
         ...chatCardActorImageData(item.actor),
-        label: game.i18n.localize("CYPHERV2.Artifact.LevelRoll"),
+        label: game.i18n.localize("MAGNUSARCHIVES.Artifact.LevelRoll"),
         formula: result.formula,
         total: result.total
       }

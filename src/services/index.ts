@@ -2,6 +2,7 @@ import {RallyService} from "./rally-service";
 import {RecoveryService} from "./recovery-service";
 import {RecoveryWorkflowService} from "./recovery-workflow-service";
 import {RestService} from "./rest-service";
+import {ConditionService} from "./condition-service";
 import {WoundService} from "./wound-service";
 import {RollChatService} from "./roll-chat-service";
 import {RollService} from "./roll-service";
@@ -34,6 +35,7 @@ import {PlayerIntrusionService} from "./player-intrusion-service";
 import {PlayerIntrusionChatService} from "./player-intrusion-chat-service";
 
 export interface CoreServices {
+  readonly conditions: ConditionService;
   readonly wounds: WoundService;
   readonly recovery: RecoveryWorkflowService;
   readonly rally: RallyService;
@@ -67,6 +69,7 @@ export interface CoreServices {
 }
 
 export function createCoreServices(rules: RuleRegistry): CoreServices {
+  const conditions = new ConditionService();
   const wounds = new WoundService();
   const recovery = new RecoveryService();
   const rest = new RestService();
@@ -86,12 +89,14 @@ export function createCoreServices(rules: RuleRegistry): CoreServices {
     skills,
     targets,
     wounds,
+    conditions,
     combatFeedback,
     combatStatuses,
     shields,
     weapons
   );
   return Object.freeze({
+    conditions,
     wounds,
     recovery: new RecoveryWorkflowService(recovery, rest),
     rally: new RallyService(wounds),
@@ -129,6 +134,7 @@ export {RallyService} from "./rally-service";
 export {RecoveryService} from "./recovery-service";
 export {RecoveryWorkflowService} from "./recovery-workflow-service";
 export {RestService} from "./rest-service";
+export {ConditionService} from "./condition-service";
 export {WoundService} from "./wound-service";
 export {RollChatService} from "./roll-chat-service";
 export {RollService} from "./roll-service";

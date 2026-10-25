@@ -36,8 +36,8 @@ const paths = defaultReviewedGenrePaths();
 const packsRoot = path.resolve(argument("--packs-root") ?? path.join(paths.projectRoot, "packs"));
 const sources = await readReviewedGenreSources({genrePath: paths.genreSource, abilityPath: paths.abilitySource});
 const extracted = {
-  genres: await extractDocuments(path.join(packsRoot, GENRE_PACK_ID), "cypherv2-genres-"),
-  abilities: await extractDocuments(path.join(packsRoot, GENRE_ABILITY_PACK_ID), "cypherv2-genre-abilities-")
+  genres: await extractDocuments(path.join(packsRoot, GENRE_PACK_ID), "magnusarchives-genres-"),
+  abilities: await extractDocuments(path.join(packsRoot, GENRE_ABILITY_PACK_ID), "magnusarchives-genre-abilities-")
 };
 const roundTrip = compareReviewedGenreRoundTrip(sources, extracted);
 console.log(JSON.stringify({counts: reviewedGenreSummary(sources), roundTrip}, null, 2));

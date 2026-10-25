@@ -79,7 +79,7 @@ export async function createReviewedSpeciesSource({candidatePath, speciesDirecto
       license: candidate.source.license,
       note: "Human-reviewed Species documents promoted losslessly from the private Working pack."
     },
-    target: {systemId: "cypherv2", packId: SPECIES_PACK_ID},
+    target: {systemId: "magnusarchives", packId: SPECIES_PACK_ID},
     counts: {species: SPECIES_CANDIDATE_COUNT},
     review: {...structuredClone(candidate.review), status: "reviewed"},
     species: species.map(normalizedDocument).sort(compareDocuments)
@@ -105,7 +105,7 @@ export function validateReviewedSpeciesSource(source, references) {
   }
   if (source.schemaVersion !== REVIEWED_SPECIES_SCHEMA_VERSION) errors.push(`schemaVersion must be ${REVIEWED_SPECIES_SCHEMA_VERSION}.`);
   if (source.source?.kind !== "reviewed-world-compendium-export") errors.push("source.kind must identify the reviewed World export.");
-  if (source.target?.systemId !== "cypherv2" || source.target?.packId !== SPECIES_PACK_ID) {
+  if (source.target?.systemId !== "magnusarchives" || source.target?.packId !== SPECIES_PACK_ID) {
     errors.push("target must identify the public Cypher V2 Species pack.");
   }
 
@@ -254,7 +254,7 @@ export function reviewedSpeciesSummary(source, references) {
   const base = speciesCandidateSummary({
     schemaVersion: 1,
     source: {title: source.source.title, file: "reviewed-world-export", sha256: source.source.sha256, license: source.source.license},
-    target: {systemId: "cypherv2", futurePackId: SPECIES_PACK_ID},
+    target: {systemId: "magnusarchives", futurePackId: SPECIES_PACK_ID},
     inventory: {
       fantasy: ["Dragonfolk", "Dwarf", "Elf", "Gnome", "Halfling", "Hellborn", "Human", "Orc"],
       scienceFiction: ["Aarak", "Cyborg", "Delph", "D’nec", "Drakain", "Human", "Mutant", "Naron", "Prota", "Rigellian", "Stelan", "Vendeer", "Zantari"]

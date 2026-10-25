@@ -53,9 +53,9 @@ jobs:
         run: |
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release edit "$GITHUB_REF_NAME" --prerelease
-            gh release upload "$GITHUB_REF_NAME" .release/cypherv2.zip --clobber
+            gh release upload "$GITHUB_REF_NAME" .release/magnusarchives.zip --clobber
           else
-            gh release create "$GITHUB_REF_NAME" .release/cypherv2.zip \
+            gh release create "$GITHUB_REF_NAME" .release/magnusarchives.zip \
               --title "$GITHUB_REF_NAME" \
               --generate-notes \
               --prerelease \

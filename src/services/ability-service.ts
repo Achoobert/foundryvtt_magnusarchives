@@ -40,8 +40,8 @@ function modifierContribution(
   return {
     id: `ability.${ability.id}.${kind}-modifier`,
     label: kind === "attack"
-      ? "CYPHERV2.Ability.AttackModifierContribution"
-      : "CYPHERV2.Ability.RollModifierContribution",
+      ? "MAGNUSARCHIVES.Ability.AttackModifierContribution"
+      : "MAGNUSARCHIVES.Ability.RollModifierContribution",
     direction: modifier > 0 ? "ease" : "hinder",
     steps: Math.abs(modifier),
     source: "other",
@@ -237,7 +237,8 @@ export class AbilityService {
         activation: ability.system.activation,
         rollType: ability.system.roll,
         damage: integer(ability.system.damage, "Ability damage"),
-        woundSeverity: ability.system.woundSeverity
+        damageEffect: ability.system.damageEffect,
+        stressAmount: ability.system.stressAmount
       },
       ...(target ? {
         target: {
@@ -273,7 +274,8 @@ export class AbilityService {
         effortDamage,
         naturalDamage,
         grossDamage: plan.damage + effortDamage + naturalDamage,
-        woundSeverity: ability.system.woundSeverity
+        damageEffect: ability.system.damageEffect,
+        stressAmount: ability.system.stressAmount
       };
     });
   }

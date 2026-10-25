@@ -1,4 +1,4 @@
-export const SYSTEM_ID = "cypherv2" as const;
+export const SYSTEM_ID = "magnusarchives" as const;
 export const SYSTEM_VERSION = "0.1.0" as const;
 export const SYSTEM_SCHEMA_VERSION = 1 as const;
 
@@ -48,6 +48,32 @@ export const CYPHER_POWERS = ["low", "medium", "advanced", "high", "ultra"] as c
 
 export const WOUND_SEVERITIES = ["minor", "moderate", "major"] as const;
 
+/**
+ * The Magnus Archives damage track (p132). "hurt" is an optional extra step
+ * granted by the Tough ability, the Never Says Die focus, or body armor.
+ */
+export const DAMAGE_TRACK_STEPS = ["hale", "hurt", "impaired", "debilitated", "dead"] as const;
+
+/**
+ * What an attack does to a PC. PCs never take Pool damage: a minor wound or a
+ * shock is Stress, and anything worse is a serious injury that moves them down
+ * the damage track (p12).
+ */
+export const CHARACTER_DAMAGE_EFFECTS = ["none", "stress", "seriousInjury"] as const;
+
+/** Points of Stress that make up one Stress Level (p12). */
+export const STRESS_POINTS_PER_LEVEL = 3;
+
+/** Six price categories for goods and services (p98). */
+export const PRICE_CATEGORIES = [
+  "inexpensive",
+  "moderate",
+  "expensive",
+  "veryExpensive",
+  "exorbitant",
+  "priceless"
+] as const;
+
 export const ABILITY_ACTIVATIONS = [
   "action",
   "firstAction",
@@ -95,6 +121,9 @@ export type DepletionDie = (typeof DEPLETION_DICE)[number];
 export type CypherManifestation = (typeof CYPHER_MANIFESTATIONS)[number];
 export type CypherPower = (typeof CYPHER_POWERS)[number];
 export type WoundSeverity = (typeof WOUND_SEVERITIES)[number];
+export type DamageTrackStep = (typeof DAMAGE_TRACK_STEPS)[number];
+export type CharacterDamageEffect = (typeof CHARACTER_DAMAGE_EFFECTS)[number];
+export type PriceCategory = (typeof PRICE_CATEGORIES)[number];
 export type AbilityActivation = (typeof ABILITY_ACTIVATIONS)[number];
 export type AbilityPool = (typeof ABILITY_POOLS)[number];
 export type AbilityRollType = (typeof ABILITY_ROLL_TYPES)[number];

@@ -1,3 +1,4 @@
+import type {DamageTrackStep} from "../../src/constants/system";
 import {deriveCharacterData} from "../../src/rules/core/derived-data";
 import {emptyCharacterOverrides} from "../../src/rules/core/character-overrides";
 import type {
@@ -53,6 +54,9 @@ export function character(options: {
   mightEdge?: number;
   effortBase?: number;
   xp?: number;
+  stress?: number;
+  damageTrackStep?: DamageTrackStep;
+  hurtAvailable?: boolean;
 } = {}): FakeCharacter {
   const stats = pools(options.poolValues);
   stats.might.baseEdge = options.mightEdge ?? 0;
@@ -84,6 +88,11 @@ export function character(options: {
     },
     proficiencies: {weaponCategories: [], weaponFamilies: [], armorCategories: [], freelyUse: []},
     stats: Object.assign(stats, {effortBase: options.effortBase ?? 1}),
+    stress: {value: options.stress ?? 0},
+    damageTrack: {
+      step: options.damageTrackStep ?? "hale",
+      hurtAvailable: options.hurtAvailable ?? false
+    },
     wounds: currentWounds,
     recovery: {
       bonus: 0,
@@ -96,7 +105,26 @@ export function character(options: {
     presentation: {hideFocusInSentence: false, powerShiftsEnabled: false},
     powerShifts: [],
     rest: {lastType: "", history: []},
-    derived: deriveCharacterData(stats, currentWounds, used, {}, [], undefined, 0, undefined, 2, options.tier ?? 1)
+    derived: deriveCharacterData(
+      stats,
+      currentWounds,
+      used,
+      {},
+      [],
+      undefined,
+      0,
+      undefined,
+      2,
+      options.tier ?? 1,
+      undefined,
+      0,
+      [],
+      {
+        stressPoints: options.stress ?? 0,
+        damageTrackStep: options.damageTrackStep ?? "hale",
+        hurtAvailable: options.hurtAvailable ?? false
+      }
+    )
   };
   const actor: FakeCharacter = {
     id: "character-1",
@@ -123,7 +151,12 @@ export function character(options: {
         this.system.tier,
         this.system.overrides,
         this.system.recovery.rollModifier,
-        this.system.recovery.slots
+        this.system.recovery.slots,
+        {
+          stressPoints: this.system.stress.value,
+          damageTrackStep: this.system.damageTrack.step,
+          hurtAvailable: this.system.damageTrack.hurtAvailable
+        }
       );
       return this;
     }

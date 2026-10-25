@@ -3,7 +3,7 @@ import {
   shouldDefaultPrototypeActorLink
 } from "../config/system-assets";
 
-export class CypherV2Actor extends Actor {
+export class MagnusArchivesActor extends Actor {
   static override getDefaultArtwork(data: Record<string, unknown>): {img: string; texture: {src: string}} {
     const icon = actorDefaultIcon(String(data.type ?? ""));
     return icon

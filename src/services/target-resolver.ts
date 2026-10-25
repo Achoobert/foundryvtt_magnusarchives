@@ -62,7 +62,7 @@ function stepContribution(modification: NpcModificationData): RollStepContributi
   integer(modification.value, `NPC modification '${modification.id}'`, 0);
   return {
     id: `npc-modification.${modification.id}`,
-    label: "CYPHERV2.Combat.TargetModification",
+    label: "MAGNUSARCHIVES.Combat.TargetModification",
     direction: modification.mode === "ease" ? "ease" : "hinder",
     steps: modification.value,
     source: "other",

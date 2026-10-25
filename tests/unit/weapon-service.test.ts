@@ -34,6 +34,6 @@ describe("WeaponService ammunition", () => {
     const item = weapon({enabled: true, value: 1, max: 12, perAttack: 2});
     await service.reload(item);
     expect(item.system.ammo).toEqual({enabled: true, value: 12, max: 12, perAttack: 2});
-    expect(item.update).toHaveBeenCalledWith({"system.ammo.value": 12}, {cypherv2WeaponReload: true});
+    expect(item.update).toHaveBeenCalledWith({"system.ammo.value": 12}, {magnusarchivesWeaponReload: true});
   });
 });

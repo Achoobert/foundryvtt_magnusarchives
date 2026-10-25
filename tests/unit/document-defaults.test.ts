@@ -18,24 +18,24 @@ const itemDocumentSource = readFileSync("src/documents/item.ts", "utf8");
 describe("new document defaults", () => {
   it("maps every supported Actor type to its packaged default icon", () => {
     expect(ACTOR_DEFAULT_ICONS).toEqual({
-      character: "systems/cypherv2/assets/icons/cypherpc.png",
-      npc: "systems/cypherv2/assets/icons/cyphernpc.png"
+      character: "systems/magnusarchives/assets/icons/magnuspc.png",
+      npc: "systems/magnusarchives/assets/icons/magnusnpc.png"
     });
     for (const type of ACTOR_TYPES) {
       expect(actorDefaultIcon(type)).toBe(ACTOR_DEFAULT_ICONS[type]);
-      expect(existsSync(ACTOR_DEFAULT_ICONS[type].replace("systems/cypherv2/", ""))).toBe(true);
+      expect(existsSync(ACTOR_DEFAULT_ICONS[type].replace("systems/magnusarchives/", ""))).toBe(true);
     }
     expect(actorDefaultIcon("unsupported")).toBeNull();
   });
 
   it("maps every actual Item type id to its packaged default icon", () => {
     expect(Object.keys(ITEM_DEFAULT_ICONS).sort()).toEqual([...ITEM_TYPES].sort());
-    expect(ITEM_DEFAULT_ICONS.characterType).toBe("systems/cypherv2/assets/icons/cyphertype.png");
-    expect(ITEM_DEFAULT_ICONS.artifact).toBe("systems/cypherv2/assets/icons/cypherartefact.png");
-    expect(ITEM_DEFAULT_ICONS.weapon).toBe("systems/cypherv2/assets/icons/cypherweapons.png");
+    expect(ITEM_DEFAULT_ICONS.characterType).toBe("systems/magnusarchives/assets/icons/magnustype.png");
+    expect(ITEM_DEFAULT_ICONS.artifact).toBe("systems/magnusarchives/assets/icons/magnusartefact.png");
+    expect(ITEM_DEFAULT_ICONS.weapon).toBe("systems/magnusarchives/assets/icons/magnusweapons.png");
     for (const type of ITEM_TYPES) {
       expect(itemDefaultIcon(type)).toBe(ITEM_DEFAULT_ICONS[type]);
-      expect(existsSync(ITEM_DEFAULT_ICONS[type].replace("systems/cypherv2/", ""))).toBe(true);
+      expect(existsSync(ITEM_DEFAULT_ICONS[type].replace("systems/magnusarchives/", ""))).toBe(true);
     }
     expect(itemDefaultIcon("unsupported")).toBeNull();
   });

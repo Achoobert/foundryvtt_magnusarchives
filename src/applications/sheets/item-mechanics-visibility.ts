@@ -9,7 +9,8 @@ export interface AbilityMechanicsSource {
   readonly rollModifier: number;
   readonly attackModifier: number;
   readonly damage: number;
-  readonly woundSeverity: string;
+  readonly damageEffect: string;
+  readonly stressAmount?: number;
   readonly range: string;
   readonly targetMode: string;
 }
@@ -20,7 +21,7 @@ export interface AbilityMechanicsVisibility {
   readonly rollModifierLabel: "task" | "defense" | "general";
   readonly showAttackModifier: boolean;
   readonly showDamage: boolean;
-  readonly showWoundSeverity: boolean;
+  readonly showDamageEffect: boolean;
   readonly showRange: boolean;
   readonly showTargetMode: boolean;
   readonly hasConditionalFields: boolean;
@@ -35,7 +36,7 @@ export function abilityMechanicsVisibility(
   const showRollModifier = task || defense || system.rollModifier !== 0;
   const showAttackModifier = attack || system.attackModifier !== 0;
   const showDamage = attack || system.damage !== 0;
-  const showWoundSeverity = attack || system.woundSeverity !== "none";
+  const showDamageEffect = attack || system.damageEffect !== "none";
   const showRange = attack || system.range.trim() !== "";
   const showTargetMode = attack || system.targetMode !== "none";
 
@@ -47,13 +48,13 @@ export function abilityMechanicsVisibility(
     rollModifierLabel: task ? "task" : defense ? "defense" : "general",
     showAttackModifier,
     showDamage,
-    showWoundSeverity,
+    showDamageEffect,
     showRange,
     showTargetMode,
     hasConditionalFields: showRollModifier
       || showAttackModifier
       || showDamage
-      || showWoundSeverity
+      || showDamageEffect
       || showRange
       || showTargetMode
   };

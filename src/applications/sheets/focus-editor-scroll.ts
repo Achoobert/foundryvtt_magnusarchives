@@ -10,10 +10,10 @@ export interface FocusEditorScrollState {
 
 /** Capture sheet and per-tree scroll without storing presentation data in a Document. */
 export function captureFocusEditorScroll(root: ParentNode): FocusEditorScrollState {
-  const sheet = root.querySelector<HTMLElement>(".cypherv2-sheet.cypherv2-item");
+  const sheet = root.querySelector<HTMLElement>(".magnusarchives-sheet.magnusarchives-item");
   const windowContent = root.querySelector<HTMLElement>(".window-content");
   const trees = [...root.querySelectorAll<HTMLElement>(
-    ".cypherv2-focus-tree-section[data-focus-uuid]"
+    ".magnusarchives-focus-tree-section[data-focus-uuid]"
   )].map((section) => {
     const scroller = section.querySelector<HTMLElement>(".focus-tree-scroll");
     return {
@@ -34,13 +34,13 @@ export function restoreFocusEditorScroll(
   root: ParentNode,
   state: FocusEditorScrollState
 ): void {
-  const sheet = root.querySelector<HTMLElement>(".cypherv2-sheet.cypherv2-item");
+  const sheet = root.querySelector<HTMLElement>(".magnusarchives-sheet.magnusarchives-item");
   if (sheet) sheet.scrollTop = state.vertical;
   const windowContent = root.querySelector<HTMLElement>(".window-content");
   if (windowContent) windowContent.scrollTop = state.windowVertical;
 
   const sections = [...root.querySelectorAll<HTMLElement>(
-    ".cypherv2-focus-tree-section[data-focus-uuid]"
+    ".magnusarchives-focus-tree-section[data-focus-uuid]"
   )];
   for (const tree of state.trees) {
     const section = sections.find((entry) => entry.dataset.focusUuid === tree.focusUuid);

@@ -1,4 +1,15 @@
-import {type RecoveryType, type WoundSeverity} from "../../constants/system";
+import {
+  STRESS_POINTS_PER_LEVEL,
+  type DamageTrackStep,
+  type RecoveryType,
+  type WoundSeverity
+} from "../../constants/system";
+import {
+  damageTrackSteps,
+  normalizeDamageTrackStep,
+  stressLevel,
+  stressToNextLevel
+} from "../../rules/core/condition-track";
 import {
   type RecoverySlotData,
   type RecoveryUsage,
@@ -60,10 +71,10 @@ const IDENTITY_META = {
 } as const;
 
 const RECOVERY_SHORT_LABELS: Readonly<Record<RecoveryType, string>> = {
-  "one-action": "CYPHERV2.Hud.Recovery.Action",
-  "10-minutes": "CYPHERV2.Hud.Recovery.TenMinutes",
-  "1-hour": "CYPHERV2.Hud.Recovery.OneHour",
-  "10-hours": "CYPHERV2.Hud.Recovery.TenHours"
+  "one-action": "MAGNUSARCHIVES.Hud.Recovery.Action",
+  "10-minutes": "MAGNUSARCHIVES.Hud.Recovery.TenMinutes",
+  "1-hour": "MAGNUSARCHIVES.Hud.Recovery.OneHour",
+  "10-hours": "MAGNUSARCHIVES.Hud.Recovery.TenHours"
 };
 
 export function identitySlot(
@@ -185,6 +196,54 @@ export function headerWoundTracks(
     overCapacity: Math.max(0, counts[severity] - capacities[severity]),
     pips: headerPips(counts[severity], capacities[severity])
   }));
+}
+
+export interface HeaderDamageTrackStep {
+  step: DamageTrackStep;
+  label: string;
+  hintLabel: string;
+  current: boolean;
+  /** Steps at or before the current one, so the track reads like a filled bar. */
+  reached: boolean;
+}
+
+/**
+ * The damage track as the printed sheet shows it (p381): one box per step, with
+ * "hurt" only present for Characters who have that extra step.
+ */
+export function headerDamageTrack(
+  step: DamageTrackStep,
+  hurtAvailable: boolean
+): readonly HeaderDamageTrackStep[] {
+  const steps = damageTrackSteps(hurtAvailable);
+  const current = normalizeDamageTrackStep(step, hurtAvailable);
+  const currentIndex = steps.indexOf(current);
+  return steps.map((entry, index) => ({
+    step: entry,
+    label: `MAGNUSARCHIVES.DamageTrack.${entry}`,
+    hintLabel: `MAGNUSARCHIVES.DamageTrack.Hint.${entry}`,
+    current: entry === current,
+    reached: index <= currentIndex
+  }));
+}
+
+export interface HeaderStress {
+  value: number;
+  level: number;
+  toNextLevel: number;
+  /** One pip per point within the current partial level. */
+  pips: readonly HeaderPip[];
+}
+
+export function headerStress(value: number): HeaderStress {
+  const safeValue = Math.max(0, Math.trunc(value));
+  const level = stressLevel(safeValue);
+  return {
+    value: safeValue,
+    level,
+    toNextLevel: stressToNextLevel(safeValue),
+    pips: headerPips(safeValue - level * STRESS_POINTS_PER_LEVEL, STRESS_POINTS_PER_LEVEL)
+  };
 }
 
 export function headerRecoveries(

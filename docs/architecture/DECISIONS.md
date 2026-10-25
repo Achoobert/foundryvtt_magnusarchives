@@ -4,7 +4,7 @@ Status: accepted for the first commit.
 
 ## Platform
 
-- System identifier: `cypherv2`.
+- System identifier: `magnusarchives`.
 - Language: TypeScript.
 - Runtime target: Foundry VTT v14, verified against 14.360.
 - User interface: Application V2 with Handlebars parts.
@@ -49,13 +49,13 @@ Status: accepted for the first commit.
   - `1-hour-or-longer`
   - `10-hour`
   - `non-rest-recovery`
-- Applied duration effects will use Foundry Active Effects plus typed `cypherv2` metadata in a later phase.
+- Applied duration effects will use Foundry Active Effects plus typed `magnusarchives` metadata in a later phase.
 
 ## Rules
 
 - Source values are never cumulatively changed by rule modules.
 - Contributions are collected and reduced into derived values.
-- The rule registry is exposed through `game.cypherv2.rules`.
+- The rule registry is exposed through `game.magnusarchives.rules`.
 - External modules will be able to register new behavior without modifications to Core.
 - The Strange is not implemented in the first version, but the registry cannot assume a fixed set of settings, contributions, sheet sections, Item behaviors, or Focus behaviors.
 

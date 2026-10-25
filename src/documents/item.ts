@@ -39,7 +39,7 @@ function equipsItem(changes: Record<string, unknown>): boolean {
   return Boolean(system && typeof system === "object" && (system as {equipped?: unknown}).equipped === true);
 }
 
-export class CypherV2Item extends Item {
+export class MagnusArchivesItem extends Item {
   static override getDefaultArtwork(data: Record<string, unknown>): {img: string} {
     const icon = itemDefaultIcon(String(data.type ?? ""));
     return icon ? {img: icon} : super.getDefaultArtwork(data);
@@ -63,15 +63,15 @@ export class CypherV2Item extends Item {
       character
       && (this.type === "shield" || this.type === "armor")
       && equipsItem(changes)
-      && options.cypherv2CombatEquipmentSync !== true
-      && options.cypherv2ShieldEquipmentSync !== true
+      && options.magnusarchivesCombatEquipmentSync !== true
+      && options.magnusarchivesShieldEquipmentSync !== true
     ) {
       for (const item of character.items) {
         if (item.id === this.id || item.type !== this.type) continue;
         if ((item.system as {equipped?: boolean}).equipped) {
           await item.update(
             {"system.equipped": false},
-            {cypherv2CombatEquipmentSync: true}
+            {magnusarchivesCombatEquipmentSync: true}
           );
         }
       }
@@ -82,7 +82,7 @@ export class CypherV2Item extends Item {
         const newMax = Number((character.system as any).derived.pools[pool].max);
         poolChanges[`system.stats.${pool}.value`] = preservePoolDeficit(oldValues[pool], oldMax[pool], newMax);
       }
-      await character.update(poolChanges, {cypherv2PackagePoolSync: true});
+      await character.update(poolChanges, {magnusarchivesPackagePoolSync: true});
     }
     return result;
   }

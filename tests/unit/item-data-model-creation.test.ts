@@ -112,7 +112,8 @@ describe("Item DataModel creation defaults", () => {
       rollModifier: 0,
       attackModifier: 0,
       damage: 0,
-      woundSeverity: "none",
+      damageEffect: "none",
+      stressAmount: 3,
       range: "",
       targetMode: "none"
     });
@@ -434,7 +435,7 @@ describe("Item DataModel creation defaults", () => {
         position: {x: 0.35, y: null}
       }, {
         id: "stone-body",
-        abilityUuid: "Compendium.cypherv2.abilities.Item.stone-body",
+        abilityUuid: "Compendium.magnusarchives.abilities.Item.stone-body",
         abilitySnapshot: {name: "Stone Body", description: "<p>Another snapshot</p>"},
         tier: 3,
         position: {x: 0.65, y: null}
@@ -796,7 +797,7 @@ describe("Item DataModel creation defaults", () => {
     const {CharacterDataModel} = await import("../../src/data/actors/character");
     const {character: characterFixture} = await import("../helpers/core-fixtures");
     const actor = characterFixture();
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
     for (const pool of ["might", "speed", "intellect"] as const) {
       actor.system.derived.pools[pool].max = 0;
       actor.system.stats[pool].max = 0;

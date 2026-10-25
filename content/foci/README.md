@@ -7,7 +7,7 @@
 ## Production guarantees
 
 - Existing Focus, Ability, node and connection IDs are preserved.
-- Focus nodes reference `Compendium.cypherv2.focus-abilities.Item.<id>` and are validated against the promoted Ability set.
+- Focus nodes reference `Compendium.magnusarchives.focus-abilities.Item.<id>` and are validated against the promoted Ability set.
 - Descriptions, snapshots, automation fields, flags, provenance, manual positions and graph connections are copied without reconstruction.
 - Volatile World timestamps and World-user ownership entries are normalized for distribution; default ownership is retained.
 - Duplicate IDs/slugs, invalid/dangling graph connections and World/test UUIDs fail the build before installed packs are replaced.

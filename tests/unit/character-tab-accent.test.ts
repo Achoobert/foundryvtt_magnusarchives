@@ -7,10 +7,10 @@ const styles = readFileSync("styles/components/_character-header.scss", "utf8");
 
 describe("Character active-tab Accent", () => {
   it("inherits the already-derived appearance variables from the Character root", () => {
-    expect(template).toContain('class="cypherv2-sheet cypherv2-character" style="{{header.appearance.style}}"');
+    expect(template).toContain('class="magnusarchives-sheet magnusarchives-character" style="{{header.appearance.style}}"');
     expect(template).not.toMatch(/sheet-tabs[^>]+style=/);
-    expect(styles).toMatch(/\.cypherv2-sheet\.cypherv2-character[\s\S]*--cypherv2-character-accent/);
-    expect(styles).toMatch(/> \.sheet-tabs > a\.active[\s\S]*var\(--cypherv2-character-accent\)/);
+    expect(styles).toMatch(/\.magnusarchives-sheet\.magnusarchives-character[\s\S]*--magnusarchives-character-accent/);
+    expect(styles).toMatch(/> \.sheet-tabs > a\.active[\s\S]*var\(--magnusarchives-character-accent\)/);
     expect(styles).not.toMatch(/> \.sheet-tabs > a\.active[\s\S]*#96082a/);
   });
 

@@ -25,16 +25,16 @@ describe("beta.3 candidate Genre Abilities", () => {
     expect(findAbility("Additional Skill (Tier 3)")).toMatchObject({
       _id: "fREdI45SXu0WPeeS",
       system: {slug: "additional-skill-tier-3", tier: 3, category: "genre-progression", source: {page: "35"}},
-      flags: {cypherv2: {genreAbility: {catalog: "progression", genres: ["realWorld"], progressionBand: "mid-tier"}}}
+      flags: {magnusarchives: {genreAbility: {catalog: "progression", genres: ["realWorld"], progressionBand: "mid-tier"}}}
     });
     expect(findAbility("Additional Skill (Tier 6)")).toMatchObject({
       _id: "xXSq03yZHRS978cj",
       system: {slug: "additional-skill-tier-6", tier: 6, category: "genre-progression", source: {page: "35"}},
-      flags: {cypherv2: {genreAbility: {catalog: "progression", genres: ["realWorld"], progressionBand: "high-tier"}}}
+      flags: {magnusarchives: {genreAbility: {catalog: "progression", genres: ["realWorld"], progressionBand: "high-tier"}}}
     });
     expect(source.catalogs.realWorld.entries.map((entry: any) => entry.abilityUuid)).toEqual([
-      "Compendium.cypherv2.genre-abilities.Item.fREdI45SXu0WPeeS",
-      "Compendium.cypherv2.genre-abilities.Item.xXSq03yZHRS978cj"
+      "Compendium.magnusarchives.genre-abilities.Item.fREdI45SXu0WPeeS",
+      "Compendium.magnusarchives.genre-abilities.Item.xXSq03yZHRS978cj"
     ]);
   });
 
@@ -45,17 +45,17 @@ describe("beta.3 candidate Genre Abilities", () => {
     });
     for (const name of ["Cypher Use", "Enhanced Stat", "Exceptional Follower", "Snipe", "Inspire Action"]) {
       expect(source.abilities.filter((document: any) => document.name === name)).toHaveLength(1);
-      expect(findAbility(name).flags.cypherv2.genreAbility.genres).toEqual(["fantasy", "scienceFiction"]);
+      expect(findAbility(name).flags.magnusarchives.genreAbility.genres).toEqual(["fantasy", "scienceFiction"]);
     }
   });
 
   it("preserves Origin rank and Tier 3 improvement rules without Type whitelists", () => {
     expect(source.catalogs.superhero).toMatchObject({catalog: "origin", eligibility: "genre", typeWhitelist: []});
-    expect(findAbility("Armored Body").flags.cypherv2.genreAbility.minimumSuperheroRank).toBe(2);
+    expect(findAbility("Armored Body").flags.magnusarchives.genreAbility.minimumSuperheroRank).toBe(2);
     for (const name of ["Incredible Instinct", "Skill Exemplar"]) {
       const ability = findAbility(name);
       expect(ability.system.tier).toBe(1);
-      expect(ability.flags.cypherv2.genreAbility.catalog).toBe("origin");
+      expect(ability.flags.magnusarchives.genreAbility.catalog).toBe("origin");
       expect(ability.system.description).toMatch(/At tier 3:/i);
       expect(ability.system.tags).toContain("tier-3-improvement");
     }
@@ -87,7 +87,7 @@ describe("beta.3 candidate Genre Abilities", () => {
     id.abilities[0]._key = "!items!aaaaaaaaaaaaaaaa";
     expect(() => validator.validateGenreAbilityCandidateSource(id)).toThrow(/deterministic ID/);
     const dangling = structuredClone(source);
-    dangling.catalogs.fantasy.entries[0].abilityUuid = "Compendium.cypherv2.genre-abilities.Item.aaaaaaaaaaaaaaaa";
+    dangling.catalogs.fantasy.entries[0].abilityUuid = "Compendium.magnusarchives.genre-abilities.Item.aaaaaaaaaaaaaaaa";
     expect(() => validator.validateGenreAbilityCandidateSource(dangling)).toThrow(/dangling/);
     const working = structuredClone(source);
     working.review.note = "Compendium.world.genre-abilities-working.Item.aaaaaaaaaaaaaaaa";

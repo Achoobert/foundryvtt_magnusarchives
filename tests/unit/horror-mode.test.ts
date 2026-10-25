@@ -42,8 +42,8 @@ describe("Horror Mode World control", () => {
     const controls = {tokens: {tools}};
     callback?.(controls as unknown as Record<string, unknown>);
 
-    const intrusion = tools.cypherv2GMIntrusion!;
-    const horror = tools.cypherv2HorrorMode!;
+    const intrusion = tools.magnusarchivesGMIntrusion!;
+    const horror = tools.magnusarchivesHorrorMode!;
     expect(horror.visible).toBe(true);
     expect(horror.order).toBe(intrusion.order + 1);
     expect(horror.icon).toContain("fa-skull");
@@ -60,7 +60,7 @@ describe("Horror Mode World control", () => {
     const controls = {tokens: {tools}};
     callback?.(controls as unknown as Record<string, unknown>);
 
-    expect(tools.cypherv2HorrorMode?.visible).toBe(false);
+    expect(tools.magnusarchivesHorrorMode?.visible).toBe(false);
   });
 
   it("uses an immediate range preview and persists on native change without an Apply action", () => {
@@ -73,18 +73,18 @@ describe("Horror Mode World control", () => {
   });
 
   it("reuses Pool-gauge tokens and escalates glow intensity without continuous animation", () => {
-    expect(styles).toContain("var(--cypherv2-pool-gauge-high)");
-    expect(styles).toContain("var(--cypherv2-color-warning)");
-    expect(styles).toContain("var(--cypherv2-danger)");
-    expect(styles).toContain('--cypherv2-horror-glow: 43%');
-    expect(styles).toContain('--cypherv2-horror-glow: 72%');
+    expect(styles).toContain("var(--magnusarchives-pool-gauge-high)");
+    expect(styles).toContain("var(--magnusarchives-color-warning)");
+    expect(styles).toContain("var(--magnusarchives-danger)");
+    expect(styles).toContain('--magnusarchives-horror-glow: 43%');
+    expect(styles).toContain('--magnusarchives-horror-glow: 72%');
     expect(styles).toContain('@media (prefers-reduced-motion: reduce)');
     expect(styles).not.toMatch(/animation|@keyframes/);
   });
 
   it("keeps explicit accessible range and normal-state copy localized", () => {
-    expect(localization["CYPHERV2.Horror.RangeSummary"]).toContain("1–{range}");
-    expect(localization["CYPHERV2.Horror.NormalSummary"]).toBe("Normal · Natural 1");
+    expect(localization["MAGNUSARCHIVES.Horror.RangeSummary"]).toContain("1–{range}");
+    expect(localization["MAGNUSARCHIVES.Horror.NormalSummary"]).toBe("Normal · Natural 1");
     expect(dialog).toContain('aria-valuetext');
   });
 });

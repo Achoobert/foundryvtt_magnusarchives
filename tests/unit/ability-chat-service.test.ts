@@ -17,7 +17,8 @@ const ability: AbilityItemLike = {
     rollModifier: 0,
     attackModifier: 0,
     damage: 5,
-    woundSeverity: "moderate",
+    damageEffect: "seriousInjury",
+    stressAmount: 3,
     range: "long",
     targetMode: "single",
     description: ""
@@ -41,7 +42,8 @@ describe("AbilityChatService", () => {
       },
       execution: {result: {success: true}},
       grossDamage: 8,
-      woundSeverity: "moderate"
+      damageEffect: "seriousInjury",
+      stressAmount: 3
     } as unknown as AbilityRollOutcome;
     await service.publishRoll({} as CombatCharacterLike, outcome, "resultOnly");
     expect(publish).toHaveBeenCalledWith(
@@ -71,7 +73,8 @@ describe("AbilityChatService", () => {
       effortDamage: 3,
       naturalDamage: 2,
       grossDamage: 10,
-      woundSeverity: "none"
+      damageEffect: "none",
+      stressAmount: 3
     } as unknown as AbilityRollOutcome;
     await service.publishRoll({} as CombatCharacterLike, outcome, "resultOnly");
     expect(publish).toHaveBeenCalledWith(
@@ -81,9 +84,9 @@ describe("AbilityChatService", () => {
       expect.objectContaining({combat: expect.objectContaining({
         damage: 10,
         damageBreakdown: [
-          {label: "CYPHERV2.Ability.DamageBreakdown.Base", value: 5},
-          {label: "CYPHERV2.Combat.DamageBreakdown.Effort", value: 3, additive: true},
-          {label: "CYPHERV2.Combat.DamageBreakdown.Natural", value: 2, additive: true}
+          {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: 5},
+          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: 3, additive: true},
+          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: 2, additive: true}
         ]
       })})
     );
@@ -100,7 +103,8 @@ describe("AbilityChatService", () => {
       effortDamage: 0,
       naturalDamage: 0,
       grossDamage: 5,
-      woundSeverity: "none"
+      damageEffect: "none",
+      stressAmount: 3
     } as unknown as AbilityRollOutcome;
     await service.publishRoll({} as CombatCharacterLike, outcome, "resultOnly");
     expect(publish).toHaveBeenCalledWith(
@@ -111,7 +115,7 @@ describe("AbilityChatService", () => {
     );
   });
 
-  it("creates a controlled Apply Wound action for a no-roll Character target", async () => {
+  it("creates a controlled Apply damage action for a no-roll Character target", async () => {
     const create = vi.fn(async () => undefined);
     const renderTemplate = vi.fn(async () => "<article>Ability</article>");
     vi.stubGlobal("foundry", {applications: {handlebars: {renderTemplate}}});
@@ -139,14 +143,14 @@ describe("AbilityChatService", () => {
       targets: [target]
     });
     expect(renderTemplate).toHaveBeenCalledWith(
-      "systems/cypherv2/templates/chat/ability-card.hbs",
+      "systems/magnusarchives/templates/chat/ability-card.hbs",
       expect.objectContaining({abilityName: "Mind Lance", targetName: "B", combatAction: true})
     );
     expect(create).toHaveBeenCalledWith(expect.objectContaining({
-      flags: {cypherv2: {combatAction: expect.objectContaining({
-        kind: "characterWound",
+      flags: {magnusarchives: {combatAction: expect.objectContaining({
+        kind: "characterDamage",
         targetTokenId: "token-b",
-        severity: "moderate"
+        effect: "seriousInjury"
       })}}
     }));
   });
@@ -178,7 +182,7 @@ describe("AbilityChatService", () => {
       canPay: true
     });
     expect(renderTemplate).toHaveBeenCalledWith(
-      "systems/cypherv2/templates/chat/ability-payment-card.hbs",
+      "systems/magnusarchives/templates/chat/ability-payment-card.hbs",
       expect.objectContaining({abilityName: "Mind Lance", actorName: "Arthur", costPaid: 1, currentAfter: 6})
     );
     expect(getSpeaker).toHaveBeenCalledWith({actor: actor as unknown as Actor});

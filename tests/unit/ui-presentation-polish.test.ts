@@ -36,7 +36,7 @@ describe("V1 presentation polish", () => {
   });
 
   it("keeps the normal NPC sheet to its compact baseline and one native Notes editor", () => {
-    expect(npcTemplate).not.toContain("CYPHERV2.Phase1");
+    expect(npcTemplate).not.toContain("MAGNUSARCHIVES.Phase1");
     for (const field of [
       "system.level",
       "system.armor",
@@ -67,27 +67,27 @@ describe("V1 presentation polish", () => {
   });
 
   it("scopes shared dialog and Chat skins to system-owned content", () => {
-    expect(dialogStyles).toContain(".application.dialog:has(.cypherv2-dialog, .cypherv2-dialog-fields)");
-    expect(chatStyles).toContain(".chat-message:has(.cypherv2-chat-card)");
-    expect(chatStyles).toContain(".cypherv2-chat-watermark");
-    expect(chatStyles).toContain("var(--cypherv2-accent)");
+    expect(dialogStyles).toContain(".application.dialog:has(.magnusarchives-dialog, .magnusarchives-dialog-fields)");
+    expect(chatStyles).toContain(".chat-message:has(.magnusarchives-chat-card)");
+    expect(chatStyles).toContain(".magnusarchives-chat-watermark");
+    expect(chatStyles).toContain("var(--magnusarchives-accent)");
   });
 
   it("skins Foundry's native RollTable result structure with semantic Cypher tokens", () => {
     expect(chatStyles).toContain(".chat-message:has(.table-draw)");
     expect(chatStyles).toContain("ul.table-results");
     expect(chatStyles).toContain("> a.content-link");
-    expect(chatStyles).toContain("var(--cypherv2-surface-primary)");
-    expect(chatStyles).toContain("var(--cypherv2-text-primary)");
-    expect(chatStyles).toContain("var(--cypherv2-text-muted)");
-    expect(chatStyles).toContain("var(--cypherv2-border)");
+    expect(chatStyles).toContain("var(--magnusarchives-surface-primary)");
+    expect(chatStyles).toContain("var(--magnusarchives-text-primary)");
+    expect(chatStyles).toContain("var(--magnusarchives-text-muted)");
+    expect(chatStyles).toContain("var(--magnusarchives-border)");
   });
 
   it("declares the Foundry v14 setup media asset", () => {
     expect(manifest.media).toContainEqual({
       type: "setup",
-      url: "systems/cypherv2/assets/cypher2meta.jpg",
-      thumbnail: "systems/cypherv2/assets/cypher2meta.jpg"
+      url: "systems/magnusarchives/assets/magnusmeta.jpg",
+      thumbnail: "systems/magnusarchives/assets/magnusmeta.jpg"
     });
   });
 });
@@ -112,7 +112,7 @@ describe("Chat card actor watermark", () => {
       system: {appearance: {color: "#00ffff"}}
     })).toMatchObject({
       actorImage: "actor.webp",
-      chatCardStyle: expect.stringContaining("--cypherv2-chat-accent: #00ffff")
+      chatCardStyle: expect.stringContaining("--magnusarchives-chat-accent: #00ffff")
     });
     expect(chatCardActorImageData({img: "actor.webp"})).not.toHaveProperty("chatCardStyle");
   });
@@ -130,16 +130,16 @@ describe("Chat card actor watermark", () => {
       "roll-card.hbs"
     ]) {
       const source = readFileSync(`templates/chat/${template}`, "utf8");
-      expect(source).toContain("cypherv2-chat-card");
-      expect(source).toContain('{{#if actorImage}}<img class="cypherv2-chat-watermark"');
+      expect(source).toContain("magnusarchives-chat-card");
+      expect(source).toContain('{{#if actorImage}}<img class="magnusarchives-chat-watermark"');
     }
   });
 
   it("sizes the shared watermark as a large bottom-right faded portrait", () => {
-    expect(chatStyles).toMatch(/\.cypherv2-chat-watermark[\s\S]*right: 0/);
-    expect(chatStyles).toMatch(/\.cypherv2-chat-watermark[\s\S]*bottom: 0/);
-    expect(chatStyles).toMatch(/\.cypherv2-chat-watermark[\s\S]*width: 68%/);
-    expect(chatStyles).toMatch(/\.cypherv2-chat-watermark[\s\S]*height: 82%/);
-    expect(chatStyles).toMatch(/\.cypherv2-chat-watermark[\s\S]*mask-image: radial-gradient/);
+    expect(chatStyles).toMatch(/\.magnusarchives-chat-watermark[\s\S]*right: 0/);
+    expect(chatStyles).toMatch(/\.magnusarchives-chat-watermark[\s\S]*bottom: 0/);
+    expect(chatStyles).toMatch(/\.magnusarchives-chat-watermark[\s\S]*width: 68%/);
+    expect(chatStyles).toMatch(/\.magnusarchives-chat-watermark[\s\S]*height: 82%/);
+    expect(chatStyles).toMatch(/\.magnusarchives-chat-watermark[\s\S]*mask-image: radial-gradient/);
   });
 });

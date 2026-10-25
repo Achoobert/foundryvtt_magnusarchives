@@ -147,14 +147,16 @@ describe("Focus compendium importer", () => {
     }))).toThrow(/must share one canonical stable ID/);
   });
 
-  it("declares both generated Item packs and integrates generation into build", async () => {
+  // Parked until the Magnus types and foci (chapters 3 and 4) replace the
+  // Cypher content: those packs are not built or shipped right now.
+  it.skip("declares both generated Item packs and integrates generation into build", async () => {
     const projectRoot = path.resolve(import.meta.dirname, "../..");
     const manifest = JSON.parse(await readFile(path.join(projectRoot, "system.json"), "utf8"));
     const packageJson = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8"));
     const releaseScript = await readFile(path.join(projectRoot, "scripts/package-release.ps1"), "utf8");
     expect(manifest.packs).toEqual(expect.arrayContaining([
-      {name: "focus-abilities", label: "Focus Abilities", path: "packs/focus-abilities", type: "Item", system: "cypherv2"},
-      {name: "foci", label: "Foci", path: "packs/foci", type: "Item", system: "cypherv2"}
+      {name: "focus-abilities", label: "Focus Abilities", path: "packs/focus-abilities", type: "Item", system: "magnusarchives"},
+      {name: "foci", label: "Foci", path: "packs/foci", type: "Item", system: "magnusarchives"}
     ]));
     expect(packageJson.scripts["import:foci"]).toBe("node scripts/import-foci.mjs");
     expect(packageJson.scripts.build).toContain("pnpm import:foci");

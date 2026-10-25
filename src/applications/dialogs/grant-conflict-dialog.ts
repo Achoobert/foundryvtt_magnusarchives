@@ -14,7 +14,7 @@ function escapeHtml(value: string): string {
 
 function rankLabel(rank: string): string {
   if (!rank) return "";
-  return game.i18n.localize(`CYPHERV2.Skill.Ranks.${rank}`);
+  return game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`);
 }
 
 function documentSnapshot(item: Item): GrantReplacementOption["snapshot"] {
@@ -33,7 +33,7 @@ async function replacementFromUuid(
 ): Promise<GrantConflictResolution | null> {
   const document = uuid ? await fromUuid(uuid) : null;
   if (!(document instanceof Item) || document.type !== conflict.type) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.GrantConflict.InvalidReplacement"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.GrantConflict.InvalidReplacement"));
     return null;
   }
   return {
@@ -46,8 +46,8 @@ async function replacementFromUuid(
       itemUuid: document.uuid,
       snapshot: documentSnapshot(document),
       reason: game.i18n.localize(selectionKind === "compendium"
-        ? "CYPHERV2.GrantConflict.CompendiumItem"
-        : "CYPHERV2.GrantConflict.WorldItem"),
+        ? "MAGNUSARCHIVES.GrantConflict.CompendiumItem"
+        : "MAGNUSARCHIVES.GrantConflict.WorldItem"),
       reasonSourceUuid: document.uuid
     }
   };
@@ -65,38 +65,38 @@ export async function resolveGrantConflictWithDialog(conflict: GrantConflict): P
         <input type="radio" name="resolution" value="suggestion:${escapeHtml(suggestion.id)}">
         <span><strong>${escapeHtml(suggestion.name)}</strong><small>${escapeHtml(suggestion.reason)}</small></span>
       </label>`).join("")
-    : `<p class="empty-list">${game.i18n.localize("CYPHERV2.GrantConflict.NoSuggestions")}</p>`;
+    : `<p class="empty-list">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoSuggestions")}</p>`;
   const typeLabel = game.i18n.localize(conflict.type === "skill"
-    ? "CYPHERV2.GrantConflict.Skill"
-    : "CYPHERV2.GrantConflict.Ability");
+    ? "MAGNUSARCHIVES.GrantConflict.Skill"
+    : "MAGNUSARCHIVES.GrantConflict.Ability");
   const existingRank = conflict.existing.rank ? ` — ${escapeHtml(rankLabel(conflict.existing.rank))}` : "";
   const proposedRank = conflict.proposed.rank ? ` — ${escapeHtml(rankLabel(conflict.proposed.rank))}` : "";
   const externalChoices = game.user.isGM ? `
-      <label class="grant-conflict-option"><input type="radio" name="resolution" value="world"><span>${game.i18n.localize("CYPHERV2.GrantConflict.WorldItem")}</span></label>
+      <label class="grant-conflict-option"><input type="radio" name="resolution" value="world"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.WorldItem")}</span></label>
       <select name="worldUuid">${worldItems.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select>
-      <label class="grant-conflict-option"><input type="radio" name="resolution" value="uuid"><span>${game.i18n.localize("CYPHERV2.GrantConflict.CompendiumUuid")}</span></label>
+      <label class="grant-conflict-option"><input type="radio" name="resolution" value="uuid"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CompendiumUuid")}</span></label>
       <input name="documentUuid" type="text" placeholder="Compendium.world.pack.Item.id">`
-    : `<p class="hint">${game.i18n.localize("CYPHERV2.GrantConflict.GmExternalOnly")}</p>`;
-  const replacementFields = conflict.context === "package" ? `<fieldset><legend>${game.i18n.format("CYPHERV2.GrantConflict.ChooseAnother", {type: typeLabel})}</legend>
+    : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.GmExternalOnly")}</p>`;
+  const replacementFields = conflict.context === "package" ? `<fieldset><legend>${game.i18n.format("MAGNUSARCHIVES.GrantConflict.ChooseAnother", {type: typeLabel})}</legend>
       ${externalChoices}
-      ${conflict.allowCustom ? `<label class="grant-conflict-option"><input type="radio" name="resolution" value="custom"><span>${game.i18n.localize("CYPHERV2.GrantConflict.CustomSkill")}</span></label><input name="customName" type="text" placeholder="${game.i18n.localize("CYPHERV2.GrantConflict.CustomSkillName")}">` : `<p class="hint">${game.i18n.localize("CYPHERV2.GrantConflict.NoCustomAbility")}</p>`}
-    </fieldset>` : `<p class="hint">${game.i18n.localize("CYPHERV2.GrantConflict.FocusRestriction")}</p>`;
-  const content = `<div class="cypherv2 cypherv2-dialog grant-conflict-dialog">
+      ${conflict.allowCustom ? `<label class="grant-conflict-option"><input type="radio" name="resolution" value="custom"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill")}</span></label><input name="customName" type="text" placeholder="${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkillName")}">` : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoCustomAbility")}</p>`}
+    </fieldset>` : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.FocusRestriction")}</p>`;
+  const content = `<div class="magnusarchives magnusarchives-dialog grant-conflict-dialog">
     <div class="grant-conflict-comparison">
-      <p><span>${game.i18n.localize("CYPHERV2.GrantConflict.AlreadyHave")}</span><strong>${escapeHtml(conflict.existing.name)}${existingRank}</strong></p>
-      <p><span>${game.i18n.format("CYPHERV2.GrantConflict.WouldGrant", {source: escapeHtml(conflict.packageName)})}</span><strong>${escapeHtml(conflict.proposed.name)}${proposedRank}</strong></p>
+      <p><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.AlreadyHave")}</span><strong>${escapeHtml(conflict.existing.name)}${existingRank}</strong></p>
+      <p><span>${game.i18n.format("MAGNUSARCHIVES.GrantConflict.WouldGrant", {source: escapeHtml(conflict.packageName)})}</span><strong>${escapeHtml(conflict.proposed.name)}${proposedRank}</strong></p>
     </div>
-    <fieldset><legend>${game.i18n.localize("CYPHERV2.GrantConflict.Suggested")}</legend>${suggestionRows}</fieldset>
+    <fieldset><legend>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.Suggested")}</legend>${suggestionRows}</fieldset>
     ${replacementFields}
-    ${conflict.allowSuppress ? `<label class="grant-conflict-option suppress"><input type="radio" name="resolution" value="suppress" checked><span>${game.i18n.localize("CYPHERV2.GrantConflict.Suppress")}</span></label>` : ""}
-    ${conflict.allowGmOverride && game.user.isGM ? `<label class="grant-conflict-option"><input type="radio" name="resolution" value="gmOverride"><span>${game.i18n.localize("CYPHERV2.GrantConflict.GmOverride")}</span></label>` : ""}
+    ${conflict.allowSuppress ? `<label class="grant-conflict-option suppress"><input type="radio" name="resolution" value="suppress" checked><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.Suppress")}</span></label>` : ""}
+    ${conflict.allowGmOverride && game.user.isGM ? `<label class="grant-conflict-option"><input type="radio" name="resolution" value="gmOverride"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.GmOverride")}</span></label>` : ""}
   </div>`;
 
   while (true) {
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.GrantConflict.Title")},
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.Title")},
       content,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Confirm")}
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm")}
     }) as DialogData | null;
     if (!data) return {action: "cancel"};
     const resolution = String(data.resolution ?? "");
@@ -126,12 +126,12 @@ export async function resolveGrantConflictWithDialog(conflict: GrantConflict): P
           name,
           itemUuid: "",
           snapshot: {name, system: {}},
-          reason: game.i18n.localize("CYPHERV2.GrantConflict.CustomSkill"),
+          reason: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill"),
           reasonSourceUuid: "",
           custom: true
         }
       };
     }
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.GrantConflict.SelectResolution"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.GrantConflict.SelectResolution"));
   }
 }

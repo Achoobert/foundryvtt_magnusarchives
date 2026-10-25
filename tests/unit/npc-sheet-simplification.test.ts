@@ -9,7 +9,7 @@ const model = readFileSync("src/data/actors/npc.ts", "utf8");
 const actorBase = readFileSync("src/data/actors/actor-base.ts", "utf8");
 const styles = readFileSync("styles/sheets/_sheets.scss", "utf8");
 
-describe("minimal NPC Sheet presentation", () => {
+describe("NPC Sheet presentation", () => {
   it("exposes the compact Portrait, Name, Level, derived TN, Armor, Health, and Notes surface", () => {
     expect(template).toContain('class="portrait npc-avatar"');
     for (const field of [
@@ -24,19 +24,27 @@ describe("minimal NPC Sheet presentation", () => {
     expect(template).not.toContain('data-tab="');
   });
 
-  it("keeps legacy mechanical Armor, Damage, Combat, Movement, Modifications, and Description out of the normal UI", () => {
-    for (const absent of [
-      "npc-combat-panel",
-      "npc-modifications-panel",
+  it("surfaces the Attack and Modifications the book\'s NPC tables use", () => {
+    // The Magnus Archives Roleplaying Game, FREE PREVIEW p15: an NPC is a name,
+    // a Level, and a short list of modifications.
+    for (const present of [
       "createModification",
       "editModification",
       "deleteModification",
       "requestDefense",
-      "system.damage.amount",
-      "system.armorBase",
-      "system.damage.woundSeverity",
+      "system.damage.effect",
+      "system.damage.stressAmount",
       "system.damage.defense.allowDodge",
-      "system.damage.defense.allowBlock",
+      "system.damage.defense.allowBlock"
+    ]) expect(template).toContain(present);
+    expect(template).toContain("MAGNUSARCHIVES.Npc.Modifications");
+  });
+
+  it("keeps the legacy Cypher mechanics out of the UI", () => {
+    for (const absent of [
+      "system.damage.amount",
+      "system.damage.woundSeverity",
+      "system.armorBase",
       "system.movement.category",
       "system.movement.distance",
       'name="system.description"'
@@ -85,7 +93,7 @@ describe("minimal NPC Sheet presentation", () => {
   it("retains every legacy NPC field and compatibility action without exposing its editor", () => {
     expect(actorBase).toContain("description: new fields.HTMLField");
     expect(actorBase).toContain("notes: new fields.HTMLField");
-    for (const field of ["armor", "armorBase", "damage", "woundSeverity", "allowBlock", "allowDodge", "movement", "modifications"]) {
+    for (const field of ["armor", "armorBase", "damage", "effect", "stressAmount", "allowBlock", "allowDodge", "movement", "modifications"]) {
       expect(model).toContain(field);
     }
     for (const action of ["requestDefense", "createModification", "editModification", "deleteModification"]) {
@@ -98,24 +106,24 @@ describe("minimal NPC Sheet presentation", () => {
     expect(npcHealthGauge(6, 12)).toMatchObject({ratio: 0.5, state: "intermediate"});
     expect(npcHealthGauge(3, 12)).toMatchObject({ratio: 0.25, state: "low"});
     expect(npcHealthGauge(20, 10)).toMatchObject({current: 10, ratio: 1});
-    expect(template).toContain("--cypherv2-npc-health-ratio: {{healthGauge.ratio}}");
-    expect(styles).toContain("width: calc(var(--cypherv2-npc-health-ratio) * 100%)");
-    expect(styles).toContain("--cypherv2-npc-health-color: var(--cypherv2-success)");
-    expect(styles).toContain("--cypherv2-npc-health-color: var(--cypherv2-color-warning)");
-    expect(styles).toContain("--cypherv2-npc-health-color: var(--cypherv2-danger)");
+    expect(template).toContain("--magnusarchives-npc-health-ratio: {{healthGauge.ratio}}");
+    expect(styles).toContain("width: calc(var(--magnusarchives-npc-health-ratio) * 100%)");
+    expect(styles).toContain("--magnusarchives-npc-health-color: var(--magnusarchives-success)");
+    expect(styles).toContain("--magnusarchives-npc-health-color: var(--magnusarchives-color-warning)");
+    expect(styles).toContain("--magnusarchives-npc-health-color: var(--magnusarchives-danger)");
   });
 
   it("keeps editable controls permission-aware and gives Notes the dominant responsive row", () => {
     expect(template).toContain('{{#if editable}}data-action="editImage"');
     expect(template).toContain('{{#unless editable}}readonly{{/unless}}');
-    expect(template.match(/\{\{#unless editable\}\}disabled\{\{\/unless\}\}/g)).toHaveLength(4);
+    expect(template.match(/\{\{#unless editable\}\}disabled\{\{\/unless\}\}/g)).toHaveLength(8);
     expect(styles).toContain("display: flex");
     expect(styles).toContain("flex: 1 1 auto");
     expect(styles).toContain(".npc-health-row");
     expect(styles).not.toContain(".npc-health-card");
-    expect(styles).toContain("container-name: cypherv2-npc-sheet");
-    expect(styles).toContain("@container cypherv2-npc-sheet (max-width: 30rem)");
-    expect(styles).toContain("@container cypherv2-npc-sheet (max-width: 23rem)");
+    expect(styles).toContain("container-name: magnusarchives-npc-sheet");
+    expect(styles).toContain("@container magnusarchives-npc-sheet (max-width: 30rem)");
+    expect(styles).toContain("@container magnusarchives-npc-sheet (max-width: 23rem)");
   });
 
   it("aligns Level and current Health through the same stable stat-line grid", () => {

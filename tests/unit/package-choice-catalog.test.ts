@@ -35,8 +35,12 @@ function catalogGroup(): DescriptorChoiceGroup {
   };
 }
 
+// The catalog grows and shrinks with the pack, so the count is read from the
+// content rather than pinned, and only the relationships are asserted.
+const DESCRIPTOR_COUNT = coreSource.packs.descriptors.documents.length;
+
 describe("dynamic package choice catalogs", () => {
-  it("resolves all 33 current public Descriptors without changing the catalog rule", () => {
+  it("resolves every current public Descriptor without changing the catalog rule", () => {
     const publicDescriptors = coreSource.packs.descriptors.documents.map((document: any) => ({
       ...document,
       uuid: `Compendium.${PUBLIC_DESCRIPTOR_PACK_ID}.Item.${document._id}`
@@ -44,13 +48,14 @@ describe("dynamic package choice catalogs", () => {
     const sourceGroup = catalogGroup();
     const [resolved] = resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors);
 
-    expect(resolved?.options).toHaveLength(33);
-    expect(new Set(resolved?.options.map((option) => option.descriptorUuid)).size).toBe(33);
+    expect(DESCRIPTOR_COUNT).toBeGreaterThan(0);
+    expect(resolved?.options).toHaveLength(DESCRIPTOR_COUNT);
+    expect(new Set(resolved?.options.map((option) => option.descriptorUuid)).size).toBe(DESCRIPTOR_COUNT);
     expect(sourceGroup).toEqual(catalogGroup());
     expect(sourceGroup.options).toEqual([]);
   });
 
-  it("grows and shrinks from the 33-system-Descriptor catalog with supported World content without modifying the package", () => {
+  it("grows and shrinks from the system Descriptor catalog with supported World content without modifying the package", () => {
     const sourceGroup = catalogGroup();
     const publicDescriptors = coreSource.packs.descriptors.documents.map((document: any) => ({
       ...document,
@@ -58,14 +63,14 @@ describe("dynamic package choice catalogs", () => {
     }));
     const customDescriptor = descriptor("Item.world-custom", "World Custom");
 
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(33);
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], [...publicDescriptors, customDescriptor])[0]?.options).toHaveLength(34);
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(33);
+    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(DESCRIPTOR_COUNT);
+    expect(resolveDescriptorChoiceCatalogs([sourceGroup], [...publicDescriptors, customDescriptor])[0]?.options).toHaveLength(DESCRIPTOR_COUNT + 1);
+    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(DESCRIPTOR_COUNT);
     expect(sourceGroup.options).toEqual([]);
   });
 
   it("discovers the canonical system pack plus World Descriptor Items", async () => {
-    const publicDescriptor = descriptor("Compendium.cypherv2.descriptors.Item.fast", "Fast");
+    const publicDescriptor = descriptor("Compendium.magnusarchives.descriptors.Item.fast", "Fast");
     const worldDescriptor = descriptor("Item.world-custom", "World Custom");
     const ignoredWorldItem = {...descriptor("Item.skill", "Not a Descriptor"), type: "skill"};
     let requestedPack = "";

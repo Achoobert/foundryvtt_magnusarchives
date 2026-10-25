@@ -93,7 +93,7 @@ function cssUrl(path: string): string {
  * Resolve a stored Foundry/Data asset path before placing it in CSS.
  *
  * CSS URLs substituted from the compiled system stylesheet otherwise resolve
- * relative to systems/cypherv2/dist. Absolute URLs are already fully resolved
+ * relative to systems/magnusarchives/dist. Absolute URLs are already fully resolved
  * (including remote/S3 assets) and must remain untouched.
  */
 export function resolveFoundryAssetUrl(
@@ -125,10 +125,10 @@ export function resolveCharacterAppearance(
       : "";
   const backgroundImage = resolveFoundryAssetUrl(backgroundSource, getRoute);
   const properties = [
-    ...(accent ? [`--cypherv2-character-accent: ${accent}`] : []),
-    ...(tint ? [`--cypherv2-character-tint: ${tint}`] : []),
+    ...(accent ? [`--magnusarchives-character-accent: ${accent}`] : []),
+    ...(tint ? [`--magnusarchives-character-tint: ${tint}`] : []),
     ...(backgroundImage
-      ? [`--cypherv2-character-background-image: ${cssUrl(backgroundImage)}`]
+      ? [`--magnusarchives-character-background-image: ${cssUrl(backgroundImage)}`]
       : [])
   ];
   return {

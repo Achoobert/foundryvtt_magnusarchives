@@ -39,7 +39,7 @@ describe("Focus editor scroll preservation", () => {
     const windowContent = new FakeElement();
     const section = new FakeElement({focusUuid: "Item.focus"});
     const tree = new FakeElement();
-    root.map(".cypherv2-sheet.cypherv2-item", sheet);
+    root.map(".magnusarchives-sheet.magnusarchives-item", sheet);
     root.map(".window-content", windowContent);
     root.sections = [section];
     section.map(".focus-tree-scroll", tree);

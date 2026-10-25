@@ -1,7 +1,7 @@
 import {SYSTEM_UI_ASSETS} from "../config/system-assets";
 import {resolveFoundryAssetUrl, type FoundryAssetRouteResolver} from "../themes/character-appearance";
 
-export const BLANK_CANVAS_BACKGROUND_PROPERTY = "--cypherv2-blank-canvas-background-image";
+export const BLANK_CANVAS_BACKGROUND_PROPERTY = "--magnusarchives-blank-canvas-background-image";
 
 interface BackgroundStyleTarget {
   readonly style: Pick<CSSStyleDeclaration, "setProperty">;

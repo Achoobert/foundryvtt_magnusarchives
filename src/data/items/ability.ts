@@ -3,7 +3,7 @@ import {
   ABILITY_POOLS,
   ABILITY_ROLL_TYPES,
   ABILITY_TARGET_MODES,
-  WOUND_SEVERITIES
+  CHARACTER_DAMAGE_EFFECTS
 } from "../../constants/system";
 import {fields, integerField} from "../common/schema";
 import {ItemDataModelBase} from "./item-base";
@@ -63,12 +63,13 @@ export class AbilityDataModel extends ItemDataModelBase {
         initial: 0
       }),
       damage: integerField(),
-      woundSeverity: new fields.StringField({
+      damageEffect: new fields.StringField({
         required: true,
         nullable: false,
         initial: "none",
-        choices: ["none", ...WOUND_SEVERITIES]
+        choices: [...CHARACTER_DAMAGE_EFFECTS]
       }),
+      stressAmount: integerField(3),
       range: new fields.StringField({required: true, nullable: false, initial: ""}),
       targetMode: new fields.StringField({
         required: true,
@@ -87,6 +88,14 @@ export class AbilityDataModel extends ItemDataModelBase {
     options: {readonly partial?: boolean} = {}
   ): Record<string, unknown> {
     const migrated = super.migrateData(source, options);
+    // Cypher Wound severities become Magnus effects: a minor Wound was the
+    // everyday hit, which here is Stress; anything worse is a serious injury.
+    if (migrated.damageEffect === undefined && typeof migrated.woundSeverity === "string") {
+      migrated.damageEffect = migrated.woundSeverity === "none"
+        ? "none"
+        : migrated.woundSeverity === "minor" ? "stress" : "seriousInjury";
+      delete migrated.woundSeverity;
+    }
     const legacyCost = migrated.cost && typeof migrated.cost === "object"
       ? migrated.cost as Record<string, unknown>
       : {};

@@ -11,7 +11,7 @@ export const TYPE_REVIEW_PACK_ID = "types-working";
 export const TYPE_ABILITY_REVIEW_PACK_ID = "type-abilities-working";
 export const TYPE_REVIEW_LABEL = "Types (Working)";
 export const TYPE_ABILITY_REVIEW_LABEL = "Type Abilities (Working)";
-export const TYPE_ABILITY_PUBLIC_PREFIX = "Compendium.cypherv2.type-abilities.Item.";
+export const TYPE_ABILITY_PUBLIC_PREFIX = "Compendium.magnusarchives.type-abilities.Item.";
 export const TYPE_ABILITY_REVIEW_PREFIX = "Compendium.world.type-abilities-working.Item.";
 
 const exists = (target) => access(target).then(() => true, () => false);
@@ -100,7 +100,7 @@ function packManifestEntry(name, label) {
     label,
     path: `packs/${name}`,
     type: "Item",
-    system: "cypherv2",
+    system: "magnusarchives",
     ownership: {PLAYER: "OBSERVER", ASSISTANT: "OWNER"},
     flags: {},
     package: "world"
@@ -119,7 +119,7 @@ export async function importTypeReview({candidatePath, projectRoot, worldDirecto
   const worldPath = path.resolve(worldDirectory);
   const manifestPath = path.join(worldPath, "world.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-  if (manifest.id !== path.basename(worldPath) || manifest.system !== "cypherv2") {
+  if (manifest.id !== path.basename(worldPath) || manifest.system !== "magnusarchives") {
     throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
   }
 
@@ -162,7 +162,7 @@ export async function importTypeReview({candidatePath, projectRoot, worldDirecto
     manifest.packs ??= [];
     upsertPack(manifest.packs, packManifestEntry(TYPE_REVIEW_PACK_ID, TYPE_REVIEW_LABEL));
     upsertPack(manifest.packs, packManifestEntry(TYPE_ABILITY_REVIEW_PACK_ID, TYPE_ABILITY_REVIEW_LABEL));
-    const temporaryManifest = path.join(worldPath, "world.json.cypherv2-review-tmp");
+    const temporaryManifest = path.join(worldPath, "world.json.magnusarchives-review-tmp");
     await writeFile(temporaryManifest, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await rm(manifestPath, {force: true});
     await rename(temporaryManifest, manifestPath);

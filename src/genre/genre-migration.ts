@@ -19,9 +19,9 @@ export async function migrateLegacyTypeGenres(): Promise<void> {
         async (uuid) => await fromUuid(uuid) as GenreDocumentLike | null
       );
       if (!suggestion) continue;
-      await game.cypherv2.services.genres.attach(character, suggestion, "migration");
+      await game.magnusarchives.services.genres.attach(character, suggestion, "migration");
     } catch (error) {
-      console.warn("cypherv2 | Could not migrate a legacy Type Genre suggestion", actor.uuid, error);
+      console.warn("magnusarchives | Could not migrate a legacy Type Genre suggestion", actor.uuid, error);
     }
   }
 }

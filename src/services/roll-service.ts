@@ -94,34 +94,35 @@ export class RollService {
     const contributions: RollStepContribution[] = [];
     const skill = manualContribution(
       "manual.skill",
-      "CYPHERV2.Roll.Breakdown.Skill",
+      "MAGNUSARCHIVES.Roll.Breakdown.Skill",
       request.skillSteps,
       "skill"
     );
     if (skill) contributions.push(skill);
     const otherEase = manualContribution(
       "manual.other-ease",
-      "CYPHERV2.Roll.Breakdown.OtherEase",
+      "MAGNUSARCHIVES.Roll.Breakdown.OtherEase",
       request.otherEase,
       "other"
     );
     if (otherEase) contributions.push(otherEase);
     const otherHindrance = manualContribution(
       "manual.other-hindrance",
-      "CYPHERV2.Roll.Breakdown.OtherHindrance",
+      "MAGNUSARCHIVES.Roll.Breakdown.OtherHindrance",
       -request.otherHindrance,
       "other"
     );
     if (otherHindrance) contributions.push(otherHindrance);
-    const woundHindrance = actor.system.derived.wounds.hindrance;
-    if (woundHindrance > 0) {
+    // Stress Levels and other always-on conditions hinder every task (p12).
+    const conditionHindrance = actor.system.derived.totalHindrance;
+    if (conditionHindrance > 0) {
       contributions.push({
-        id: "core.wounds.hindrance",
-        label: "CYPHERV2.Roll.Breakdown.Wounds",
+        id: "core.conditions.hindrance",
+        label: "MAGNUSARCHIVES.Roll.Breakdown.Conditions",
         direction: "hinder",
-        steps: woundHindrance,
-        source: "wound",
-        sourceId: "system.derived.wounds.hindrance"
+        steps: conditionHindrance,
+        source: "condition",
+        sourceId: "system.derived.totalHindrance"
       });
     }
     const tags = request.tags ?? [];
@@ -133,7 +134,7 @@ export class RollService {
       for (const entry of armor?.speedTaskContributions ?? []) {
         contributions.push({
           id: entry.id,
-          label: `CYPHERV2.Combat.Armor.Unfamiliar.${armor?.category ?? "light"}`,
+          label: `MAGNUSARCHIVES.Combat.Armor.Unfamiliar.${armor?.category ?? "light"}`,
           direction: "hinder",
           steps: entry.value,
           source: "other",
@@ -155,7 +156,7 @@ export class RollService {
     const policy = this.#rules.resolveDifficultyPolicy(policyRequest.base, enabledRuleModuleIds);
     const baseContext: RollContext = {
       actor: {id: actor.id, name: actor.name},
-      label: request.label ?? "CYPHERV2.Roll.TestRoll",
+      label: request.label ?? "MAGNUSARCHIVES.Roll.TestRoll",
       pool: request.pool,
       difficulty: request.difficulty,
       assets: request.assets,
@@ -164,6 +165,7 @@ export class RollService {
       freeDamageEffort: request.freeDamageEffort ?? 0,
       freeEffort: request.freeEffort,
       edge: request.pool === null ? 0 : actor.system.derived.pools[request.pool].edge,
+      effortSurcharge: actor.system.derived.damageTrack.effortSurcharge,
       poolValue: request.pool === null ? 0 : actor.system.stats[request.pool].value,
       actionCost: request.actionCost ?? 0,
       actionCostIgnoresEdge: request.actionCostIgnoresEdge ?? false,

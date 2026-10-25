@@ -17,7 +17,7 @@ function targetIdentity(target: AbilityTargetLike) {
 }
 
 function consequence(
-  outcome: Pick<AbilityRollOutcome, "target" | "grossDamage" | "woundSeverity" | "ability">,
+  outcome: Pick<AbilityRollOutcome, "target" | "grossDamage" | "damageEffect" | "stressAmount" | "ability">,
   sourceActorId: string
 ): RollChatCombatPresentation {
   const target = outcome.target;
@@ -33,13 +33,15 @@ function consequence(
       }
     };
   }
-  if (target.type === "character" && outcome.woundSeverity !== "none") {
+  if (target.type === "character" && outcome.damageEffect !== "none") {
     return {
-      woundSeverity: outcome.woundSeverity,
+      damageEffect: outcome.damageEffect,
+      stressAmount: outcome.stressAmount,
       action: {
-        kind: "characterWound",
+        kind: "characterDamage",
         ...actionTargetIdentity(targetIdentity(target)),
-        severity: outcome.woundSeverity,
+        effect: outcome.damageEffect,
+        stressAmount: outcome.stressAmount,
         sourceActorId,
         sourceName: outcome.ability.name,
         applied: false
@@ -72,9 +74,9 @@ export class AbilityChatService {
       ...(damageCanBePresented && outcome.ability.system.roll === "attack" ? {
         damage: outcome.grossDamage,
         damageBreakdown: [
-          {label: "CYPHERV2.Ability.DamageBreakdown.Base", value: outcome.baseDamage},
-          ...(outcome.effortDamage ? [{label: "CYPHERV2.Combat.DamageBreakdown.Effort", value: outcome.effortDamage, additive: true}] : []),
-          ...(outcome.naturalDamage ? [{label: "CYPHERV2.Combat.DamageBreakdown.Natural", value: outcome.naturalDamage, additive: true}] : [])
+          {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: outcome.baseDamage},
+          ...(outcome.effortDamage ? [{label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: outcome.effortDamage, additive: true}] : []),
+          ...(outcome.naturalDamage ? [{label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: outcome.naturalDamage, additive: true}] : [])
         ]
       } : {})
     };
@@ -90,30 +92,32 @@ export class AbilityChatService {
         ability: outcome.ability,
         target,
         grossDamage: outcome.ability.system.damage,
-        woundSeverity: outcome.ability.system.woundSeverity
+        damageEffect: outcome.ability.system.damageEffect,
+        stressAmount: outcome.ability.system.stressAmount
       }, actor.id) : {};
       const action = combat.action;
       const content = await foundry.applications.handlebars.renderTemplate(
-        "systems/cypherv2/templates/chat/ability-card.hbs",
+        "systems/magnusarchives/templates/chat/ability-card.hbs",
         {
           abilityName: outcome.ability.name,
           actorName: actor.name,
           ...chatCardActorImageData(actor as unknown as import("./chat-card-presentation").ChatCardActorLike),
-          activation: game.i18n.localize(`CYPHERV2.Ability.Activation.${outcome.ability.system.activation}`),
+          activation: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${outcome.ability.system.activation}`),
           poolLabel: outcome.pool
-            ? game.i18n.localize(`CYPHERV2.Pools.${outcome.pool[0]!.toUpperCase()}${outcome.pool.slice(1)}`)
+            ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${outcome.pool[0]!.toUpperCase()}${outcome.pool.slice(1)}`)
             : "",
           costPaid: outcome.costPaid,
           targetName: target?.name ?? "",
           damage: combat.damage,
-          woundSeverity: combat.woundSeverity
-            ? game.i18n.localize(`CYPHERV2.Wounds.Severity.${combat.woundSeverity}`)
+          damageEffect: combat.damageEffect
+            ? game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${combat.damageEffect}`)
             : "",
+          stressAmount: combat.damageEffect === "stress" ? combat.stressAmount : 0,
           combatAction: Boolean(action),
           combatActionLabel: action
             ? game.i18n.localize(action.kind === "npcDamage"
-              ? "CYPHERV2.Combat.ApplyDamage"
-              : "CYPHERV2.Combat.ApplyWound")
+              ? "MAGNUSARCHIVES.Combat.ApplyDamage"
+              : "MAGNUSARCHIVES.Combat.ApplyCharacterDamage")
             : ""
         }
       );
@@ -121,17 +125,17 @@ export class AbilityChatService {
         speaker: ChatMessage.getSpeaker({actor: actor as unknown as Actor}),
         content
       };
-      if (action) message.flags = {cypherv2: {combatAction: action}};
+      if (action) message.flags = {magnusarchives: {combatAction: action}};
       await ChatMessage.create(message);
     }
   }
 
   async publishPayment(actor: CombatCharacterLike, outcome: AbilityPaymentOutcome): Promise<void> {
     const poolLabel = game.i18n.localize(
-      `CYPHERV2.Pools.${outcome.pool[0]!.toUpperCase()}${outcome.pool.slice(1)}`
+      `MAGNUSARCHIVES.Pools.${outcome.pool[0]!.toUpperCase()}${outcome.pool.slice(1)}`
     );
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/ability-payment-card.hbs",
+      "systems/magnusarchives/templates/chat/ability-payment-card.hbs",
       {
         abilityName: outcome.ability.name,
         actorName: actor.name,

@@ -107,7 +107,7 @@ export class FocusTreeConnectionController {
 
   bind(root: ParentNode): void {
     this.disconnect();
-    this.#sections = [...root.querySelectorAll<HTMLElement>(".cypherv2-focus-tree-section")];
+    this.#sections = [...root.querySelectorAll<HTMLElement>(".magnusarchives-focus-tree-section")];
     if (this.#sections.length === 0) return;
 
     this.#observer = new ResizeObserver(() => this.scheduleRefresh());

@@ -1,5 +1,5 @@
 import {CharacterSheet} from "../applications/sheets/character-sheet";
-import {CypherV2ItemSheet} from "../applications/sheets/item-sheet";
+import {MagnusArchivesItemSheet} from "../applications/sheets/item-sheet";
 import {NpcSheet} from "../applications/sheets/npc-sheet";
 import {SYSTEM_ID} from "../constants/system";
 
@@ -9,18 +9,18 @@ export function registerSheets(): void {
   DocumentSheetConfig.registerSheet(foundry.documents.Actor, SYSTEM_ID, CharacterSheet, {
     types: ["character"],
     makeDefault: true,
-    label: "CYPHERV2.Sheets.Character"
+    label: "MAGNUSARCHIVES.Sheets.Character"
   });
 
   DocumentSheetConfig.registerSheet(foundry.documents.Actor, SYSTEM_ID, NpcSheet, {
     types: ["npc"],
     makeDefault: true,
-    label: "CYPHERV2.Sheets.Npc"
+    label: "MAGNUSARCHIVES.Sheets.Npc"
   });
 
-  DocumentSheetConfig.registerSheet(foundry.documents.Item, SYSTEM_ID, CypherV2ItemSheet, {
+  DocumentSheetConfig.registerSheet(foundry.documents.Item, SYSTEM_ID, MagnusArchivesItemSheet, {
     makeDefault: true,
-    label: "CYPHERV2.Sheets.Item"
+    label: "MAGNUSARCHIVES.Sheets.Item"
   });
 }
 

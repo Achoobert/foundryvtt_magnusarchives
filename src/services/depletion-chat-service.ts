@@ -4,7 +4,7 @@ import {chatCardActorImageData} from "./chat-card-presentation";
 export class DepletionChatService {
   async publish(item: DepletionItemLike, result: DepletionRollResult): Promise<void> {
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/depletion-card.hbs",
+      "systems/magnusarchives/templates/chat/depletion-card.hbs",
       {
         itemName: result.itemName,
         ...chatCardActorImageData(item.actor),
@@ -12,7 +12,7 @@ export class DepletionChatService {
         total: result.total,
         depleted: result.depleted,
         outcome: game.i18n.localize(
-          result.depleted ? "CYPHERV2.Depletion.Depleted" : "CYPHERV2.Depletion.NotDepleted"
+          result.depleted ? "MAGNUSARCHIVES.Depletion.Depleted" : "MAGNUSARCHIVES.Depletion.NotDepleted"
         )
       }
     );

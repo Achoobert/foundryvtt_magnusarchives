@@ -23,8 +23,8 @@ export function validateGenreAbilityReviewDocuments(abilities) {
   if (abilities.length !== GENRE_ABILITY_COUNTS.abilities) errors.push(`Expected ${GENRE_ABILITY_COUNTS.abilities} Genre Abilities; found ${abilities.length}.`);
   if (new Set(abilities.map((document) => document._id)).size !== abilities.length) errors.push("Duplicate Genre Ability IDs in Working documents.");
   if (new Set(abilities.map((document) => document.system?.slug)).size !== abilities.length) errors.push("Duplicate Genre Ability slugs in Working documents.");
-  const progression = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "progression");
-  const origin = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "origin");
+  const progression = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "progression");
+  const origin = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "origin");
   if (progression.length !== GENRE_ABILITY_COUNTS.progression) errors.push(`Expected ${GENRE_ABILITY_COUNTS.progression} progression Abilities; found ${progression.length}.`);
   if (origin.length !== GENRE_ABILITY_COUNTS.origin) errors.push(`Expected 26 Origin Abilities; found ${origin.length}.`);
   if (abilities.some((document) => (document.system?.ruleElements?.length ?? 0) !== 0)) errors.push("Working documents contain speculative ruleElements.");
@@ -57,7 +57,7 @@ function packManifestEntry() {
     label: GENRE_ABILITY_REVIEW_LABEL,
     path: `packs/${GENRE_ABILITY_REVIEW_PACK_ID}`,
     type: "Item",
-    system: "cypherv2",
+    system: "magnusarchives",
     ownership: {PLAYER: "OBSERVER", ASSISTANT: "OWNER"},
     flags: {},
     package: "world"
@@ -77,7 +77,7 @@ export async function importGenreAbilityReview({candidatePath, projectRoot, worl
   const worldPath = path.resolve(worldDirectory);
   const manifestPath = path.join(worldPath, "world.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-  if (manifest.id !== path.basename(worldPath) || manifest.system !== "cypherv2") throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
+  if (manifest.id !== path.basename(worldPath) || manifest.system !== "magnusarchives") throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
 
   const generatedRoot = path.resolve(projectRoot, ".generated", "genre-ability-review-source");
   const stagingRoot = path.resolve(projectRoot, ".generated", "genre-ability-review-build");
@@ -109,7 +109,7 @@ export async function importGenreAbilityReview({candidatePath, projectRoot, worl
     packInstalled = true;
     manifest.packs ??= [];
     upsertPack(manifest.packs, packManifestEntry());
-    const temporaryManifest = path.join(worldPath, "world.json.cypherv2-genre-ability-review-tmp");
+    const temporaryManifest = path.join(worldPath, "world.json.magnusarchives-genre-ability-review-tmp");
     await writeFile(temporaryManifest, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await rm(manifestPath, {force: true});
     await rename(temporaryManifest, manifestPath);

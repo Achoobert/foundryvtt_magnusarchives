@@ -29,10 +29,10 @@ describe("Type Item Sheet pre-release presentation", () => {
   it("renders the requested Type sections in stable document order", () => {
     const markers = [
       "type-benefits-panel",
-      "CYPHERV2.Packages.AbilityGrants",
-      "CYPHERV2.Species.AbilityChoices",
-      "CYPHERV2.Packages.FixedSkills",
-      "CYPHERV2.Packages.ChoiceGroups",
+      "MAGNUSARCHIVES.Packages.AbilityGrants",
+      "MAGNUSARCHIVES.Species.AbilityChoices",
+      "MAGNUSARCHIVES.Packages.FixedSkills",
+      "MAGNUSARCHIVES.Packages.ChoiceGroups",
       "name=\"system.backgroundOptions\"",
       "name=\"system.equipmentNotes\"",
       "type-technical-area"
@@ -47,7 +47,7 @@ describe("Type Item Sheet pre-release presentation", () => {
 
   it("uses compact shared headings, add controls, rows, and icon actions", () => {
     expect(typeSection.match(/class="compact-package-header/g)).toHaveLength(6);
-    expect(typeSection.match(/class="compact-package-add-action cypherv2-icon-action"/g)).toHaveLength(4);
+    expect(typeSection.match(/class="compact-package-add-action magnusarchives-icon-action"/g)).toHaveLength(4);
     expect(typeSection).toContain('class="compact-package-grant-row"');
     expect(typeSection).toContain('class="fa-solid fa-magnifying-glass"');
     expect(typeSection).toContain('class="fa-solid fa-arrows-rotate"');
@@ -63,7 +63,7 @@ describe("Type Item Sheet pre-release presentation", () => {
     expect(typeSection).toContain('name="system.genre" data-type-genre-select');
     expect(typeSection).toContain('name="system.customGenreId"');
     expect(typeSection).toContain("data-type-custom-genre {{#unless typeCustomGenreSelected}}hidden{{/unless}}");
-    expect(language).toContain('"CYPHERV2.Packages.CustomGenre": "Custom Genre"');
+    expect(language).toContain('"MAGNUSARCHIVES.Packages.CustomGenre": "Custom Genre"');
     expect(sheet).toContain('typeCustomGenreSelected: isCharacterType && String(system.genre ?? "none") === "custom"');
 
     const binding = sheet.slice(
@@ -89,13 +89,13 @@ describe("Type Item Sheet pre-release presentation", () => {
 
   it("exposes extensible Weapon families with built-in suggestions and one normalized update path", () => {
     expect(typeSection).toContain("data-package-weapon-families");
-    expect(typeSection).toContain("cypherv2-type-weapon-family-suggestions");
+    expect(typeSection).toContain("magnusarchives-type-weapon-family-suggestions");
     expect(typeSection).not.toContain('name="system.weaponFamilyUse.');
     expect(sheet).toContain('#bindWeaponFamilies(): void');
     expect(sheet).toContain('normalizeWeaponFamilies(input.value)');
     expect(sheet).toContain('this.item.update({"system.weaponFamilies"');
     expect(sheet).toContain("BUILT_IN_WEAPON_FAMILIES.map");
-    expect(language).toContain('"CYPHERV2.Packages.WeaponFamilyPlaceholder"');
+    expect(language).toContain('"MAGNUSARCHIVES.Packages.WeaponFamilyPlaceholder"');
   });
 
   it("preserves the Custom Genre source field and native document-drop fallback", () => {

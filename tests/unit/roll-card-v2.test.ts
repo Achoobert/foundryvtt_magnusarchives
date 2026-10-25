@@ -72,7 +72,7 @@ describe("Roll Card V2 presentation data", () => {
     const pooled = buildPublicRollCardData(result(6, {pool: "might", origin: skillOrigin}), "full");
 
     expect(poolless).not.toHaveProperty("poolLabel");
-    expect(pooled.poolLabel).toBe("CYPHERV2.Pools.Might");
+    expect(pooled.poolLabel).toBe("MAGNUSARCHIVES.Pools.Might");
     expect(pooled).toMatchObject({skillName: "Cooking", skillRankClass: "specialized"});
   });
 
@@ -84,14 +84,14 @@ describe("Roll Card V2 presentation data", () => {
     }]}), "full");
 
     expect(data).toMatchObject({naturalRoll: 6, naturalDifficulty: 2});
-    expect(data.stepSummary).toBe("+2 CYPHERV2.Roll.EaseSteps · -1 CYPHERV2.Roll.HindranceStep");
+    expect(data.stepSummary).toBe("+2 MAGNUSARCHIVES.Roll.EaseSteps · -1 MAGNUSARCHIVES.Roll.HindranceStep");
     expect(data.modifierDetails).toEqual(expect.arrayContaining([
       {label: "Trained", value: "+2"},
       {label: "Wound", value: "-1"}
     ]));
     expect(data.modifierTotalDetails).toEqual([
-      {label: "CYPHERV2.Roll.TotalEase", value: "+2"},
-      {label: "CYPHERV2.Roll.TotalHindrance", value: "-1"}
+      {label: "MAGNUSARCHIVES.Roll.TotalEase", value: "+2"},
+      {label: "MAGNUSARCHIVES.Roll.TotalHindrance", value: "-1"}
     ]);
   });
 
@@ -108,8 +108,8 @@ describe("Roll Card V2 presentation data", () => {
     }]}), "full");
     expect(data.modifierDetails).toEqual([{label: "Trained", value: "+2"}]);
     expect(data.modifierTotalDetails).toEqual([
-      {label: "CYPHERV2.Roll.TotalEase", value: "+2"},
-      {label: "CYPHERV2.Roll.TotalHindrance", value: 0}
+      {label: "MAGNUSARCHIVES.Roll.TotalEase", value: "+2"},
+      {label: "MAGNUSARCHIVES.Roll.TotalHindrance", value: 0}
     ]);
   });
 
@@ -134,7 +134,7 @@ describe("Roll Card V2 presentation data", () => {
       difficulty: {mode: "hidden", value: 1},
       contributions: [{id: "ease", label: "Ease", direction: "ease", steps: 1, source: "other"}]
     }), "full");
-    expect(data).toMatchObject({presentation: "concealed", outcome: "CYPHERV2.Roll.Success"});
+    expect(data).toMatchObject({presentation: "concealed", outcome: "MAGNUSARCHIVES.Roll.Success"});
     expect(JSON.stringify(data)).not.toContain("AutomaticSuccess");
   });
 
@@ -148,10 +148,10 @@ describe("Roll Card V2 presentation data", () => {
   });
 
   it.each([
-    [17, "CYPHERV2.Roll.SpecialRoll.DamageBonus", "+1 CYPHERV2.Roll.NaturalEffects.Damage"],
-    [18, "CYPHERV2.Roll.SpecialRoll.DamageBonus", "+2 CYPHERV2.Roll.NaturalEffects.Damage"],
-    [19, "CYPHERV2.Roll.SpecialRoll.MinorEffect", "+3 CYPHERV2.Roll.NaturalEffects.Damage"],
-    [20, "CYPHERV2.Roll.SpecialRoll.MajorEffect", "+4 CYPHERV2.Roll.NaturalEffects.Damage"]
+    [17, "MAGNUSARCHIVES.Roll.SpecialRoll.DamageBonus", "+1 MAGNUSARCHIVES.Roll.NaturalEffects.Damage"],
+    [18, "MAGNUSARCHIVES.Roll.SpecialRoll.DamageBonus", "+2 MAGNUSARCHIVES.Roll.NaturalEffects.Damage"],
+    [19, "MAGNUSARCHIVES.Roll.SpecialRoll.MinorEffect", "+3 MAGNUSARCHIVES.Roll.NaturalEffects.Damage"],
+    [20, "MAGNUSARCHIVES.Roll.SpecialRoll.MajorEffect", "+4 MAGNUSARCHIVES.Roll.NaturalEffects.Damage"]
   ] as const)("labels Special Roll %i by its resolved consequence", (natural, label, damage) => {
     const rolled = result(natural, {difficulty: {mode: "known", value: 1}, purpose: "damage"});
     const resolved = natural >= 19 ? chooseNaturalAttackEffect(rolled, "damage") : rolled;
@@ -168,17 +168,17 @@ describe("Roll Card V2 presentation data", () => {
       "effect"
     );
     expect(buildPublicRollCardData(minor, "full").specialRoll).toEqual({
-      label: "CYPHERV2.Roll.SpecialRoll.MinorEffect"
+      label: "MAGNUSARCHIVES.Roll.SpecialRoll.MinorEffect"
     });
     expect(buildPublicRollCardData(major, "full").specialRoll).toEqual({
-      label: "CYPHERV2.Roll.SpecialRoll.MajorEffect"
+      label: "MAGNUSARCHIVES.Roll.SpecialRoll.MajorEffect"
     });
   });
 
   it("integrates natural 1 as a GM Intrusion event in the originating data", () => {
     const data = buildPublicRollCardData(result(1), "full");
     expect(data).toMatchObject({naturalRoll: 1, gmIntrusion: true, hasExceptionalResult: true});
-    expect(data.specialRoll).toEqual({label: "CYPHERV2.Roll.NaturalEffects.GMIntrusion"});
+    expect(data.specialRoll).toEqual({label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion"});
     expect(data.naturalEffects).toContainEqual(expect.objectContaining({isIntrusion: true}));
   });
 
@@ -191,11 +191,11 @@ describe("Roll Card V2 presentation data", () => {
     const horror = buildPublicRollCardData(result(3, {horrorIntrusionRange: 4}), "full");
     const outside = buildPublicRollCardData(result(5, {horrorIntrusionRange: 4}), "full");
 
-    expect(normal.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "CYPHERV2.Horror.Title"}));
-    expect(normalWithinHorror.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "CYPHERV2.Horror.Title"}));
-    expect(horror.resolutionDetails).toContainEqual({label: "CYPHERV2.Horror.Title", value: "1–4"});
+    expect(normal.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
+    expect(normalWithinHorror.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
+    expect(horror.resolutionDetails).toContainEqual({label: "MAGNUSARCHIVES.Horror.Title", value: "1–4"});
     expect(horror.hasDetails).toBe(true);
-    expect(outside.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "CYPHERV2.Horror.Title"}));
+    expect(outside.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
   });
 
   it("exposes final attack damage and its existing breakdown without recalculation", () => {
@@ -216,7 +216,7 @@ describe("Roll Card V2 presentation data", () => {
         {label: "Natural", value: "+2"}
       ],
       damageTotalDetails: [
-        {label: "CYPHERV2.Combat.FinalDamage", value: 12}
+        {label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 12}
       ]
     });
     expect(buildRollCardCombatData(undefined)).toEqual({
@@ -237,12 +237,12 @@ describe("Roll Card V2 presentation data", () => {
       freeDamageEffort: 1
     }), "full");
     expect(used.effortDetails).toEqual(expect.arrayContaining([
-      {label: "CYPHERV2.Roll.PaidEffort", value: 1},
-      {label: "CYPHERV2.Roll.PaidDamageEffort", value: 1},
-      {label: "CYPHERV2.Roll.FreeDamageEffort", value: 1},
-      {label: "CYPHERV2.Roll.TotalAppliedEffort", value: "3 / 6"}
+      {label: "MAGNUSARCHIVES.Roll.PaidEffort", value: 1},
+      {label: "MAGNUSARCHIVES.Roll.PaidDamageEffort", value: 1},
+      {label: "MAGNUSARCHIVES.Roll.FreeDamageEffort", value: 1},
+      {label: "MAGNUSARCHIVES.Roll.TotalAppliedEffort", value: "3 / 6"}
     ]));
-    expect(used.costDetails).toContainEqual({label: "CYPHERV2.Roll.CostPaid", value: 5});
+    expect(used.costDetails).toContainEqual({label: "MAGNUSARCHIVES.Roll.CostPaid", value: 5});
   });
 });
 
@@ -276,22 +276,22 @@ describe("Roll Card V2 templates and routing", () => {
   it("uses effect-first Special Roll terminology without repeating the natural number", () => {
     expect(template).toContain("{{specialRoll.label}}");
     expect(template).toContain("{{specialRoll.damage}}");
-    expect(template).not.toContain('{{localize "CYPHERV2.Roll.Natural"}} {{naturalRoll}}');
-    expect(template).toContain('{{localize "CYPHERV2.Roll.NaturalEffects.Title"}}');
+    expect(template).not.toContain('{{localize "MAGNUSARCHIVES.Roll.Natural"}} {{naturalRoll}}');
+    expect(template).toContain('{{localize "MAGNUSARCHIVES.Roll.NaturalEffects.Title"}}');
   });
 
   it("uses Base Damage, additive damage contributions, and official Special Roll terminology", () => {
-    expect(localization["CYPHERV2.Combat.DamageBreakdown.Category"]).toBe("Base Damage");
-    expect(localization["CYPHERV2.Combat.DamageBreakdown.Natural"]).toBe("Natural Damage");
-    expect(localization["CYPHERV2.Roll.NaturalEffects.Title"]).toBe("Special Roll");
-    expect(localization["CYPHERV2.Roll.SpecialRoll.DamageBonus"]).toBe("Damage Bonus");
-    expect(localization["CYPHERV2.Roll.SpecialRoll.MinorEffect"]).toBe("Minor Effect");
-    expect(localization["CYPHERV2.Roll.SpecialRoll.MajorEffect"]).toBe("Major Effect");
+    expect(localization["MAGNUSARCHIVES.Combat.DamageBreakdown.Category"]).toBe("Base Damage");
+    expect(localization["MAGNUSARCHIVES.Combat.DamageBreakdown.Natural"]).toBe("Natural Damage");
+    expect(localization["MAGNUSARCHIVES.Roll.NaturalEffects.Title"]).toBe("Special Roll");
+    expect(localization["MAGNUSARCHIVES.Roll.SpecialRoll.DamageBonus"]).toBe("Damage Bonus");
+    expect(localization["MAGNUSARCHIVES.Roll.SpecialRoll.MinorEffect"]).toBe("Minor Effect");
+    expect(localization["MAGNUSARCHIVES.Roll.SpecialRoll.MajorEffect"]).toBe("Major Effect");
     const userFacingRollText = [
       template,
-      localization["CYPHERV2.Roll.NaturalEffects.Title"],
-      localization["CYPHERV2.Combat.DamageBreakdown.Natural"],
-      localization["CYPHERV2.Combat.NaturalChoice.Title"]
+      localization["MAGNUSARCHIVES.Roll.NaturalEffects.Title"],
+      localization["MAGNUSARCHIVES.Combat.DamageBreakdown.Natural"],
+      localization["MAGNUSARCHIVES.Combat.NaturalChoice.Title"]
     ].join("\n");
     expect(userFacingRollText).not.toMatch(/Natural Result/i);
     expect(userFacingRollText).not.toMatch(/Critical(?: Hit| Result| Failure)?/i);
@@ -326,29 +326,29 @@ describe("Roll Card V2 templates and routing", () => {
     );
     expect(manual).toContain("this.#chat.publish(record");
     expect(natural).not.toContain("this.#chat.publish(record");
-    expect(natural).toContain('Hooks.callAll("cypherv2GMIntrusionCreated"');
+    expect(natural).toContain('Hooks.callAll("magnusarchivesGMIntrusionCreated"');
   });
 
   it("uses Character accent only as decoration and respects reduced motion", () => {
-    expect(styles).toContain("--cypherv2-chat-accent");
-    expect(styles).toContain("var(--cypherv2-success)");
-    expect(styles).toContain("var(--cypherv2-danger)");
+    expect(styles).toContain("--magnusarchives-chat-accent");
+    expect(styles).toContain("var(--magnusarchives-success)");
+    expect(styles).toContain("var(--magnusarchives-danger)");
     expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
-    expect(styles).toContain("cypherv2-chat-card-enter");
+    expect(styles).toContain("magnusarchives-chat-card-enter");
   });
 
   it("assigns semantic foregrounds directly to disclosure labels and values", () => {
     expect(styles).toMatch(
-      /\.roll-card-disclosure\s*\{[\s\S]*?\.roll-card-detail-list\s*>\s*dt\s*\{\s*color:\s*var\(--cypherv2-text-muted\)/
+      /\.roll-card-disclosure\s*\{[\s\S]*?\.roll-card-detail-list\s*>\s*dt\s*\{\s*color:\s*var\(--magnusarchives-text-muted\)/
     );
     expect(styles).toMatch(
-      /\.roll-card-disclosure\s*\{[\s\S]*?\.roll-card-detail-list\s*>\s*dd\s*\{\s*color:\s*var\(--cypherv2-text-primary\)/
+      /\.roll-card-disclosure\s*\{[\s\S]*?\.roll-card-detail-list\s*>\s*dd\s*\{\s*color:\s*var\(--magnusarchives-text-primary\)/
     );
     expect(styles).toMatch(
-      /\.roll-card-disclosure\s*\{[\s\S]*?>\s*ul\s*>\s*li\s*>\s*span[\s\S]*?color:\s*var\(--cypherv2-text-primary\)/
+      /\.roll-card-disclosure\s*\{[\s\S]*?>\s*ul\s*>\s*li\s*>\s*span[\s\S]*?color:\s*var\(--magnusarchives-text-primary\)/
     );
     expect(styles).toMatch(
-      /\.roll-card-disclosure\s*\{[\s\S]*?>\s*ul\s*>\s*li\s*>\s*small[\s\S]*?color:\s*var\(--cypherv2-text-muted\)/
+      /\.roll-card-disclosure\s*\{[\s\S]*?>\s*ul\s*>\s*li\s*>\s*small[\s\S]*?color:\s*var\(--magnusarchives-text-muted\)/
     );
   });
 });

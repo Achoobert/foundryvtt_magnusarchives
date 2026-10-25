@@ -11,7 +11,7 @@ afterAll(() => vi.unstubAllGlobals());
 describe("Rally dialog V2", () => {
   it("uses the scoped shared dialog skin and exactly two mode radios", () => {
     const html = rallyDialogContent(9, 21, 2, 5, 7);
-    expect(html).toContain("cypherv2 cypherv2-dialog cypherv2-rally-dialog");
+    expect(html).toContain("magnusarchives magnusarchives-dialog magnusarchives-rally-dialog");
     expect(html.match(/name="severity"/g)).toHaveLength(2);
     expect(html).toContain('value="minor" data-default-cost="2" checked');
     expect(html).toContain('value="moderate" data-default-cost="5"');

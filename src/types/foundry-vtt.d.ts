@@ -244,7 +244,7 @@ declare const CONFIG: {
   };
 };
 
-interface CypherV2GameApi {
+interface MagnusArchivesGameApi {
   readonly version: string;
   readonly rules: import("../rules/rule-registry").RuleRegistry;
   readonly services: import("../services").CoreServices;
@@ -274,7 +274,7 @@ declare const game: {
     get(scope: string, key: string): unknown;
     set(scope: string, key: string, value: unknown): Promise<unknown>;
   };
-  cypherv2: CypherV2GameApi;
+  magnusarchives: MagnusArchivesGameApi;
 };
 
 declare const Hooks: {

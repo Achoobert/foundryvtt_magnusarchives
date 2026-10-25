@@ -16,7 +16,7 @@ export function initializeItemChatController(): void {
         const uuid = button.dataset.itemUuid;
         const item = uuid ? await fromUuid(uuid) as Item | null : null;
         if (!item || item.type !== "artifact" || !canControl(item)) {
-          ui.notifications.warn(game.i18n.localize("CYPHERV2.Inventory.NotAuthorized"));
+          ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Inventory.NotAuthorized"));
           return;
         }
         button.disabled = true;

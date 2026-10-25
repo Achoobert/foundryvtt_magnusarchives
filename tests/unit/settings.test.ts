@@ -17,7 +17,7 @@ describe("world settings", () => {
     vi.stubGlobal("game", {settings: {register}});
     registerSettings(new ThemeRegistry());
 
-    expect(register).toHaveBeenCalledWith("cypherv2", SETTING_KEYS.showGmRollAudit, expect.objectContaining({
+    expect(register).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.showGmRollAudit, expect.objectContaining({
       scope: "world",
       config: true,
       type: Boolean,
@@ -30,7 +30,7 @@ describe("world settings", () => {
     vi.stubGlobal("game", {settings: {get}});
 
     expect(showGmRollAuditEnabled()).toBe(true);
-    expect(get).toHaveBeenCalledWith("cypherv2", SETTING_KEYS.showGmRollAudit);
+    expect(get).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.showGmRollAudit);
   });
 
   it("registers one hidden World Horror range from 1 through 20 with default 1", () => {
@@ -38,7 +38,7 @@ describe("world settings", () => {
     vi.stubGlobal("game", {settings: {register}});
     registerSettings(new ThemeRegistry());
 
-    expect(register).toHaveBeenCalledWith("cypherv2", SETTING_KEYS.horrorIntrusionRange, expect.objectContaining({
+    expect(register).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.horrorIntrusionRange, expect.objectContaining({
       scope: "world",
       config: false,
       type: Number,
@@ -60,7 +60,7 @@ describe("world settings", () => {
 
     await expect(setHorrorIntrusionRange(4)).resolves.toBe(4);
     expect(currentHorrorIntrusionRange()).toBe(4);
-    expect(set).toHaveBeenCalledWith("cypherv2", SETTING_KEYS.horrorIntrusionRange, 4);
+    expect(set).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.horrorIntrusionRange, 4);
   });
 
   it("rejects a player mutation before the World setting is written", async () => {
@@ -71,7 +71,7 @@ describe("world settings", () => {
       settings: {get: () => 1, set}
     });
 
-    await expect(setHorrorIntrusionRange(4)).rejects.toThrow("CYPHERV2.Horror.Errors.GMOnly");
+    await expect(setHorrorIntrusionRange(4)).rejects.toThrow("MAGNUSARCHIVES.Horror.Errors.GMOnly");
     expect(set).not.toHaveBeenCalled();
   });
 });

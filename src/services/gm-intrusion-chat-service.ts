@@ -99,7 +99,7 @@ export class GMIntrusionChatService {
         speakerActor ? {actor: speakerActor as unknown as Actor} : undefined
       ),
       content,
-      flags: {cypherv2: {gmIntrusion: state}}
+      flags: {magnusarchives: {gmIntrusion: state}}
     }) as ChatMessage;
   }
 
@@ -109,7 +109,7 @@ export class GMIntrusionChatService {
     speakerActor?: GMIntrusionCharacterLike
   ): Promise<void> {
     const content = await this.render(state, speakerActor);
-    await message.update({content, "flags.cypherv2.gmIntrusion": state});
+    await message.update({content, "flags.magnusarchives.gmIntrusion": state});
   }
 
   async render(
@@ -117,7 +117,7 @@ export class GMIntrusionChatService {
     speakerActor?: GMIntrusionCharacterLike
   ): Promise<string> {
     return foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/gm-intrusion-card.hbs",
+      "systems/magnusarchives/templates/chat/gm-intrusion-card.hbs",
       {
         ...buildGMIntrusionCardData(state),
         ...chatCardActorImageData(speakerActor as unknown as import("./chat-card-presentation").ChatCardActorLike)

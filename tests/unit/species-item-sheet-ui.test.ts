@@ -39,7 +39,7 @@ describe("Species Item Sheet beta.3 foundation", () => {
     expect(speciesSection).toContain('class="compact-package-header"');
     expect(speciesSection).toContain('class="compact-package-grant-row"');
     expect(speciesSection).toContain("compact-package-empty");
-    expect(speciesSection).toContain("compact-package-add-action cypherv2-icon-action");
+    expect(speciesSection).toContain("compact-package-add-action magnusarchives-icon-action");
     expect(speciesSection).toContain('class="fa-solid fa-magnifying-glass"');
     expect(speciesSection).toContain('class="fa-solid fa-arrows-rotate"');
     expect(speciesSection).toContain('class="fa-solid fa-trash"');
@@ -48,14 +48,14 @@ describe("Species Item Sheet beta.3 foundation", () => {
   it("exposes the shared extensible Weapon-family editor and normalized update path", () => {
     expect(speciesSection).toContain('value="{{speciesWeaponFamiliesValue}}"');
     expect(speciesSection).toContain("data-package-weapon-families");
-    expect(speciesSection).toContain("cypherv2-species-weapon-family-suggestions");
+    expect(speciesSection).toContain("magnusarchives-species-weapon-family-suggestions");
     expect(speciesSection).not.toContain('name="system.weaponFamilyUse.');
     expect(sheet).toContain('this.item.type !== "characterType" && this.item.type !== "species"');
     expect(sheet).toContain('this.item.update({"system.weaponFamilies": normalizeWeaponFamilies(input.value)})');
   });
 
   it("renders Descriptor choice groups with stable action identifiers", () => {
-    expect(speciesSection).toContain("CYPHERV2.Species.DescriptorChoices");
+    expect(speciesSection).toContain("MAGNUSARCHIVES.Species.DescriptorChoices");
     expect(speciesSection).toContain('data-choice-kind="descriptor"');
     expect(speciesSection).toContain('data-grant-kind="descriptorGroup"');
     expect(speciesSection).toContain('data-grant-kind="descriptorOption"');
@@ -70,7 +70,7 @@ describe("Species Item Sheet beta.3 foundation", () => {
     expect(speciesSection).toContain("has-context-note");
     expect(speciesSection).not.toContain("{{grant.notes}}");
     expect(speciesSection).not.toContain("{{option.notes}}");
-    expect(sheet).toContain("CYPHERV2.Packages.SkillContextNote");
+    expect(sheet).toContain("MAGNUSARCHIVES.Packages.SkillContextNote");
   });
 
   it("retains all package authoring action contracts", () => {

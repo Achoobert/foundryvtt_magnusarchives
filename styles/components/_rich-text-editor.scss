@@ -1,14 +1,14 @@
-.cypherv2 .cypherv2-rich-description {
+.magnusarchives .magnusarchives-rich-description {
   .editor {
     position: relative;
     display: flex;
     flex-direction: column;
     min-height: 7rem;
     overflow: visible;
-    color: var(--cypherv2-color-text);
-    background: color-mix(in srgb, var(--cypherv2-color-bg) 80%, transparent);
-    border: 1px solid var(--cypherv2-color-border);
-    border-radius: var(--cypherv2-radius);
+    color: var(--magnusarchives-color-text);
+    background: color-mix(in srgb, var(--magnusarchives-color-bg) 80%, transparent);
+    border: 1px solid var(--magnusarchives-color-border);
+    border-radius: var(--magnusarchives-radius);
 
     &:hover button.toggle:enabled,
     &:focus-within button.toggle:enabled {
@@ -50,8 +50,8 @@
         padding: 0.3rem;
         overflow: visible;
         list-style: none !important;
-        background: var(--cypherv2-color-surface);
-        border-bottom: 1px solid var(--cypherv2-color-border);
+        background: var(--magnusarchives-color-surface);
+        border-bottom: 1px solid var(--magnusarchives-color-border);
 
         > li {
           position: relative;
@@ -67,7 +67,7 @@
           flex: 0 0 auto;
           margin-left: auto;
           padding-left: 0.3rem;
-          border-left: 1px solid var(--cypherv2-color-border);
+          border-left: 1px solid var(--magnusarchives-color-border);
         }
 
         // These editors are deliberately non-collaborative. Foundry still
@@ -85,29 +85,29 @@
           min-width: 1.65rem;
           min-height: 1.65rem;
           padding: 0.2rem 0.35rem;
-          color: var(--cypherv2-color-text);
+          color: var(--magnusarchives-color-text);
           background: transparent;
-          border-radius: calc(var(--cypherv2-radius) / 2);
+          border-radius: calc(var(--magnusarchives-radius) / 2);
           cursor: pointer;
 
           &:hover,
           &.active {
-            color: var(--cypherv2-color-text);
-            background: color-mix(in srgb, var(--cypherv2-color-accent) 20%, transparent);
+            color: var(--magnusarchives-color-text);
+            background: color-mix(in srgb, var(--magnusarchives-color-accent) 20%, transparent);
           }
         }
 
         button[data-action="save"] {
-          color: var(--cypherv2-color-text);
+          color: var(--magnusarchives-color-text);
           font-weight: 700;
-          background: var(--cypherv2-color-accent);
-          border: 1px solid var(--cypherv2-color-accent);
+          background: var(--magnusarchives-color-accent);
+          border: 1px solid var(--magnusarchives-color-accent);
 
           &:hover,
           &:focus-visible {
-            color: var(--cypherv2-color-text);
-            background: color-mix(in srgb, var(--cypherv2-color-accent) 82%, var(--cypherv2-color-text));
-            outline: 1px solid var(--cypherv2-color-text);
+            color: var(--magnusarchives-color-text);
+            background: color-mix(in srgb, var(--magnusarchives-color-accent) 82%, var(--magnusarchives-color-text));
+            outline: 1px solid var(--magnusarchives-color-text);
             outline-offset: 1px;
           }
         }
@@ -136,8 +136,8 @@
     position: absolute;
     z-index: 3;
     top: 0.25rem;
-    right: var(--cypherv2-space);
-    color: var(--cypherv2-color-accent);
+    right: var(--magnusarchives-space);
+    color: var(--magnusarchives-color-accent);
     opacity: 0.55;
   }
 
@@ -168,13 +168,13 @@
 // compact document sheets those headings are subsections, not page titles.
 // Keep the scale local to Item prose and embedded Item details so headings in
 // journals and unrelated Foundry applications retain their native hierarchy.
-.cypherv2 .cypherv2-sheet.cypherv2-item .cypherv2-rich-description :is(.editor-content, .ProseMirror),
-.cypherv2 .cypherv2-sheet.cypherv2-character :is(.ability-description, .compact-inventory-details) {
+.magnusarchives .magnusarchives-sheet.magnusarchives-item .magnusarchives-rich-description :is(.editor-content, .ProseMirror),
+.magnusarchives .magnusarchives-sheet.magnusarchives-character :is(.ability-description, .compact-inventory-details) {
   h1,
   h2,
   h3 {
-    color: var(--cypherv2-text-primary);
-    font-family: var(--cypherv2-font-heading);
+    color: var(--magnusarchives-text-primary);
+    font-family: var(--magnusarchives-font-heading);
     font-weight: 800;
     line-height: 1.2;
     overflow-wrap: anywhere;
@@ -189,7 +189,7 @@
     padding-bottom: 0.16rem;
     font-size: 0.9rem;
     letter-spacing: 0.035em;
-    border-bottom: 1px solid color-mix(in srgb, var(--cypherv2-border) 65%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--magnusarchives-border) 65%, transparent);
   }
 
   h2 {
@@ -200,7 +200,7 @@
 
   h3 {
     margin: 0.5rem 0 0.2rem;
-    color: color-mix(in srgb, var(--cypherv2-text-primary) 84%, var(--cypherv2-text-muted));
+    color: color-mix(in srgb, var(--magnusarchives-text-primary) 84%, var(--magnusarchives-text-muted));
     font-size: 0.76rem;
     letter-spacing: 0.018em;
   }

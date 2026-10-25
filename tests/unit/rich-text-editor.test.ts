@@ -67,8 +67,8 @@ describe("native Application V2 rich-text controls", () => {
       expect(source).not.toContain("ProseMirrorDescriptionController");
       expect(source).not.toMatch(/#(?:notesEditor|richTextEditor|descriptionEditor)/);
     }
-    expect(styles).not.toContain("cypherv2-editor-active");
-    expect(styles).not.toContain("cypherv2-editor-save");
+    expect(styles).not.toContain("magnusarchives-editor-active");
+    expect(styles).not.toContain("magnusarchives-editor-save");
   });
 
   it("styles only native active, inactive, toggle, toolbar, and content structures", () => {
@@ -87,18 +87,18 @@ describe("native Application V2 rich-text controls", () => {
   });
 
   it("does not repeat the Character Notes tab label above its native editor", () => {
-    expect(characterTemplate).not.toContain('<span>{{localize "CYPHERV2.Tabs.Notes"}}</span>');
+    expect(characterTemplate).not.toContain('<span>{{localize "MAGNUSARCHIVES.Tabs.Notes"}}</span>');
     expect(characterTemplate).toContain('name="system.notes"');
   });
 
   it("positions and styles Foundry native editor controls without replacing them", () => {
-    expect(styles).toMatch(/button\.toggle\s*\{[\s\S]*right:\s*var\(--cypherv2-space\)/);
+    expect(styles).toMatch(/button\.toggle\s*\{[\s\S]*right:\s*var\(--magnusarchives-space\)/);
     expect(styles).toMatch(/> li:has\(> button\[data-action="save"\]\)\s*\{[^}]*order:\s*100/);
     expect(styles).toMatch(/> li:has\(> button\[data-action="save"\]\)\s*\{[^}]*margin-left:\s*auto/);
-    expect(styles).toMatch(/button\[data-action="save"\]\s*\{[\s\S]*background:\s*var\(--cypherv2-color-accent\)/);
+    expect(styles).toMatch(/button\[data-action="save"\]\s*\{[\s\S]*background:\s*var\(--magnusarchives-color-accent\)/);
     expect(styles).toMatch(/button\[data-action="save"\]\s*\{[\s\S]*font-weight:\s*700/);
     expect(styles).not.toContain('li[data-action="save"]');
-    expect(styles).not.toContain("cypherv2-editor-save");
+    expect(styles).not.toContain("magnusarchives-editor-save");
   });
 
   it("hides only Foundry's native collaboration status slot in Cypher editors", () => {
@@ -107,8 +107,8 @@ describe("native Application V2 rich-text controls", () => {
   });
 
   it("keeps semantic rich-text headings compact only in Item prose and embedded Character Item details", () => {
-    expect(styles).toContain(".cypherv2-sheet.cypherv2-item .cypherv2-rich-description :is(.editor-content, .ProseMirror)");
-    expect(styles).toContain(".cypherv2-sheet.cypherv2-character :is(.ability-description, .compact-inventory-details)");
+    expect(styles).toContain(".magnusarchives-sheet.magnusarchives-item .magnusarchives-rich-description :is(.editor-content, .ProseMirror)");
+    expect(styles).toContain(".magnusarchives-sheet.magnusarchives-character :is(.ability-description, .compact-inventory-details)");
     expect(styles).toMatch(/h1\s*\{[\s\S]*font-size:\s*0\.9rem/);
     expect(styles).toMatch(/h2\s*\{[\s\S]*font-size:\s*0\.82rem/);
     expect(styles).toMatch(/h3\s*\{[\s\S]*font-size:\s*0\.76rem/);

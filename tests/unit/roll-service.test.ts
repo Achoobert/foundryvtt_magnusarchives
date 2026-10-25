@@ -71,7 +71,7 @@ function equipArmor(
 describe("RollService", () => {
   it("uses prepared Actor Genre data when Foundry only has a Compendium index entry", () => {
     const actor = character({effortBase: 10, poolValues: {might: 50}});
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     const previousResolver = globalThis.fromUuidSync;
     globalThis.fromUuidSync = (() => ({
@@ -129,7 +129,7 @@ describe("RollService", () => {
     expect(preview.totalHindrance).toBe(steps);
     expect(preview.breakdown).toContainEqual(expect.objectContaining({
       id: `armor.${category}.speed-task`,
-      label: `CYPHERV2.Combat.Armor.Unfamiliar.${category}`,
+      label: `MAGNUSARCHIVES.Combat.Armor.Unfamiliar.${category}`,
       direction: "hinder",
       steps
     }));
@@ -172,7 +172,7 @@ describe("RollService", () => {
         pool: "speed",
         contributions: [{
           id: "armor.medium.dodge",
-          label: "CYPHERV2.Combat.Armor.Dodge",
+          label: "MAGNUSARCHIVES.Combat.Armor.Dodge",
           direction: "hinder",
           steps: 2,
           source: "other"
@@ -187,7 +187,7 @@ describe("RollService", () => {
     expect(armor.speedTaskHindrance).toBe(2);
   });
 
-  it("automatically includes derived Wound Hindrance", () => {
+  it("automatically includes derived condition Hindrance", () => {
     const actor = character({wounds: wounds({moderate: 3, major: 1})});
     const preview = serviceWithRoll(10).preview(
       actor as RollCharacterDocumentLike,
@@ -198,8 +198,8 @@ describe("RollService", () => {
     expect(preview.totalHindrance).toBe(2);
     expect(preview.finalDifficulty).toBe(7);
     expect(preview.breakdown).toContainEqual(expect.objectContaining({
-      id: "core.wounds.hindrance",
-      source: "wound",
+      id: "core.conditions.hindrance",
+      source: "condition",
       steps: 2
     }));
   });

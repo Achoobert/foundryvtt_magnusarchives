@@ -7,7 +7,7 @@ export interface CharacterSheetUiState {
 /** Capture tab and viewport state before Application V2 replaces the Character Sheet DOM. */
 export function captureCharacterSheetUiState(root: ParentNode): CharacterSheetUiState {
   const tabs = [...root.querySelectorAll<HTMLElement>(
-    ".cypherv2-sheet.cypherv2-character > .tab[data-tab]"
+    ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
   )];
   const active = tabs.find((tab) => tab.classList.contains("active"));
   const disclosures = [...root.querySelectorAll<HTMLDetailsElement>(
@@ -29,7 +29,7 @@ export function restoreCharacterSheetScroll(
   state: CharacterSheetUiState
 ): void {
   for (const tab of root.querySelectorAll<HTMLElement>(
-    ".cypherv2-sheet.cypherv2-character > .tab[data-tab]"
+    ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
   )) {
     tab.scrollTop = state.tabScroll[tab.dataset.tab ?? ""] ?? 0;
   }

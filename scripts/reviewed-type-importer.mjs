@@ -23,7 +23,7 @@ export const REVIEWED_TYPE_PACKS = Object.freeze({
 
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const PUBLIC_ABILITY_UUID_PATTERN = /^Compendium\.cypherv2\.type-abilities\.Item\.([A-Za-z0-9]{16})$/;
+const PUBLIC_ABILITY_UUID_PATTERN = /^Compendium\.magnusarchives\.type-abilities\.Item\.([A-Za-z0-9]{16})$/;
 const ACTIVATIONS = new Set(["action", "firstAction", "lastAction", "enabler", "reaction", "timed", "perpetual", "passive", "special"]);
 const SUPERHERO_TYPES = new Map([
   ["Crimefighter", {rank: 1, powerShiftCount: 2, poolBonus: 0}],
@@ -130,7 +130,7 @@ export async function createReviewedTypeSource({candidatePath, typeDirectory, ab
       license: candidate.source.license,
       note: "Human-reviewed Type documents promoted losslessly from the private Working packs."
     },
-    target: {systemId: "cypherv2", typePackId: TYPE_PACK_ID, abilityPackId: TYPE_ABILITY_PACK_ID},
+    target: {systemId: "magnusarchives", typePackId: TYPE_PACK_ID, abilityPackId: TYPE_ABILITY_PACK_ID},
     counts: structuredClone(TYPE_CANDIDATE_COUNTS),
     review: {...structuredClone(candidate.review), status: "reviewed"},
     types: review.types.map(adaptTypeDocument).sort(compareDocuments),
@@ -169,7 +169,7 @@ export function validateReviewedTypeSource(source) {
   }
   if (source.schemaVersion !== REVIEWED_TYPE_SCHEMA_VERSION) errors.push(`schemaVersion must be ${REVIEWED_TYPE_SCHEMA_VERSION}.`);
   if (source.source?.kind !== "reviewed-world-compendium-export") errors.push("source.kind must identify the reviewed World export.");
-  if (source.target?.systemId !== "cypherv2" || source.target?.typePackId !== TYPE_PACK_ID || source.target?.abilityPackId !== TYPE_ABILITY_PACK_ID) {
+  if (source.target?.systemId !== "magnusarchives" || source.target?.typePackId !== TYPE_PACK_ID || source.target?.abilityPackId !== TYPE_ABILITY_PACK_ID) {
     errors.push("target must identify the two public Cypher V2 Type packs.");
   }
   const types = Array.isArray(source.types) ? source.types : [];

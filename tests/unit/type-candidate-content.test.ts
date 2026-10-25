@@ -41,7 +41,7 @@ describe("beta.3 candidate Types and Type Abilities", () => {
     expect(assignmentIds.every((id: string) => /^[A-Za-z0-9]{16}$/.test(id))).toBe(true);
     for (const type of source.types) {
       for (const grant of type.system.abilityGrants) {
-        const match = grant.abilityUuid.match(/^Compendium\.cypherv2\.type-abilities\.Item\.([A-Za-z0-9]{16})$/);
+        const match = grant.abilityUuid.match(/^Compendium\.magnusarchives\.type-abilities\.Item\.([A-Za-z0-9]{16})$/);
         expect(match).not.toBeNull();
         expect(abilityIds.has(match[1])).toBe(true);
       }
@@ -126,7 +126,7 @@ describe("beta.3 candidate Types and Type Abilities", () => {
     expect(() => validator.validateTypeCandidateSource(notes)).toThrow(/notes must be a string/);
 
     const dangling = structuredClone(source);
-    dangling.types[0].system.abilityGrants[0].abilityUuid = "Compendium.cypherv2.type-abilities.Item.aaaaaaaaaaaaaaaa";
+    dangling.types[0].system.abilityGrants[0].abilityUuid = "Compendium.magnusarchives.type-abilities.Item.aaaaaaaaaaaaaaaa";
     expect(() => validator.validateTypeCandidateSource(dangling)).toThrow(/targets missing Ability/);
   });
 });

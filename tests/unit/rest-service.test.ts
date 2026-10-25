@@ -80,7 +80,7 @@ describe("RestService", () => {
   });
 
   it("does not allow Rest after death", async () => {
-    const actor = character({wounds: wounds({major: 3})});
+    const actor = character({damageTrackStep: "dead"});
     await expect(service.apply(actor, "10-hours", {majorTaskSucceeded: true})).rejects.toThrow(/dead/i);
   });
 });

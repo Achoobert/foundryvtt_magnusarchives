@@ -7,7 +7,7 @@ export const GENRE_REVIEW_PACK_ID = "genres-working";
 export const GENRE_REVIEW_LABEL = "Genres (Working)";
 export const GENRE_ABILITY_REVIEW_PACK_ID = "genre-abilities-working";
 
-const CANONICAL_PREFIX = "Compendium.cypherv2.genre-abilities.Item.";
+const CANONICAL_PREFIX = "Compendium.magnusarchives.genre-abilities.Item.";
 const WORKING_PREFIX = `Compendium.world.${GENRE_ABILITY_REVIEW_PACK_ID}.Item.`;
 const exists = (target) => access(target).then(() => true, () => false);
 
@@ -92,7 +92,7 @@ function packManifestEntry() {
     label: GENRE_REVIEW_LABEL,
     path: `packs/${GENRE_REVIEW_PACK_ID}`,
     type: "Item",
-    system: "cypherv2",
+    system: "magnusarchives",
     ownership: {PLAYER: "OBSERVER", ASSISTANT: "OWNER"},
     flags: {},
     package: "world"
@@ -115,7 +115,7 @@ export async function importGenreReview({candidatePath, abilityCandidatePath, pr
   const worldPath = path.resolve(worldDirectory);
   const manifestPath = path.join(worldPath, "world.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-  if (manifest.id !== path.basename(worldPath) || manifest.system !== "cypherv2") throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
+  if (manifest.id !== path.basename(worldPath) || manifest.system !== "magnusarchives") throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
   if (!(manifest.packs ?? []).some((pack) => pack.name === GENRE_ABILITY_REVIEW_PACK_ID)) throw new Error(`World '${worldPath}' does not register ${GENRE_ABILITY_REVIEW_PACK_ID}.`);
   if (!(await exists(path.join(worldPath, "packs", GENRE_ABILITY_REVIEW_PACK_ID)))) throw new Error("Genre Abilities (Working) pack is unavailable.");
 
@@ -149,7 +149,7 @@ export async function importGenreReview({candidatePath, abilityCandidatePath, pr
     packInstalled = true;
     manifest.packs ??= [];
     upsertPack(manifest.packs, packManifestEntry());
-    const temporaryManifest = path.join(worldPath, "world.json.cypherv2-genre-review-tmp");
+    const temporaryManifest = path.join(worldPath, "world.json.magnusarchives-genre-review-tmp");
     await writeFile(temporaryManifest, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await rm(manifestPath, {force: true});
     await rename(temporaryManifest, manifestPath);

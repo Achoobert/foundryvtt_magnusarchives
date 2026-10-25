@@ -32,7 +32,7 @@ export class WeaponService {
     this.assertCanAttack(weapon);
     if (!weapon.update) throw new Error("Weapon ammunition requires an updateable Item document.");
     const current = Math.max(0, ammo.current - ammo.perAttack);
-    await weapon.update({"system.ammo.value": current}, {cypherv2WeaponUse: true});
+    await weapon.update({"system.ammo.value": current}, {magnusarchivesWeaponUse: true});
     return {previous: ammo.current, current, spent: ammo.current - current};
   }
 
@@ -40,6 +40,6 @@ export class WeaponService {
     const ammo = this.ammunition(weapon);
     if (!ammo.tracked) throw new Error("Ammunition tracking is not enabled for this Weapon.");
     if (!weapon.update) throw new Error("Weapon ammunition requires an updateable Item document.");
-    await weapon.update({"system.ammo.value": ammo.maximum}, {cypherv2WeaponReload: true});
+    await weapon.update({"system.ammo.value": ammo.maximum}, {magnusarchivesWeaponReload: true});
   }
 }

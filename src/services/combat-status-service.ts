@@ -57,7 +57,7 @@ export function initializeNpcDeadStatusSynchronization(service: CombatStatusServ
     changes: Record<string, unknown>,
     options: Record<string, unknown> = {}
   ) => {
-    if (options.cypherv2SkipDeadStatusSync === true) return;
+    if (options.magnusarchivesSkipDeadStatusSync === true) return;
     if (actor.type !== "npc" || !healthValueChanged(changes)) return;
     const health = Number((actor.system.health as {value?: unknown} | undefined)?.value);
     if (!Number.isFinite(health)) return;

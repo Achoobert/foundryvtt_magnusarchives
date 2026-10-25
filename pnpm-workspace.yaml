@@ -1,14 +1,17 @@
 packages:
   - "."
+  - "tests/e2e"
 
 allowBuilds:
   '@parcel/watcher': true
   classic-level: true
   esbuild: true
+  cypress: true
 
 onlyBuiltDependencies:
   - "@parcel/watcher"
   - "classic-level"
   - "esbuild"
+  - "cypress"
 
 confirmModulesPurge: false

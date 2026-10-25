@@ -21,18 +21,18 @@ export function registerGMIntrusionSceneControl(): void {
     if (!tokens) return;
     const tools = tokens.tools ?? (tokens.tools = {});
     const intrusionOrder = Object.keys(tools).length;
-    tools.cypherv2GMIntrusion = {
-      name: "cypherv2GMIntrusion",
-      title: "CYPHERV2.Intrusion.SceneControl",
+    tools.magnusarchivesGMIntrusion = {
+      name: "magnusarchivesGMIntrusion",
+      title: "MAGNUSARCHIVES.Intrusion.SceneControl",
       icon: "fa-solid fa-bolt",
       order: intrusionOrder,
       button: true,
       visible: game.user.isGM,
       onChange: () => void promptManualGMIntrusion()
     };
-    tools.cypherv2HorrorMode = {
-      name: "cypherv2HorrorMode",
-      title: "CYPHERV2.Horror.SceneControl",
+    tools.magnusarchivesHorrorMode = {
+      name: "magnusarchivesHorrorMode",
+      title: "MAGNUSARCHIVES.Horror.SceneControl",
       icon: "fa-solid fa-skull",
       order: intrusionOrder + 1,
       button: true,

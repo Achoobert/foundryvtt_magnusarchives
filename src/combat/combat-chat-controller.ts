@@ -23,7 +23,7 @@ function canControl(actor: Actor): boolean {
 
 function notifyMissingAuthoritativeToken(identity: CombatTargetIdentity): void {
   if (identity.tokenId || identity.tokenUuid) {
-    ui.notifications.error(game.i18n.localize("CYPHERV2.Combat.Errors.OriginalTokenMissing"));
+    ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Combat.Errors.OriginalTokenMissing"));
   }
 }
 
@@ -58,7 +58,7 @@ function outcomeAction(message: ChatMessage): CombatOutcomeAction | null {
   const value = message.getFlag(SYSTEM_ID, "combatAction");
   if (!value || typeof value !== "object") return null;
   const action = value as Partial<CombatOutcomeAction>;
-  if (action.kind !== "npcDamage" && action.kind !== "characterWound" && action.kind !== "shieldWound") return null;
+  if (action.kind !== "npcDamage" && action.kind !== "characterDamage" && action.kind !== "shieldWound") return null;
   if (typeof action.targetActorId !== "string" || typeof action.applied !== "boolean") return null;
   return value as CombatOutcomeAction;
 }
@@ -86,37 +86,36 @@ export async function applyCombatOutcome(message: ChatMessage, button: HTMLButto
   button.disabled = true;
   try {
     if (action.kind === "npcDamage") {
-      await game.cypherv2.services.combat.applyNpcDamage(
+      await game.magnusarchives.services.combat.applyNpcDamage(
         exactTarget as unknown as NpcTargetLike,
         action.requestedDamage
       );
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Combat.DamageApplied"));
-    } else if (action.kind === "characterWound") {
-      const source = action.sourceActorId
-        ? {id: action.sourceActorId, name: action.sourceName ?? "NPC"}
-        : undefined;
-      await game.cypherv2.services.combat.applyCharacterWound(
+      ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Combat.DamageApplied"));
+    } else if (action.kind === "characterDamage") {
+      await game.magnusarchives.services.combat.applyCharacterDamage(
         exactTarget as unknown as CombatCharacterLike,
-        action.severity,
-        source
+        action.effect,
+        action.stressAmount
       );
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Combat.WoundApplied"));
+      ui.notifications.info(game.i18n.localize(action.effect === "stress"
+        ? "MAGNUSARCHIVES.Combat.StressApplied"
+        : "MAGNUSARCHIVES.Combat.SeriousInjuryApplied"));
     } else {
       const shield = target.items.get(action.shieldId);
       if (!shield || shield.type !== "shield") throw new Error("Resolved Shield Item not found.");
       const source = action.sourceActorId
         ? {id: action.sourceActorId, name: action.sourceName ?? "NPC"}
         : undefined;
-      await game.cypherv2.services.combat.applyShieldWound(
+      await game.magnusarchives.services.combat.applyShieldWound(
         exactTarget as unknown as CombatCharacterLike,
         shield as unknown as import("../services/shield-service").ShieldItemLike,
         action.severity,
         source
       );
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Combat.WoundApplied"));
+      ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Combat.WoundApplied"));
     }
     await message.setFlag(SYSTEM_ID, "combatAction", {...action, applied: true});
-    button.textContent = game.i18n.localize("CYPHERV2.Combat.Applied");
+    button.textContent = game.i18n.localize("MAGNUSARCHIVES.Combat.Applied");
   } catch (error) {
     button.disabled = false;
     ui.notifications.error(error instanceof Error ? error.message : String(error));
@@ -146,7 +145,8 @@ async function requestDefense(
     defense,
     {
       source: actorWithTargetIdentity(source, sourceIdentity) as unknown as NpcTargetLike,
-      woundSeverity: request.woundSeverity
+      effect: request.effect,
+      stressAmount: request.stressAmount
     }
   );
   if (!completed) {
@@ -167,7 +167,7 @@ function renderCombatChat(message: ChatMessage, html: HTMLElement): void {
     if (!action || !target || !canControl(target)) actionButton.remove();
     else if (action.applied) {
       actionButton.disabled = true;
-      actionButton.textContent = game.i18n.localize("CYPHERV2.Combat.Applied");
+      actionButton.textContent = game.i18n.localize("MAGNUSARCHIVES.Combat.Applied");
     } else {
       actionButton.addEventListener("click", () => void applyCombatOutcome(message, actionButton), {once: true});
     }

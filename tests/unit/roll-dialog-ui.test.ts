@@ -14,7 +14,7 @@ describe("All-in-One Roll Dialog UI", () => {
       expect(source).toContain("rollDialogShell(");
       expect(source).toContain("bindRollDialogPreview(");
     }
-    expect(common).toContain("game.cypherv2.services.rolls.preview(");
+    expect(common).toContain("game.magnusarchives.services.rolls.preview(");
     expect(common).not.toContain("prepareRoll(");
     expect(common).not.toContain("calculatePoolCost(");
   });
@@ -87,12 +87,12 @@ describe("All-in-One Roll Dialog UI", () => {
     expect(styles).toContain("container-type: inline-size");
     expect(styles).toContain("@container (max-width: 42rem)");
     expect(styles).toContain("grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr)");
-    expect(styles).toContain("var(--cypherv2-surface-primary)");
-    expect(styles).toContain("var(--cypherv2-surface-raised)");
-    expect(styles).toContain("var(--cypherv2-text-primary)");
-    expect(styles).toContain("var(--cypherv2-text-muted)");
-    expect(styles).toContain("var(--cypherv2-accent)");
-    expect(styles).toContain("var(--cypherv2-success)");
-    expect(styles).toContain("var(--cypherv2-danger)");
+    expect(styles).toContain("var(--magnusarchives-surface-primary)");
+    expect(styles).toContain("var(--magnusarchives-surface-raised)");
+    expect(styles).toContain("var(--magnusarchives-text-primary)");
+    expect(styles).toContain("var(--magnusarchives-text-muted)");
+    expect(styles).toContain("var(--magnusarchives-accent)");
+    expect(styles).toContain("var(--magnusarchives-success)");
+    expect(styles).toContain("var(--magnusarchives-danger)");
   });
 });

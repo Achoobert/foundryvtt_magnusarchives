@@ -18,7 +18,7 @@ The build compiles one reviewed, lossless Foundry document snapshot into the two
 Existing 16-character Foundry document IDs are preserved. A canonical Ability always has the UUID:
 
 ```text
-Compendium.cypherv2.focus-abilities.Item.<stable-document-id>
+Compendium.magnusarchives.focus-abilities.Item.<stable-document-id>
 ```
 
 Node IDs, not array positions, remain the progression identity. Manual node positions and connection IDs are retained exactly. All promoted Focus links are rewritten by target document ID to the system namespace; names are never used as the identity map.
@@ -40,7 +40,7 @@ Full rules text remains authoritative. Existing structured runtime fields, sourc
 1. Review edits in disposable World compendiums, never directly in the system packs.
 2. Close Foundry and unpack both reviewed World packs with the Foundry v14 CLI.
 3. Run `pnpm promote:foci -- --foci <unpacked-foci> --abilities <unpacked-abilities>`.
-4. Review the resulting `content/foci/reviewed-pack.json` diff. The promotion normalizes World Ability UUIDs to `Compendium.cypherv2.focus-abilities.Item.<same-id>` and strips volatile World/user timestamps.
+4. Review the resulting `content/foci/reviewed-pack.json` diff. The promotion normalizes World Ability UUIDs to `Compendium.magnusarchives.focus-abilities.Item.<same-id>` and strips volatile World/user timestamps.
 5. Run `pnpm import:foci`. Both packs are compiled in staging first; existing system packs are held as rollback backups until both replacements succeed.
 6. Test the compiled LevelDB packs under `packs/focus-abilities` and `packs/foci` in Foundry.
 

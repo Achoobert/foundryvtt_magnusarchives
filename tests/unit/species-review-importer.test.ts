@@ -15,17 +15,20 @@ const [candidate, coreSource] = await Promise.all([
 ]);
 const references = candidateValidator.createSpeciesReferenceCatalogs(coreSource);
 
-describe("private Species review import", () => {
+// Parked: Species and Genres are not Magnus Archives concepts. The data models
+// stay registered for migration, but the packs are no longer built or shipped,
+// so this suite has nothing to validate.
+describe.skip("private Species review import", () => {
   it("preserves all candidate documents without rewriting valid public UUIDs", () => {
     const review = reviewImporter.createSpeciesReviewDocuments(candidate, references);
     expect(reviewImporter.validateSpeciesReviewDocuments(review, references)).toEqual({species: 20});
     expect(reviewImporter.compareSpeciesReviewRoundTrip(candidate, review, references)).toEqual({speciesMatch: true, matches: true});
     expect(review).toEqual(candidate.species);
-    expect(JSON.stringify(review)).toContain("Compendium.cypherv2.skills.Item.");
+    expect(JSON.stringify(review)).toContain("Compendium.magnusarchives.skills.Item.");
     expect(review.find((document: any) => document.name === "Human")?.system.descriptorChoiceGroups[0]).toMatchObject({
       sourceMode: "catalog", catalogItemType: "descriptor", options: []
     });
-    expect(JSON.stringify(review)).not.toContain("Compendium.cypherv2.descriptors.Item.");
+    expect(JSON.stringify(review)).not.toContain("Compendium.magnusarchives.descriptors.Item.");
     expect(JSON.stringify(review)).not.toMatch(/Compendium\.world\./);
   });
 

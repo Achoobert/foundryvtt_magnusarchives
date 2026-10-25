@@ -13,9 +13,9 @@ const intrusionDialog = readFileSync(resolve(root, "src/applications/dialogs/gm-
 describe("shared Cypher V2 checkbox presentation", () => {
   it("scopes one custom checkbox control to Cypher sheets and dialogs", () => {
     expect(styleIndex).toContain('@use "components/checkbox";');
-    expect(checkboxStyles).toContain('.cypherv2-sheet input[type="checkbox"]');
-    expect(checkboxStyles).toContain('.cypherv2-dialog input[type="checkbox"]');
-    expect(checkboxStyles).toContain('.application.dialog:has(.cypherv2-dialog-fields)');
+    expect(checkboxStyles).toContain('.magnusarchives-sheet input[type="checkbox"]');
+    expect(checkboxStyles).toContain('.magnusarchives-dialog input[type="checkbox"]');
+    expect(checkboxStyles).toContain('.application.dialog:has(.magnusarchives-dialog-fields)');
     expect(checkboxStyles).toContain("appearance: none");
   });
 
@@ -29,8 +29,8 @@ describe("shared Cypher V2 checkbox presentation", () => {
   });
 
   it("uses the semantic soft red and an off-white vector checkmark", () => {
-    expect(checkboxStyles).toMatch(/&:checked\s*\{[\s\S]*?background:\s*var\(--cypherv2-danger\)/);
-    expect(checkboxStyles).toMatch(/&::before\s*\{[\s\S]*?background-color:\s*var\(--cypherv2-text-primary\)/);
+    expect(checkboxStyles).toMatch(/&:checked\s*\{[\s\S]*?background:\s*var\(--magnusarchives-danger\)/);
+    expect(checkboxStyles).toMatch(/&::before\s*\{[\s\S]*?background-color:\s*var\(--magnusarchives-text-primary\)/);
     expect(checkboxStyles).toContain("$checkmark-mask: url(");
     expect(checkboxStyles).not.toContain('content: "✓"');
     expect(checkboxStyles).not.toMatch(/yellow|orange|#[0-9a-f]{3,8}/i);
@@ -60,7 +60,7 @@ describe("shared Cypher V2 checkbox presentation", () => {
   it("preserves explicit hover, keyboard focus, and disabled states", () => {
     expect(checkboxStyles).toContain("&:not(:disabled):hover");
     expect(checkboxStyles).toContain("&:focus-visible");
-    expect(checkboxStyles).toContain("outline: 2px solid var(--cypherv2-text-primary)");
+    expect(checkboxStyles).toContain("outline: 2px solid var(--magnusarchives-text-primary)");
     expect(checkboxStyles).toContain("&:disabled");
     expect(checkboxStyles).toContain("cursor: not-allowed");
   });

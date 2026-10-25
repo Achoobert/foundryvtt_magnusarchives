@@ -37,20 +37,20 @@ export async function promptWoundCapacityOverride(actor: CharacterDocumentLike):
   const calculated = actor.system.derived.wounds.calculatedCapacities;
   const current = actor.system.overrides.wounds ?? {minor: 0, moderate: 0, major: 0};
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Overrides.WoundsEdit")},
-    content: `<div class="cypherv2 cypherv2-dialog cypherv2-wound-override-dialog">
-      <section class="cypherv2-dialog-section">
-        <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Overrides.WoundModifiers")}</span>
-        <div class="cypherv2-dialog-field-grid">
-          ${WOUND_SEVERITIES.map((severity) => `<label class="cypherv2-dialog-field">${game.i18n.localize(`CYPHERV2.Wounds.Severity.${severity}`)}
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundsEdit")},
+    content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-wound-override-dialog">
+      <section class="magnusarchives-dialog-section">
+        <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundModifiers")}</span>
+        <div class="magnusarchives-dialog-field-grid">
+          ${WOUND_SEVERITIES.map((severity) => `<label class="magnusarchives-dialog-field">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)}
             <input name="${severity}" type="number" step="1" value="${current[severity]}">
-            <small>${game.i18n.localize("CYPHERV2.Overrides.Calculated")}: ${calculated[severity]}</small>
+            <small>${game.i18n.localize("MAGNUSARCHIVES.Overrides.Calculated")}: ${calculated[severity]}</small>
           </label>`).join("")}
         </div>
       </section>
     </div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Save")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
   }) as DialogData | null;
   if (!data) return;
   try {
@@ -66,32 +66,32 @@ export async function promptWoundCapacityOverride(actor: CharacterDocumentLike):
 }
 
 function recoveryTypeOptions(selected: RecoveryType): string {
-  return RECOVERY_TYPES.map((type) => `<option value="${type}"${type === selected ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Recovery.${type}`)}</option>`).join("");
+  return RECOVERY_TYPES.map((type) => `<option value="${type}"${type === selected ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}</option>`).join("");
 }
 
 function recoverySlotRow(slot: RecoverySlotData): string {
   return `<div class="recovery-override-slot" data-recovery-slot-id="${escapeHtml(slot.id)}">
     <i class="fa-solid fa-grip-lines" aria-hidden="true"></i>
-    <select name="slotType__${escapeHtml(slot.id)}" aria-label="${game.i18n.localize("CYPHERV2.Overrides.RecoverySlotType")}">${recoveryTypeOptions(slot.type)}</select>
-    <span class="recovery-slot-state">${slot.used ? game.i18n.localize("CYPHERV2.Overrides.Used") : game.i18n.localize("CYPHERV2.Overrides.Available")}</span>
+    <select name="slotType__${escapeHtml(slot.id)}" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Overrides.RecoverySlotType")}">${recoveryTypeOptions(slot.type)}</select>
+    <span class="recovery-slot-state">${slot.used ? game.i18n.localize("MAGNUSARCHIVES.Overrides.Used") : game.i18n.localize("MAGNUSARCHIVES.Overrides.Available")}</span>
     <span class="character-settings-row-actions">
-      <button type="button" class="cypherv2-icon-action" data-recovery-slot-move="up" title="${game.i18n.localize("CYPHERV2.Actions.MoveUp")}"><i class="fa-solid fa-arrow-up"></i></button>
-      <button type="button" class="cypherv2-icon-action" data-recovery-slot-move="down" title="${game.i18n.localize("CYPHERV2.Actions.MoveDown")}"><i class="fa-solid fa-arrow-down"></i></button>
-      <button type="button" class="cypherv2-icon-action" data-recovery-slot-remove title="${game.i18n.localize("CYPHERV2.Actions.Remove")}"><i class="fa-solid fa-trash"></i></button>
+      <button type="button" class="magnusarchives-icon-action" data-recovery-slot-move="up" title="${game.i18n.localize("MAGNUSARCHIVES.Actions.MoveUp")}"><i class="fa-solid fa-arrow-up"></i></button>
+      <button type="button" class="magnusarchives-icon-action" data-recovery-slot-move="down" title="${game.i18n.localize("MAGNUSARCHIVES.Actions.MoveDown")}"><i class="fa-solid fa-arrow-down"></i></button>
+      <button type="button" class="magnusarchives-icon-action" data-recovery-slot-remove title="${game.i18n.localize("MAGNUSARCHIVES.Actions.Remove")}"><i class="fa-solid fa-trash"></i></button>
     </span>
   </div>`;
 }
 
 export function recoveryOverrideDialogContent(slots: readonly RecoverySlotData[], modifier: number): string {
-  return `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-override-dialog">
-    <section class="cypherv2-dialog-section">
-      <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Overrides.RecoveryTrack")}</span>
+  return `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-override-dialog">
+    <section class="magnusarchives-dialog-section">
+      <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Overrides.RecoveryTrack")}</span>
       <input type="hidden" name="slotOrder" value="${slots.map((slot) => slot.id).join(",")}">
       <div class="recovery-override-slots">${slots.map(recoverySlotRow).join("")}</div>
-      <button type="button" class="compact-inline-action recovery-slot-add" data-recovery-slot-add><i class="fa-solid fa-plus"></i> ${game.i18n.localize("CYPHERV2.Overrides.AddRecoverySlot")}</button>
+      <button type="button" class="compact-inline-action recovery-slot-add" data-recovery-slot-add><i class="fa-solid fa-plus"></i> ${game.i18n.localize("MAGNUSARCHIVES.Overrides.AddRecoverySlot")}</button>
     </section>
-    <section class="cypherv2-dialog-section">
-      <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Overrides.RecoveryRollModifier")}
+    <section class="magnusarchives-dialog-section">
+      <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Overrides.RecoveryRollModifier")}
         <input name="rollModifier" type="number" min="-20" max="20" step="1" value="${modifier}">
       </label>
     </section>
@@ -157,10 +157,10 @@ export function parseRecoveryOverrideDialogData(
 export async function promptRecoveryOverride(actor: CharacterDocumentLike): Promise<void> {
   const slots = actor.system.recovery.slots;
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Overrides.RecoveryEdit")},
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.RecoveryEdit")},
     content: recoveryOverrideDialogContent(slots, actor.system.recovery.rollModifier),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Save")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")},
     render: (_event: Event, dialog: {element: HTMLElement}) => bindRecoveryOverrideDialog(dialog.element)
   }) as DialogData | null;
   if (!data) return;

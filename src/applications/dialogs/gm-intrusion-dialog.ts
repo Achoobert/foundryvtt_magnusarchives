@@ -19,7 +19,7 @@ export async function promptManualGMIntrusion(): Promise<void> {
     .filter((actor) => actor.type === "character")
     .sort((left, right) => left.name.localeCompare(right.name));
   if (characters.length === 0) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.Intrusion.NoCharacters"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Intrusion.NoCharacters"));
     return;
   }
   const targetedOptions = characters.map((actor) => (
@@ -30,25 +30,25 @@ export async function promptManualGMIntrusion(): Promise<void> {
       + '" type="checkbox"> ' + escapeHtml(actor.name) + "</label>"
   )).join("");
   const content = [
-    '<div class="cypherv2-dialog-fields cypherv2-intrusion-dialog">',
-    "<label>" + game.i18n.localize("CYPHERV2.Intrusion.ModeLabel"),
+    '<div class="magnusarchives-dialog-fields magnusarchives-intrusion-dialog">',
+    "<label>" + game.i18n.localize("MAGNUSARCHIVES.Intrusion.ModeLabel"),
     '<select name="mode">',
-    '<option value="targeted">' + game.i18n.localize("CYPHERV2.Intrusion.Mode.targeted") + "</option>",
-    '<option value="group">' + game.i18n.localize("CYPHERV2.Intrusion.Mode.group") + "</option>",
-    '<option value="free">' + game.i18n.localize("CYPHERV2.Intrusion.Mode.free") + "</option>",
+    '<option value="targeted">' + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Mode.targeted") + "</option>",
+    '<option value="group">' + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Mode.group") + "</option>",
+    '<option value="free">' + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Mode.free") + "</option>",
     "</select></label>",
-    '<label data-intrusion-selection="single">' + game.i18n.localize("CYPHERV2.Intrusion.Character"),
+    '<label data-intrusion-selection="single">' + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Character"),
     '<select name="targetActorId">' + targetedOptions + "</select></label>",
     '<fieldset data-intrusion-selection="group" hidden>',
-    "<legend>" + game.i18n.localize("CYPHERV2.Intrusion.GroupCharacters") + "</legend>",
+    "<legend>" + game.i18n.localize("MAGNUSARCHIVES.Intrusion.GroupCharacters") + "</legend>",
     groupOptions,
     "</fieldset></div>"
   ].join("");
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Intrusion.ManualTitle")},
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Intrusion.ManualTitle")},
     content,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Intrusion.Create")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Create")},
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       const mode = dialog.element.querySelector<HTMLSelectElement>('[name="mode"]');
       const single = dialog.element.querySelector<HTMLElement>('[data-intrusion-selection="single"]');

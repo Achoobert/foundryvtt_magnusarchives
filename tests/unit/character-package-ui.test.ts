@@ -31,8 +31,8 @@ describe("Character Package UI", () => {
     expect(template).toContain('name="system.cypherLimitBonus"');
     expect(template).toContain('data-grant-target="descriptor"');
     expect(template).toContain('elementType="prose-mirror"');
-    expect(dialogs).toContain("CYPHERV2.Packages.RemoveWithGrants");
-    expect(dialogs).toContain("CYPHERV2.Packages.KeepGrants");
+    expect(dialogs).toContain("MAGNUSARCHIVES.Packages.RemoveWithGrants");
+    expect(dialogs).toContain("MAGNUSARCHIVES.Packages.KeepGrants");
     expect(dialogs).toContain("replaceItemId");
     expect(dialogs).toContain("attachSpecies");
     expect(dialogs).toContain("promptPoolBonusChoices");

@@ -11,6 +11,8 @@ import {
   SKILL_RANKS,
   WEAPON_ATTACK_TYPES,
   WEAPON_CATEGORIES,
+  CHARACTER_DAMAGE_EFFECTS,
+  PRICE_CATEGORIES,
   WOUND_SEVERITIES,
   type SkillRank,
   type WoundSeverity
@@ -100,7 +102,7 @@ const ITEM_MUTATING_ACTIONS = new Set([
   "addGenreAbility", "refreshGenreAbility", "removeGenreAbility"
 ]);
 
-export class CypherV2ItemSheet extends ItemSheetV2 {
+export class MagnusArchivesItemSheet extends ItemSheetV2 {
   readonly #focusTreeConnections = new FocusTreeConnectionController();
   readonly #focusEditorInteraction = new FocusTreeEditorInteractionState();
   readonly #systemTooltip = new SystemTooltip();
@@ -128,7 +130,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onSetShieldWoundCount(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -143,7 +145,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     if (data.track !== "shield" || data.shieldId !== this.item.id) {
       throw new Error("Invalid Shield Wound count action data.");
     }
-    await game.cypherv2.services.shields.setCount(
+    await game.magnusarchives.services.shields.setCount(
       this.item as unknown as ShieldItemLike,
       data.severity,
       data.count
@@ -152,74 +154,74 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onEditShieldWound(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
-    const data = CypherV2ItemSheet.#shieldWoundData(target);
+    const data = MagnusArchivesItemSheet.#shieldWoundData(target);
     await promptEditShieldWound(this.item as unknown as ShieldItemLike, data.severity, data.woundId);
   }
 
   static async #onDeleteShieldWound(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
-    const data = CypherV2ItemSheet.#shieldWoundData(target);
+    const data = MagnusArchivesItemSheet.#shieldWoundData(target);
     await promptDeleteShieldWound(this.item as unknown as ShieldItemLike, data.severity, data.woundId);
   }
 
-  static async #onReloadWeapon(this: CypherV2ItemSheet): Promise<void> {
+  static async #onReloadWeapon(this: MagnusArchivesItemSheet): Promise<void> {
     if (!this.isEditable || this.item.type !== "weapon") return;
-    await game.cypherv2.services.weapons.reload(this.item as unknown as import("../../combat/combat-types").WeaponItemLike);
+    await game.magnusarchives.services.weapons.reload(this.item as unknown as import("../../combat/combat-types").WeaponItemLike);
     await this.render({force: true});
   }
 
   static DEFAULT_OPTIONS = {
     ...DOCUMENT_SHEET_FORM_OPTIONS,
-    classes: ["cypherv2", "sheet", "item", "item-sheet"],
+    classes: ["magnusarchives", "sheet", "item", "item-sheet"],
     actions: guardEditableActions({
-      rollDepletion: CypherV2ItemSheet.#onRollDepletion,
-      reloadWeapon: CypherV2ItemSheet.#onReloadWeapon,
-      openFocusNode: CypherV2ItemSheet.#onOpenFocusNode,
-      editFocusTree: CypherV2ItemSheet.#onEditFocusTree,
-      addFocusAbility: CypherV2ItemSheet.#onAddFocusAbility,
-      saveFocusTree: CypherV2ItemSheet.#onSaveFocusTree,
-      cancelFocusTree: CypherV2ItemSheet.#onCancelFocusTree,
-      selectFocusEditorNode: CypherV2ItemSheet.#onSelectFocusEditorNode,
-      moveFocusNode: CypherV2ItemSheet.#onMoveFocusNode,
-      setFocusNodeTier: CypherV2ItemSheet.#onSetFocusNodeTier,
-      startFocusConnection: CypherV2ItemSheet.#onStartFocusConnection,
-      completeFocusConnection: CypherV2ItemSheet.#onCompleteFocusConnection,
-      cancelFocusConnection: CypherV2ItemSheet.#onCancelFocusConnection,
-      deleteFocusConnection: CypherV2ItemSheet.#onDeleteFocusConnection,
-      clearFocusConnections: CypherV2ItemSheet.#onClearFocusConnections,
-      refreshFocusSnapshot: CypherV2ItemSheet.#onRefreshFocusSnapshot,
-      deleteFocusNode: CypherV2ItemSheet.#onDeleteFocusNode,
-      addPackageGrant: CypherV2ItemSheet.#onAddPackageGrant,
-      addChoiceGroup: CypherV2ItemSheet.#onAddChoiceGroup,
-      addChoiceOption: CypherV2ItemSheet.#onAddChoiceOption,
-      editSkillGrantNote: CypherV2ItemSheet.#onEditSkillGrantNote,
-      inspectPackageGrant: CypherV2ItemSheet.#onInspectPackageGrant,
-      refreshPackageGrant: CypherV2ItemSheet.#onRefreshPackageGrant,
-      removePackageGrant: CypherV2ItemSheet.#onRemovePackageGrant,
-      addPoolBonusChoiceGroup: CypherV2ItemSheet.#onAddPoolBonusChoiceGroup,
-      editPoolBonusChoiceGroup: CypherV2ItemSheet.#onEditPoolBonusChoiceGroup,
-      removePoolBonusChoiceGroup: CypherV2ItemSheet.#onRemovePoolBonusChoiceGroup,
-      setShieldWoundCount: CypherV2ItemSheet.#onSetShieldWoundCount,
-      editShieldWound: CypherV2ItemSheet.#onEditShieldWound,
-      deleteShieldWound: CypherV2ItemSheet.#onDeleteShieldWound,
-      addGenreAbility: CypherV2ItemSheet.#onAddGenreAbility,
-      inspectGenreAbility: CypherV2ItemSheet.#onInspectGenreAbility,
-      refreshGenreAbility: CypherV2ItemSheet.#onRefreshGenreAbility,
-      removeGenreAbility: CypherV2ItemSheet.#onRemoveGenreAbility
+      rollDepletion: MagnusArchivesItemSheet.#onRollDepletion,
+      reloadWeapon: MagnusArchivesItemSheet.#onReloadWeapon,
+      openFocusNode: MagnusArchivesItemSheet.#onOpenFocusNode,
+      editFocusTree: MagnusArchivesItemSheet.#onEditFocusTree,
+      addFocusAbility: MagnusArchivesItemSheet.#onAddFocusAbility,
+      saveFocusTree: MagnusArchivesItemSheet.#onSaveFocusTree,
+      cancelFocusTree: MagnusArchivesItemSheet.#onCancelFocusTree,
+      selectFocusEditorNode: MagnusArchivesItemSheet.#onSelectFocusEditorNode,
+      moveFocusNode: MagnusArchivesItemSheet.#onMoveFocusNode,
+      setFocusNodeTier: MagnusArchivesItemSheet.#onSetFocusNodeTier,
+      startFocusConnection: MagnusArchivesItemSheet.#onStartFocusConnection,
+      completeFocusConnection: MagnusArchivesItemSheet.#onCompleteFocusConnection,
+      cancelFocusConnection: MagnusArchivesItemSheet.#onCancelFocusConnection,
+      deleteFocusConnection: MagnusArchivesItemSheet.#onDeleteFocusConnection,
+      clearFocusConnections: MagnusArchivesItemSheet.#onClearFocusConnections,
+      refreshFocusSnapshot: MagnusArchivesItemSheet.#onRefreshFocusSnapshot,
+      deleteFocusNode: MagnusArchivesItemSheet.#onDeleteFocusNode,
+      addPackageGrant: MagnusArchivesItemSheet.#onAddPackageGrant,
+      addChoiceGroup: MagnusArchivesItemSheet.#onAddChoiceGroup,
+      addChoiceOption: MagnusArchivesItemSheet.#onAddChoiceOption,
+      editSkillGrantNote: MagnusArchivesItemSheet.#onEditSkillGrantNote,
+      inspectPackageGrant: MagnusArchivesItemSheet.#onInspectPackageGrant,
+      refreshPackageGrant: MagnusArchivesItemSheet.#onRefreshPackageGrant,
+      removePackageGrant: MagnusArchivesItemSheet.#onRemovePackageGrant,
+      addPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onAddPoolBonusChoiceGroup,
+      editPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onEditPoolBonusChoiceGroup,
+      removePoolBonusChoiceGroup: MagnusArchivesItemSheet.#onRemovePoolBonusChoiceGroup,
+      setShieldWoundCount: MagnusArchivesItemSheet.#onSetShieldWoundCount,
+      editShieldWound: MagnusArchivesItemSheet.#onEditShieldWound,
+      deleteShieldWound: MagnusArchivesItemSheet.#onDeleteShieldWound,
+      addGenreAbility: MagnusArchivesItemSheet.#onAddGenreAbility,
+      inspectGenreAbility: MagnusArchivesItemSheet.#onInspectGenreAbility,
+      refreshGenreAbility: MagnusArchivesItemSheet.#onRefreshGenreAbility,
+      removeGenreAbility: MagnusArchivesItemSheet.#onRemoveGenreAbility
     }, ITEM_MUTATING_ACTIONS),
     position: {width: 620, height: 680},
     window: {resizable: true}
   };
 
   static PARTS = {
-    main: {template: "systems/cypherv2/templates/item/item-sheet.hbs"}
+    main: {template: "systems/magnusarchives/templates/item/item-sheet.hbs"}
   };
 
   override async _onRender(
@@ -322,7 +324,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       const sides = Number(sidesInput.value);
       const threshold = Number((this.item.system as unknown as {depletion: {threshold: number}}).depletion.threshold);
       if (!Number.isInteger(sides) || sides < 2 || sides > 1000 || threshold > sides) {
-        ui.notifications.error(game.i18n.localize("CYPHERV2.Depletion.InvalidDie"));
+        ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Depletion.InvalidDie"));
         await this.render({force: true});
         return;
       }
@@ -333,7 +335,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       const threshold = Number(match?.[1] ?? (match ? 1 : Number.NaN));
       const sides = depletionDieSides((this.item.system as unknown as {depletion: {die: string}}).depletion);
       if (!Number.isInteger(threshold) || threshold < 1 || threshold > sides) {
-        ui.notifications.error(game.i18n.format("CYPHERV2.Depletion.InvalidThreshold", {sides}));
+        ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Depletion.InvalidThreshold", {sides}));
         await this.render({force: true});
         return;
       }
@@ -356,15 +358,15 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
         const severity = input.dataset.severity;
         if (!WOUND_SEVERITIES.includes(severity as WoundSeverity)) return;
         try {
-          await game.cypherv2.services.shields.setCapacity(
+          await game.magnusarchives.services.shields.setCapacity(
             this.item as unknown as ShieldItemLike,
             severity as WoundSeverity,
             Number(input.value)
           );
         } catch (error) {
           if (error instanceof ShieldCapacityBelowWoundsError) {
-            ui.notifications.warn(game.i18n.format("CYPHERV2.Shield.CapacityTooLow", {
-              severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${error.severity}`),
+            ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Shield.CapacityTooLow", {
+              severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${error.severity}`),
               count: error.current
             }));
           } else notifyError(error);
@@ -509,22 +511,22 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onAddPackageGrant(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onAddPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const expected = this.item.type === "characterType"
       ? target.dataset.grantTarget ?? "ability"
       : this.item.type === "descriptor" ? "skill" : target.dataset.grantTarget;
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     if (expected !== "ability" && expected !== "skill" && expected !== "descriptor") return;
     const sources = [...game.items].filter((item) => item.type === expected).sort((a, b) => a.name.localeCompare(b.name));
-    const custom = expected === "skill" ? `<option value="custom">${game.i18n.localize("CYPHERV2.Packages.CustomSkill")}</option>` : "";
+    const custom = expected === "skill" ? `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>` : "";
     if (!sources.length && expected === "ability") {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Packages.NoWorldAbilities"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.NoWorldAbilities"));
       return;
     }
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(expected === "ability" ? "CYPHERV2.Packages.AddAbility" : expected === "skill" ? "CYPHERV2.Packages.AddFixedSkill" : "CYPHERV2.Species.AddDescriptorGrant")},
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.Source")}<select name="uuid">${custom}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${expected === "skill" ? `<label>${game.i18n.localize("CYPHERV2.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("CYPHERV2.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`CYPHERV2.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label><label>${game.i18n.localize("CYPHERV2.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>` : ""}</div>`,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+      window: {title: game.i18n.localize(expected === "ability" ? "MAGNUSARCHIVES.Packages.AddAbility" : expected === "skill" ? "MAGNUSARCHIVES.Packages.AddFixedSkill" : "MAGNUSARCHIVES.Species.AddDescriptorGrant")},
+      content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${custom}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${expected === "skill" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>` : ""}</div>`,
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     if (data.uuid === "custom") {
@@ -537,46 +539,46 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onAddGenreAbility(this: CypherV2ItemSheet): Promise<void> {
+  static async #onAddGenreAbility(this: MagnusArchivesItemSheet): Promise<void> {
     if (this.item.type !== "genre") return;
     const abilities = [...game.items]
       .filter((item) => item.type === "ability")
       .sort((left, right) => left.name.localeCompare(right.name));
     if (!abilities.length) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Genre.NoWorldAbilities"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Genre.NoWorldAbilities"));
       return;
     }
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.Genre.AddAbility")},
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Genre.Ability")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Genre.AddAbility")},
+      content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Genre.Ability")}
         <select name="uuid">${abilities.map((ability) => `<option value="${escapeHtml(ability.uuid)}">${escapeHtml(ability.name)}</option>`).join("")}</select></label>
-        <label>${game.i18n.localize("CYPHERV2.Genre.MinimumTier")}<input name="minimumTier" type="number" min="${GENRE_MINIMUM_TIER_MIN}" max="${GENRE_MINIMUM_TIER_MAX}" value="${GENRE_MINIMUM_TIER_MIN}"></label></div>`,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+        <label>${game.i18n.localize("MAGNUSARCHIVES.Genre.MinimumTier")}<input name="minimumTier" type="number" min="${GENRE_MINIMUM_TIER_MIN}" max="${GENRE_MINIMUM_TIER_MAX}" value="${GENRE_MINIMUM_TIER_MIN}"></label></div>`,
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     const source = await fromUuid(String(data.uuid ?? "")) as Item | null;
     if (source) await this.#addGenreAbility(source, Number(data.minimumTier ?? 1));
   }
 
-  static async #onInspectGenreAbility(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onInspectGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const entry = this.#genreEntry(target.dataset.entryId);
     if (!entry) return;
     const source = entry.abilityUuid ? await fromUuid(entry.abilityUuid) as Item | null : null;
     if (source) { await source.sheet?.render(true); return; }
     await foundry.applications.api.DialogV2.confirm({
       window: {title: entry.snapshot.name},
-      content: `<div class="cypherv2 cypherv2-dialog package-snapshot">${String(entry.snapshot.system.description ?? "")}</div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Close")},
-      no: {label: game.i18n.localize("CYPHERV2.Actions.Close")}
+      content: `<div class="magnusarchives magnusarchives-dialog package-snapshot">${String(entry.snapshot.system.description ?? "")}</div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}
     });
   }
 
-  static async #onRefreshGenreAbility(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRefreshGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const entry = this.#genreEntry(target.dataset.entryId);
     if (!entry) return;
     const source = entry.abilityUuid ? await fromUuid(entry.abilityUuid) as Item | null : null;
     if (!source) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Packages.SourceUnavailable"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.SourceUnavailable"));
       return;
     }
     const entries = (this.item.system as unknown as GenreSystemData).abilityCatalog;
@@ -585,22 +587,22 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     });
   }
 
-  static async #onRemoveGenreAbility(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRemoveGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const id = target.dataset.entryId;
     if (!id || this.item.type !== "genre") return;
     const entries = (this.item.system as unknown as GenreSystemData).abilityCatalog;
     await this.item.update({"system.abilityCatalog": removeGenreAbilityEntry(entries, id)});
   }
 
-  static async #onAddChoiceGroup(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onAddChoiceGroup(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const choiceKind = target.dataset.choiceKind ?? "skill";
     const abilityChoice = this.item.type !== "descriptor" && choiceKind === "ability";
     const descriptorChoice = this.item.type === "species" && choiceKind === "descriptor";
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.Packages.AddChoiceGroup")},
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.ChooseCount")}<input name="choose" type="number" min="1" value="1"></label>${descriptorChoice ? `<label>${game.i18n.localize("CYPHERV2.Packages.ChoiceSource")}<select name="sourceMode"><option value="fixed">${game.i18n.localize("CYPHERV2.Packages.FixedOptions")}</option><option value="catalog">${game.i18n.localize("CYPHERV2.Packages.AllAvailableDescriptors")}</option></select></label>` : abilityChoice ? "" : `<label>${game.i18n.localize("CYPHERV2.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`CYPHERV2.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label>`}</div>`,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.AddChoiceGroup")},
+      content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseCount")}<input name="choose" type="number" min="1" value="1"></label>${descriptorChoice ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.ChoiceSource")}<select name="sourceMode"><option value="fixed">${game.i18n.localize("MAGNUSARCHIVES.Packages.FixedOptions")}</option><option value="catalog">${game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")}</option></select></label>` : abilityChoice ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label>`}</div>`,
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     const system = this.item.system as unknown as DescriptorSystemData | SpeciesSystemData | CharacterTypeSystemData;
@@ -627,31 +629,31 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     existing?: PoolBonusChoiceGroup
   ): Promise<Omit<PoolBonusChoiceGroup, "id"> | null> {
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(existing ? "CYPHERV2.Packages.EditPoolBonusChoiceGroup" : "CYPHERV2.Packages.AddPoolBonusChoiceGroup")},
-      content: `<div class="cypherv2 cypherv2-dialog package-pool-choice-authoring">
-        <div class="cypherv2-dialog-section cypherv2-dialog-field-grid">
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Packages.Amount")}<input name="amount" type="number" min="1" value="${existing?.amount ?? 1}"></label>
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Packages.ChooseCount")}<input name="choose" type="number" min="1" value="${existing?.choose ?? 1}"></label>
+      window: {title: game.i18n.localize(existing ? "MAGNUSARCHIVES.Packages.EditPoolBonusChoiceGroup" : "MAGNUSARCHIVES.Packages.AddPoolBonusChoiceGroup")},
+      content: `<div class="magnusarchives magnusarchives-dialog package-pool-choice-authoring">
+        <div class="magnusarchives-dialog-section magnusarchives-dialog-field-grid">
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Packages.Amount")}<input name="amount" type="number" min="1" value="${existing?.amount ?? 1}"></label>
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseCount")}<input name="choose" type="number" min="1" value="${existing?.choose ?? 1}"></label>
         </div>
-        <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Packages.AllowedPools")}</span>
+        <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Packages.AllowedPools")}</span>
         <div class="package-pool-choice-options">
-          ${POOL_KEYS.map((pool) => `<label class="cypherv2-dialog-toggle"><input name="pool_${pool}" type="checkbox" ${existing?.pools.includes(pool) ? "checked" : ""}><span>${game.i18n.localize(`CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</span></label>`).join("")}
+          ${POOL_KEYS.map((pool) => `<label class="magnusarchives-dialog-toggle"><input name="pool_${pool}" type="checkbox" ${existing?.pools.includes(pool) ? "checked" : ""}><span>${game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</span></label>`).join("")}
         </div>
       </div>`,
-      ok: {label: game.i18n.localize(existing ? "CYPHERV2.Actions.Save" : "CYPHERV2.Actions.Add")}
+      ok: {label: game.i18n.localize(existing ? "MAGNUSARCHIVES.Actions.Save" : "MAGNUSARCHIVES.Actions.Add")}
     }) as Record<string, unknown> | null;
     if (!data) return null;
     const amount = Math.trunc(Number(data.amount));
     const choose = Math.trunc(Number(data.choose));
     const pools = POOL_KEYS.filter((pool) => Boolean(data[`pool_${pool}`]));
     if (!Number.isInteger(amount) || amount < 1 || !Number.isInteger(choose) || choose < 1 || choose > pools.length) {
-      ui.notifications.error(game.i18n.localize("CYPHERV2.Packages.InvalidPoolBonusChoice"));
+      ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Packages.InvalidPoolBonusChoice"));
       return null;
     }
     return {amount, choose, pools};
   }
 
-  static async #onAddPoolBonusChoiceGroup(this: CypherV2ItemSheet): Promise<void> {
+  static async #onAddPoolBonusChoiceGroup(this: MagnusArchivesItemSheet): Promise<void> {
     if (this.item.type !== "descriptor") return;
     const data = await this.#promptPoolBonusChoiceGroup();
     if (!data) return;
@@ -660,7 +662,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onEditPoolBonusChoiceGroup(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -676,7 +678,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onRemovePoolBonusChoiceGroup(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -687,7 +689,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     });
   }
 
-  static async #onAddChoiceOption(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onAddChoiceOption(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const groupId = target.dataset.groupId;
     const system = this.item.system as unknown as DescriptorSystemData | SpeciesSystemData | CharacterTypeSystemData;
@@ -703,9 +705,9 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     const sourceType = abilityChoice ? "ability" : descriptorChoice ? "descriptor" : "skill";
     const sources = [...game.items].filter((item) => item.type === sourceType).sort((a, b) => a.name.localeCompare(b.name));
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(abilityChoice ? "CYPHERV2.Species.AddAbilityOption" : descriptorChoice ? "CYPHERV2.Species.AddDescriptorOption" : "CYPHERV2.Packages.AddSkillOption")},
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.Source")}<select name="uuid">${abilityChoice || descriptorChoice ? "" : `<option value="custom">${game.i18n.localize("CYPHERV2.Packages.CustomSkill")}</option>`}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${abilityChoice || descriptorChoice ? "" : `<label>${game.i18n.localize("CYPHERV2.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("CYPHERV2.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>`}</div>`,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Add")}
+      window: {title: game.i18n.localize(abilityChoice ? "MAGNUSARCHIVES.Species.AddAbilityOption" : descriptorChoice ? "MAGNUSARCHIVES.Species.AddDescriptorOption" : "MAGNUSARCHIVES.Packages.AddSkillOption")},
+      content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${abilityChoice || descriptorChoice ? "" : `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>`}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${abilityChoice || descriptorChoice ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>`}</div>`,
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     const source = data.uuid === "custom" ? null : await fromUuid(String(data.uuid ?? "")) as Item | null;
@@ -726,19 +728,19 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onEditSkillGrantNote(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onEditSkillGrantNote(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry || !("skillUuid" in entry)) return;
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.Packages.EditSkillContextNote")},
-      content: `<div class="cypherv2-dialog-fields"><label>${game.i18n.localize("CYPHERV2.Packages.SkillContextNote")}<textarea name="notes" rows="3">${escapeHtml(String(entry.notes ?? ""))}</textarea></label></div>`,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Save")}
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.EditSkillContextNote")},
+      content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="3">${escapeHtml(String(entry.notes ?? ""))}</textarea></label></div>`,
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     await this.#replacePackageEntry(target, {...entry, notes: String(data.notes ?? "")});
   }
 
-  static async #onInspectPackageGrant(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onInspectPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry) return;
     const uuid = "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
@@ -746,21 +748,21 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     if (source) { await source.sheet?.render(true); return; }
     await foundry.applications.api.DialogV2.confirm({
       window: {title: entry.snapshot?.name || ("customName" in entry ? entry.customName : "")},
-      content: `<div class="cypherv2 cypherv2-dialog package-snapshot"><p>${String(entry.snapshot?.system?.description ?? "")}</p></div>`,
-      yes: {label: game.i18n.localize("CYPHERV2.Actions.Close")}, no: {label: game.i18n.localize("CYPHERV2.Actions.Close")}
+      content: `<div class="magnusarchives magnusarchives-dialog package-snapshot"><p>${String(entry.snapshot?.system?.description ?? "")}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}, no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}
     });
   }
 
-  static async #onRefreshPackageGrant(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRefreshPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry) return;
     const uuid = "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
     const source = uuid ? await fromUuid(uuid) as Item | null : null;
-    if (!source) { ui.notifications.warn(game.i18n.localize("CYPHERV2.Packages.SourceUnavailable")); return; }
+    if (!source) { ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.SourceUnavailable")); return; }
     await this.#replacePackageEntry(target, {...entry, snapshot: this.#snapshot(source)});
   }
 
-  static async #onRemovePackageGrant(this: CypherV2ItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRemovePackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const kind = target.dataset.grantKind;
     const id = target.dataset.grantId;
     if (!id) return;
@@ -797,12 +799,12 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onRollDepletion(this: CypherV2ItemSheet): Promise<void> {
+  static async #onRollDepletion(this: MagnusArchivesItemSheet): Promise<void> {
     await rollItemDepletion(this.item as unknown as DepletionItemLike);
   }
 
   static async #onOpenFocusNode(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -811,7 +813,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     await openFocusNode(this.#focusDocument(), nodeId);
   }
 
-  static async #onEditFocusTree(this: CypherV2ItemSheet): Promise<void> {
+  static async #onEditFocusTree(this: MagnusArchivesItemSheet): Promise<void> {
     try {
       this.#assertGmFocusEditorAccess();
       this.#focusTreeEditor = new FocusTreeEditorSession(
@@ -824,20 +826,20 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onAddFocusAbility(this: CypherV2ItemSheet): Promise<void> {
+  static async #onAddFocusAbility(this: MagnusArchivesItemSheet): Promise<void> {
     try {
       const editor = this.#editor();
       const abilities = [...game.items]
         .filter((item) => item.type === "ability")
         .sort((left, right) => left.name.localeCompare(right.name));
       if (abilities.length === 0) {
-        ui.notifications.warn(game.i18n.localize("CYPHERV2.Focus.Editor.NoWorldAbilities"));
+        ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.NoWorldAbilities"));
         return;
       }
       const data = await foundry.applications.api.DialogV2.input({
-        window: {title: game.i18n.localize("CYPHERV2.Focus.Editor.AddAbility")},
-        content: `<div class="cypherv2-dialog-fields">
-          <label>${game.i18n.localize("CYPHERV2.Focus.Editor.Ability")}
+        window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")},
+        content: `<div class="magnusarchives-dialog-fields">
+          <label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.Ability")}
             <select name="abilityUuid">${abilities.map((ability) => (
               `<option value="${escapeHtml(ability.uuid)}">${escapeHtml(ability.name)}</option>`
             )).join("")}</select>
@@ -845,11 +847,11 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
           ${this.#tierSelectHtml()}
         </div>`,
         rejectClose: false,
-        ok: {label: game.i18n.localize("CYPHERV2.Focus.Editor.AddAbility")}
+        ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")}
       }) as Record<string, unknown> | null;
       if (!data) return;
       const ability = await fromUuid(String(data.abilityUuid ?? ""));
-      if (!ability) throw new Error(game.i18n.localize("CYPHERV2.Focus.Editor.AbilityUnavailable"));
+      if (!ability) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AbilityUnavailable"));
       const node = editor.addAbility(
         ability as FocusEditorAbilityLike,
         Number(data.tier ?? 1)
@@ -861,7 +863,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onSaveFocusTree(this: CypherV2ItemSheet): Promise<void> {
+  static async #onSaveFocusTree(this: MagnusArchivesItemSheet): Promise<void> {
     try {
       const editor = this.#editor();
       const warnings = editor.diagnostics().filter((entry) => entry.severity === "warning");
@@ -869,7 +871,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       await editor.save((graph) => this.item.update({"system.graph": graph}));
       this.#focusTreeEditor = null;
       this.#focusEditorInteraction.reset();
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Focus.Editor.Saved"));
+      ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.Saved"));
       await this.#rerender();
     } catch (error) {
       if (error instanceof FocusGraphValidationError) {
@@ -880,7 +882,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onCancelFocusTree(this: CypherV2ItemSheet): Promise<void> {
+  static async #onCancelFocusTree(this: MagnusArchivesItemSheet): Promise<void> {
     this.#focusTreeEditor?.cancel();
     this.#focusTreeEditor = null;
     this.#focusEditorInteraction.reset();
@@ -888,7 +890,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onSelectFocusEditorNode(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -900,7 +902,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onMoveFocusNode(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -915,7 +917,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onSetFocusNodeTier(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -928,7 +930,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onStartFocusConnection(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     _target: HTMLElement
   ): Promise<void> {
@@ -938,7 +940,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onCompleteFocusConnection(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -953,13 +955,13 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onCancelFocusConnection(this: CypherV2ItemSheet): Promise<void> {
+  static async #onCancelFocusConnection(this: MagnusArchivesItemSheet): Promise<void> {
     this.#focusEditorInteraction.cancelConnection();
     await this.#rerender();
   }
 
   static async #onDeleteFocusConnection(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -973,16 +975,16 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onClearFocusConnections(this: CypherV2ItemSheet): Promise<void> {
+  static async #onClearFocusConnections(this: MagnusArchivesItemSheet): Promise<void> {
     try {
       const editor = this.#editor();
       const confirmed = await foundry.applications.api.DialogV2.confirm({
-        window: {title: game.i18n.localize("CYPHERV2.Focus.Editor.ClearConnections")},
-        content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Focus.Editor.ClearConnectionsConfirm")}</p></div>`,
+        window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ClearConnections")},
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ClearConnectionsConfirm")}</p></div>`,
         rejectClose: false,
         modal: true,
-        yes: {label: game.i18n.localize("CYPHERV2.Focus.Editor.ClearConnections")},
-        no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+        yes: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ClearConnections")},
+        no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
       });
       if (!confirmed) return;
       editor.clearConnections();
@@ -994,7 +996,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onRefreshFocusSnapshot(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -1003,7 +1005,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       const node = this.#editor().graph.nodes.find((entry) => entry.id === nodeId);
       if (!node) throw new Error(`Focus node '${nodeId}' was not found.`);
       const ability = await fromUuid(node.abilityUuid);
-      if (!ability) throw new Error(game.i18n.localize("CYPHERV2.Focus.Editor.AbilityUnavailable"));
+      if (!ability) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AbilityUnavailable"));
       this.#editor().refreshSnapshot(nodeId, ability as FocusEditorAbilityLike);
       await this.#rerender();
     } catch (error) {
@@ -1012,7 +1014,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   static async #onDeleteFocusNode(
-    this: CypherV2ItemSheet,
+    this: MagnusArchivesItemSheet,
     _event: PointerEvent,
     target: HTMLElement
   ): Promise<void> {
@@ -1021,14 +1023,14 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       const node = this.#editor().graph.nodes.find((entry) => entry.id === nodeId);
       if (!node) throw new Error(`Focus node '${nodeId}' was not found.`);
       const confirmed = await foundry.applications.api.DialogV2.confirm({
-        window: {title: game.i18n.localize("CYPHERV2.Focus.Editor.DeleteNode")},
-        content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.format("CYPHERV2.Focus.Editor.DeleteNodeConfirm", {
+        window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DeleteNode")},
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Focus.Editor.DeleteNodeConfirm", {
           name: escapeHtml(node.abilitySnapshot.name || node.id)
         })}</p></div>`,
         rejectClose: false,
         modal: true,
-        yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-        no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+        yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+        no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
       });
       if (!confirmed) return;
       this.#editor().deleteNode(nodeId);
@@ -1041,7 +1043,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
 
   #assertGmFocusEditorAccess(): void {
     if (this.item.type !== "focus" || !game.user.isGM || !this.isEditable) {
-      throw new Error(game.i18n.localize("CYPHERV2.Focus.Editor.GmOnly"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.GmOnly"));
     }
   }
 
@@ -1066,13 +1068,13 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   async #addAbility(ability: FocusEditorAbilityLike): Promise<void> {
     const editor = this.#editor();
     if (ability.type !== "ability") {
-      throw new Error(game.i18n.localize("CYPHERV2.Focus.Editor.DropAbilityOnly"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DropAbilityOnly"));
     }
     const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.Focus.Editor.ChooseTier")},
-      content: `<div class="cypherv2-dialog-fields">${this.#tierSelectHtml()}</div>`,
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ChooseTier")},
+      content: `<div class="magnusarchives-dialog-fields">${this.#tierSelectHtml()}</div>`,
       rejectClose: false,
-      ok: {label: game.i18n.localize("CYPHERV2.Focus.Editor.AddAbility")}
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")}
     }) as Record<string, unknown> | null;
     if (!data) return;
     const node = editor.addAbility(ability, Number(data.tier ?? 1));
@@ -1081,7 +1083,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
   }
 
   #tierSelectHtml(): string {
-    return `<label>${game.i18n.localize("CYPHERV2.Focus.Tier")}
+    return `<label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Tier")}
       <select name="tier">${[1, 2, 3, 4, 5, 6]
         .map((tier) => `<option value="${tier}">${tier}</option>`)
         .join("")}</select>
@@ -1100,11 +1102,11 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
 
   async #addGenreAbility(source: Item, minimumTier = 1): Promise<void> {
     if (this.item.type !== "genre" || source.type !== "ability") {
-      throw new Error(game.i18n.localize("CYPHERV2.Genre.DropAbilityOnly"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Genre.DropAbilityOnly"));
     }
     const system = this.item.system as unknown as GenreSystemData;
     if (system.abilityCatalog.some((entry) => entry.abilityUuid === source.uuid)) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Genre.DuplicateAbility"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Genre.DuplicateAbility"));
       return;
     }
     const entry: GenreAbilityEntry = {
@@ -1178,7 +1180,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
         return;
       }
     }
-    throw new Error(game.i18n.localize("CYPHERV2.Packages.InvalidDrop"));
+    throw new Error(game.i18n.localize("MAGNUSARCHIVES.Packages.InvalidDrop"));
   }
 
   #packageEntry(target: HTMLElement): AbilityGrant | SkillGrant | SkillGrantOption | DescriptorGrant | null {
@@ -1283,39 +1285,39 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       ...abilityVisibility,
       rollModifierLabel: game.i18n.localize(
         abilityVisibility.rollModifierLabel === "task"
-          ? "CYPHERV2.Ability.TaskModifier"
+          ? "MAGNUSARCHIVES.Ability.TaskModifier"
           : abilityVisibility.rollModifierLabel === "defense"
-            ? "CYPHERV2.Ability.DefenseModifier"
-            : "CYPHERV2.Ability.RollModifier"
+            ? "MAGNUSARCHIVES.Ability.DefenseModifier"
+            : "MAGNUSARCHIVES.Ability.RollModifier"
       )
     } : null;
     const genreAbilityMetadata = isAbility
-      ? ((this.item as unknown as {flags?: {cypherv2?: {genreAbility?: {
+      ? ((this.item as unknown as {flags?: {magnusarchives?: {genreAbility?: {
         catalog?: string;
         genres?: string[];
         progressionBand?: string;
         minimumSuperheroRank?: number;
-      }}}}).flags?.cypherv2?.genreAbility)
+      }}}}).flags?.magnusarchives?.genreAbility)
       : undefined;
     const abilityGenreReview = genreAbilityMetadata ? {
-      catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${genreAbilityMetadata.catalog ?? "progression"}`),
+      catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${genreAbilityMetadata.catalog ?? "progression"}`),
       genresLabel: (genreAbilityMetadata.genres ?? []).map((genre) => (
-        game.i18n.localize(`CYPHERV2.Packages.Genre.${genre}`)
+        game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${genre}`)
       )).join(" · "),
       progressionBandLabel: genreAbilityMetadata.progressionBand === "origin"
-        ? game.i18n.localize("CYPHERV2.Genre.CatalogKind.origin")
-        : game.i18n.localize(`CYPHERV2.Genre.ProgressionBand.${genreAbilityMetadata.progressionBand ?? "mid-tier"}`),
+        ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin")
+        : game.i18n.localize(`MAGNUSARCHIVES.Genre.ProgressionBand.${genreAbilityMetadata.progressionBand ?? "mid-tier"}`),
       minimumSuperheroRank: Number(genreAbilityMetadata.minimumSuperheroRank ?? 0)
     } : null;
     const genreCatalogEntries = isGenre
       ? (system as unknown as GenreSystemData).abilityCatalog.map((entry) => ({
         ...entry,
-        catalogLabel: game.i18n.localize(`CYPHERV2.Genre.CatalogKind.${entry.catalog ?? "progression"}`),
+        catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${entry.catalog ?? "progression"}`),
         progressionBandLabel: (entry.catalog ?? "progression") === "progression"
           ? entry.minimumTier === 3
-            ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.mid-tier")
+            ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.mid-tier")
             : entry.minimumTier === 6
-              ? game.i18n.localize("CYPHERV2.Genre.ProgressionBand.high-tier")
+              ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.high-tier")
               : ""
           : "",
         minimumSuperheroRank: Number(entry.minimumSuperheroRank ?? 0)
@@ -1369,8 +1371,8 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       typeSuperheroAttached: typeSuperheroSelected && Boolean(typeInstance?.instanceId),
       typeSuperheroicsPoolLabel: typeInstance?.selections?.superheroicsPool
         && typeInstance.selections.superheroicsPool !== "none"
-        ? game.i18n.localize(`CYPHERV2.Pools.${typeInstance.selections.superheroicsPool[0]!.toUpperCase()}${typeInstance.selections.superheroicsPool.slice(1)}`)
-        : game.i18n.localize("CYPHERV2.Common.None"),
+        ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${typeInstance.selections.superheroicsPool[0]!.toUpperCase()}${typeInstance.selections.superheroicsPool.slice(1)}`)
+        : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
       typeWeaponFamiliesValue: isCharacterType
         ? normalizeWeaponFamilies((system as unknown as CharacterTypeSystemData).weaponFamilies).map(weaponFamilyLabel).join(", ")
         : "",
@@ -1385,7 +1387,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       hideNormalItemFooter: isAbility || isSkill || isWeapon || isArmor || isShield || isEquipment || isCypher || isArtifact || isFocus || isGenre || isDescriptor || isCharacterType || isSpecies,
       genreEffortCapOptions: isGenre ? ["core", "unlimited"].map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Genre.EffortCap.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Genre.EffortCap.${value}`),
         selected: (system.options as {totalEffortCapMode?: string} | undefined)?.totalEffortCapMode === value
       })) : [],
       genreMinimumTierMin: GENRE_MINIMUM_TIER_MIN,
@@ -1397,48 +1399,48 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       hasGrantProvenance,
       packagePoolOptions: ["none", ...POOL_KEYS].map((value) => ({
         value,
-        label: value === "none" ? game.i18n.localize("CYPHERV2.Common.None") : game.i18n.localize(`CYPHERV2.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+        label: value === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
         selected: (system.edgeGrant as {pool?: string} | undefined)?.pool === value
       })),
       packageGenreOptions: ["none", "fantasy", "scienceFiction", "superhero", "custom"].map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Packages.Genre.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${value}`),
         selected: system.genre === value
       })),
       edgeModeOptions: ["none", "fixed", "choice"].map((value) => ({
         value,
-        label: game.i18n.localize(value === "none" ? "CYPHERV2.Common.None" : value === "fixed" ? "CYPHERV2.Packages.FixedPool" : "CYPHERV2.Packages.ChoicePool"),
+        label: game.i18n.localize(value === "none" ? "MAGNUSARCHIVES.Common.None" : value === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"),
         selected: (system.edgeGrant as {mode?: string} | undefined)?.mode === value
       })),
       descriptorSkillGrants: isDescriptor ? (system.skillGrants as SkillGrant[]).map((grant) => ({
-        ...grant, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${grant.rank}`)
+        ...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
       })) : [],
       descriptorPoolBonusChoiceGroups: isDescriptor
         ? ((system.poolBonusChoiceGroups ?? []) as PoolBonusChoiceGroup[]).map((group) => ({
           ...group,
           poolsLabel: group.pools.map((pool) => game.i18n.localize(
-            `CYPHERV2.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`
+            `MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`
           )).join(" · ")
         }))
         : [],
       descriptorChoiceGroups: isDescriptor ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
-        ...group, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${group.rank}`)
+        ...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
       })) : [],
       typeSkillGrants: isCharacterType ? (system.skillGrants as SkillGrant[]).map((grant) => ({
-        ...grant, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${grant.rank}`)
+        ...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
       })) : [],
       typeSkillChoiceGroups: isCharacterType ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
-        ...group, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${group.rank}`)
+        ...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
       })) : [],
       typeAbilityChoiceGroups: isCharacterType ? (system.abilityChoiceGroups as CharacterTypeSystemData["abilityChoiceGroups"]) : [],
-      speciesSkillGrants: isSpecies ? (system.skillGrants as SkillGrant[]).map((grant) => ({...grant, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${grant.rank}`)})) : [],
-      speciesSkillChoiceGroups: isSpecies ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({...group, rankLabel: game.i18n.localize(`CYPHERV2.Skill.Ranks.${group.rank}`)})) : [],
+      speciesSkillGrants: isSpecies ? (system.skillGrants as SkillGrant[]).map((grant) => ({...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)})) : [],
+      speciesSkillChoiceGroups: isSpecies ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)})) : [],
       speciesAbilityChoiceGroups: isSpecies ? (system.abilityChoiceGroups as SpeciesSystemData["abilityChoiceGroups"]) : [],
       speciesDescriptorChoiceGroups: isSpecies
         ? (system.descriptorChoiceGroups as SpeciesSystemData["descriptorChoiceGroups"]).map((group) => ({
           ...group,
           catalogMode: (group.sourceMode ?? "fixed") === "catalog",
-          catalogLabel: game.i18n.localize("CYPHERV2.Packages.AllAvailableDescriptors")
+          catalogLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")
         }))
         : [],
       canEditFocusTree: Boolean(isFocus && game.user.isGM && this.isEditable && !this.#focusTreeEditor),
@@ -1462,7 +1464,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
         })) ?? []
       } : null,
       focusTrees: isFocus
-        ? [await game.cypherv2.services.focusTrees.prepare(focusDocument!, this.#focusTreeEditor ? {
+        ? [await game.magnusarchives.services.focusTrees.prepare(focusDocument!, this.#focusTreeEditor ? {
           editor: {
             selectedNodeId: this.#focusEditorInteraction.selectedNodeId,
             connectionSourceNodeId: this.#focusEditorInteraction.connectionSourceNodeId
@@ -1472,53 +1474,56 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       isHeavyWeapon: isWeapon && system.category === "heavy",
       abilityActivationOptions: isAbility ? ABILITY_ACTIVATIONS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Ability.Activation.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${value}`),
         selected: system.activation === value
       })) : [],
       abilityAllowedPoolOptions: isAbility ? POOL_KEYS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
         selected: abilityCostPools.includes(value)
       })) : [],
       abilityRollOptions: isAbility ? ABILITY_ROLL_TYPES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Ability.Roll.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Roll.${value}`),
         selected: system.roll === value
       })) : [],
-      abilityWoundOptions: isAbility ? ["none", ...WOUND_SEVERITIES].map((value) => ({
+      priceCategoryOptions: isEquipment ? PRICE_CATEGORIES.map((value) => ({
         value,
-        label: game.i18n.localize(value === "none"
-          ? "CYPHERV2.Common.None"
-          : `CYPHERV2.Wounds.Severity.${value}`),
-        selected: system.woundSeverity === value
+        label: game.i18n.localize(`MAGNUSARCHIVES.Price.${value}`),
+        selected: system.price === value
+      })) : [],
+      abilityDamageEffectOptions: isAbility ? CHARACTER_DAMAGE_EFFECTS.map((value) => ({
+        value,
+        label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${value}`),
+        selected: system.damageEffect === value
       })) : [],
       abilityTargetOptions: isAbility ? ABILITY_TARGET_MODES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Ability.TargetMode.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.TargetMode.${value}`),
         selected: system.targetMode === value
       })) : [],
       cypherManifestationOptions: isCypher ? CYPHER_MANIFESTATIONS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Cypher.Manifestation.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${value}`),
         selected: system.manifestation === value
       })) : [],
       cypherPowerOptions: isCypher ? CYPHER_POWERS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Cypher.Power.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${value}`),
         selected: system.power === value
       })) : [],
       cypherEffectiveLevel: isCypher ? cypherLevel(system) : 0,
       artifactLevelRollable: isArtifact ? artifactLevelIsRollable(system) : false,
       skillRankOptions: isSkill ? SKILL_RANKS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Skill.Ranks.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
         selected: value === rank
       })) : [],
       skillPoolOptions: isSkill ? [
-        {value: "choose", label: game.i18n.localize("CYPHERV2.Skill.ChoosePool"), selected: defaultPool === "choose"},
+        {value: "choose", label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"), selected: defaultPool === "choose"},
         ...POOL_KEYS.map((value: PoolKey) => ({
           value,
-          label: game.i18n.localize(`CYPHERV2.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+          label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
           selected: value === defaultPool
         }))
       ] : [],
@@ -1538,34 +1543,34 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
         value,
         label: game.i18n.localize(
           value === "attack"
-            ? "CYPHERV2.Combat.Context.AnyAttack"
+            ? "MAGNUSARCHIVES.Combat.Context.AnyAttack"
             : value === "defense"
-              ? "CYPHERV2.Combat.Context.AnyDefense"
-              : `CYPHERV2.Combat.Context.${value}`
+              ? "MAGNUSARCHIVES.Combat.Context.AnyDefense"
+              : `MAGNUSARCHIVES.Combat.Context.${value}`
         ),
         selected: skillContexts.includes(value)
       })) : [],
       weaponCategoryOptions: isWeapon ? WEAPON_CATEGORIES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Combat.Weapon.Category.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${value}`),
         selected: system.category === value
       })) : [],
       weaponFamilyDisplay: isWeapon ? weaponFamilyLabel(system.family) : "",
       weaponDefaultPoolOptions: isWeapon ? ["none", ...POOL_KEYS].map((value) => ({
         value,
         label: value === "none"
-          ? game.i18n.localize("CYPHERV2.Common.None")
-          : game.i18n.localize(`CYPHERV2.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+          ? game.i18n.localize("MAGNUSARCHIVES.Common.None")
+          : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
         selected: system.defaultPool === value
       })) : [],
       weaponAttackTypeOptions: isWeapon ? WEAPON_ATTACK_TYPES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Combat.Weapon.AttackType.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${value}`),
         selected: system.attackType === value
       })) : [],
       rangeOptions: isWeapon ? RANGE_CATEGORIES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Combat.Range.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${value}`),
         selected: system.rangeCategory === value
       })) : [],
       weaponAttackModifierOptions: isWeapon ? [-2, -1, 0, 1, 2].map((value) => ({
@@ -1575,7 +1580,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       })) : [],
       weaponSkillLevelOptions: isWeapon ? SKILL_RANKS.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Skill.Ranks.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
         selected: system.skillLevel === value
       })) : [],
       combatResourcesExpanded: (isWeapon || isArmor || isShield)
@@ -1595,7 +1600,7 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
       })) : [],
       armorCategoryOptions: isArmor ? ARMOR_CATEGORIES.map((value) => ({
         value,
-        label: game.i18n.localize(`CYPHERV2.Combat.Armor.Category.${value}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${value}`),
         selected: system.category === value
       })) : [],
       shieldWoundTracks: isShield ? headerWoundTracks({
@@ -1604,11 +1609,11 @@ export class CypherV2ItemSheet extends ItemSheetV2 {
         major: (system.wounds as ShieldItemLike["system"]["wounds"]).major.length
       }, (system.derived as ShieldItemLike["system"]["derived"]).capacities).map((track) => ({
         ...track,
-        label: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
         pips: track.pips.map((pip) => ({
           ...pip,
-          tooltip: game.i18n.format("CYPHERV2.Hud.SetWoundCount", {
-            severity: game.i18n.localize(`CYPHERV2.Wounds.Severity.${track.severity}`),
+          tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
+            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
             count: pip.targetCount
           })
         }))

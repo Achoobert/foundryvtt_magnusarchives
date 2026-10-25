@@ -94,7 +94,7 @@ export class WoundService {
       id: input.id ?? this.#idFactory(),
       label: input.label ?? `${severity[0]?.toUpperCase()}${severity.slice(1)} Wound`,
       description: input.description ?? "",
-      sourceUuid: input.sourceUuid ?? "cypherv2.core",
+      sourceUuid: input.sourceUuid ?? "magnusarchives.core",
       treated: input.treated ?? false
     };
     const requestedIndex = WOUND_SEVERITIES.indexOf(severity);
@@ -187,7 +187,7 @@ export class WoundService {
         id: this.#idFactory(),
         label: input.label ?? `${severity[0]?.toUpperCase()}${severity.slice(1)} Wound`,
         description: input.description ?? "",
-        sourceUuid: input.sourceUuid ?? "cypherv2.manual",
+        sourceUuid: input.sourceUuid ?? "magnusarchives.manual",
         treated: input.treated ?? false
       };
       track.push(record);

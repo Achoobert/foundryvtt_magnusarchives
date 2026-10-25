@@ -68,4 +68,4 @@ currently available choices and all penalties remain derived.
 
 ## Duration effects
 
-Items may describe a duration trigger. Applied effects will later be represented as Foundry Active Effects with `flags.cypherv2.duration` metadata. Duration processing belongs to Recovery/Rest services.
+Items may describe a duration trigger. Applied effects will later be represented as Foundry Active Effects with `flags.magnusarchives.duration` metadata. Duration processing belongs to Recovery/Rest services.

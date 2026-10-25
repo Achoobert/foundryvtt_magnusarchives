@@ -17,7 +17,7 @@ export class PlayerIntrusionChatService {
     actor: PlayerIntrusionCharacterLike
   ): Promise<ChatMessage> {
     const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/cypherv2/templates/chat/player-intrusion-card.hbs",
+      "systems/magnusarchives/templates/chat/player-intrusion-card.hbs",
       {
         ...buildPlayerIntrusionCardData(record),
         ...chatCardActorImageData(actor as unknown as import("./chat-card-presentation").ChatCardActorLike)
@@ -26,7 +26,7 @@ export class PlayerIntrusionChatService {
     return await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({actor: actor as unknown as Actor}),
       content,
-      flags: {cypherv2: {playerIntrusion: record}}
+      flags: {magnusarchives: {playerIntrusion: record}}
     }) as ChatMessage;
   }
 }

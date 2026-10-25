@@ -1,5 +1,6 @@
 import {
   type ArmorCategory,
+  type DamageTrackStep,
   RECOVERY_TYPES,
   type RecoveryKind,
   type RecoveryType,
@@ -72,9 +73,20 @@ export interface WoundRecordData {
 }
 
 export type WoundCollection = Record<WoundSeverity, WoundRecordData[]>;
+
+export interface StressData {
+  /** Raw Stress points. Three points make one Stress Level. */
+  value: number;
+}
+
+export interface DamageTrackData {
+  step: DamageTrackStep;
+  /** Whether the extra "hurt" step is available (Tough, Never Says Die, body armor). */
+  hurtAvailable: boolean;
+}
 export type WoundCapacities = Record<WoundSeverity, number>;
 
-export type ContributionSourceType = "base" | "core" | "rule-module" | "wound" | "item";
+export type ContributionSourceType = "base" | "core" | "rule-module" | "wound" | "stress" | "item";
 
 export interface DerivedContribution {
   id: string;
@@ -104,6 +116,27 @@ export interface CharacterDerivedData {
     max: number;
     contributions: DerivedContribution[];
   };
+  stress: {
+    value: number;
+    /** floor(value / 3). Every Stress Level hinders all tasks. */
+    level: number;
+    /** Points still needed before the next Stress Level lands. */
+    toNextLevel: number;
+    hindrance: number;
+  };
+  damageTrack: {
+    step: DamageTrackStep;
+    hurtAvailable: boolean;
+    steps: DamageTrackStep[];
+    /** Extra Pool points every level of Effort costs. */
+    effortSurcharge: number;
+    ignoresSpecialEffects: boolean;
+    reducedSpecialDamage: boolean;
+    moveOnly: boolean;
+    dead: boolean;
+  };
+  /** Stress Levels plus any other always-on hindrances, applied to every task. */
+  totalHindrance: number;
   wounds: {
     calculatedCapacities: WoundCapacities;
     capacities: WoundCapacities;
@@ -199,6 +232,8 @@ export interface CharacterCoreSystemData {
     freelyUse: string[];
   };
   stats: CharacterPools & {effortBase: number};
+  stress: StressData;
+  damageTrack: DamageTrackData;
   wounds: WoundCollection;
   derived: CharacterDerivedData;
   recovery: {
@@ -234,7 +269,7 @@ export const defaultIdFactory: IdFactory = () => {
   const randomUUID = globalThis.crypto?.randomUUID;
   if (randomUUID) return randomUUID.call(globalThis.crypto);
   fallbackId += 1;
-  return `cypherv2-${Date.now()}-${fallbackId}`;
+  return `magnusarchives-${Date.now()}-${fallbackId}`;
 };
 
 export function assertCharacter(actor: CharacterDocumentLike): void {
@@ -243,7 +278,7 @@ export function assertCharacter(actor: CharacterDocumentLike): void {
 
 export function assertLiving(actor: CharacterDocumentLike): void {
   assertCharacter(actor);
-  if (actor.system.derived.wounds.dead) throw new Error("A dead Character cannot use this service.");
+  if (actor.system.derived.damageTrack.dead) throw new Error("A dead Character cannot use this service.");
 }
 
 export function cloneWounds(wounds: WoundCollection): WoundCollection {

@@ -12,23 +12,23 @@ const trackerSource = readFileSync("src/applications/combat-tracker.ts", "utf8")
 describe("system UI assets", () => {
   it("uses packaged root-relative system paths for pause and turn marker artwork", () => {
     expect(SYSTEM_UI_ASSETS).toEqual({
-      gamePaused: "systems/cypherv2/assets/ui/cyphergamepaused.png",
-      lobby: "systems/cypherv2/assets/cypherlobby.png",
-      turnMarker: "systems/cypherv2/assets/ui/cypherturnmarker.png"
+      gamePaused: "systems/magnusarchives/assets/ui/magnusgamepaused.png",
+      lobby: "systems/magnusarchives/assets/magnuslobby.png",
+      turnMarker: "systems/magnusarchives/assets/ui/magnusturnmarker.png"
     });
     for (const path of Object.values(SYSTEM_UI_ASSETS)) {
       expect(path).not.toContain("/dist/");
-      expect(existsSync(path.replace("systems/cypherv2/", ""))).toBe(true);
+      expect(existsSync(path.replace("systems/magnusarchives/", ""))).toBe(true);
     }
   });
 
   it("replaces pause presentation through the configured native Application V2 class", () => {
     expect(pauseSource).toContain("extends BaseGamePause");
-    expect(pauseSource).toContain("CONFIG.ui.pause = CypherV2GamePause");
+    expect(pauseSource).toContain("CONFIG.ui.pause = MagnusArchivesGamePause");
     expect(pauseSource).toContain("icon: SYSTEM_UI_ASSETS.gamePaused");
     expect(pauseSource).toContain("spin: false");
     expect(pauseSource).not.toContain('Hooks.on("renderPause"');
-    expect(pauseStyles).toContain("#pause.cypherv2-game-pause");
+    expect(pauseStyles).toContain("#pause.magnusarchives-game-pause");
     expect(pauseStyles).toContain("clip: rect(0, 0, 0, 0)");
     expect(mainSource).toContain("registerGamePause();");
   });

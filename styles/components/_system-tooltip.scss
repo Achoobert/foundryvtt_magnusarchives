@@ -1,4 +1,4 @@
-.cypherv2-system-tooltip {
+.magnusarchives-system-tooltip {
   position: fixed;
   z-index: 10000;
   width: min(22rem, calc(100vw - 1rem));
@@ -6,28 +6,28 @@
   padding: 0.65rem;
   overflow: auto;
   pointer-events: none;
-  color: var(--cypherv2-color-text);
-  background: var(--cypherv2-color-surface-raised);
-  border: 1px solid var(--cypherv2-color-border);
-  border-radius: var(--cypherv2-radius);
-  box-shadow: var(--cypherv2-shadow);
+  color: var(--magnusarchives-color-text);
+  background: var(--magnusarchives-color-surface-raised);
+  border: 1px solid var(--magnusarchives-color-border);
+  border-radius: var(--magnusarchives-radius);
+  box-shadow: var(--magnusarchives-shadow);
 
   h3,
   p {
     margin: 0;
   }
 
-  .cypherv2-focus-tooltip-content {
+  .magnusarchives-focus-tooltip-content {
     display: grid;
     gap: 0.4rem;
   }
 
-  .cypherv2-tooltip-meta {
-    color: var(--cypherv2-color-muted);
+  .magnusarchives-tooltip-meta {
+    color: var(--magnusarchives-color-muted);
     font-size: 0.72rem;
   }
 
-  .cypherv2-tooltip-description {
+  .magnusarchives-tooltip-description {
     overflow-wrap: anywhere;
 
     > :first-child {

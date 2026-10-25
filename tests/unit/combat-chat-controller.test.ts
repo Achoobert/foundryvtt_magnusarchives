@@ -21,7 +21,7 @@ describe("deferred Combat Chat outcomes", () => {
       user: {isGM: true},
       actors: new Map([[actor.id, actor]]),
       i18n: {localize: (key: string) => key},
-      cypherv2: {services: {combat: {applyShieldWound}}}
+      magnusarchives: {services: {combat: {applyShieldWound}}}
     });
     vi.stubGlobal("ui", {notifications: {info: vi.fn(), error: vi.fn()}});
     const action = {
@@ -47,7 +47,7 @@ describe("deferred Combat Chat outcomes", () => {
       "major",
       {id: "npc-source", name: "Sentinel"}
     );
-    expect(setFlag).toHaveBeenCalledWith("cypherv2", "combatAction", {...action, applied: true});
+    expect(setFlag).toHaveBeenCalledWith("magnusarchives", "combatAction", {...action, applied: true});
     expect(button.disabled).toBe(true);
   });
 
@@ -59,7 +59,7 @@ describe("deferred Combat Chat outcomes", () => {
       testUserPermission = vi.fn(() => true);
     }
     const source = new FakeActor();
-    const applyCharacterWound = vi.fn(async () => undefined);
+    const applyCharacterDamage = vi.fn(async () => undefined);
     const error = vi.fn();
     vi.stubGlobal("Actor", FakeActor);
     vi.stubGlobal("CONST", {DOCUMENT_OWNERSHIP_LEVELS: {OWNER: 3}});
@@ -68,13 +68,13 @@ describe("deferred Combat Chat outcomes", () => {
     vi.stubGlobal("game", {
       user: {isGM: true}, actors: new Map([[source.id, source]]),
       i18n: {localize: () => "The original token no longer exists."},
-      cypherv2: {services: {combat: {applyCharacterWound}}}
+      magnusarchives: {services: {combat: {applyCharacterDamage}}}
     });
     vi.stubGlobal("ui", {notifications: {info: vi.fn(), error}});
     const action = {
-      kind: "characterWound", targetActorId: source.id,
+      kind: "characterDamage", targetActorId: source.id,
       targetTokenId: "deleted", targetTokenUuid: "Scene.scene.Token.deleted",
-      severity: "major", applied: false
+      effect: "seriousInjury", stressAmount: 0, applied: false
     };
     const setFlag = vi.fn(async () => undefined);
     const message = {getFlag: () => action, setFlag} as unknown as ChatMessage;
@@ -84,7 +84,7 @@ describe("deferred Combat Chat outcomes", () => {
     await applyCombatOutcome(message, button);
 
     expect(error).toHaveBeenCalledWith("The original token no longer exists.");
-    expect(applyCharacterWound).not.toHaveBeenCalled();
+    expect(applyCharacterDamage).not.toHaveBeenCalled();
     expect(source.update).not.toHaveBeenCalled();
     expect(setFlag).not.toHaveBeenCalled();
     expect(button.disabled).toBe(false);

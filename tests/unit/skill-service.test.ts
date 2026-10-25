@@ -140,7 +140,7 @@ describe("SkillService", () => {
 
     expect(execution.result.prepared.breakdown).toEqual(expect.arrayContaining([
       expect.objectContaining({source: "skill", direction: "ease", steps: 1}),
-      expect.objectContaining({source: "wound", direction: "hinder", steps: 1})
+      expect.objectContaining({source: "condition", direction: "hinder", steps: 1})
     ]));
     expect(card.presentation).toBe("concealed");
     expect(card).not.toHaveProperty("poolLabel");
@@ -177,7 +177,7 @@ describe("SkillService", () => {
     expect(preview.totalHindrance).toBe(2);
     expect(preview.breakdown).toContainEqual(expect.objectContaining({
       id: "armor.medium.speed-task",
-      label: "CYPHERV2.Combat.Armor.Unfamiliar.medium"
+      label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium"
     }));
   });
 });

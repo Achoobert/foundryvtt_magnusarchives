@@ -165,7 +165,7 @@ describe("Power Shift UI remains guide-only", () => {
   });
 
   it("keeps its compact panel, header, row, and action presentation outside the Abilities scope", () => {
-    expect(powerShiftStyles).toContain(".cypherv2 .character-power-shifts");
+    expect(powerShiftStyles).toContain(".magnusarchives .character-power-shifts");
     expect(powerShiftStyles).toContain("border: 1px solid");
     expect(powerShiftStyles).toContain("font-size: 0.72rem");
     expect(powerShiftStyles).toContain("text-transform: uppercase");

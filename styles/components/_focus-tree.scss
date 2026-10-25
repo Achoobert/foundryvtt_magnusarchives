@@ -1,13 +1,13 @@
-.cypherv2-focus-tree-section {
+.magnusarchives-focus-tree-section {
   display: grid;
-  gap: var(--cypherv2-space-compact);
+  gap: var(--magnusarchives-space-compact);
 
   .focus-tree-scroll {
     max-width: 100%;
     overflow: auto;
-    background: var(--cypherv2-color-surface);
-    border: 1px solid var(--cypherv2-color-border);
-    border-radius: var(--cypherv2-radius);
+    background: var(--magnusarchives-color-surface);
+    border: 1px solid var(--magnusarchives-color-border);
+    border-radius: var(--magnusarchives-radius);
   }
 
   .focus-tree-canvas {
@@ -22,8 +22,8 @@
     left: 0;
     height: 108px;
     padding: 0.22rem 0.38rem;
-    color: var(--cypherv2-color-muted);
-    border-bottom: 1px solid var(--cypherv2-color-border);
+    color: var(--magnusarchives-color-muted);
+    border-bottom: 1px solid var(--magnusarchives-color-border);
   }
 
   .focus-tier-nodes {
@@ -45,23 +45,23 @@
     pointer-events: none;
 
     line {
-      stroke: var(--cypherv2-color-accent);
+      stroke: var(--magnusarchives-color-accent);
       stroke-width: 2;
     }
 
     marker path {
-      fill: var(--cypherv2-color-accent);
+      fill: var(--magnusarchives-color-accent);
     }
   }
 
   .focus-tree-node {
     position: relative;
     z-index: 2;
-    color: var(--cypherv2-color-text);
-    background: var(--cypherv2-color-surface-raised);
-    border: 2px solid var(--cypherv2-color-border);
-    border-radius: var(--cypherv2-radius);
-    box-shadow: var(--cypherv2-shadow);
+    color: var(--magnusarchives-color-text);
+    background: var(--magnusarchives-color-surface-raised);
+    border: 2px solid var(--magnusarchives-color-border);
+    border-radius: var(--magnusarchives-radius);
+    box-shadow: var(--magnusarchives-shadow);
     font-size: 0.76rem;
 
     .focus-tree-node-inspect {
@@ -96,7 +96,7 @@
     }
 
     em {
-      color: var(--cypherv2-color-muted);
+      color: var(--magnusarchives-color-muted);
       font-size: 0.6rem;
       font-style: normal;
       letter-spacing: 0.025em;
@@ -108,7 +108,7 @@
       position: absolute;
       top: 0.25rem;
       right: 0.25rem;
-      color: var(--cypherv2-color-muted);
+      color: var(--magnusarchives-color-muted);
       font-size: 0.62rem;
     }
 
@@ -116,7 +116,7 @@
       position: absolute;
       right: 0.25rem;
       bottom: 0.2rem;
-      color: var(--cypherv2-color-accent);
+      color: var(--magnusarchives-color-accent);
       font-size: 0.72rem;
     }
 
@@ -136,25 +136,25 @@
       min-height: 0;
       margin: 0;
       padding: 0.12rem 0.3rem;
-      color: var(--cypherv2-color-text);
-      background: var(--cypherv2-color-surface-raised);
-      border: 1px solid var(--cypherv2-color-warning);
-      border-radius: calc(var(--cypherv2-radius) / 2);
+      color: var(--magnusarchives-color-text);
+      background: var(--magnusarchives-color-surface-raised);
+      border: 1px solid var(--magnusarchives-color-warning);
+      border-radius: calc(var(--magnusarchives-radius) / 2);
       font-size: 0.62rem;
       line-height: 1.15;
 
       &.restore {
-        border-color: var(--cypherv2-color-accent);
+        border-color: var(--magnusarchives-color-accent);
       }
 
       &.undo {
-        border-color: var(--cypherv2-color-danger);
+        border-color: var(--magnusarchives-color-danger);
       }
     }
 
     &.state-owned {
-      background: color-mix(in srgb, var(--cypherv2-color-accent) 24%, var(--cypherv2-color-surface-raised));
-      border-color: var(--cypherv2-color-accent);
+      background: color-mix(in srgb, var(--magnusarchives-color-accent) 24%, var(--magnusarchives-color-surface-raised));
+      border-color: var(--magnusarchives-color-accent);
     }
 
     &.missing-owned-ability {
@@ -162,7 +162,7 @@
     }
 
     &.state-available {
-      border-color: var(--cypherv2-color-border);
+      border-color: var(--magnusarchives-color-border);
     }
 
     &.state-future {
@@ -190,18 +190,18 @@
     }
 
     &.invalid-progression {
-      border-color: var(--cypherv2-color-danger);
+      border-color: var(--magnusarchives-color-danger);
       border-style: dashed;
     }
   }
 
   .focus-tree-diagnostics {
-    color: var(--cypherv2-color-warning);
+    color: var(--magnusarchives-color-warning);
   }
 
   .focus-tree-advisory-reason {
     margin: 0.18rem 0 0;
-    color: var(--cypherv2-color-warning);
+    color: var(--magnusarchives-color-warning);
     font-size: 0.72rem;
   }
 }
@@ -211,23 +211,23 @@
 .focus-item-information,
 .focus-progression {
   display: grid;
-  gap: var(--cypherv2-space-compact);
+  gap: var(--magnusarchives-space-compact);
 }
 
 .focus-progression {
-  padding-top: var(--cypherv2-space-tight);
+  padding-top: var(--magnusarchives-space-tight);
 
   + .focus-progression {
-    margin-top: var(--cypherv2-space-compact);
-    padding-top: var(--cypherv2-space-compact);
-    border-top: 1px solid var(--cypherv2-color-border);
+    margin-top: var(--magnusarchives-space-compact);
+    padding-top: var(--magnusarchives-space-compact);
+    border-top: 1px solid var(--magnusarchives-color-border);
   }
 }
 
 .focus-tree-editor-header,
 .focus-tree-node-editor > header {
   display: flex;
-  gap: var(--cypherv2-space);
+  gap: var(--magnusarchives-space);
   align-items: center;
   justify-content: space-between;
 
@@ -237,7 +237,7 @@
   }
 
   small {
-    color: var(--cypherv2-color-muted);
+    color: var(--magnusarchives-color-muted);
   }
 }
 
@@ -263,17 +263,17 @@
   }
 
   padding: 0.55rem;
-  background: var(--cypherv2-color-surface);
-  border: 1px solid var(--cypherv2-color-border);
-  border-radius: var(--cypherv2-radius);
+  background: var(--magnusarchives-color-surface);
+  border: 1px solid var(--magnusarchives-color-border);
+  border-radius: var(--magnusarchives-radius);
 }
 
 .focus-tree-editor-dropzone {
   flex: 1 1 16rem;
   padding: 0.45rem 0.65rem;
-  color: var(--cypherv2-color-muted);
-  border: 1px dashed var(--cypherv2-color-accent);
-  border-radius: var(--cypherv2-radius);
+  color: var(--magnusarchives-color-muted);
+  border: 1px dashed var(--magnusarchives-color-accent);
+  border-radius: var(--magnusarchives-radius);
   text-align: center;
 }
 
@@ -282,7 +282,7 @@
   gap: 0.5rem;
   align-items: center;
   justify-content: space-between;
-  color: var(--cypherv2-color-warning);
+  color: var(--magnusarchives-color-warning);
 }
 
 .focus-item-tree.editing {
@@ -291,15 +291,15 @@
     opacity: 1;
 
     &.editor-selected {
-      border-color: var(--cypherv2-color-accent);
-      outline: 3px solid color-mix(in srgb, var(--cypherv2-color-accent) 75%, transparent);
+      border-color: var(--magnusarchives-color-accent);
+      outline: 3px solid color-mix(in srgb, var(--magnusarchives-color-accent) 75%, transparent);
       outline-offset: 2px;
-      box-shadow: 0 0 0 4px color-mix(in srgb, var(--cypherv2-color-accent) 22%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--magnusarchives-color-accent) 22%, transparent);
     }
 
     &.connection-source {
-      border-color: var(--cypherv2-color-accent);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--cypherv2-color-accent) 40%, transparent);
+      border-color: var(--magnusarchives-color-accent);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--magnusarchives-color-accent) 40%, transparent);
     }
   }
 }
@@ -310,15 +310,15 @@
   top: 0;
   display: grid;
   gap: 0.55rem;
-  background: var(--cypherv2-color-surface-raised);
-  box-shadow: var(--cypherv2-shadow);
+  background: var(--magnusarchives-color-surface-raised);
+  box-shadow: var(--magnusarchives-shadow);
 
   button {
     width: auto;
   }
 
   .danger {
-    color: var(--cypherv2-color-warning);
+    color: var(--magnusarchives-color-warning);
   }
 
   &.empty {
@@ -328,7 +328,7 @@
 
   .focus-tree-selected-label {
     display: block;
-    color: var(--cypherv2-color-accent);
+    color: var(--magnusarchives-color-accent);
     font-size: 0.68rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -363,5 +363,5 @@
 
 .focus-tree-editor-hint {
   margin: 0;
-  color: var(--cypherv2-color-muted);
+  color: var(--magnusarchives-color-muted);
 }

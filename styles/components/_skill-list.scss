@@ -1,4 +1,4 @@
-.cypherv2 .skills-section {
+.magnusarchives .skills-section {
   .skills-header {
     display: flex;
     gap: 0.5rem;
@@ -12,7 +12,7 @@
     display: flex;
     gap: 0.25rem;
     align-items: center;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -20,21 +20,21 @@
 
     button {
       padding: 0.08rem 0.12rem;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: inherit;
       font-weight: inherit;
       letter-spacing: inherit;
       text-transform: inherit;
 
       &.is-active {
-        color: var(--cypherv2-accent-hover);
+        color: var(--magnusarchives-accent-hover);
       }
     }
   }
 
   .skills-add-action {
     padding: 0.1rem 0.2rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.7rem;
   }
 
@@ -61,8 +61,8 @@
 
     &:hover,
     &:focus-within {
-      background: var(--cypherv2-surface-raised);
-      box-shadow: inset 2px 0 var(--cypherv2-accent);
+      background: var(--magnusarchives-surface-raised);
+      box-shadow: inset 2px 0 var(--magnusarchives-accent);
 
       .compact-skill-actions {
         opacity: 1;
@@ -76,7 +76,7 @@
     min-width: 0;
     min-height: 1.4rem;
     overflow: hidden;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 0.78rem;
     font-weight: 650;
     text-align: left;
@@ -89,15 +89,15 @@
     }
 
     &:focus-visible {
-      color: var(--cypherv2-accent-hover);
-      outline: 1px solid var(--cypherv2-accent-hover);
+      color: var(--magnusarchives-accent-hover);
+      outline: 1px solid var(--magnusarchives-accent-hover);
       outline-offset: 1px;
       border-radius: 0.15rem;
-      box-shadow: 0 0 0.35rem color-mix(in srgb, var(--cypherv2-accent) 42%, transparent);
+      box-shadow: 0 0 0.35rem color-mix(in srgb, var(--magnusarchives-accent) 42%, transparent);
     }
 
     &.is-quick-roll-pulse {
-      animation: cypherv2-skill-quick-roll-pulse 200ms ease-out;
+      animation: magnusarchives-skill-quick-roll-pulse 200ms ease-out;
     }
   }
 
@@ -125,23 +125,23 @@
     }
 
     &.is-expert {
-      color: var(--cypherv2-rank-expert);
+      color: var(--magnusarchives-rank-expert);
     }
 
     &.is-specialized {
-      color: var(--cypherv2-rank-specialized);
+      color: var(--magnusarchives-rank-specialized);
     }
 
     &.is-trained {
-      color: var(--cypherv2-rank-trained);
+      color: var(--magnusarchives-rank-trained);
     }
 
     &.is-untrained {
-      color: var(--cypherv2-rank-untrained);
+      color: var(--magnusarchives-rank-untrained);
     }
 
     &.is-inability {
-      color: var(--cypherv2-rank-inability);
+      color: var(--magnusarchives-rank-inability);
     }
   }
 
@@ -153,7 +153,7 @@
     opacity: 0.62;
     transition: opacity 100ms ease;
 
-    .cypherv2-icon-action {
+    .magnusarchives-icon-action {
       width: 1.35rem;
       height: 1.35rem;
       padding: 0.1rem;
@@ -168,35 +168,35 @@
   .compact-skill-empty {
     grid-column: 1 / -1;
     padding: 0.4rem 0.25rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.75rem;
     font-style: italic;
   }
 }
 
-@keyframes cypherv2-skill-quick-roll-pulse {
+@keyframes magnusarchives-skill-quick-roll-pulse {
   0%,
   100% {
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     background: transparent;
     text-shadow: none;
   }
 
   45% {
-    color: var(--cypherv2-accent-hover);
-    background: color-mix(in srgb, var(--cypherv2-accent) 10%, transparent);
-    text-shadow: 0 0 0.35rem color-mix(in srgb, var(--cypherv2-accent) 55%, transparent);
+    color: var(--magnusarchives-accent-hover);
+    background: color-mix(in srgb, var(--magnusarchives-accent) 10%, transparent);
+    text-shadow: 0 0 0.35rem color-mix(in srgb, var(--magnusarchives-accent) 55%, transparent);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cypherv2 .skills-section .compact-skill-roll.is-quick-roll-pulse {
+  .magnusarchives .skills-section .compact-skill-roll.is-quick-roll-pulse {
     animation-duration: 1ms;
   }
 }
 
-@container cypherv2-character-sheet (max-width: 640px) {
-  .cypherv2 .skills-section .compact-skill-list {
+@container magnusarchives-character-sheet (max-width: 640px) {
+  .magnusarchives .skills-section .compact-skill-list {
     grid-template-columns: minmax(0, 1fr);
   }
 }

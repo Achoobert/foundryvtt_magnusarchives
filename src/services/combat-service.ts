@@ -1,5 +1,6 @@
 import {
   DEFENSE_TYPES,
+  type CharacterDamageEffect,
   type DefenseType,
   type WeaponCategory,
   type WoundSeverity
@@ -29,6 +30,7 @@ import type {SkillItemLike} from "./skill-service";
 import {SkillService} from "./skill-service";
 import {TargetResolver} from "./target-resolver";
 import {WoundService, type WoundApplicationResult} from "./wound-service";
+import {ConditionService, type DamageTrackResult, type StressResult} from "./condition-service";
 import {
   NoopCombatFeedbackService,
   type CombatFeedbackService
@@ -120,6 +122,12 @@ export interface DefenseRollOptions {
   readonly enabledRuleModuleIds?: readonly string[];
 }
 
+export interface CharacterDamageApplication {
+  readonly effect: Exclude<CharacterDamageEffect, "none">;
+  readonly stress: StressResult | null;
+  readonly injury: DamageTrackResult | null;
+}
+
 export interface NpcDamageApplication {
   readonly requestedDamage: number;
   readonly armor: number;
@@ -129,12 +137,23 @@ export interface NpcDamageApplication {
   readonly dead: boolean;
 }
 
-export interface DefenseWoundResolution {
-  readonly recipient: "character" | "shield" | "none";
-  readonly severity: WoundSeverity | "none";
-  readonly shieldId?: string;
-  readonly shieldName?: string;
-}
+/**
+ * What a defense roll leaves the defender with. A PC takes Stress or a serious
+ * injury (p12); only a Shield still carries a Wound track of its own.
+ */
+export type DefenseWoundResolution =
+  | {readonly recipient: "none"}
+  | {
+      readonly recipient: "character";
+      readonly effect: Exclude<CharacterDamageEffect, "none">;
+      readonly stressAmount: number;
+    }
+  | {
+      readonly recipient: "shield";
+      readonly severity: WoundSeverity;
+      readonly shieldId: string;
+      readonly shieldName: string;
+    };
 
 const BASE_COMBAT_POLICY: CombatPolicy = Object.freeze({
   weaponDamage: Object.freeze({light: 2, medium: 4, heavy: 6}),
@@ -195,6 +214,7 @@ export class CombatService {
   readonly #skills: SkillService;
   readonly #targets: TargetResolver;
   readonly #wounds: WoundService;
+  readonly #conditions: ConditionService;
   readonly #feedback: CombatFeedbackService;
   readonly #statuses: CombatStatusService;
   readonly #shields: ShieldService;
@@ -206,6 +226,7 @@ export class CombatService {
     skills: SkillService,
     targets: TargetResolver,
     wounds: WoundService,
+    conditions: ConditionService = new ConditionService(),
     feedback: CombatFeedbackService = new NoopCombatFeedbackService(),
     statuses: CombatStatusService = new NoopCombatStatusService(),
     shields: ShieldService = new ShieldService(wounds),
@@ -216,6 +237,7 @@ export class CombatService {
     this.#skills = skills;
     this.#targets = targets;
     this.#wounds = wounds;
+    this.#conditions = conditions;
     this.#feedback = feedback;
     this.#statuses = statuses;
     this.#shields = shields;
@@ -265,7 +287,7 @@ export class CombatService {
     if (this.weaponFreelyUsed(actor, weapon) || policy.unfamiliarWeaponHindrance <= 0) return null;
     return {
       id: `weapon.${weapon.id}.unfamiliar`,
-      label: `CYPHERV2.Combat.Weapon.Unfamiliar.${weapon.system.category}`,
+      label: `MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.${weapon.system.category}`,
       direction: "hinder",
       steps: policy.unfamiliarWeaponHindrance,
       source: "other",
@@ -330,7 +352,7 @@ export class CombatService {
     if (weapon.system.category === "light" && policy.lightWeaponEase > 0) {
       commonContributions.push({
         id: `weapon.${weapon.id}.light`,
-        label: "CYPHERV2.Combat.Weapon.LightEase",
+        label: "MAGNUSARCHIVES.Combat.Weapon.LightEase",
         direction: "ease",
         steps: policy.lightWeaponEase,
         source: "other",
@@ -342,7 +364,7 @@ export class CombatService {
     if (options.extremeRange) {
       commonContributions.push({
         id: `weapon.${weapon.id}.extreme-range`,
-        label: "CYPHERV2.Combat.Weapon.ExtremeRange",
+        label: "MAGNUSARCHIVES.Combat.Weapon.ExtremeRange",
         direction: "hinder",
         steps: 1,
         source: "other",
@@ -357,7 +379,7 @@ export class CombatService {
     if (weapon.system.attackModifier !== 0) {
       commonContributions.push({
         id: `weapon.${weapon.id}.attack-modifier`,
-        label: "CYPHERV2.Combat.Weapon.AttackModifierContribution",
+        label: "MAGNUSARCHIVES.Combat.Weapon.AttackModifierContribution",
         direction: weapon.system.attackModifier > 0 ? "ease" : "hinder",
         steps: Math.abs(weapon.system.attackModifier),
         source: "other",
@@ -500,20 +522,20 @@ export class CombatService {
     const armor = actor.system.derived.combat.armor;
     const armorContributions = defenseType === "dodge"
       ? armor.dodgeContributions.map((entry) => (
-          derivedContribution(entry, "hinder", "CYPHERV2.Combat.Armor.DodgeHindrance")
+          derivedContribution(entry, "hinder", "MAGNUSARCHIVES.Combat.Armor.DodgeHindrance")
         ))
       : armor.blockContributions.map((entry) => (
-          derivedContribution(entry, "ease", "CYPHERV2.Combat.Armor.BlockEase")
+          derivedContribution(entry, "ease", "MAGNUSARCHIVES.Combat.Armor.BlockEase")
         ));
     const skillContribution = options.skill
       ? this.#skills.rankContribution(options.skill, enabled)
       : null;
     return {
       label: defenseType === "dodge"
-        ? "CYPHERV2.Combat.Defense.DodgeRoll"
+        ? "MAGNUSARCHIVES.Combat.Defense.DodgeRoll"
         : defenseType === "blockWithShield"
-          ? "CYPHERV2.Combat.Defense.BlockWithShieldRoll"
-          : "CYPHERV2.Combat.Defense.BlockRoll",
+          ? "MAGNUSARCHIVES.Combat.Defense.BlockWithShieldRoll"
+          : "MAGNUSARCHIVES.Combat.Defense.BlockRoll",
       pool,
       difficulty: options.difficulty,
       skillSteps: options.skillSteps ?? 0,
@@ -562,40 +584,36 @@ export class CombatService {
     });
   }
 
-  woundAfterDefense(
+  /** A successful defense avoids the attack entirely; a failed one takes it in full. */
+  damageAfterDefense(
     result: RollResult,
-    defenseType: DefenseType,
-    severity: WoundSeverity,
-    enabledRuleModuleIds: readonly string[] = []
-  ): WoundSeverity | "none" {
-    if (result.success !== true) return severity;
-    if (defenseType === "dodge") return "none";
-    if (defenseType === "blockWithShield") return "none";
-    return reduceWoundSeverity(severity, this.policy(enabledRuleModuleIds).blockSeverityReduction);
+    effect: Exclude<CharacterDamageEffect, "none">
+  ): CharacterDamageEffect {
+    return result.success === true ? "none" : effect;
   }
 
-  async resolveDefenseWound(
+  async resolveDefenseDamage(
     actor: CombatCharacterLike,
     result: RollResult,
     defenseType: DefenseType,
-    severity: WoundSeverity,
-    source?: {readonly id: string; readonly name: string},
-    enabledRuleModuleIds: readonly string[] = []
+    effect: Exclude<CharacterDamageEffect, "none">,
+    stressAmount: number,
+    _source?: {readonly id: string; readonly name: string},
+    _enabledRuleModuleIds: readonly string[] = []
   ): Promise<DefenseWoundResolution> {
     if (defenseType !== "blockWithShield" || result.success !== true) {
-      const characterSeverity = this.woundAfterDefense(result, defenseType, severity, enabledRuleModuleIds);
-      return {
-        recipient: characterSeverity === "none" ? "none" : "character",
-        severity: characterSeverity
-      };
+      const applied = this.damageAfterDefense(result, effect);
+      if (applied === "none") return {recipient: "none"};
+      return {recipient: "character", effect: applied, stressAmount};
     }
     const shield = await this.#shields.normalizeEquipped(actor);
     if (!shield || this.#shields.isBroken(shield)) {
       throw new Error("Block With Shield requires one equipped, functional Shield.");
     }
+    // A Shield keeps its own Wound track; a serious injury breaks it harder.
     return {
       recipient: "shield",
-      severity,
+      severity: effect === "seriousInjury" ? "major" : "minor",
       shieldId: shield.id,
       shieldName: shield.name
     };
@@ -609,7 +627,7 @@ export class CombatService {
   ): Promise<ShieldWoundApplication> {
     const result = await this.#shields.applyResolved(actor, shield, severity, {
       ...(source ? {label: `${source.name} attack`} : {}),
-      sourceUuid: source ? `Actor.${source.id}` : "cypherv2.combat"
+      sourceUuid: source ? `Actor.${source.id}` : "magnusarchives.combat"
     });
     if (result.appliedSeverity) {
       await this.#feedback.shieldWound?.(
@@ -641,7 +659,7 @@ export class CombatService {
     const health = Math.max(0, previousHealth - appliedDamage);
     await target.update(
       {"system.health.value": health},
-      {cypherv2SkipDeadStatusSync: true}
+      {magnusarchivesSkipDeadStatusSync: true}
     );
     const result = {
       requestedDamage: damage,
@@ -656,17 +674,23 @@ export class CombatService {
     return result;
   }
 
-  async applyCharacterWound(
+  /**
+   * Applies an attack to a PC: Stress points, or a serious injury that moves
+   * them one step down the damage track (p12).
+   */
+  async applyCharacterDamage(
     target: CharacterDocumentLike & {readonly id: string} & import("../combat/combat-types").CombatTargetDocumentIdentity,
-    severity: WoundSeverity,
-    source?: {readonly id: string; readonly name: string}
-  ): Promise<WoundApplicationResult> {
-    const result = await this.#wounds.apply(target, severity, {
-      ...(source ? {label: `${source.name} attack`} : {}),
-      sourceUuid: source ? `Actor.${source.id}` : "cypherv2.combat"
-    });
-    if (result.appliedSeverity) await this.#feedback.characterWound(target, result.appliedSeverity);
-    return result;
+    effect: Exclude<CharacterDamageEffect, "none">,
+    stressAmount = 0
+  ): Promise<CharacterDamageApplication> {
+    if (effect === "stress") {
+      const stress = await this.#conditions.applyStress(target, Math.max(0, stressAmount));
+      await this.#feedback.characterStress?.(target, stress.value - stress.previousValue, stress.level);
+      return {effect, stress, injury: null};
+    }
+    const injury = await this.#conditions.applySeriousInjury(target);
+    await this.#feedback.characterSeriousInjury?.(target, injury.step);
+    return {effect, stress: null, injury};
   }
 
   #applicableSkills(
@@ -695,5 +719,5 @@ export class CombatService {
 }
 
 export function weaponCategoryLabel(category: WeaponCategory): string {
-  return `CYPHERV2.Combat.Weapon.Category.${category}`;
+  return `MAGNUSARCHIVES.Combat.Weapon.Category.${category}`;
 }

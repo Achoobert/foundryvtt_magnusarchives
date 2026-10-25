@@ -159,15 +159,17 @@ export function validateCypherImportSource(catalog) {
 }
 
 export function stableDocumentId(kind, sourceId) {
+  // Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+  // generated document _id and breaks ~4,000 @UUID cross-references in content/.
   return createHash("sha256").update(`cypherv2\u0000${kind}\u0000${sourceId}`).digest("hex").slice(0, 16);
 }
 
 export function cypherCompendiumUuid(cypherId) {
-  return `Compendium.cypherv2.${CYPHER_PACK_ID}.Item.${stableDocumentId("cypher", cypherId)}`;
+  return `Compendium.magnusarchives.${CYPHER_PACK_ID}.Item.${stableDocumentId("cypher", cypherId)}`;
 }
 
 export function cypherTableCompendiumUuid(tableId) {
-  return `Compendium.cypherv2.${CYPHER_TABLE_PACK_ID}.RollTable.${stableDocumentId("roll-table", tableId)}`;
+  return `Compendium.magnusarchives.${CYPHER_TABLE_PACK_ID}.RollTable.${stableDocumentId("roll-table", tableId)}`;
 }
 
 function emptyProvenance() {
@@ -200,7 +202,7 @@ function generatedCypherDocument(catalog, record) {
     _id: id,
     name: record.name,
     type: "cypher",
-    img: "systems/cypherv2/assets/icons/cyphercypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
     system: {
       ...baseSystem(catalog, record),
       level: record.levelOverride ? record.level : 1,
@@ -217,7 +219,7 @@ function generatedCypherDocument(catalog, record) {
     folder: null,
     sort: record.sourceOrder * 100000,
     flags: {
-      cypherv2: {
+      magnusarchives: {
         cypherImport: {
           sourceId: record.id,
           sourceOrder: record.sourceOrder,
@@ -237,24 +239,24 @@ function generatedTableResult(table, result, index, cyphersById) {
   const common = {
     _key: `!tables.results!${stableDocumentId("roll-table", table.id)}.${id}`,
     _id: id,
-    img: "systems/cypherv2/assets/icons/cyphercypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
     range: [...result.range],
     weight: result.range[1] - result.range[0] + 1,
     drawn: false,
-    flags: {cypherv2: {cypherImport: {sourceTableId: table.id, sourceResultIndex: index}}}
+    flags: {magnusarchives: {cypherImport: {sourceTableId: table.id, sourceResultIndex: index}}}
   };
   if (result.cypherId) return {
     ...common,
     type: 2,
     text: result.text ?? cyphersById.get(result.cypherId).name,
-    documentCollection: `cypherv2.${CYPHER_PACK_ID}`,
+    documentCollection: `magnusarchives.${CYPHER_PACK_ID}`,
     documentId: stableDocumentId("cypher", result.cypherId)
   };
   if (result.tableId) return {
     ...common,
     type: 2,
     text: result.text ?? result.tableId,
-    documentCollection: `cypherv2.${CYPHER_TABLE_PACK_ID}`,
+    documentCollection: `magnusarchives.${CYPHER_TABLE_PACK_ID}`,
     documentId: stableDocumentId("roll-table", result.tableId)
   };
   return {...common, type: 0, text: result.text, documentCollection: null, documentId: null};
@@ -266,7 +268,7 @@ function generatedRollTableDocument(catalog, table, sort, cyphersById) {
     _key: `!tables!${id}`,
     _id: id,
     name: table.name,
-    img: "systems/cypherv2/assets/icons/cyphercypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
     description: `<p>${catalog.source.title} (${catalog.source.version}), p. ${table.sourcePage}.</p>`,
     results: table.results.map((result, index) => generatedTableResult(table, result, index, cyphersById)),
     replacement: true,
@@ -274,7 +276,7 @@ function generatedRollTableDocument(catalog, table, sort, cyphersById) {
     formula: table.formula,
     folder: null,
     sort,
-    flags: {cypherv2: {cypherImport: {sourceId: table.id, sourcePage: table.sourcePage}}}
+    flags: {magnusarchives: {cypherImport: {sourceId: table.id, sourcePage: table.sourcePage}}}
   };
 }
 
@@ -337,7 +339,7 @@ async function writeDocumentDirectory(directory, documents, sourceFlag) {
   await rm(directory, {recursive: true, force: true});
   await mkdir(directory, {recursive: true});
   for (const document of documents) {
-    const sourceId = document.flags.cypherv2.cypherImport[sourceFlag];
+    const sourceId = document.flags.magnusarchives.cypherImport[sourceFlag];
     await writeFile(path.join(directory, `${sourceId}.json`), `${JSON.stringify(document, null, 2)}\n`, "utf8");
   }
 }

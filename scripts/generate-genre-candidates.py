@@ -21,7 +21,7 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-GENRE_ICON = "systems/cypherv2/assets/icons/cyphergenre.png"
+GENRE_ICON = "systems/magnusarchives/assets/icons/magnusgenre.png"
 
 GENRE_INVENTORY = [
     {
@@ -73,6 +73,8 @@ def slugify(value: str) -> str:
 
 
 def stable_id(kind: str, key: str) -> str:
+    # Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+    # generated document _id and breaks ~4,000 @UUID cross-references in content/.
     return hashlib.sha256(f"cypherv2-beta3:{kind}:{key}".encode("utf-8")).hexdigest()[:16]
 
 
@@ -318,7 +320,7 @@ def build_candidate(document_path: Path, ability_candidate_path: Path) -> dict:
             "file": document_path.name, "sha256": hashlib.sha256(document_path.read_bytes()).hexdigest(),
             "license": LICENSE, "note": "Candidate content only; requires in-Foundry review before promotion.",
         },
-        "target": {"systemId": "cypherv2", "futurePackId": "genres", "abilityPackId": "genre-abilities"},
+        "target": {"systemId": "magnusarchives", "futurePackId": "genres", "abilityPackId": "genre-abilities"},
         "inventory": GENRE_INVENTORY,
         "counts": {"genres": 4, "progressionRelations": 89, "originRelations": 26, "catalogRelations": 115},
         "review": {

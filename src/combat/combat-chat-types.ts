@@ -1,4 +1,4 @@
-import type {DefenseType, WoundSeverity} from "../constants/system";
+import type {CharacterDamageEffect, DefenseType, WoundSeverity} from "../constants/system";
 import type {CombatTargetIdentity} from "./combat-types";
 
 export type CombatOutcomeAction =
@@ -12,12 +12,14 @@ export type CombatOutcomeAction =
       readonly applied: boolean;
     }
   | {
-      readonly kind: "characterWound";
+      readonly kind: "characterDamage";
       readonly targetActorId: string;
       readonly targetActorUuid?: string;
       readonly targetTokenId?: string;
       readonly targetTokenUuid?: string;
-      readonly severity: WoundSeverity;
+      /** PCs take Stress or a serious injury, never Pool damage (p12). */
+      readonly effect: Exclude<CharacterDamageEffect, "none">;
+      readonly stressAmount: number;
       readonly sourceActorId?: string;
       readonly sourceName?: string;
       readonly applied: boolean;
@@ -48,7 +50,8 @@ export interface DefenseRequestData {
   readonly targetTokenId?: string;
   readonly targetTokenUuid?: string;
   readonly targetName: string;
-  readonly woundSeverity: WoundSeverity;
+  readonly effect: Exclude<CharacterDamageEffect, "none">;
+  readonly stressAmount: number;
   readonly allowedDefenses: readonly DefenseType[];
   readonly resolved: boolean;
 }
@@ -72,7 +75,8 @@ export interface RollChatCombatPresentation {
     /** Present this resolved contribution as additive without changing its value. */
     readonly additive?: boolean;
   }[];
-  readonly woundSeverity?: WoundSeverity;
+  readonly damageEffect?: Exclude<CharacterDamageEffect, "none">;
+  readonly stressAmount?: number;
   readonly action?: CombatOutcomeAction;
   readonly shieldTransfer?: {
     readonly shieldName: string;

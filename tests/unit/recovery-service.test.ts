@@ -165,7 +165,7 @@ describe("RecoveryService", () => {
   });
 
   it("does not allow Recovery after death", async () => {
-    const actor = character({wounds: wounds({major: 3})});
+    const actor = character({damageTrackStep: "dead"});
     await expect(service.roll(actor, "one-action")).rejects.toThrow(/dead/i);
   });
 });

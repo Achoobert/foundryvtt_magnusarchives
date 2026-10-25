@@ -1,5 +1,6 @@
 import type {
   ArmorCategory,
+  CharacterDamageEffect,
   DefenseType,
   SkillRank,
   WeaponAttackType,
@@ -69,7 +70,8 @@ export interface NpcTargetLike extends CombatTargetDocumentIdentity {
     readonly modifications: readonly NpcModificationData[];
     readonly damage: {
       readonly amount: number;
-      readonly woundSeverity: WoundSeverity;
+      readonly effect: CharacterDamageEffect;
+      readonly stressAmount: number;
       readonly defense: {readonly allowBlock: boolean; readonly allowDodge: boolean};
       readonly notes: string;
     };

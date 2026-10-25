@@ -123,16 +123,16 @@ describe("Character Header HUD V1.1", () => {
     expect(headerPoolGauge(-4, 18)).toEqual({current: 0, max: 18, ratio: 0, percent: 0});
     expect(headerPoolGauge(4, 0)).toEqual({current: 0, max: 0, ratio: 0, percent: 0});
     expect(sheet).toContain("headerPoolGauge(coreSystem.stats[pool].value, coreSystem.derived.pools[pool].max)");
-    expect(template).toContain("--cypherv2-pool-gauge-ratio: {{pool.gauge.ratio}}");
-    expect(styles).toContain("var(--cypherv2-pool-gauge-low)");
-    expect(styles).toContain("var(--cypherv2-pool-gauge-high)");
-    expect(styles).toContain("--cypherv2-pool-gauge-color: color-mix(");
+    expect(template).toContain("--magnusarchives-pool-gauge-ratio: {{pool.gauge.ratio}}");
+    expect(styles).toContain("var(--magnusarchives-pool-gauge-low)");
+    expect(styles).toContain("var(--magnusarchives-pool-gauge-high)");
+    expect(styles).toContain("--magnusarchives-pool-gauge-color: color-mix(");
     expect(styles).toContain("in hsl shorter hue");
-    expect(styles).toContain(".character-hud-pool-gauge {\n    --cypherv2-pool-gauge-color");
+    expect(styles).toContain(".character-hud-pool-gauge {\n    --magnusarchives-pool-gauge-color");
     expect(styles).toContain("position: absolute");
     expect(styles).toContain("background: transparent");
     expect(styles).toContain("pointer-events: none");
-    expect(styles).not.toContain("var(--cypherv2-character-accent) calc((1 - var(--cypherv2-pool-gauge-ratio))");
+    expect(styles).not.toContain("var(--magnusarchives-character-accent) calc((1 - var(--magnusarchives-pool-gauge-ratio))");
   });
 
   it("wires identity inspection, placeholder drops, whole-card Pool rolls, and direct XP/RP editing", () => {
@@ -165,12 +165,12 @@ describe("Character Header HUD V1.1", () => {
     expect(pools).toContain("pool.isMight");
     expect(pools).toContain('data-action="rally"');
     expect(pools).toContain("pool.canRally");
-    expect(sheet).toContain("game.cypherv2.services.rally.canApply");
+    expect(sheet).toContain("game.magnusarchives.services.rally.canApply");
     expect(sheet).toContain("event?.stopPropagation()");
     expect(sheet).toContain('event.target.closest("input, button, select, textarea, a")');
   });
 
-  it("renders compact Recovery controls and merges Shield Wounds into the Character Wound card", () => {
+  it("renders compact Recovery controls", () => {
     expect(template).toContain('data-action="recoveryType"');
     expect(template).toContain("{{#if recovery.used}}disabled");
     expect(template).toContain('data-action="resetRecoveries"');
@@ -182,44 +182,36 @@ describe("Character Header HUD V1.1", () => {
     expect(recoveryDialog).toContain("selectedType?: RecoveryType");
     expect(recoveryDialog).toContain("selectedSlotId?: string");
     expect(template).toContain('data-recovery-slot-id="{{recovery.id}}"');
-    expect(template).toContain("{{#if header.shield}}");
-    expect(template).toContain("header.shield.broken");
-    expect(template).toContain("header.wounds.rows");
-    expect(template).toContain("row.character.pips");
-    expect(template).toContain("row.shield.pips");
-    expect(template).not.toContain("CYPHERV2.Hud.NoShield");
-    expect(sheet).toContain("const woundRows = woundTracks.map");
-    expect(sheet).toContain("CYPHERV2.Hud.CharacterWoundTooltip");
-    expect(sheet).toContain("CYPHERV2.Hud.ShieldWoundTooltip");
-    expect(sheet).toContain("coreSystem.derived.wounds.capacities");
     expect(sheet).toContain("coreSystem.derived.pools[pool].max");
     expect(sheet).toContain("coreSystem.derived.pools[pool].edge");
   });
 
-  it("renders permission-scoped Character and Shield Wound pip actions", () => {
-    expect(template).toContain('data-action="setCharacterWoundCount"');
-    expect(template).toContain('data-action="setShieldWoundCount"');
-    expect(template).toContain('data-count="{{pip.targetCount}}"');
-    expect(template).toContain('data-track="character"');
-    expect(template).toContain('data-track="shield"');
-    expect(template).toContain("{{#if @root.editable}}");
-    expect(sheet).toContain("CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER");
-    expect(sheet).toContain("game.cypherv2.services.wounds.setCount(");
-    expect(sheet).toContain("game.cypherv2.services.shields.setCount(");
-    expect(sheet).toMatch(/services\.wounds\.setCount\([\s\S]*?await this\.render\(\{force: true\}\)/);
-    expect(sheet).toMatch(/services\.shields\.setCount\([\s\S]*?await this\.render\(\{force: true\}\)/);
+  it("renders the Magnus damage track and Stress cards in the HUD", () => {
+    expect(template).toContain('class="character-hud-card character-hud-damage-track');
+    expect(template).toContain('class="character-hud-card character-hud-stress"');
+    expect(template).toContain('data-action="setDamageTrackStep"');
+    expect(template).toContain('data-action="applySeriousInjury"');
+    expect(template).toContain('data-action="healDamageTrack"');
+    expect(template).toContain('data-action="adjustStress"');
+    expect(template).toContain('name="system.stress.value"');
+    expect(template).toContain("{{header.stress.level}}");
+    expect(template).toContain("MAGNUSARCHIVES.DamageTrack.Label");
+    expect(template).toContain("MAGNUSARCHIVES.Stress.Label");
+
+    expect(sheet).toContain("headerDamageTrack(");
+    expect(sheet).toContain("headerStress(coreSystem.stress.value)");
+    expect(sheet).toContain("coreSystem.derived.damageTrack.hurtAvailable");
+    expect(sheet).toContain("services.conditions.applySeriousInjury(");
+    expect(sheet).toContain("services.conditions.setDamageTrackStep(");
+
     for (const declaration of [
       "flex: 0 0 0.58rem",
-      "width: 0.58rem !important",
-      "min-width: 0.58rem !important",
-      "height: 0.58rem !important",
-      "min-height: 0.58rem !important",
       "aspect-ratio: 1 / 1",
       "border-radius: 50%"
     ]) expect(styles).toContain(declaration);
-    expect(styles).not.toContain("transform: rotate(45deg)");
-    expect(styles).toContain("--cypherv2-wound-pip-character");
-    expect(styles).toContain("--cypherv2-wound-pip-shield");
+    expect(styles).toContain("--magnusarchives-stress-pip");
+    expect(styles).toContain("--magnusarchives-damage-track-reached");
+    expect(styles).toContain(".character-hud-damage-track-steps");
   });
 
   it("exposes compact manual Weapon and Armor familiarity actions without a multi-select", () => {
@@ -243,7 +235,7 @@ describe("Character Header HUD V1.1", () => {
   });
 
   it("keeps Wounds, Recovery, and RP/XP in one compact bottom HUD row", () => {
-    expect(styles).toContain("grid-template-columns: minmax(0, 38fr) minmax(0, 50fr) var(--cypherv2-hud-stat-stack-width)");
+    expect(styles).toContain("grid-template-columns: minmax(0, 38fr) minmax(0, 50fr) var(--magnusarchives-hud-stat-stack-width)");
     expect(styles).toContain("padding-block: 0.25rem");
     const lowerStart = styles.indexOf(".character-hud-lower");
     const woundsStart = styles.indexOf(".character-hud-wounds", lowerStart);
@@ -257,32 +249,32 @@ describe("Character Header HUD V1.1", () => {
   });
 
   it("uses the V1.1 hierarchy and container-responsive layout without Header color literals", () => {
-    expect(styles).toContain("container-name: cypherv2-character-sheet");
+    expect(styles).toContain("container-name: magnusarchives-character-sheet");
     expect(styles).toContain("grid-template-columns: repeat(3, minmax(0, 1fr))");
     expect(styles).toContain("grid-template-columns: 4.75rem minmax(0, 1fr)");
     expect(styles).toContain("height: 6rem");
-    expect(styles).toContain("@container cypherv2-character-sheet (max-width: 720px)");
-    expect(styles).toContain("@container cypherv2-character-sheet (max-width: 560px)");
+    expect(styles).toContain("@container magnusarchives-character-sheet (max-width: 720px)");
+    expect(styles).toContain("@container magnusarchives-character-sheet (max-width: 560px)");
     expect(styles).toContain("min-width: 0");
     expect(styles).not.toMatch(/#[0-9a-f]{3,8}/i);
     for (const token of [
-      "--cypherv2-surface-primary",
-      "--cypherv2-surface-secondary",
-      "--cypherv2-surface-raised",
-      "--cypherv2-text-primary",
-      "--cypherv2-text-muted",
-      "--cypherv2-accent",
-      "--cypherv2-accent-hover",
-      "--cypherv2-border",
-      "--cypherv2-danger"
+      "--magnusarchives-surface-primary",
+      "--magnusarchives-surface-secondary",
+      "--magnusarchives-surface-raised",
+      "--magnusarchives-text-primary",
+      "--magnusarchives-text-muted",
+      "--magnusarchives-accent",
+      "--magnusarchives-accent-hover",
+      "--magnusarchives-border",
+      "--magnusarchives-danger"
     ]) expect(styles).toContain(`var(${token})`);
   });
 
   it("keeps base/source editing in Settings without the obsolete override notice", () => {
-    expect(sheet).toContain('{id: "settings", icon: "fa-solid fa-sliders", label: "CYPHERV2.Tabs.Settings"}');
+    expect(sheet).toContain('{id: "settings", icon: "fa-solid fa-sliders", label: "MAGNUSARCHIVES.Tabs.Settings"}');
     expect(template).toContain('data-tab="settings"');
-    expect(template).not.toContain("CYPHERV2.Settings.Character.Placeholder");
-    expect(template).toContain("CYPHERV2.Settings.Character.BaseValues");
+    expect(template).not.toContain("MAGNUSARCHIVES.Settings.Character.Placeholder");
+    expect(template).toContain("MAGNUSARCHIVES.Settings.Character.BaseValues");
     expect(template).toContain('name="system.stats.might.baseMax"');
     expect(template).not.toContain('name="system.stats.might.baseMax" type="number" value="{{header');
   });
@@ -314,6 +306,6 @@ describe("Character Header HUD V1.1", () => {
     expect(sentence).toContain('data-hud-drop="descriptor"');
     expect(sentence).toContain('data-hud-drop="characterType"');
     expect(sentence).toContain('data-hud-drop="focus"');
-    expect(sentence).toContain("CYPHERV2.Hud.And");
+    expect(sentence).toContain("MAGNUSARCHIVES.Hud.And");
   });
 });

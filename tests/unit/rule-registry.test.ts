@@ -9,7 +9,7 @@ describe("RuleRegistry", () => {
     const registry = new RuleRegistry();
     registry.register(CORE_RULE_MODULE);
 
-    expect(registry.get("cypherv2.core")?.core).toBe(true);
+    expect(registry.get("magnusarchives.core")?.core).toBe(true);
   });
 
   it("rejects duplicate IDs", () => {
@@ -24,9 +24,9 @@ describe("RuleRegistry", () => {
     registry.register(CORE_RULE_MODULE);
     registry.register({id: "example.optional", title: "Example"});
 
-    expect(registry.active([]).map((module) => module.id)).toEqual(["cypherv2.core"]);
+    expect(registry.active([]).map((module) => module.id)).toEqual(["magnusarchives.core"]);
     expect(registry.active(["example.optional"]).map((module) => module.id)).toEqual([
-      "cypherv2.core",
+      "magnusarchives.core",
       "example.optional"
     ]);
   });

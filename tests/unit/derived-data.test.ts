@@ -64,7 +64,7 @@ describe("Core Character derived data", () => {
     const derived = deriveCharacterData(pools(), wounds(), createRecoveryUsage());
 
     expect(derived.wounds.capacities).toEqual({minor: 3, moderate: 3, major: 3});
-    expect(derived.wounds.capacityContributions.major[0]?.sourceId).toBe("cypherv2.core");
+    expect(derived.wounds.capacityContributions.major[0]?.sourceId).toBe("magnusarchives.core");
   });
 
   it("applies independent manual Wound capacity modifiers after calculated contributions", () => {

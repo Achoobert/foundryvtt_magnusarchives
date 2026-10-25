@@ -32,10 +32,10 @@ describe("Player Intrusion UI and authority", () => {
 
   it("uses a compact Character-accent card and no consequence workflow", () => {
     expect(card).toContain("player-intrusion-card");
-    expect(card).toContain("cypherv2-chat-card");
+    expect(card).toContain("magnusarchives-chat-card");
     expect(card).toContain("actorImage");
     expect(card).not.toMatch(/Accept|Refuse|Resolve|data-action/);
     expect(styles).toContain(".character-player-intrusion");
-    expect(styles).toContain("var(--cypherv2-character-accent)");
+    expect(styles).toContain("var(--magnusarchives-character-accent)");
   });
 });

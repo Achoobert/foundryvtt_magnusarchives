@@ -12,7 +12,7 @@ The combined equipment pack is retained because the reviewed source uses one Ite
 
 ## Reference policy
 
-Promotion resolves references by exact Foundry document ID, never by display name. A reviewed local Skill reference such as `Item.<id>` becomes `Compendium.cypherv2.skills.Item.<id>` in both structured fields and enriched HTML. Validation rejects remaining `cypher-v2-test`, `Compendium.world`, Working-pack, dangling promoted-system, or known bare local Item references.
+Promotion resolves references by exact Foundry document ID, never by display name. A reviewed local Skill reference such as `Item.<id>` becomes `Compendium.magnusarchives.skills.Item.<id>` in both structured fields and enriched HTML. Validation rejects remaining `cypher-v2-test`, `Compendium.world`, Working-pack, dangling promoted-system, or known bare local Item references.
 
 Blank reviewed slugs remain blank. Non-blank slugs, when present, must be unique within their pack. World ownership and volatile `_stats` timestamps/source markers are normalized; reviewed names, descriptions, mechanics, flags, tags, provenance, snapshots, folders, sort values, and IDs are preserved.
 

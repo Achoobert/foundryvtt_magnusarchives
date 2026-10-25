@@ -13,7 +13,8 @@ function ability(overrides: Partial<AbilityMechanicsSource> = {}): AbilityMechan
     rollModifier: 0,
     attackModifier: 0,
     damage: 0,
-    woundSeverity: "none",
+    damageEffect: "none",
+    stressAmount: 3,
     range: "",
     targetMode: "none",
     ...overrides
@@ -28,7 +29,7 @@ describe("Ability Item mechanical field visibility", () => {
       rollModifierLabel: "general",
       showAttackModifier: false,
       showDamage: false,
-      showWoundSeverity: false,
+      showDamageEffect: false,
       showRange: false,
       showTargetMode: false,
       hasConditionalFields: false
@@ -62,7 +63,7 @@ describe("Ability Item mechanical field visibility", () => {
     expect(abilityMechanicsVisibility(ability({roll: "attack"}))).toMatchObject({
       showAttackModifier: true,
       showDamage: true,
-      showWoundSeverity: true,
+      showDamageEffect: true,
       showRange: true,
       showTargetMode: true,
       hasConditionalFields: true
@@ -75,7 +76,8 @@ describe("Ability Item mechanical field visibility", () => {
       rollModifier: 1,
       attackModifier: -1,
       damage: 4,
-      woundSeverity: "moderate",
+      damageEffect: "seriousInjury",
+      stressAmount: 3,
       range: "long",
       targetMode: "multiple"
     }));
@@ -83,7 +85,7 @@ describe("Ability Item mechanical field visibility", () => {
       showRollModifier: true,
       showAttackModifier: true,
       showDamage: true,
-      showWoundSeverity: true,
+      showDamageEffect: true,
       showRange: true,
       showTargetMode: true
     });

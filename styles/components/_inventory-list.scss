@@ -1,4 +1,4 @@
-.cypherv2 .inventory-section {
+.magnusarchives .inventory-section {
   display: grid;
   gap: 0.55rem;
   min-width: 0;
@@ -18,7 +18,7 @@
 
     h2 {
       margin: 0;
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.055em;
@@ -31,14 +31,14 @@
     display: inline-flex;
     gap: 0.22rem;
     align-items: center;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
     }
 
     input {
@@ -46,7 +46,7 @@
       min-width: 2.25rem;
       height: 1.25rem;
       padding: 0 0.18rem;
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-size: 0.67rem;
       font-weight: 700;
       text-align: center;
@@ -57,7 +57,7 @@
     width: 1.35rem;
     height: 1.35rem;
     padding: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.68rem;
   }
 
@@ -80,8 +80,8 @@
     &:hover,
     &:focus-within,
     &.is-expanded {
-      background: var(--cypherv2-surface-raised);
-      box-shadow: inset 2px 0 var(--cypherv2-accent);
+      background: var(--magnusarchives-surface-raised);
+      box-shadow: inset 2px 0 var(--magnusarchives-accent);
     }
 
     &.is-expanded .inventory-details-toggle i {
@@ -92,7 +92,7 @@
       opacity: 0.55;
 
       .inventory-item-name {
-        color: var(--cypherv2-text-muted);
+        color: var(--magnusarchives-text-muted);
       }
 
       .inventory-item-actions {
@@ -132,7 +132,7 @@
     flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 0.73rem;
     font-weight: 700;
     line-height: 1.15;
@@ -147,13 +147,13 @@
   .inventory-depletion,
   .inventory-quantity {
     flex: 0 0 auto;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.61rem;
     line-height: 1.1;
     white-space: nowrap;
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
     }
   }
 
@@ -175,11 +175,11 @@
       border-radius: 50%;
     }
 
-    &.is-low { color: var(--cypherv2-cypher-power-low); }
-    &.is-medium { color: var(--cypherv2-cypher-power-medium); }
-    &.is-advanced { color: var(--cypherv2-cypher-power-advanced); }
-    &.is-high { color: var(--cypherv2-cypher-power-high); }
-    &.is-ultra { color: var(--cypherv2-cypher-power-ultra); }
+    &.is-low { color: var(--magnusarchives-cypher-power-low); }
+    &.is-medium { color: var(--magnusarchives-cypher-power-medium); }
+    &.is-advanced { color: var(--magnusarchives-cypher-power-advanced); }
+    &.is-high { color: var(--magnusarchives-cypher-power-high); }
+    &.is-ultra { color: var(--magnusarchives-cypher-power-ultra); }
   }
 
   .inventory-rollable {
@@ -188,7 +188,7 @@
     min-width: 0;
     height: 1.3rem;
     padding: 0 0.2rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     background: transparent;
     border: 0;
     font-size: 0.61rem;
@@ -197,7 +197,7 @@
 
     &:not(:disabled):hover,
     &:not(:disabled):focus-visible {
-      color: var(--cypherv2-accent-hover);
+      color: var(--magnusarchives-accent-hover);
     }
 
     &:disabled {
@@ -207,19 +207,19 @@
 
   .inventory-depleted-label {
     flex: 0 0 auto;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.58rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 
     &.combat-depleted-state {
-      color: var(--cypherv2-danger);
+      color: var(--magnusarchives-danger);
     }
   }
 
   .inventory-state {
-    color: var(--cypherv2-success);
+    color: var(--magnusarchives-success);
     font-weight: 700;
     text-transform: uppercase;
   }
@@ -246,7 +246,7 @@
     opacity: 0.62;
     transition: opacity 100ms ease;
 
-    .cypherv2-icon-action {
+    .magnusarchives-icon-action {
       width: 1.25rem;
       height: 1.25rem;
       padding: 0;
@@ -259,10 +259,10 @@
     margin: 0 0.35rem 0.25rem 1.55rem;
     padding: 0.35rem 0.45rem 0.4rem;
     overflow-wrap: anywhere;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 0.71rem;
     line-height: 1.4;
-    border-top: 1px solid color-mix(in srgb, var(--cypherv2-border) 45%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--magnusarchives-border) 45%, transparent);
 
     &[hidden] {
       display: none;
@@ -284,7 +284,7 @@
 
   .compact-inventory-empty {
     padding: 0.22rem 0.25rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.7rem;
     font-style: italic;
   }
@@ -292,23 +292,23 @@
 
 // The Combat tab deliberately reuses Inventory primitives. Keep this visual
 // alignment pass scoped to the actual Character Inventory tab.
-.cypherv2 [data-tab="inventory"] .inventory-section {
+.magnusarchives [data-tab="inventory"] .inventory-section {
   .compact-inventory-list {
     gap: 0;
   }
 
   .compact-inventory-item {
-    border-bottom: 1px solid color-mix(in srgb, var(--cypherv2-border) 42%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--magnusarchives-border) 42%, transparent);
     border-radius: 0.2rem 0.2rem 0 0;
 
     &:hover,
     &:focus-within {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 55%, transparent);
-      box-shadow: inset 2px 0 var(--cypherv2-accent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 55%, transparent);
+      box-shadow: inset 2px 0 var(--magnusarchives-accent);
     }
 
     &.is-expanded {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 22%, transparent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 22%, transparent);
       box-shadow: none;
     }
 
@@ -343,7 +343,7 @@
 
     .inventory-level {
       margin-left: 0;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.66rem;
       font-weight: 500;
 
@@ -364,16 +364,16 @@
   .compact-inventory-details {
     margin: 0.05rem 0.3rem 0.38rem 1.45rem;
     padding: 0.24rem 0.38rem 0.3rem 0.55rem;
-    color: color-mix(in srgb, var(--cypherv2-text-primary) 86%, var(--cypherv2-text-muted));
+    color: color-mix(in srgb, var(--magnusarchives-text-primary) 86%, var(--magnusarchives-text-muted));
     background: transparent;
     border-top: 0;
-    border-left: 2px solid color-mix(in srgb, var(--cypherv2-accent) 62%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--magnusarchives-accent) 62%, transparent);
     font-weight: 400;
     line-height: 1.4;
   }
 }
 
-.cypherv2 .combat-tab-section {
+.magnusarchives .combat-tab-section {
   --combat-grid-columns: minmax(6.5rem, 1fr) 10.75rem 4.75rem 7.25rem 7.25rem 4.25rem;
 
   .combat-weapon-row,
@@ -388,8 +388,8 @@
 
     &:hover,
     &:focus-visible {
-      background: var(--cypherv2-surface-raised);
-      box-shadow: inset 2px 0 0 var(--cypherv2-accent);
+      background: var(--magnusarchives-surface-raised);
+      box-shadow: inset 2px 0 0 var(--magnusarchives-accent);
       outline: 0;
     }
   }
@@ -431,7 +431,7 @@
     width: 1rem;
     min-width: 1rem;
     height: 1rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.58rem;
   }
 
@@ -451,11 +451,11 @@
   }
 
   .combat-status-separator {
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
   }
 
   .combat-weapon-item.is-unusable .combat-attack-name {
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     cursor: not-allowed;
     opacity: 0.55;
   }
@@ -475,7 +475,7 @@
   .combat-attack-category,
   .combat-ammo {
     flex: 0 0 auto;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.61rem;
     line-height: 1.15;
     white-space: nowrap;
@@ -490,13 +490,13 @@
   }
 
   .combat-depletion {
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-weight: 700;
     text-transform: none;
   }
 
   .combat-familiarity-warning {
-    color: var(--cypherv2-warning, #d6ad60);
+    color: var(--magnusarchives-warning, #d6ad60);
     font-size: 0.58rem;
     font-weight: 750;
     letter-spacing: 0.025em;
@@ -518,7 +518,7 @@
 
   .combat-inline-shield-wounds {
     gap: 0.35rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.55rem;
     white-space: nowrap;
 
@@ -555,11 +555,11 @@
   .combat-inline-shield-pip {
     width: 0.38rem;
     height: 0.38rem;
-    border: 1px solid var(--cypherv2-wound-pip-shield);
+    border: 1px solid var(--magnusarchives-wound-pip-shield);
     border-radius: 50%;
 
     &.is-filled {
-      background: var(--cypherv2-wound-pip-shield);
+      background: var(--magnusarchives-wound-pip-shield);
     }
   }
 
@@ -570,18 +570,18 @@
     flex: 0 0 auto;
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.63rem;
 
     &.is-equipped {
-      color: var(--cypherv2-success);
+      color: var(--magnusarchives-success);
     }
   }
 
   .combat-item-summary,
   .combat-armor-total,
   .combat-shield-wounds {
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.61rem;
     line-height: 1.15;
   }
@@ -595,27 +595,27 @@
     white-space: nowrap;
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
     }
   }
 
   .combat-item-summary.combat-equipped-state {
-    color: var(--cypherv2-success);
+    color: var(--magnusarchives-success);
   }
 
   .combat-item-summary.combat-depleted-state {
-    color: var(--cypherv2-danger);
+    color: var(--magnusarchives-danger);
     font-weight: 800;
     letter-spacing: 0.04em;
   }
 
   .combat-shield-state {
     &.is-functional {
-      color: var(--cypherv2-success);
+      color: var(--magnusarchives-success);
     }
 
     &.is-broken {
-      color: var(--cypherv2-danger);
+      color: var(--magnusarchives-danger);
     }
   }
 
@@ -626,7 +626,7 @@
     white-space: nowrap;
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
     }
   }
 
@@ -639,12 +639,12 @@
 
   .combat-warning {
     margin: 0.1rem 0.25rem 0.2rem;
-    color: var(--cypherv2-danger);
+    color: var(--magnusarchives-danger);
     font-size: 0.66rem;
   }
 }
 
-.cypherv2 .quick-defense-section {
+.magnusarchives .quick-defense-section {
   display: grid;
   gap: 0.12rem;
   margin-bottom: 0.55rem;
@@ -652,7 +652,7 @@
 
   > h2 {
     margin: 0;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.055em;
@@ -674,59 +674,59 @@
     min-width: 0;
     min-height: 1.75rem;
     padding: 0.18rem 0.42rem;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     text-align: center;
-    background: color-mix(in srgb, var(--cypherv2-surface-secondary) 72%, transparent);
-    border: 1px solid color-mix(in srgb, var(--cypherv2-border) 65%, transparent);
+    background: color-mix(in srgb, var(--magnusarchives-surface-secondary) 72%, transparent);
+    border: 1px solid color-mix(in srgb, var(--magnusarchives-border) 65%, transparent);
     border-radius: 0.25rem;
-    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--cypherv2-text-primary) 7%, transparent);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--magnusarchives-text-primary) 7%, transparent);
     transition: background 100ms ease, border-color 100ms ease, box-shadow 100ms ease;
 
     > i {
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.66rem;
       transition: color 100ms ease;
     }
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-size: 0.69rem;
       font-weight: 800;
       letter-spacing: 0.045em;
     }
 
     small {
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.61rem;
     }
 
     &:hover {
-      border-color: var(--cypherv2-accent);
-      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--cypherv2-text-primary) 9%, transparent), 0 0 0.35rem color-mix(in srgb, var(--cypherv2-accent) 30%, transparent);
+      border-color: var(--magnusarchives-accent);
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--magnusarchives-text-primary) 9%, transparent), 0 0 0.35rem color-mix(in srgb, var(--magnusarchives-accent) 30%, transparent);
 
       > i {
-        color: var(--cypherv2-accent-hover);
+        color: var(--magnusarchives-accent-hover);
       }
     }
 
     &:focus-visible {
-      border-color: var(--cypherv2-accent);
-      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--cypherv2-text-primary) 9%, transparent), 0 0 0 2px color-mix(in srgb, var(--cypherv2-accent) 58%, transparent);
+      border-color: var(--magnusarchives-accent);
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--magnusarchives-text-primary) 9%, transparent), 0 0 0 2px color-mix(in srgb, var(--magnusarchives-accent) 58%, transparent);
       outline: 0;
 
       > i {
-        color: var(--cypherv2-accent-hover);
+        color: var(--magnusarchives-accent-hover);
       }
     }
 
     &:active {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 82%, transparent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 82%, transparent);
     }
   }
 }
 
-@container cypherv2-character-sheet (min-width: 541px) and (max-width: 700px) {
-  .cypherv2 .combat-tab-section {
+@container magnusarchives-character-sheet (min-width: 541px) and (max-width: 700px) {
+  .magnusarchives .combat-tab-section {
     --combat-grid-columns: minmax(4.5rem, 1fr) 8rem 3.75rem 6.25rem 5.75rem 4.25rem;
 
     .combat-weapon-row,
@@ -749,8 +749,8 @@
   }
 }
 
-@container cypherv2-character-sheet (max-width: 540px) {
-  .cypherv2 .inventory-section {
+@container magnusarchives-character-sheet (max-width: 540px) {
+  .magnusarchives .inventory-section {
     .compact-inventory-row {
       flex-wrap: wrap;
     }

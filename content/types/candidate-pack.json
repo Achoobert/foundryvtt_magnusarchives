@@ -10,7 +10,7 @@
     "note": "Candidate content only; requires in-Foundry review before promotion."
   },
   "target": {
-    "systemId": "cypherv2",
+    "systemId": "magnusarchives",
     "typePackId": "types",
     "abilityPackId": "type-abilities"
   },
@@ -49,7 +49,7 @@
       "name": "Barbarian",
       "type": "characterType",
       "_id": "d8e5ea0d7fe42730",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "barbarian",
@@ -133,11 +133,11 @@
         "abilityGrants": [
           {
             "id": "7b8a2fcbdf4f401b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.10e3d5d62bd518d2",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.10e3d5d62bd518d2",
             "notes": "",
             "snapshot": {
               "name": "Frenzy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "frenzy",
@@ -207,11 +207,11 @@
           },
           {
             "id": "bc801b53c35e4826",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.17476016c01afbb6",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.17476016c01afbb6",
             "notes": "",
             "snapshot": {
               "name": "Wilderness Survival",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wilderness-survival",
@@ -279,11 +279,11 @@
           },
           {
             "id": "1d2b5bc215b437b2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4797998eece54eba",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4797998eece54eba",
             "notes": "",
             "snapshot": {
               "name": "Wounded Fury",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wounded-fury",
@@ -417,7 +417,7 @@
       "name": "Bard",
       "type": "characterType",
       "_id": "956ad92394d2c26a",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "bard",
@@ -501,11 +501,11 @@
         "abilityGrants": [
           {
             "id": "3f875c5d3399cf61",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.5f9742f814524205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.5f9742f814524205",
             "notes": "",
             "snapshot": {
               "name": "Expert Interlocuter",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-interlocuter",
@@ -573,11 +573,11 @@
           },
           {
             "id": "b31166be36ae7075",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.37352a89b7a014a8",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.37352a89b7a014a8",
             "notes": "",
             "snapshot": {
               "name": "Inspiring Performance",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-performance",
@@ -647,11 +647,11 @@
           },
           {
             "id": "549658597ffe9f31",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.6153cd2148c9a937",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.6153cd2148c9a937",
             "notes": "",
             "snapshot": {
               "name": "A Smile and a Word",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-smile-and-a-word",
@@ -785,7 +785,7 @@
       "name": "Cleric",
       "type": "characterType",
       "_id": "979634434151fd8f",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "cleric",
@@ -869,11 +869,11 @@
         "abilityGrants": [
           {
             "id": "dfc36e08402d6e9a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc3ef14247cee87d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc3ef14247cee87d",
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -941,11 +941,11 @@
           },
           {
             "id": "a9ea0e3db1c46b3d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.7d45abc79698313c",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.7d45abc79698313c",
             "notes": "",
             "snapshot": {
               "name": "Divine Radiance",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "divine-radiance",
@@ -1015,11 +1015,11 @@
           },
           {
             "id": "5b548e873b3c7033",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f879fa47429bda71",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f879fa47429bda71",
             "notes": "",
             "snapshot": {
               "name": "Healing Hand",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "healing-hand",
@@ -1155,7 +1155,7 @@
       "name": "Druid",
       "type": "characterType",
       "_id": "86818b4db0bcced2",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "druid",
@@ -1239,11 +1239,11 @@
         "abilityGrants": [
           {
             "id": "8d69cd45464e8431",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.870584440bc71b56",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.870584440bc71b56",
             "notes": "",
             "snapshot": {
               "name": "Beast Companion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "beast-companion",
@@ -1311,11 +1311,11 @@
           },
           {
             "id": "8d7f759b1632f069",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.3b3a4837f75af00c",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.3b3a4837f75af00c",
             "notes": "",
             "snapshot": {
               "name": "Friend to Small Creatures",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "friend-to-small-creatures",
@@ -1385,11 +1385,11 @@
           },
           {
             "id": "32024038e58de8f5",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.a5afc00205f3989a",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.a5afc00205f3989a",
             "notes": "",
             "snapshot": {
               "name": "Seeds of Fury",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "seeds-of-fury",
@@ -1525,7 +1525,7 @@
       "name": "Fighter",
       "type": "characterType",
       "_id": "bf9a519441bc0bf4",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "fighter",
@@ -1609,11 +1609,11 @@
         "abilityGrants": [
           {
             "id": "90441f94786b8ab9",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -1681,11 +1681,11 @@
           },
           {
             "id": "19f43bcdaf999afc",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f0e2658192a5a005",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f0e2658192a5a005",
             "notes": "",
             "snapshot": {
               "name": "Press Advantage",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "press-advantage",
@@ -1753,11 +1753,11 @@
           },
           {
             "id": "7535a086a89bf9fc",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.89a5322c3c159134",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.89a5322c3c159134",
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -1894,7 +1894,7 @@
       "name": "Mage",
       "type": "characterType",
       "_id": "09bb408115f8dd1c",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "mage",
@@ -1978,11 +1978,11 @@
         "abilityGrants": [
           {
             "id": "6c9840152bd45e11",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.80727a4079bde20b",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.80727a4079bde20b",
             "notes": "",
             "snapshot": {
               "name": "Blast",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "blast",
@@ -2052,11 +2052,11 @@
           },
           {
             "id": "6159bc3d78986f23",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.bd398ed33213d1e3",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.bd398ed33213d1e3",
             "notes": "",
             "snapshot": {
               "name": "Mage Armor",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mage-armor",
@@ -2126,11 +2126,11 @@
           },
           {
             "id": "7bf6f53b67149518",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.cbc62f473329cda0",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.cbc62f473329cda0",
             "notes": "",
             "snapshot": {
               "name": "Prepare Spell",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepare-spell",
@@ -2264,7 +2264,7 @@
       "name": "Monk",
       "type": "characterType",
       "_id": "3f1cefc3603b2685",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "monk",
@@ -2348,11 +2348,11 @@
         "abilityGrants": [
           {
             "id": "d1d166479e9f94ba",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.a92c67eaddf4a6b1",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.a92c67eaddf4a6b1",
             "notes": "",
             "snapshot": {
               "name": "Flurry",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flurry",
@@ -2422,11 +2422,11 @@
           },
           {
             "id": "e8103dbdbceb189e",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.285f82e5f996c542",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.285f82e5f996c542",
             "notes": "",
             "snapshot": {
               "name": "Nimble",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "nimble",
@@ -2496,11 +2496,11 @@
           },
           {
             "id": "5a751a246cac75e9",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4d791e11017a1b00",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4d791e11017a1b00",
             "notes": "",
             "snapshot": {
               "name": "No Need for Weapons",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "no-need-for-weapons",
@@ -2634,7 +2634,7 @@
       "name": "Necromancer",
       "type": "characterType",
       "_id": "c74ebb4ccc151dc3",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "necromancer",
@@ -2718,11 +2718,11 @@
         "abilityGrants": [
           {
             "id": "f80239ff943efbef",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.9b6962b889a32319",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.9b6962b889a32319",
             "notes": "",
             "snapshot": {
               "name": "Basic Necromancy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "basic-necromancy",
@@ -2792,11 +2792,11 @@
           },
           {
             "id": "15ce6a472b53ce0a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.7d4dfe7612b41b83",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.7d4dfe7612b41b83",
             "notes": "",
             "snapshot": {
               "name": "Drain Life",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "drain-life",
@@ -2866,11 +2866,11 @@
           },
           {
             "id": "488c67e1316875a2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.75500383dbaf1c92",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.75500383dbaf1c92",
             "notes": "",
             "snapshot": {
               "name": "Tribulation",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tribulation",
@@ -3006,7 +3006,7 @@
       "name": "Paladin",
       "type": "characterType",
       "_id": "309b76be09a406a3",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "paladin",
@@ -3090,11 +3090,11 @@
         "abilityGrants": [
           {
             "id": "52e1f742a5581803",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc3ef14247cee87d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc3ef14247cee87d",
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -3162,11 +3162,11 @@
           },
           {
             "id": "52b3888016a31ccc",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.8b7933a4596642bc",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.8b7933a4596642bc",
             "notes": "",
             "snapshot": {
               "name": "Holy Succor",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "holy-succor",
@@ -3236,11 +3236,11 @@
           },
           {
             "id": "f707d8f9fc242fbd",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2cc13d56bf323369",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2cc13d56bf323369",
             "notes": "",
             "snapshot": {
               "name": "Sacred Smite",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sacred-smite",
@@ -3376,7 +3376,7 @@
       "name": "Ranger",
       "type": "characterType",
       "_id": "c9e4b87f25ef51e9",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "ranger",
@@ -3460,11 +3460,11 @@
         "abilityGrants": [
           {
             "id": "0b01b9e5cf25fc53",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.75b0f9eee36acc46",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.75b0f9eee36acc46",
             "notes": "",
             "snapshot": {
               "name": "Expert Tracker",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-tracker",
@@ -3532,11 +3532,11 @@
           },
           {
             "id": "60c8b0e4f0a88bd6",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.d10643fea15a7488",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.d10643fea15a7488",
             "notes": "",
             "snapshot": {
               "name": "Find the Way",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "find-the-way",
@@ -3604,11 +3604,11 @@
           },
           {
             "id": "73189953db7ec5eb",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.603db56399e57ac8",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.603db56399e57ac8",
             "notes": "",
             "snapshot": {
               "name": "Quarry",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "quarry",
@@ -3744,7 +3744,7 @@
       "name": "Rogue",
       "type": "characterType",
       "_id": "403e14a55239bf14",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "rogue",
@@ -3828,11 +3828,11 @@
         "abilityGrants": [
           {
             "id": "6bcf851d472b3a2c",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.206ed1b1b27ad725",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.206ed1b1b27ad725",
             "notes": "",
             "snapshot": {
               "name": "Detect Traps",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "detect-traps",
@@ -3903,11 +3903,11 @@
           },
           {
             "id": "02175895195d8f64",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.50227fc23d4b5ae6",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.50227fc23d4b5ae6",
             "notes": "",
             "snapshot": {
               "name": "Expert Sneak",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-sneak",
@@ -3975,11 +3975,11 @@
           },
           {
             "id": "b51bae4712c51b9b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2f7ea3530d029205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2f7ea3530d029205",
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -4115,7 +4115,7 @@
       "name": "Archer",
       "type": "characterType",
       "_id": "74b8398a1dd3e1a7",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "archer",
@@ -4199,11 +4199,11 @@
         "abilityGrants": [
           {
             "id": "b617d2a01f0120d2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -4271,11 +4271,11 @@
           },
           {
             "id": "a7e69b3c7d60d5a8",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.a9fa658e010cdf50",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.a9fa658e010cdf50",
             "notes": "",
             "snapshot": {
               "name": "Overwatch",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "overwatch",
@@ -4345,11 +4345,11 @@
           },
           {
             "id": "8780d59675281ebd",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.0aaa6ae911ef19d7",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.0aaa6ae911ef19d7",
             "notes": "",
             "snapshot": {
               "name": "Quick Draw",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "quick-draw",
@@ -4485,7 +4485,7 @@
       "name": "Axe Fighter",
       "type": "characterType",
       "_id": "58bf4a1fd5cfd18b",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "axe-fighter",
@@ -4569,11 +4569,11 @@
         "abilityGrants": [
           {
             "id": "c509b4be90b29ff4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f4e8daf24e682c9d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f4e8daf24e682c9d",
             "notes": "",
             "snapshot": {
               "name": "Axe Hook",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "axe-hook",
@@ -4643,11 +4643,11 @@
           },
           {
             "id": "bad16660b3e4b621",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -4715,11 +4715,11 @@
           },
           {
             "id": "202f8bc2eccc24b8",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.0b88cec9b761dc17",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.0b88cec9b761dc17",
             "notes": "",
             "snapshot": {
               "name": "Split Skull",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "split-skull",
@@ -4855,7 +4855,7 @@
       "name": "Knife Fighter",
       "type": "characterType",
       "_id": "b611587269518910",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "knife-fighter",
@@ -4939,11 +4939,11 @@
         "abilityGrants": [
           {
             "id": "66497deaeb0d147d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -5011,11 +5011,11 @@
           },
           {
             "id": "dde8e2bfbba8df69",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2dc209054abe86fa",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2dc209054abe86fa",
             "notes": "",
             "snapshot": {
               "name": "Gut Ripper",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "gut-ripper",
@@ -5085,11 +5085,11 @@
           },
           {
             "id": "0c7c501a0e02bcc3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f28ab392f2d9b33c",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f28ab392f2d9b33c",
             "notes": "",
             "snapshot": {
               "name": "Hindering Throw",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hindering-throw",
@@ -5225,7 +5225,7 @@
       "name": "Priest",
       "type": "characterType",
       "_id": "85e111b368eeb018",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "priest",
@@ -5309,11 +5309,11 @@
         "abilityGrants": [
           {
             "id": "5ebe141e2cd53b50",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.82096c90e2189333",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.82096c90e2189333",
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -5381,11 +5381,11 @@
           },
           {
             "id": "9b563214ad112a12",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f64f38b1aa44281a",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f64f38b1aa44281a",
             "notes": "",
             "snapshot": {
               "name": "Idol",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "idol",
@@ -5455,11 +5455,11 @@
           },
           {
             "id": "c2a5cf1c167e3e3b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.30541678e18fa823",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.30541678e18fa823",
             "notes": "",
             "snapshot": {
               "name": "Retribution",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "retribution",
@@ -5595,7 +5595,7 @@
       "name": "Sorcerer",
       "type": "characterType",
       "_id": "36d72338784f3e51",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "sorcerer",
@@ -5679,11 +5679,11 @@
         "abilityGrants": [
           {
             "id": "8be6fa745d407ac4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.82096c90e2189333",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.82096c90e2189333",
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -5751,11 +5751,11 @@
           },
           {
             "id": "e97b7956ed2efe48",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fba81347ba18e166",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fba81347ba18e166",
             "notes": "",
             "snapshot": {
               "name": "Open Inner Eye",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "open-inner-eye",
@@ -5892,7 +5892,7 @@
       "name": "Sword Fighter",
       "type": "characterType",
       "_id": "d99a04726064f7d1",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "sword-fighter",
@@ -5976,11 +5976,11 @@
         "abilityGrants": [
           {
             "id": "e8b295aef081b967",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc3ef14247cee87d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc3ef14247cee87d",
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -6048,11 +6048,11 @@
           },
           {
             "id": "afb0184c05967152",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -6120,11 +6120,11 @@
           },
           {
             "id": "34fa78635b0801e1",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.bd015f1a58ed25b8",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.bd015f1a58ed25b8",
             "notes": "",
             "snapshot": {
               "name": "Swing Through",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "swing-through",
@@ -6260,7 +6260,7 @@
       "name": "Thief",
       "type": "characterType",
       "_id": "6a8ce9d7b246ebcc",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "thief",
@@ -6344,11 +6344,11 @@
         "abilityGrants": [
           {
             "id": "86b39e9551102ef2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.206ed1b1b27ad725",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.206ed1b1b27ad725",
             "notes": "",
             "snapshot": {
               "name": "Detect Traps",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "detect-traps",
@@ -6419,11 +6419,11 @@
           },
           {
             "id": "804baffe9f4363e3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.6905f94b017b8dec",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.6905f94b017b8dec",
             "notes": "",
             "snapshot": {
               "name": "Ferocious When Cornered",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "ferocious-when-cornered",
@@ -6491,11 +6491,11 @@
           },
           {
             "id": "b7c0f9f0fc7630f7",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2f7ea3530d029205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2f7ea3530d029205",
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -6631,7 +6631,7 @@
       "name": "Two-Weapon Fighter",
       "type": "characterType",
       "_id": "a9bfe438d7cd184e",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "two-weapon-fighter",
@@ -6715,11 +6715,11 @@
         "abilityGrants": [
           {
             "id": "3dbd220b4ea65717",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -6787,11 +6787,11 @@
           },
           {
             "id": "2a919f3856bf8233",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc38da25fae2f50e",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc38da25fae2f50e",
             "notes": "",
             "snapshot": {
               "name": "Weapon Switch",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "weapon-switch",
@@ -6925,7 +6925,7 @@
       "name": "Witch",
       "type": "characterType",
       "_id": "cb9163432dcfc1a6",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "witch",
@@ -7009,11 +7009,11 @@
         "abilityGrants": [
           {
             "id": "fa0a71bd293e0e16",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.02e6bf650833fd27",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.02e6bf650833fd27",
             "notes": "",
             "snapshot": {
               "name": "Brew Potion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "brew-potion",
@@ -7081,11 +7081,11 @@
           },
           {
             "id": "d0e52c205b16d4d5",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.87f25bb2cce11dfe",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.87f25bb2cce11dfe",
             "notes": "",
             "snapshot": {
               "name": "Evil Eye",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "evil-eye",
@@ -7155,11 +7155,11 @@
           },
           {
             "id": "37b5c47d7c656bde",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.ced558adecdf19fa",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.ced558adecdf19fa",
             "notes": "",
             "snapshot": {
               "name": "Potion Cyphers",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "potion-cyphers",
@@ -7293,7 +7293,7 @@
       "name": "Burglar",
       "type": "characterType",
       "_id": "e437537fa61ee6ae",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "burglar",
@@ -7377,11 +7377,11 @@
         "abilityGrants": [
           {
             "id": "775b4b347ffff4a3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.716eebbb5c388326",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.716eebbb5c388326",
             "notes": "",
             "snapshot": {
               "name": "Burgle",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "burgle",
@@ -7451,11 +7451,11 @@
           },
           {
             "id": "718b4f687035a9af",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4af32b4be4180dee",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4af32b4be4180dee",
             "notes": "",
             "snapshot": {
               "name": "Escape",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "escape",
@@ -7525,11 +7525,11 @@
           },
           {
             "id": "3c15aeb74c52846b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.02f4f64395c0a1f5",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.02f4f64395c0a1f5",
             "notes": "",
             "snapshot": {
               "name": "Slip Into Shadow",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "slip-into-shadow",
@@ -7663,7 +7663,7 @@
       "name": "Noble Warrior",
       "type": "characterType",
       "_id": "aeb913b70109139e",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-warrior",
@@ -7747,11 +7747,11 @@
         "abilityGrants": [
           {
             "id": "c4dfe4693de2595b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -7819,11 +7819,11 @@
           },
           {
             "id": "c9d8514af2c683b8",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.b078958f9a9d642a",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.b078958f9a9d642a",
             "notes": "",
             "snapshot": {
               "name": "Noble Defender",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-defender",
@@ -7894,11 +7894,11 @@
           },
           {
             "id": "9de047710767070e",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.122b12f77541be06",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.122b12f77541be06",
             "notes": "",
             "snapshot": {
               "name": "Noble Sacrifice",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-sacrifice",
@@ -8035,7 +8035,7 @@
       "name": "Swashbuckler",
       "type": "characterType",
       "_id": "bf28776079ef485c",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "swashbuckler",
@@ -8119,11 +8119,11 @@
         "abilityGrants": [
           {
             "id": "3e70f95fa1520951",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.58005ab2b2e7f660",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.58005ab2b2e7f660",
             "notes": "",
             "snapshot": {
               "name": "Attack Flourish",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "attack-flourish",
@@ -8191,11 +8191,11 @@
           },
           {
             "id": "f15924928781e819",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.7d9473c46eff8736",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.7d9473c46eff8736",
             "notes": "",
             "snapshot": {
               "name": "Flamboyant Swordplay",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flamboyant-swordplay",
@@ -8265,11 +8265,11 @@
           },
           {
             "id": "253bf01f7c2a4084",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c05bdc2843797866",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c05bdc2843797866",
             "notes": "",
             "snapshot": {
               "name": "Romantic Flair",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "romantic-flair",
@@ -8405,7 +8405,7 @@
       "name": "Warrior",
       "type": "characterType",
       "_id": "bf753b73b1822d14",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "warrior",
@@ -8489,11 +8489,11 @@
         "abilityGrants": [
           {
             "id": "8701f0146269d981",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc3ef14247cee87d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc3ef14247cee87d",
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -8561,11 +8561,11 @@
           },
           {
             "id": "27b7a9c023c2503c",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e1a0785eb2bcb439",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e1a0785eb2bcb439",
             "notes": "",
             "snapshot": {
               "name": "Despite My Wounds",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "despite-my-wounds",
@@ -8633,11 +8633,11 @@
           },
           {
             "id": "fe0b6912d6ee234b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -8771,7 +8771,7 @@
       "name": "Wizard",
       "type": "characterType",
       "_id": "88520602d9c1b483",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wizard",
@@ -8855,11 +8855,11 @@
         "abilityGrants": [
           {
             "id": "5d6ebc7cda484872",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.209ac979cfbb76b5",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.209ac979cfbb76b5",
             "notes": "",
             "snapshot": {
               "name": "Lightning Bolt",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lightning-bolt",
@@ -8929,11 +8929,11 @@
           },
           {
             "id": "cff58c33d945d4bf",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.cbc62f473329cda0",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.cbc62f473329cda0",
             "notes": "",
             "snapshot": {
               "name": "Prepare Spell",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepare-spell",
@@ -9001,11 +9001,11 @@
           },
           {
             "id": "8a61a3c49820cfd7",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.24d086d6b63e489f",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.24d086d6b63e489f",
             "notes": "",
             "snapshot": {
               "name": "Wizard’s Cunning",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wizards-cunning",
@@ -9141,7 +9141,7 @@
       "name": "Diplomat",
       "type": "characterType",
       "_id": "de5d7748b80432d9",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "diplomat",
@@ -9225,11 +9225,11 @@
         "abilityGrants": [
           {
             "id": "c974863d5365a084",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.28687ef0ae707b03",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.28687ef0ae707b03",
             "notes": "",
             "snapshot": {
               "name": "Connected",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "connected",
@@ -9299,11 +9299,11 @@
           },
           {
             "id": "f160df06218b5260",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.39024e2e5b98d183",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.39024e2e5b98d183",
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -9373,11 +9373,11 @@
           },
           {
             "id": "214e72a464cb7234",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.17715e87a5f36c62",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.17715e87a5f36c62",
             "notes": "",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -9514,7 +9514,7 @@
       "name": "Engineer",
       "type": "characterType",
       "_id": "ac5c0ccdf311cba4",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "engineer",
@@ -9598,11 +9598,11 @@
         "abilityGrants": [
           {
             "id": "ade2f18aed6100c5",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.a7729ea93ff2cb86",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.a7729ea93ff2cb86",
             "notes": "",
             "snapshot": {
               "name": "Connected Knowledge",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "connected-knowledge",
@@ -9672,11 +9672,11 @@
           },
           {
             "id": "d1e955e96b5618cf",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.62b598bcc47996b9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.62b598bcc47996b9",
             "notes": "",
             "snapshot": {
               "name": "Expert Engineer",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-engineer",
@@ -9744,11 +9744,11 @@
           },
           {
             "id": "32f82c37a8dee57a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.9b3767a9bf09d8e7",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.9b3767a9bf09d8e7",
             "notes": "",
             "snapshot": {
               "name": "Modify Device",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "modify-device",
@@ -9884,7 +9884,7 @@
       "name": "Medic",
       "type": "characterType",
       "_id": "f7f205e9fea64602",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "medic",
@@ -9968,11 +9968,11 @@
         "abilityGrants": [
           {
             "id": "f883822d589d6dad",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.bac67cd10809d66b",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.bac67cd10809d66b",
             "notes": "",
             "snapshot": {
               "name": "Bad Medicine",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "bad-medicine",
@@ -10043,11 +10043,11 @@
           },
           {
             "id": "00951f82d4b7df07",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.af353aa3c8d755e2",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.af353aa3c8d755e2",
             "notes": "",
             "snapshot": {
               "name": "Expert Doctor",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-doctor",
@@ -10115,11 +10115,11 @@
           },
           {
             "id": "b4975440d42b9109",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.092d4796892ee391",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.092d4796892ee391",
             "notes": "",
             "snapshot": {
               "name": "Prepared Medic",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepared-medic",
@@ -10255,7 +10255,7 @@
       "name": "Operative",
       "type": "characterType",
       "_id": "27f16676a6ce6162",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "operative",
@@ -10339,11 +10339,11 @@
         "abilityGrants": [
           {
             "id": "99136546492600cd",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4af32b4be4180dee",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4af32b4be4180dee",
             "notes": "",
             "snapshot": {
               "name": "Escape",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "escape",
@@ -10413,11 +10413,11 @@
           },
           {
             "id": "21e6c3284ec41dc8",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2f7ea3530d029205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2f7ea3530d029205",
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -10487,11 +10487,11 @@
           },
           {
             "id": "01f5bbc2c723222d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fd471b0e8537ab6e",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fd471b0e8537ab6e",
             "notes": "",
             "snapshot": {
               "name": "Spin Identity",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-identity",
@@ -10627,7 +10627,7 @@
       "name": "Pilot",
       "type": "characterType",
       "_id": "167b4e970c850cea",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "pilot",
@@ -10711,11 +10711,11 @@
         "abilityGrants": [
           {
             "id": "bfcc46d966bef360",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4adfcfc836af61c7",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4adfcfc836af61c7",
             "notes": "",
             "snapshot": {
               "name": "Born to Pilot",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "born-to-pilot",
@@ -10785,11 +10785,11 @@
           },
           {
             "id": "6550bf93f74de252",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.8e1e0d640cba5029",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.8e1e0d640cba5029",
             "notes": "",
             "snapshot": {
               "name": "Expert Space Pilot",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-space-pilot",
@@ -10857,11 +10857,11 @@
           },
           {
             "id": "5d7772286acd1010",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.d735a059fd509e50",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.d735a059fd509e50",
             "notes": "",
             "snapshot": {
               "name": "Piloting Flourish",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "piloting-flourish",
@@ -10995,7 +10995,7 @@
       "name": "Soldier",
       "type": "characterType",
       "_id": "d382459623f124c8",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "soldier",
@@ -11079,11 +11079,11 @@
         "abilityGrants": [
           {
             "id": "28a7dc1adc5f033e",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.d9621bd5f67a5b67",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.d9621bd5f67a5b67",
             "notes": "",
             "snapshot": {
               "name": "Combat Enhancement",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-enhancement",
@@ -11154,11 +11154,11 @@
           },
           {
             "id": "07fc37f8f7199e6d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "CRD Soldier guidance recommends genre-appropriate weapons, including laser pistols, rail guns, and specific spacecraft weapons.",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -11226,11 +11226,11 @@
           },
           {
             "id": "36167e76d587c7c7",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.48011353a0f51d14",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.48011353a0f51d14",
             "notes": "",
             "snapshot": {
               "name": "Push Implant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-implant",
@@ -11364,7 +11364,7 @@
       "name": "Android",
       "type": "characterType",
       "_id": "0fb796162a585b84",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "android",
@@ -11448,11 +11448,11 @@
         "abilityGrants": [
           {
             "id": "1b80aba99de8799b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.d0ca08b072a772b2",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.d0ca08b072a772b2",
             "notes": "",
             "snapshot": {
               "name": "Built to Hack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "built-to-hack",
@@ -11522,11 +11522,11 @@
           },
           {
             "id": "b3b61cddf93dd34b",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.09303c8d52c51d2d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.09303c8d52c51d2d",
             "notes": "",
             "snapshot": {
               "name": "Flex Skill",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flex-skill",
@@ -11594,11 +11594,11 @@
           },
           {
             "id": "d37768eb2f3512c4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.a461d63ed308dd09",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.a461d63ed308dd09",
             "notes": "",
             "snapshot": {
               "name": "Machine Not Flesh",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-not-flesh",
@@ -11732,7 +11732,7 @@
       "name": "Noble",
       "type": "characterType",
       "_id": "13a3b390b6a49b88",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "noble",
@@ -11816,11 +11816,11 @@
         "abilityGrants": [
           {
             "id": "34eadb5333ae41d4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.8ebf0d87f3dc03de",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.8ebf0d87f3dc03de",
             "notes": "",
             "snapshot": {
               "name": "Exorbitant Reach",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exorbitant-reach",
@@ -11888,11 +11888,11 @@
           },
           {
             "id": "ab542b4018a7ec1a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.3430c6863f19160d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.3430c6863f19160d",
             "notes": "",
             "snapshot": {
               "name": "Noble Bearing",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-bearing",
@@ -11962,11 +11962,11 @@
           },
           {
             "id": "8a08ef81b5673680",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.97d226b7ac3e4b3e",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.97d226b7ac3e4b3e",
             "notes": "",
             "snapshot": {
               "name": "Retainer",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "retainer",
@@ -12100,7 +12100,7 @@
       "name": "Psion",
       "type": "characterType",
       "_id": "ba99b8aab41a77c2",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "psion",
@@ -12184,11 +12184,11 @@
         "abilityGrants": [
           {
             "id": "5b371ccef2aa18d6",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e0232d2e5de381ee",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e0232d2e5de381ee",
             "notes": "",
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -12258,11 +12258,11 @@
           },
           {
             "id": "1c5dbfcc1f2d323a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4b4b1f4da109cf1e",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4b4b1f4da109cf1e",
             "notes": "",
             "snapshot": {
               "name": "Onslaught",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "onslaught",
@@ -12332,11 +12332,11 @@
           },
           {
             "id": "2463e5efc28ab563",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.6d05c4841adf13dc",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.6d05c4841adf13dc",
             "notes": "",
             "snapshot": {
               "name": "Psychic Veil",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "psychic-veil",
@@ -12472,7 +12472,7 @@
       "name": "Scoundrel",
       "type": "characterType",
       "_id": "c1c71e1bdb2eee41",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "scoundrel",
@@ -12556,11 +12556,11 @@
         "abilityGrants": [
           {
             "id": "00e49ddef4087a35",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.9ed172b46ad95328",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.9ed172b46ad95328",
             "notes": "",
             "snapshot": {
               "name": "Desperate Defense",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "desperate-defense",
@@ -12628,11 +12628,11 @@
           },
           {
             "id": "e06c4727e5b81849",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.39024e2e5b98d183",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.39024e2e5b98d183",
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -12702,11 +12702,11 @@
           },
           {
             "id": "fa22112816576ee9",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.327612b082276daa",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.327612b082276daa",
             "notes": "",
             "snapshot": {
               "name": "Hand to Eye",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hand-to-eye",
@@ -12843,7 +12843,7 @@
       "name": "Starpilot",
       "type": "characterType",
       "_id": "6b727b34dd7395bc",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "starpilot",
@@ -12927,11 +12927,11 @@
         "abilityGrants": [
           {
             "id": "d693a184a220a251",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f480a772e14372b9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f480a772e14372b9",
             "notes": "",
             "snapshot": {
               "name": "Audacious Blast",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "audacious-blast",
@@ -13001,11 +13001,11 @@
           },
           {
             "id": "32bf81c8b29dec08",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.82096c90e2189333",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.82096c90e2189333",
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -13073,11 +13073,11 @@
           },
           {
             "id": "27afa12442c608d6",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c2502b55f3dacaef",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c2502b55f3dacaef",
             "notes": "",
             "snapshot": {
               "name": "Redline Maneuver",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "redline-maneuver",
@@ -13214,7 +13214,7 @@
       "name": "Tech",
       "type": "characterType",
       "_id": "68fa5f681f943d41",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "tech",
@@ -13298,11 +13298,11 @@
         "abilityGrants": [
           {
             "id": "eff94fe6daf57f44",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.0e8b8ca3ee06a937",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.0e8b8ca3ee06a937",
             "notes": "",
             "snapshot": {
               "name": "Always Tinkering",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-tinkering",
@@ -13370,11 +13370,11 @@
           },
           {
             "id": "687bca8dc944f2e3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e0070d35e5189b23",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e0070d35e5189b23",
             "notes": "",
             "snapshot": {
               "name": "Craft Device",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "craft-device",
@@ -13444,11 +13444,11 @@
           },
           {
             "id": "15dafa5ac668c238",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.82096c90e2189333",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.82096c90e2189333",
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -13582,7 +13582,7 @@
       "name": "Trader",
       "type": "characterType",
       "_id": "537386f76212a75b",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "trader",
@@ -13666,11 +13666,11 @@
         "abilityGrants": [
           {
             "id": "c4d3ea9785af55f1",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.39024e2e5b98d183",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.39024e2e5b98d183",
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -13740,11 +13740,11 @@
           },
           {
             "id": "41e417b89d5ad63f",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.6153cd2148c9a937",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.6153cd2148c9a937",
             "notes": "",
             "snapshot": {
               "name": "A Smile and a Word",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-smile-and-a-word",
@@ -13812,11 +13812,11 @@
           },
           {
             "id": "b541e63e23070ed6",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2908a13733589883",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2908a13733589883",
             "notes": "",
             "snapshot": {
               "name": "Smooth Operator",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "smooth-operator",
@@ -13952,7 +13952,7 @@
       "name": "Dealer",
       "type": "characterType",
       "_id": "2839c44379de4bbb",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "dealer",
@@ -14036,11 +14036,11 @@
         "abilityGrants": [
           {
             "id": "40d86d6e51f67207",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.39024e2e5b98d183",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.39024e2e5b98d183",
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -14110,11 +14110,11 @@
           },
           {
             "id": "27bcd003165f81c3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2f7ea3530d029205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2f7ea3530d029205",
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -14184,11 +14184,11 @@
           },
           {
             "id": "ddae357205868853",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.9773750fd61d6dec",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.9773750fd61d6dec",
             "notes": "",
             "snapshot": {
               "name": "When the Deal Bombs",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "when-the-deal-bombs",
@@ -14322,7 +14322,7 @@
       "name": "Heavy",
       "type": "characterType",
       "_id": "000c718b1835c21d",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "heavy",
@@ -14406,11 +14406,11 @@
         "abilityGrants": [
           {
             "id": "b48ab8cf4bf50c57",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fc3ef14247cee87d",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fc3ef14247cee87d",
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -14478,11 +14478,11 @@
           },
           {
             "id": "56e25b0cd52cfca2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.716e1cb2a968099a",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.716e1cb2a968099a",
             "notes": "",
             "snapshot": {
               "name": "Desperate Feat",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "desperate-feat",
@@ -14550,11 +14550,11 @@
           },
           {
             "id": "5f294a7b9de7d74f",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.c942b5a05dc50aa9",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.c942b5a05dc50aa9",
             "notes": "CRD Heavy guidance recommends genre-appropriate weapons such as pistols and rifles.",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -14688,7 +14688,7 @@
       "name": "Survivor",
       "type": "characterType",
       "_id": "d32463e0e5c9942c",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "survivor",
@@ -14772,11 +14772,11 @@
         "abilityGrants": [
           {
             "id": "561361d9137ebd0f",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e1a0785eb2bcb439",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e1a0785eb2bcb439",
             "notes": "",
             "snapshot": {
               "name": "Despite My Wounds",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "despite-my-wounds",
@@ -14844,11 +14844,11 @@
           },
           {
             "id": "27081eef5b7a67fa",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.913697a8917b3281",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.913697a8917b3281",
             "notes": "",
             "snapshot": {
               "name": "Enhanced Scavenging",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-scavenging",
@@ -14918,11 +14918,11 @@
           },
           {
             "id": "23ceef4453a49743",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.6df7913bcfcf7ad6",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.6df7913bcfcf7ad6",
             "notes": "",
             "snapshot": {
               "name": "Get Out",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "get-out",
@@ -15056,7 +15056,7 @@
       "name": "Tender",
       "type": "characterType",
       "_id": "473ac68e0a34d37c",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "tender",
@@ -15140,11 +15140,11 @@
         "abilityGrants": [
           {
             "id": "b0d12eec39ff36a7",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.3d3418d78875a040",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.3d3418d78875a040",
             "notes": "",
             "snapshot": {
               "name": "Foil Danger",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "foil-danger",
@@ -15214,11 +15214,11 @@
           },
           {
             "id": "d6bf5a19d491add2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.17715e87a5f36c62",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.17715e87a5f36c62",
             "notes": "CRD Tender wording omits the Diplomat/Superhuman restriction that the suggested action occur on the ally's next turn and adds an introductory explanatory sentence.",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -15289,11 +15289,11 @@
           },
           {
             "id": "7541d5fe2f4af0c4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.377a3186d6a44621",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.377a3186d6a44621",
             "notes": "",
             "snapshot": {
               "name": "Wasteland Healer",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wasteland-healer",
@@ -15429,7 +15429,7 @@
       "name": "Crimefighter",
       "type": "characterType",
       "_id": "de2cc24aa9304e72",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "crimefighter",
@@ -15513,11 +15513,11 @@
         "abilityGrants": [
           {
             "id": "27373d75ee18ad2c",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.0e8b8ca3ee06a937",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.0e8b8ca3ee06a937",
             "notes": "",
             "snapshot": {
               "name": "Always Tinkering",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-tinkering",
@@ -15585,11 +15585,11 @@
           },
           {
             "id": "e29730b36bed5afa",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.be1dd6bcd6128ec4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.be1dd6bcd6128ec4",
             "notes": "",
             "snapshot": {
               "name": "Sleuthing",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sleuthing",
@@ -15659,11 +15659,11 @@
           },
           {
             "id": "a4ad4ecc13b64938",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fa7e87d0478622e4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fa7e87d0478622e4",
             "notes": "CRD Crimefighter wording permits any specific attack (examples include eye lasers, punches, or guns), rather than only a weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -15732,11 +15732,11 @@
           },
           {
             "id": "b0a8ba30fbdb92a0",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -15870,7 +15870,7 @@
       "name": "Vigilante",
       "type": "characterType",
       "_id": "c52d7c84f3cf4d6c",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "vigilante",
@@ -15954,11 +15954,11 @@
         "abilityGrants": [
           {
             "id": "219a91dce194e80a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.285f82e5f996c542",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.285f82e5f996c542",
             "notes": "",
             "snapshot": {
               "name": "Nimble",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "nimble",
@@ -16028,11 +16028,11 @@
           },
           {
             "id": "f334f8acf8d2d6dc",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2f7ea3530d029205",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2f7ea3530d029205",
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -16102,11 +16102,11 @@
           },
           {
             "id": "1c8c03e9e29289cb",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fa7e87d0478622e4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fa7e87d0478622e4",
             "notes": "CRD Vigilante wording says specific weapon attack, then recommends unarmed attacks for this Type.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -16175,11 +16175,11 @@
           },
           {
             "id": "f569eebacdf5a6cf",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -16313,7 +16313,7 @@
       "name": "Enhanced Hero",
       "type": "characterType",
       "_id": "308f39bc2a008e10",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-hero",
@@ -16397,11 +16397,11 @@
         "abilityGrants": [
           {
             "id": "6750789c7491c22e",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.4d791e11017a1b00",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.4d791e11017a1b00",
             "notes": "",
             "snapshot": {
               "name": "No Need for Weapons",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "no-need-for-weapons",
@@ -16469,11 +16469,11 @@
           },
           {
             "id": "5cfefb3be3484c02",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.f0e2658192a5a005",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.f0e2658192a5a005",
             "notes": "",
             "snapshot": {
               "name": "Press Advantage",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "press-advantage",
@@ -16541,11 +16541,11 @@
           },
           {
             "id": "bb3017d1385f9d19",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.89a5322c3c159134",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.89a5322c3c159134",
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -16616,11 +16616,11 @@
           },
           {
             "id": "7958f474f66761f8",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -16754,7 +16754,7 @@
       "name": "Powerstar",
       "type": "characterType",
       "_id": "d7fe8016fe198930",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "powerstar",
@@ -16838,11 +16838,11 @@
         "abilityGrants": [
           {
             "id": "df3ae8844fe4fff3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2c61703f7d9293ee",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2c61703f7d9293ee",
             "notes": "",
             "snapshot": {
               "name": "Enhanced Energy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-energy",
@@ -16911,11 +16911,11 @@
           },
           {
             "id": "821119df8c5caf3d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.409ad5faecf18099",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.409ad5faecf18099",
             "notes": "",
             "snapshot": {
               "name": "Power Prowess",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "power-prowess",
@@ -16983,11 +16983,11 @@
           },
           {
             "id": "0c843d484ff14fa4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -17055,11 +17055,11 @@
           },
           {
             "id": "7ba95e4e08c905b5",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e7f9f4d434653437",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e7f9f4d434653437",
             "notes": "",
             "snapshot": {
               "name": "Wider Use",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wider-use",
@@ -17193,7 +17193,7 @@
       "name": "Superhuman",
       "type": "characterType",
       "_id": "c12c2be822350a49",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "superhuman",
@@ -17277,11 +17277,11 @@
         "abilityGrants": [
           {
             "id": "57ea245cba35681f",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.17715e87a5f36c62",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.17715e87a5f36c62",
             "notes": "",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -17352,11 +17352,11 @@
           },
           {
             "id": "d5f68fd14694e619",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e04548ef823bdcbb",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e04548ef823bdcbb",
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -17424,11 +17424,11 @@
           },
           {
             "id": "2494b2651499a376",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.89a5322c3c159134",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.89a5322c3c159134",
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -17499,11 +17499,11 @@
           },
           {
             "id": "afe88af2e1c73838",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fa7e87d0478622e4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fa7e87d0478622e4",
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -17572,11 +17572,11 @@
           },
           {
             "id": "b3a10d1b30229c99",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -17710,7 +17710,7 @@
       "name": "Powerhouse",
       "type": "characterType",
       "_id": "6dbfa31960d11200",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "powerhouse",
@@ -17794,11 +17794,11 @@
         "abilityGrants": [
           {
             "id": "2c6df70502ec49a3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.3923bb81b9050282",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.3923bb81b9050282",
             "notes": "",
             "snapshot": {
               "name": "Always Mighty",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-mighty",
@@ -17866,11 +17866,11 @@
           },
           {
             "id": "667eb90b76efeb3e",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.2c61703f7d9293ee",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.2c61703f7d9293ee",
             "notes": "CRD Powerhouse occurrence omits the Enabler classification printed in the otherwise identical Powerstar occurrence.",
             "snapshot": {
               "name": "Enhanced Energy",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-energy",
@@ -17939,11 +17939,11 @@
           },
           {
             "id": "0d53669d54f73ed9",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e04548ef823bdcbb",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e04548ef823bdcbb",
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -18011,11 +18011,11 @@
           },
           {
             "id": "0b40155e8b030ab4",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fa7e87d0478622e4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fa7e87d0478622e4",
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -18084,11 +18084,11 @@
           },
           {
             "id": "b77d0a05a52261f2",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -18222,7 +18222,7 @@
       "name": "Living God",
       "type": "characterType",
       "_id": "5333203fce3e36f5",
-      "img": "systems/cypherv2/assets/icons/cyphertype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.png",
       "system": {
         "schemaVersion": 1,
         "slug": "living-god",
@@ -18306,11 +18306,11 @@
         "abilityGrants": [
           {
             "id": "9269dc33c91f8c88",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.404b131571e3098c",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.404b131571e3098c",
             "notes": "",
             "snapshot": {
               "name": "Hover",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hover",
@@ -18380,11 +18380,11 @@
           },
           {
             "id": "fd5589b8b205dc4a",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.e04548ef823bdcbb",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.e04548ef823bdcbb",
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -18452,11 +18452,11 @@
           },
           {
             "id": "b932cfcb788e78fd",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.7c3d59b7a280a36c",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.7c3d59b7a280a36c",
             "notes": "",
             "snapshot": {
               "name": "Second Focus",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "second-focus",
@@ -18524,11 +18524,11 @@
           },
           {
             "id": "b44e1947bdf24e2d",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.fa7e87d0478622e4",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.fa7e87d0478622e4",
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -18597,11 +18597,11 @@
           },
           {
             "id": "ec0a26889f316ce3",
-            "abilityUuid": "Compendium.cypherv2.type-abilities.Item.14fe7b70be0e5125",
+            "abilityUuid": "Compendium.magnusarchives.type-abilities.Item.14fe7b70be0e5125",
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/cypherv2/assets/icons/cypherability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.png",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -18737,7 +18737,7 @@
       "name": "Frenzy",
       "type": "ability",
       "_id": "10e3d5d62bd518d2",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "frenzy",
@@ -18826,7 +18826,7 @@
       "name": "Wilderness Survival",
       "type": "ability",
       "_id": "17476016c01afbb6",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wilderness-survival",
@@ -18913,7 +18913,7 @@
       "name": "Wounded Fury",
       "type": "ability",
       "_id": "4797998eece54eba",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wounded-fury",
@@ -19000,7 +19000,7 @@
       "name": "Expert Interlocuter",
       "type": "ability",
       "_id": "5f9742f814524205",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-interlocuter",
@@ -19087,7 +19087,7 @@
       "name": "Inspiring Performance",
       "type": "ability",
       "_id": "37352a89b7a014a8",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "inspiring-performance",
@@ -19176,7 +19176,7 @@
       "name": "A Smile and a Word",
       "type": "ability",
       "_id": "6153cd2148c9a937",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "a-smile-and-a-word",
@@ -19263,7 +19263,7 @@
       "name": "Combat Prowess",
       "type": "ability",
       "_id": "fc3ef14247cee87d",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "combat-prowess",
@@ -19350,7 +19350,7 @@
       "name": "Divine Radiance",
       "type": "ability",
       "_id": "7d45abc79698313c",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "divine-radiance",
@@ -19439,7 +19439,7 @@
       "name": "Healing Hand",
       "type": "ability",
       "_id": "f879fa47429bda71",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "healing-hand",
@@ -19528,7 +19528,7 @@
       "name": "Beast Companion",
       "type": "ability",
       "_id": "870584440bc71b56",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "beast-companion",
@@ -19615,7 +19615,7 @@
       "name": "Friend to Small Creatures",
       "type": "ability",
       "_id": "3b3a4837f75af00c",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "friend-to-small-creatures",
@@ -19704,7 +19704,7 @@
       "name": "Seeds of Fury",
       "type": "ability",
       "_id": "a5afc00205f3989a",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "seeds-of-fury",
@@ -19793,7 +19793,7 @@
       "name": "Expert Combatant",
       "type": "ability",
       "_id": "c942b5a05dc50aa9",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-combatant",
@@ -19880,7 +19880,7 @@
       "name": "Press Advantage",
       "type": "ability",
       "_id": "f0e2658192a5a005",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "press-advantage",
@@ -19967,7 +19967,7 @@
       "name": "Successive Attack",
       "type": "ability",
       "_id": "89a5322c3c159134",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "successive-attack",
@@ -20057,7 +20057,7 @@
       "name": "Blast",
       "type": "ability",
       "_id": "80727a4079bde20b",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "blast",
@@ -20146,7 +20146,7 @@
       "name": "Mage Armor",
       "type": "ability",
       "_id": "bd398ed33213d1e3",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "mage-armor",
@@ -20235,7 +20235,7 @@
       "name": "Prepare Spell",
       "type": "ability",
       "_id": "cbc62f473329cda0",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "prepare-spell",
@@ -20322,7 +20322,7 @@
       "name": "Flurry",
       "type": "ability",
       "_id": "a92c67eaddf4a6b1",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "flurry",
@@ -20411,7 +20411,7 @@
       "name": "Nimble",
       "type": "ability",
       "_id": "285f82e5f996c542",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "nimble",
@@ -20500,7 +20500,7 @@
       "name": "No Need for Weapons",
       "type": "ability",
       "_id": "4d791e11017a1b00",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "no-need-for-weapons",
@@ -20587,7 +20587,7 @@
       "name": "Basic Necromancy",
       "type": "ability",
       "_id": "9b6962b889a32319",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "basic-necromancy",
@@ -20676,7 +20676,7 @@
       "name": "Drain Life",
       "type": "ability",
       "_id": "7d4dfe7612b41b83",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "drain-life",
@@ -20765,7 +20765,7 @@
       "name": "Tribulation",
       "type": "ability",
       "_id": "75500383dbaf1c92",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "tribulation",
@@ -20854,7 +20854,7 @@
       "name": "Holy Succor",
       "type": "ability",
       "_id": "8b7933a4596642bc",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "holy-succor",
@@ -20943,7 +20943,7 @@
       "name": "Sacred Smite",
       "type": "ability",
       "_id": "2cc13d56bf323369",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "sacred-smite",
@@ -21032,7 +21032,7 @@
       "name": "Expert Tracker",
       "type": "ability",
       "_id": "75b0f9eee36acc46",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-tracker",
@@ -21119,7 +21119,7 @@
       "name": "Find the Way",
       "type": "ability",
       "_id": "d10643fea15a7488",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "find-the-way",
@@ -21206,7 +21206,7 @@
       "name": "Quarry",
       "type": "ability",
       "_id": "603db56399e57ac8",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "quarry",
@@ -21295,7 +21295,7 @@
       "name": "Detect Traps",
       "type": "ability",
       "_id": "206ed1b1b27ad725",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "detect-traps",
@@ -21385,7 +21385,7 @@
       "name": "Expert Sneak",
       "type": "ability",
       "_id": "50227fc23d4b5ae6",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-sneak",
@@ -21472,7 +21472,7 @@
       "name": "Sneak Attack",
       "type": "ability",
       "_id": "2f7ea3530d029205",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "sneak-attack",
@@ -21561,7 +21561,7 @@
       "name": "Overwatch",
       "type": "ability",
       "_id": "a9fa658e010cdf50",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "overwatch",
@@ -21650,7 +21650,7 @@
       "name": "Quick Draw",
       "type": "ability",
       "_id": "0aaa6ae911ef19d7",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "quick-draw",
@@ -21739,7 +21739,7 @@
       "name": "Axe Hook",
       "type": "ability",
       "_id": "f4e8daf24e682c9d",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "axe-hook",
@@ -21828,7 +21828,7 @@
       "name": "Split Skull",
       "type": "ability",
       "_id": "0b88cec9b761dc17",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "split-skull",
@@ -21917,7 +21917,7 @@
       "name": "Gut Ripper",
       "type": "ability",
       "_id": "2dc209054abe86fa",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "gut-ripper",
@@ -22006,7 +22006,7 @@
       "name": "Hindering Throw",
       "type": "ability",
       "_id": "f28ab392f2d9b33c",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "hindering-throw",
@@ -22095,7 +22095,7 @@
       "name": "Cypher Use",
       "type": "ability",
       "_id": "82096c90e2189333",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "cypher-use",
@@ -22182,7 +22182,7 @@
       "name": "Idol",
       "type": "ability",
       "_id": "f64f38b1aa44281a",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "idol",
@@ -22271,7 +22271,7 @@
       "name": "Retribution",
       "type": "ability",
       "_id": "30541678e18fa823",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "retribution",
@@ -22360,7 +22360,7 @@
       "name": "Open Inner Eye",
       "type": "ability",
       "_id": "fba81347ba18e166",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "open-inner-eye",
@@ -22450,7 +22450,7 @@
       "name": "Swing Through",
       "type": "ability",
       "_id": "bd015f1a58ed25b8",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "swing-through",
@@ -22539,7 +22539,7 @@
       "name": "Ferocious When Cornered",
       "type": "ability",
       "_id": "6905f94b017b8dec",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "ferocious-when-cornered",
@@ -22626,7 +22626,7 @@
       "name": "Weapon Switch",
       "type": "ability",
       "_id": "fc38da25fae2f50e",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "weapon-switch",
@@ -22713,7 +22713,7 @@
       "name": "Brew Potion",
       "type": "ability",
       "_id": "02e6bf650833fd27",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "brew-potion",
@@ -22800,7 +22800,7 @@
       "name": "Evil Eye",
       "type": "ability",
       "_id": "87f25bb2cce11dfe",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "evil-eye",
@@ -22889,7 +22889,7 @@
       "name": "Potion Cyphers",
       "type": "ability",
       "_id": "ced558adecdf19fa",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "potion-cyphers",
@@ -22976,7 +22976,7 @@
       "name": "Burgle",
       "type": "ability",
       "_id": "716eebbb5c388326",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "burgle",
@@ -23065,7 +23065,7 @@
       "name": "Escape",
       "type": "ability",
       "_id": "4af32b4be4180dee",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "escape",
@@ -23154,7 +23154,7 @@
       "name": "Slip Into Shadow",
       "type": "ability",
       "_id": "02f4f64395c0a1f5",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "slip-into-shadow",
@@ -23241,7 +23241,7 @@
       "name": "Noble Defender",
       "type": "ability",
       "_id": "b078958f9a9d642a",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-defender",
@@ -23331,7 +23331,7 @@
       "name": "Noble Sacrifice",
       "type": "ability",
       "_id": "122b12f77541be06",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-sacrifice",
@@ -23421,7 +23421,7 @@
       "name": "Attack Flourish",
       "type": "ability",
       "_id": "58005ab2b2e7f660",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "attack-flourish",
@@ -23508,7 +23508,7 @@
       "name": "Flamboyant Swordplay",
       "type": "ability",
       "_id": "7d9473c46eff8736",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "flamboyant-swordplay",
@@ -23597,7 +23597,7 @@
       "name": "Romantic Flair",
       "type": "ability",
       "_id": "c05bdc2843797866",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "romantic-flair",
@@ -23686,7 +23686,7 @@
       "name": "Despite My Wounds",
       "type": "ability",
       "_id": "e1a0785eb2bcb439",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "despite-my-wounds",
@@ -23773,7 +23773,7 @@
       "name": "Lightning Bolt",
       "type": "ability",
       "_id": "209ac979cfbb76b5",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "lightning-bolt",
@@ -23862,7 +23862,7 @@
       "name": "Wizard’s Cunning",
       "type": "ability",
       "_id": "24d086d6b63e489f",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wizards-cunning",
@@ -23951,7 +23951,7 @@
       "name": "Connected",
       "type": "ability",
       "_id": "28687ef0ae707b03",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "connected",
@@ -24040,7 +24040,7 @@
       "name": "Fast Talk",
       "type": "ability",
       "_id": "39024e2e5b98d183",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "fast-talk",
@@ -24129,7 +24129,7 @@
       "name": "Inspiring Suggestion",
       "type": "ability",
       "_id": "17715e87a5f36c62",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "inspiring-suggestion",
@@ -24219,7 +24219,7 @@
       "name": "Connected Knowledge",
       "type": "ability",
       "_id": "a7729ea93ff2cb86",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "connected-knowledge",
@@ -24308,7 +24308,7 @@
       "name": "Expert Engineer",
       "type": "ability",
       "_id": "62b598bcc47996b9",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-engineer",
@@ -24395,7 +24395,7 @@
       "name": "Modify Device",
       "type": "ability",
       "_id": "9b3767a9bf09d8e7",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "modify-device",
@@ -24484,7 +24484,7 @@
       "name": "Bad Medicine",
       "type": "ability",
       "_id": "bac67cd10809d66b",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "bad-medicine",
@@ -24574,7 +24574,7 @@
       "name": "Expert Doctor",
       "type": "ability",
       "_id": "af353aa3c8d755e2",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-doctor",
@@ -24661,7 +24661,7 @@
       "name": "Prepared Medic",
       "type": "ability",
       "_id": "092d4796892ee391",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "prepared-medic",
@@ -24750,7 +24750,7 @@
       "name": "Spin Identity",
       "type": "ability",
       "_id": "fd471b0e8537ab6e",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "spin-identity",
@@ -24839,7 +24839,7 @@
       "name": "Born to Pilot",
       "type": "ability",
       "_id": "4adfcfc836af61c7",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "born-to-pilot",
@@ -24928,7 +24928,7 @@
       "name": "Expert Space Pilot",
       "type": "ability",
       "_id": "8e1e0d640cba5029",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-space-pilot",
@@ -25015,7 +25015,7 @@
       "name": "Piloting Flourish",
       "type": "ability",
       "_id": "d735a059fd509e50",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "piloting-flourish",
@@ -25102,7 +25102,7 @@
       "name": "Combat Enhancement",
       "type": "ability",
       "_id": "d9621bd5f67a5b67",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "combat-enhancement",
@@ -25192,7 +25192,7 @@
       "name": "Push Implant",
       "type": "ability",
       "_id": "48011353a0f51d14",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "push-implant",
@@ -25279,7 +25279,7 @@
       "name": "Built to Hack",
       "type": "ability",
       "_id": "d0ca08b072a772b2",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "built-to-hack",
@@ -25368,7 +25368,7 @@
       "name": "Flex Skill",
       "type": "ability",
       "_id": "09303c8d52c51d2d",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "flex-skill",
@@ -25455,7 +25455,7 @@
       "name": "Machine Not Flesh",
       "type": "ability",
       "_id": "a461d63ed308dd09",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "machine-not-flesh",
@@ -25542,7 +25542,7 @@
       "name": "Exorbitant Reach",
       "type": "ability",
       "_id": "8ebf0d87f3dc03de",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "exorbitant-reach",
@@ -25629,7 +25629,7 @@
       "name": "Noble Bearing",
       "type": "ability",
       "_id": "3430c6863f19160d",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-bearing",
@@ -25718,7 +25718,7 @@
       "name": "Retainer",
       "type": "ability",
       "_id": "97d226b7ac3e4b3e",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "retainer",
@@ -25805,7 +25805,7 @@
       "name": "Mind Reading",
       "type": "ability",
       "_id": "e0232d2e5de381ee",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "mind-reading",
@@ -25894,7 +25894,7 @@
       "name": "Onslaught",
       "type": "ability",
       "_id": "4b4b1f4da109cf1e",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "onslaught",
@@ -25983,7 +25983,7 @@
       "name": "Psychic Veil",
       "type": "ability",
       "_id": "6d05c4841adf13dc",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "psychic-veil",
@@ -26072,7 +26072,7 @@
       "name": "Desperate Defense",
       "type": "ability",
       "_id": "9ed172b46ad95328",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "desperate-defense",
@@ -26159,7 +26159,7 @@
       "name": "Hand to Eye",
       "type": "ability",
       "_id": "327612b082276daa",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "hand-to-eye",
@@ -26249,7 +26249,7 @@
       "name": "Audacious Blast",
       "type": "ability",
       "_id": "f480a772e14372b9",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "audacious-blast",
@@ -26338,7 +26338,7 @@
       "name": "Redline Maneuver",
       "type": "ability",
       "_id": "c2502b55f3dacaef",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "redline-maneuver",
@@ -26428,7 +26428,7 @@
       "name": "Always Tinkering",
       "type": "ability",
       "_id": "0e8b8ca3ee06a937",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "always-tinkering",
@@ -26515,7 +26515,7 @@
       "name": "Craft Device",
       "type": "ability",
       "_id": "e0070d35e5189b23",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "craft-device",
@@ -26604,7 +26604,7 @@
       "name": "Smooth Operator",
       "type": "ability",
       "_id": "2908a13733589883",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "smooth-operator",
@@ -26693,7 +26693,7 @@
       "name": "When the Deal Bombs",
       "type": "ability",
       "_id": "9773750fd61d6dec",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "when-the-deal-bombs",
@@ -26780,7 +26780,7 @@
       "name": "Desperate Feat",
       "type": "ability",
       "_id": "716e1cb2a968099a",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "desperate-feat",
@@ -26867,7 +26867,7 @@
       "name": "Enhanced Scavenging",
       "type": "ability",
       "_id": "913697a8917b3281",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-scavenging",
@@ -26956,7 +26956,7 @@
       "name": "Get Out",
       "type": "ability",
       "_id": "6df7913bcfcf7ad6",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "get-out",
@@ -27043,7 +27043,7 @@
       "name": "Foil Danger",
       "type": "ability",
       "_id": "3d3418d78875a040",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "foil-danger",
@@ -27132,7 +27132,7 @@
       "name": "Wasteland Healer",
       "type": "ability",
       "_id": "377a3186d6a44621",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wasteland-healer",
@@ -27221,7 +27221,7 @@
       "name": "Sleuthing",
       "type": "ability",
       "_id": "be1dd6bcd6128ec4",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "sleuthing",
@@ -27310,7 +27310,7 @@
       "name": "Super Combatant",
       "type": "ability",
       "_id": "fa7e87d0478622e4",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "super-combatant",
@@ -27398,7 +27398,7 @@
       "name": "Superheroics",
       "type": "ability",
       "_id": "14fe7b70be0e5125",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "superheroics",
@@ -27485,7 +27485,7 @@
       "name": "Enhanced Energy",
       "type": "ability",
       "_id": "2c61703f7d9293ee",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-energy",
@@ -27573,7 +27573,7 @@
       "name": "Power Prowess",
       "type": "ability",
       "_id": "409ad5faecf18099",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "power-prowess",
@@ -27660,7 +27660,7 @@
       "name": "Wider Use",
       "type": "ability",
       "_id": "e7f9f4d434653437",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "wider-use",
@@ -27747,7 +27747,7 @@
       "name": "Push on Through",
       "type": "ability",
       "_id": "e04548ef823bdcbb",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "push-on-through",
@@ -27834,7 +27834,7 @@
       "name": "Always Mighty",
       "type": "ability",
       "_id": "3923bb81b9050282",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "always-mighty",
@@ -27921,7 +27921,7 @@
       "name": "Hover",
       "type": "ability",
       "_id": "404b131571e3098c",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "hover",
@@ -28010,7 +28010,7 @@
       "name": "Second Focus",
       "type": "ability",
       "_id": "7c3d59b7a280a36c",
-      "img": "systems/cypherv2/assets/icons/cypherability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.png",
       "system": {
         "schemaVersion": 1,
         "slug": "second-focus",

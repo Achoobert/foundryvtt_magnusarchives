@@ -3,9 +3,9 @@ import {SYSTEM_UI_ASSETS} from "../config/system-assets";
 const BaseGamePause = CONFIG.ui.pause;
 
 /** Keep Foundry's native pause lifecycle while supplying Cypher-branded presentation data. */
-export class CypherV2GamePause extends BaseGamePause {
+export class MagnusArchivesGamePause extends BaseGamePause {
   static override DEFAULT_OPTIONS = {
-    classes: ["cypherv2-game-pause"]
+    classes: ["magnusarchives-game-pause"]
   };
 
   override async _prepareContext(options: Record<string, unknown>): Promise<Record<string, unknown>> {
@@ -19,7 +19,7 @@ export class CypherV2GamePause extends BaseGamePause {
 }
 
 export function registerGamePause(): void {
-  CONFIG.ui.pause = CypherV2GamePause;
+  CONFIG.ui.pause = MagnusArchivesGamePause;
 }
 
 /** Configure only Foundry's fallback; a world or Token-specific custom marker remains authoritative. */

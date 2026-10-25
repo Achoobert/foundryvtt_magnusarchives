@@ -26,18 +26,18 @@ export interface RecoveryWorkflowHooks {
 
 const FOUNDRY_RECOVERY_HOOKS: RecoveryWorkflowHooks = {
   beforeComplete(context): void {
-    Hooks.callAll("cypherv2.preRecoveryWorkflow", context);
+    Hooks.callAll("magnusarchives.preRecoveryWorkflow", context);
   },
   processDurations(context): void {
-    Hooks.callAll("cypherv2.processRecoveryDurations", context);
+    Hooks.callAll("magnusarchives.processRecoveryDurations", context);
   },
   afterComplete(context): void {
-    Hooks.callAll("cypherv2.recoveryCompleted", context);
-    if (context.kind === "normal" && context.rest) Hooks.callAll("cypherv2.restCompleted", context);
-    if (context.kind === "nonRest") Hooks.callAll("cypherv2.nonRestRecoveryCompleted", context);
+    Hooks.callAll("magnusarchives.recoveryCompleted", context);
+    if (context.kind === "normal" && context.rest) Hooks.callAll("magnusarchives.restCompleted", context);
+    if (context.kind === "nonRest") Hooks.callAll("magnusarchives.nonRestRecoveryCompleted", context);
   },
   refresh(context): void {
-    Hooks.callAll("cypherv2.recoveryRefresh", context);
+    Hooks.callAll("magnusarchives.recoveryRefresh", context);
   }
 };
 

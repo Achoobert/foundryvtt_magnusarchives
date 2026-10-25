@@ -7,7 +7,7 @@ This directory is not a public Compendium. Human review happens in the private `
 ## Representation policy
 
 - Generic Species fields carry only exact Pool, Wound, Edge, familiarity, Skill, Ability, Descriptor, and choice data supported by the current package model.
-- Human uses a catalog-backed `descriptorChoiceGroups` rule resolved from the public `cypherv2.descriptors` pack and World Descriptor Items when attached; Descriptor UUIDs and snapshots are not frozen into Human.
+- Human uses a catalog-backed `descriptorChoiceGroups` rule resolved from the public `magnusarchives.descriptors` pack and World Descriptor Items when attached; Descriptor UUIDs and snapshots are not frozen into Human.
 - Contextual Skill restrictions use grant/option `notes` while the canonical public Skill Item remains shared.
 - Mutant's adapted Focus Ability, Dwarf recovery, D’nec recovery, natural-1 exceptions, conditional damage/resistance, movement, telepathy, Assets, and turn denial remain faithful rich text.
 - No speculative `ruleElements`, Species-specific services, or Species Ability Compendium are introduced.

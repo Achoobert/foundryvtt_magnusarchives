@@ -1,14 +1,14 @@
-.cypherv2-dialog {
+.magnusarchives-dialog {
   box-sizing: border-box;
   display: grid;
-  gap: var(--cypherv2-space-compact);
+  gap: var(--magnusarchives-space-compact);
   width: 100%;
   min-width: 0;
   padding: 0.15rem;
-  color: var(--cypherv2-text-primary);
-  background: var(--cypherv2-surface-primary);
+  color: var(--magnusarchives-text-primary);
+  background: var(--magnusarchives-surface-primary);
 
-  .cypherv2-dialog-heading {
+  .magnusarchives-dialog-heading {
     display: grid;
     gap: 0.08rem;
     margin: 0;
@@ -20,7 +20,7 @@
     }
 
     span {
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.68rem;
       font-weight: 750;
       letter-spacing: 0.08em;
@@ -33,40 +33,40 @@
     }
   }
 
-  .cypherv2-dialog-section {
+  .magnusarchives-dialog-section {
     display: grid;
     gap: 0.35rem;
     min-width: 0;
     padding: 0.55rem;
-    background: var(--cypherv2-surface-secondary);
-    border: 1px solid var(--cypherv2-border);
-    border-radius: var(--cypherv2-radius);
+    background: var(--magnusarchives-surface-secondary);
+    border: 1px solid var(--magnusarchives-border);
+    border-radius: var(--magnusarchives-radius);
   }
 
-  .cypherv2-dialog-section-heading {
-    color: var(--cypherv2-text-muted);
+  .magnusarchives-dialog-section-heading {
+    color: var(--magnusarchives-text-muted);
     font-size: 0.68rem;
     font-weight: 750;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .cypherv2-dialog-value {
-    color: var(--cypherv2-text-primary);
+  .magnusarchives-dialog-value {
+    color: var(--magnusarchives-text-primary);
     font-size: 0.88rem;
     font-variant-numeric: tabular-nums;
   }
 
-  .cypherv2-dialog-field-grid {
+  .magnusarchives-dialog-field-grid {
     grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
   }
 
-  .cypherv2-dialog-field,
-  .cypherv2-dialog-fields label {
+  .magnusarchives-dialog-field,
+  .magnusarchives-dialog-fields label {
     display: grid;
     gap: 0.18rem;
     min-width: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.74rem;
     font-weight: 600;
   }
@@ -79,24 +79,24 @@
     min-width: 0;
     min-height: 1.75rem;
     padding: 0.18rem 0.4rem;
-    color: var(--cypherv2-text-primary);
-    background: var(--cypherv2-surface-primary);
-    border: 1px solid var(--cypherv2-border);
+    color: var(--magnusarchives-text-primary);
+    background: var(--magnusarchives-surface-primary);
+    border: 1px solid var(--magnusarchives-border);
 
     &:focus-visible {
-      border-color: var(--cypherv2-accent);
-      outline: 1px solid var(--cypherv2-accent);
+      border-color: var(--magnusarchives-accent);
+      outline: 1px solid var(--magnusarchives-accent);
       outline-offset: 1px;
     }
   }
 
-  .cypherv2-dialog-button-group {
+  .magnusarchives-dialog-button-group {
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
   }
 
-  .cypherv2-dialog-toggle {
+  .magnusarchives-dialog-toggle {
     position: relative;
     display: inline-flex;
     min-width: 0;
@@ -117,10 +117,10 @@
       justify-content: center;
       min-height: 1.65rem;
       padding: 0.18rem 0.5rem;
-      color: var(--cypherv2-text-muted);
-      background: var(--cypherv2-surface-primary);
-      border: 1px solid var(--cypherv2-border);
-      border-radius: calc(var(--cypherv2-radius) / 2);
+      color: var(--magnusarchives-text-muted);
+      background: var(--magnusarchives-surface-primary);
+      border: 1px solid var(--magnusarchives-border);
+      border-radius: calc(var(--magnusarchives-radius) / 2);
       font-size: 0.68rem;
       font-weight: 750;
       letter-spacing: 0.025em;
@@ -130,19 +130,19 @@
 
     &:hover span,
     input:focus-visible + span {
-      color: var(--cypherv2-text-primary);
-      border-color: var(--cypherv2-accent);
+      color: var(--magnusarchives-text-primary);
+      border-color: var(--magnusarchives-accent);
     }
 
     input:checked + span {
-      color: var(--cypherv2-text-primary);
-      background: color-mix(in srgb, var(--cypherv2-accent) 22%, var(--cypherv2-surface-primary));
-      border-color: var(--cypherv2-accent);
-      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cypherv2-accent) 55%, transparent);
+      color: var(--magnusarchives-text-primary);
+      background: color-mix(in srgb, var(--magnusarchives-accent) 22%, var(--magnusarchives-surface-primary));
+      border-color: var(--magnusarchives-accent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--magnusarchives-accent) 55%, transparent);
     }
   }
 
-  .cypherv2-dialog-summary-row {
+  .magnusarchives-dialog-summary-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.5rem;
@@ -151,44 +151,44 @@
 
     span {
       min-width: 0;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       overflow-wrap: anywhere;
     }
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
   }
 
-  .cypherv2-dialog-help {
+  .magnusarchives-dialog-help {
     margin: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.72rem;
   }
 
-  .cypherv2-dialog-callout {
+  .magnusarchives-dialog-callout {
     margin: 0;
     padding: 0.4rem 0.5rem;
-    color: var(--cypherv2-text-primary);
-    background: var(--cypherv2-surface-raised);
-    border-left: 2px solid var(--cypherv2-accent);
+    color: var(--magnusarchives-text-primary);
+    background: var(--magnusarchives-surface-raised);
+    border-left: 2px solid var(--magnusarchives-accent);
 
     &.is-warning {
-      border-left-color: var(--cypherv2-color-warning);
+      border-left-color: var(--magnusarchives-color-warning);
     }
 
     &.is-success {
-      border-left-color: var(--cypherv2-success);
+      border-left-color: var(--magnusarchives-success);
     }
 
     &.is-danger {
-      border-left-color: var(--cypherv2-danger);
+      border-left-color: var(--magnusarchives-danger);
     }
   }
 
-  .cypherv2-dialog-actions {
+  .magnusarchives-dialog-actions {
     display: flex;
     gap: 0.35rem;
     align-items: center;
@@ -210,26 +210,26 @@
       min-height: 1.85rem;
       margin: 0;
       padding: 0.25rem 0.4rem;
-      color: var(--cypherv2-text-muted);
-      background: var(--cypherv2-surface-secondary);
-      border: 1px solid var(--cypherv2-border);
-      border-radius: calc(var(--cypherv2-radius) / 2);
+      color: var(--magnusarchives-text-muted);
+      background: var(--magnusarchives-surface-secondary);
+      border: 1px solid var(--magnusarchives-border);
+      border-radius: calc(var(--magnusarchives-radius) / 2);
       cursor: pointer;
 
       strong {
-        color: var(--cypherv2-text-primary);
+        color: var(--magnusarchives-text-primary);
       }
 
       &:hover,
       &:focus-within,
       &:has(input:checked) {
-        border-color: var(--cypherv2-accent);
+        border-color: var(--magnusarchives-accent);
       }
     }
 
     .ability-payment-whole-cost {
       margin: 0;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.68rem;
     }
   }
@@ -243,7 +243,7 @@
     }
 
     .package-pool-choice-option,
-    .package-pool-choice-options .cypherv2-dialog-toggle {
+    .package-pool-choice-options .magnusarchives-dialog-toggle {
       width: 100%;
 
       span {
@@ -262,8 +262,8 @@
       padding-bottom: 0.25rem;
 
       strong {
-        color: var(--cypherv2-text-primary);
-        font-family: var(--cypherv2-font-heading);
+        color: var(--magnusarchives-text-primary);
+        font-family: var(--magnusarchives-font-heading);
         font-size: 0.82rem;
         letter-spacing: 0.065em;
       }
@@ -271,7 +271,7 @@
 
     .package-choice-prompt {
       padding: 0 0.25rem 0.15rem;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.74rem;
     }
 
@@ -291,10 +291,10 @@
       min-height: 2rem;
       margin: 0;
       padding: 0.3rem 0.5rem;
-      color: var(--cypherv2-text-primary);
-      background: var(--cypherv2-surface-secondary);
-      border: 1px solid var(--cypherv2-border);
-      border-radius: calc(var(--cypherv2-radius) / 2);
+      color: var(--magnusarchives-text-primary);
+      background: var(--magnusarchives-surface-secondary);
+      border: 1px solid var(--magnusarchives-border);
+      border-radius: calc(var(--magnusarchives-radius) / 2);
       box-shadow: none;
       font-size: 0.75rem;
       line-height: 1.25;
@@ -309,17 +309,17 @@
 
       &:hover,
       &:focus-visible {
-        color: var(--cypherv2-text-primary);
-        background: var(--cypherv2-surface-raised);
-        border-color: var(--cypherv2-accent);
-        outline: 1px solid var(--cypherv2-accent);
+        color: var(--magnusarchives-text-primary);
+        background: var(--magnusarchives-surface-raised);
+        border-color: var(--magnusarchives-accent);
+        outline: 1px solid var(--magnusarchives-accent);
         outline-offset: 1px;
       }
 
       &.is-selected {
-        background: color-mix(in srgb, var(--cypherv2-accent) 18%, var(--cypherv2-surface-secondary));
-        border-color: var(--cypherv2-accent);
-        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cypherv2-accent) 45%, transparent);
+        background: color-mix(in srgb, var(--magnusarchives-accent) 18%, var(--magnusarchives-surface-secondary));
+        border-color: var(--magnusarchives-accent);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--magnusarchives-accent) 45%, transparent);
 
         .package-choice-check {
           opacity: 1;
@@ -328,7 +328,7 @@
     }
 
     .package-choice-check {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       opacity: 0;
     }
 
@@ -345,7 +345,7 @@
       justify-content: flex-end;
       min-height: 1.2rem;
       padding: 0.05rem 0.25rem 0;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.68rem;
       font-variant-numeric: tabular-nums;
     }
@@ -353,7 +353,7 @@
 }
 
 @media (max-width: 520px) {
-  .cypherv2.cypherv2-dialog.ability-payment-dialog .ability-payment-choice {
+  .magnusarchives.magnusarchives-dialog.ability-payment-dialog .ability-payment-choice {
     grid-template-columns: auto minmax(0, 1fr);
 
     span {
@@ -364,23 +364,23 @@
 
 // Foundry's footer lives outside the supplied dialog content. :has() keeps this
 // skin strictly limited to DialogV2 applications containing Cypher V2 content.
-.application.dialog:has(.cypherv2-dialog, .cypherv2-dialog-fields) {
+.application.dialog:has(.magnusarchives-dialog, .magnusarchives-dialog-fields) {
   .window-content {
     padding: 0.55rem;
-    color: var(--cypherv2-text-primary);
-    background: var(--cypherv2-surface-primary);
+    color: var(--magnusarchives-text-primary);
+    background: var(--magnusarchives-surface-primary);
   }
 
-  .cypherv2-dialog-fields:not(.cypherv2-dialog) {
+  .magnusarchives-dialog-fields:not(.magnusarchives-dialog) {
     display: grid;
-    gap: var(--cypherv2-space-compact);
+    gap: var(--magnusarchives-space-compact);
     min-width: 0;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
 
     label {
       display: grid;
       gap: 0.18rem;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.74rem;
       font-weight: 600;
     }
@@ -390,9 +390,9 @@
     textarea {
       width: 100%;
       min-width: 0;
-      color: var(--cypherv2-text-primary);
-      background: var(--cypherv2-surface-secondary);
-      border: 1px solid var(--cypherv2-border);
+      color: var(--magnusarchives-text-primary);
+      background: var(--magnusarchives-surface-secondary);
+      border: 1px solid var(--magnusarchives-border);
     }
   }
 
@@ -403,14 +403,14 @@
     button {
       min-height: 1.85rem;
       padding: 0.25rem 0.65rem;
-      color: var(--cypherv2-text-primary);
-      background: var(--cypherv2-surface-raised);
-      border: 1px solid var(--cypherv2-border);
+      color: var(--magnusarchives-text-primary);
+      background: var(--magnusarchives-surface-raised);
+      border: 1px solid var(--magnusarchives-border);
 
       &:hover,
       &:focus-visible {
-        border-color: var(--cypherv2-accent);
-        outline-color: var(--cypherv2-accent);
+        border-color: var(--magnusarchives-accent);
+        outline-color: var(--magnusarchives-accent);
       }
     }
   }
@@ -428,26 +428,26 @@
     min-width: 6rem;
   }
 }
-.cypherv2-recovery-override-dialog {
+.magnusarchives-recovery-override-dialog {
   .recovery-override-slots {
     display: grid;
-    gap: var(--cypherv2-space-tight);
+    gap: var(--magnusarchives-space-tight);
   }
 
   .recovery-override-slot {
     display: grid;
     grid-template-columns: 1rem minmax(8rem, 1fr) auto auto;
-    gap: var(--cypherv2-space-tight);
+    gap: var(--magnusarchives-space-tight);
     align-items: center;
-    padding: var(--cypherv2-space-tight);
-    color: var(--cypherv2-text-primary);
-    background: var(--cypherv2-surface-primary);
-    border: 1px solid var(--cypherv2-border);
-    border-radius: calc(var(--cypherv2-radius) / 2);
+    padding: var(--magnusarchives-space-tight);
+    color: var(--magnusarchives-text-primary);
+    background: var(--magnusarchives-surface-primary);
+    border: 1px solid var(--magnusarchives-border);
+    border-radius: calc(var(--magnusarchives-radius) / 2);
 
     > i,
     .recovery-slot-state {
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
     }
 
     .recovery-slot-state {
@@ -457,11 +457,11 @@
   }
 
   .recovery-slot-add {
-    margin-top: var(--cypherv2-space-compact);
+    margin-top: var(--magnusarchives-space-compact);
   }
 }
 
-.cypherv2-wound-override-dialog .cypherv2-dialog-field small {
-  color: var(--cypherv2-text-muted);
+.magnusarchives-wound-override-dialog .magnusarchives-dialog-field small {
+  color: var(--magnusarchives-text-muted);
   font-size: 0.65rem;
 }

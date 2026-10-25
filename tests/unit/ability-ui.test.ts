@@ -10,8 +10,8 @@ describe("Ability Runtime UI", () => {
   it("uses the Ability name and chevron only for accordion disclosure", () => {
     expect(source).toContain('{id: "abilities"');
     expect(characterSheet).toContain('data-tab="abilities"');
-    expect(characterSheet).toContain('class="ability-details-toggle cypherv2-icon-action" data-action="toggleAbilityDetails"');
-    expect(characterSheet).toContain('class="ability-reference cypherv2-primary-action" data-action="toggleAbilityDetails"');
+    expect(characterSheet).toContain('class="ability-details-toggle magnusarchives-icon-action" data-action="toggleAbilityDetails"');
+    expect(characterSheet).toContain('class="ability-reference magnusarchives-primary-action" data-action="toggleAbilityDetails"');
     expect(characterSheet).toContain('aria-expanded="{{ability.expanded}}"');
     expect(characterSheet).not.toContain('data-action="useAbility"');
   });
@@ -42,7 +42,7 @@ describe("Ability Runtime UI", () => {
 
   it("wraps long content and remains dense at narrow widths", () => {
     expect(styles).toContain("overflow-wrap: anywhere");
-    expect(styles).toContain("@container cypherv2-character-sheet (max-width: 560px)");
+    expect(styles).toContain("@container magnusarchives-character-sheet (max-width: 560px)");
     expect(styles).toContain("min-height: 1.65rem");
     expect(styles).toContain("starts-archived-group");
     expect(styles).toContain("is-archived");
@@ -57,7 +57,7 @@ describe("Ability Runtime UI", () => {
       "system.rollModifier",
       "system.attackModifier",
       "system.damage",
-      "system.woundSeverity",
+      "system.damageEffect",
       "system.range",
       "system.targetMode"
     ]) expect(itemSheet).toContain(`name="${field}"`);

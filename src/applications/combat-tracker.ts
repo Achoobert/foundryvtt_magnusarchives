@@ -8,7 +8,7 @@ import {
 } from "../combat-tracker/combat-tracker-flow";
 
 const BaseCombatTracker = foundry.applications.sidebar.tabs.CombatTracker;
-const DRAG_TYPE = "application/x-cypherv2-combatant";
+const DRAG_TYPE = "application/x-magnusarchives-combatant";
 
 interface TrackerTurnContext {
   id: string;
@@ -30,20 +30,20 @@ function combatantIdFrom(element: Element | null): string | null {
   return (element as HTMLElement | null)?.dataset.combatantId ?? null;
 }
 
-export class CypherV2CombatTracker extends BaseCombatTracker {
+export class MagnusArchivesCombatTracker extends BaseCombatTracker {
   static override DEFAULT_OPTIONS = {
-    classes: ["cypherv2-combat-tracker"],
+    classes: ["magnusarchives-combat-tracker"],
     actions: {
-      endCypherTurn: CypherV2CombatTracker.#onEndTurn
+      endCypherTurn: MagnusArchivesCombatTracker.#onEndTurn
     }
   };
 
   static override PARTS = {
     header: {
-      template: "systems/cypherv2/templates/sidebar/combat-tracker-header.hbs"
+      template: "systems/magnusarchives/templates/sidebar/combat-tracker-header.hbs"
     },
     tracker: {
-      template: "systems/cypherv2/templates/sidebar/combat-tracker.hbs",
+      template: "systems/magnusarchives/templates/sidebar/combat-tracker.hbs",
       scrollable: [""]
     },
     footer: {
@@ -51,11 +51,11 @@ export class CypherV2CombatTracker extends BaseCombatTracker {
     }
   };
 
-  static async #onEndTurn(this: CypherV2CombatTracker, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onEndTurn(this: MagnusArchivesCombatTracker, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const combat = this.viewed;
     const requestedId = combatantIdFrom(target.closest("[data-combatant-id]"));
     if (!combat || !requestedId) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.CombatTracker.Errors.NoCombat"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.CombatTracker.Errors.NoCombat"));
       return;
     }
 
@@ -63,7 +63,7 @@ export class CypherV2CombatTracker extends BaseCombatTracker {
     try {
       const result = await endCurrentCombatantTurn(combat, game.user, requestedId);
       if (!result.ok) {
-        ui.notifications.warn(game.i18n.localize(`CYPHERV2.CombatTracker.Errors.${result.reason}`));
+        ui.notifications.warn(game.i18n.localize(`MAGNUSARCHIVES.CombatTracker.Errors.${result.reason}`));
       }
     } finally {
       target.removeAttribute("disabled");
@@ -93,8 +93,8 @@ export class CypherV2CombatTracker extends BaseCombatTracker {
     await super._onRender(context, options);
     if (!game.user.isGM) return;
     const tracker = this.element.querySelector<HTMLElement>(".combat-tracker");
-    if (!tracker || tracker.dataset.cypherv2OrderBound === "true") return;
-    tracker.dataset.cypherv2OrderBound = "true";
+    if (!tracker || tracker.dataset.magnusarchivesOrderBound === "true") return;
+    tracker.dataset.magnusarchivesOrderBound = "true";
     tracker.addEventListener("dragover", this.#onDragOver);
     tracker.addEventListener("drop", this.#onDrop.bind(this));
     tracker.addEventListener("dragend", this.#clearDragState.bind(this));
@@ -124,7 +124,7 @@ export class CypherV2CombatTracker extends BaseCombatTracker {
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData(DRAG_TYPE, combatantId);
     event.dataTransfer.setData("text/plain", combatantId);
-    row?.classList.add("cypherv2-combatant-dragging");
+    row?.classList.add("magnusarchives-combatant-dragging");
   }
 
   #onDragOver(event: DragEvent): void {
@@ -165,21 +165,21 @@ export class CypherV2CombatTracker extends BaseCombatTracker {
   }
 
   #clearDragState(): void {
-    this.element.querySelectorAll(".cypherv2-combatant-dragging").forEach((row) => {
-      row.classList.remove("cypherv2-combatant-dragging");
+    this.element.querySelectorAll(".magnusarchives-combatant-dragging").forEach((row) => {
+      row.classList.remove("magnusarchives-combatant-dragging");
     });
   }
 }
 
 export function registerCombatTracker(): void {
-  CONFIG.ui.combat = CypherV2CombatTracker;
+  CONFIG.ui.combat = MagnusArchivesCombatTracker;
 }
 
 export function initializeCombatTrackerDoneReset(): void {
   Hooks.on("updateCombat", (combat: Combat, changes: Record<string, unknown>) => {
     if (!("round" in changes) || !game.user.isActiveGM) return;
     void clearCombatantDoneStates(combat).catch((error: unknown) => {
-      console.error("cypherv2 | Failed to reset Combat Tracker DONE states", error);
+      console.error("magnusarchives | Failed to reset Combat Tracker DONE states", error);
     });
   });
 }

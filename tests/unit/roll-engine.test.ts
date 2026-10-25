@@ -15,7 +15,7 @@ function step(
 function context(overrides: Partial<RollContext> = {}): RollContext {
   return {
     actor: {id: "actor-1", name: "Ada"},
-    label: "CYPHERV2.Roll.Task",
+    label: "MAGNUSARCHIVES.Roll.Task",
     pool: "might",
     difficulty: {mode: "known", value: 5},
     assets: 0,

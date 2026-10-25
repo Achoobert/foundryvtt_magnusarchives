@@ -1,6 +1,6 @@
 import "../styles/index.scss";
 
-import {createCypherV2Api} from "./api/cypherv2-api";
+import {createMagnusArchivesApi} from "./api/magnusarchives-api";
 import {registerDataModels} from "./config/data-models";
 import {registerDocumentClasses} from "./config/documents";
 import {registerSettings} from "./config/settings";
@@ -38,7 +38,7 @@ Hooks.once("init", async () => {
 
   registerGenreCompendiumIndexFields();
 
-  game.cypherv2 = createCypherV2Api(rules, createCoreServices(rules), themes);
+  game.magnusarchives = createMagnusArchivesApi(rules, createCoreServices(rules), themes);
 
   registerDocumentClasses();
   registerDataModels();
@@ -48,30 +48,30 @@ Hooks.once("init", async () => {
   registerCombatTurnMarker();
   registerGMIntrusionSceneControl();
 
-  Hooks.callAll("cypherv2.registerRules", rules);
-  Hooks.callAll("cypherv2.registerThemes", themes);
+  Hooks.callAll("magnusarchives.registerRules", rules);
+  Hooks.callAll("magnusarchives.registerThemes", themes);
   registerSettings(themes);
   await foundry.applications.handlebars.loadTemplates([
-    "systems/cypherv2/templates/focus/focus-tree.hbs"
+    "systems/magnusarchives/templates/focus/focus-tree.hbs"
   ]);
 });
 
 Hooks.once("ready", async () => {
   initializeBlankCanvasBackground();
   const selectedTheme = String(game.settings.get(SYSTEM_ID, SETTING_KEYS.theme));
-  game.cypherv2.themes.apply(game.cypherv2.themes.has(selectedTheme) ? selectedTheme : "core");
+  game.magnusarchives.themes.apply(game.magnusarchives.themes.has(selectedTheme) ? selectedTheme : "core");
   initializeGMIntrusionController(
-    game.cypherv2.services.intrusions,
-    game.cypherv2.services.intrusionChat
+    game.magnusarchives.services.intrusions,
+    game.magnusarchives.services.intrusionChat
   );
   initializePlayerIntrusionController(
-    game.cypherv2.services.playerIntrusions,
-    game.cypherv2.services.playerIntrusionChat
+    game.magnusarchives.services.playerIntrusions,
+    game.magnusarchives.services.playerIntrusionChat
   );
   initializeCombatChatController();
   initializeItemChatController();
   initializeChatCardEntrance();
-  initializeNpcDeadStatusSynchronization(game.cypherv2.services.combatStatuses);
+  initializeNpcDeadStatusSynchronization(game.magnusarchives.services.combatStatuses);
   initializeCombatTrackerDoneReset();
   await prepareCharacterGenreCompendiumIndexes();
   await migrateLegacyTypeGenres();

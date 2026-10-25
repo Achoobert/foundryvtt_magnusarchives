@@ -281,7 +281,7 @@ describe("GenreService", () => {
   });
 
   it("resolves a legacy custom Type suggestion by UUID, including compendium sources", async () => {
-    const compendium = {...genre(), uuid: "Compendium.cypherv2.genres.Item.hero"} as GenreDocumentLike;
+    const compendium = {...genre(), uuid: "Compendium.magnusarchives.genres.Item.hero"} as GenreDocumentLike;
     const resolve = vi.fn(async (uuid: string) => uuid === compendium.uuid ? compendium : null);
     await expect(resolveLegacyGenreSuggestion(
       {genre: "custom", customGenreId: compendium.uuid},

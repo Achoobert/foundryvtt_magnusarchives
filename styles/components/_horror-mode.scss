@@ -1,47 +1,47 @@
-.cypherv2.cypherv2-dialog.cypherv2-horror-dialog {
-  --cypherv2-horror-color: var(--cypherv2-text-muted);
-  --cypherv2-horror-glow: 0%;
+.magnusarchives.magnusarchives-dialog.magnusarchives-horror-dialog {
+  --magnusarchives-horror-color: var(--magnusarchives-text-muted);
+  --magnusarchives-horror-glow: 0%;
 
   min-width: 0;
 
   &[data-horror-band="low"] {
-    --cypherv2-horror-color: var(--cypherv2-pool-gauge-high);
-    --cypherv2-horror-glow: 18%;
+    --magnusarchives-horror-color: var(--magnusarchives-pool-gauge-high);
+    --magnusarchives-horror-glow: 18%;
   }
 
   &[data-horror-band="elevated"] {
-    --cypherv2-horror-color: color-mix(in srgb, var(--cypherv2-color-warning) 76%, var(--cypherv2-text-primary));
-    --cypherv2-horror-glow: 26%;
+    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-color-warning) 76%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-glow: 26%;
   }
 
   &[data-horror-band="severe"] {
-    --cypherv2-horror-color: color-mix(in srgb, var(--cypherv2-color-warning) 64%, var(--cypherv2-danger));
-    --cypherv2-horror-glow: 34%;
+    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-color-warning) 64%, var(--magnusarchives-danger));
+    --magnusarchives-horror-glow: 34%;
   }
 
   &[data-horror-band="extreme"] {
-    --cypherv2-horror-color: var(--cypherv2-danger);
-    --cypherv2-horror-glow: 43%;
+    --magnusarchives-horror-color: var(--magnusarchives-danger);
+    --magnusarchives-horror-glow: 43%;
   }
 
   &[data-horror-band="catastrophic"] {
-    --cypherv2-horror-color: color-mix(in srgb, var(--cypherv2-danger) 86%, var(--cypherv2-text-primary));
-    --cypherv2-horror-glow: 57%;
+    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-danger) 86%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-glow: 57%;
   }
 
   &[data-horror-band="maximum"] {
-    --cypherv2-horror-color: color-mix(in srgb, var(--cypherv2-danger) 72%, var(--cypherv2-text-primary));
-    --cypherv2-horror-glow: 72%;
+    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-danger) 72%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-glow: 72%;
   }
 
-  .cypherv2-dialog-heading strong {
-    color: var(--cypherv2-horror-color);
+  .magnusarchives-dialog-heading strong {
+    color: var(--magnusarchives-horror-color);
   }
 
   .horror-range-control {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 2.1rem;
-    gap: var(--cypherv2-space-compact);
+    gap: var(--magnusarchives-space-compact);
     align-items: center;
     min-width: 0;
     padding-block: 0.25rem;
@@ -64,14 +64,14 @@
       height: 0.32rem;
       background: linear-gradient(
         to right,
-        var(--cypherv2-horror-color) 0 var(--cypherv2-horror-fill),
-        var(--cypherv2-surface-raised) var(--cypherv2-horror-fill) 100%
+        var(--magnusarchives-horror-color) 0 var(--magnusarchives-horror-fill),
+        var(--magnusarchives-surface-raised) var(--magnusarchives-horror-fill) 100%
       );
-      border: 1px solid color-mix(in srgb, var(--cypherv2-border) 72%, transparent);
+      border: 1px solid color-mix(in srgb, var(--magnusarchives-border) 72%, transparent);
       border-radius: 999px;
       box-shadow: 0 0 0.42rem color-mix(
         in srgb,
-        var(--cypherv2-horror-color) var(--cypherv2-horror-glow),
+        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
         transparent
       );
     }
@@ -81,30 +81,30 @@
       width: 0.86rem;
       height: 0.86rem;
       margin-top: calc((0.32rem - 0.86rem) / 2);
-      background: var(--cypherv2-surface-primary);
-      border: 2px solid var(--cypherv2-horror-color);
+      background: var(--magnusarchives-surface-primary);
+      border: 2px solid var(--magnusarchives-horror-color);
       border-radius: 50%;
       box-shadow: 0 0 0.38rem color-mix(
         in srgb,
-        var(--cypherv2-horror-color) var(--cypherv2-horror-glow),
+        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
         transparent
       );
     }
 
     &::-moz-range-track {
       height: 0.32rem;
-      background: var(--cypherv2-surface-raised);
-      border: 1px solid color-mix(in srgb, var(--cypherv2-border) 72%, transparent);
+      background: var(--magnusarchives-surface-raised);
+      border: 1px solid color-mix(in srgb, var(--magnusarchives-border) 72%, transparent);
       border-radius: 999px;
     }
 
     &::-moz-range-progress {
       height: 0.32rem;
-      background: var(--cypherv2-horror-color);
+      background: var(--magnusarchives-horror-color);
       border-radius: 999px;
       box-shadow: 0 0 0.42rem color-mix(
         in srgb,
-        var(--cypherv2-horror-color) var(--cypherv2-horror-glow),
+        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
         transparent
       );
     }
@@ -112,24 +112,24 @@
     &::-moz-range-thumb {
       width: 0.72rem;
       height: 0.72rem;
-      background: var(--cypherv2-surface-primary);
-      border: 2px solid var(--cypherv2-horror-color);
+      background: var(--magnusarchives-surface-primary);
+      border: 2px solid var(--magnusarchives-horror-color);
       border-radius: 50%;
       box-shadow: 0 0 0.38rem color-mix(
         in srgb,
-        var(--cypherv2-horror-color) var(--cypherv2-horror-glow),
+        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
         transparent
       );
     }
 
     &:focus-visible {
-      outline: 2px solid var(--cypherv2-text-primary);
+      outline: 2px solid var(--magnusarchives-text-primary);
       outline-offset: 3px;
     }
   }
 
   .horror-range-value {
-    color: var(--cypherv2-horror-color);
+    color: var(--magnusarchives-horror-color);
     font-size: 1rem;
     font-weight: 850;
     text-align: right;
@@ -138,7 +138,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cypherv2.cypherv2-dialog.cypherv2-horror-dialog * {
+  .magnusarchives.magnusarchives-dialog.magnusarchives-horror-dialog * {
     transition: none;
   }
 }

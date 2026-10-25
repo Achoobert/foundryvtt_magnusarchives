@@ -71,7 +71,7 @@ function combat(
 describe("Cypher V2 Combat Tracker", () => {
   it("replaces every visible initiative roll surface with the current-row DONE action", () => {
     expect(trackerTemplate).toContain('data-action="endCypherTurn"');
-    expect(trackerTemplate).toContain("CYPHERV2.CombatTracker.Done");
+    expect(trackerTemplate).toContain("MAGNUSARCHIVES.CombatTracker.Done");
     expect(trackerTemplate).toContain("{{#if canEndTurn}}");
     expect(trackerTemplate).not.toContain("rollInitiative");
     expect(trackerTemplate).not.toContain("initiative-input");
@@ -104,7 +104,7 @@ describe("Cypher V2 Combat Tracker", () => {
 
     await expect(endCurrentCombatantTurn(encounter, user("player"), "first")).resolves.toEqual({ok: true});
     expect(encounter.nextTurn).toHaveBeenCalledOnce();
-    expect(first.getFlag("cypherv2", "doneThisRound")).toBe(1);
+    expect(first.getFlag("magnusarchives", "doneThisRound")).toBe(1);
     expect(encounter.turn).toBe(1);
     expect(encounter.round).toBe(1);
     expect(isCombatantDoneThisRound(first, encounter.round)).toBe(true);
@@ -143,7 +143,7 @@ describe("Cypher V2 Combat Tracker", () => {
 
   it("preserves explicit GM drag order as hidden descending Foundry initiative ranks", () => {
     const completed = combatant("d");
-    void completed.setFlag("cypherv2", "doneThisRound", 2);
+    void completed.setFlag("magnusarchives", "doneThisRound", 2);
     const reordered = reorderCombatantIds(["a", "b", "c", completed.id], "d", "a", true);
     expect(reordered).toEqual(["a", "d", "b", "c"]);
     expect(manualOrderInitiativeUpdates(reordered)).toEqual([
@@ -161,40 +161,40 @@ describe("Cypher V2 Combat Tracker", () => {
   it("renders a persistent non-actionable DONE status and the next current action", () => {
     const previous = combatant("previous", ["player"]);
     const next = combatant("next", ["player"]);
-    void previous.setFlag("cypherv2", "doneThisRound", 3);
+    void previous.setFlag("magnusarchives", "doneThisRound", 3);
 
     expect(isCombatantDoneThisRound(previous, 3)).toBe(true);
     expect(isCombatantDoneThisRound(next, 3)).toBe(false);
     expect(canEndCombatantTurn(user("player"), next)).toBe(true);
     expect(trackerTemplate).toContain("{{else if doneThisRound}}");
-    expect(trackerTemplate).toContain('class="cypherv2-done-status"');
-    expect(trackerTemplate).not.toContain('class="cypherv2-done-status" data-action');
+    expect(trackerTemplate).toContain('class="magnusarchives-done-status"');
+    expect(trackerTemplate).not.toContain('class="magnusarchives-done-status" data-action');
     expect(trackerStyles).toContain("pointer-events: none");
   });
 
   it("clears every persisted DONE flag after a native round change", async () => {
     const first = combatant("first");
     const second = combatant("second");
-    await first.setFlag("cypherv2", "doneThisRound", 1);
-    await second.setFlag("cypherv2", "doneThisRound", 1);
+    await first.setFlag("magnusarchives", "doneThisRound", 1);
+    await second.setFlag("magnusarchives", "doneThisRound", 1);
     const updateEmbeddedDocuments = vi.fn(async (
       _type: string,
       updates: Record<string, unknown>[]
     ) => {
       for (const update of updates) {
         const target = [first, second].find((entry) => entry.id === update._id);
-        target?.flags.delete("cypherv2.doneThisRound");
+        target?.flags.delete("magnusarchives.doneThisRound");
       }
     });
 
     expect(isCombatantDoneThisRound(first, 2)).toBe(false);
     await clearCombatantDoneStates({combatants: [first, second], updateEmbeddedDocuments});
     expect(updateEmbeddedDocuments).toHaveBeenCalledWith("Combatant", [
-      {_id: "first", "flags.cypherv2.-=doneThisRound": null},
-      {_id: "second", "flags.cypherv2.-=doneThisRound": null}
+      {_id: "first", "flags.magnusarchives.-=doneThisRound": null},
+      {_id: "second", "flags.magnusarchives.-=doneThisRound": null}
     ], {turnEvents: false});
-    expect(first.getFlag("cypherv2", "doneThisRound")).toBeUndefined();
-    expect(second.getFlag("cypherv2", "doneThisRound")).toBeUndefined();
+    expect(first.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
+    expect(second.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
     expect(trackerSource).toContain('Hooks.on("updateCombat"');
     expect(trackerSource).toContain('"round" in changes');
   });
@@ -204,8 +204,8 @@ describe("Cypher V2 Combat Tracker", () => {
     const next = combatant("next");
     const encounter = combat([skipped, next], 0, 2);
     await encounter.nextTurn();
-    expect(skipped.getFlag("cypherv2", "doneThisRound")).toBeUndefined();
-    expect(next.getFlag("cypherv2", "doneThisRound")).toBeUndefined();
+    expect(skipped.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
+    expect(next.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
 
     const added = combatant("added-mid-round");
     expect(isCombatantDoneThisRound(added, 2)).toBe(false);
@@ -213,16 +213,16 @@ describe("Cypher V2 Combat Tracker", () => {
 
   it("registers a v14 CombatTracker subclass instead of patching Foundry core DOM", () => {
     expect(trackerSource).toContain("extends BaseCombatTracker");
-    expect(trackerSource).toContain("CONFIG.ui.combat = CypherV2CombatTracker");
+    expect(trackerSource).toContain("CONFIG.ui.combat = MagnusArchivesCombatTracker");
     expect(mainSource).toContain("registerCombatTracker();");
     expect(trackerSource).not.toContain('Hooks.on("renderCombatTracker"');
   });
 
   it("uses localized accessible Soft Red presentation without Cypher initiative math", () => {
-    expect(localization["CYPHERV2.CombatTracker.Done"]).toBe("Done");
-    expect(localization["CYPHERV2.CombatTracker.EndTurn"]).toBe("End Turn");
-    expect(trackerTemplate).toContain("CYPHERV2.CombatTracker.DoneAria");
-    expect(trackerStyles).toContain("var(--cypherv2-danger)");
+    expect(localization["MAGNUSARCHIVES.CombatTracker.Done"]).toBe("Done");
+    expect(localization["MAGNUSARCHIVES.CombatTracker.EndTurn"]).toBe("End Turn");
+    expect(trackerTemplate).toContain("MAGNUSARCHIVES.CombatTracker.DoneAria");
+    expect(trackerStyles).toContain("var(--magnusarchives-danger)");
     expect(trackerStyles).toContain(":focus-visible");
     expect(`${trackerSource}\n${trackerTemplate}`).not.toMatch(/NPC Level|system\.level|system\.stats\.speed/);
   });

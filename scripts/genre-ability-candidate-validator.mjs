@@ -38,7 +38,7 @@ export const ORIGIN = Object.freeze([
 
 const FOUNDRY_ID = /^[A-Za-z0-9]{16}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const ABILITY_UUID = /^Compendium\.cypherv2\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
+const ABILITY_UUID = /^Compendium\.magnusarchives\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
 const ACTIVATIONS = new Set(["action", "firstAction", "lastAction", "enabler", "reaction", "timed", "perpetual", "passive", "special"]);
 const POOLS = new Set(["might", "speed", "intellect"]);
 const ROLLS = new Set(["none", "task", "attack", "defense"]);
@@ -56,6 +56,8 @@ function unique(values) {
 }
 
 function stableId(kind, key) {
+  // Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+  // generated document _id and breaks ~4,000 @UUID cross-references in content/.
   return createHash("sha256").update(`cypherv2-beta3:${kind}:${key}`).digest("hex").slice(0, 16);
 }
 
@@ -91,7 +93,7 @@ function validateAbility(document, index, errors) {
   if (!ROLLS.has(document?.system?.roll)) errors.push(`${location}.system.roll is unsupported.`);
   if (!Array.isArray(document?.system?.cost?.allowedPools) || !document.system.cost.allowedPools.every((pool) => POOLS.has(pool))) errors.push(`${location}.system.cost.allowedPools is invalid.`);
   if (!unique(document?.system?.cost?.allowedPools ?? [])) errors.push(`${location}.system.cost.allowedPools contains duplicates.`);
-  const metadata = document?.flags?.cypherv2?.genreAbility;
+  const metadata = document?.flags?.magnusarchives?.genreAbility;
   if (!metadata || !["progression", "origin"].includes(metadata.catalog)) errors.push(`${location} lacks the progression/origin discriminator.`);
   if (!Array.isArray(metadata?.genres) || metadata.genres.length < 1) errors.push(`${location} lacks Genre membership metadata.`);
   if (metadata?.catalog === "origin" && (metadata.progressionBand !== "origin" || JSON.stringify(metadata.genres) !== JSON.stringify(["superhero"]))) errors.push(`${location} has invalid Origin metadata.`);
@@ -125,7 +127,7 @@ export function validateGenreAbilityCandidateSource(source) {
   const errors = [];
   if (!source || typeof source !== "object" || Array.isArray(source)) throw new GenreAbilityCandidateValidationError(["Source root must be an object."]);
   if (source.schemaVersion !== GENRE_ABILITY_CANDIDATE_SCHEMA_VERSION) errors.push("schemaVersion must be 1.");
-  if (source.target?.systemId !== "cypherv2" || source.target?.futurePackId !== "genre-abilities") errors.push("Candidate target metadata is invalid.");
+  if (source.target?.systemId !== "magnusarchives" || source.target?.futurePackId !== "genre-abilities") errors.push("Candidate target metadata is invalid.");
   if (!/^[a-f0-9]{64}$/.test(source.source?.sha256 ?? "")) errors.push("source.sha256 must identify the exact CRD input.");
   if (source.source?.file !== "Cypher-Reference-Document-2026-07-29.docx" || source.source?.license !== "2026 Cypher Open License") errors.push("Candidate source/provenance metadata is invalid.");
   if (JSON.stringify(source.inventory?.progression?.realWorld?.midTier) !== JSON.stringify(REAL_WORLD_MID)) errors.push("Real World mid-tier inventory mismatch.");
@@ -144,8 +146,8 @@ export function validateGenreAbilityCandidateSource(source) {
   if (!unique(abilities.map((document) => document._id))) errors.push("Ability IDs must be unique.");
   if (!unique(abilities.map((document) => document.system?.slug))) errors.push("Ability slugs must be unique.");
   abilities.forEach((document, index) => validateAbility(document, index, errors));
-  const progression = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "progression");
-  const origin = abilities.filter((document) => document.flags?.cypherv2?.genreAbility?.catalog === "origin");
+  const progression = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "progression");
+  const origin = abilities.filter((document) => document.flags?.magnusarchives?.genreAbility?.catalog === "origin");
   if (progression.length !== 43) errors.push(`Expected 43 progression documents; found ${progression.length}.`);
   if (origin.length !== 26) errors.push(`Expected 26 Origin documents; found ${origin.length}.`);
 
@@ -175,17 +177,17 @@ export function validateGenreAbilityCandidateSource(source) {
   if (relationIds.size !== GENRE_ABILITY_COUNTS.relations) errors.push(`Expected ${GENRE_ABILITY_COUNTS.relations} unique relations; found ${relationIds.size}.`);
 
   const armored = abilities.find((document) => document.name === "Armored Body");
-  if (armored?.flags?.cypherv2?.genreAbility?.minimumSuperheroRank !== 2) errors.push("Armored Body must preserve Superhero Rank 2+.");
+  if (armored?.flags?.magnusarchives?.genreAbility?.minimumSuperheroRank !== 2) errors.push("Armored Body must preserve Superhero Rank 2+.");
   for (const name of ["Incredible Instinct", "Skill Exemplar"]) {
     const ability = abilities.find((document) => document.name === name);
-    if (ability?.flags?.cypherv2?.genreAbility?.catalog !== "origin" || !/At tier 3:/i.test(ability?.system?.description ?? "") || !ability?.system?.tags?.includes("tier-3-improvement")) errors.push(`${name} must remain one Tier 1 Origin choice with its Tier 3 improvement.`);
+    if (ability?.flags?.magnusarchives?.genreAbility?.catalog !== "origin" || !/At tier 3:/i.test(ability?.system?.description ?? "") || !ability?.system?.tags?.includes("tier-3-improvement")) errors.push(`${name} must remain one Tier 1 Origin choice with its Tier 3 improvement.`);
   }
   for (const [name, id, tier, band] of [
     ["Additional Skill (Tier 3)", "fREdI45SXu0WPeeS", 3, "mid-tier"],
     ["Additional Skill (Tier 6)", "xXSq03yZHRS978cj", 6, "high-tier"]
   ]) {
     const ability = abilities.find((document) => document.name === name);
-    if (ability?._id !== id || ability?.system?.tier !== tier || ability?.flags?.cypherv2?.genreAbility?.progressionBand !== band || JSON.stringify(ability?.flags?.cypherv2?.genreAbility?.genres) !== JSON.stringify(["realWorld"])) errors.push(`${name} must preserve its Working identity and Real World progression metadata.`);
+    if (ability?._id !== id || ability?.system?.tier !== tier || ability?.flags?.magnusarchives?.genreAbility?.progressionBand !== band || JSON.stringify(ability?.flags?.magnusarchives?.genreAbility?.genres) !== JSON.stringify(["realWorld"])) errors.push(`${name} must preserve its Working identity and Real World progression metadata.`);
   }
   if ((source.review?.sameNameCollisions?.length ?? 0) !== 14 || source.review.sameNameCollisions.some((entry) => entry.reused)) errors.push("Same-name audit must preserve all independently sourced colliding Genre Ability documents.");
 
@@ -201,16 +203,16 @@ export function genreAbilityCandidateSummary(source) {
   validateGenreAbilityCandidateSource(source);
   const abilities = source.abilities;
   const activations = Object.fromEntries([...ACTIVATIONS].map((activation) => [activation, abilities.filter((document) => document.system.activation === activation).length]));
-  const progression = abilities.filter((document) => document.flags.cypherv2.genreAbility.catalog === "progression");
+  const progression = abilities.filter((document) => document.flags.magnusarchives.genreAbility.catalog === "progression");
   return {
     ...source.counts,
     progressionMembership: {
-      realWorldOnly: progression.filter((document) => JSON.stringify(document.flags.cypherv2.genreAbility.genres) === JSON.stringify(["realWorld"])).length,
-      fantasyOnly: progression.filter((document) => JSON.stringify(document.flags.cypherv2.genreAbility.genres) === JSON.stringify(["fantasy"])).length,
-      scienceFictionOnly: progression.filter((document) => JSON.stringify(document.flags.cypherv2.genreAbility.genres) === JSON.stringify(["scienceFiction"])).length,
-      shared: progression.filter((document) => document.flags.cypherv2.genreAbility.genres.length === 2).length,
-      midTier: progression.filter((document) => document.flags.cypherv2.genreAbility.progressionBand === "mid-tier").length,
-      highTier: progression.filter((document) => document.flags.cypherv2.genreAbility.progressionBand === "high-tier").length
+      realWorldOnly: progression.filter((document) => JSON.stringify(document.flags.magnusarchives.genreAbility.genres) === JSON.stringify(["realWorld"])).length,
+      fantasyOnly: progression.filter((document) => JSON.stringify(document.flags.magnusarchives.genreAbility.genres) === JSON.stringify(["fantasy"])).length,
+      scienceFictionOnly: progression.filter((document) => JSON.stringify(document.flags.magnusarchives.genreAbility.genres) === JSON.stringify(["scienceFiction"])).length,
+      shared: progression.filter((document) => document.flags.magnusarchives.genreAbility.genres.length === 2).length,
+      midTier: progression.filter((document) => document.flags.magnusarchives.genreAbility.progressionBand === "mid-tier").length,
+      highTier: progression.filter((document) => document.flags.magnusarchives.genreAbility.progressionBand === "high-tier").length
     },
     structured: {
       fixedPoolCosts: abilities.filter((document) => document.system.cost.amount > 0 && document.system.cost.allowedPools.length === 1).length,
@@ -220,7 +222,7 @@ export function genreAbilityCandidateSummary(source) {
       damage: abilities.filter((document) => document.system.damage > 0).length,
       range: abilities.filter((document) => document.system.range).length,
       duration: abilities.filter((document) => document.system.automation.duration.enabled).length,
-      minimumSuperheroRank: abilities.filter((document) => document.flags.cypherv2.genreAbility.minimumSuperheroRank > 0).length
+      minimumSuperheroRank: abilities.filter((document) => document.flags.magnusarchives.genreAbility.minimumSuperheroRank > 0).length
     }
   };
 }

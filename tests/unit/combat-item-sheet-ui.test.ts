@@ -77,8 +77,8 @@ describe("compact Combat Item Sheets", () => {
     expect(shield).toContain('class="fa-solid fa-pen"');
     expect(shield).toContain('class="fa-solid fa-trash"');
     expect(shield).toContain('name="system.description"');
-    expect(source).toContain("game.cypherv2.services.shields.setCount(");
-    expect(source).toContain("game.cypherv2.services.shields.setCapacity(");
+    expect(source).toContain("game.magnusarchives.services.shields.setCount(");
+    expect(source).toContain("game.magnusarchives.services.shields.setCapacity(");
     expect(source).toContain("if (!this.isEditable) return");
     expect(source).toContain("#openDisclosures");
     expect(source).toContain('querySelectorAll<HTMLDetailsElement>("details")');
@@ -97,7 +97,7 @@ describe("compact Combat Item Sheets", () => {
     expect(styles).toContain(".compact-shield-pip");
     expect(styles).toContain("aspect-ratio: 1 / 1");
     expect(styles).toContain("border-radius: 50%");
-    expect(styles).toContain("--cypherv2-wound-pip-shield");
+    expect(styles).toContain("--magnusarchives-wound-pip-shield");
     expect(styles).not.toContain("transform: rotate(45deg)");
     expect(source).toMatch(/services\.shields\.setCount\([\s\S]*?await this\.render\(\{force: true\}\)/);
     for (const type of ["Weapon", "Armor", "Shield"] as const) {

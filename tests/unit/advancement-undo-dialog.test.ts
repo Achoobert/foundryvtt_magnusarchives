@@ -9,7 +9,7 @@ function setup(confirmed: boolean) {
   const localize = vi.fn((key: string) => key);
   vi.stubGlobal("game", {
     i18n: {localize, format: vi.fn((key: string) => key)},
-    cypherv2: {services: {advancement: {undoPurchase}}}
+    magnusarchives: {services: {advancement: {undoPurchase}}}
   });
   vi.stubGlobal("foundry", {applications: {api: {DialogV2: {wait}}}});
   vi.stubGlobal("ui", {notifications: {info: vi.fn(), error: vi.fn()}});
@@ -29,14 +29,14 @@ describe("Advancement status-only Undo dialog", () => {
       defaultYes: false,
       buttons: [
         {
-          action: "no", label: "CYPHERV2.Actions.Cancel", icon: "fa-solid fa-xmark", default: true
+          action: "no", label: "MAGNUSARCHIVES.Actions.Cancel", icon: "fa-solid fa-xmark", default: true
         },
         {
-          action: "yes", label: "CYPHERV2.Advancement.Undo.Confirm", icon: "fa-solid fa-check"
+          action: "yes", label: "MAGNUSARCHIVES.Advancement.Undo.Confirm", icon: "fa-solid fa-check"
         }
       ]
     });
-    expect(String(wait.mock.calls[0]?.[0]?.content)).toContain("CYPHERV2.Advancement.Undo.NoRollbackWarning");
+    expect(String(wait.mock.calls[0]?.[0]?.content)).toContain("MAGNUSARCHIVES.Advancement.Undo.NoRollbackWarning");
   });
 
   it("passes the exact stable purchase ID only after confirmation", async () => {
@@ -47,6 +47,6 @@ describe("Advancement status-only Undo dialog", () => {
 
     expect(undoPurchase).toHaveBeenCalledOnce();
     expect(undoPurchase).toHaveBeenCalledWith(actor, "purchase-exact");
-    expect(ui.notifications.info).toHaveBeenCalledWith("CYPHERV2.Advancement.Undo.Success");
+    expect(ui.notifications.info).toHaveBeenCalledWith("MAGNUSARCHIVES.Advancement.Undo.Success");
   });
 });

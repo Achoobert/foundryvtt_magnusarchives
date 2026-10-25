@@ -28,8 +28,8 @@ describe("PlayerIntrusionChatService", () => {
       xpSpent: 1
     }, actor as never);
     expect(create).toHaveBeenCalledWith(expect.objectContaining({
-      flags: {cypherv2: {playerIntrusion: expect.objectContaining({requestId: "request-1", xpSpent: 1})}}
+      flags: {magnusarchives: {playerIntrusion: expect.objectContaining({requestId: "request-1", xpSpent: 1})}}
     }));
-    expect(create.mock.calls[0]![0].content).toContain("--cypherv2-chat-accent");
+    expect(create.mock.calls[0]![0].content).toContain("--magnusarchives-chat-accent");
   });
 });

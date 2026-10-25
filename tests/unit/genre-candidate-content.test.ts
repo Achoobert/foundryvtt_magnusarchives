@@ -16,7 +16,10 @@ function genre(name: string): any {
   return source.genres.find((document: any) => document.name === name);
 }
 
-describe("beta.3 candidate Genres", () => {
+// Parked: Species and Genres are not Magnus Archives concepts. The data models
+// stay registered for migration, but the packs are no longer built or shipped,
+// so this suite has nothing to validate.
+describe.skip("beta.3 candidate Genres", () => {
   it("validates the exact four chapter-level CRD Genres and deterministic identities", () => {
     expect(() => validator.validateGenreCandidateSource(source, abilitySource)).not.toThrow();
     expect(source.inventory.map((entry: any) => entry.heading)).toEqual([
@@ -61,8 +64,8 @@ describe("beta.3 candidate Genres", () => {
       ["Additional Skill (Tier 6)", 6]
     ]);
     expect(realWorld.map((entry: any) => entry.abilityUuid)).toEqual([
-      "Compendium.cypherv2.genre-abilities.Item.fREdI45SXu0WPeeS",
-      "Compendium.cypherv2.genre-abilities.Item.xXSq03yZHRS978cj"
+      "Compendium.magnusarchives.genre-abilities.Item.fREdI45SXu0WPeeS",
+      "Compendium.magnusarchives.genre-abilities.Item.xXSq03yZHRS978cj"
     ]);
   });
 
@@ -105,8 +108,8 @@ describe("beta.3 candidate Genres", () => {
     expect(JSON.stringify(source)).not.toContain("genre-abilities-working");
     expect(manifest.packs).toHaveLength(12);
     expect(manifest.packs).toEqual(expect.arrayContaining([
-      {name: "genres", label: "Genres", path: "packs/genres", type: "Item", system: "cypherv2"},
-      {name: "genre-abilities", label: "Genre Abilities", path: "packs/genre-abilities", type: "Item", system: "cypherv2"}
+      {name: "genres", label: "Genres", path: "packs/genres", type: "Item", system: "magnusarchives"},
+      {name: "genre-abilities", label: "Genre Abilities", path: "packs/genre-abilities", type: "Item", system: "magnusarchives"}
     ]));
   });
 });

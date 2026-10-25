@@ -19,7 +19,7 @@ describe("private Genre review import", () => {
     const review = reviewImporter.createGenreReviewDocuments(candidate, abilitySource);
     expect(reviewImporter.validateGenreReviewDocuments(review, candidate, abilitySource)).toEqual({genres: 4, relations: 115});
     expect(JSON.stringify(review)).toContain("Compendium.world.genre-abilities-working.Item.");
-    expect(JSON.stringify(review)).not.toContain("Compendium.cypherv2.genre-abilities.Item.");
+    expect(JSON.stringify(review)).not.toContain("Compendium.magnusarchives.genre-abilities.Item.");
     expect(reviewImporter.compareGenreReviewRoundTrip(candidate, review, abilitySource)).toEqual({
       genreMatch: true,
       matches: true,

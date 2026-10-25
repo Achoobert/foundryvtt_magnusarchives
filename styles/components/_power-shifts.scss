@@ -1,11 +1,11 @@
-.cypherv2 .character-power-shifts {
+.magnusarchives .character-power-shifts {
   display: grid;
   gap: 0.25rem;
   min-width: 0;
   margin-bottom: 0.55rem;
   padding: 0.35rem 0.45rem;
-  background: color-mix(in srgb, var(--cypherv2-surface-raised) 36%, transparent);
-  border: 1px solid color-mix(in srgb, var(--cypherv2-border) 65%, transparent);
+  background: color-mix(in srgb, var(--magnusarchives-surface-raised) 36%, transparent);
+  border: 1px solid color-mix(in srgb, var(--magnusarchives-border) 65%, transparent);
   border-radius: 0.3rem;
 
   .power-shift-header {
@@ -16,14 +16,14 @@
 
     h2 {
       margin: 0;
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-size: 0.72rem;
       letter-spacing: 0.045em;
       text-transform: uppercase;
     }
 
     > strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       font-size: 0.72rem;
     }
   }
@@ -32,13 +32,13 @@
   .power-shift-legacy-note,
   .power-shift-empty {
     margin: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.66rem;
   }
 
   .power-shift-warning,
   .power-shift-row-warning {
-    color: var(--cypherv2-color-warning);
+    color: var(--magnusarchives-color-warning);
   }
 
   .power-shift-list {
@@ -60,11 +60,11 @@
 
     &:hover,
     &:focus-within {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 55%, transparent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 55%, transparent);
     }
 
     &.has-category-warning {
-      box-shadow: inset 2px 0 color-mix(in srgb, var(--cypherv2-color-warning) 75%, transparent);
+      box-shadow: inset 2px 0 color-mix(in srgb, var(--magnusarchives-color-warning) 75%, transparent);
     }
   }
 
@@ -74,24 +74,24 @@
     gap: 0.2rem;
     align-items: baseline;
     min-width: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.68rem;
 
     strong {
-      color: var(--cypherv2-text-primary);
+      color: var(--magnusarchives-text-primary);
       text-transform: uppercase;
     }
 
     small {
       flex-basis: 100%;
       overflow-wrap: anywhere;
-      color: var(--cypherv2-text-muted);
+      color: var(--magnusarchives-text-muted);
       font-size: 0.63rem;
     }
   }
 
   .power-shift-value {
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     text-align: center;
   }
 

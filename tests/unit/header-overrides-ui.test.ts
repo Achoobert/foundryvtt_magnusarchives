@@ -6,13 +6,13 @@ const styles = readFileSync("styles/components/_character-header.scss", "utf8");
 const sheet = readFileSync("src/applications/sheets/character-sheet.ts", "utf8");
 
 describe("Header override presentation", () => {
-  it("uses the same stat-box component for Tier, Effort, RP, and XP", () => {
-    expect(template.match(/character-hud-stat-box/g)).toHaveLength(4);
+  it("uses the same stat-box component for Tier, Effort, RP, XP, and Stress", () => {
+    expect(template.match(/character-hud-stat-box/g)).toHaveLength(6);
     expect(template).toContain("character-hud-core-stats character-hud-stat-stack");
     expect(template).toContain("character-hud-currency character-hud-stat-stack");
     expect(styles).toContain("grid-template-rows: repeat(2, 2.55rem)");
     expect(styles).toContain("height: 2.55rem");
-    expect(styles.match(/var\(--cypherv2-hud-stat-stack-width\)/g)).toHaveLength(2);
+    expect(styles.match(/var\(--magnusarchives-hud-stat-stack-width\)/g)).toHaveLength(2);
   });
 
   it("renders only effective values in the Header with no override decoration", () => {

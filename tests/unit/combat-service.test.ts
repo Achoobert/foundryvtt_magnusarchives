@@ -8,6 +8,7 @@ import {CombatService, type CombatCharacterLike} from "../../src/services/combat
 import {RollService} from "../../src/services/roll-service";
 import {SkillService, type SkillItemLike} from "../../src/services/skill-service";
 import {TargetResolver} from "../../src/services/target-resolver";
+import {ConditionService} from "../../src/services/condition-service";
 import {WoundService} from "../../src/services/wound-service";
 import type {CombatFeedbackService} from "../../src/services/combat-feedback-service";
 import type {CombatStatusService} from "../../src/services/combat-status-service";
@@ -64,7 +65,8 @@ function npc(level = 4, armorBase = 0, modifications: readonly NpcModificationDa
       health: {value: 20, baseMax: 20},
       damage: {
         amount: 4,
-        woundSeverity: "moderate",
+        effect: "seriousInjury",
+        stressAmount: 3,
         defense: {allowBlock: true, allowDodge: true},
         notes: ""
       },
@@ -114,6 +116,7 @@ function setup(
       skills,
       targets,
       wounds,
+      new ConditionService(),
       feedback,
       statuses,
       new ShieldService(wounds)
@@ -245,7 +248,7 @@ describe("CombatService weapon attacks", () => {
       expect(plan.freelyUsed).toBe(false);
       expect(plan.requests[0]?.contributions).toContainEqual(expect.objectContaining({
         id: `weapon.weapon-${category}.unfamiliar`,
-        label: `CYPHERV2.Combat.Weapon.Unfamiliar.${category}`,
+        label: `MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.${category}`,
         direction: "hinder",
         steps: 1
       }));
@@ -579,7 +582,7 @@ describe("CombatService defense and damage", () => {
     expect(preview.breakdown.filter((entry) => entry.id.startsWith("armor.medium"))).toHaveLength(1);
   });
 
-  it("makes Dodge avoid a Wound and successful Block reduce it one severity", () => {
+  it("avoids all damage on a successful defense and applies it in full on a failure", () => {
     const {actor, combat} = setup();
     const success = new RollService(new RuleRegistry(), async () => ({naturalRoll: 12}));
     void success;
@@ -593,10 +596,11 @@ describe("CombatService defense and damage", () => {
       beatsDifficulty: 4,
       prepared: combat.buildDefenseRequest(actor, "block", {difficulty: {mode: "known", value: 2}})
     } as unknown as import("../../src/rolls/roll-types").RollResult;
-    expect(combat.woundAfterDefense(result, "dodge", "major")).toBe("none");
-    expect(combat.woundAfterDefense(result, "block", "major")).toBe("moderate");
-    expect(combat.woundAfterDefense(result, "block", "minor")).toBe("none");
-    expect(combat.woundAfterDefense({...result, success: false}, "block", "major")).toBe("major");
+    // A successful defense avoids the attack outright; a failed one takes it in full.
+    expect(combat.damageAfterDefense(result, "seriousInjury")).toBe("none");
+    expect(combat.damageAfterDefense(result, "stress")).toBe("none");
+    expect(combat.damageAfterDefense({...result, success: false}, "seriousInjury")).toBe("seriousInjury");
+    expect(combat.damageAfterDefense({...result, success: false}, "stress")).toBe("stress");
   });
 
   it("applies damage to NPC Health after NPC Armor", async () => {
@@ -663,10 +667,20 @@ describe("CombatService defense and damage", () => {
     ]);
   });
 
-  it("applies a structured Wound to a Character without HP conversion", async () => {
+  it("gives a Character Stress rather than Pool damage", async () => {
     const {actor, combat} = setup();
-    await combat.applyCharacterWound(actor, "moderate", {id: "npc-1", name: "Sentinel"});
-    expect(actor.system.wounds.moderate).toHaveLength(1);
-    expect(actor.system.wounds.moderate[0]).toMatchObject({label: "Sentinel attack", sourceUuid: "Actor.npc-1"});
+    const result = await combat.applyCharacterDamage(actor, "stress", 3);
+    expect(result.effect).toBe("stress");
+    expect(result.stress).toMatchObject({value: 3, level: 1});
+    expect(actor.system.stress.value).toBe(3);
+    expect(actor.system.damageTrack.step).toBe("hale");
+  });
+
+  it("moves a Character down the damage track on a serious injury", async () => {
+    const {actor, combat} = setup();
+    const result = await combat.applyCharacterDamage(actor, "seriousInjury");
+    expect(result.injury).toMatchObject({previousStep: "hale", step: "impaired", dead: false});
+    expect(actor.system.damageTrack.step).toBe("impaired");
+    expect(actor.system.stress.value).toBe(0);
   });
 });

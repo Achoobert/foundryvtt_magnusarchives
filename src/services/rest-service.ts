@@ -1,4 +1,5 @@
-import type {RestType} from "../constants/system";
+import {STRESS_POINTS_PER_LEVEL, type RestType} from "../constants/system";
+import {stressAfterRest} from "../rules/core/condition-track";
 import {
   assertLiving,
   cloneWounds,
@@ -18,8 +19,18 @@ export interface RestOptions {
   majorTaskSucceeded?: boolean;
 }
 
+/** Hours of rest each Rest type represents, for the Stress rules on p12. */
+const REST_HOURS: Readonly<Record<RestType, number>> = Object.freeze({
+  "10-minutes": 0,
+  "1-hour": 1,
+  "10-hours": 10
+});
+
 export interface RestResult {
   type: RestType;
+  /** Stress before and after the rest. Rest removes 3 points for each hour. */
+  stressBefore: number;
+  stress: number;
   wounds: WoundCollection;
   removed: WoundRecordData[];
   choice: string;
@@ -40,7 +51,17 @@ export class RestService {
     this.#now = now;
   }
 
-  rest(current: WoundCollection, type: RestType, options: RestOptions = {}): RestResult {
+  /** Points of Stress a rest of this type removes (p12). */
+  stressRelief(type: RestType): number {
+    return REST_HOURS[type] * STRESS_POINTS_PER_LEVEL;
+  }
+
+  rest(
+    current: WoundCollection,
+    type: RestType,
+    options: RestOptions = {},
+    currentStress = 0
+  ): RestResult {
     const wounds = cloneWounds(current);
     const removed: WoundRecordData[] = [];
     let choice = "";
@@ -80,6 +101,8 @@ export class RestService {
 
     return {
       type,
+      stressBefore: currentStress,
+      stress: stressAfterRest(currentStress, REST_HOURS[type]),
       wounds,
       removed,
       choice,
@@ -89,7 +112,7 @@ export class RestService {
 
   prepare(actor: CharacterDocumentLike, type: RestType, options: RestOptions = {}): RestPreparation {
     assertLiving(actor);
-    const result = this.rest(actor.system.wounds, type, options);
+    const result = this.rest(actor.system.wounds, type, options, actor.system.stress.value);
     return {
       result,
       historyEntry: {
@@ -111,6 +134,7 @@ export class RestService {
     const {result, historyEntry} = this.prepare(actor, type, options);
     await actor.update({
       "system.wounds": result.wounds,
+      "system.stress.value": result.stress,
       "system.rest.lastType": type,
       "system.rest.history": [...actor.system.rest.history, historyEntry]
     });

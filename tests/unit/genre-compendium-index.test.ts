@@ -24,24 +24,24 @@ describe("Genre Compendium index preparation", () => {
   });
 
   it("recognizes only canonical Compendium Item UUIDs", () => {
-    expect(genreCompendiumPackId("Compendium.cypherv2.genres.Item.superhero"))
-      .toBe("cypherv2.genres");
+    expect(genreCompendiumPackId("Compendium.magnusarchives.genres.Item.superhero"))
+      .toBe("magnusarchives.genres");
     expect(genreCompendiumPackId("Item.world-genre")).toBeNull();
-    expect(genreCompendiumPackId("Compendium.cypherv2.genres.Actor.superhero")).toBeNull();
+    expect(genreCompendiumPackId("Compendium.magnusarchives.genres.Actor.superhero")).toBeNull();
   });
 
   it("enriches each referenced pack once and reprepares affected Characters", async () => {
-    const first = actor("Compendium.cypherv2.genres.Item.first");
-    const second = actor("Compendium.cypherv2.genres.Item.second");
+    const first = actor("Compendium.magnusarchives.genres.Item.first");
+    const second = actor("Compendium.magnusarchives.genres.Item.second");
     const world = actor("Item.world-genre");
-    const npc = actor("Compendium.cypherv2.genres.Item.npc", "npc");
+    const npc = actor("Compendium.magnusarchives.genres.Item.npc", "npc");
     const getIndex = vi.fn(async () => undefined);
     const packs = {get: vi.fn(() => ({getIndex}))};
 
     await prepareCharacterGenreCompendiumIndexes([first, second, world, npc], packs);
 
     expect(packs.get).toHaveBeenCalledOnce();
-    expect(packs.get).toHaveBeenCalledWith("cypherv2.genres");
+    expect(packs.get).toHaveBeenCalledWith("magnusarchives.genres");
     expect(getIndex).toHaveBeenCalledWith({fields: [...GENRE_COMPENDIUM_INDEX_FIELDS]});
     expect(first.reset).toHaveBeenCalledOnce();
     expect(second.reset).toHaveBeenCalledOnce();
@@ -58,7 +58,7 @@ describe("Genre Compendium index preparation", () => {
     await prepareCharacterGenreCompendiumIndexes([character], packs, warn);
 
     expect(warn).toHaveBeenCalledWith(
-      "cypherv2 | Could not enrich Genre Compendium index private.genres",
+      "magnusarchives | Could not enrich Genre Compendium index private.genres",
       error
     );
     expect(character.reset).toHaveBeenCalledOnce();

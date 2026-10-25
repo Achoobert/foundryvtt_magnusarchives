@@ -69,8 +69,8 @@ describe("Inventory UI V1", () => {
 
   it("displays and rolls existing Artifact Depletion through the existing service", () => {
     expect(template).toContain('class="inventory-artifact-identity"');
-    expect(template).toContain('>({{localize "CYPHERV2.Inventory.Level"}} {{item.level}})');
-    expect(template).toContain('>({{localize "CYPHERV2.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>');
+    expect(template).toContain('>({{localize "MAGNUSARCHIVES.Inventory.Level"}} {{item.level}})');
+    expect(template).toContain('>({{localize "MAGNUSARCHIVES.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>');
     expect(template).toContain("item.depletionLabel");
     expect(template).toContain('data-action="rollInventoryDepletion"');
     expect(source).toContain("await rollItemDepletion(item as unknown as DepletionItemLike)");
@@ -80,7 +80,7 @@ describe("Inventory UI V1", () => {
 
   it("adds independent Send to Chat actions to Inventory, Abilities, and Combat Items", () => {
     expect(template.match(/data-action="sendItemToChat"/g)).toHaveLength(7);
-    expect(source).toContain("game.cypherv2.services.itemChat.publish(item)");
+    expect(source).toContain("game.magnusarchives.services.itemChat.publish(item)");
   });
 
   it("renders Cypher Power and muted reversible Artifact Depletion state", () => {
@@ -89,7 +89,7 @@ describe("Inventory UI V1", () => {
     expect(template).toContain("{{#if item.depleted}}is-depleted{{/if}}");
     expect(styles).toContain("&.is-depleted");
     expect(template).toContain('class="inventory-depleted-label combat-depleted-state"');
-    expect(styles).toMatch(/\.inventory-depleted-label[\s\S]*&\.combat-depleted-state[\s\S]*var\(--cypherv2-danger\)/);
+    expect(styles).toMatch(/\.inventory-depleted-label[\s\S]*&\.combat-depleted-state[\s\S]*var\(--magnusarchives-danger\)/);
     for (const rank of ["low", "medium", "advanced", "high", "ultra"]) {
       expect(styles).toContain(`&.is-${rank}`);
     }

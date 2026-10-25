@@ -9,12 +9,12 @@ export default defineConfig({
     lib: {
       entry: "src/main.ts",
       formats: ["es"],
-      fileName: "cypherv2",
-      cssFileName: "cypherv2"
+      fileName: "magnusarchives",
+      cssFileName: "magnusarchives"
     },
     rollupOptions: {
       output: {
-        entryFileNames: "cypherv2.mjs",
+        entryFileNames: "magnusarchives.mjs",
         assetFileNames: "[name][extname]"
       }
     }

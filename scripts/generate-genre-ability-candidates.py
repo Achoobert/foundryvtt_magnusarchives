@@ -20,8 +20,8 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-ABILITY_ICON = "systems/cypherv2/assets/icons/cypherability.png"
-ABILITY_PREFIX = "Compendium.cypherv2.genre-abilities.Item."
+ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.png"
+ABILITY_PREFIX = "Compendium.magnusarchives.genre-abilities.Item."
 
 REAL_WORLD_MID = ["Additional Skill (Tier 3)"]
 REAL_WORLD_HIGH = ["Additional Skill (Tier 6)"]
@@ -171,6 +171,8 @@ def slugify(value: str) -> str:
 
 
 def stable_id(kind: str, key: str) -> str:
+    # Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+    # generated document _id and breaks ~4,000 @UUID cross-references in content/.
     return hashlib.sha256(f"cypherv2-beta3:{kind}:{key}".encode()).hexdigest()[:16]
 
 
@@ -319,7 +321,7 @@ def foundry_item(name: str, item_id: str, system: dict, sort: int, metadata: dic
     return {
         "name": name, "type": "ability", "_id": item_id, "img": ABILITY_ICON,
         "system": system, "effects": [], "folder": None, "sort": sort,
-        "ownership": {"default": 0}, "flags": {"cypherv2": {"genreAbility": metadata}},
+        "ownership": {"default": 0}, "flags": {"magnusarchives": {"genreAbility": metadata}},
         "_stats": {
             "coreVersion": "14.360", "systemId": None, "systemVersion": None,
             "createdTime": None, "modifiedTime": None, "lastModifiedBy": None,
@@ -451,7 +453,7 @@ def build_candidate(document_path: Path) -> dict:
             "file": document_path.name, "sha256": hashlib.sha256(document_path.read_bytes()).hexdigest(),
             "license": LICENSE, "note": "Candidate content only; requires in-Foundry review before promotion.",
         },
-        "target": {"systemId": "cypherv2", "futurePackId": "genre-abilities"},
+        "target": {"systemId": "magnusarchives", "futurePackId": "genre-abilities"},
         "inventory": {
             "progression": {
                 "realWorld": {"midTier": REAL_WORLD_MID, "highTier": REAL_WORLD_HIGH},

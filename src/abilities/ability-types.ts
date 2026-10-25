@@ -3,7 +3,7 @@ import type {
   AbilityPool,
   AbilityRollType,
   AbilityTargetMode,
-  WoundSeverity
+  CharacterDamageEffect
 } from "../constants/system";
 import type {CombatTargetDocumentIdentity, NpcTargetLike, TargetResolution} from "../combat/combat-types";
 import type {CharacterDocumentLike, PoolKey} from "../rules/core/core-types";
@@ -28,7 +28,8 @@ export interface AbilityItemLike {
     readonly rollModifier: number;
     readonly attackModifier: number;
     readonly damage: number;
-    readonly woundSeverity: WoundSeverity | "none";
+    readonly damageEffect: CharacterDamageEffect;
+    readonly stressAmount: number;
     readonly range: string;
     readonly targetMode: AbilityTargetMode;
     readonly description: string;
@@ -80,7 +81,8 @@ export interface AbilityRollOutcome {
   readonly effortDamage: number;
   readonly naturalDamage: number;
   readonly grossDamage: number;
-  readonly woundSeverity: WoundSeverity | "none";
+  readonly damageEffect: CharacterDamageEffect;
+  readonly stressAmount: number;
 }
 
 export interface AbilityNoRollOutcome {

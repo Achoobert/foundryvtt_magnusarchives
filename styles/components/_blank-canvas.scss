@@ -9,7 +9,7 @@ body.game:has(canvas#board[style*="display: none"]) {
   height: 100vh;
   min-height: 100vh;
   background-color: #000;
-  background-image: var(--cypherv2-blank-canvas-background-image, none);
+  background-image: var(--magnusarchives-blank-canvas-background-image, none);
   background-attachment: fixed;
   background-origin: border-box;
   background-position: center center;

@@ -34,13 +34,13 @@ describe("Application V2 document sheet form options", () => {
   });
 
   it("applies the native form behavior to every document sheet", async () => {
-    const [{CharacterSheet}, {NpcSheet}, {CypherV2ItemSheet}] = await Promise.all([
+    const [{CharacterSheet}, {NpcSheet}, {MagnusArchivesItemSheet}] = await Promise.all([
       import("../../src/applications/sheets/character-sheet"),
       import("../../src/applications/sheets/npc-sheet"),
       import("../../src/applications/sheets/item-sheet")
     ]);
 
-    for (const SheetClass of [CharacterSheet, NpcSheet, CypherV2ItemSheet]) {
+    for (const SheetClass of [CharacterSheet, NpcSheet, MagnusArchivesItemSheet]) {
       expect(SheetClass.DEFAULT_OPTIONS).toMatchObject(DOCUMENT_SHEET_FORM_OPTIONS);
     }
   });

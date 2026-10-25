@@ -48,7 +48,7 @@ describe("Shield V1 UI", () => {
     expect(itemDocument).toContain('this.type === "shield"');
     expect(itemDocument).toContain('item.type !== this.type');
     expect(itemDocument).toContain('{"system.equipped": false}');
-    expect(itemDocument).toContain("cypherv2CombatEquipmentSync");
+    expect(itemDocument).toContain("magnusarchivesCombatEquipmentSync");
   });
 
   it("chooses Block With Shield on the request card without a post-roll transfer popup", () => {
@@ -56,7 +56,7 @@ describe("Shield V1 UI", () => {
     expect(defenseTemplate).toContain('data-defense="block"');
     expect(defenseTemplate).toContain('data-defense="blockWithShield"');
     expect(combatDialogs).toContain('defenseType === "blockWithShield"');
-    expect(combatDialogs).toContain("resolveDefenseWound");
+    expect(combatDialogs).toContain("resolveDefenseDamage");
     expect(combatDialogs).not.toContain("promptBlockWoundChoice");
     expect(combatDialogs).not.toContain("TransferWound");
   });

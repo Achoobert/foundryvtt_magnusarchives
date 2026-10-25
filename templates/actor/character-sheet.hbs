@@ -1,115 +1,143 @@
-<div class="cypherv2-sheet cypherv2-character" style="{{header.appearance.style}}">
+<div class="magnusarchives-sheet magnusarchives-character" style="{{header.appearance.style}}">
   {{#unless coreCreation.coreInitialized}}
     <section class="core-setup-banner">
-      <div><strong>{{localize "CYPHERV2.Creation.Required"}}</strong><p>{{localize "CYPHERV2.Creation.RequiredHint"}}</p></div>
+      <div><strong>{{localize "MAGNUSARCHIVES.Creation.Required"}}</strong><p>{{localize "MAGNUSARCHIVES.Creation.RequiredHint"}}</p></div>
       <div class="core-action-bar">
-        <button type="button" data-action="beginCoreSetup">{{localize "CYPHERV2.Creation.Begin"}}</button>
+        <button type="button" data-action="beginCoreSetup">{{localize "MAGNUSARCHIVES.Creation.Begin"}}</button>
         {{#if isGM}}
-          <button type="button" data-action="skipCoreSetup">{{localize "CYPHERV2.Creation.Skip"}}</button>
-          <button type="button" data-action="markCoreInitialized">{{localize "CYPHERV2.Creation.MarkInitialized"}}</button>
+          <button type="button" data-action="skipCoreSetup">{{localize "MAGNUSARCHIVES.Creation.Skip"}}</button>
+          <button type="button" data-action="markCoreInitialized">{{localize "MAGNUSARCHIVES.Creation.MarkInitialized"}}</button>
         {{/if}}
       </div>
     </section>
   {{/unless}}
-  <header class="sheet-header cypherv2-character-hud {{#if header.appearance.hasBackgroundImage}}has-header-background{{/if}} {{#if header.appearance.hasCharacterColor}}has-character-color{{/if}}" aria-label="{{localize 'CYPHERV2.Hud.Title'}}">
+  <header class="sheet-header magnusarchives-character-hud {{#if header.appearance.hasBackgroundImage}}has-header-background{{/if}} {{#if header.appearance.hasCharacterColor}}has-character-color{{/if}}" aria-label="{{localize 'MAGNUSARCHIVES.Hud.Title'}}">
     <div class="character-hud-topline">
       <section class="character-hud-identity">
-        <img class="character-hud-avatar" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" {{#if editable}}data-action="editImage" role="button" tabindex="0" title="{{localize 'CYPHERV2.Common.EditImage'}}"{{/if}}>
+        <img class="character-hud-avatar" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" {{#if editable}}data-action="editImage" role="button" tabindex="0" title="{{localize 'MAGNUSARCHIVES.Common.EditImage'}}"{{/if}}>
         <div class="character-hud-identity-copy">
           <div class="character-hud-name-row">
-            <input class="character-hud-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CYPHERV2.Common.Name'}}" {{#unless editable}}readonly{{/unless}}>
-            {{#if header.playerIntrusion.visible}}<button type="button" class="character-player-intrusion cypherv2-icon-action" data-action="playerIntrusion" title="{{header.playerIntrusion.tooltip}}" aria-label="{{header.playerIntrusion.tooltip}}" {{#unless header.playerIntrusion.canUse}}disabled aria-disabled="true"{{/unless}}><i class="fa-solid fa-bolt" aria-hidden="true"></i></button>{{/if}}
+            <input class="character-hud-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MAGNUSARCHIVES.Common.Name'}}" {{#unless editable}}readonly{{/unless}}>
+            {{#if header.playerIntrusion.visible}}<button type="button" class="character-player-intrusion magnusarchives-icon-action" data-action="playerIntrusion" title="{{header.playerIntrusion.tooltip}}" aria-label="{{header.playerIntrusion.tooltip}}" {{#unless header.playerIntrusion.canUse}}disabled aria-disabled="true"{{/unless}}><i class="fa-solid fa-bolt" aria-hidden="true"></i></button>{{/if}}
           </div>
           <p class="character-hud-sentence" aria-label="{{header.identity.sentence}}">
-            <span>{{localize "CYPHERV2.Hud.IAm"}} {{header.identity.article}}</span>
+            <span>{{localize "MAGNUSARCHIVES.Hud.IAm"}} {{header.identity.article}}</span>
             {{#each header.identity.descriptors as |descriptor|}}
               {{#if descriptor.missing}}
-                <span class="character-hud-identity-slot is-missing" data-hud-drop="descriptor" title="{{localize 'CYPHERV2.Hud.DropDescriptor'}}">{{descriptor.displayName}}</span>
+                <span class="character-hud-identity-slot is-missing" data-hud-drop="descriptor" title="{{localize 'MAGNUSARCHIVES.Hud.DropDescriptor'}}">{{descriptor.displayName}}</span>
               {{else}}
-                <button type="button" class="character-hud-identity-slot cypherv2-primary-action" data-action="inspectPackage" data-item-id="{{descriptor.id}}">{{descriptor.displayName}}</button>
+                <button type="button" class="character-hud-identity-slot magnusarchives-primary-action" data-action="inspectPackage" data-item-id="{{descriptor.id}}">{{descriptor.displayName}}</button>
               {{/if}}
-              {{#unless @last}}<span>{{localize "CYPHERV2.Hud.And"}}</span>{{/unless}}
+              {{#unless @last}}<span>{{localize "MAGNUSARCHIVES.Hud.And"}}</span>{{/unless}}
             {{/each}}
             {{#if header.identity.species}}
-              <button type="button" class="character-hud-identity-slot cypherv2-primary-action" data-action="inspectPackage" data-item-id="{{header.identity.species.id}}">{{header.identity.species.displayName}}</button>
+              <button type="button" class="character-hud-identity-slot magnusarchives-primary-action" data-action="inspectPackage" data-item-id="{{header.identity.species.id}}">{{header.identity.species.displayName}}</button>
             {{/if}}
             {{#if header.identity.type.missing}}
-              <span class="character-hud-identity-slot is-missing" data-hud-drop="characterType" title="{{localize 'CYPHERV2.Hud.DropType'}}">{{header.identity.type.displayName}}</span>
+              <span class="character-hud-identity-slot is-missing" data-hud-drop="characterType" title="{{localize 'MAGNUSARCHIVES.Hud.DropType'}}">{{header.identity.type.displayName}}</span>
             {{else}}
-              <button type="button" class="character-hud-identity-slot cypherv2-primary-action" data-action="inspectPackage" data-item-id="{{header.identity.type.id}}">{{header.identity.type.displayName}}</button>
+              <button type="button" class="character-hud-identity-slot magnusarchives-primary-action" data-action="inspectPackage" data-item-id="{{header.identity.type.id}}">{{header.identity.type.displayName}}</button>
             {{/if}}
             {{#if header.identity.showFocus}}
-              <span>{{localize "CYPHERV2.Hud.Who"}}</span>
+              <span>{{localize "MAGNUSARCHIVES.Hud.Who"}}</span>
               {{#if header.identity.focus.missing}}
-                <span class="character-hud-identity-slot is-missing" data-hud-drop="focus" title="{{localize 'CYPHERV2.Hud.DropFocus'}}">{{header.identity.focus.displayName}}</span>
+                <span class="character-hud-identity-slot is-missing" data-hud-drop="focus" title="{{localize 'MAGNUSARCHIVES.Hud.DropFocus'}}">{{header.identity.focus.displayName}}</span>
               {{else}}
-                <button type="button" class="character-hud-identity-slot cypherv2-primary-action" data-action="inspectHeaderFocus" data-focus-uuid="{{header.identity.focus.uuid}}">{{header.identity.focus.displayName}}</button>
+                <button type="button" class="character-hud-identity-slot magnusarchives-primary-action" data-action="inspectHeaderFocus" data-focus-uuid="{{header.identity.focus.uuid}}">{{header.identity.focus.displayName}}</button>
               {{/if}}
             {{/if}}
           </p>
         </div>
       </section>
 
-      <section class="character-hud-core-stats character-hud-stat-stack" aria-label="{{localize 'CYPHERV2.Hud.CoreStats'}}">
-        <span class="character-hud-stat-box"><small>{{localize "CYPHERV2.Character.Tier"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value cypherv2-primary-action" data-action="editCharacterOverride" data-override-key="tier">{{header.stats.tier}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.tier}}</strong>{{/if}}</span>
-        <span class="character-hud-stat-box"><small>{{localize "CYPHERV2.Character.Effort"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value cypherv2-primary-action" data-action="editCharacterOverride" data-override-key="effort">{{header.stats.effort}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.effort}}</strong>{{/if}}</span>
+      <section class="character-hud-core-stats character-hud-stat-stack" aria-label="{{localize 'MAGNUSARCHIVES.Hud.CoreStats'}}">
+        <span class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.Tier"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="tier">{{header.stats.tier}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.tier}}</strong>{{/if}}</span>
+        <span class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.Effort"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="effort">{{header.stats.effort}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.effort}}</strong>{{/if}}</span>
       </section>
     </div>
 
-    <section class="character-hud-pools" aria-label="{{localize 'CYPHERV2.Character.Pools'}}">
+    <section class="character-hud-pools" aria-label="{{localize 'MAGNUSARCHIVES.Character.Pools'}}">
       {{#each header.pools as |pool|}}
-        <article class="character-hud-card character-hud-pool" data-action="rollPool" data-pool="{{pool.key}}" role="button" tabindex="0" aria-label="{{localize 'CYPHERV2.Hud.RollPool'}} {{pool.label}}">
+        <article class="character-hud-card character-hud-pool" data-action="rollPool" data-pool="{{pool.key}}" role="button" tabindex="0" aria-label="{{localize 'MAGNUSARCHIVES.Hud.RollPool'}} {{pool.label}}">
           <strong class="character-hud-card-title">{{pool.label}}</strong>
           <div class="character-hud-pool-value">
-            {{#if ../editable}}<input name="system.stats.{{pool.key}}.value" type="number" data-dtype="Number" value="{{pool.value}}" min="0" aria-label="{{pool.label}} {{localize 'CYPHERV2.Pools.Value'}}">{{else}}<strong>{{pool.value}}</strong>{{/if}}
-            <span>/ {{#if ../editable}}<button type="button" class="character-hud-effective-value cypherv2-primary-action" data-action="editCharacterOverride" data-override-key="{{pool.key}}Max">{{pool.max}}</button>{{else}}{{pool.max}}{{/if}}</span>
+            {{#if ../editable}}<input name="system.stats.{{pool.key}}.value" type="number" data-dtype="Number" value="{{pool.value}}" min="0" aria-label="{{pool.label}} {{localize 'MAGNUSARCHIVES.Pools.Value'}}">{{else}}<strong>{{pool.value}}</strong>{{/if}}
+            <span>/ {{#if ../editable}}<button type="button" class="character-hud-effective-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="{{pool.key}}Max">{{pool.max}}</button>{{else}}{{pool.max}}{{/if}}</span>
           </div>
-          <span class="character-hud-pool-gauge" style="--cypherv2-pool-gauge-ratio: {{pool.gauge.ratio}}" aria-hidden="true"><i></i></span>
+          <span class="character-hud-pool-gauge" style="--magnusarchives-pool-gauge-ratio: {{pool.gauge.ratio}}" aria-hidden="true"><i></i></span>
           <div class="character-hud-pool-meta">
-            <small>{{localize "CYPHERV2.Pools.Edge"}} {{#if ../editable}}<button type="button" class="character-hud-effective-value cypherv2-primary-action" data-action="editCharacterOverride" data-override-key="{{pool.key}}Edge">{{pool.edge}}</button>{{else}}<strong>{{pool.edge}}</strong>{{/if}}</small>
-            {{#if pool.isMight}}<button type="button" class="character-hud-rally cypherv2-primary-action" data-action="rally" {{#unless pool.canRally}}disabled aria-disabled="true"{{/unless}}>{{localize "CYPHERV2.Actions.Rally"}}</button>{{/if}}
+            <small>{{localize "MAGNUSARCHIVES.Pools.Edge"}} {{#if ../editable}}<button type="button" class="character-hud-effective-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="{{pool.key}}Edge">{{pool.edge}}</button>{{else}}<strong>{{pool.edge}}</strong>{{/if}}</small>
+            {{#if pool.isMight}}<button type="button" class="character-hud-rally magnusarchives-primary-action" data-action="rally" {{#unless pool.canRally}}disabled aria-disabled="true"{{/unless}}>{{localize "MAGNUSARCHIVES.Actions.Rally"}}</button>{{/if}}
           </div>
         </article>
       {{/each}}
     </section>
 
     <div class="character-hud-lower">
-      <article class="character-hud-card character-hud-wounds {{#if header.wounds.dead}}is-dead{{/if}}">
+      <article class="character-hud-card character-hud-damage-track {{#if header.damageTrack.dead}}is-dead{{/if}}">
         <div class="character-hud-card-heading">
-          {{#if editable}}<button type="button" class="character-hud-card-title cypherv2-primary-action" data-action="applyWound">{{localize "CYPHERV2.Character.Wounds"}}</button>{{else}}<strong class="character-hud-card-title">{{localize "CYPHERV2.Character.Wounds"}}</strong>{{/if}}
-          {{#if header.wounds.hindrance}}<span class="character-hud-hindrance" title="{{localize 'CYPHERV2.Wounds.Hindrance'}}">{{header.wounds.hindranceModifier}}</span>{{/if}}
+          <strong class="character-hud-card-title">{{localize "MAGNUSARCHIVES.DamageTrack.Label"}}</strong>
+          {{#if header.damageTrack.canEdit}}
+            <span class="character-hud-track-actions">
+              <button type="button" class="magnusarchives-icon-action" data-action="healDamageTrack" title="{{localize 'MAGNUSARCHIVES.DamageTrack.Heal'}}" aria-label="{{localize 'MAGNUSARCHIVES.DamageTrack.Heal'}}"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+              <button type="button" class="magnusarchives-icon-action" data-action="applySeriousInjury" title="{{localize 'MAGNUSARCHIVES.DamageTrack.SeriousInjury'}}" aria-label="{{localize 'MAGNUSARCHIVES.DamageTrack.SeriousInjury'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+            </span>
+          {{/if}}
         </div>
-        <div class="character-hud-wound-columns {{#if header.shield}}has-shield{{/if}}">
-          <span></span><small>{{localize "CYPHERV2.Hud.Character"}}</small>
-          {{#if header.shield}}<button type="button" class="character-hud-shield-name cypherv2-primary-action" data-action="editCombatItem" data-item-id="{{header.shield.id}}">{{header.shield.name}}</button>{{/if}}
+        <ol class="character-hud-damage-track-steps" role="radiogroup" aria-label="{{localize 'MAGNUSARCHIVES.DamageTrack.Label'}}">
+          {{#each header.damageTrack.steps as |entry|}}
+            <li>
+              {{#if ../header.damageTrack.canEdit}}
+                <button type="button" class="character-hud-damage-step {{#if entry.current}}is-current{{/if}} {{#if entry.reached}}is-reached{{/if}}" data-action="setDamageTrackStep" data-step="{{entry.step}}" role="radio" aria-checked="{{entry.current}}" title="{{entry.hint}}">{{entry.label}}</button>
+              {{else}}
+                <span class="character-hud-damage-step {{#if entry.current}}is-current{{/if}} {{#if entry.reached}}is-reached{{/if}}" role="radio" aria-checked="{{entry.current}}" title="{{entry.hint}}">{{entry.label}}</span>
+              {{/if}}
+            </li>
+          {{/each}}
+        </ol>
+        {{#if header.damageTrack.dead}}<strong class="character-hud-danger">{{localize "MAGNUSARCHIVES.DamageTrack.dead"}}</strong>{{/if}}
+      </article>
+
+      <article class="character-hud-card character-hud-stress">
+        <div class="character-hud-card-heading">
+          <strong class="character-hud-card-title">{{localize "MAGNUSARCHIVES.Stress.Label"}}</strong>
+          {{#if header.stress.level}}<span class="character-hud-hindrance" title="{{localize 'MAGNUSARCHIVES.Stress.Hindrance'}}">{{header.stress.hindranceModifier}}</span>{{/if}}
         </div>
-        {{#each header.wounds.rows as |row|}}
-          <div class="character-hud-wound-row {{#if ../header.shield}}has-shield{{/if}}">
-            <small>{{row.character.shortLabel}}</small>
-            <span class="character-hud-pips" aria-label="{{row.character.tooltip}}">{{#each row.character.pips as |pip|}}{{#if @root.editable}}<button type="button" class="character-hud-pip is-character is-editable {{#if pip.filled}}is-filled{{/if}}" data-action="setCharacterWoundCount" data-track="character" data-severity="{{row.character.severity}}" data-count="{{pip.targetCount}}" title="{{pip.tooltip}}" aria-label="{{pip.tooltip}}" aria-pressed="{{pip.filled}}"></button>{{else}}<i class="character-hud-pip is-character {{#if pip.filled}}is-filled{{/if}}"></i>{{/if}}{{/each}}{{#if row.character.overCapacity}}<small class="character-hud-over-capacity">+{{row.character.overCapacity}}</small>{{/if}}</span>
-            {{#if row.shield}}<span class="character-hud-pips" aria-label="{{row.shield.tooltip}}">{{#each row.shield.pips as |pip|}}{{#if @root.editable}}<button type="button" class="character-hud-pip is-shield is-editable {{#if pip.filled}}is-filled{{/if}}" data-action="setShieldWoundCount" data-track="shield" data-shield-id="{{row.shield.itemId}}" data-severity="{{row.shield.severity}}" data-count="{{pip.targetCount}}" title="{{pip.tooltip}}" aria-label="{{pip.tooltip}}" aria-pressed="{{pip.filled}}"></button>{{else}}<i class="character-hud-pip is-shield {{#if pip.filled}}is-filled{{/if}}"></i>{{/if}}{{/each}}</span>{{/if}}
+        <div class="character-hud-stress-values">
+          <label class="character-hud-stat-box">
+            <small>{{localize "MAGNUSARCHIVES.Stress.Points"}}</small>
+            {{#if header.stress.canEdit}}<input class="character-hud-stat-value" name="system.stress.value" type="number" data-dtype="Number" value="{{header.stress.value}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stress.value}}</strong>{{/if}}
+          </label>
+          <span class="character-hud-stat-box">
+            <small>{{localize "MAGNUSARCHIVES.Stress.Level"}}</small>
+            <strong class="character-hud-stat-value">{{header.stress.level}}</strong>
+          </span>
+        </div>
+        <span class="character-hud-pips" aria-label="{{localize 'MAGNUSARCHIVES.Stress.TowardNextLevel'}}">
+          {{#each header.stress.pips as |pip|}}<i class="character-hud-pip is-stress {{#if pip.filled}}is-filled{{/if}}"></i>{{/each}}
+        </span>
+        {{#if header.stress.canEdit}}
+          <div class="character-hud-stress-actions">
+            <button type="button" class="magnusarchives-icon-action" data-action="adjustStress" data-delta="-1" title="{{localize 'MAGNUSARCHIVES.Stress.Relieve'}}" aria-label="{{localize 'MAGNUSARCHIVES.Stress.Relieve'}}"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+            <button type="button" class="magnusarchives-icon-action" data-action="adjustStress" data-delta="1" title="{{localize 'MAGNUSARCHIVES.Stress.Apply'}}" aria-label="{{localize 'MAGNUSARCHIVES.Stress.Apply'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
           </div>
-        {{/each}}
-        <div class="character-hud-wound-status">
-          {{#if header.wounds.dead}}<strong class="character-hud-danger">{{localize "CYPHERV2.Wounds.Dead"}}</strong>{{/if}}
-          {{#if header.shield.broken}}<strong class="character-hud-danger">{{header.shield.name}} — {{localize "CYPHERV2.Shield.Broken"}}</strong>{{/if}}
-        </div>
+        {{/if}}
       </article>
 
       <article class="character-hud-card character-hud-recovery">
         <div class="character-hud-card-heading character-hud-recovery-heading">
-          <strong class="character-hud-card-title">{{localize "CYPHERV2.Character.Recovery"}}</strong>
+          <strong class="character-hud-card-title">{{localize "MAGNUSARCHIVES.Character.Recovery"}}</strong>
           <small class="character-hud-recovery-formula">{{header.recoveryFormulaLabel}}</small>
-          {{#if header.canResetRecoveries}}<button type="button" class="cypherv2-icon-action" data-action="resetRecoveries" title="{{localize 'CYPHERV2.Hud.ResetRecoveries'}}" aria-label="{{localize 'CYPHERV2.Hud.ResetRecoveries'}}"><i class="fa-solid fa-rotate-right"></i></button>{{/if}}
+          {{#if header.canResetRecoveries}}<button type="button" class="magnusarchives-icon-action" data-action="resetRecoveries" title="{{localize 'MAGNUSARCHIVES.Hud.ResetRecoveries'}}" aria-label="{{localize 'MAGNUSARCHIVES.Hud.ResetRecoveries'}}"><i class="fa-solid fa-rotate-right"></i></button>{{/if}}
         </div>
         <div class="character-hud-recovery-buttons">
           {{#each header.recoveries as |recovery|}}<button type="button" data-action="recoveryType" data-recovery-slot-id="{{recovery.id}}" data-recovery-type="{{recovery.type}}" title="{{recovery.label}}" {{#if recovery.used}}disabled aria-disabled="true"{{/if}}>{{localize recovery.shortLabel}}</button>{{/each}}
         </div>
       </article>
 
-      <section class="character-hud-currency character-hud-stat-stack" aria-label="{{localize 'CYPHERV2.Hud.Currency'}}">
-          <label class="character-hud-stat-box"><small>{{localize "CYPHERV2.Hud.ResourcePointsShort"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.resourcePoints" type="number" data-dtype="Number" value="{{header.stats.resourcePoints}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.resourcePoints}}</strong>{{/if}}</label>
-          <label class="character-hud-stat-box"><small>{{localize "CYPHERV2.Character.XP"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.xp" type="number" data-dtype="Number" value="{{header.stats.xp}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.xp}}</strong>{{/if}}</label>
+      <section class="character-hud-currency character-hud-stat-stack" aria-label="{{localize 'MAGNUSARCHIVES.Hud.Currency'}}">
+          <label class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Hud.ResourcePointsShort"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.resourcePoints" type="number" data-dtype="Number" value="{{header.stats.resourcePoints}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.resourcePoints}}</strong>{{/if}}</label>
+          <label class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.XP"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.xp" type="number" data-dtype="Number" value="{{header.stats.xp}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.xp}}</strong>{{/if}}</label>
       </section>
     </div>
   </header>
@@ -124,99 +152,99 @@
 
   <div class="tab {{tabs.settings.cssClass}}" data-group="primary" data-tab="settings">
     <div class="character-settings-panel">
-      <section class="character-settings-section character-familiarity-settings" title="{{localize 'CYPHERV2.Settings.Character.FamiliarityHint'}}">
-        <header class="character-settings-section-header"><h2>{{localize "CYPHERV2.Settings.Character.Familiarities"}}</h2></header>
-        <div class="character-familiarity-family"><h3>{{localize "CYPHERV2.Settings.Character.WeaponCategories"}}</h3><div class="character-familiarity-buttons">{{#each familiarities.weapons as |entry|}}<button type="button" class="character-familiarity-toggle {{#if entry.effective}}is-effective{{/if}} {{#if entry.manual}}is-manual{{/if}} {{#if entry.packageGranted}}is-package-granted{{/if}}" data-action="toggleFamiliarity" data-family="weapon" data-category="{{entry.category}}" aria-pressed="{{entry.manual}}" title="{{entry.sourceHint}}" {{#unless entry.canToggle}}disabled aria-disabled="true"{{/unless}}><span>{{entry.label}}</span>{{#if entry.effective}}<i class="fa-solid fa-check" aria-hidden="true"></i>{{/if}}</button>{{/each}}</div></div>
-        <div class="character-familiarity-family character-weapon-family-settings"><h3>{{localize "CYPHERV2.Settings.Character.WeaponFamilies"}}</h3><div class="character-familiarity-tags">{{#each familiarities.weaponFamilies as |entry|}}<span class="character-familiarity-tag {{#if entry.packageGranted}}is-package-granted{{/if}}" title="{{entry.sourceHint}}"><span>{{entry.label}}</span>{{#if entry.canRemove}}<button type="button" class="cypherv2-icon-action" data-action="removeWeaponFamily" data-weapon-family="{{entry.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}} {{entry.label}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{entry.label}}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}{{#if editable}}<button type="button" class="compact-inline-action" data-action="addWeaponFamily"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "CYPHERV2.Settings.Character.AddWeaponFamily"}}</button>{{/if}}</div></div>
-        <div class="character-familiarity-family"><h3>{{localize "CYPHERV2.Combat.Armors"}}</h3><div class="character-familiarity-buttons">{{#each familiarities.armor as |entry|}}<button type="button" class="character-familiarity-toggle {{#if entry.effective}}is-effective{{/if}} {{#if entry.manual}}is-manual{{/if}} {{#if entry.packageGranted}}is-package-granted{{/if}}" data-action="toggleFamiliarity" data-family="armor" data-category="{{entry.category}}" aria-pressed="{{entry.manual}}" title="{{entry.sourceHint}}" {{#unless entry.canToggle}}disabled aria-disabled="true"{{/unless}}><span>{{entry.label}}</span>{{#if entry.effective}}<i class="fa-solid fa-check" aria-hidden="true"></i>{{/if}}</button>{{/each}}</div></div>
+      <section class="character-settings-section character-familiarity-settings" title="{{localize 'MAGNUSARCHIVES.Settings.Character.FamiliarityHint'}}">
+        <header class="character-settings-section-header"><h2>{{localize "MAGNUSARCHIVES.Settings.Character.Familiarities"}}</h2></header>
+        <div class="character-familiarity-family"><h3>{{localize "MAGNUSARCHIVES.Settings.Character.WeaponCategories"}}</h3><div class="character-familiarity-buttons">{{#each familiarities.weapons as |entry|}}<button type="button" class="character-familiarity-toggle {{#if entry.effective}}is-effective{{/if}} {{#if entry.manual}}is-manual{{/if}} {{#if entry.packageGranted}}is-package-granted{{/if}}" data-action="toggleFamiliarity" data-family="weapon" data-category="{{entry.category}}" aria-pressed="{{entry.manual}}" title="{{entry.sourceHint}}" {{#unless entry.canToggle}}disabled aria-disabled="true"{{/unless}}><span>{{entry.label}}</span>{{#if entry.effective}}<i class="fa-solid fa-check" aria-hidden="true"></i>{{/if}}</button>{{/each}}</div></div>
+        <div class="character-familiarity-family character-weapon-family-settings"><h3>{{localize "MAGNUSARCHIVES.Settings.Character.WeaponFamilies"}}</h3><div class="character-familiarity-tags">{{#each familiarities.weaponFamilies as |entry|}}<span class="character-familiarity-tag {{#if entry.packageGranted}}is-package-granted{{/if}}" title="{{entry.sourceHint}}"><span>{{entry.label}}</span>{{#if entry.canRemove}}<button type="button" class="magnusarchives-icon-action" data-action="removeWeaponFamily" data-weapon-family="{{entry.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{entry.label}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{entry.label}}"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}{{#if editable}}<button type="button" class="compact-inline-action" data-action="addWeaponFamily"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.Settings.Character.AddWeaponFamily"}}</button>{{/if}}</div></div>
+        <div class="character-familiarity-family"><h3>{{localize "MAGNUSARCHIVES.Combat.Armors"}}</h3><div class="character-familiarity-buttons">{{#each familiarities.armor as |entry|}}<button type="button" class="character-familiarity-toggle {{#if entry.effective}}is-effective{{/if}} {{#if entry.manual}}is-manual{{/if}} {{#if entry.packageGranted}}is-package-granted{{/if}}" data-action="toggleFamiliarity" data-family="armor" data-category="{{entry.category}}" aria-pressed="{{entry.manual}}" title="{{entry.sourceHint}}" {{#unless entry.canToggle}}disabled aria-disabled="true"{{/unless}}><span>{{entry.label}}</span>{{#if entry.effective}}<i class="fa-solid fa-check" aria-hidden="true"></i>{{/if}}</button>{{/each}}</div></div>
       </section>
 
       <section class="character-settings-section character-packages">
         <header class="character-settings-section-header">
-          <h2>{{localize "CYPHERV2.Settings.Character.Sources"}}</h2>
-          {{#if advancement.guidance.completed}}{{#if editable}}<button type="button" class="compact-inline-action" data-action="resetProgressionGuidance">{{localize "CYPHERV2.Advancement.Guidance.Reset"}}</button>{{/if}}{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Settings.Character.Sources"}}</h2>
+          {{#if advancement.guidance.completed}}{{#if editable}}<button type="button" class="compact-inline-action" data-action="resetProgressionGuidance">{{localize "MAGNUSARCHIVES.Advancement.Guidance.Reset"}}</button>{{/if}}{{/if}}
         </header>
         <div class="character-source-subsection character-genre-settings" data-hud-drop="genre">
-          <h3>{{localize "CYPHERV2.Genre.Label"}}</h3>
+          <h3>{{localize "MAGNUSARCHIVES.Genre.Label"}}</h3>
           {{#if genre.attached}}
             <div class="character-genre-row">
               <i class="fa-solid fa-masks-theater" aria-hidden="true"></i>
               <button type="button" class="link-button" data-action="inspectGenre" {{#unless genre.available}}disabled{{/unless}}>{{genre.name}}</button>
-              <small>{{#if genre.available}}{{localize "CYPHERV2.Genre.EffortCap.Label"}}: {{genre.totalEffortCapLabel}}{{else}}{{localize "CYPHERV2.Genre.SourceUnavailable"}}{{/if}}</small>
-              {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="cypherv2-icon-action" data-action="addGenre" title="{{localize 'CYPHERV2.Packages.Replace'}}" aria-label="{{localize 'CYPHERV2.Packages.Replace'}} {{genre.name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="cypherv2-icon-action" data-action="removeGenre" title="{{localize 'CYPHERV2.Genre.Remove'}}" aria-label="{{localize 'CYPHERV2.Genre.Remove'}} {{genre.name}}"><i class="fa-solid fa-xmark"></i></button></span>{{/if}}
+              <small>{{#if genre.available}}{{localize "MAGNUSARCHIVES.Genre.EffortCap.Label"}}: {{genre.totalEffortCapLabel}}{{else}}{{localize "MAGNUSARCHIVES.Genre.SourceUnavailable"}}{{/if}}</small>
+              {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="magnusarchives-icon-action" data-action="addGenre" title="{{localize 'MAGNUSARCHIVES.Packages.Replace'}}" aria-label="{{localize 'MAGNUSARCHIVES.Packages.Replace'}} {{genre.name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="magnusarchives-icon-action" data-action="removeGenre" title="{{localize 'MAGNUSARCHIVES.Genre.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Genre.Remove'}} {{genre.name}}"><i class="fa-solid fa-xmark"></i></button></span>{{/if}}
             </div>
           {{else}}
-            <div class="character-genre-empty"><span class="character-genre-dropzone"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i> {{localize "CYPHERV2.Genre.DropHere"}}</span>{{#if editable}}<button type="button" class="compact-inline-action" data-action="addGenre"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Genre.Add"}}</button>{{/if}}</div>
+            <div class="character-genre-empty"><span class="character-genre-dropzone"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.Genre.DropHere"}}</span>{{#if editable}}<button type="button" class="compact-inline-action" data-action="addGenre"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Genre.Add"}}</button>{{/if}}</div>
           {{/if}}
         </div>
         <label class="character-focus-sentence-setting">
           <input type="checkbox" name="system.presentation.hideFocusInSentence" {{checked system.presentation.hideFocusInSentence}} {{#unless editable}}disabled{{/unless}}>
-          <span>{{localize "CYPHERV2.Settings.Character.HideFocusInSentence"}}</span>
+          <span>{{localize "MAGNUSARCHIVES.Settings.Character.HideFocusInSentence"}}</span>
         </label>
         <label class="character-focus-sentence-setting character-power-shift-setting">
           <input type="checkbox" name="system.presentation.powerShiftsEnabled" {{checked system.presentation.powerShiftsEnabled}} {{#unless editable}}disabled{{/unless}}>
-          <span>{{localize "CYPHERV2.PowerShifts.Activate"}}</span>
+          <span>{{localize "MAGNUSARCHIVES.PowerShifts.Activate"}}</span>
         </label>
         <div class="character-source-list">
-          <div class="character-source-row"><strong>{{localize "CYPHERV2.Packages.Types"}}</strong><div class="character-source-values">{{#each typeItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addType"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Actions.Add"}}</button>{{/if}}</div>
-          <div class="character-source-row"><strong>{{localize "CYPHERV2.Packages.PrimaryDescriptor"}}</strong><div class="character-source-values">{{#each primaryDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addDescriptor"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Actions.Add"}}</button>{{/if}}</div>
-          <div class="character-source-row"><strong>{{localize "CYPHERV2.Packages.Species"}}</strong><div class="character-source-values">{{#each speciesItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addSpecies"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Actions.Add"}}</button>{{/if}}</div>
-          <div class="character-source-row"><strong>{{localize "CYPHERV2.Packages.AdditionalDescriptors"}}</strong><div class="character-source-values">{{#each additionalDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addDescriptor"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Actions.Add"}}</button>{{/if}}</div>
-          <div class="character-source-row"><strong>{{localize "CYPHERV2.Packages.SpeciesDescriptors"}}</strong><div class="character-source-values">{{#each speciesDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'CYPHERV2.Actions.Remove'}}" aria-label="{{localize 'CYPHERV2.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "CYPHERV2.Common.None"}}</span>{{/each}}</div></div>
+          <div class="character-source-row"><strong>{{localize "MAGNUSARCHIVES.Packages.Types"}}</strong><div class="character-source-values">{{#each typeItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addType"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Actions.Add"}}</button>{{/if}}</div>
+          <div class="character-source-row"><strong>{{localize "MAGNUSARCHIVES.Packages.PrimaryDescriptor"}}</strong><div class="character-source-values">{{#each primaryDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addDescriptor"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Actions.Add"}}</button>{{/if}}</div>
+          <div class="character-source-row"><strong>{{localize "MAGNUSARCHIVES.Packages.Species"}}</strong><div class="character-source-values">{{#each speciesItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addSpecies"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Actions.Add"}}</button>{{/if}}</div>
+          <div class="character-source-row"><strong>{{localize "MAGNUSARCHIVES.Packages.AdditionalDescriptors"}}</strong><div class="character-source-values">{{#each additionalDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}</div>{{#if editable}}<button type="button" class="compact-inline-action character-source-add" data-action="addDescriptor"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Actions.Add"}}</button>{{/if}}</div>
+          <div class="character-source-row"><strong>{{localize "MAGNUSARCHIVES.Packages.SpeciesDescriptors"}}</strong><div class="character-source-values">{{#each speciesDescriptorItems as |package|}}<span class="character-source-item"><button type="button" class="link-button" data-action="inspectPackage" data-item-id="{{package.id}}">{{package.name}}</button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="removePackage" data-item-id="{{package.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Remove'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Remove'}} {{package.name}}"><i class="fa-solid fa-xmark"></i></button>{{/if}}</span>{{else}}<span class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</span>{{/each}}</div></div>
         </div>
         <details class="character-granted-disclosure">
-          <summary>{{localize "CYPHERV2.Settings.Character.GrantedProvenance"}}</summary>
-          {{#if packageGrantedItems.length}}<ul>{{#each packageGrantedItems as |item|}}<li><button type="button" class="link-button" data-action="inspectGrantedItem" data-item-id="{{item.id}}">{{item.name}}</button><small>{{item.type}} · {{item.sourceName}} · {{item.status}}{{#if item.replacementLabel}} · {{item.replacementLabel}}{{/if}}</small></li>{{/each}}</ul>{{else}}<p class="empty-list">{{localize "CYPHERV2.Common.None"}}</p>{{/if}}
+          <summary>{{localize "MAGNUSARCHIVES.Settings.Character.GrantedProvenance"}}</summary>
+          {{#if packageGrantedItems.length}}<ul>{{#each packageGrantedItems as |item|}}<li><button type="button" class="link-button" data-action="inspectGrantedItem" data-item-id="{{item.id}}">{{item.name}}</button><small>{{item.type}} · {{item.sourceName}} · {{item.status}}{{#if item.replacementLabel}} · {{item.replacementLabel}}{{/if}}</small></li>{{/each}}</ul>{{else}}<p class="empty-list">{{localize "MAGNUSARCHIVES.Common.None"}}</p>{{/if}}
         </details>
       </section>
 
       <details class="character-settings-section character-settings-disclosure character-base-values" data-persistent-disclosure="base-values">
-        <summary>{{localize "CYPHERV2.Settings.Character.BaseValues"}}</summary>
+        <summary>{{localize "MAGNUSARCHIVES.Settings.Character.BaseValues"}}</summary>
         <div class="character-base-values-grid">
-          <article class="character-base-pool"><header><h3>{{localize "CYPHERV2.Pools.Might"}}</h3><small>{{system.stats.might.value}} / {{system.derived.pools.might.max}} · {{localize "CYPHERV2.Pools.Edge"}} {{system.derived.pools.might.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "CYPHERV2.Pools.BaseMax"}}</span><input name="system.stats.might.baseMax" type="number" data-dtype="Number" value="{{system.stats.might.baseMax}}" min="1"></label><label><span>{{localize "CYPHERV2.Pools.BaseEdge"}}</span><input name="system.stats.might.baseEdge" type="number" data-dtype="Number" value="{{system.stats.might.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "CYPHERV2.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.might.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.might.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
-          <article class="character-base-pool"><header><h3>{{localize "CYPHERV2.Pools.Speed"}}</h3><small>{{system.stats.speed.value}} / {{system.derived.pools.speed.max}} · {{localize "CYPHERV2.Pools.Edge"}} {{system.derived.pools.speed.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "CYPHERV2.Pools.BaseMax"}}</span><input name="system.stats.speed.baseMax" type="number" data-dtype="Number" value="{{system.stats.speed.baseMax}}" min="1"></label><label><span>{{localize "CYPHERV2.Pools.BaseEdge"}}</span><input name="system.stats.speed.baseEdge" type="number" data-dtype="Number" value="{{system.stats.speed.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "CYPHERV2.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.speed.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.speed.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
-          <article class="character-base-pool"><header><h3>{{localize "CYPHERV2.Pools.Intellect"}}</h3><small>{{system.stats.intellect.value}} / {{system.derived.pools.intellect.max}} · {{localize "CYPHERV2.Pools.Edge"}} {{system.derived.pools.intellect.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "CYPHERV2.Pools.BaseMax"}}</span><input name="system.stats.intellect.baseMax" type="number" data-dtype="Number" value="{{system.stats.intellect.baseMax}}" min="1"></label><label><span>{{localize "CYPHERV2.Pools.BaseEdge"}}</span><input name="system.stats.intellect.baseEdge" type="number" data-dtype="Number" value="{{system.stats.intellect.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "CYPHERV2.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.intellect.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.intellect.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
+          <article class="character-base-pool"><header><h3>{{localize "MAGNUSARCHIVES.Pools.Might"}}</h3><small>{{system.stats.might.value}} / {{system.derived.pools.might.max}} · {{localize "MAGNUSARCHIVES.Pools.Edge"}} {{system.derived.pools.might.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseMax"}}</span><input name="system.stats.might.baseMax" type="number" data-dtype="Number" value="{{system.stats.might.baseMax}}" min="1"></label><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseEdge"}}</span><input name="system.stats.might.baseEdge" type="number" data-dtype="Number" value="{{system.stats.might.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "MAGNUSARCHIVES.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.might.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.might.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
+          <article class="character-base-pool"><header><h3>{{localize "MAGNUSARCHIVES.Pools.Speed"}}</h3><small>{{system.stats.speed.value}} / {{system.derived.pools.speed.max}} · {{localize "MAGNUSARCHIVES.Pools.Edge"}} {{system.derived.pools.speed.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseMax"}}</span><input name="system.stats.speed.baseMax" type="number" data-dtype="Number" value="{{system.stats.speed.baseMax}}" min="1"></label><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseEdge"}}</span><input name="system.stats.speed.baseEdge" type="number" data-dtype="Number" value="{{system.stats.speed.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "MAGNUSARCHIVES.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.speed.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.speed.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
+          <article class="character-base-pool"><header><h3>{{localize "MAGNUSARCHIVES.Pools.Intellect"}}</h3><small>{{system.stats.intellect.value}} / {{system.derived.pools.intellect.max}} · {{localize "MAGNUSARCHIVES.Pools.Edge"}} {{system.derived.pools.intellect.edge}}</small></header><div class="character-base-fields"><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseMax"}}</span><input name="system.stats.intellect.baseMax" type="number" data-dtype="Number" value="{{system.stats.intellect.baseMax}}" min="1"></label><label><span>{{localize "MAGNUSARCHIVES.Pools.BaseEdge"}}</span><input name="system.stats.intellect.baseEdge" type="number" data-dtype="Number" value="{{system.stats.intellect.baseEdge}}"></label></div><details class="derived-breakdown"><summary>{{localize "MAGNUSARCHIVES.Packages.Breakdown"}}</summary><ul>{{#each system.derived.pools.intellect.maxContributions as |entry|}}<li>{{entry.label}}: +{{entry.value}}</li>{{/each}}{{#each system.derived.pools.intellect.edgeContributions as |entry|}}<li>{{entry.label}} (Edge): +{{entry.value}}</li>{{/each}}</ul></details></article>
         </div>
       </details>
 
       <details class="character-settings-section character-settings-disclosure character-override-settings" data-persistent-disclosure="effective-overrides">
-        <summary>{{localize "CYPHERV2.Overrides.Title"}}</summary>
+        <summary>{{localize "MAGNUSARCHIVES.Overrides.Title"}}</summary>
         <div class="character-override-list">
           {{#each characterOverrides as |entry|}}
             <div class="character-override-row">
               <strong>{{entry.label}}</strong>
-              <span><small>{{localize "CYPHERV2.Overrides.Calculated"}}</small> {{entry.calculated}}</span>
-              <span><small>{{localize "CYPHERV2.Overrides.Override"}}</small> {{#if entry.hasOverride}}{{entry.override}}{{else}}{{localize "CYPHERV2.Common.None"}}{{/if}}</span>
-              <span><small>{{localize "CYPHERV2.Overrides.Effective"}}</small> {{entry.effective}}</span>
-              {{#if ../editable}}<span class="character-settings-row-actions"><button type="button" class="cypherv2-icon-action" data-action="editCharacterOverride" data-override-key="{{entry.key}}" title="{{localize 'CYPHERV2.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="cypherv2-icon-action" data-action="clearCharacterOverride" data-override-key="{{entry.key}}" title="{{localize 'CYPHERV2.Overrides.Clear'}}" {{#unless entry.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
+              <span><small>{{localize "MAGNUSARCHIVES.Overrides.Calculated"}}</small> {{entry.calculated}}</span>
+              <span><small>{{localize "MAGNUSARCHIVES.Overrides.Override"}}</small> {{#if entry.hasOverride}}{{entry.override}}{{else}}{{localize "MAGNUSARCHIVES.Common.None"}}{{/if}}</span>
+              <span><small>{{localize "MAGNUSARCHIVES.Overrides.Effective"}}</small> {{entry.effective}}</span>
+              {{#if ../editable}}<span class="character-settings-row-actions"><button type="button" class="magnusarchives-icon-action" data-action="editCharacterOverride" data-override-key="{{entry.key}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="magnusarchives-icon-action" data-action="clearCharacterOverride" data-override-key="{{entry.key}}" title="{{localize 'MAGNUSARCHIVES.Overrides.Clear'}}" {{#unless entry.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
             </div>
           {{/each}}
           <div class="character-override-row character-compound-override-row">
-            <strong>{{localize "CYPHERV2.Overrides.Wounds"}}</strong>
-            <span><small>{{localize "CYPHERV2.Overrides.Calculated"}}</small> MIN {{woundOverride.calculated.minor}} · MOD {{woundOverride.calculated.moderate}} · MAJ {{woundOverride.calculated.major}}</span>
-            <span><small>{{localize "CYPHERV2.Overrides.Override"}}</small> {{#if woundOverride.hasOverride}}MIN {{woundOverride.modifierLabels.minor}} · MOD {{woundOverride.modifierLabels.moderate}} · MAJ {{woundOverride.modifierLabels.major}}{{else}}{{localize "CYPHERV2.Common.None"}}{{/if}}</span>
-            <span><small>{{localize "CYPHERV2.Overrides.Effective"}}</small> MIN {{woundOverride.effective.minor}} · MOD {{woundOverride.effective.moderate}} · MAJ {{woundOverride.effective.major}}</span>
-            {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="cypherv2-icon-action" data-action="editWoundCapacityOverride" title="{{localize 'CYPHERV2.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="cypherv2-icon-action" data-action="resetWoundCapacityOverride" title="{{localize 'CYPHERV2.Overrides.Clear'}}" {{#unless woundOverride.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
+            <strong>{{localize "MAGNUSARCHIVES.Overrides.Wounds"}}</strong>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Calculated"}}</small> MIN {{woundOverride.calculated.minor}} · MOD {{woundOverride.calculated.moderate}} · MAJ {{woundOverride.calculated.major}}</span>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Override"}}</small> {{#if woundOverride.hasOverride}}MIN {{woundOverride.modifierLabels.minor}} · MOD {{woundOverride.modifierLabels.moderate}} · MAJ {{woundOverride.modifierLabels.major}}{{else}}{{localize "MAGNUSARCHIVES.Common.None"}}{{/if}}</span>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Effective"}}</small> MIN {{woundOverride.effective.minor}} · MOD {{woundOverride.effective.moderate}} · MAJ {{woundOverride.effective.major}}</span>
+            {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="magnusarchives-icon-action" data-action="editWoundCapacityOverride" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="magnusarchives-icon-action" data-action="resetWoundCapacityOverride" title="{{localize 'MAGNUSARCHIVES.Overrides.Clear'}}" {{#unless woundOverride.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
           </div>
           <div class="character-override-row character-compound-override-row">
-            <strong>{{localize "CYPHERV2.Overrides.Recovery"}}</strong>
-            <span><small>{{localize "CYPHERV2.Overrides.Calculated"}}</small> {{recoveryOverride.calculatedSlots}} {{localize "CYPHERV2.Overrides.Slots"}} · {{recoveryOverride.calculatedFormula}}</span>
-            <span><small>{{localize "CYPHERV2.Overrides.Override"}}</small> {{#if recoveryOverride.hasOverride}}{{localize "CYPHERV2.Overrides.Custom"}}{{else}}{{localize "CYPHERV2.Common.None"}}{{/if}}</span>
-            <span><small>{{localize "CYPHERV2.Overrides.Effective"}}</small> {{recoveryOverride.effectiveSlots}} {{localize "CYPHERV2.Overrides.Slots"}} · {{recoveryOverride.effectiveFormula}}</span>
-            {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="cypherv2-icon-action" data-action="editRecoveryOverride" title="{{localize 'CYPHERV2.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="cypherv2-icon-action" data-action="resetRecoveryOverride" title="{{localize 'CYPHERV2.Overrides.Clear'}}" {{#unless recoveryOverride.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
+            <strong>{{localize "MAGNUSARCHIVES.Overrides.Recovery"}}</strong>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Calculated"}}</small> {{recoveryOverride.calculatedSlots}} {{localize "MAGNUSARCHIVES.Overrides.Slots"}} · {{recoveryOverride.calculatedFormula}}</span>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Override"}}</small> {{#if recoveryOverride.hasOverride}}{{localize "MAGNUSARCHIVES.Overrides.Custom"}}{{else}}{{localize "MAGNUSARCHIVES.Common.None"}}{{/if}}</span>
+            <span><small>{{localize "MAGNUSARCHIVES.Overrides.Effective"}}</small> {{recoveryOverride.effectiveSlots}} {{localize "MAGNUSARCHIVES.Overrides.Slots"}} · {{recoveryOverride.effectiveFormula}}</span>
+            {{#if editable}}<span class="character-settings-row-actions"><button type="button" class="magnusarchives-icon-action" data-action="editRecoveryOverride" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="magnusarchives-icon-action" data-action="resetRecoveryOverride" title="{{localize 'MAGNUSARCHIVES.Overrides.Clear'}}" {{#unless recoveryOverride.hasOverride}}disabled{{/unless}}><i class="fa-solid fa-rotate-left"></i></button></span>{{/if}}
           </div>
         </div>
       </details>
 
       <section class="character-settings-section character-header-appearance-settings">
         <header class="character-settings-section-header">
-          <h2>{{localize "CYPHERV2.Settings.Character.CharacterAppearance"}}</h2>
-          {{#if editable}}<button type="button" class="compact-inline-action" data-action="resetHeaderAppearance"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> {{localize "CYPHERV2.Settings.Character.ResetToTheme"}}</button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Settings.Character.CharacterAppearance"}}</h2>
+          {{#if editable}}<button type="button" class="compact-inline-action" data-action="resetHeaderAppearance"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.Settings.Character.ResetToTheme"}}</button>{{/if}}
         </header>
         <div class="character-header-appearance-grid">
-          <label><span>{{localize "CYPHERV2.Settings.Character.HeaderBackground"}}</span><select name="system.appearance.backgroundMode" {{#unless editable}}disabled{{/unless}}><option value="theme" {{#if header.appearance.isTheme}}selected{{/if}}>{{localize "CYPHERV2.Settings.Character.BackgroundTheme"}}</option><option value="portrait" {{#if header.appearance.isPortrait}}selected{{/if}}>{{localize "CYPHERV2.Settings.Character.BackgroundPortrait"}}</option><option value="custom" {{#if header.appearance.isCustom}}selected{{/if}}>{{localize "CYPHERV2.Settings.Character.BackgroundCustom"}}</option></select></label>
-          {{#if header.appearance.isCustom}}<label class="character-header-custom-image"><span>{{localize "CYPHERV2.Settings.Character.CustomImage"}}</span><file-picker type="image" name="system.appearance.customImage" value="{{system.appearance.customImage}}" {{#unless editable}}disabled{{/unless}}></file-picker></label>{{/if}}
-          <label class="character-header-color"><span>{{localize "CYPHERV2.Settings.Character.CharacterColor"}}</span><input type="color" data-header-color value="{{header.appearance.colorInput}}" {{#unless editable}}disabled{{/unless}}></label>
+          <label><span>{{localize "MAGNUSARCHIVES.Settings.Character.HeaderBackground"}}</span><select name="system.appearance.backgroundMode" {{#unless editable}}disabled{{/unless}}><option value="theme" {{#if header.appearance.isTheme}}selected{{/if}}>{{localize "MAGNUSARCHIVES.Settings.Character.BackgroundTheme"}}</option><option value="portrait" {{#if header.appearance.isPortrait}}selected{{/if}}>{{localize "MAGNUSARCHIVES.Settings.Character.BackgroundPortrait"}}</option><option value="custom" {{#if header.appearance.isCustom}}selected{{/if}}>{{localize "MAGNUSARCHIVES.Settings.Character.BackgroundCustom"}}</option></select></label>
+          {{#if header.appearance.isCustom}}<label class="character-header-custom-image"><span>{{localize "MAGNUSARCHIVES.Settings.Character.CustomImage"}}</span><file-picker type="image" name="system.appearance.customImage" value="{{system.appearance.customImage}}" {{#unless editable}}disabled{{/unless}}></file-picker></label>{{/if}}
+          <label class="character-header-color"><span>{{localize "MAGNUSARCHIVES.Settings.Character.CharacterColor"}}</span><input type="color" data-header-color value="{{header.appearance.colorInput}}" {{#unless editable}}disabled{{/unless}}></label>
         </div>
       </section>
     </div>
@@ -226,43 +254,43 @@
     <section class="skills-section">
       {{#if powerShifts.enabled}}
         <section class="character-power-shifts {{#if powerShifts.overBudget}}has-budget-warning{{/if}}">
-          <header class="power-shift-header"><h2>{{localize "CYPHERV2.PowerShifts.Title"}}</h2><strong>{{powerShifts.allocated}} / {{powerShifts.available}}</strong>{{#if editable}}<button type="button" class="compact-inline-action" data-action="addPowerShift"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "CYPHERV2.PowerShifts.Add"}}</button>{{/if}}</header>
-          {{#if powerShifts.overBudget}}<p class="power-shift-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> {{localize "CYPHERV2.PowerShifts.OverBudget"}}</p>{{/if}}
-          {{#if powerShifts.legacy}}<p class="power-shift-legacy-note">{{localize "CYPHERV2.PowerShifts.LegacySlots"}}</p>{{/if}}
+          <header class="power-shift-header"><h2>{{localize "MAGNUSARCHIVES.PowerShifts.Title"}}</h2><strong>{{powerShifts.allocated}} / {{powerShifts.available}}</strong>{{#if editable}}<button type="button" class="compact-inline-action" data-action="addPowerShift"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.PowerShifts.Add"}}</button>{{/if}}</header>
+          {{#if powerShifts.overBudget}}<p class="power-shift-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.PowerShifts.OverBudget"}}</p>{{/if}}
+          {{#if powerShifts.legacy}}<p class="power-shift-legacy-note">{{localize "MAGNUSARCHIVES.PowerShifts.LegacySlots"}}</p>{{/if}}
           <ol class="power-shift-list">
             {{#each powerShifts.entries as |shift|}}
               <li class="power-shift-row {{#if shift.categoryWarning}}has-category-warning{{/if}}">
                 <span class="power-shift-identity"><strong>{{shift.category}}</strong>{{#if shift.specification}}<span>— {{shift.specification}}</span>{{/if}}{{#if shift.description}}<small>{{shift.description}}</small>{{/if}}</span>
                 <strong class="power-shift-value">{{shift.shifts}}</strong>
-                {{#if ../editable}}<span class="power-shift-actions"><button type="button" class="cypherv2-icon-action" data-action="editPowerShift" data-power-shift-id="{{shift.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{shift.category}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="deletePowerShift" data-power-shift-id="{{shift.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{shift.category}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button></span>{{/if}}
-                {{#if shift.categoryWarning}}<small class="power-shift-row-warning">{{localize "CYPHERV2.PowerShifts.CategoryWarning"}}</small>{{/if}}
+                {{#if ../editable}}<span class="power-shift-actions"><button type="button" class="magnusarchives-icon-action" data-action="editPowerShift" data-power-shift-id="{{shift.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{shift.category}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="deletePowerShift" data-power-shift-id="{{shift.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{shift.category}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button></span>{{/if}}
+                {{#if shift.categoryWarning}}<small class="power-shift-row-warning">{{localize "MAGNUSARCHIVES.PowerShifts.CategoryWarning"}}</small>{{/if}}
               </li>
-            {{else}}<li class="power-shift-empty">{{localize "CYPHERV2.PowerShifts.Empty"}}</li>{{/each}}
+            {{else}}<li class="power-shift-empty">{{localize "MAGNUSARCHIVES.PowerShifts.Empty"}}</li>{{/each}}
           </ol>
         </section>
       {{/if}}
       <header class="skills-header">
-        <div class="skills-sort" aria-label="{{localize 'CYPHERV2.Skill.Sort.Label'}}">
-          <span>{{localize "CYPHERV2.Skill.Sort.Label"}}</span>
-          <button type="button" class="cypherv2-primary-action {{#if skillSort.nameActive}}is-active{{/if}}" data-action="setSkillSort" data-sort-mode="name" aria-pressed="{{skillSort.nameActive}}">{{localize "CYPHERV2.Skill.Sort.Name"}}</button>
+        <div class="skills-sort" aria-label="{{localize 'MAGNUSARCHIVES.Skill.Sort.Label'}}">
+          <span>{{localize "MAGNUSARCHIVES.Skill.Sort.Label"}}</span>
+          <button type="button" class="magnusarchives-primary-action {{#if skillSort.nameActive}}is-active{{/if}}" data-action="setSkillSort" data-sort-mode="name" aria-pressed="{{skillSort.nameActive}}">{{localize "MAGNUSARCHIVES.Skill.Sort.Name"}}</button>
           <span aria-hidden="true">|</span>
-          <button type="button" class="cypherv2-primary-action {{#if skillSort.rankActive}}is-active{{/if}}" data-action="setSkillSort" data-sort-mode="rank" aria-pressed="{{skillSort.rankActive}}">{{localize "CYPHERV2.Skill.Sort.Rank"}}</button>
+          <button type="button" class="magnusarchives-primary-action {{#if skillSort.rankActive}}is-active{{/if}}" data-action="setSkillSort" data-sort-mode="rank" aria-pressed="{{skillSort.rankActive}}">{{localize "MAGNUSARCHIVES.Skill.Sort.Rank"}}</button>
         </div>
-        {{#if editable}}<button type="button" class="skills-add-action cypherv2-primary-action" data-action="createSkill"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Skill.Add"}}</button>{{/if}}
+        {{#if editable}}<button type="button" class="skills-add-action magnusarchives-primary-action" data-action="createSkill"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Skill.Add"}}</button>{{/if}}
       </header>
       <ol class="compact-skill-list">
         {{#each skillItems as |skill|}}
           <li class="compact-skill-row" data-item-id="{{skill.id}}">
-            <button type="button" class="compact-skill-roll cypherv2-primary-action" data-action="rollSkill" data-item-id="{{skill.id}}" title="{{skill.name}}">{{skill.name}}</button>
+            <button type="button" class="compact-skill-roll magnusarchives-primary-action" data-action="rollSkill" data-item-id="{{skill.id}}" title="{{skill.name}}">{{skill.name}}</button>
             <span class="compact-skill-rank is-{{skill.rank}}">{{skill.rankLabel}}</span>
             <span class="compact-skill-actions">
-              <button type="button" class="cypherv2-icon-action" data-action="configureSkillRoll" data-item-id="{{skill.id}}" title="{{localize 'CYPHERV2.Skill.ConfigureRoll'}}" aria-label="{{localize 'CYPHERV2.Skill.ConfigureRoll'}}: {{skill.name}}"><i class="fa-solid fa-sliders" aria-hidden="true"></i></button>
-              <button type="button" class="cypherv2-icon-action" data-action="editSkill" data-item-id="{{skill.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{skill.name}}"><i class="fa-solid fa-pen"></i></button>
-              <button type="button" class="cypherv2-icon-action" data-action="deleteSkill" data-item-id="{{skill.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{skill.name}}"><i class="fa-solid fa-trash"></i></button>
+              <button type="button" class="magnusarchives-icon-action" data-action="configureSkillRoll" data-item-id="{{skill.id}}" title="{{localize 'MAGNUSARCHIVES.Skill.ConfigureRoll'}}" aria-label="{{localize 'MAGNUSARCHIVES.Skill.ConfigureRoll'}}: {{skill.name}}"><i class="fa-solid fa-sliders" aria-hidden="true"></i></button>
+              <button type="button" class="magnusarchives-icon-action" data-action="editSkill" data-item-id="{{skill.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{skill.name}}"><i class="fa-solid fa-pen"></i></button>
+              <button type="button" class="magnusarchives-icon-action" data-action="deleteSkill" data-item-id="{{skill.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{skill.name}}"><i class="fa-solid fa-trash"></i></button>
             </span>
           </li>
         {{else}}
-          <li class="compact-skill-empty">{{localize "CYPHERV2.Skill.Empty"}}</li>
+          <li class="compact-skill-empty">{{localize "MAGNUSARCHIVES.Skill.Empty"}}</li>
         {{/each}}
       </ol>
     </section>
@@ -271,38 +299,38 @@
   <div class="tab {{tabs.abilities.cssClass}}" data-group="primary" data-tab="abilities">
     <section class="abilities-section">
       <header class="abilities-header">
-        {{#if editable}}<button type="button" class="abilities-add-action cypherv2-primary-action" data-action="createAbility"><i class="fa-solid fa-plus"></i> {{localize "CYPHERV2.Ability.Add"}}</button>{{/if}}
+        {{#if editable}}<button type="button" class="abilities-add-action magnusarchives-primary-action" data-action="createAbility"><i class="fa-solid fa-plus"></i> {{localize "MAGNUSARCHIVES.Ability.Add"}}</button>{{/if}}
       </header>
       <ol class="compact-ability-list">
         {{#each abilityItems as |ability|}}
           <li class="compact-ability {{#if ability.expanded}}is-expanded{{/if}} {{#if ability.archived}}is-archived{{/if}} {{#if ability.startsArchivedGroup}}starts-archived-group{{/if}}" data-item-id="{{ability.id}}">
             <div class="compact-ability-row">
-              <button type="button" class="ability-details-toggle cypherv2-icon-action" data-action="toggleAbilityDetails" data-item-id="{{ability.id}}" aria-expanded="{{ability.expanded}}" aria-controls="ability-details-{{ability.id}}" aria-label="{{localize 'CYPHERV2.Ability.ToggleDetails'}}: {{ability.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-              <button type="button" class="ability-reference cypherv2-primary-action" data-action="toggleAbilityDetails" data-item-id="{{ability.id}}" aria-expanded="{{ability.expanded}}" aria-controls="ability-details-{{ability.id}}"><span class="ability-name">{{ability.name}}</span>{{#if ability.costLabel}} <span class="ability-cost">({{ability.costLabel}})</span>{{/if}}</button>
+              <button type="button" class="ability-details-toggle magnusarchives-icon-action" data-action="toggleAbilityDetails" data-item-id="{{ability.id}}" aria-expanded="{{ability.expanded}}" aria-controls="ability-details-{{ability.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Ability.ToggleDetails'}}: {{ability.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+              <button type="button" class="ability-reference magnusarchives-primary-action" data-action="toggleAbilityDetails" data-item-id="{{ability.id}}" aria-expanded="{{ability.expanded}}" aria-controls="ability-details-{{ability.id}}"><span class="ability-name">{{ability.name}}</span>{{#if ability.costLabel}} <span class="ability-cost">({{ability.costLabel}})</span>{{/if}}</button>
               <span class="compact-ability-actions">
-                <button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{ability.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button>
-                {{#if ability.canPay}}<button type="button" class="cypherv2-icon-action" data-action="payAbilityCost" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Ability.Payment.PayCost'}}" aria-label="{{localize 'CYPHERV2.Ability.Payment.PayCost'}} {{ability.name}}"><i class="fa-solid fa-coins" aria-hidden="true"></i></button>{{/if}}
+                <button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{ability.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button>
+                {{#if ability.canPay}}<button type="button" class="magnusarchives-icon-action" data-action="payAbilityCost" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Ability.Payment.PayCost'}}" aria-label="{{localize 'MAGNUSARCHIVES.Ability.Payment.PayCost'}} {{ability.name}}"><i class="fa-solid fa-coins" aria-hidden="true"></i></button>{{/if}}
                 {{#if ../editable}}
                   {{#if ability.archived}}
-                    <button type="button" class="cypherv2-icon-action ability-archive-action" data-action="toggleAbilityArchived" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Ability.Archive.Restore'}}" aria-label="{{localize 'CYPHERV2.Ability.Archive.Restore'}} {{ability.name}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>
+                    <button type="button" class="magnusarchives-icon-action ability-archive-action" data-action="toggleAbilityArchived" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Ability.Archive.Restore'}}" aria-label="{{localize 'MAGNUSARCHIVES.Ability.Archive.Restore'}} {{ability.name}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>
                   {{else}}
-                    <button type="button" class="cypherv2-icon-action ability-archive-action" data-action="toggleAbilityArchived" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Ability.Archive.Archive'}}" aria-label="{{localize 'CYPHERV2.Ability.Archive.Archive'}} {{ability.name}}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i></button>
+                    <button type="button" class="magnusarchives-icon-action ability-archive-action" data-action="toggleAbilityArchived" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Ability.Archive.Archive'}}" aria-label="{{localize 'MAGNUSARCHIVES.Ability.Archive.Archive'}} {{ability.name}}"><i class="fa-solid fa-box-archive" aria-hidden="true"></i></button>
                   {{/if}}
                 {{/if}}
-                {{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="inspectAbility" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{ability.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{/if}}
-                {{#if ability.canDelete}}<button type="button" class="cypherv2-icon-action" data-action="deleteAbility" data-item-id="{{ability.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{ability.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}
+                {{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="inspectAbility" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{ability.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{/if}}
+                {{#if ability.canDelete}}<button type="button" class="magnusarchives-icon-action" data-action="deleteAbility" data-item-id="{{ability.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{ability.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}
               </span>
             </div>
-            <section id="ability-details-{{ability.id}}" class="compact-ability-details" aria-label="{{localize 'CYPHERV2.Ability.Details'}} {{ability.name}}" {{#unless ability.expanded}}hidden{{/unless}}>
+            <section id="ability-details-{{ability.id}}" class="compact-ability-details" aria-label="{{localize 'MAGNUSARCHIVES.Ability.Details'}} {{ability.name}}" {{#unless ability.expanded}}hidden{{/unless}}>
               {{#if ability.hasDescription}}
                 <div class="ability-description">{{{ability.enrichedDescription}}}</div>
               {{else}}
-                <p class="ability-no-description">{{localize "CYPHERV2.Ability.NoDescription"}}</p>
+                <p class="ability-no-description">{{localize "MAGNUSARCHIVES.Ability.NoDescription"}}</p>
               {{/if}}
             </section>
           </li>
         {{else}}
-          <li class="compact-ability-empty">{{localize "CYPHERV2.Ability.Empty"}}</li>
+          <li class="compact-ability-empty">{{localize "MAGNUSARCHIVES.Ability.Empty"}}</li>
         {{/each}}
       </ol>
     </section>
@@ -312,64 +340,64 @@
     <section class="inventory-section">
       <section class="inventory-group" data-inventory-section="equipment">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Inventory.Equipment"}}</h2>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createInventoryItem" data-item-type="equipment" title="{{localize 'CYPHERV2.Inventory.AddEquipment'}}" aria-label="{{localize 'CYPHERV2.Inventory.AddEquipment'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Inventory.Equipment"}}</h2>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createInventoryItem" data-item-type="equipment" title="{{localize 'MAGNUSARCHIVES.Inventory.AddEquipment'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.AddEquipment'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
         <ol class="compact-inventory-list">
           {{#each inventory.equipment as |item|}}
             <li class="compact-inventory-item {{#if item.expanded}}is-expanded{{/if}}" data-item-id="{{item.id}}">
               <div class="compact-inventory-row">
-                <button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-                <button type="button" class="inventory-item-name cypherv2-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>
-                {{#if item.equipped}}<span class="inventory-state">{{localize "CYPHERV2.Combat.Equipped"}}</span>{{/if}}
-                <label class="inventory-quantity"><span>{{localize "CYPHERV2.Inventory.Quantity"}}</span>{{#if ../editable}}<input type="number" min="0" step="1" value="{{item.quantity}}" data-inventory-quantity data-item-id="{{item.id}}" aria-label="{{localize 'CYPHERV2.Inventory.Quantity'}} {{item.name}}">{{else}}<strong>{{item.quantity}}</strong>{{/if}}</label>
-                <span class="inventory-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+                <button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                <button type="button" class="inventory-item-name magnusarchives-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>
+                {{#if item.equipped}}<span class="inventory-state">{{localize "MAGNUSARCHIVES.Combat.Equipped"}}</span>{{/if}}
+                <label class="inventory-quantity"><span>{{localize "MAGNUSARCHIVES.Inventory.Quantity"}}</span>{{#if ../editable}}<input type="number" min="0" step="1" value="{{item.quantity}}" data-inventory-quantity data-item-id="{{item.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.Quantity'}} {{item.name}}">{{else}}<strong>{{item.quantity}}</strong>{{/if}}</label>
+                <span class="inventory-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
               </div>
-              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}</section>
+              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}</section>
             </li>
-          {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Inventory.Empty.Equipment"}}</li>{{/each}}
+          {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Inventory.Empty.Equipment"}}</li>{{/each}}
         </ol>
       </section>
 
       <section class="inventory-group" data-inventory-section="cypher">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Inventory.Cyphers"}}</h2>
-          <label class="inventory-limit"><span>{{localize "CYPHERV2.Inventory.Limit"}}</span>{{#if editable}}<input name="system.cypherLimitBase" type="number" min="0" step="1" value="{{system.cypherLimitBase}}" aria-label="{{localize 'CYPHERV2.Inventory.Limit'}}">{{else}}<strong>{{system.cypherLimitBase}}</strong>{{/if}}</label>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createInventoryItem" data-item-type="cypher" title="{{localize 'CYPHERV2.Inventory.AddCypher'}}" aria-label="{{localize 'CYPHERV2.Inventory.AddCypher'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Inventory.Cyphers"}}</h2>
+          <label class="inventory-limit"><span>{{localize "MAGNUSARCHIVES.Inventory.Limit"}}</span>{{#if editable}}<input name="system.cypherLimitBase" type="number" min="0" step="1" value="{{system.cypherLimitBase}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.Limit'}}">{{else}}<strong>{{system.cypherLimitBase}}</strong>{{/if}}</label>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createInventoryItem" data-item-type="cypher" title="{{localize 'MAGNUSARCHIVES.Inventory.AddCypher'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.AddCypher'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
         <ol class="compact-inventory-list">
           {{#each inventory.cyphers as |item|}}
             <li class="compact-inventory-item {{#if item.expanded}}is-expanded{{/if}}" data-item-id="{{item.id}}">
               <div class="compact-inventory-row">
-                <button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-                <button type="button" class="inventory-item-name cypherv2-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>
+                <button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                <button type="button" class="inventory-item-name magnusarchives-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>
                 <span class="inventory-power is-{{item.power}}"><i aria-hidden="true"></i>{{item.powerLabel}}</span>
-                <span class="inventory-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+                <span class="inventory-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
               </div>
-              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}</section>
+              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}</section>
             </li>
-          {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Inventory.Empty.Cyphers"}}</li>{{/each}}
+          {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Inventory.Empty.Cyphers"}}</li>{{/each}}
         </ol>
       </section>
 
       <section class="inventory-group" data-inventory-section="artifact">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Inventory.Artifacts"}}</h2>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createInventoryItem" data-item-type="artifact" title="{{localize 'CYPHERV2.Inventory.AddArtifact'}}" aria-label="{{localize 'CYPHERV2.Inventory.AddArtifact'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Inventory.Artifacts"}}</h2>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createInventoryItem" data-item-type="artifact" title="{{localize 'MAGNUSARCHIVES.Inventory.AddArtifact'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.AddArtifact'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
         <ol class="compact-inventory-list">
           {{#each inventory.artifacts as |item|}}
             <li class="compact-inventory-item {{#if item.expanded}}is-expanded{{/if}} {{#if item.depleted}}is-depleted{{/if}}" data-item-id="{{item.id}}">
               <div class="compact-inventory-row">
-                <button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-                <span class="inventory-artifact-identity"><button type="button" class="inventory-item-name cypherv2-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>{{#if item.canRollLevel}}<button type="button" class="inventory-level inventory-rollable" data-action="rollArtifactLevel" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Artifact.RollLevel'}}">({{localize "CYPHERV2.Inventory.Level"}} {{item.level}}) <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{else}}<span class="inventory-level">({{localize "CYPHERV2.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>{{/if}}</span>
-                {{#if item.depleted}}<span class="inventory-depleted-label combat-depleted-state">{{localize "CYPHERV2.Artifact.Depleted"}}</span>{{/if}}
-                {{#if item.depletionLabel}}<button type="button" class="inventory-depletion inventory-rollable" data-action="rollInventoryDepletion" data-item-id="{{item.id}}" {{#unless item.canRollDepletion}}disabled{{/unless}} title="{{localize 'CYPHERV2.Depletion.Roll'}}">{{localize "CYPHERV2.Inventory.Depletion"}} {{item.depletionLabel}}</button>{{/if}}
-                <span class="inventory-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+                <button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleInventoryDetails" data-item-id="{{item.id}}" aria-expanded="{{item.expanded}}" aria-controls="inventory-details-{{item.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{item.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                <span class="inventory-artifact-identity"><button type="button" class="inventory-item-name magnusarchives-primary-action" data-action="openInventoryItem" data-item-id="{{item.id}}">{{item.name}}</button>{{#if item.canRollLevel}}<button type="button" class="inventory-level inventory-rollable" data-action="rollArtifactLevel" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Artifact.RollLevel'}}">({{localize "MAGNUSARCHIVES.Inventory.Level"}} {{item.level}}) <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{else}}<span class="inventory-level">({{localize "MAGNUSARCHIVES.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>{{/if}}</span>
+                {{#if item.depleted}}<span class="inventory-depleted-label combat-depleted-state">{{localize "MAGNUSARCHIVES.Artifact.Depleted"}}</span>{{/if}}
+                {{#if item.depletionLabel}}<button type="button" class="inventory-depletion inventory-rollable" data-action="rollInventoryDepletion" data-item-id="{{item.id}}" {{#unless item.canRollDepletion}}disabled{{/unless}} title="{{localize 'MAGNUSARCHIVES.Depletion.Roll'}}">{{localize "MAGNUSARCHIVES.Inventory.Depletion"}} {{item.depletionLabel}}</button>{{/if}}
+                <span class="inventory-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{item.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="openInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{item.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteInventoryItem" data-item-id="{{item.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{item.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
               </div>
-              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}</section>
+              <section id="inventory-details-{{item.id}}" class="compact-inventory-details" {{#unless item.expanded}}hidden{{/unless}}>{{#if item.hasDescription}}{{{item.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}</section>
             </li>
-          {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Inventory.Empty.Artifacts"}}</li>{{/each}}
+          {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Inventory.Empty.Artifacts"}}</li>{{/each}}
         </ol>
       </section>
     </section>
@@ -377,81 +405,81 @@
 
   <div class="tab {{tabs.combat.cssClass}}" data-group="primary" data-tab="combat">
     <section class="quick-defense-section" data-combat-section="defense">
-    <h2>{{localize "CYPHERV2.Combat.Defense.Quick"}}</h2>
+    <h2>{{localize "MAGNUSARCHIVES.Combat.Defense.Quick"}}</h2>
     <div class="quick-defense-bar">
-      <button type="button" class="quick-defense-action cypherv2-primary-action" data-action="dodge" title="{{localize 'CYPHERV2.Combat.Defense.DodgeTooltip'}}"><i class="fa-solid fa-person-running" aria-hidden="true"></i><strong>{{localize "CYPHERV2.Combat.Defense.dodge"}}</strong><small>{{localize "CYPHERV2.Pools.Speed"}}</small></button>
-      <button type="button" class="quick-defense-action cypherv2-primary-action" data-action="block" title="{{localize 'CYPHERV2.Combat.Defense.BlockTooltip'}}"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><strong>{{localize "CYPHERV2.Combat.Defense.block"}}</strong><small>{{localize "CYPHERV2.Pools.Might"}}</small></button>
+      <button type="button" class="quick-defense-action magnusarchives-primary-action" data-action="dodge" title="{{localize 'MAGNUSARCHIVES.Combat.Defense.DodgeTooltip'}}"><i class="fa-solid fa-person-running" aria-hidden="true"></i><strong>{{localize "MAGNUSARCHIVES.Combat.Defense.dodge"}}</strong><small>{{localize "MAGNUSARCHIVES.Pools.Speed"}}</small></button>
+      <button type="button" class="quick-defense-action magnusarchives-primary-action" data-action="block" title="{{localize 'MAGNUSARCHIVES.Combat.Defense.BlockTooltip'}}"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><strong>{{localize "MAGNUSARCHIVES.Combat.Defense.block"}}</strong><small>{{localize "MAGNUSARCHIVES.Pools.Might"}}</small></button>
     </div>
     </section>
     <section class="inventory-section combat-tab-section">
       <section class="inventory-group" data-combat-section="attacks">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Combat.Attacks"}}</h2>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createWeapon" title="{{localize 'CYPHERV2.Combat.Weapon.Create'}}" aria-label="{{localize 'CYPHERV2.Combat.Weapon.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Combat.Attacks"}}</h2>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createWeapon" title="{{localize 'MAGNUSARCHIVES.Combat.Weapon.Create'}}" aria-label="{{localize 'MAGNUSARCHIVES.Combat.Weapon.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
         <ol class="compact-inventory-list compact-combat-list">
         {{#each weaponItems as |weapon|}}
-          <li class="compact-inventory-item compact-combat-item combat-weapon-item {{#unless weapon.canAttack}}is-unusable{{/unless}} {{#if weapon.expanded}}is-expanded{{/if}}" data-item-id="{{weapon.id}}" {{#unless weapon.canAttack}}title="{{localize 'CYPHERV2.Combat.Weapon.InsufficientAmmo'}}"{{/unless}}>
+          <li class="compact-inventory-item compact-combat-item combat-weapon-item {{#unless weapon.canAttack}}is-unusable{{/unless}} {{#if weapon.expanded}}is-expanded{{/if}}" data-item-id="{{weapon.id}}" {{#unless weapon.canAttack}}title="{{localize 'MAGNUSARCHIVES.Combat.Weapon.InsufficientAmmo'}}"{{/unless}}>
             <div class="compact-inventory-row compact-combat-row combat-weapon-row" data-action="attackWeapon" data-item-id="{{weapon.id}}" role="button" tabindex="0">
-              <span class="combat-row-left"><button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleCombatDetails" data-item-id="{{weapon.id}}" aria-expanded="{{weapon.expanded}}" aria-controls="combat-details-{{weapon.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{weapon.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><span class="combat-attack-identity"><button type="button" class="inventory-item-name combat-attack-name cypherv2-primary-action" data-action="attackWeapon" data-item-id="{{weapon.id}}" {{#unless weapon.canAttack}}disabled title="{{localize 'CYPHERV2.Combat.Weapon.InsufficientAmmo'}}"{{/unless}}>{{weapon.name}}</button><span class="combat-attack-category">({{weapon.category}})</span></span></span>
+              <span class="combat-row-left"><button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleCombatDetails" data-item-id="{{weapon.id}}" aria-expanded="{{weapon.expanded}}" aria-controls="combat-details-{{weapon.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{weapon.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><span class="combat-attack-identity"><button type="button" class="inventory-item-name combat-attack-name magnusarchives-primary-action" data-action="attackWeapon" data-item-id="{{weapon.id}}" {{#unless weapon.canAttack}}disabled title="{{localize 'MAGNUSARCHIVES.Combat.Weapon.InsufficientAmmo'}}"{{/unless}}>{{weapon.name}}</button><span class="combat-attack-category">({{weapon.category}})</span></span></span>
               <span class="combat-secondary-column" aria-hidden="true"></span>
-              <span class="combat-ammo-column">{{#if weapon.ammoEnabled}}<span class="combat-ammo" title="{{localize 'CYPHERV2.Combat.Ammo'}}">{{weapon.ammoLabel}}</span><button type="button" class="cypherv2-icon-action combat-reload-action" data-action="reloadWeapon" data-item-id="{{weapon.id}}" title="{{localize 'CYPHERV2.Combat.Weapon.ReloadToMaximum'}}" aria-label="{{localize 'CYPHERV2.Combat.Weapon.ReloadToMaximum'}} {{weapon.name}}"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>{{/if}}</span>
-              <span class="combat-depletion-column">{{#if weapon.depletionEnabled}}{{#if weapon.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "CYPHERV2.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{weapon.id}}" title="{{localize 'CYPHERV2.Depletion.Roll'}}">{{weapon.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
-              <span class="combat-item-summary combat-damage-column"><strong>{{weapon.damage}}</strong> {{localize "CYPHERV2.Combat.Damage"}}</span>
-              <span class="inventory-item-actions combat-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{weapon.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{weapon.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="editCombatItem" data-item-id="{{weapon.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{weapon.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteCombatItem" data-item-id="{{weapon.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{weapon.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+              <span class="combat-ammo-column">{{#if weapon.ammoEnabled}}<span class="combat-ammo" title="{{localize 'MAGNUSARCHIVES.Combat.Ammo'}}">{{weapon.ammoLabel}}</span><button type="button" class="magnusarchives-icon-action combat-reload-action" data-action="reloadWeapon" data-item-id="{{weapon.id}}" title="{{localize 'MAGNUSARCHIVES.Combat.Weapon.ReloadToMaximum'}}" aria-label="{{localize 'MAGNUSARCHIVES.Combat.Weapon.ReloadToMaximum'}} {{weapon.name}}"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i></button>{{/if}}</span>
+              <span class="combat-depletion-column">{{#if weapon.depletionEnabled}}{{#if weapon.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "MAGNUSARCHIVES.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{weapon.id}}" title="{{localize 'MAGNUSARCHIVES.Depletion.Roll'}}">{{weapon.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
+              <span class="combat-item-summary combat-damage-column"><strong>{{weapon.damage}}</strong> {{localize "MAGNUSARCHIVES.Combat.Damage"}}</span>
+              <span class="inventory-item-actions combat-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{weapon.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{weapon.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="editCombatItem" data-item-id="{{weapon.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{weapon.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteCombatItem" data-item-id="{{weapon.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{weapon.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
             </div>
-            <section id="combat-details-{{weapon.id}}" class="compact-inventory-details compact-combat-details" {{#unless weapon.expanded}}hidden{{/unless}}>{{#if weapon.hasDescription}}{{{weapon.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}</section>
+            <section id="combat-details-{{weapon.id}}" class="compact-inventory-details compact-combat-details" {{#unless weapon.expanded}}hidden{{/unless}}>{{#if weapon.hasDescription}}{{{weapon.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}</section>
           </li>
-        {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Combat.Weapon.Empty"}}</li>{{/each}}
+        {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Combat.Weapon.Empty"}}</li>{{/each}}
         </ol>
       </section>
 
       <section class="inventory-group" data-combat-section="shields">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Shield.Title"}}</h2>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createShield" title="{{localize 'CYPHERV2.Shield.Create'}}" aria-label="{{localize 'CYPHERV2.Shield.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Shield.Title"}}</h2>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createShield" title="{{localize 'MAGNUSARCHIVES.Shield.Create'}}" aria-label="{{localize 'MAGNUSARCHIVES.Shield.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
-        {{#if multipleShieldsEquipped}}<p class="combat-warning">{{localize "CYPHERV2.Shield.MultipleEquipped"}}</p>{{/if}}
+        {{#if multipleShieldsEquipped}}<p class="combat-warning">{{localize "MAGNUSARCHIVES.Shield.MultipleEquipped"}}</p>{{/if}}
         <ol class="compact-inventory-list compact-combat-list">
         {{#each shieldItems as |shield|}}
           <li class="compact-inventory-item compact-combat-item {{#if shield.expanded}}is-expanded{{/if}}" data-item-id="{{shield.id}}">
             <div class="compact-inventory-row compact-combat-row combat-shield-row" data-action="toggleCombatDetails" data-item-id="{{shield.id}}" role="button" tabindex="0" aria-expanded="{{shield.expanded}}" aria-controls="combat-details-{{shield.id}}">
-              <span class="combat-row-left"><button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleCombatDetails" data-item-id="{{shield.id}}" aria-expanded="{{shield.expanded}}" aria-controls="combat-details-{{shield.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{shield.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><button type="button" class="combat-equipped-toggle cypherv2-icon-action {{#if shield.equipped}}is-equipped{{/if}}" data-action="toggleShieldEquipped" data-item-id="{{shield.id}}" title="{{#if shield.equipped}}{{localize 'CYPHERV2.Combat.UnequipShield'}}{{else}}{{localize 'CYPHERV2.Combat.EquipShield'}}{{/if}}" aria-label="{{#if shield.equipped}}{{localize 'CYPHERV2.Combat.UnequipShield'}}{{else}}{{localize 'CYPHERV2.Combat.EquipShield'}}{{/if}} {{shield.name}}" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-hand" aria-hidden="true"></i></button><span class="inventory-item-name">{{shield.name}}</span></span>
+              <span class="combat-row-left"><button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleCombatDetails" data-item-id="{{shield.id}}" aria-expanded="{{shield.expanded}}" aria-controls="combat-details-{{shield.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{shield.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><button type="button" class="combat-equipped-toggle magnusarchives-icon-action {{#if shield.equipped}}is-equipped{{/if}}" data-action="toggleShieldEquipped" data-item-id="{{shield.id}}" title="{{#if shield.equipped}}{{localize 'MAGNUSARCHIVES.Combat.UnequipShield'}}{{else}}{{localize 'MAGNUSARCHIVES.Combat.EquipShield'}}{{/if}}" aria-label="{{#if shield.equipped}}{{localize 'MAGNUSARCHIVES.Combat.UnequipShield'}}{{else}}{{localize 'MAGNUSARCHIVES.Combat.EquipShield'}}{{/if}} {{shield.name}}" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-hand" aria-hidden="true"></i></button><span class="inventory-item-name">{{shield.name}}</span></span>
               <span class="combat-secondary-column combat-shield-wounds-column"><span class="combat-inline-shield-wounds">{{#each shield.woundTracks as |track|}}<span class="combat-inline-shield-track"><abbr title="{{track.label}}">{{track.shortLabel}}</abbr>{{#each track.pips as |pip|}}<i class="combat-inline-shield-pip {{#if pip.filled}}is-filled{{/if}}"></i>{{/each}}</span>{{/each}}</span></span>
               <span class="combat-ammo-column" aria-hidden="true"></span>
-              <span class="combat-depletion-column">{{#if shield.depletionEnabled}}{{#if shield.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "CYPHERV2.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{shield.id}}" title="{{localize 'CYPHERV2.Depletion.Roll'}}">{{shield.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
-              <span class="combat-status-column">{{#if shield.equipped}}<span class="combat-item-summary combat-equipped-state">{{localize "CYPHERV2.Combat.Equipped"}}</span>{{#if shield.broken}}<span class="combat-status-separator">·</span>{{/if}}{{/if}}{{#if shield.broken}}<span class="combat-item-summary combat-shield-state is-broken">{{localize "CYPHERV2.Shield.Broken"}}</span>{{/if}}</span>
-              <span class="inventory-item-actions combat-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{shield.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{shield.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="editCombatItem" data-item-id="{{shield.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{shield.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteCombatItem" data-item-id="{{shield.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{shield.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+              <span class="combat-depletion-column">{{#if shield.depletionEnabled}}{{#if shield.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "MAGNUSARCHIVES.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{shield.id}}" title="{{localize 'MAGNUSARCHIVES.Depletion.Roll'}}">{{shield.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
+              <span class="combat-status-column">{{#if shield.equipped}}<span class="combat-item-summary combat-equipped-state">{{localize "MAGNUSARCHIVES.Combat.Equipped"}}</span>{{#if shield.broken}}<span class="combat-status-separator">·</span>{{/if}}{{/if}}{{#if shield.broken}}<span class="combat-item-summary combat-shield-state is-broken">{{localize "MAGNUSARCHIVES.Shield.Broken"}}</span>{{/if}}</span>
+              <span class="inventory-item-actions combat-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{shield.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{shield.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="editCombatItem" data-item-id="{{shield.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{shield.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteCombatItem" data-item-id="{{shield.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{shield.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
             </div>
             <section id="combat-details-{{shield.id}}" class="compact-inventory-details compact-combat-details" {{#unless shield.expanded}}hidden{{/unless}}>
-              {{#if shield.hasDescription}}{{{shield.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}
-              <p class="combat-shield-wounds">{{localize "CYPHERV2.Wounds.Minor"}} {{shield.minor}}/{{shield.capacities.minor}} · {{localize "CYPHERV2.Wounds.Moderate"}} {{shield.moderate}}/{{shield.capacities.moderate}} · {{localize "CYPHERV2.Wounds.Major"}} {{shield.major}}/{{shield.capacities.major}}</p>
+              {{#if shield.hasDescription}}{{{shield.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}
+              <p class="combat-shield-wounds">{{localize "MAGNUSARCHIVES.Wounds.Minor"}} {{shield.minor}}/{{shield.capacities.minor}} · {{localize "MAGNUSARCHIVES.Wounds.Moderate"}} {{shield.moderate}}/{{shield.capacities.moderate}} · {{localize "MAGNUSARCHIVES.Wounds.Major"}} {{shield.major}}/{{shield.capacities.major}}</p>
             </section>
           </li>
-        {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Shield.Empty"}}</li>{{/each}}
+        {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Shield.Empty"}}</li>{{/each}}
         </ol>
       </section>
 
       <section class="inventory-group" data-combat-section="armor">
         <header class="inventory-group-header">
-          <h2>{{localize "CYPHERV2.Combat.Armors"}}</h2>
-          <span class="combat-armor-total">{{localize "CYPHERV2.Combat.Armor.Total"}} <strong>{{system.derived.combat.armor.blockEase}}</strong></span>
-          {{#if editable}}<button type="button" class="inventory-add-action cypherv2-primary-action" data-action="createArmor" title="{{localize 'CYPHERV2.Combat.Armor.Create'}}" aria-label="{{localize 'CYPHERV2.Combat.Armor.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Combat.Armors"}}</h2>
+          <span class="combat-armor-total">{{localize "MAGNUSARCHIVES.Combat.Armor.Total"}} <strong>{{system.derived.combat.armor.blockEase}}</strong></span>
+          {{#if editable}}<button type="button" class="inventory-add-action magnusarchives-primary-action" data-action="createArmor" title="{{localize 'MAGNUSARCHIVES.Combat.Armor.Create'}}" aria-label="{{localize 'MAGNUSARCHIVES.Combat.Armor.Create'}}"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>{{/if}}
         </header>
         <ol class="compact-inventory-list compact-combat-list">
         {{#each armorItems as |armor|}}
           <li class="compact-inventory-item compact-combat-item {{#if armor.expanded}}is-expanded{{/if}}" data-item-id="{{armor.id}}">
             <div class="compact-inventory-row compact-combat-row combat-armor-row" data-action="toggleCombatDetails" data-item-id="{{armor.id}}" role="button" tabindex="0" aria-expanded="{{armor.expanded}}" aria-controls="combat-details-{{armor.id}}">
-              <span class="combat-row-left"><button type="button" class="inventory-details-toggle cypherv2-icon-action" data-action="toggleCombatDetails" data-item-id="{{armor.id}}" aria-expanded="{{armor.expanded}}" aria-controls="combat-details-{{armor.id}}" aria-label="{{localize 'CYPHERV2.Inventory.ToggleDetails'}}: {{armor.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><button type="button" class="combat-equipped-toggle cypherv2-icon-action {{#if armor.equipped}}is-equipped{{/if}}" data-action="toggleArmorEquipped" data-item-id="{{armor.id}}" title="{{#if armor.equipped}}{{localize 'CYPHERV2.Combat.UnequipArmor'}}{{else}}{{localize 'CYPHERV2.Combat.EquipArmor'}}{{/if}}" aria-label="{{#if armor.equipped}}{{localize 'CYPHERV2.Combat.UnequipArmor'}}{{else}}{{localize 'CYPHERV2.Combat.EquipArmor'}}{{/if}} {{armor.name}}" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-hand" aria-hidden="true"></i></button><span class="combat-attack-identity"><span class="inventory-item-name">{{armor.name}}</span><span class="combat-attack-category">({{armor.category}})</span></span></span>
-              <span class="combat-secondary-column combat-familiarity-column">{{#unless armor.freelyUsed}}<span class="combat-familiarity-warning" title="{{localize 'CYPHERV2.Combat.Armor.UnfamiliarTooltip'}}">{{localize "CYPHERV2.Combat.Armor.UnfamiliarLabel"}}</span>{{/unless}}</span>
+              <span class="combat-row-left"><button type="button" class="inventory-details-toggle magnusarchives-icon-action" data-action="toggleCombatDetails" data-item-id="{{armor.id}}" aria-expanded="{{armor.expanded}}" aria-controls="combat-details-{{armor.id}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.ToggleDetails'}}: {{armor.name}}"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button><button type="button" class="combat-equipped-toggle magnusarchives-icon-action {{#if armor.equipped}}is-equipped{{/if}}" data-action="toggleArmorEquipped" data-item-id="{{armor.id}}" title="{{#if armor.equipped}}{{localize 'MAGNUSARCHIVES.Combat.UnequipArmor'}}{{else}}{{localize 'MAGNUSARCHIVES.Combat.EquipArmor'}}{{/if}}" aria-label="{{#if armor.equipped}}{{localize 'MAGNUSARCHIVES.Combat.UnequipArmor'}}{{else}}{{localize 'MAGNUSARCHIVES.Combat.EquipArmor'}}{{/if}} {{armor.name}}" {{#unless ../editable}}disabled{{/unless}}><i class="fa-solid fa-hand" aria-hidden="true"></i></button><span class="combat-attack-identity"><span class="inventory-item-name">{{armor.name}}</span><span class="combat-attack-category">({{armor.category}})</span></span></span>
+              <span class="combat-secondary-column combat-familiarity-column">{{#unless armor.freelyUsed}}<span class="combat-familiarity-warning" title="{{localize 'MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip'}}">{{localize "MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel"}}</span>{{/unless}}</span>
               <span class="combat-ammo-column" aria-hidden="true"></span>
-              <span class="combat-depletion-column">{{#if armor.depletionEnabled}}{{#if armor.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "CYPHERV2.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{armor.id}}" title="{{localize 'CYPHERV2.Depletion.Roll'}}">{{armor.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
-              <span class="combat-status-column">{{#if armor.equipped}}<span class="combat-item-summary combat-equipped-state">{{localize "CYPHERV2.Combat.Equipped"}}</span>{{/if}}</span>
-              <span class="inventory-item-actions combat-item-actions"><button type="button" class="cypherv2-icon-action" data-action="sendItemToChat" data-item-id="{{armor.id}}" title="{{localize 'CYPHERV2.Inventory.SendToChat'}}" aria-label="{{localize 'CYPHERV2.Inventory.SendToChat'}} {{armor.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="cypherv2-icon-action" data-action="editCombatItem" data-item-id="{{armor.id}}" title="{{localize 'CYPHERV2.Actions.Edit'}}" aria-label="{{localize 'CYPHERV2.Actions.Edit'}} {{armor.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="cypherv2-icon-action" data-action="deleteCombatItem" data-item-id="{{armor.id}}" title="{{localize 'CYPHERV2.Actions.Delete'}}" aria-label="{{localize 'CYPHERV2.Actions.Delete'}} {{armor.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
+              <span class="combat-depletion-column">{{#if armor.depletionEnabled}}{{#if armor.depleted}}<span class="combat-item-summary combat-depleted-state">{{localize "MAGNUSARCHIVES.Depletion.Depleted"}}</span>{{else}}<button type="button" class="combat-depletion inventory-rollable" data-action="rollCombatDepletion" data-item-id="{{armor.id}}" title="{{localize 'MAGNUSARCHIVES.Depletion.Roll'}}">{{armor.depletionLabel}} <i class="fa-solid fa-dice" aria-hidden="true"></i></button>{{/if}}{{/if}}</span>
+              <span class="combat-status-column">{{#if armor.equipped}}<span class="combat-item-summary combat-equipped-state">{{localize "MAGNUSARCHIVES.Combat.Equipped"}}</span>{{/if}}</span>
+              <span class="inventory-item-actions combat-item-actions"><button type="button" class="magnusarchives-icon-action" data-action="sendItemToChat" data-item-id="{{armor.id}}" title="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}}" aria-label="{{localize 'MAGNUSARCHIVES.Inventory.SendToChat'}} {{armor.name}}"><i class="fa-solid fa-message" aria-hidden="true"></i></button><button type="button" class="magnusarchives-icon-action" data-action="editCombatItem" data-item-id="{{armor.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Edit'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Edit'}} {{armor.name}}"><i class="fa-solid fa-pen" aria-hidden="true"></i></button>{{#if ../editable}}<button type="button" class="magnusarchives-icon-action" data-action="deleteCombatItem" data-item-id="{{armor.id}}" title="{{localize 'MAGNUSARCHIVES.Actions.Delete'}}" aria-label="{{localize 'MAGNUSARCHIVES.Actions.Delete'}} {{armor.name}}"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>{{/if}}</span>
             </div>
-            <section id="combat-details-{{armor.id}}" class="compact-inventory-details compact-combat-details" {{#unless armor.expanded}}hidden{{/unless}}>{{#if armor.hasDescription}}{{{armor.enrichedDescription}}}{{else}}<p>{{localize "CYPHERV2.Inventory.NoDescription"}}</p>{{/if}}</section>
+            <section id="combat-details-{{armor.id}}" class="compact-inventory-details compact-combat-details" {{#unless armor.expanded}}hidden{{/unless}}>{{#if armor.hasDescription}}{{{armor.enrichedDescription}}}{{else}}<p>{{localize "MAGNUSARCHIVES.Inventory.NoDescription"}}</p>{{/if}}</section>
           </li>
-        {{else}}<li class="compact-inventory-empty">{{localize "CYPHERV2.Combat.Armor.Empty"}}</li>{{/each}}
+        {{else}}<li class="compact-inventory-empty">{{localize "MAGNUSARCHIVES.Combat.Armor.Empty"}}</li>{{/each}}
         </ol>
       </section>
     </section>
@@ -459,7 +487,7 @@
 
   <div class="tab {{tabs.notes.cssClass}} character-notes-tab" data-group="primary" data-tab="notes">
     <section class="character-notes-layout">
-      <div class="stacked-field cypherv2-rich-description character-notes-editor">
+      <div class="stacked-field magnusarchives-rich-description character-notes-editor">
         {{formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid}}
       </div>
     </section>
@@ -470,15 +498,15 @@
       {{#unless advancement.guidance.completed}}
         <aside class="progression-guidance-banner">
           <div><strong>{{advancement.guidance.title}}</strong><span>{{advancement.guidance.reminder}}</span></div>
-          {{#if editable}}<button type="button" class="compact-inline-action" data-action="completeProgressionGuidance">{{localize "CYPHERV2.Advancement.Guidance.Done"}}</button>{{/if}}
+          {{#if editable}}<button type="button" class="compact-inline-action" data-action="completeProgressionGuidance">{{localize "MAGNUSARCHIVES.Advancement.Guidance.Done"}}</button>{{/if}}
         </aside>
       {{/unless}}
 
       <section class="advancement-section progression-section">
         <header class="progression-section-header">
-          <h2>{{localize "CYPHERV2.Advancement.CompactTitle"}}</h2>
-          <p class="derived-summary">{{localize "CYPHERV2.Character.Tier"}} {{header.stats.tier}} · {{advancement.purchasedCount}} / {{advancement.policy.purchasesPerTier}}</p>
-          {{#if advancement.canAdvanceTier}}<button type="button" class="compact-inline-action" data-action="advanceTier">{{localize "CYPHERV2.Advancement.AdvanceTier"}}</button>{{/if}}
+          <h2>{{localize "MAGNUSARCHIVES.Advancement.CompactTitle"}}</h2>
+          <p class="derived-summary">{{localize "MAGNUSARCHIVES.Character.Tier"}} {{header.stats.tier}} · {{advancement.purchasedCount}} / {{advancement.policy.purchasesPerTier}}</p>
+          {{#if advancement.canAdvanceTier}}<button type="button" class="compact-inline-action" data-action="advanceTier">{{localize "MAGNUSARCHIVES.Advancement.AdvanceTier"}}</button>{{/if}}
         </header>
 
         <ol class="advancement-options compact-advancement-options">
@@ -500,12 +528,12 @@
 
         {{#if advancement.purchases.length}}
           <details class="advancement-cycle-details">
-            <summary>{{localize "CYPHERV2.Advancement.ThisCycle"}}</summary>
+            <summary>{{localize "MAGNUSARCHIVES.Advancement.ThisCycle"}}</summary>
             <ul class="advancement-purchases">
               {{#each advancement.purchases as |purchase|}}
                 <li>
-                  <span>{{localize purchase.label}} · {{purchase.xpCost}} XP · +{{purchase.resourcePointsGranted}} {{localize "CYPHERV2.Character.ResourcePoints"}}</span>
-                  {{#if ../editable}}<button type="button" class="cypherv2-icon-action advancement-undo-action" data-action="undoAdvancement" data-purchase-id="{{purchase.id}}" title="{{localize 'CYPHERV2.Advancement.Undo.Action'}}" aria-label="{{localize 'CYPHERV2.Advancement.Undo.Action'}}: {{localize purchase.label}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>{{/if}}
+                  <span>{{localize purchase.label}} · {{purchase.xpCost}} XP · +{{purchase.resourcePointsGranted}} {{localize "MAGNUSARCHIVES.Character.ResourcePoints"}}</span>
+                  {{#if ../editable}}<button type="button" class="magnusarchives-icon-action advancement-undo-action" data-action="undoAdvancement" data-purchase-id="{{purchase.id}}" title="{{localize 'MAGNUSARCHIVES.Advancement.Undo.Action'}}" aria-label="{{localize 'MAGNUSARCHIVES.Advancement.Undo.Action'}}: {{localize purchase.label}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>{{/if}}
                 </li>
               {{/each}}
             </ul>
@@ -515,22 +543,22 @@
 
       <section class="focus-progression-section progression-section">
         <header class="progression-section-header">
-          <h2>{{localize "CYPHERV2.Focus.CompactTitle"}}</h2>
+          <h2>{{localize "MAGNUSARCHIVES.Focus.CompactTitle"}}</h2>
           <div class="progression-compact-actions">
-            {{#if editable}}<button type="button" class="compact-inline-action" data-action="addFocus"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "CYPHERV2.Focus.Association.Add"}}</button>{{/if}}
-            {{#if genre.available}}<button type="button" class="compact-inline-action" data-action="browseGenreAbilities">{{localize "CYPHERV2.Genre.AddAbilities"}}</button>{{/if}}
+            {{#if editable}}<button type="button" class="compact-inline-action" data-action="addFocus"><i class="fa-solid fa-plus" aria-hidden="true"></i> {{localize "MAGNUSARCHIVES.Focus.Association.Add"}}</button>{{/if}}
+            {{#if genre.available}}<button type="button" class="compact-inline-action" data-action="browseGenreAbilities">{{localize "MAGNUSARCHIVES.Genre.AddAbilities"}}</button>{{/if}}
           </div>
         </header>
         {{#each focusTrees as |tree|}}
           <article class="focus-progression">
             <header class="focus-progression-header">
               <h3>{{tree.focusName}} <small>— {{localize tree.provenanceLabel}}</small></h3>
-              {{#if ../editable}}<button type="button" class="compact-inline-action" data-action="removeFocus" data-focus-uuid="{{tree.focusUuid}}">{{localize "CYPHERV2.Focus.Association.Remove"}}</button>{{/if}}
+              {{#if ../editable}}<button type="button" class="compact-inline-action" data-action="removeFocus" data-focus-uuid="{{tree.focusUuid}}">{{localize "MAGNUSARCHIVES.Focus.Association.Remove"}}</button>{{/if}}
             </header>
-            {{> "systems/cypherv2/templates/focus/focus-tree.hbs" tree}}
+            {{> "systems/magnusarchives/templates/focus/focus-tree.hbs" tree}}
           </article>
-        {{else}}<p class="empty-list">{{localize "CYPHERV2.Focus.NoProgression"}}</p>{{/each}}
-        {{#if missingFoci.length}}<aside class="focus-tree-diagnostics"><strong>{{localize "CYPHERV2.Focus.MissingFoci"}}</strong><ul>{{#each missingFoci as |uuid|}}<li>{{uuid}}</li>{{/each}}</ul></aside>{{/if}}
+        {{else}}<p class="empty-list">{{localize "MAGNUSARCHIVES.Focus.NoProgression"}}</p>{{/each}}
+        {{#if missingFoci.length}}<aside class="focus-tree-diagnostics"><strong>{{localize "MAGNUSARCHIVES.Focus.MissingFoci"}}</strong><ul>{{#each missingFoci as |uuid|}}<li>{{uuid}}</li>{{/each}}</ul></aside>{{/if}}
       </section>
     </section>
   </div>

@@ -11,7 +11,7 @@ export const GENRE_COUNTS = Object.freeze({genres: 4, progressionRelations: 89, 
 
 const FOUNDRY_ID = /^[A-Za-z0-9]{16}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const ABILITY_UUID = /^Compendium\.cypherv2\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
+const ABILITY_UUID = /^Compendium\.magnusarchives\.genre-abilities\.Item\.([A-Za-z0-9]{16})$/;
 const EXPECTED = Object.freeze([
   {key: "realWorld", name: "The Real World", heading: "The Real World Genre", subgenres: ["Espionage", "Crime Thriller", "Action", "Rescue", "Historical", "Real-World Horror", "Modern Magic"], progressionCatalog: "realWorld", originCatalog: false},
   {key: "fantasy", name: "Fantasy", heading: "Fantasy Genre", subgenres: ["Dungeon Fantasy", "Swords & Sorcery", "Epic Fantasy"], progressionCatalog: "fantasy", originCatalog: false},
@@ -28,6 +28,8 @@ export class GenreCandidateValidationError extends Error {
 }
 
 function stableId(kind, key) {
+  // Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+  // generated document _id and breaks ~4,000 @UUID cross-references in content/.
   return createHash("sha256").update(`cypherv2-beta3:${kind}:${key}`).digest("hex").slice(0, 16);
 }
 
@@ -68,7 +70,7 @@ export function validateGenreCandidateSource(source, abilitySource) {
   const errors = [];
   if (!source || typeof source !== "object" || Array.isArray(source)) throw new GenreCandidateValidationError(["Source root must be an object."]);
   if (source.schemaVersion !== GENRE_CANDIDATE_SCHEMA_VERSION) errors.push("schemaVersion must be 1.");
-  if (source.target?.systemId !== "cypherv2" || source.target?.futurePackId !== "genres" || source.target?.abilityPackId !== "genre-abilities") errors.push("Candidate target metadata is invalid.");
+  if (source.target?.systemId !== "magnusarchives" || source.target?.futurePackId !== "genres" || source.target?.abilityPackId !== "genre-abilities") errors.push("Candidate target metadata is invalid.");
   if (source.source?.file !== "Cypher-Reference-Document-2026-07-29.docx" || source.source?.license !== "2026 Cypher Open License") errors.push("Candidate source/provenance metadata is invalid.");
   if (source.source?.sha256 !== abilitySource.source.sha256) errors.push("Genre and Genre Ability candidates must identify the same exact CRD source.");
   if (JSON.stringify(source.counts) !== JSON.stringify(GENRE_COUNTS)) errors.push("Stored Genre counts are invalid.");

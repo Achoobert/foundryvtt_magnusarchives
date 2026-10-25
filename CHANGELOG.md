@@ -2,6 +2,44 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.2.0 - Unreleased
+
+The system is now **The Magnus Archives** (`magnusarchives`), forked from Cypher V2.
+
+### Added
+
+- **Stress and the damage track**, replacing Wounds for Characters. Stress accumulates in points;
+  every 3 points is one Stress Level, and each level hinders every task (p12). The damage track runs
+  Hale, Hurt, Impaired, Debilitated, Dead (p132), with Hurt available only to Characters who have it.
+- Impaired Characters pay 1 extra Pool point per level of Effort, automatically applied to rolls.
+- Rest removes 3 points of Stress for each hour (p12).
+- `ConditionService` for applying Stress, serious injuries and recovery along the track.
+- The six price categories for Equipment (p98), plus a free-text price note.
+- `rapidFire` and `explosive` flags on Weapons (p100, p103-104).
+- An **Equipment** compendium built from the price tables (p102-104).
+- A local development loop ported from blades68: `pnpm watch`, `dev:sync`, `dev:world`, `dev:seed`,
+  `test:quench:sync`, and a Cypress + Quench suite under `tests/`.
+
+### Changed
+
+- Attacks on a PC now inflict Stress or a serious injury rather than a Wound severity. NPCs and
+  Abilities declare `damage.effect` (`stress` or `seriousInjury`) with a `stressAmount`.
+- A successful defense roll avoids the attack entirely; there is no Block severity reduction.
+- Body armor has no damage-reduction value. It grants the extra Hurt step and hinders every
+  Speed-based task (p100).
+- The NPC sheet now shows Level, the derived target number, the attack's effect, and Modifications,
+  the way the book's NPC tables are written.
+- The **Descriptors** pack is the 27 Magnus descriptors (p19-26); **Skills** is the 47-skill list
+  plus the three defense tasks (p16-17); **Weapons & Armor** is the weapons from the price tables.
+
+### Removed
+
+- Species and Genres are not Magnus Archives concepts. Their data models remain registered so
+  existing documents migrate, but the packs are no longer built or shipped.
+- The `types`, `type-abilities`, `foci` and `focus-abilities` packs are not built yet: their Cypher
+  content references skills that are not on the Magnus skill list. The Magnus types (chapter 3) and
+  foci (chapter 4) replace them.
+
 ## 0.1.0-beta.2 - 2026-09-07
 
 ### Added
@@ -20,11 +58,11 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- New `cypherv2` Foundry VTT v14 system manifest.
+- New `magnusarchives` Foundry VTT v14 system manifest.
 - TypeScript, Vite, Sass, and Vitest toolchain.
 - Character, NPC, and Item TypeDataModel shells.
 - Minimal Application V2 Actor and Item sheets.
-- Minimal rule-module registry and `game.cypherv2` API.
+- Minimal rule-module registry and `game.magnusarchives` API.
 - Core world settings and an English-only localization catalog.
 - Phase 0 architecture decisions and data contracts.
 - Smoke tests for document constants and the rule registry.

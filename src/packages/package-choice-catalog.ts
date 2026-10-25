@@ -1,6 +1,6 @@
 import type {DescriptorChoiceGroup, DescriptorGrant, ItemSnapshot} from "./package-types";
 
-export const PUBLIC_DESCRIPTOR_PACK_ID = "cypherv2.descriptors";
+export const PUBLIC_DESCRIPTOR_PACK_ID = "magnusarchives.descriptors";
 
 export interface DescriptorCatalogDocumentLike {
   readonly uuid: string;

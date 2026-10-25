@@ -74,21 +74,21 @@ export class PlayerIntrusionController {
 
   async activate(actor: ControlledPlayerIntrusionCharacter): Promise<boolean> {
     if (!canControl(actor, game.user)) {
-      throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.NotAuthorized"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.NotAuthorized"));
     }
     if (!this.#service.canUse(actor)) {
-      throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.RequiresXP"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.RequiresXP"));
     }
     if (this.#activeActors.has(actor.uuid)) return false;
     this.#activeActors.add(actor.uuid);
     try {
       const confirmed = await foundry.applications.api.DialogV2.confirm({
-        window: {title: game.i18n.localize("CYPHERV2.Intrusion.Player.Title")},
-        content: '<div class="cypherv2 cypherv2-dialog player-intrusion-dialog"><p>'
-          + game.i18n.localize("CYPHERV2.Intrusion.Player.ConfirmPrompt")
+        window: {title: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Title")},
+        content: '<div class="magnusarchives magnusarchives-dialog player-intrusion-dialog"><p>'
+          + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.ConfirmPrompt")
           + "</p></div>",
-        yes: {label: game.i18n.localize("CYPHERV2.Intrusion.Player.Confirm")},
-        no: {label: game.i18n.localize("CYPHERV2.Intrusion.Player.Cancel")}
+        yes: {label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Confirm")},
+        no: {label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Cancel")}
       });
       if (!confirmed) return false;
       const requestId = defaultIdFactory();
@@ -116,15 +116,15 @@ export class PlayerIntrusionController {
       const resolved = await fromUuid(actorUuid);
       const actor = resolved as ControlledPlayerIntrusionCharacter | null;
       if (!actor || actor.type !== "character" || actor.uuid !== actorUuid) {
-        throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.CharacterMissing"));
+        throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.CharacterMissing"));
       }
       const requester = users().find((user) => user.id === requesterUserId && user.active);
       if (!requester || !canControl(actor, requester)) {
-        throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Player.NotAuthorized"));
+        throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.NotAuthorized"));
       }
       const record = await this.#service.spend(actor, requestId);
       await this.#chat.publish(record, actor);
-      Hooks.callAll("cypherv2PlayerIntrusionCreated", record, actor);
+      Hooks.callAll("magnusarchivesPlayerIntrusionCreated", record, actor);
     } finally {
       this.#activeRequests.delete(requestId);
     }

@@ -27,7 +27,7 @@ const localize = (key: string): string => key;
 
 function request(overrides: Partial<CharacterRollRequest> = {}): CharacterRollRequest {
   return {
-    label: "CYPHERV2.Roll.TaskRoll",
+    label: "MAGNUSARCHIVES.Roll.TaskRoll",
     pool: "might",
     difficulty: {mode: "known", value: 5},
     skillSteps: 0,
@@ -87,7 +87,7 @@ describe("All-in-One Roll Dialog view model", () => {
       isOwner: true,
       ownership: {player: 3}
     });
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     vi.stubGlobal("fromUuidSync", () => ({
       _id: "superhero",
@@ -110,7 +110,7 @@ describe("All-in-One Roll Dialog view model", () => {
       isOwner: true,
       ownership: {player: 3}
     });
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.cypherv2.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     vi.stubGlobal("fromUuidSync", () => ({
       _id: "superhero",
@@ -242,7 +242,7 @@ describe("All-in-One Roll Dialog view model", () => {
     const weaponRequest = combat.buildWeaponAttackPlan(actor, weapon()).requests[0]!;
     const weaponView = buildRollDialogPreview(rolls.preview(actor, weaponRequest, policy), actor, localize);
     expect(weaponView.automaticModifiers).toContainEqual(expect.objectContaining({
-      label: "CYPHERV2.Combat.Weapon.Unfamiliar.heavy",
+      label: "MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.heavy",
       modifier: "-1"
     }));
 
@@ -259,7 +259,7 @@ describe("All-in-One Roll Dialog view model", () => {
     };
     const armorView = buildRollDialogPreview(rolls.preview(actor, request({pool: "speed"}), policy), actor, localize);
     expect(armorView.automaticModifiers).toContainEqual(expect.objectContaining({
-      label: "CYPHERV2.Combat.Armor.Unfamiliar.medium",
+      label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium",
       modifier: "-2"
     }));
   });
@@ -347,9 +347,9 @@ describe("All-in-One Roll Dialog view model", () => {
   it("preserves the Foundry Localization method context", () => {
     const localization = {
       translations: {
-        "CYPHERV2.Pools.Might": "Might",
-        "CYPHERV2.Pools.Speed": "Speed",
-        "CYPHERV2.Pools.Intellect": "Intellect"
+        "MAGNUSARCHIVES.Pools.Might": "Might",
+        "MAGNUSARCHIVES.Pools.Speed": "Speed",
+        "MAGNUSARCHIVES.Pools.Intellect": "Intellect"
       },
       localize(this: {translations: Record<string, string>}, key: string): string {
         if (!this?.translations) throw new Error("Localization context was lost");

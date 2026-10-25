@@ -14,7 +14,7 @@ class FakeCard {
 class FakeRoot {
   constructor(readonly card: FakeCard | null) {}
   querySelector<T>(selector: string): T | null {
-    return (selector === ".cypherv2-roll-card[data-cypherv2-entrance]" ? this.card : null) as T | null;
+    return (selector === ".magnusarchives-roll-card[data-magnusarchives-entrance]" ? this.card : null) as T | null;
   }
 }
 
@@ -25,9 +25,9 @@ describe("Chat Card entrance presentation", () => {
     const rerenderedCard = new FakeCard();
 
     expect(tracker.mark({id: "new"}, new FakeRoot(firstCard) as unknown as ParentNode)).toBe(true);
-    expect(firstCard.classList.values).toContain("cypherv2-chat-card-enter");
+    expect(firstCard.classList.values).toContain("magnusarchives-chat-card-enter");
     expect(tracker.mark({id: "new"}, new FakeRoot(rerenderedCard) as unknown as ParentNode)).toBe(false);
-    expect(rerenderedCard.classList.values).not.toContain("cypherv2-chat-card-enter");
+    expect(rerenderedCard.classList.values).not.toContain("magnusarchives-chat-card-enter");
   });
 
   it("does not animate cards already present when the tracker initializes", () => {
@@ -35,6 +35,6 @@ describe("Chat Card entrance presentation", () => {
     const card = new FakeCard();
 
     expect(tracker.mark({id: "history"}, new FakeRoot(card) as unknown as ParentNode)).toBe(false);
-    expect(card.classList.values).not.toContain("cypherv2-chat-card-enter");
+    expect(card.classList.values).not.toContain("magnusarchives-chat-card-enter");
   });
 });

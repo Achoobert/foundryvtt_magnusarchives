@@ -26,7 +26,8 @@ function target(): NpcTargetLike {
       modifications: [],
       damage: {
         amount: 4,
-        woundSeverity: "moderate",
+        effect: "seriousInjury",
+        stressAmount: 3,
         defense: {allowBlock: true, allowDodge: true},
         notes: ""
       }
@@ -102,7 +103,7 @@ function unresolvedAttackOutcome(): WeaponAttackOutcome {
     limits: {difficultyCeiling: 10, assetLimit: 2, paidEffortMaximum: 3, totalEffortMaximum: CORE_TOTAL_EFFORT_CAP},
     contributions: [{
       id: "skill.specialized",
-      label: "CYPHERV2.Skill.Ranks.specialized",
+      label: "MAGNUSARCHIVES.Skill.Ranks.specialized",
       direction: "ease",
       steps: 1,
       source: "skill"
@@ -208,9 +209,9 @@ describe("CombatChatService", () => {
       combatAction: true
     });
     expect(publicPayload.damageTotalDetails).toEqual(expect.arrayContaining([
-      expect.objectContaining({label: "CYPHERV2.Combat.FinalDamage", value: 8})
+      expect.objectContaining({label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 8})
     ]));
-    expect(publicMessage).toHaveProperty("flags.cypherv2.combatAction", expect.objectContaining({
+    expect(publicMessage).toHaveProperty("flags.magnusarchives.combatAction", expect.objectContaining({
       kind: "npcDamage",
       targetActorId: "npc-1",
       targetTokenId: "npc-token-1",
@@ -243,11 +244,11 @@ describe("CombatChatService", () => {
     expect(unresolvedPayload).not.toHaveProperty("outcome");
     expect(unresolvedPayload).not.toHaveProperty("combatAction");
     expect(unresolvedPayload.damageDetails).toEqual([
-      {label: "CYPHERV2.Combat.DamageBreakdown.Category", value: 4},
-      {label: "CYPHERV2.Combat.DamageBreakdown.Natural", value: "+2"}
+      {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: 4},
+      {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: "+2"}
     ]);
     expect(unresolvedPayload.damageTotalDetails).toEqual([
-      {label: "CYPHERV2.Combat.FinalDamage", value: 6}
+      {label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 6}
     ]);
 
     const failed = outcome();
@@ -270,7 +271,8 @@ describe("CombatChatService", () => {
     await combatChat().createDefenseRequest(
       target(),
       actor(),
-      "moderate",
+      "seriousInjury",
+      0,
       ["block", "dodge"]
     );
 
@@ -278,12 +280,12 @@ describe("CombatChatService", () => {
     const serialized = JSON.stringify(messages[0]);
     expect(serialized).not.toContain('"level"');
     expect(serialized).not.toContain('"difficulty"');
-    expect(messages[0]).toHaveProperty("flags.cypherv2.defenseRequest", expect.objectContaining({
+    expect(messages[0]).toHaveProperty("flags.magnusarchives.defenseRequest", expect.objectContaining({
       sourceActorId: "npc-1",
       targetActorId: "character-1",
       targetTokenId: "character-token-1",
       targetTokenUuid: "Scene.scene.Token.character-token-1",
-      woundSeverity: "moderate",
+      effect: "seriousInjury",
       allowedDefenses: ["block", "dodge"]
     }));
     expect(JSON.parse(String(messages[0]!.content))).toMatchObject({
@@ -300,21 +302,23 @@ describe("CombatChatService", () => {
     await combatChat().createDefenseRequest(
       target(),
       actor([shield()]),
-      "moderate",
+      "seriousInjury",
+      0,
       ["block", "dodge"]
     );
     await combatChat().createDefenseRequest(
       target(),
       actor([shield({broken: true})]),
-      "moderate",
+      "seriousInjury",
+      0,
       ["block", "dodge"]
     );
 
-    expect(messages[0]).toHaveProperty("flags.cypherv2.defenseRequest.allowedDefenses", [
+    expect(messages[0]).toHaveProperty("flags.magnusarchives.defenseRequest.allowedDefenses", [
       "block", "dodge", "blockWithShield"
     ]);
     expect(JSON.parse(String(messages[0]!.content))).toMatchObject({allowBlockWithShield: true});
-    expect(messages[1]).toHaveProperty("flags.cypherv2.defenseRequest.allowedDefenses", ["block", "dodge"]);
+    expect(messages[1]).toHaveProperty("flags.magnusarchives.defenseRequest.allowedDefenses", ["block", "dodge"]);
     expect(JSON.parse(String(messages[1]!.content))).toMatchObject({allowBlockWithShield: false});
   });
 
@@ -335,10 +339,10 @@ describe("CombatChatService", () => {
     expect(payload).toMatchObject({
       shieldTransfer: true,
       shieldName: "Round Shield",
-      shieldSeverity: "CYPHERV2.Wounds.Severity.major",
+      shieldSeverity: "MAGNUSARCHIVES.Wounds.Severity.major",
       combatAction: true
     });
-    expect(messages[0]).toHaveProperty("flags.cypherv2.combatAction", expect.objectContaining({
+    expect(messages[0]).toHaveProperty("flags.magnusarchives.combatAction", expect.objectContaining({
       kind: "shieldWound",
       targetActorId: "character-1",
       shieldId: "shield-1",

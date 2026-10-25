@@ -32,7 +32,7 @@ export function validateSpeciesReviewDocuments(species, references) {
       license: "2026 Cypher Open License",
       note: "Private Working validation wrapper."
     },
-    target: {systemId: "cypherv2", futurePackId: "species"},
+    target: {systemId: "magnusarchives", futurePackId: "species"},
     inventory: {
       fantasy: ["Dragonfolk", "Dwarf", "Elf", "Gnome", "Halfling", "Hellborn", "Human", "Orc"],
       scienceFiction: ["Aarak", "Cyborg", "Delph", "D’nec", "Drakain", "Human", "Mutant", "Naron", "Prota", "Rigellian", "Stelan", "Vendeer", "Zantari"]
@@ -68,7 +68,7 @@ function packManifestEntry() {
     label: SPECIES_REVIEW_LABEL,
     path: `packs/${SPECIES_REVIEW_PACK_ID}`,
     type: "Item",
-    system: "cypherv2",
+    system: "magnusarchives",
     ownership: {PLAYER: "OBSERVER", ASSISTANT: "OWNER"},
     flags: {},
     package: "world"
@@ -92,7 +92,7 @@ export async function importSpeciesReview({candidatePath, referencePath, project
   const worldPath = path.resolve(worldDirectory);
   const manifestPath = path.join(worldPath, "world.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-  if (manifest.id !== path.basename(worldPath) || manifest.system !== "cypherv2") {
+  if (manifest.id !== path.basename(worldPath) || manifest.system !== "magnusarchives") {
     throw new Error(`Refusing to import into unexpected World '${worldPath}'.`);
   }
 
@@ -126,7 +126,7 @@ export async function importSpeciesReview({candidatePath, referencePath, project
     packInstalled = true;
     manifest.packs ??= [];
     upsertPack(manifest.packs, packManifestEntry());
-    const temporaryManifest = path.join(worldPath, "world.json.cypherv2-species-review-tmp");
+    const temporaryManifest = path.join(worldPath, "world.json.magnusarchives-species-review-tmp");
     await writeFile(temporaryManifest, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await rm(manifestPath, {force: true});
     await rename(temporaryManifest, manifestPath);

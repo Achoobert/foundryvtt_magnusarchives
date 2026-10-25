@@ -1,4 +1,4 @@
-.cypherv2 .abilities-section {
+.magnusarchives .abilities-section {
   min-width: 0;
 
   .abilities-header {
@@ -11,7 +11,7 @@
 
   .abilities-add-action {
     padding: 0.1rem 0.2rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.7rem;
   }
 
@@ -28,14 +28,14 @@
     min-width: 0;
     margin: 0;
     border: 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--cypherv2-border) 42%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--magnusarchives-border) 42%, transparent);
     border-radius: 0.2rem 0.2rem 0 0;
     transition: background 100ms ease, box-shadow 100ms ease;
 
     &.starts-archived-group {
       margin-top: 0.45rem;
       padding-top: 0.25rem;
-      border-top: 1px solid color-mix(in srgb, var(--cypherv2-border) 78%, transparent);
+      border-top: 1px solid color-mix(in srgb, var(--magnusarchives-border) 78%, transparent);
     }
 
     &.is-archived {
@@ -50,12 +50,12 @@
 
     &:hover,
     &:focus-within {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 55%, transparent);
-      box-shadow: inset 2px 0 var(--cypherv2-accent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 55%, transparent);
+      box-shadow: inset 2px 0 var(--magnusarchives-accent);
     }
 
     &.is-expanded {
-      background: color-mix(in srgb, var(--cypherv2-surface-raised) 22%, transparent);
+      background: color-mix(in srgb, var(--magnusarchives-surface-raised) 22%, transparent);
       box-shadow: none;
     }
 
@@ -99,19 +99,19 @@
     width: 100%;
     min-width: 0;
     padding: 0.08rem 0.12rem 0.08rem 0;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     text-align: left;
 
     &:hover .ability-name,
     &:focus-visible .ability-name {
-      color: var(--cypherv2-accent-hover);
+      color: var(--magnusarchives-accent-hover);
     }
   }
 
   .ability-name {
     min-width: 0;
     overflow-wrap: anywhere;
-    color: var(--cypherv2-text-primary);
+    color: var(--magnusarchives-text-primary);
     font-size: 0.72rem;
     font-weight: 750;
     letter-spacing: 0.025em;
@@ -123,7 +123,7 @@
 
   .ability-cost {
     flex: 0 0 auto;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.66rem;
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -140,7 +140,7 @@
     opacity: 0.62;
     transition: opacity 100ms ease;
 
-    .cypherv2-icon-action {
+    .magnusarchives-icon-action {
       width: 1.25rem;
       height: 1.25rem;
       padding: 0.08rem;
@@ -152,9 +152,9 @@
     min-width: 0;
     margin: 0.05rem 0.3rem 0.38rem 1.45rem;
     padding: 0.24rem 0.38rem 0.3rem 0.55rem;
-    color: color-mix(in srgb, var(--cypherv2-text-primary) 86%, var(--cypherv2-text-muted));
+    color: color-mix(in srgb, var(--magnusarchives-text-primary) 86%, var(--magnusarchives-text-muted));
     background: transparent;
-    border-left: 2px solid color-mix(in srgb, var(--cypherv2-accent) 62%, transparent);
+    border-left: 2px solid color-mix(in srgb, var(--magnusarchives-accent) 62%, transparent);
 
     &[hidden] {
       display: none;
@@ -184,21 +184,21 @@
 
   .ability-no-description {
     margin: 0;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.7rem;
     font-style: italic;
   }
 
   .compact-ability-empty {
     padding: 0.4rem 0.25rem;
-    color: var(--cypherv2-text-muted);
+    color: var(--magnusarchives-text-muted);
     font-size: 0.75rem;
     font-style: italic;
   }
 }
 
-@container cypherv2-character-sheet (max-width: 560px) {
-  .cypherv2 .abilities-section {
+@container magnusarchives-character-sheet (max-width: 560px) {
+  .magnusarchives .abilities-section {
     .compact-ability-row {
       grid-template-columns: 1.1rem minmax(0, 1fr) max-content;
     }

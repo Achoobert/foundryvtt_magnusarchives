@@ -7,9 +7,11 @@ export const REVIEWED_CORE_PACKS = Object.freeze({
   descriptors: Object.freeze({label: "Descriptors", itemTypes: Object.freeze(["descriptor"])}),
   skills: Object.freeze({label: "Skills", itemTypes: Object.freeze(["skill"])}),
   "weapons-and-armors": Object.freeze({
-    label: "Weapons & Armors",
+    label: "Weapons & Armor",
     itemTypes: Object.freeze(["weapon", "armor", "shield"])
-  })
+  }),
+  // The Magnus price tables list ordinary gear separately from weapons (p102).
+  equipment: Object.freeze({label: "Equipment", itemTypes: Object.freeze(["equipment"])})
 });
 
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;
@@ -75,7 +77,7 @@ function visitStrings(value, transform) {
 }
 
 function systemDocumentUuid(packId, kind, id) {
-  return `Compendium.cypherv2.${packId}.${kind}.${id}`;
+  return `Compendium.magnusarchives.${packId}.${kind}.${id}`;
 }
 
 function rewriteDocumentReferences(document, sourcePackId, identities, rewriteCounts) {
@@ -83,7 +85,7 @@ function rewriteDocumentReferences(document, sourcePackId, identities, rewriteCo
     let rewritten = value.replace(COMPENDIUM_UUID_PATTERN, (match, systemId, _packId, kind, id) => {
       const target = identities.get(id);
       if (!target || target.kind !== kind) return match;
-      if (systemId !== "cypher-v2-test" && systemId !== "world" && systemId !== "cypherv2") return match;
+      if (systemId !== "cypher-v2-test" && systemId !== "world" && systemId !== "magnusarchives") return match;
       const replacement = systemDocumentUuid(target.packId, target.kind, id);
       if (replacement !== match) incrementRewrite(rewriteCounts, sourcePackId, target.packId);
       return replacement;
@@ -138,7 +140,7 @@ export async function createReviewedCorePackSource({directories}) {
       worldId: "cypher-v2-test",
       note: "Lossless reviewed documents promoted from the authoritative World packs."
     },
-    target: {systemId: "cypherv2"},
+    target: {systemId: "magnusarchives"},
     referenceRewrites: Object.fromEntries([...rewriteCounts.entries()].sort()),
     packs
   });
@@ -182,7 +184,7 @@ export function validateReviewedCorePackSource(source) {
     throw new ReviewedCorePackValidationError(["Source root must be an object."]);
   }
   if (source.schemaVersion !== REVIEWED_CORE_PACK_SCHEMA_VERSION) errors.push(`schemaVersion must be ${REVIEWED_CORE_PACK_SCHEMA_VERSION}.`);
-  if (source.target?.systemId !== "cypherv2") errors.push("target.systemId must be 'cypherv2'.");
+  if (source.target?.systemId !== "magnusarchives") errors.push("target.systemId must be 'magnusarchives'.");
   const packIds = Object.keys(REVIEWED_CORE_PACKS);
   if (JSON.stringify(Object.keys(source.packs ?? {}).sort()) !== JSON.stringify([...packIds].sort())) {
     errors.push(`packs must contain exactly: ${packIds.join(", ")}.`);
@@ -235,7 +237,7 @@ export function validateReviewedCorePackSource(source) {
         }
         for (const match of value.matchAll(COMPENDIUM_UUID_PATTERN)) {
           const [, systemId, targetPackId, kind, id] = match;
-          if (systemId !== "cypherv2" || !REVIEWED_CORE_PACKS[targetPackId]) continue;
+          if (systemId !== "magnusarchives" || !REVIEWED_CORE_PACKS[targetPackId]) continue;
           const target = identities.get(id);
           if (!target || target.packId !== targetPackId || target.kind !== kind) {
             errors.push(`packs.${packId}.documents[${index}] contains unresolved system UUID '${match[0]}'.`);

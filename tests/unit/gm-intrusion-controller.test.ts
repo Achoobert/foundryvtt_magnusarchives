@@ -98,8 +98,8 @@ describe("GM Intrusion distribution coordinator", () => {
 
   it("uses connectivity-neutral copy for an empty recipient list", () => {
     const translations = JSON.parse(readFileSync("lang/en.json", "utf8")) as Record<string, string>;
-    expect(translations["CYPHERV2.Intrusion.Chat.NoEligible"]).toBe("No eligible Character available.");
-    expect(translations["CYPHERV2.Intrusion.Chat.NoEligible"]).not.toMatch(/connected/i);
+    expect(translations["MAGNUSARCHIVES.Intrusion.Chat.NoEligible"]).toBe("No eligible Character available.");
+    expect(translations["MAGNUSARCHIVES.Intrusion.Chat.NoEligible"]).not.toMatch(/connected/i);
   });
 
   it("lets the GM award shared XP once to an offline player's Character", async () => {
@@ -183,7 +183,7 @@ describe("GM Intrusion distribution coordinator", () => {
     expect(pending).toEqual([]);
 
     await expect(controller.requestDistribution("intrusion-1", recipient.id))
-      .rejects.toThrow("CYPHERV2.Intrusion.Errors.AlreadyResolved");
+      .rejects.toThrow("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved");
     expect(recipient.system.xp).toBe(5);
   });
 
@@ -339,7 +339,7 @@ describe("GM Intrusion distribution coordinator", () => {
 
     gameState.user = unrelated;
     await expect(controller.requestDistribution("intrusion-1", recipient.id))
-      .rejects.toThrow("CYPHERV2.Intrusion.Errors.NotAuthorized");
+      .rejects.toThrow("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized");
     expect(emit).toHaveBeenCalledTimes(1);
   });
 
@@ -419,7 +419,7 @@ describe("GM Intrusion distribution coordinator", () => {
     click?.({preventDefault: vi.fn(), stopPropagation: vi.fn()});
     await vi.advanceTimersByTimeAsync(0);
 
-    expect(errorNotification).toHaveBeenCalledWith("CYPHERV2.Intrusion.Errors.CharacterMissing");
+    expect(errorNotification).toHaveBeenCalledWith("MAGNUSARCHIVES.Intrusion.Errors.CharacterMissing");
     expect(button.disabled).toBe(false);
   });
 });

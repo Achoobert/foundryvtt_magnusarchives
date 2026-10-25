@@ -29,10 +29,13 @@ describe("Wound count Application V2 action data", () => {
     expect(() => parseWoundCountActionData(dataset)).toThrow("Invalid Wound count action data");
   });
 
-  it("renders explicit Character and Shield datasets without relative-context lookups", () => {
-    expect(characterTemplate).toContain('data-track="character" data-severity="{{row.character.severity}}" data-count="{{pip.targetCount}}"');
-    expect(characterTemplate).toContain('data-track="shield" data-shield-id="{{row.shield.itemId}}" data-severity="{{row.shield.severity}}" data-count="{{pip.targetCount}}"');
+  it("renders the explicit Shield dataset without relative-context lookups", () => {
     expect(itemTemplate).toContain('data-track="shield" data-shield-id="{{@root.item.id}}" data-severity="{{track.severity}}" data-count="{{pip.targetCount}}"');
-    expect(characterTemplate).not.toContain('data-severity="{{../severity}}"');
+    expect(itemTemplate).not.toContain('data-severity="{{../severity}}"');
+  });
+
+  it("no longer renders a Character Wound track — the Character sheet uses Stress and the damage track", () => {
+    expect(characterTemplate).not.toContain('data-action="setCharacterWoundCount"');
+    expect(characterTemplate).toContain('data-action="setDamageTrackStep"');
   });
 });

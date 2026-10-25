@@ -32,7 +32,7 @@ describe("compact Ability Item Sheet", () => {
     expect(ability.indexOf('name="system.activation"')).toBeGreaterThan(description);
     expect(ability.indexOf('name="system.roll"')).toBeGreaterThan(description);
     expect(ability).not.toContain("ability-automation");
-    expect(ability).not.toContain("CYPHERV2.Ability.Automation");
+    expect(ability).not.toContain("MAGNUSARCHIVES.Ability.Automation");
   });
 
   it("retains all runtime fields inside Advanced / Technical", () => {
@@ -41,7 +41,7 @@ describe("compact Ability Item Sheet", () => {
       "showRollModifier",
       "showAttackModifier",
       "showDamage",
-      "showWoundSeverity",
+      "showDamageEffect",
       "showRange",
       "showTargetMode"
     ]) expect(ability).toContain(`abilityMechanics.${condition}`);
@@ -99,6 +99,6 @@ describe("compact rule Item Sheet layout", () => {
     expect(styles).toContain("flex: 1 1 auto");
     expect(styles).toContain("min-height: 8rem");
     expect(styles).toContain("overflow-x: hidden");
-    expect(styles).toContain("@container cypherv2-rule-item (max-width: 520px)");
+    expect(styles).toContain("@container magnusarchives-rule-item (max-width: 520px)");
   });
 });

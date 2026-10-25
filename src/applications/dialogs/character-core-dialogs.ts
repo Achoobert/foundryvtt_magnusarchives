@@ -59,7 +59,7 @@ function notifyError(error: unknown): void {
 async function input(
   title: string,
   content: string,
-  okLabel = game.i18n.localize("CYPHERV2.Actions.Apply")
+  okLabel = game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")
 ): Promise<DialogData | null> {
   return foundry.applications.api.DialogV2.input({
     window: {title},
@@ -90,25 +90,25 @@ export async function promptEditWound(
     return;
   }
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Wounds.EditTitle")},
-    content: `<div class="cypherv2-dialog-fields">
-      <label>${game.i18n.localize("CYPHERV2.Wounds.Label")}
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Wounds.EditTitle")},
+    content: `<div class="magnusarchives-dialog-fields">
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.Label")}
         <input name="label" type="text" value="${escapeHtml(wound.label)}">
       </label>
-      <label>${game.i18n.localize("CYPHERV2.Wounds.Description")}
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.Description")}
         <textarea name="description">${escapeHtml(wound.description)}</textarea>
       </label>
     </div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Save")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
   }) as DialogData | null;
   if (!data) return;
   try {
-    await game.cypherv2.services.wounds.edit(actor, severity, woundId, {
+    await game.magnusarchives.services.wounds.edit(actor, severity, woundId, {
       label: stringValue(data, "label"),
       description: stringValue(data, "description")
     });
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Wounds.Updated"));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Wounds.Updated"));
   } catch (error) {
     notifyError(error);
   }
@@ -120,17 +120,17 @@ export async function promptDeleteWound(
   woundId: string
 ): Promise<void> {
   const confirmed = await foundry.applications.api.DialogV2.confirm({
-    window: {title: game.i18n.localize("CYPHERV2.Wounds.DeleteTitle")},
-    content: `<div class="cypherv2 cypherv2-dialog"><p>${game.i18n.localize("CYPHERV2.Wounds.DeleteConfirm")}</p></div>`,
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Wounds.DeleteTitle")},
+    content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Wounds.DeleteConfirm")}</p></div>`,
     rejectClose: false,
     modal: true,
-    yes: {label: game.i18n.localize("CYPHERV2.Actions.Delete")},
-    no: {label: game.i18n.localize("CYPHERV2.Actions.Cancel")}
+    yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
+    no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
   });
   if (!confirmed) return;
   try {
-    await game.cypherv2.services.wounds.delete(actor, severity, woundId);
-    ui.notifications.info(game.i18n.localize("CYPHERV2.Wounds.Deleted"));
+    await game.magnusarchives.services.wounds.delete(actor, severity, woundId);
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Wounds.Deleted"));
   } catch (error) {
     notifyError(error);
   }
@@ -138,14 +138,14 @@ export async function promptDeleteWound(
 
 export async function promptApplyWound(actor: CharacterDocumentLike): Promise<void> {
   const data = await input(
-    game.i18n.localize("CYPHERV2.Actions.ApplyWound"),
-    `<div class="cypherv2-dialog-fields">
-      <label>${game.i18n.localize("CYPHERV2.Wounds.SeverityLabel")}
+    game.i18n.localize("MAGNUSARCHIVES.Actions.ApplyWound"),
+    `<div class="magnusarchives-dialog-fields">
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.SeverityLabel")}
         <select name="severity">
-          ${WOUND_SEVERITIES.map((severity) => `<option value="${severity}">${game.i18n.localize(`CYPHERV2.Wounds.Severity.${severity}`)}</option>`).join("")}
+          ${WOUND_SEVERITIES.map((severity) => `<option value="${severity}">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)}</option>`).join("")}
         </select>
       </label>
-      <label>${game.i18n.localize("CYPHERV2.Wounds.Label")}
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.Label")}
         <input name="label" type="text">
       </label>
     </div>`
@@ -153,14 +153,14 @@ export async function promptApplyWound(actor: CharacterDocumentLike): Promise<vo
   if (!data) return;
   try {
     const label = stringValue(data, "label");
-    const result = await game.cypherv2.services.wounds.apply(
+    const result = await game.magnusarchives.services.wounds.apply(
       actor,
       stringValue(data, "severity") as WoundSeverity,
       label ? {label} : {}
     );
     const message = result.applied
-      ? `${result.appliedSeverity}${result.dead ? ` — ${game.i18n.localize("CYPHERV2.Wounds.Dead")}` : ""}`
-      : game.i18n.localize("CYPHERV2.Wounds.NoFourthMajor");
+      ? `${result.appliedSeverity}${result.dead ? ` — ${game.i18n.localize("MAGNUSARCHIVES.Wounds.Dead")}` : ""}`
+      : game.i18n.localize("MAGNUSARCHIVES.Wounds.NoFourthMajor");
     ui.notifications.info(message);
   } catch (error) {
     notifyError(error);
@@ -169,23 +169,23 @@ export async function promptApplyWound(actor: CharacterDocumentLike): Promise<vo
 
 export async function promptPoolDamage(actor: CharacterDocumentLike): Promise<void> {
   const data = await input(
-    game.i18n.localize("CYPHERV2.Actions.PoolDamage"),
-    `<div class="cypherv2-dialog-fields">
-      <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}
+    game.i18n.localize("MAGNUSARCHIVES.Actions.PoolDamage"),
+    `<div class="magnusarchives-dialog-fields">
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}
         <select name="pool">
-          <option value="might">${game.i18n.localize("CYPHERV2.Pools.Might")}</option>
-          <option value="speed">${game.i18n.localize("CYPHERV2.Pools.Speed")}</option>
-          <option value="intellect">${game.i18n.localize("CYPHERV2.Pools.Intellect")}</option>
+          <option value="might">${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}</option>
+          <option value="speed">${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}</option>
+          <option value="intellect">${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}</option>
         </select>
       </label>
-      <label>${game.i18n.localize("CYPHERV2.Pools.Damage")}
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Damage")}
         <input name="damage" type="number" value="1" min="0" step="1">
       </label>
     </div>`
   );
   if (!data) return;
   try {
-    const result = await game.cypherv2.services.wounds.damagePool(
+    const result = await game.magnusarchives.services.wounds.damagePool(
       actor,
       stringValue(data, "pool") as PoolKey,
       numberValue(data, "damage")
@@ -210,105 +210,105 @@ export async function promptRecovery(
     : defaultRecoverySlots(actor.system.recovery.used);
   const availableSlots = availableRecoverySlots(slots);
   if (availableSlots.length === 0) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.Recovery.NoneAvailable"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Recovery.NoneAvailable"));
     return;
   }
   if (selectedSlotId && !availableSlots.some((slot) => slot.id === selectedSlotId && slot.type === selectedType)) {
-    ui.notifications.warn(game.i18n.localize("CYPHERV2.Recovery.AlreadyUsed"));
+    ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Recovery.AlreadyUsed"));
     return;
   }
   let type = selectedType;
   let slotId = selectedSlotId;
   if (!type || !slotId) {
     const selection = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize("CYPHERV2.Recovery.Choose")},
-      content: `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-dialog">
-        <section class="cypherv2-dialog-section">
-          <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Recovery.Available")}</span>
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Recovery.Choose")}
-            <select name="slotId">${availableSlots.map((entry) => `<option value="${entry.id}">${game.i18n.localize(`CYPHERV2.Recovery.${entry.type}`)}</option>`).join("")}</select>
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Recovery.Choose")},
+      content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
+        <section class="magnusarchives-dialog-section">
+          <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Recovery.Available")}</span>
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Recovery.Choose")}
+            <select name="slotId">${availableSlots.map((entry) => `<option value="${entry.id}">${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${entry.type}`)}</option>`).join("")}</select>
           </label>
         </section>
       </div>`,
       rejectClose: false,
-      ok: {label: game.i18n.localize("CYPHERV2.Actions.Next")}
+      ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Next")}
     }) as DialogData | null;
     if (!selection) return;
     slotId = stringValue(selection, "slotId");
     type = availableSlots.find((slot) => slot.id === slotId)?.type;
     if (!type || !slotId) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Recovery.AlreadyUsed"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Recovery.AlreadyUsed"));
       return;
     }
   }
   const modes = recoveryDialogModes(type);
   const setup = await foundry.applications.api.DialogV2.input({
-    window: {title: `${game.i18n.localize("CYPHERV2.Actions.Recovery")} — ${game.i18n.localize(`CYPHERV2.Recovery.${type}`)}`},
-    content: `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-dialog">
-      <header class="cypherv2-dialog-heading">
-        <span>${game.i18n.localize("CYPHERV2.Actions.Recovery")}</span>
-        <strong>${game.i18n.localize(`CYPHERV2.Recovery.${type}`)}</strong>
+    window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}`},
+    content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
+      <header class="magnusarchives-dialog-heading">
+        <span>${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")}</span>
+        <strong>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}</strong>
       </header>
-      <section class="cypherv2-dialog-section cypherv2-recovery-formula">
-        <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Recovery.Roll")}</span>
-        <strong class="cypherv2-dialog-value">${escapeHtml(actor.system.derived.recovery.formula)}</strong>
+      <section class="magnusarchives-dialog-section magnusarchives-recovery-formula">
+        <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Recovery.Roll")}</span>
+        <strong class="magnusarchives-dialog-value">${escapeHtml(actor.system.derived.recovery.formula)}</strong>
       </section>
-      <section class="cypherv2-dialog-section">
-        <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Recovery.KindLabel")}</span>
-        <div class="cypherv2-dialog-button-group recovery-mode-buttons" role="radiogroup" aria-label="${game.i18n.localize("CYPHERV2.Recovery.KindLabel")}">
-          ${modes.map((mode) => `<label class="cypherv2-dialog-toggle"><input name="mode" type="radio" value="${mode}"${mode === "normal" ? " checked" : ""}><span>${game.i18n.localize(`CYPHERV2.Recovery.Kind.${mode}`)}</span></label>`).join("")}
+      <section class="magnusarchives-dialog-section">
+        <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Recovery.KindLabel")}</span>
+        <div class="magnusarchives-dialog-button-group recovery-mode-buttons" role="radiogroup" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Recovery.KindLabel")}">
+          ${modes.map((mode) => `<label class="magnusarchives-dialog-toggle"><input name="mode" type="radio" value="${mode}"${mode === "normal" ? " checked" : ""}><span>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.Kind.${mode}`)}</span></label>`).join("")}
         </div>
       </section>
     </div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Recovery.Recover")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Recovery.Recover")}
   }) as DialogData | null;
   if (!setup) return;
   try {
     const resolution = resolveRecoveryDialogMode(type, stringValue(setup, "mode") as RecoveryDialogMode);
     if (resolution.kind === "nonRest") {
-      await game.cypherv2.services.recovery.completeNonRest(actor, type, slotId);
-      ui.notifications.info(game.i18n.localize("CYPHERV2.Recovery.NonRestCompleted"));
+      await game.magnusarchives.services.recovery.completeNonRest(actor, type, slotId);
+      ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Recovery.NonRestCompleted"));
       return;
     }
-    const roll = await game.cypherv2.services.recovery.rollNormal(
+    const roll = await game.magnusarchives.services.recovery.rollNormal(
       actor,
       type,
       resolution.lastAction,
       slotId
     );
     const restControls = type === "1-hour"
-      ? `<label>${game.i18n.localize("CYPHERV2.Rest.OneHourChoice")}
+      ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Rest.OneHourChoice")}
           <select name="oneHourChoice">
-            <option value="remove-moderate">${game.i18n.localize("CYPHERV2.Rest.RemoveModerate")}</option>
-            <option value="remove-minors">${game.i18n.localize("CYPHERV2.Rest.RemoveMinors")}</option>
+            <option value="remove-moderate">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveModerate")}</option>
+            <option value="remove-minors">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveMinors")}</option>
           </select>
         </label>`
       : type === "10-hours"
-        ? `<label><input name="exchange" type="checkbox"> ${game.i18n.localize("CYPHERV2.Rest.ExchangeMinor")}</label>
-          <label><input name="majorSuccess" type="checkbox"> ${game.i18n.localize("CYPHERV2.Rest.MajorTaskSuccess")}</label>`
+        ? `<label><input name="exchange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.ExchangeMinor")}</label>
+          <label><input name="majorSuccess" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.MajorTaskSuccess")}</label>`
         : type === "10-minutes"
-          ? `<p>${game.i18n.localize("CYPHERV2.Recovery.TenMinuteBenefit")}</p>`
+          ? `<p>${game.i18n.localize("MAGNUSARCHIVES.Recovery.TenMinuteBenefit")}</p>`
           : "";
     const allocation = await input(
-      `${game.i18n.localize("CYPHERV2.Actions.Recovery")} — ${roll.total}`,
-      `<div class="cypherv2 cypherv2-dialog cypherv2-recovery-dialog cypherv2-recovery-allocation-dialog">
-        <section class="cypherv2-dialog-section">
-          <span class="cypherv2-dialog-section-heading">${game.i18n.localize("CYPHERV2.Recovery.Result")}</span>
-          <div class="cypherv2-dialog-summary-row"><span>${escapeHtml(actor.system.derived.recovery.formula)}</span><strong>${roll.total}</strong></div>
-          ${roll.lastAction ? `<div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Recovery.Kind.lastAction")}</span><strong>+2</strong></div>` : ""}
+      `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${roll.total}`,
+      `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog magnusarchives-recovery-allocation-dialog">
+        <section class="magnusarchives-dialog-section">
+          <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Recovery.Result")}</span>
+          <div class="magnusarchives-dialog-summary-row"><span>${escapeHtml(actor.system.derived.recovery.formula)}</span><strong>${roll.total}</strong></div>
+          ${roll.lastAction ? `<div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Recovery.Kind.lastAction")}</span><strong>+2</strong></div>` : ""}
         </section>
-        <section class="cypherv2-dialog-section cypherv2-dialog-field-grid">
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Pools.Might")} <input name="might" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Pools.Speed")} <input name="speed" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
-          <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Pools.Intellect")} <input name="intellect" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
+        <section class="magnusarchives-dialog-section magnusarchives-dialog-field-grid">
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")} <input name="might" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")} <input name="speed" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
+          <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")} <input name="intellect" type="number" value="0" min="0" max="${roll.total}" step="1"></label>
         </section>
-        ${restControls ? `<section class="cypherv2-dialog-section cypherv2-dialog-fields">${restControls}</section>` : ""}
+        ${restControls ? `<section class="magnusarchives-dialog-section magnusarchives-dialog-fields">${restControls}</section>` : ""}
       </div>`,
-      game.i18n.localize("CYPHERV2.Recovery.Recover")
+      game.i18n.localize("MAGNUSARCHIVES.Recovery.Recover")
     );
     if (!allocation) return;
-    const result = await game.cypherv2.services.recovery.completeNormal(
+    const result = await game.magnusarchives.services.recovery.completeNormal(
       actor,
       roll,
       {
@@ -325,7 +325,7 @@ export async function promptRecovery(
     const restored = roll.total - result.recovery.unspent;
     const removed = result.rest?.result.removed.length ?? 0;
     ui.notifications.info(
-      `${game.i18n.localize("CYPHERV2.Recovery.Restored")}: ${restored}; ${game.i18n.localize("CYPHERV2.Rest.Removed")}: ${removed}`
+      `${game.i18n.localize("MAGNUSARCHIVES.Recovery.Restored")}: ${restored}; ${game.i18n.localize("MAGNUSARCHIVES.Rest.Removed")}: ${removed}`
     );
   } catch (error) {
     notifyError(error);
@@ -333,14 +333,14 @@ export async function promptRecovery(
 }
 
 export async function promptRally(actor: CharacterDocumentLike): Promise<void> {
-  const rally = game.cypherv2.services.rally;
+  const rally = game.magnusarchives.services.rally;
   const current = actor.system.stats.might.value;
   const maximum = actor.system.derived.pools.might.max;
   const minorCost = rally.costFor("minor");
   const moderateCost = rally.costFor("moderate");
   const initialPreview = rally.preview(actor, "minor", minorCost);
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Actions.Rally")},
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")},
     content: rallyDialogContent(
       current,
       maximum,
@@ -349,19 +349,19 @@ export async function promptRally(actor: CharacterDocumentLike): Promise<void> {
       initialPreview.success ? initialPreview.mightValue : null
     ),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Rally")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")},
     render: (_event: Event, dialog: {element: HTMLElement}) => bindRallyDialog(dialog.element, actor)
   }) as DialogData | null;
   if (!data) return;
   try {
-    const result = await game.cypherv2.services.rally.apply(
+    const result = await game.magnusarchives.services.rally.apply(
       actor,
       stringValue(data, "severity") as RallySeverity,
       undefined,
       numberValue(data, "cost")
     );
     if (!result.success) throw new Error(result.failure ?? "Rally failed.");
-    ui.notifications.info(`${game.i18n.localize("CYPHERV2.Actions.Rally")}: -${result.cost} Might`);
+    ui.notifications.info(`${game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")}: -${result.cost} Might`);
   } catch (error) {
     notifyError(error);
   }
@@ -374,24 +374,24 @@ export function rallyDialogContent(
   moderateCost = 5,
   afterMight: number | null = null
 ): string {
-  const minor = game.i18n.localize("CYPHERV2.Wounds.Severity.minor");
-  const moderate = game.i18n.localize("CYPHERV2.Wounds.Severity.moderate");
-  return `<div class="cypherv2 cypherv2-dialog cypherv2-rally-dialog" data-current-might="${currentMight}" data-max-might="${maximumMight}">
-    <header class="cypherv2-dialog-heading"><span>${game.i18n.localize("CYPHERV2.Actions.Rally")}</span><strong data-rally-heading>${minor}</strong></header>
-    <section class="cypherv2-dialog-section">
-      <div class="cypherv2-dialog-button-group" role="radiogroup" aria-label="${game.i18n.localize("CYPHERV2.Wounds.SeverityLabel")}">
-        <label class="cypherv2-dialog-toggle"><input type="radio" name="severity" value="minor" data-default-cost="${minorCost}" checked><span>${minor}</span></label>
-        <label class="cypherv2-dialog-toggle"><input type="radio" name="severity" value="moderate" data-default-cost="${moderateCost}"><span>${moderate}</span></label>
+  const minor = game.i18n.localize("MAGNUSARCHIVES.Wounds.Severity.minor");
+  const moderate = game.i18n.localize("MAGNUSARCHIVES.Wounds.Severity.moderate");
+  return `<div class="magnusarchives magnusarchives-dialog magnusarchives-rally-dialog" data-current-might="${currentMight}" data-max-might="${maximumMight}">
+    <header class="magnusarchives-dialog-heading"><span>${game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")}</span><strong data-rally-heading>${minor}</strong></header>
+    <section class="magnusarchives-dialog-section">
+      <div class="magnusarchives-dialog-button-group" role="radiogroup" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Wounds.SeverityLabel")}">
+        <label class="magnusarchives-dialog-toggle"><input type="radio" name="severity" value="minor" data-default-cost="${minorCost}" checked><span>${minor}</span></label>
+        <label class="magnusarchives-dialog-toggle"><input type="radio" name="severity" value="moderate" data-default-cost="${moderateCost}"><span>${moderate}</span></label>
       </div>
-      <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Rally.Cost")}
+      <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Rally.Cost")}
         <input name="cost" type="number" min="0" max="${RALLY_EXECUTION_COST_MAX}" step="1" value="${minorCost}">
       </label>
     </section>
-    <section class="cypherv2-dialog-section" aria-label="${game.i18n.localize("CYPHERV2.Roll.Summary")}">
-      <div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Rally.Cost")}</span><strong><span data-rally-cost>${minorCost}</span> Might</strong></div>
-      <div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Rally.CurrentMight")}</span><strong>${currentMight} / ${maximumMight}</strong></div>
-      <div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Rally.AfterRally")}</span><strong><span data-rally-after>${afterMight ?? "—"}</span> / ${maximumMight}</strong></div>
-      <p class="cypherv2-dialog-callout is-danger" data-rally-error ${afterMight === null ? "" : "hidden"}>${game.i18n.localize("CYPHERV2.Rally.Unavailable")}</p>
+    <section class="magnusarchives-dialog-section" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Roll.Summary")}">
+      <div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Rally.Cost")}</span><strong><span data-rally-cost>${minorCost}</span> Might</strong></div>
+      <div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Rally.CurrentMight")}</span><strong>${currentMight} / ${maximumMight}</strong></div>
+      <div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Rally.AfterRally")}</span><strong><span data-rally-after>${afterMight ?? "—"}</span> / ${maximumMight}</strong></div>
+      <p class="magnusarchives-dialog-callout is-danger" data-rally-error ${afterMight === null ? "" : "hidden"}>${game.i18n.localize("MAGNUSARCHIVES.Rally.Unavailable")}</p>
     </section>
   </div>`;
 }
@@ -409,17 +409,17 @@ export function bindRallyDialog(root: HTMLElement, actor: CharacterDocumentLike)
     const amount = Number(cost.value);
     const severity = modes.find((mode) => mode.checked)?.value as RallySeverity | undefined;
     const preview = severity
-      ? game.cypherv2.services.rally.preview(actor, severity, amount)
+      ? game.magnusarchives.services.rally.preview(actor, severity, amount)
       : null;
     if (costSummary) costSummary.textContent = Number.isInteger(amount) ? String(amount) : "—";
     if (afterSummary) afterSummary.textContent = preview?.success ? String(preview.mightValue) : "—";
     if (error) {
       error.hidden = preview?.success === true;
       error.textContent = game.i18n.localize(preview?.failure === "insufficient-might"
-        ? "CYPHERV2.Rally.InsufficientMight"
+        ? "MAGNUSARCHIVES.Rally.InsufficientMight"
         : preview?.failure === "invalid-cost"
-          ? "CYPHERV2.Rally.InvalidCost"
-          : "CYPHERV2.Rally.NoWound");
+          ? "MAGNUSARCHIVES.Rally.InvalidCost"
+          : "MAGNUSARCHIVES.Rally.NoWound");
     }
     if (submit) submit.disabled = preview?.success !== true;
   };
@@ -439,23 +439,23 @@ export async function promptCharacterOverride(
 ): Promise<void> {
   const view = characterOverrideView(actor.system, key);
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize("CYPHERV2.Overrides.Edit")},
-    content: `<div class="cypherv2 cypherv2-dialog cypherv2-override-dialog">
-      <section class="cypherv2-dialog-section">
-        <div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Overrides.Calculated")}</span><strong>${view.calculated}</strong></div>
-        <label class="cypherv2-dialog-field">${game.i18n.localize("CYPHERV2.Overrides.Override")}
+    window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.Edit")},
+    content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-override-dialog">
+      <section class="magnusarchives-dialog-section">
+        <div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Overrides.Calculated")}</span><strong>${view.calculated}</strong></div>
+        <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Overrides.Override")}
           <input name="value" type="number" min="${view.minimum}" step="1" value="${view.override ?? view.effective}">
         </label>
-        <div class="cypherv2-dialog-summary-row"><span>${game.i18n.localize("CYPHERV2.Overrides.Effective")}</span><strong>${view.effective}</strong></div>
+        <div class="magnusarchives-dialog-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Overrides.Effective")}</span><strong>${view.effective}</strong></div>
       </section>
     </div>`,
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Actions.Apply")}
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")}
   }) as DialogData | null;
   if (!data) return;
   const value = Number(data.value);
   if (!Number.isInteger(value) || value < view.minimum) {
-    notifyError(new Error(game.i18n.localize("CYPHERV2.Overrides.Invalid")));
+    notifyError(new Error(game.i18n.localize("MAGNUSARCHIVES.Overrides.Invalid")));
     return;
   }
   await actor.update({[view.path]: value});

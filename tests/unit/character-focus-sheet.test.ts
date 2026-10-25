@@ -82,7 +82,7 @@ describe("Character Focus association UI", () => {
     const template = readFileSync(resolve(root, "templates/actor/character-sheet.hbs"), "utf8");
     const source = readFileSync(resolve(root, "src/applications/sheets/character-sheet.ts"), "utf8");
 
-    expect(template).toContain('class="cypherv2-icon-action advancement-undo-action"');
+    expect(template).toContain('class="magnusarchives-icon-action advancement-undo-action"');
     expect(template).toContain('data-action="undoAdvancement"');
     expect(template).toContain('data-purchase-id="{{purchase.id}}"');
     expect(template).toContain('fa-arrow-rotate-left');

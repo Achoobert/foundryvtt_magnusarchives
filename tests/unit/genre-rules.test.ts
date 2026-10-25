@@ -39,7 +39,7 @@ describe("Genre rules", () => {
 
   it("rejects a synchronous Compendium index entry that has no Genre system data", () => {
     const association = {
-      sourceUuid: "Compendium.cypherv2.genres.Item.superhero",
+      sourceUuid: "Compendium.magnusarchives.genres.Item.superhero",
       instanceId: "instance",
       provenance: "manual" as const,
       attachedAt: 1

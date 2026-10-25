@@ -21,9 +21,9 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-ABILITY_PREFIX = "Compendium.cypherv2.type-abilities.Item."
-TYPE_ICON = "systems/cypherv2/assets/icons/cyphertype.png"
-ABILITY_ICON = "systems/cypherv2/assets/icons/cypherability.png"
+ABILITY_PREFIX = "Compendium.magnusarchives.type-abilities.Item."
+TYPE_ICON = "systems/magnusarchives/assets/icons/magnustype.png"
+ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.png"
 TYPE_NAMES = [
     "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Mage", "Monk",
     "Necromancer", "Paladin", "Ranger", "Rogue", "Archer", "Axe Fighter",
@@ -81,6 +81,8 @@ def slugify(value: str) -> str:
 
 
 def stable_id(kind: str, key: str) -> str:
+    # Stable-ID hash seed: intentionally still 'cypherv2'. Changing it regenerates every
+    # generated document _id and breaks ~4,000 @UUID cross-references in content/.
     return hashlib.sha256(f"cypherv2-beta3:{kind}:{key}".encode("utf-8")).hexdigest()[:16]
 
 
@@ -504,7 +506,7 @@ def build_candidate(document_path: Path) -> dict:
             "license": LICENSE,
             "note": "Candidate content only; requires in-Foundry review before promotion.",
         },
-        "target": {"systemId": "cypherv2", "typePackId": "types", "abilityPackId": "type-abilities"},
+        "target": {"systemId": "magnusarchives", "typePackId": "types", "abilityPackId": "type-abilities"},
         "counts": {"types": len(type_documents), "abilities": len(ability_documents), "assignments": len(occurrences)},
         "review": {
             "status": "candidate",

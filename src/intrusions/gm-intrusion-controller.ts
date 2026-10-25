@@ -184,7 +184,7 @@ export class GMIntrusionController {
     Hooks.on("updateActor", () => {
       if (this.#isPrimaryGM()) void this.retryPendingDistributions();
     });
-    Hooks.on("cypherv2IntrusionPendingChanged", () => {
+    Hooks.on("magnusarchivesIntrusionPendingChanged", () => {
       if (this.#isPrimaryGM()) void this.retryPendingDistributions();
     });
     if (this.#isPrimaryGM()) {
@@ -195,8 +195,8 @@ export class GMIntrusionController {
   }
 
   async createManual(request: ManualGMIntrusionRequest): Promise<GMIntrusionRecord> {
-    if (!game.user.isGM) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.GMOnly"));
-    if (this.#creatingManual) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyCreating"));
+    if (!game.user.isGM) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.GMOnly"));
+    if (this.#creatingManual) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyCreating"));
     this.#creatingManual = true;
     try {
       const selected = request.actorIds.map(actorById).filter((actor): actor is OwnedCharacterLike => actor !== null);
@@ -206,7 +206,7 @@ export class GMIntrusionController {
         record = await this.#service.createGroup(selected, policy.enabledRuleModuleIds ?? []);
       } else {
         const actor = selected[0];
-        if (!actor) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.ChooseCharacter"));
+        if (!actor) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.ChooseCharacter"));
         record = request.mode === "free"
           ? await this.#service.createFree(actor, 0, policy.enabledRuleModuleIds ?? [])
           : await this.#service.createTargeted(actor, policy.enabledRuleModuleIds ?? []);
@@ -232,7 +232,7 @@ export class GMIntrusionController {
         // obligation exists so every client binds controls against canonical state.
         await this.#refreshPendingCard(pending, true);
       }
-      Hooks.callAll("cypherv2GMIntrusionCreated", record);
+      Hooks.callAll("magnusarchivesGMIntrusionCreated", record);
       return record;
     } finally {
       this.#creatingManual = false;
@@ -249,7 +249,7 @@ export class GMIntrusionController {
       return;
     }
     if (!primaryGM()) {
-      ui.notifications.warn(game.i18n.localize("CYPHERV2.Intrusion.NoActiveGM"));
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Intrusion.NoActiveGM"));
       return;
     }
     game.socket.emit(SOCKET_NAME, {type: "create-free", actorId: actor.id, naturalRoll: result.naturalRoll});
@@ -264,18 +264,18 @@ export class GMIntrusionController {
     const pending = this.#findPending(intrusionId);
     const source = actorById(pending.sourceActorId);
     if (!source || !this.#canResolve(source, pending)) {
-      throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NotAuthorized"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
     }
     if (this.#isPrimaryGM()) {
       await this.#distribute(intrusionId, recipientActorId, game.user.id);
       return;
     }
-    if (!primaryGM()) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NoActiveGM"));
+    if (!primaryGM()) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NoActiveGM"));
     const requestId = defaultIdFactory();
     await new Promise<void>((resolve, reject) => {
       const timeout = setTimeout(() => {
         this.#distributionRequests.delete(requestId);
-        reject(new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.RequestTimeout")));
+        reject(new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RequestTimeout")));
       }, 10_000);
       this.#distributionRequests.set(requestId, {resolve, reject, timeout});
       game.socket.emit(SOCKET_NAME, {
@@ -290,11 +290,11 @@ export class GMIntrusionController {
 
   async #createFree(actorId: string, naturalRoll: number): Promise<void> {
     const actor = actorById(actorId);
-    if (!actor) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.CharacterMissing"));
+    if (!actor) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.CharacterMissing"));
     const policy = currentRollPolicyRequest();
     const record = await this.#service.createFree(actor, naturalRoll, policy.enabledRuleModuleIds ?? []);
     // Natural 1 remains represented by the originating Roll Card only.
-    Hooks.callAll("cypherv2GMIntrusionCreated", record);
+    Hooks.callAll("magnusarchivesGMIntrusionCreated", record);
   }
 
   #bindChatCard(message: ChatMessage, html: HTMLElement): void {
@@ -310,8 +310,8 @@ export class GMIntrusionController {
         button.remove();
         continue;
       }
-      if (button.dataset.cypherv2IntrusionBound === "true") continue;
-      button.dataset.cypherv2IntrusionBound = "true";
+      if (button.dataset.magnusarchivesIntrusionBound === "true") continue;
+      button.dataset.magnusarchivesIntrusionBound = "true";
       button.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -363,7 +363,7 @@ export class GMIntrusionController {
     requesterUserId: string
   ): Promise<void> {
     if (this.#resolving.has(intrusionId)) {
-      throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
+      throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"));
     }
     this.#resolving.add(intrusionId);
     let awardApplied = false;
@@ -376,11 +376,11 @@ export class GMIntrusionController {
       const recipient = actorById(recipientActorId);
       message = game.messages.get(pending.messageId) ?? null;
       if (!source || !recipient || !message) {
-        throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.CharacterMissing"));
+        throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.CharacterMissing"));
       }
       const state = message.getFlag(SYSTEM_ID, "gmIntrusion");
       if (!isGMIntrusionChatState(state) || state.intrusionId !== intrusionId || state.status !== "pending") {
-        throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
+        throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"));
       }
       pendingState = state;
       const requester = activeUsers().find((user) => user.id === requesterUserId);
@@ -388,10 +388,10 @@ export class GMIntrusionController {
         requester.id === pending.responderUserId
         && owners(source, true).some((owner) => owner.id === requester.id)
       ));
-      if (!authorized) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.NotAuthorized"));
+      if (!authorized) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
       const eligible = eligibleSharedXpRecipients(characters(), source.id);
       const selected = eligible.find((candidate) => candidate.actorId === recipient.id);
-      if (!selected) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.RecipientUnavailable"));
+      if (!selected) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"));
 
       await this.#chat.update(message, {...state, status: "resolving"}, source);
       await this.#service.distributeSecondXp(source, recipient, pending.amount);
@@ -403,7 +403,7 @@ export class GMIntrusionController {
         recipients: [],
         resolvedRecipient: selected
       }, source);
-      Hooks.callAll("cypherv2GMIntrusionXPDistributed", intrusionId, source, recipient);
+      Hooks.callAll("magnusarchivesGMIntrusionXPDistributed", intrusionId, source, recipient);
     } catch (error) {
       if (!awardApplied && pendingState && message && source) {
         await this.#chat.update(message, pendingState, source);
@@ -422,7 +422,7 @@ export class GMIntrusionController {
       clearTimeout(pending.timeout);
       this.#distributionRequests.delete(message.requestId);
       if (message.success) pending.resolve();
-      else pending.reject(new Error(message.error ?? game.i18n.localize("CYPHERV2.Intrusion.Errors.RecipientUnavailable")));
+      else pending.reject(new Error(message.error ?? game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable")));
       return;
     }
     if (!this.#isPrimaryGM()) return;
@@ -462,7 +462,7 @@ export class GMIntrusionController {
 
   #findPending(intrusionId: string): PendingGMIntrusionXP {
     const pending = this.#pending().find((entry) => entry.intrusionId === intrusionId);
-    if (!pending) throw new Error(game.i18n.localize("CYPHERV2.Intrusion.Errors.AlreadyResolved"));
+    if (!pending) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"));
     return pending;
   }
 

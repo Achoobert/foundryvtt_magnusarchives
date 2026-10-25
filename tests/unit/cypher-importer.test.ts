@@ -71,12 +71,12 @@ describe("Cypher compendium importer", () => {
 
     for (const table of generated.tableDocuments) {
       for (const result of table.results) {
-        if (result.documentCollection === "cypherv2.cyphers") expect(cypherIds.has(result.documentId)).toBe(true);
-        if (result.documentCollection === "cypherv2.cypher-tables") expect(tableIds.has(result.documentId)).toBe(true);
+        if (result.documentCollection === "magnusarchives.cyphers") expect(cypherIds.has(result.documentId)).toBe(true);
+        if (result.documentCollection === "magnusarchives.cypher-tables") expect(tableIds.has(result.documentId)).toBe(true);
       }
     }
-    expect(importer.cypherCompendiumUuid("amazing-effort")).toMatch(/^Compendium\.cypherv2\.cyphers\.Item\.[a-f0-9]{16}$/);
-    expect(importer.cypherTableCompendiumUuid("random-cyphers")).toMatch(/^Compendium\.cypherv2\.cypher-tables\.RollTable\.[a-f0-9]{16}$/);
+    expect(importer.cypherCompendiumUuid("amazing-effort")).toMatch(/^Compendium\.magnusarchives\.cyphers\.Item\.[a-f0-9]{16}$/);
+    expect(importer.cypherTableCompendiumUuid("random-cyphers")).toMatch(/^Compendium\.magnusarchives\.cypher-tables\.RollTable\.[a-f0-9]{16}$/);
   });
 
   it("preserves complete, non-overlapping d00 coverage and source weights", async () => {
@@ -125,8 +125,8 @@ describe("Cypher compendium importer", () => {
     const releaseScript = await readFile(path.join(projectRoot, "scripts/package-release.ps1"), "utf8");
     const schema = JSON.parse(await readFile(path.join(projectRoot, "content/cyphers/catalog.schema.json"), "utf8"));
 
-    expect(manifest.packs).toContainEqual({name: "cyphers", label: "Cyphers", path: "packs/cyphers", type: "Item", system: "cypherv2"});
-    expect(manifest.packs).toContainEqual({name: "cypher-tables", label: "Cypher Tables", path: "packs/cypher-tables", type: "RollTable", system: "cypherv2"});
+    expect(manifest.packs).toContainEqual({name: "cyphers", label: "Cyphers", path: "packs/cyphers", type: "Item", system: "magnusarchives"});
+    expect(manifest.packs).toContainEqual({name: "cypher-tables", label: "Cypher Tables", path: "packs/cypher-tables", type: "RollTable", system: "magnusarchives"});
     expect(packageJson.scripts["import:cyphers"]).toBe("node scripts/import-cyphers.mjs");
     expect(packageJson.scripts.build).toContain("pnpm import:cyphers");
     expect(releaseScript).toContain('"packs/cyphers"');

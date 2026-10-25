@@ -23,8 +23,8 @@ describe("Combat Tab UI V1", () => {
     expect(bar.match(/data-action="(?:dodge|block)"/g)).toHaveLength(2);
     expect(bar).toContain('data-action="dodge"');
     expect(bar).toContain('data-action="block"');
-    expect(bar).toMatch(/data-action="dodge"[^>]*>[\s\S]*?fa-person-running[\s\S]*?CYPHERV2\.Combat\.Defense\.dodge[\s\S]*?CYPHERV2\.Pools\.Speed/);
-    expect(bar).toMatch(/data-action="block"[^>]*>[\s\S]*?fa-shield-halved[\s\S]*?CYPHERV2\.Combat\.Defense\.block[\s\S]*?CYPHERV2\.Pools\.Might/);
+    expect(bar).toMatch(/data-action="dodge"[^>]*>[\s\S]*?fa-person-running[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.dodge[\s\S]*?MAGNUSARCHIVES\.Pools\.Speed/);
+    expect(bar).toMatch(/data-action="block"[^>]*>[\s\S]*?fa-shield-halved[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.block[\s\S]*?MAGNUSARCHIVES\.Pools\.Might/);
     expect(bar).not.toContain("blockWithShield");
     expect(source).toMatch(/#onDodge[\s\S]*?promptDefenseRoll\(this\.actor[\s\S]*?, "dodge"\)/);
     expect(source).toMatch(/#onBlock[\s\S]*?promptDefenseRoll\(this\.actor[\s\S]*?, "block"\)/);
@@ -39,22 +39,22 @@ describe("Combat Tab UI V1", () => {
     expect(defenseRequest).toContain('data-defense="block"');
     expect(defenseRequest).toContain('data-defense="blockWithShield"');
     expect(dialogs).toContain("buildDefenseAgainstNpcRequest(");
-    expect(dialogs).toContain("resolveDefenseWound(");
+    expect(dialogs).toContain("resolveDefenseDamage(");
   });
 
   it("renders only compact Attacks, Shields, and Armor groups without Damage & Recovery", () => {
     for (const section of ["attacks", "shields", "armor"]) {
       expect(combat).toContain(`data-combat-section="${section}"`);
     }
-    expect(combat).toContain('localize "CYPHERV2.Combat.Attacks"');
-    expect(combat).not.toContain('localize "CYPHERV2.Combat.Weapons"');
+    expect(combat).toContain('localize "MAGNUSARCHIVES.Combat.Attacks"');
+    expect(combat).not.toContain('localize "MAGNUSARCHIVES.Combat.Weapons"');
     expect(combat).not.toContain("Damage & Recovery");
     expect(combat).not.toContain('class="combat-list-header"');
   });
 
   it("makes the whole Weapon row invoke the existing targeted Weapon workflow", () => {
     expect(combat).toContain('class="compact-inventory-row compact-combat-row combat-weapon-row" data-action="attackWeapon"');
-    expect(combat).toContain('class="inventory-item-name combat-attack-name cypherv2-primary-action" data-action="attackWeapon"');
+    expect(combat).toContain('class="inventory-item-name combat-attack-name magnusarchives-primary-action" data-action="attackWeapon"');
     expect(source).toContain("await promptWeaponAttack(");
     expect(source).toMatch(/#onAttackWeapon[\s\S]*?event\.preventDefault\(\);[\s\S]*?event\.stopPropagation\(\);/);
     expect(dialogs).toContain("buildWeaponAttackPlan(actor, weapon, buildOptions(data))");
@@ -87,14 +87,14 @@ describe("Combat Tab UI V1", () => {
     expect(styles).toContain('grid-template-areas: "identity secondary ammo depletion status actions"');
     expect(styles).toContain("grid-template-columns: var(--combat-grid-columns)");
     expect(combat).toContain("weapon.depleted");
-    expect(combat).toContain('localize "CYPHERV2.Depletion.Depleted"');
+    expect(combat).toContain('localize "MAGNUSARCHIVES.Depletion.Depleted"');
   });
 
   it("blocks only the Attack action when ammunition is insufficient", () => {
     expect(combat).toMatch(/combat-attack-name[\s\S]*?#unless weapon\.canAttack[\s\S]*?disabled/);
     expect(source).toContain("services.weapons.ammunition(");
     expect(source).toContain("if (!ammunition.canAttack)");
-    expect(source).toContain("CYPHERV2.Combat.Weapon.InsufficientAmmo");
+    expect(source).toContain("MAGNUSARCHIVES.Combat.Weapon.InsufficientAmmo");
   });
 
   it("keeps Weapon Depletion entirely manual", () => {
@@ -110,12 +110,12 @@ describe("Combat Tab UI V1", () => {
     expect(combat).toMatch(/combat-shield-row[\s\S]*?toggleCombatDetails[\s\S]*?toggleShieldEquipped[\s\S]*?shield\.name/);
     expect(combat).toMatch(/combat-armor-row[\s\S]*?toggleCombatDetails[\s\S]*?toggleArmorEquipped[\s\S]*?armor\.name/);
     expect(combat.match(/fa-hand/g)).toHaveLength(2);
-    expect(combat).toContain("CYPHERV2.Combat.EquipShield");
-    expect(combat).toContain("CYPHERV2.Combat.UnequipShield");
-    expect(combat).toContain("CYPHERV2.Combat.EquipArmor");
-    expect(combat).toContain("CYPHERV2.Combat.UnequipArmor");
-    expect(combat).not.toContain('{{localize "CYPHERV2.Shield.Functional"}}');
-    expect(combat).toContain('{{localize "CYPHERV2.Shield.Broken"}}');
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.EquipShield");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.UnequipShield");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.EquipArmor");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.UnequipArmor");
+    expect(combat).not.toContain('{{localize "MAGNUSARCHIVES.Shield.Functional"}}');
+    expect(combat).toContain('{{localize "MAGNUSARCHIVES.Shield.Broken"}}');
     expect(combat).toMatch(/armor\.name[\s\S]*?\(\{\{armor\.category\}\}\)[\s\S]*?armor\.equipped/);
     expect(source).toContain("services.shields.setEquipped(");
     expect(source).toMatch(/#onToggleArmorEquipped[\s\S]*?armor\.update\(\{"system\.equipped"/);
@@ -123,17 +123,17 @@ describe("Combat Tab UI V1", () => {
     expect(source).toMatch(/#onToggleArmorEquipped[\s\S]*?event\.stopPropagation\(\);/);
     expect(styles).toContain("grid-template-columns: 1.25rem 1.25rem minmax(0, 1fr)");
     expect(combat).toContain("armor.freelyUsed");
-    expect(combat).not.toContain("CYPHERV2.Combat.Armor.CannotFreelyUse");
-    expect(combat).toContain("CYPHERV2.Combat.Armor.UnfamiliarLabel");
-    expect(combat).toContain("CYPHERV2.Combat.Armor.UnfamiliarTooltip");
-    expect(localization["CYPHERV2.Combat.Armor.UnfamiliarLabel"]).toBe("Unfamiliar");
-    expect(localization["CYPHERV2.Combat.Armor.UnfamiliarTooltip"])
+    expect(combat).not.toContain("MAGNUSARCHIVES.Combat.Armor.CannotFreelyUse");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip");
+    expect(localization["MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel"]).toBe("Unfamiliar");
+    expect(localization["MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip"])
       .toBe("Cannot freely use this Armor category · relevant Speed tasks are hindered.");
     expect(combat).toContain("shield.woundTracks");
     expect(combat).toMatch(/combat-row-left[\s\S]*?combat-shield-wounds-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/);
-    expect(combat).not.toContain("CYPHERV2.Combat.Armor.Active");
-    expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?var\(--cypherv2-success\)/);
-    expect(styles).toMatch(/\.combat-equipped-toggle[\s\S]*?var\(--cypherv2-text-muted\)[\s\S]*?&\.is-equipped[\s\S]*?var\(--cypherv2-success\)/);
+    expect(combat).not.toContain("MAGNUSARCHIVES.Combat.Armor.Active");
+    expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?var\(--magnusarchives-success\)/);
+    expect(styles).toMatch(/\.combat-equipped-toggle[\s\S]*?var\(--magnusarchives-text-muted\)[\s\S]*?&\.is-equipped[\s\S]*?var\(--magnusarchives-success\)/);
   });
 
   it("uses one six-column Combat grid with fixed Depletion and Actions positions", () => {
@@ -149,16 +149,16 @@ describe("Combat Tab UI V1", () => {
 
   it("uses shared semantic status colors without allowing secondary data to move Depletion", () => {
     expect(combat.match(/class="combat-item-summary combat-depleted-state"/g)).toHaveLength(3);
-    expect(styles).toMatch(/\.combat-item-summary\.combat-depleted-state[\s\S]*?color: var\(--cypherv2-danger\)/);
+    expect(styles).toMatch(/\.combat-item-summary\.combat-depleted-state[\s\S]*?color: var\(--magnusarchives-danger\)/);
     expect(combat.match(/combat-equipped-state/g)).toHaveLength(2);
-    expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?color: var\(--cypherv2-success\)/);
+    expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?color: var\(--magnusarchives-success\)/);
     expect(styles.indexOf(".combat-item-summary.combat-equipped-state"))
       .toBeGreaterThan(styles.indexOf(".combat-item-summary {"));
     expect(styles.indexOf(".combat-item-summary.combat-depleted-state"))
       .toBeGreaterThan(styles.indexOf(".combat-item-summary {"));
     expect(styles).not.toContain("!important");
     expect(combat).toContain("combat-secondary-column combat-familiarity-column");
-    expect(combat).toContain("CYPHERV2.Combat.Armor.UnfamiliarLabel");
+    expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel");
     expect(combat).toContain("combat-secondary-column combat-shield-wounds-column");
     expect(styles).toMatch(/\.combat-secondary-column[\s\S]*?grid-area: secondary[\s\S]*?width: 100%[\s\S]*?min-width: 0/);
     expect(styles).toMatch(/\.combat-shield-wounds-column[\s\S]*?overflow: hidden/);
@@ -185,7 +185,7 @@ describe("Combat Tab UI V1", () => {
   });
 
   it("uses existing Shield and Armor derived states without persisting UI state", () => {
-    expect(source).toContain("game.cypherv2.services.shields.isBroken(shield)");
+    expect(source).toContain("game.magnusarchives.services.shields.isBroken(shield)");
     expect(combat).toContain("shield.broken");
     expect(combat).toContain("shield.equipped");
     expect(combat).toContain("system.derived.combat.armor.blockEase");

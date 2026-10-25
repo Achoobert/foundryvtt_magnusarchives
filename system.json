@@ -1,26 +1,33 @@
 {
-  "id": "cypherv2",
-  "title": "Cypher V2",
-  "description": "A modern, extensible implementation of Cypher V2 for Foundry Virtual Tabletop.",
+  "id": "magnusarchives",
+  "title": "The Magnus Archives",
+  "description": "An unofficial Foundry VTT v14 system for The Magnus Archives Roleplaying Game, with Stress, the damage track and the book's price categories.",
   "version": "0.1.0-beta.5",
-  "manifest": "https://raw.githubusercontent.com/SebsokK/cypherv2/main/system.json",
-  "download": "https://github.com/SebsokK/cypherv2/releases/download/v0.1.0-beta.5/cypherv2.zip",
+  "manifest": "https://raw.githubusercontent.com/Achoobert/foundryvtt_magnusarchives/main/system.json",
+  "download": "https://github.com/Achoobert/foundryvtt_magnusarchives/releases/download/v0.1.0-beta.5/magnusarchives.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14.360"
   },
   "authors": [
     {
+      "name": "Achoobert"
+    },
+    {
       "name": "Cypher V2 Contributors"
     }
   ],
-  "esmodules": ["dist/cypherv2.mjs"],
-  "styles": ["dist/cypherv2.css"],
+  "esmodules": [
+    "dist/magnusarchives.mjs"
+  ],
+  "styles": [
+    "dist/magnusarchives.css"
+  ],
   "media": [
     {
       "type": "setup",
-      "url": "systems/cypherv2/assets/cypher2meta.jpg",
-      "thumbnail": "systems/cypherv2/assets/cypher2meta.jpg"
+      "url": "systems/magnusarchives/assets/magnusmeta.jpg",
+      "thumbnail": "systems/magnusarchives/assets/magnusmeta.jpg"
     }
   ],
   "packs": [
@@ -29,84 +36,42 @@
       "label": "Descriptors",
       "path": "packs/descriptors",
       "type": "Item",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     },
     {
       "name": "skills",
       "label": "Skills",
       "path": "packs/skills",
       "type": "Item",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     },
     {
       "name": "weapons-and-armors",
-      "label": "Weapons & Armors",
+      "label": "Weapons & Armor",
       "path": "packs/weapons-and-armors",
       "type": "Item",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     },
     {
-      "name": "type-abilities",
-      "label": "Type Abilities",
-      "path": "packs/type-abilities",
+      "name": "equipment",
+      "label": "Equipment",
+      "path": "packs/equipment",
       "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "types",
-      "label": "Types",
-      "path": "packs/types",
-      "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "species",
-      "label": "Species",
-      "path": "packs/species",
-      "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "genre-abilities",
-      "label": "Genre Abilities",
-      "path": "packs/genre-abilities",
-      "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "genres",
-      "label": "Genres",
-      "path": "packs/genres",
-      "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "focus-abilities",
-      "label": "Focus Abilities",
-      "path": "packs/focus-abilities",
-      "type": "Item",
-      "system": "cypherv2"
-    },
-    {
-      "name": "foci",
-      "label": "Foci",
-      "path": "packs/foci",
-      "type": "Item",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     },
     {
       "name": "cyphers",
       "label": "Cyphers",
       "path": "packs/cyphers",
       "type": "Item",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     },
     {
       "name": "cypher-tables",
       "label": "Cypher Tables",
       "path": "packs/cypher-tables",
       "type": "RollTable",
-      "system": "cypherv2"
+      "system": "magnusarchives"
     }
   ],
   "documentTypes": {
@@ -123,23 +88,85 @@
         ]
       },
       "npc": {
-        "htmlFields": ["description", "notes", "gmNotes", "gmIntrusion"]
+        "htmlFields": [
+          "description",
+          "notes",
+          "gmNotes",
+          "gmIntrusion"
+        ]
       }
     },
     "Item": {
-      "ability": {"htmlFields": ["description"]},
-      "skill": {"htmlFields": ["acquisition.notes"]},
-      "weapon": {"htmlFields": ["description"]},
-      "armor": {"htmlFields": ["description"]},
-      "shield": {"htmlFields": ["description", "wounds.minor.*.description", "wounds.moderate.*.description", "wounds.major.*.description"]},
-      "equipment": {"htmlFields": ["description"]},
-      "cypher": {"htmlFields": ["description"]},
-      "artifact": {"htmlFields": ["description"]},
-      "descriptor": {"htmlFields": ["description"]},
-      "characterType": {"htmlFields": ["description", "backgroundOptions", "equipmentNotes"]},
-      "focus": {"htmlFields": ["description"]},
-      "genre": {"htmlFields": ["description"]},
-      "species": {"htmlFields": ["description"]}
+      "ability": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "skill": {
+        "htmlFields": [
+          "acquisition.notes"
+        ]
+      },
+      "weapon": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "armor": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "shield": {
+        "htmlFields": [
+          "description",
+          "wounds.minor.*.description",
+          "wounds.moderate.*.description",
+          "wounds.major.*.description"
+        ]
+      },
+      "equipment": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "cypher": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "artifact": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "descriptor": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "characterType": {
+        "htmlFields": [
+          "description",
+          "backgroundOptions",
+          "equipmentNotes"
+        ]
+      },
+      "focus": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "genre": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "species": {
+        "htmlFields": [
+          "description"
+        ]
+      }
     }
   },
   "languages": [

@@ -9,7 +9,7 @@
     "note": "Human-reviewed Species documents promoted losslessly from the private Working pack."
   },
   "target": {
-    "systemId": "cypherv2",
+    "systemId": "magnusarchives",
     "packId": "species"
   },
   "counts": {
@@ -30,7 +30,7 @@
       "name": "Dragonfolk",
       "type": "species",
       "_id": "f042637bbdd2b4c4",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "dragonfolk",
@@ -103,13 +103,13 @@
         "skillGrants": [
           {
             "id": "b7bfc3e24ae23b3d",
-            "skillUuid": "Compendium.cypherv2.skills.Item.TxjNz86eOB6UwTGb",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb",
             "customName": "",
             "notes": "<p>Except against other dragonfolk and dragons.</p>",
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -229,7 +229,7 @@
       "name": "Dwarf",
       "type": "species",
       "_id": "0b6d6a0587878026",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "dwarf",
@@ -302,13 +302,13 @@
         "skillGrants": [
           {
             "id": "ca0ca7a160852289",
-            "skillUuid": "Compendium.cypherv2.skills.Item.mKV1IKZRS6AnPXuL",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.mKV1IKZRS6AnPXuL",
             "customName": "",
             "notes": "<p>Only underground or in mountainous areas.</p>",
             "rank": "trained",
             "snapshot": {
               "name": "Navigation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -428,7 +428,7 @@
       "name": "Elf",
       "type": "species",
       "_id": "fe5c06084f9e873a",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "elf",
@@ -501,13 +501,13 @@
         "skillGrants": [
           {
             "id": "0e2ce83c15fd58c4",
-            "skillUuid": "Compendium.cypherv2.skills.Item.ZxPyYpNcbki4VN3z",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.ZxPyYpNcbki4VN3z",
             "customName": "",
             "notes": "<p>Only in forested areas.</p>",
             "rank": "trained",
             "snapshot": {
               "name": "Stealth",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -627,7 +627,7 @@
       "name": "Gnome",
       "type": "species",
       "_id": "9fe135f4b849afc8",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "gnome",
@@ -700,13 +700,13 @@
         "skillGrants": [
           {
             "id": "02a257cd81d6000b",
-            "skillUuid": "Compendium.cypherv2.skills.Item.2MqmaRu3v8lwmp2Y",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.2MqmaRu3v8lwmp2Y",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Crafting",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -826,7 +826,7 @@
       "name": "Halfling",
       "type": "species",
       "_id": "d700d7ddae31b4b2",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "halfling",
@@ -899,13 +899,13 @@
         "skillGrants": [
           {
             "id": "9fff00b65ddd0e0f",
-            "skillUuid": "Compendium.cypherv2.skills.Item.tVQtb4lURI7PT7jv",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.tVQtb4lURI7PT7jv",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Escaping",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1025,7 +1025,7 @@
       "name": "Hellborn",
       "type": "species",
       "_id": "3bc0398215332d18",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "hellborn",
@@ -1098,13 +1098,13 @@
         "skillGrants": [
           {
             "id": "fab16f7fb99e6041",
-            "skillUuid": "Compendium.cypherv2.skills.Item.o4muzrPEpWaPoj8L",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.o4muzrPEpWaPoj8L",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Magic Lore",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1224,7 +1224,7 @@
       "name": "Human",
       "type": "species",
       "_id": "691ca370329e2fd4",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "human",
@@ -1369,7 +1369,7 @@
       "name": "Orc",
       "type": "species",
       "_id": "e9ac81135b1ab83a",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "orc",
@@ -1442,13 +1442,13 @@
         "skillGrants": [
           {
             "id": "363801c5d5c96ef9",
-            "skillUuid": "Compendium.cypherv2.skills.Item.TxjNz86eOB6UwTGb",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb",
             "customName": "",
             "notes": "<p>Except against other orcs.</p>",
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1568,7 +1568,7 @@
       "name": "Aarak",
       "type": "species",
       "_id": "8ee3669fb6c8b3c0",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "aarak",
@@ -1704,7 +1704,7 @@
       "name": "Cyborg",
       "type": "species",
       "_id": "578a5bddc7402a45",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "cyborg",
@@ -1777,13 +1777,13 @@
         "skillGrants": [
           {
             "id": "167debc402086f42",
-            "skillUuid": "Compendium.cypherv2.skills.Item.7V0GzAJ7VKztphYz",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.7V0GzAJ7VKztphYz",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Hacking",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1903,7 +1903,7 @@
       "name": "Delph",
       "type": "species",
       "_id": "157e545cf2e57521",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "delph",
@@ -2039,7 +2039,7 @@
       "name": "D’nec",
       "type": "species",
       "_id": "dd8fffdbc46ab7b3",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "dnec",
@@ -2112,13 +2112,13 @@
         "skillGrants": [
           {
             "id": "d2c6318731f759dc",
-            "skillUuid": "Compendium.cypherv2.skills.Item.YX221YoZqvXKxght",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.YX221YoZqvXKxght",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Systems Operation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2238,7 +2238,7 @@
       "name": "Drakain",
       "type": "species",
       "_id": "95139a0ffdd3d121",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "drakain",
@@ -2311,13 +2311,13 @@
         "skillGrants": [
           {
             "id": "bb3df34fcb0d4fd8",
-            "skillUuid": "Compendium.cypherv2.skills.Item.TxjNz86eOB6UwTGb",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb",
             "customName": "",
             "notes": "<p>Except against other drakain.</p>",
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2437,7 +2437,7 @@
       "name": "Mutant",
       "type": "species",
       "_id": "e7f81f8b4adb5c60",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "mutant",
@@ -2573,7 +2573,7 @@
       "name": "Naron",
       "type": "species",
       "_id": "16774b1fa82dd1e6",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "naron",
@@ -2646,13 +2646,13 @@
         "skillGrants": [
           {
             "id": "48f3aa0b1249a9ad",
-            "skillUuid": "Compendium.cypherv2.skills.Item.hKvDCdvYoAm0ee1J",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.hKvDCdvYoAm0ee1J",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Recognizing Motive",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2715,12 +2715,12 @@
             "options": [
               {
                 "id": "6bd49bd4960471cb",
-                "skillUuid": "Compendium.cypherv2.skills.Item.99Mq1WuOXmI8UP5N",
+                "skillUuid": "Compendium.magnusarchives.skills.Item.99Mq1WuOXmI8UP5N",
                 "customName": "",
                 "notes": "",
                 "snapshot": {
                   "name": "Charm",
-                  "img": "systems/cypherv2/assets/icons/cypherskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
                   "system": {
                     "defaultPool": "choose",
                     "schemaVersion": 1,
@@ -2775,12 +2775,12 @@
               },
               {
                 "id": "32887ccb987d1649",
-                "skillUuid": "Compendium.cypherv2.skills.Item.9NS4fm5VOrlzRwHv",
+                "skillUuid": "Compendium.magnusarchives.skills.Item.9NS4fm5VOrlzRwHv",
                 "customName": "",
                 "notes": "",
                 "snapshot": {
                   "name": "Deception",
-                  "img": "systems/cypherv2/assets/icons/cypherskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
                   "system": {
                     "defaultPool": "choose",
                     "schemaVersion": 1,
@@ -2900,7 +2900,7 @@
       "name": "Prota",
       "type": "species",
       "_id": "3029daa6ca40d4bb",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "prota",
@@ -2973,13 +2973,13 @@
         "skillGrants": [
           {
             "id": "fb9de1f79c4e6468",
-            "skillUuid": "Compendium.cypherv2.skills.Item.99Mq1WuOXmI8UP5N",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.99Mq1WuOXmI8UP5N",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Charm",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3099,7 +3099,7 @@
       "name": "Rigellian",
       "type": "species",
       "_id": "26f846b76bb37583",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "rigellian",
@@ -3172,13 +3172,13 @@
         "skillGrants": [
           {
             "id": "46ab2c004dd1daff",
-            "skillUuid": "Compendium.cypherv2.skills.Item.YX221YoZqvXKxght",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.YX221YoZqvXKxght",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Systems Operation",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3298,7 +3298,7 @@
       "name": "Stelan",
       "type": "species",
       "_id": "3b235fcd26c3a297",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "stelan",
@@ -3371,13 +3371,13 @@
         "skillGrants": [
           {
             "id": "f5e8778876c53917",
-            "skillUuid": "Compendium.cypherv2.skills.Item.lHWpNLOlq1KQMmXw",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.lHWpNLOlq1KQMmXw",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Gathering information",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3497,7 +3497,7 @@
       "name": "Vendeer",
       "type": "species",
       "_id": "173f8bfcf6234f50",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "vendeer",
@@ -3570,13 +3570,13 @@
         "skillGrants": [
           {
             "id": "1595d0bd717b6afe",
-            "skillUuid": "Compendium.cypherv2.skills.Item.S9WFjHa5QI83AFQO",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.S9WFjHa5QI83AFQO",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Perception",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3696,7 +3696,7 @@
       "name": "Zantari",
       "type": "species",
       "_id": "39042b8995c8359a",
-      "img": "systems/cypherv2/assets/icons/cypherspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
       "system": {
         "schemaVersion": 1,
         "slug": "zantari",
@@ -3769,13 +3769,13 @@
         "skillGrants": [
           {
             "id": "fc826d20d8dc1b9f",
-            "skillUuid": "Compendium.cypherv2.skills.Item.S9WFjHa5QI83AFQO",
+            "skillUuid": "Compendium.magnusarchives.skills.Item.S9WFjHa5QI83AFQO",
             "customName": "",
             "notes": "",
             "rank": "trained",
             "snapshot": {
               "name": "Perception",
-              "img": "systems/cypherv2/assets/icons/cypherskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,

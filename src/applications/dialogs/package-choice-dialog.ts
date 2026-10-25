@@ -62,11 +62,11 @@ export async function promptPackageChoice(request: PackageChoiceRequest): Promis
   const single = request.choose === 1;
   const claimSubmission = packageChoiceSubmissionGuard();
   let selected: string[] = [];
-  const content = `<div class="cypherv2 cypherv2-dialog package-choice-dialog ${single ? "package-choice-single" : "package-choice-multiple"}" data-package-choice-required="${request.choose}">
-    <header class="cypherv2-dialog-heading package-choice-heading"><strong>${escapeHtml(request.title)}</strong></header>
-    <p class="cypherv2-dialog-help package-choice-prompt">${escapeHtml(request.prompt)}</p>
+  const content = `<div class="magnusarchives magnusarchives-dialog package-choice-dialog ${single ? "package-choice-single" : "package-choice-multiple"}" data-package-choice-required="${request.choose}">
+    <header class="magnusarchives-dialog-heading package-choice-heading"><strong>${escapeHtml(request.title)}</strong></header>
+    <p class="magnusarchives-dialog-help package-choice-prompt">${escapeHtml(request.prompt)}</p>
     <div class="package-choice-options" role="group" aria-label="${escapeHtml(request.ariaLabel)}">${choiceRows(options, single)}</div>
-    ${single ? "" : `<div class="package-choice-selection-status" aria-live="polite"><span data-package-choice-count>0 / ${request.choose} ${game.i18n.localize("CYPHERV2.Packages.Selected")}</span></div>`}
+    ${single ? "" : `<div class="package-choice-selection-status" aria-live="polite"><span data-package-choice-count>0 / ${request.choose} ${game.i18n.localize("MAGNUSARCHIVES.Packages.Selected")}</span></div>`}
   </div>`;
 
   const buttons = single
@@ -77,7 +77,7 @@ export async function promptPackageChoice(request: PackageChoiceRequest): Promis
     }))
     : [{
       action: "confirm-package-choice",
-      label: game.i18n.localize("CYPHERV2.Actions.Confirm"),
+      label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm"),
       icon: "fa-solid fa-check",
       disabled: true,
       callback: (): string[] => claimSubmission() ? [...selected] : []
@@ -100,7 +100,7 @@ export async function promptPackageChoice(request: PackageChoiceRequest): Promis
           row.setAttribute("aria-pressed", String(isSelected));
         }
         if (confirm) confirm.disabled = selected.length !== request.choose;
-        if (count) count.textContent = game.i18n.format("CYPHERV2.Packages.SelectionCount", {
+        if (count) count.textContent = game.i18n.format("MAGNUSARCHIVES.Packages.SelectionCount", {
           selected: selected.length,
           required: request.choose
         });

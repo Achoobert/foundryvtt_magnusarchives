@@ -52,7 +52,7 @@ describe("English localization catalog", () => {
       ...sourceFiles(join(root, "templates")).filter((path) => extname(path) === ".hbs")
     ];
     const referenced = new Set<string>();
-    const literalKey = /["']((?:CYPHERV2|TYPES)\.[A-Za-z0-9_.-]+)["']/g;
+    const literalKey = /["']((?:MAGNUSARCHIVES|TYPES)\.[A-Za-z0-9_.-]+)["']/g;
     for (const file of files) {
       const source = readFileSync(file, "utf8");
       for (const match of source.matchAll(literalKey)) referenced.add(match[1]!);
@@ -67,17 +67,17 @@ describe("English localization catalog", () => {
     const dynamicKeys = [
       ...ACTOR_TYPES.map((type) => `TYPES.Actor.${type}`),
       ...ITEM_TYPES.map((type) => `TYPES.Item.${type}`),
-      ...WOUND_SEVERITIES.map((severity) => `CYPHERV2.Wounds.Severity.${severity}`),
-      ...RECOVERY_KINDS.map((kind) => `CYPHERV2.Recovery.Kind.${kind}`),
-      ...RECOVERY_TYPES.map((type) => `CYPHERV2.Recovery.${type}`),
-      ...SKILL_RANKS.map((rank) => `CYPHERV2.Skill.Ranks.${rank}`),
-      ...CYPHER_MANIFESTATIONS.map((value) => `CYPHERV2.Cypher.Manifestation.${value}`),
-      ...CYPHER_POWERS.map((value) => `CYPHERV2.Cypher.Power.${value}`),
+      ...WOUND_SEVERITIES.map((severity) => `MAGNUSARCHIVES.Wounds.Severity.${severity}`),
+      ...RECOVERY_KINDS.map((kind) => `MAGNUSARCHIVES.Recovery.Kind.${kind}`),
+      ...RECOVERY_TYPES.map((type) => `MAGNUSARCHIVES.Recovery.${type}`),
+      ...SKILL_RANKS.map((rank) => `MAGNUSARCHIVES.Skill.Ranks.${rank}`),
+      ...CYPHER_MANIFESTATIONS.map((value) => `MAGNUSARCHIVES.Cypher.Manifestation.${value}`),
+      ...CYPHER_POWERS.map((value) => `MAGNUSARCHIVES.Cypher.Power.${value}`),
       ...["applied", "available", "unresolved", "inapplicable"]
-        .map((status) => `CYPHERV2.Roll.NaturalEffects.Status.${status}`),
-      ...["targeted", "group", "free"].map((mode) => `CYPHERV2.Intrusion.Mode.${mode}`),
+        .map((status) => `MAGNUSARCHIVES.Roll.NaturalEffects.Status.${status}`),
+      ...["targeted", "group", "free"].map((mode) => `MAGNUSARCHIVES.Intrusion.Mode.${mode}`),
       ...["owned", "available", "locked", "future"]
-        .map((state) => `CYPHERV2.Focus.State.${state}`)
+        .map((state) => `MAGNUSARCHIVES.Focus.State.${state}`)
     ];
 
     expect(dynamicKeys.filter((key) => !(key in translations))).toEqual([]);

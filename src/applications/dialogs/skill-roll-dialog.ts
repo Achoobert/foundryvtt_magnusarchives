@@ -37,7 +37,7 @@ function skillRequest(
   enabledRuleModuleIds: readonly string[]
 ) {
   const pool = rollDialogText(data, "pool");
-  return game.cypherv2.services.skills.buildRollRequest(skill, {
+  return game.magnusarchives.services.skills.buildRollRequest(skill, {
     ...(pool === "might" || pool === "speed" || pool === "intellect"
       ? {pool: pool as PoolKey}
       : {}),
@@ -57,31 +57,31 @@ export async function promptSkillRoll(
 ): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
-  const policy = game.cypherv2.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
-  const configuredPool = game.cypherv2.services.skills.configuredPool(skill) ?? "choose";
+  const policy = game.magnusarchives.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
+  const configuredPool = game.magnusarchives.services.skills.configuredPool(skill) ?? "choose";
   const poolChoices = `
-    ${configuredPool === "choose" ? `<option value="" selected disabled>${game.i18n.localize("CYPHERV2.Skill.ChoosePool")}</option>` : ""}
-    <option value="might"${selected(configuredPool, "might")}>${game.i18n.localize("CYPHERV2.Pools.Might")}</option>
-    <option value="speed"${selected(configuredPool, "speed")}>${game.i18n.localize("CYPHERV2.Pools.Speed")}</option>
-    <option value="intellect"${selected(configuredPool, "intellect")}>${game.i18n.localize("CYPHERV2.Pools.Intellect")}</option>`;
+    ${configuredPool === "choose" ? `<option value="" selected disabled>${game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")}</option>` : ""}
+    <option value="might"${selected(configuredPool, "might")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}</option>
+    <option value="speed"${selected(configuredPool, "speed")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}</option>
+    <option value="intellect"${selected(configuredPool, "intellect")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}</option>`;
   const rankChoices = SKILL_RANKS.map((rank) => (
-    `<option value="${rank}"${rank === skill.system.rank ? " selected" : ""}>${game.i18n.localize(`CYPHERV2.Skill.Ranks.${rank}`)} · ${skillRankSteps(rank) === 0 ? game.i18n.localize("CYPHERV2.Roll.Unmodified") : skillRankSteps(rank) > 0 ? `+${skillRankSteps(rank)}` : skillRankSteps(rank)}</option>`
+    `<option value="${rank}"${rank === skill.system.rank ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)} · ${skillRankSteps(rank) === 0 ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified") : skillRankSteps(rank) > 0 ? `+${skillRankSteps(rank)}` : skillRankSteps(rank)}</option>`
   )).join("");
   const settings = `
     ${difficultyFields(policy.difficultyCeiling, hiddenDifficultyEnabled())}
-    <label>${game.i18n.localize("CYPHERV2.Pools.Pool")}<select name="pool">${poolChoices}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.SkillLevel")}<select name="skillRank">${rankChoices}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.Assets")}<select name="assets">${selectOptions(policy.assetLimit)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.EffortToEase")}<select name="paidEffort">${selectOptions(actor.system.derived.effort.max)}</select></label>
-    <label>${game.i18n.localize("CYPHERV2.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}<select name="pool">${poolChoices}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillRank">${rankChoices}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}<select name="assets">${selectOptions(policy.assetLimit)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${selectOptions(actor.system.derived.effort.max)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}`;
 
   const data = await foundry.applications.api.DialogV2.input({
-    window: {title: `${game.i18n.localize("CYPHERV2.Skill.Roll")}: ${skill.name}`, resizable: true},
+    window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Skill.Roll")}: ${skill.name}`, resizable: true},
     position: {width: 800},
     content: rollDialogShell({identity: skill.name, settings}),
     rejectClose: false,
-    ok: {label: game.i18n.localize("CYPHERV2.Roll.Roll")},
+    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Roll.Roll")},
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       bindRollDialogPreview(dialog.element, {
         actor,
@@ -94,7 +94,7 @@ export async function promptSkillRoll(
 
   try {
     const request = skillRequest(skill, data, enabled);
-    const execution = await game.cypherv2.services.rolls.execute(actor, request, policyRequest);
+    const execution = await game.magnusarchives.services.rolls.execute(actor, request, policyRequest);
     await publishRollOutcome(actor, execution);
   } catch (error) {
     ui.notifications.error(error instanceof Error ? error.message : String(error));

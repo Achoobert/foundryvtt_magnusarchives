@@ -47,7 +47,7 @@ describe("Reviewed Focus pack promotion", () => {
     expect(uuids).not.toContainEqual(expect.stringContaining("cypher-v2-test"));
     expect(uuids).not.toContainEqual(expect.stringContaining("focus-abilities-working"));
     for (const uuid of uuids) {
-      expect(uuid).toMatch(/^Compendium\.cypherv2\.focus-abilities\.Item\.[A-Za-z0-9]{16}$/);
+      expect(uuid).toMatch(/^Compendium\.magnusarchives\.focus-abilities\.Item\.[A-Za-z0-9]{16}$/);
       expect(abilityIds.has(uuid.split(".").at(-1))).toBe(true);
     }
   });
@@ -61,7 +61,7 @@ describe("Reviewed Focus pack promotion", () => {
     for (const [focusName, abilityId] of expected) {
       const focus = reviewedSource.foci.find((document: {name: string}) => document.name === focusName);
       expect(focus.system.graph.nodes).toContainEqual(expect.objectContaining({
-        abilityUuid: `Compendium.cypherv2.focus-abilities.Item.${abilityId}`
+        abilityUuid: `Compendium.magnusarchives.focus-abilities.Item.${abilityId}`
       }));
     }
   });
@@ -69,7 +69,7 @@ describe("Reviewed Focus pack promotion", () => {
   it("rejects stale World UUIDs, dangling edges, and duplicate slugs", () => {
     const staleUuid = structuredClone(reviewedSource);
     staleUuid.foci[0].system.graph.nodes[0].abilityUuid = "Compendium.world.focus-abilities-working.Item.abcdefghijklmnop";
-    expect(() => reviewedImporter.validateReviewedFocusSource(staleUuid)).toThrow(/must target Compendium\.cypherv2\.focus-abilities/);
+    expect(() => reviewedImporter.validateReviewedFocusSource(staleUuid)).toThrow(/must target Compendium\.magnusarchives\.focus-abilities/);
 
     const dangling = structuredClone(reviewedSource);
     dangling.foci[0].system.graph.connections[0].to = "missing-node";
@@ -80,7 +80,9 @@ describe("Reviewed Focus pack promotion", () => {
     expect(() => reviewedImporter.validateReviewedFocusSource(duplicateSlug)).toThrow(/duplicate system\.slug/);
   });
 
-  it("makes the reviewed pack snapshot—not the pre-review catalog—the build source", async () => {
+  // Parked until the Magnus types and foci (chapters 3 and 4) replace the
+  // Cypher content: those packs are not built or shipped right now.
+  it.skip("makes the reviewed pack snapshot—not the pre-review catalog—the build source", async () => {
     const importScript = await readFile(path.join(projectRoot, "scripts/import-foci.mjs"), "utf8");
     const packageJson = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8"));
     expect(importScript).toContain("readReviewedFocusSource");

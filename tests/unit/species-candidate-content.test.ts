@@ -17,7 +17,10 @@ function findSpecies(name: string): any {
   return source.species.find((document: any) => document.name === name);
 }
 
-describe("beta.3 candidate Species", () => {
+// Parked: Species and Genres are not Magnus Archives concepts. The data models
+// stay registered for migration, but the packs are no longer built or shipped,
+// so this suite has nothing to validate.
+describe.skip("beta.3 candidate Species", () => {
   it("validates the exact 20-Species CRD inventory and structured feature usage", () => {
     expect(() => validator.validateSpeciesCandidateSource(source, references)).not.toThrow();
     expect(source.inventory).toEqual({
@@ -70,7 +73,7 @@ describe("beta.3 candidate Species", () => {
       catalogItemType: "descriptor",
       options: []
     });
-    expect(JSON.stringify(group)).not.toContain("Compendium.cypherv2.descriptors.Item.");
+    expect(JSON.stringify(group)).not.toContain("Compendium.magnusarchives.descriptors.Item.");
   });
 
   it("keeps Mutant, Dwarf, and D’nec exceptional recovery/Ability rules manual", () => {
@@ -84,7 +87,7 @@ describe("beta.3 candidate Species", () => {
 
   it("preserves contextual Skill restrictions on canonical shared Skill grants", () => {
     expect(findSpecies("Dragonfolk").system.skillGrants[0]).toMatchObject({
-      skillUuid: "Compendium.cypherv2.skills.Item.TxjNz86eOB6UwTGb",
+      skillUuid: "Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb",
       notes: "<p>Except against other dragonfolk and dragons.</p>"
     });
     expect(findSpecies("Dwarf").system.skillGrants[0].notes).toMatch(/underground or in mountainous areas/i);
@@ -112,7 +115,7 @@ describe("beta.3 candidate Species", () => {
     expect(() => validator.validateSpeciesCandidateSource(duplicate, references)).toThrow(/Species IDs must be unique/);
 
     const dangling = structuredClone(source);
-    dangling.species[0].system.skillGrants[0].skillUuid = "Compendium.cypherv2.skills.Item.aaaaaaaaaaaaaaaa";
+    dangling.species[0].system.skillGrants[0].skillUuid = "Compendium.magnusarchives.skills.Item.aaaaaaaaaaaaaaaa";
     expect(() => validator.validateSpeciesCandidateSource(dangling, references)).toThrow(/targets missing Skill/);
 
     const automated = structuredClone(source);
