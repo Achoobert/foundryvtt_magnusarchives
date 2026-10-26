@@ -7,7 +7,9 @@ const styles = readFileSync("styles/components/_character-header.scss", "utf8");
 
 describe("Character active-tab Accent", () => {
   it("inherits the already-derived appearance variables from the Character root", () => {
-    expect(template).toContain('class="magnusarchives-sheet magnusarchives-character" style="{{header.appearance.style}}"');
+    expect(template).toContain(
+      'class="magnusarchives-sheet magnusarchives-character" style="{{header.appearance.style}}"'
+    );
     expect(template).not.toMatch(/sheet-tabs[^>]+style=/);
     expect(styles).toMatch(/\.magnusarchives-sheet\.magnusarchives-character[\s\S]*--magnusarchives-character-accent/);
     expect(styles).toMatch(/> \.sheet-tabs > a\.active[\s\S]*var\(--magnusarchives-character-accent\)/);
@@ -19,7 +21,14 @@ describe("Character active-tab Accent", () => {
     expect(styles).toMatch(/> \.sheet-tabs > a\.active[\s\S]*font-weight/);
     expect(sheet).toContain('changeTab.call(this, this.#activeTab, "primary")');
     const configured = sheet.match(/static TABS = \{[\s\S]*?tabs: \[([\s\S]*?)\],\s*initial:/)?.[1] ?? "";
-    expect([...configured.matchAll(/\{id: "([^"]+)"/g)].map((match) => match[1]))
-      .toEqual(["skills", "abilities", "combat", "inventory", "advancement", "notes", "settings"]);
+    expect([...configured.matchAll(/\{id: "([^"]+)"/g)].map((match) => match[1])).toEqual([
+      "skills",
+      "abilities",
+      "combat",
+      "inventory",
+      "advancement",
+      "notes",
+      "settings"
+    ]);
   });
 });

@@ -91,14 +91,12 @@ export class AbilityDataModel extends ItemDataModelBase {
     // Cypher Wound severities become Magnus effects: a minor Wound was the
     // everyday hit, which here is Stress; anything worse is a serious injury.
     if (migrated.damageEffect === undefined && typeof migrated.woundSeverity === "string") {
-      migrated.damageEffect = migrated.woundSeverity === "none"
-        ? "none"
-        : migrated.woundSeverity === "minor" ? "stress" : "seriousInjury";
+      migrated.damageEffect =
+        migrated.woundSeverity === "none" ? "none" : migrated.woundSeverity === "minor" ? "stress" : "seriousInjury";
       delete migrated.woundSeverity;
     }
-    const legacyCost = migrated.cost && typeof migrated.cost === "object"
-      ? migrated.cost as Record<string, unknown>
-      : {};
+    const legacyCost =
+      migrated.cost && typeof migrated.cost === "object" ? (migrated.cost as Record<string, unknown>) : {};
     if (options.partial) {
       if (Object.hasOwn(migrated, "archived")) migrated.archived = Boolean(migrated.archived);
       const hasAllowedPools = Object.hasOwn(legacyCost, "allowedPools");
@@ -116,19 +114,14 @@ export class AbilityDataModel extends ItemDataModelBase {
     }
     if (migrated.pool === undefined) {
       const legacyPool = String(legacyCost.pool ?? "none");
-      migrated.pool = ABILITY_POOLS.includes(legacyPool as (typeof ABILITY_POOLS)[number])
-        ? legacyPool
-        : "none";
+      migrated.pool = ABILITY_POOLS.includes(legacyPool as (typeof ABILITY_POOLS)[number]) ? legacyPool : "none";
     }
     migrated.archived = Boolean(migrated.archived ?? false);
     migrated.cost = {
       amount: Number(legacyCost.amount ?? 0),
       scalable: Boolean(legacyCost.scalable ?? false),
       ignoresEdge: Boolean(legacyCost.ignoresEdge ?? false),
-      allowedPools: normalizeAbilityAllowedPools(
-        legacyCost.allowedPools,
-        migrated.pool ?? legacyCost.pool
-      )
+      allowedPools: normalizeAbilityAllowedPools(legacyCost.allowedPools, migrated.pool ?? legacyCost.pool)
     };
     if (migrated.roll === undefined) migrated.roll = "none";
     if (migrated.targetMode === undefined) migrated.targetMode = "none";

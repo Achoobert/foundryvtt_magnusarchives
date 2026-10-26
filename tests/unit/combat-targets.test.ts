@@ -34,13 +34,20 @@ describe("combat target identity", () => {
     }
     const source = new MockActor("source");
     vi.stubGlobal("Actor", MockActor);
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
     vi.stubGlobal("game", {actors: {get: vi.fn(() => source)}});
 
-    await expect(resolveTargetActor({
-      actorId: "source", tokenId: "deleted", tokenUuid: "Scene.scene.Token.deleted"
-    })).resolves.toBeNull();
+    await expect(
+      resolveTargetActor({
+        actorId: "source",
+        tokenId: "deleted",
+        tokenUuid: "Scene.scene.Token.deleted"
+      })
+    ).resolves.toBeNull();
     expect(game.actors.get).not.toHaveBeenCalled();
   });
 
@@ -50,7 +57,10 @@ describe("combat target identity", () => {
     }
     const source = new MockActor("source");
     vi.stubGlobal("Actor", MockActor);
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
     vi.stubGlobal("game", {actors: {get: vi.fn(() => source)}});
 
@@ -59,20 +69,34 @@ describe("combat target identity", () => {
 
   it("keeps two synthetic Tokens from the same source Actor independently targeted", async () => {
     class MockActor {
-      constructor(readonly id: string, readonly token: string) {}
+      constructor(
+        readonly id: string,
+        readonly token: string
+      ) {}
     }
     const first = new MockActor("source", "a");
     const second = new MockActor("source", "b");
     vi.stubGlobal("Actor", MockActor);
-    vi.stubGlobal("fromUuid", vi.fn(async (uuid: string) => ({actor: uuid.endsWith("token-a") ? first : second})));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async (uuid: string) => ({actor: uuid.endsWith("token-a") ? first : second}))
+    );
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
     vi.stubGlobal("game", {actors: {get: vi.fn()}});
 
-    await expect(resolveTargetActor({
-      actorId: "source", tokenId: "token-a", tokenUuid: "Scene.scene.Token.token-a"
-    })).resolves.toBe(first);
-    await expect(resolveTargetActor({
-      actorId: "source", tokenId: "token-b", tokenUuid: "Scene.scene.Token.token-b"
-    })).resolves.toBe(second);
+    await expect(
+      resolveTargetActor({
+        actorId: "source",
+        tokenId: "token-a",
+        tokenUuid: "Scene.scene.Token.token-a"
+      })
+    ).resolves.toBe(first);
+    await expect(
+      resolveTargetActor({
+        actorId: "source",
+        tokenId: "token-b",
+        tokenUuid: "Scene.scene.Token.token-b"
+      })
+    ).resolves.toBe(second);
   });
 });

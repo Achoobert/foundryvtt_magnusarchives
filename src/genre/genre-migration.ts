@@ -16,7 +16,7 @@ export async function migrateLegacyTypeGenres(): Promise<void> {
       const suggestion = await resolveLegacyGenreSuggestion(
         type.system as {genre?: string; customGenreId?: string},
         genres,
-        async (uuid) => await fromUuid(uuid) as GenreDocumentLike | null
+        async (uuid) => (await fromUuid(uuid)) as GenreDocumentLike | null
       );
       if (!suggestion) continue;
       await game.magnusarchives.services.genres.attach(character, suggestion, "migration");

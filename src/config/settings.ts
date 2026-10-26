@@ -113,10 +113,8 @@ export function registerSettings(themes: ThemeRegistry): void {
       max: HORROR_INTRUSION_RANGE_MAX,
       step: 1
     },
-    onChange: (range: number) => Hooks.callAll(
-      "magnusarchivesHorrorIntrusionRangeChanged",
-      normalizeHorrorIntrusionRange(range)
-    )
+    onChange: (range: number) =>
+      Hooks.callAll("magnusarchivesHorrorIntrusionRangeChanged", normalizeHorrorIntrusionRange(range))
   });
 
   // Reuse the former setting key so the first GM startup can discard legacy history.
@@ -134,9 +132,7 @@ export function currentRollPolicyRequest(): RollPolicyRequest {
   const enabled = currentEnabledRuleModuleIds();
   return {
     base: {
-      difficultyCeiling: Number(
-        game.settings.get(SYSTEM_ID, SETTING_KEYS.defaultDifficultyCeiling)
-      ),
+      difficultyCeiling: Number(game.settings.get(SYSTEM_ID, SETTING_KEYS.defaultDifficultyCeiling)),
       assetLimit: 0
     },
     enabledRuleModuleIds: enabled
@@ -145,9 +141,7 @@ export function currentRollPolicyRequest(): RollPolicyRequest {
 
 export function currentEnabledRuleModuleIds(): string[] {
   const enabled = game.settings.get(SYSTEM_ID, SETTING_KEYS.enabledRuleModules);
-  return Array.isArray(enabled)
-    ? enabled.filter((id): id is string => typeof id === "string")
-    : [];
+  return Array.isArray(enabled) ? enabled.filter((id): id is string => typeof id === "string") : [];
 }
 
 export function currentDifficultyVisibility(): DifficultyVisibility {
@@ -165,9 +159,7 @@ export function showGmRollAuditEnabled(): boolean {
 
 export function currentHorrorIntrusionRange(): number {
   if (typeof game === "undefined") return HORROR_INTRUSION_RANGE_DEFAULT;
-  return normalizeHorrorIntrusionRange(
-    game.settings.get(SYSTEM_ID, SETTING_KEYS.horrorIntrusionRange)
-  );
+  return normalizeHorrorIntrusionRange(game.settings.get(SYSTEM_ID, SETTING_KEYS.horrorIntrusionRange));
 }
 
 export async function setHorrorIntrusionRange(range: number): Promise<number> {

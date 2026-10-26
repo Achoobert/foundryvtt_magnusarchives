@@ -29,10 +29,7 @@ export function relativeRectangle(
  * Intersect the center-to-center segment with both node rectangles.
  * This is orientation-agnostic and remains valid if a future editor moves nodes.
  */
-export function connectionEndpoints(
-  from: RectangleLike,
-  to: RectangleLike
-): ConnectionEndpoints {
+export function connectionEndpoints(from: RectangleLike, to: RectangleLike): ConnectionEndpoints {
   const fromCenter = {
     x: from.left + from.width / 2,
     y: from.top + from.height / 2
@@ -43,17 +40,19 @@ export function connectionEndpoints(
   };
   const dx = toCenter.x - fromCenter.x;
   const dy = toCenter.y - fromCenter.y;
-  if (dx === 0 && dy === 0) return {
-    x1: fromCenter.x,
-    y1: fromCenter.y,
-    x2: toCenter.x,
-    y2: toCenter.y
-  };
+  if (dx === 0 && dy === 0)
+    return {
+      x1: fromCenter.x,
+      y1: fromCenter.y,
+      x2: toCenter.x,
+      y2: toCenter.y
+    };
 
-  const boundaryScale = (rectangle: RectangleLike): number => Math.min(
-    dx === 0 ? Number.POSITIVE_INFINITY : (rectangle.width / 2) / Math.abs(dx),
-    dy === 0 ? Number.POSITIVE_INFINITY : (rectangle.height / 2) / Math.abs(dy)
-  );
+  const boundaryScale = (rectangle: RectangleLike): number =>
+    Math.min(
+      dx === 0 ? Number.POSITIVE_INFINITY : rectangle.width / 2 / Math.abs(dx),
+      dy === 0 ? Number.POSITIVE_INFINITY : rectangle.height / 2 / Math.abs(dy)
+    );
   const fromScale = boundaryScale(from);
   const toScale = boundaryScale(to);
   return {
@@ -115,7 +114,8 @@ export class FocusTreeConnectionController {
       this.#observer.observe(section);
       for (const element of section.querySelectorAll<HTMLElement>(
         ".focus-tree-scroll, .focus-tree-canvas, .focus-tree-node"
-      )) this.#observer.observe(element);
+      ))
+        this.#observer.observe(element);
     }
     this.scheduleRefresh();
   }

@@ -2,10 +2,7 @@ import {currentRollPolicyRequest, SETTING_KEYS} from "../config/settings";
 import {SYSTEM_ID} from "../constants/system";
 import {defaultIdFactory} from "../rules/core/core-types";
 import type {RollResult} from "../rolls/roll-types";
-import {
-  isGMIntrusionChatState,
-  type GMIntrusionChatService
-} from "../services/gm-intrusion-chat-service";
+import {isGMIntrusionChatState, type GMIntrusionChatService} from "../services/gm-intrusion-chat-service";
 import type {GMIntrusionCharacterLike, GMIntrusionService} from "../services/gm-intrusion-service";
 import type {
   GMIntrusionChatState,
@@ -73,13 +70,15 @@ function characters(): OwnedCharacterLike[] {
 
 function actorById(id: string): OwnedCharacterLike | null {
   const actor = game.actors.get(id);
-  return actor?.type === "character" ? actor as unknown as OwnedCharacterLike : null;
+  return actor?.type === "character" ? (actor as unknown as OwnedCharacterLike) : null;
 }
 
 function primaryGM(): IntrusionUserLike | null {
-  return activeUsers()
-    .filter((user) => user.isGM)
-    .sort((left, right) => left.id.localeCompare(right.id))[0] ?? null;
+  return (
+    activeUsers()
+      .filter((user) => user.isGM)
+      .sort((left, right) => left.id.localeCompare(right.id))[0] ?? null
+  );
 }
 
 function owners(actor: OwnedCharacterLike, activeOnly: boolean): IntrusionUserLike[] {
@@ -89,12 +88,8 @@ function owners(actor: OwnedCharacterLike, activeOnly: boolean): IntrusionUserLi
     .sort((left, right) => left.id.localeCompare(right.id));
 }
 
-export function selectDistributionResponder(
-  candidates: readonly IntrusionUserLike[]
-): IntrusionUserLike | null {
-  const eligible = candidates
-    .filter((user) => !user.isGM)
-    .sort((left, right) => left.id.localeCompare(right.id));
+export function selectDistributionResponder(candidates: readonly IntrusionUserLike[]): IntrusionUserLike | null {
+  const eligible = candidates.filter((user) => !user.isGM).sort((left, right) => left.id.localeCompare(right.id));
   return eligible.find((user) => user.active) ?? eligible[0] ?? null;
 }
 
@@ -102,13 +97,15 @@ export function eligibleSharedXpRecipients(
   actors: readonly OwnedCharacterLike[],
   sourceActorId: string
 ): GMIntrusionRecipient[] {
-  const assignedCharacterIds = new Set(users()
-    .filter((user) => !user.isGM)
-    .map((user) => user.character?.id)
-    .filter((actorId): actorId is string => typeof actorId === "string" && actorId.length > 0));
-  const uniqueCharacters = new Map(actors
-    .filter((actor) => actor.type === "character")
-    .map((actor) => [actor.id, actor])).values();
+  const assignedCharacterIds = new Set(
+    users()
+      .filter((user) => !user.isGM)
+      .map((user) => user.character?.id)
+      .filter((actorId): actorId is string => typeof actorId === "string" && actorId.length > 0)
+  );
+  const uniqueCharacters = new Map(
+    actors.filter((actor) => actor.type === "character").map((actor) => [actor.id, actor])
+  ).values();
   return [...uniqueCharacters]
     .filter((actor) => actor.id !== sourceActorId)
     .filter((actor) => assignedCharacterIds.has(actor.id))
@@ -119,34 +116,35 @@ export function eligibleSharedXpRecipients(
 export function isPendingXP(value: unknown): value is PendingGMIntrusionXP {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Record<string, unknown>;
-  return typeof candidate.intrusionId === "string"
-    && candidate.intrusionId.length > 0
-    && typeof candidate.messageId === "string"
-    && candidate.messageId.length > 0
-    && typeof candidate.sourceActorId === "string"
-    && candidate.sourceActorId.length > 0
-    && Number.isInteger(candidate.amount)
-    && Number(candidate.amount) > 0
-    && (candidate.responderUserId === undefined || typeof candidate.responderUserId === "string");
+  return (
+    typeof candidate.intrusionId === "string" &&
+    candidate.intrusionId.length > 0 &&
+    typeof candidate.messageId === "string" &&
+    candidate.messageId.length > 0 &&
+    typeof candidate.sourceActorId === "string" &&
+    candidate.sourceActorId.length > 0 &&
+    Number.isInteger(candidate.amount) &&
+    Number(candidate.amount) > 0 &&
+    (candidate.responderUserId === undefined || typeof candidate.responderUserId === "string")
+  );
 }
 
 function isLegacyPendingXP(value: unknown): value is Omit<PendingGMIntrusionXP, "messageId"> {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Record<string, unknown>;
-  return typeof candidate.intrusionId === "string"
-    && candidate.intrusionId.length > 0
-    && candidate.messageId === undefined
-    && typeof candidate.sourceActorId === "string"
-    && candidate.sourceActorId.length > 0
-    && Number.isInteger(candidate.amount)
-    && Number(candidate.amount) > 0
-    && (candidate.responderUserId === undefined || typeof candidate.responderUserId === "string");
+  return (
+    typeof candidate.intrusionId === "string" &&
+    candidate.intrusionId.length > 0 &&
+    candidate.messageId === undefined &&
+    typeof candidate.sourceActorId === "string" &&
+    candidate.sourceActorId.length > 0 &&
+    Number.isInteger(candidate.amount) &&
+    Number(candidate.amount) > 0 &&
+    (candidate.responderUserId === undefined || typeof candidate.responderUserId === "string")
+  );
 }
 
-function sameRecipients(
-  left: readonly GMIntrusionRecipient[],
-  right: readonly GMIntrusionRecipient[]
-): boolean {
+function sameRecipients(left: readonly GMIntrusionRecipient[], right: readonly GMIntrusionRecipient[]): boolean {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
@@ -207,9 +205,10 @@ export class GMIntrusionController {
       } else {
         const actor = selected[0];
         if (!actor) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.ChooseCharacter"));
-        record = request.mode === "free"
-          ? await this.#service.createFree(actor, 0, policy.enabledRuleModuleIds ?? [])
-          : await this.#service.createTargeted(actor, policy.enabledRuleModuleIds ?? []);
+        record =
+          request.mode === "free"
+            ? await this.#service.createFree(actor, 0, policy.enabledRuleModuleIds ?? [])
+            : await this.#service.createTargeted(actor, policy.enabledRuleModuleIds ?? []);
       }
 
       const source = selected[0];
@@ -302,9 +301,8 @@ export class GMIntrusionController {
     if (!isGMIntrusionChatState(state)) return;
     const pending = this.#pending().find((entry) => entry.intrusionId === state.intrusionId);
     const source = pending ? actorById(pending.sourceActorId) : null;
-    const canResolve = state.status === "pending" && (
-      game.user.isGM || Boolean(pending && source && this.#canResolve(source, pending))
-    );
+    const canResolve =
+      state.status === "pending" && (game.user.isGM || Boolean(pending && source && this.#canResolve(source, pending)));
     for (const button of html.querySelectorAll<HTMLButtonElement>("[data-action='assignSharedIntrusionXp']")) {
       if (!canResolve) {
         button.remove();
@@ -328,8 +326,10 @@ export class GMIntrusionController {
 
   #canResolve(source: OwnedCharacterLike, pending: PendingGMIntrusionXP): boolean {
     if (game.user.isGM) return true;
-    return game.user.id === pending.responderUserId
-      && source.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
+    return (
+      game.user.id === pending.responderUserId &&
+      source.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+    );
   }
 
   async #refreshPendingCard(pending: PendingGMIntrusionXP, forceRender = false): Promise<void> {
@@ -340,7 +340,7 @@ export class GMIntrusionController {
       return;
     }
     let responder = pending.responderUserId
-      ? users().find((user) => user.id === pending.responderUserId) ?? null
+      ? (users().find((user) => user.id === pending.responderUserId) ?? null)
       : null;
     if (!responder || !owners(source, false).some((owner) => owner.id === responder?.id)) {
       responder = selectDistributionResponder(owners(source, false));
@@ -357,11 +357,7 @@ export class GMIntrusionController {
     }
   }
 
-  async #distribute(
-    intrusionId: string,
-    recipientActorId: string,
-    requesterUserId: string
-  ): Promise<void> {
+  async #distribute(intrusionId: string, recipientActorId: string, requesterUserId: string): Promise<void> {
     if (this.#resolving.has(intrusionId)) {
       throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"));
     }
@@ -384,10 +380,13 @@ export class GMIntrusionController {
       }
       pendingState = state;
       const requester = activeUsers().find((user) => user.id === requesterUserId);
-      const authorized = requester?.isGM === true || Boolean(requester && (
-        requester.id === pending.responderUserId
-        && owners(source, true).some((owner) => owner.id === requester.id)
-      ));
+      const authorized =
+        requester?.isGM === true ||
+        Boolean(
+          requester &&
+          requester.id === pending.responderUserId &&
+          owners(source, true).some((owner) => owner.id === requester.id)
+        );
       if (!authorized) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
       const eligible = eligibleSharedXpRecipients(characters(), source.id);
       const selected = eligible.find((candidate) => candidate.actorId === recipient.id);
@@ -397,12 +396,16 @@ export class GMIntrusionController {
       await this.#service.distributeSecondXp(source, recipient, pending.amount);
       awardApplied = true;
       await this.#removePending(intrusionId);
-      await this.#chat.update(message, {
-        ...state,
-        status: "resolved",
-        recipients: [],
-        resolvedRecipient: selected
-      }, source);
+      await this.#chat.update(
+        message,
+        {
+          ...state,
+          status: "resolved",
+          recipients: [],
+          resolvedRecipient: selected
+        },
+        source
+      );
       Hooks.callAll("magnusarchivesGMIntrusionXPDistributed", intrusionId, source, recipient);
     } catch (error) {
       if (!awardApplied && pendingState && message && source) {
@@ -422,7 +425,10 @@ export class GMIntrusionController {
       clearTimeout(pending.timeout);
       this.#distributionRequests.delete(message.requestId);
       if (message.success) pending.resolve();
-      else pending.reject(new Error(message.error ?? game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable")));
+      else
+        pending.reject(
+          new Error(message.error ?? game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"))
+        );
       return;
     }
     if (!this.#isPrimaryGM()) return;
@@ -451,13 +457,15 @@ export class GMIntrusionController {
 
   #pending(): PendingGMIntrusionXP[] {
     const value = game.settings.get(SYSTEM_ID, SETTING_KEYS.pendingIntrusionXP);
-    return Array.isArray(value) ? value.filter(isPendingXP).map((pending) => ({
-      intrusionId: pending.intrusionId,
-      messageId: pending.messageId,
-      sourceActorId: pending.sourceActorId,
-      amount: pending.amount,
-      ...(pending.responderUserId ? {responderUserId: pending.responderUserId} : {})
-    })) : [];
+    return Array.isArray(value)
+      ? value.filter(isPendingXP).map((pending) => ({
+          intrusionId: pending.intrusionId,
+          messageId: pending.messageId,
+          sourceActorId: pending.sourceActorId,
+          amount: pending.amount,
+          ...(pending.responderUserId ? {responderUserId: pending.responderUserId} : {})
+        }))
+      : [];
   }
 
   #findPending(intrusionId: string): PendingGMIntrusionXP {

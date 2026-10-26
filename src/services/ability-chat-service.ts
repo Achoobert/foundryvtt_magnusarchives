@@ -66,35 +66,48 @@ export class AbilityChatService {
   ): Promise<void> {
     const successful = outcome.execution.result.success === true;
     const damageCanBePresented = outcome.execution.result.success !== false;
-    const consequenceData = successful
-      ? consequence(outcome, actor.id)
-      : {};
+    const consequenceData = successful ? consequence(outcome, actor.id) : {};
     const combat = {
       ...consequenceData,
-      ...(damageCanBePresented && outcome.ability.system.roll === "attack" ? {
-        damage: outcome.grossDamage,
-        damageBreakdown: [
-          {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: outcome.baseDamage},
-          ...(outcome.effortDamage ? [{label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: outcome.effortDamage, additive: true}] : []),
-          ...(outcome.naturalDamage ? [{label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: outcome.naturalDamage, additive: true}] : [])
-        ]
-      } : {})
+      ...(damageCanBePresented && outcome.ability.system.roll === "attack"
+        ? {
+            damage: outcome.grossDamage,
+            damageBreakdown: [
+              {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: outcome.baseDamage},
+              ...(outcome.effortDamage
+                ? [{label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: outcome.effortDamage, additive: true}]
+                : []),
+              ...(outcome.naturalDamage
+                ? [
+                    {
+                      label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
+                      value: outcome.naturalDamage,
+                      additive: true
+                    }
+                  ]
+                : [])
+            ]
+          }
+        : {})
     };
     await this.#rollChat.publish(actor, outcome.execution, visibility, {combat, showGmAudit});
   }
 
   async publishNoRoll(actor: CombatCharacterLike, outcome: AbilityNoRollOutcome): Promise<void> {
-    const targets: readonly (AbilityTargetLike | null)[] = outcome.targets.length
-      ? outcome.targets
-      : [null];
+    const targets: readonly (AbilityTargetLike | null)[] = outcome.targets.length ? outcome.targets : [null];
     for (const target of targets) {
-      const combat = target ? consequence({
-        ability: outcome.ability,
-        target,
-        grossDamage: outcome.ability.system.damage,
-        damageEffect: outcome.ability.system.damageEffect,
-        stressAmount: outcome.ability.system.stressAmount
-      }, actor.id) : {};
+      const combat = target
+        ? consequence(
+            {
+              ability: outcome.ability,
+              target,
+              grossDamage: outcome.ability.system.damage,
+              damageEffect: outcome.ability.system.damageEffect,
+              stressAmount: outcome.ability.system.stressAmount
+            },
+            actor.id
+          )
+        : {};
       const action = combat.action;
       const content = await foundry.applications.handlebars.renderTemplate(
         "systems/magnusarchives/templates/chat/ability-card.hbs",
@@ -115,9 +128,11 @@ export class AbilityChatService {
           stressAmount: combat.damageEffect === "stress" ? combat.stressAmount : 0,
           combatAction: Boolean(action),
           combatActionLabel: action
-            ? game.i18n.localize(action.kind === "npcDamage"
-              ? "MAGNUSARCHIVES.Combat.ApplyDamage"
-              : "MAGNUSARCHIVES.Combat.ApplyCharacterDamage")
+            ? game.i18n.localize(
+                action.kind === "npcDamage"
+                  ? "MAGNUSARCHIVES.Combat.ApplyDamage"
+                  : "MAGNUSARCHIVES.Combat.ApplyCharacterDamage"
+              )
             : ""
         }
       );

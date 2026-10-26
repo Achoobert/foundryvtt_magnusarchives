@@ -72,15 +72,16 @@ describe("WoundService", () => {
     expect(result.wounds.major).toHaveLength(0);
   });
 
-  it.each([[3, 2], [2, 1], [1, 0]] as const)(
-    "reduces a contiguous track from %i to %i",
-    (before, count) => {
-      const result = service.setWoundCount(wounds({minor: before}), "minor", count, 3);
-      expect(result.previousCount).toBe(before);
-      expect(result.wounds.minor).toHaveLength(count);
-      expect(result.removed).toHaveLength(before - count);
-    }
-  );
+  it.each([
+    [3, 2],
+    [2, 1],
+    [1, 0]
+  ] as const)("reduces a contiguous track from %i to %i", (before, count) => {
+    const result = service.setWoundCount(wounds({minor: before}), "minor", count, 3);
+    expect(result.previousCount).toBe(before);
+    expect(result.wounds.minor).toHaveLength(count);
+    expect(result.removed).toHaveLength(before - count);
+  });
 
   it("supports dynamic capacities and refuses a non-contiguous count beyond capacity", () => {
     expect(service.setWoundCount(wounds(), "minor", 5, 5).wounds.minor).toHaveLength(5);
@@ -121,10 +122,12 @@ describe("WoundService", () => {
   });
 
   it("cannot edit a Wound through the wrong severity collection", () => {
-    expect(() => service.updateWound(wounds({major: 1}), "minor", "major-1", {
-      label: "Invalid move",
-      description: ""
-    })).toThrow("was not found in minor Wounds");
+    expect(() =>
+      service.updateWound(wounds({major: 1}), "minor", "major-1", {
+        label: "Invalid move",
+        description: ""
+      })
+    ).toThrow("was not found in minor Wounds");
   });
 
   it("persists a manual edit with one Actor update", async () => {
@@ -211,13 +214,7 @@ describe("WoundService", () => {
   });
 
   it("applies Wound rollover to Pool Damage overflow", () => {
-    const result = service.applyPoolDamage(
-      wounds({minor: 3, moderate: 3}),
-      "might",
-      0,
-      2,
-      capacities
-    );
+    const result = service.applyPoolDamage(wounds({minor: 3, moderate: 3}), "might", 0, 2, capacities);
     expect(result.overflowSeverity).toBe("minor");
     expect(result.wound?.appliedSeverity).toBe("major");
   });

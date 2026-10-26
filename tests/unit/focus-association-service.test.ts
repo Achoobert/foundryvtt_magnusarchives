@@ -44,14 +44,23 @@ class TestCharacter implements FocusAssociationCharacterLike {
 }
 
 function focus(uuid: string): FocusDocumentLike {
-  return {id: uuid.split(".").at(-1)!, uuid, name: uuid, type: "focus", system: {
-    graph: {version: 1, nodes: [], connections: []}
-  }};
+  return {
+    id: uuid.split(".").at(-1)!,
+    uuid,
+    name: uuid,
+    type: "focus",
+    system: {
+      graph: {version: 1, nodes: [], connections: []}
+    }
+  };
 }
 
 function service(): FocusAssociationService {
   let id = 0;
-  return new FocusAssociationService(() => `choice-${++id}`, () => 1234);
+  return new FocusAssociationService(
+    () => `choice-${++id}`,
+    () => 1234
+  );
 }
 
 describe("FocusAssociationService", () => {
@@ -67,9 +76,11 @@ describe("FocusAssociationService", () => {
       ownedNodeIds: []
     });
     expect(result.choicesGranted).toHaveLength(2);
-    expect(result.choicesGranted).toEqual(expect.arrayContaining([
-      expect.objectContaining({source: "characterCreation", grantTier: 1, focusUuid: item.uuid})
-    ]));
+    expect(result.choicesGranted).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({source: "characterCreation", grantTier: 1, focusUuid: item.uuid})
+      ])
+    );
   });
 
   it("attaches multiple independent Foci without graph duplication", async () => {
@@ -78,17 +89,21 @@ describe("FocusAssociationService", () => {
     await rules.attach(actor, focus("Item.primary"), "creation");
     await rules.attach(actor, focus("Compendium.world.foci.Item.additional"), "additional");
 
-    expect(actor.system.focusProgress.map((entry) => ({
-      focusUuid: entry.focusUuid,
-      provenance: entry.provenance,
-      ownedNodeIds: entry.ownedNodeIds
-    }))).toEqual([
+    expect(
+      actor.system.focusProgress.map((entry) => ({
+        focusUuid: entry.focusUuid,
+        provenance: entry.provenance,
+        ownedNodeIds: entry.ownedNodeIds
+      }))
+    ).toEqual([
       {focusUuid: "Item.primary", provenance: "creation", ownedNodeIds: []},
       {focusUuid: "Compendium.world.foci.Item.additional", provenance: "additional", ownedNodeIds: []}
     ]);
-    expect(actor.system.advancement.pendingFocusChoices.filter((choice) => (
-      choice.focusUuid === "Compendium.world.foci.Item.additional"
-    ))).toHaveLength(2);
+    expect(
+      actor.system.advancement.pendingFocusChoices.filter(
+        (choice) => choice.focusUuid === "Compendium.world.foci.Item.additional"
+      )
+    ).toHaveLength(2);
     expect(actor.system.advancement.pendingFocusChoices.at(-1)?.source).toBe("additionalFocus");
   });
 
@@ -106,8 +121,9 @@ describe("FocusAssociationService", () => {
     const tierThree = new TestCharacter(3);
     await service().attach(tierThree, focus("Item.additional"), "additional");
     expect(tierThree.system.focusProgress[0]?.provenance).toBe("additional");
-    await expect(service().attach(new TestCharacter(2), focus("Item.primary"), "creation"))
-      .rejects.toMatchObject({code: "creation-tier"});
+    await expect(service().attach(new TestCharacter(2), focus("Item.primary"), "creation")).rejects.toMatchObject({
+      code: "creation-tier"
+    });
   });
 
   it("removes only association and linked pending choices, preserving acquired Abilities", async () => {

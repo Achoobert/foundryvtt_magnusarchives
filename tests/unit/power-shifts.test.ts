@@ -15,11 +15,7 @@ import {
   type PowerShiftTypeLike
 } from "../../src/packages/power-shifts";
 
-function superheroType(
-  id: string,
-  count: number,
-  powerShifts: readonly string[] = []
-): PowerShiftTypeLike {
+function superheroType(id: string, count: number, powerShifts: readonly string[] = []): PowerShiftTypeLike {
   return {
     id,
     name: `Type ${id}`,
@@ -54,30 +50,65 @@ describe("Character-owned optional Power Shifts", () => {
     expect(POWER_SHIFT_CATEGORIES).toContain("Single Attack");
     expect(POWER_SHIFT_CATEGORIES).toContain("Savant");
     expect(POWER_SHIFT_CATEGORIES).toContain("Custom");
-    expect(normalizePowerShiftAllocations([{
-      id: "custom", category: "Cosmic Luck", shifts: 2,
-      specification: "Lucky breaks", description: "Player-facing guide text."
-    }])).toEqual([{
-      id: "custom", category: "Cosmic Luck", shifts: 2,
-      specification: "Lucky breaks", description: "Player-facing guide text."
-    }]);
+    expect(
+      normalizePowerShiftAllocations([
+        {
+          id: "custom",
+          category: "Cosmic Luck",
+          shifts: 2,
+          specification: "Lucky breaks",
+          description: "Player-facing guide text."
+        }
+      ])
+    ).toEqual([
+      {
+        id: "custom",
+        category: "Cosmic Luck",
+        shifts: 2,
+        specification: "Lucky breaks",
+        description: "Player-facing guide text."
+      }
+    ]);
   });
 
   it("adds, edits, and deletes stable structured allocations", () => {
-    const added = savePowerShiftAllocation([], {
-      category: "Power", shifts: 2, specification: "Eye Lasers", description: "Damage guide"
-    }, () => "stable-shift-id");
-    expect(added).toEqual([{
-      id: "stable-shift-id", category: "Power", shifts: 2,
-      specification: "Eye Lasers", description: "Damage guide"
-    }]);
-    const edited = savePowerShiftAllocation(added, {
-      ...added[0]!, shifts: 3, description: "Updated guide"
-    }, () => "unused-id");
-    expect(edited).toEqual([{
-      id: "stable-shift-id", category: "Power", shifts: 3,
-      specification: "Eye Lasers", description: "Updated guide"
-    }]);
+    const added = savePowerShiftAllocation(
+      [],
+      {
+        category: "Power",
+        shifts: 2,
+        specification: "Eye Lasers",
+        description: "Damage guide"
+      },
+      () => "stable-shift-id"
+    );
+    expect(added).toEqual([
+      {
+        id: "stable-shift-id",
+        category: "Power",
+        shifts: 2,
+        specification: "Eye Lasers",
+        description: "Damage guide"
+      }
+    ]);
+    const edited = savePowerShiftAllocation(
+      added,
+      {
+        ...added[0]!,
+        shifts: 3,
+        description: "Updated guide"
+      },
+      () => "unused-id"
+    );
+    expect(edited).toEqual([
+      {
+        id: "stable-shift-id",
+        category: "Power",
+        shifts: 3,
+        specification: "Eye Lasers",
+        description: "Updated guide"
+      }
+    ]);
     expect(deletePowerShiftAllocation(edited, "stable-shift-id")).toEqual([]);
   });
 
@@ -107,20 +138,34 @@ describe("Character-owned optional Power Shifts", () => {
       {id: "legacy-instance-legacy-0", category: "Custom", shifts: 1, specification: "Strength", description: ""},
       {id: "legacy-instance-legacy-1", category: "Custom", shifts: 1, specification: "Flight", description: ""}
     ]);
-    const saved = savePowerShiftAllocation(effectivePowerShiftAllocations([], types), {
-      category: "Accuracy", shifts: 1, specification: "", description: ""
-    }, () => "new-shift");
+    const saved = savePowerShiftAllocation(
+      effectivePowerShiftAllocations([], types),
+      {
+        category: "Accuracy",
+        shifts: 1,
+        specification: "",
+        description: ""
+      },
+      () => "new-shift"
+    );
     expect(saved.map((entry) => entry.id)).toEqual([
-      "legacy-instance-legacy-0", "legacy-instance-legacy-1", "new-shift"
+      "legacy-instance-legacy-0",
+      "legacy-instance-legacy-1",
+      "new-shift"
     ]);
   });
 
   it("normalizes legacy Character data without expanding unrelated partial updates", () => {
     expect(migrateCharacterSystemData({xp: 2}, {partial: true})).toEqual({xp: 2});
-    expect(migrateCharacterSystemData({
-      presentation: {powerShiftsEnabled: true},
-      powerShifts: [{id: "kept", category: "Flight", shifts: 1, label: "Fast", description: ""}]
-    }, {partial: true})).toEqual({
+    expect(
+      migrateCharacterSystemData(
+        {
+          presentation: {powerShiftsEnabled: true},
+          powerShifts: [{id: "kept", category: "Flight", shifts: 1, label: "Fast", description: ""}]
+        },
+        {partial: true}
+      )
+    ).toEqual({
       presentation: {powerShiftsEnabled: true},
       powerShifts: [{id: "kept", category: "Flight", shifts: 1, specification: "Fast", description: ""}]
     });
@@ -159,7 +204,9 @@ describe("Power Shift UI remains guide-only", () => {
     expect(skillsTab).toContain("{{#if powerShifts.enabled}}");
     expect(skillsTab).toContain('class="character-power-shifts');
     expect(skillsTab.indexOf('class="character-power-shifts')).toBeLessThan(skillsTab.indexOf('class="skills-sort'));
-    expect(skillsTab.indexOf('class="character-power-shifts')).toBeLessThan(skillsTab.indexOf('class="compact-skill-list'));
+    expect(skillsTab.indexOf('class="character-power-shifts')).toBeLessThan(
+      skillsTab.indexOf('class="compact-skill-list')
+    );
     expect(abilitiesTab).not.toContain("powerShifts");
     expect(abilitiesTab).not.toContain("character-power-shifts");
   });

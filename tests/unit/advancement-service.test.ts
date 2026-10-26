@@ -34,7 +34,6 @@ class TestSkill implements AdvancementSkillLike {
     }
     return this;
   }
-
 }
 
 function setPath(target: Record<string, unknown>, path: string, value: unknown): void {
@@ -53,22 +52,24 @@ class TestCharacter implements AdvancementCharacterLike {
   failNextUpdate = false;
   system: AdvancementCharacterLike["system"] & {advancement: CharacterAdvancementData};
 
-  constructor(options: {
-    tier?: number;
-    xp?: number;
-    effort?: number;
-    skills?: TestSkill[];
-    overrides?: Partial<{
-      tier: number | null;
-      effort: number | null;
-      mightMax: number | null;
-      speedMax: number | null;
-      intellectMax: number | null;
-      mightEdge: number | null;
-      speedEdge: number | null;
-      intellectEdge: number | null;
-    }>;
-  } = {}) {
+  constructor(
+    options: {
+      tier?: number;
+      xp?: number;
+      effort?: number;
+      skills?: TestSkill[];
+      overrides?: Partial<{
+        tier: number | null;
+        effort: number | null;
+        mightMax: number | null;
+        speedMax: number | null;
+        intellectMax: number | null;
+        mightEdge: number | null;
+        speedEdge: number | null;
+        intellectEdge: number | null;
+      }>;
+    } = {}
+  ) {
     this.items = options.skills ?? [];
     this.system = {
       tier: options.tier ?? 1,
@@ -100,8 +101,12 @@ class TestCharacter implements AdvancementCharacterLike {
       recovery: {bonus: 0},
       advancement: {
         cycle: 1,
-        purchases: [], initializedFocusUuids: [], pendingFocusChoices: [], pendingGenreChoices: [],
-        guidanceCompletedTiers: [], notes: ""
+        purchases: [],
+        initializedFocusUuids: [],
+        pendingFocusChoices: [],
+        pendingGenreChoices: [],
+        guidanceCompletedTiers: [],
+        notes: ""
       },
       proficiencies: {weaponCategories: [], armorCategories: [], freelyUse: []}
     };
@@ -117,19 +122,15 @@ class TestCharacter implements AdvancementCharacterLike {
       setPath(this.system as unknown as Record<string, unknown>, path.replace(/^system\./, ""), value);
     }
     for (const pool of ["might", "speed", "intellect"] as const) {
-      (this.system.derived.pools[pool] as {max: number}).max = this.system.overrides.stats[pool].max
-        ?? this.system.stats[pool].baseMax;
+      (this.system.derived.pools[pool] as {max: number}).max =
+        this.system.overrides.stats[pool].max ?? this.system.stats[pool].baseMax;
     }
     (this.system.derived.tier as {value: number}).value = this.system.overrides.tier ?? this.system.tier;
-    (this.system.derived.effort as {max: number}).max = this.system.overrides.effort
-      ?? this.system.stats.effortBase;
+    (this.system.derived.effort as {max: number}).max = this.system.overrides.effort ?? this.system.stats.effortBase;
     return this;
   }
 
-  async createEmbeddedDocuments(
-    _type: string,
-    data: Record<string, unknown>[]
-  ): Promise<unknown[]> {
+  async createEmbeddedDocuments(_type: string, data: Record<string, unknown>[]): Promise<unknown[]> {
     return data.map((entry) => {
       const system = entry.system as TestSkill["system"];
       const created = new TestSkill(`skill-${this.items.length + 1}`, String(entry.name), system);
@@ -143,16 +144,19 @@ function makeService(): AdvancementService {
   const rules = new RuleRegistry();
   registerCoreRuleModule(rules);
   let id = 0;
-  return new AdvancementService(rules, () => `id-${++id}`, () => 1234);
+  return new AdvancementService(
+    rules,
+    () => `id-${++id}`,
+    () => 1234
+  );
 }
 
-function skill(
-  rank: TestSkill["system"]["rank"],
-  contexts: string[] = [],
-  grantedByUuid = ""
-): TestSkill {
+function skill(rank: TestSkill["system"]["rank"], contexts: string[] = [], grantedByUuid = ""): TestSkill {
   return new TestSkill("skill-1", "Test Skill", {
-    rank, category: "general", contexts, acquisition: {grantedByUuid}
+    rank,
+    category: "general",
+    contexts,
+    acquisition: {grantedByUuid}
   });
 }
 
@@ -161,7 +165,8 @@ async function completeCycle(actor: TestCharacter, service: AdvancementService):
   await service.purchase(actor, {kind: "extraEffort"});
   await service.purchase(actor, {kind: "moveTowardPerfection", pool: "might"});
   await service.purchase(actor, {
-    kind: "increaseCapabilities", allocation: {might: 4, speed: 0, intellect: 0}
+    kind: "increaseCapabilities",
+    allocation: {might: 4, speed: 0, intellect: 0}
   });
 }
 
@@ -176,8 +181,7 @@ describe("AdvancementService", () => {
 
   it("rejects insufficient XP without partial changes", async () => {
     const actor = new TestCharacter({xp: 3});
-    await expect(makeService().purchase(actor, {kind: "extraEffort"}))
-      .rejects.toMatchObject({code: "insufficient-xp"});
+    await expect(makeService().purchase(actor, {kind: "extraEffort"})).rejects.toMatchObject({code: "insufficient-xp"});
     expect(actor.system.stats.effortBase).toBe(1);
     expect(actor.system.advancement.purchases).toEqual([]);
     expect(actor.updates).toEqual([]);
@@ -186,7 +190,8 @@ describe("AdvancementService", () => {
   it("distributes exactly +4 Pool maximum and current Pool points", async () => {
     const actor = new TestCharacter();
     await makeService().purchase(actor, {
-      kind: "increaseCapabilities", allocation: {might: 1, speed: 0, intellect: 3}
+      kind: "increaseCapabilities",
+      allocation: {might: 1, speed: 0, intellect: 3}
     });
     expect(actor.system.stats.might).toMatchObject({baseMax: 11, value: 9});
     expect(actor.system.stats.speed).toMatchObject({baseMax: 10, value: 7});
@@ -195,9 +200,12 @@ describe("AdvancementService", () => {
 
   it("rejects invalid capability allocations", async () => {
     const actor = new TestCharacter();
-    await expect(makeService().purchase(actor, {
-      kind: "increaseCapabilities", allocation: {might: 2, speed: 1, intellect: 0}
-    })).rejects.toMatchObject({code: "invalid-allocation"});
+    await expect(
+      makeService().purchase(actor, {
+        kind: "increaseCapabilities",
+        allocation: {might: 2, speed: 1, intellect: 0}
+      })
+    ).rejects.toMatchObject({code: "invalid-allocation"});
     expect(actor.updates).toEqual([]);
   });
 
@@ -205,26 +213,30 @@ describe("AdvancementService", () => {
     const edgeActor = new TestCharacter();
     await makeService().purchase(edgeActor, {kind: "moveTowardPerfection", pool: "speed"});
     expect(edgeActor.system.stats.speed.baseEdge).toBe(1);
-    await expect(makeService().purchase(new TestCharacter({effort: 6}), {kind: "extraEffort"}))
-      .rejects.toMatchObject({code: "effort-maximum"});
+    await expect(makeService().purchase(new TestCharacter({effort: 6}), {kind: "extraEffort"})).rejects.toMatchObject({
+      code: "effort-maximum"
+    });
   });
 
   it("routes capability, Edge, and Effort progression to active overrides only", async () => {
-    const actor = new TestCharacter({overrides: {
-      effort: 4,
-      mightMax: 22,
-      speedMax: 19,
-      intellectMax: 17,
-      mightEdge: 3,
-      speedEdge: 2,
-      intellectEdge: 4
-    }});
+    const actor = new TestCharacter({
+      overrides: {
+        effort: 4,
+        mightMax: 22,
+        speedMax: 19,
+        intellectMax: 17,
+        mightEdge: 3,
+        speedEdge: 2,
+        intellectEdge: 4
+      }
+    });
     (actor.system.stats.might as {baseMax: number; value: number}).baseMax = 18;
     (actor.system.stats.might as {baseMax: number; value: number}).value = 17;
     const bases = structuredClone(actor.system.stats);
 
     await makeService().purchase(actor, {
-      kind: "increaseCapabilities", allocation: {might: 2, speed: 1, intellect: 1}
+      kind: "increaseCapabilities",
+      allocation: {might: 2, speed: 1, intellect: 1}
     });
     expect(actor.system.overrides.stats.might.max).toBe(24);
     expect(actor.system.overrides.stats.speed.max).toBe(20);
@@ -259,43 +271,64 @@ describe("AdvancementService", () => {
   );
 
   it.each([
-    ["inability", "untrained"], ["untrained", "trained"], ["trained", "specialized"]
+    ["inability", "untrained"],
+    ["untrained", "trained"],
+    ["trained", "specialized"]
   ] as const)("improves Skill %s to %s", async (before, after) => {
     const item = skill(before);
     await makeService().purchase(new TestCharacter({skills: [item]}), {
-      kind: "skillTraining", mode: "improve", skillId: item.id
+      kind: "skillTraining",
+      mode: "improve",
+      skillId: item.id
     });
     expect(item.system.rank).toBe(after);
   });
 
   it("supports Ability-linked Skills but never grants Expert through Core training", async () => {
     const linked = skill("untrained", [], "Item.ability");
-    expect(makeService().skillTrainingOptions(new TestCharacter({skills: [linked]}))[0])
-      .toMatchObject({eligible: true, abilityLinked: true});
+    expect(makeService().skillTrainingOptions(new TestCharacter({skills: [linked]}))[0]).toMatchObject({
+      eligible: true,
+      abilityLinked: true
+    });
     const specialized = skill("specialized");
-    await expect(makeService().purchase(new TestCharacter({skills: [specialized]}), {
-      kind: "skillTraining", mode: "improve", skillId: specialized.id
-    })).rejects.toMatchObject({code: "skill-maximum"});
+    await expect(
+      makeService().purchase(new TestCharacter({skills: [specialized]}), {
+        kind: "skillTraining",
+        mode: "improve",
+        skillId: specialized.id
+      })
+    ).rejects.toMatchObject({code: "skill-maximum"});
   });
 
   it("gates attack/defense Trained at Tier 2 and Specialized at Tier 4", () => {
     const service = makeService();
     const attack = skill("untrained", ["attack.weapon"]);
-    expect(service.skillTrainingOptions(new TestCharacter({tier: 1, skills: [attack]}))[0])
-      .toMatchObject({eligible: false, reason: "tier"});
-    expect(service.skillTrainingOptions(new TestCharacter({tier: 2, skills: [attack]}))[0])
-      .toMatchObject({eligible: true, nextRank: "trained"});
+    expect(service.skillTrainingOptions(new TestCharacter({tier: 1, skills: [attack]}))[0]).toMatchObject({
+      eligible: false,
+      reason: "tier"
+    });
+    expect(service.skillTrainingOptions(new TestCharacter({tier: 2, skills: [attack]}))[0]).toMatchObject({
+      eligible: true,
+      nextRank: "trained"
+    });
     attack.system.rank = "trained";
-    expect(service.skillTrainingOptions(new TestCharacter({tier: 3, skills: [attack]}))[0])
-      .toMatchObject({eligible: false, reason: "tier"});
-    expect(service.skillTrainingOptions(new TestCharacter({tier: 4, skills: [attack]}))[0])
-      .toMatchObject({eligible: true, nextRank: "specialized"});
+    expect(service.skillTrainingOptions(new TestCharacter({tier: 3, skills: [attack]}))[0]).toMatchObject({
+      eligible: false,
+      reason: "tier"
+    });
+    expect(service.skillTrainingOptions(new TestCharacter({tier: 4, skills: [attack]}))[0]).toMatchObject({
+      eligible: true,
+      nextRank: "specialized"
+    });
   });
 
   it("learns a new custom Skill as a real trained embedded Item", async () => {
     const actor = new TestCharacter();
     await makeService().purchase(actor, {
-      kind: "skillTraining", mode: "learn", customName: "Cartography", customCategory: "general"
+      kind: "skillTraining",
+      mode: "learn",
+      customName: "Cartography",
+      customCategory: "general"
     });
     expect(actor.items).toHaveLength(1);
     expect(actor.items[0]).toMatchObject({name: "Cartography", type: "skill", system: {rank: "trained"}});
@@ -316,7 +349,12 @@ describe("AdvancementService", () => {
         acquisition: {grantedByUuid: ""}
       }
     };
-    const service = new AdvancementService(rules, () => "record", () => 0, async () => source);
+    const service = new AdvancementService(
+      rules,
+      () => "record",
+      () => 0,
+      async () => source
+    );
     await service.purchase(actor, {kind: "skillTraining", mode: "learn", sourceUuid: source.uuid});
     expect(actor.items[0]).toMatchObject({
       name: "Archery",
@@ -325,22 +363,42 @@ describe("AdvancementService", () => {
   });
 
   it("prevents accidental duplicate learned Skills by normalized name", async () => {
-    const actor = new TestCharacter({skills: [new TestSkill("known", "Cartography", {
-      rank: "trained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
-    })]});
-    await expect(makeService().purchase(actor, {
-      kind: "skillTraining", mode: "learn", customName: "  CARTOGRAPHY  ", customCategory: "general"
-    })).rejects.toMatchObject({code: "duplicate-skill"});
+    const actor = new TestCharacter({
+      skills: [
+        new TestSkill("known", "Cartography", {
+          rank: "trained",
+          category: "general",
+          contexts: [],
+          acquisition: {grantedByUuid: ""}
+        })
+      ]
+    });
+    await expect(
+      makeService().purchase(actor, {
+        kind: "skillTraining",
+        mode: "learn",
+        customName: "  CARTOGRAPHY  ",
+        customCategory: "general"
+      })
+    ).rejects.toMatchObject({code: "duplicate-skill"});
     expect(actor.items).toHaveLength(1);
   });
 
   it("applies Tier 2 restriction when learning a new attack/defense Skill", async () => {
-    await expect(makeService().purchase(new TestCharacter({tier: 1}), {
-      kind: "skillTraining", mode: "learn", customName: "Sword", customCategory: "attack"
-    })).rejects.toMatchObject({code: "skill-tier"});
+    await expect(
+      makeService().purchase(new TestCharacter({tier: 1}), {
+        kind: "skillTraining",
+        mode: "learn",
+        customName: "Sword",
+        customCategory: "attack"
+      })
+    ).rejects.toMatchObject({code: "skill-tier"});
     const actor = new TestCharacter({tier: 2});
     await makeService().purchase(actor, {
-      kind: "skillTraining", mode: "learn", customName: "Dodge", customCategory: "defense"
+      kind: "skillTraining",
+      mode: "learn",
+      customName: "Dodge",
+      customCategory: "defense"
     });
     expect(actor.items[0]?.system.rank).toBe("trained");
   });
@@ -349,7 +407,9 @@ describe("AdvancementService", () => {
     const item = skill("untrained");
     const actor = new TestCharacter({skills: [item]});
     actor.failNextUpdate = true;
-    await expect(makeService().purchase(actor, {kind: "skillTraining", mode: "improve", skillId: item.id})).rejects.toThrow();
+    await expect(
+      makeService().purchase(actor, {kind: "skillTraining", mode: "improve", skillId: item.id})
+    ).rejects.toThrow();
     expect(item.system.rank).toBe("untrained");
     expect(actor.system.xp).toBe(40);
   });
@@ -358,11 +418,11 @@ describe("AdvancementService", () => {
     const actor = new TestCharacter();
     const service = makeService();
     await service.purchase(actor, {kind: "extraEffort"});
-    await expect(service.purchase(actor, {kind: "extraEffort"}))
-      .rejects.toMatchObject({code: "already-purchased"});
+    await expect(service.purchase(actor, {kind: "extraEffort"})).rejects.toMatchObject({code: "already-purchased"});
     await service.purchase(actor, {kind: "other", otherKind: "focus"});
-    await expect(service.purchase(actor, {kind: "other", otherKind: "recovery"}))
-      .rejects.toMatchObject({code: "other-already-purchased"});
+    await expect(service.purchase(actor, {kind: "other", otherKind: "recovery"})).rejects.toMatchObject({
+      code: "other-already-purchased"
+    });
   });
 
   it("lets Other replace one normal slot and completes at four purchases", async () => {
@@ -370,8 +430,9 @@ describe("AdvancementService", () => {
     const service = makeService();
     await completeCycle(actor, service);
     expect(service.view(actor)).toMatchObject({purchasedCount: 4, remainingCount: 0, canAdvanceTier: true});
-    await expect(service.purchase(actor, {kind: "skillTraining", mode: "improve", skillId: "missing"}))
-      .rejects.toMatchObject({code: "cycle-complete"});
+    await expect(
+      service.purchase(actor, {kind: "skillTraining", mode: "improve", skillId: "missing"})
+    ).rejects.toMatchObject({code: "cycle-complete"});
   });
 
   it("applies the Recovery, Focus, armor, and weapon Other benefits", async () => {
@@ -390,9 +451,12 @@ describe("AdvancementService", () => {
   });
 
   it("requires Tier 3 for Other: Genre and creates a structured choice", async () => {
-    await expect(makeService().purchase(new TestCharacter({tier: 2}), {
-      kind: "other", otherKind: "genre"
-    })).rejects.toMatchObject({code: "genre-tier"});
+    await expect(
+      makeService().purchase(new TestCharacter({tier: 2}), {
+        kind: "other",
+        otherKind: "genre"
+      })
+    ).rejects.toMatchObject({code: "genre-tier"});
     const actor = new TestCharacter({tier: 3});
     await makeService().purchase(actor, {kind: "other", otherKind: "genre"});
     expect(actor.system.advancement.pendingGenreChoices[0]).toMatchObject({source: "otherAdvancement", grantTier: 3});
@@ -425,19 +489,23 @@ describe("AdvancementService", () => {
   it.each([3, 6, 9])("adds milestone Genre Choice at Tier %i", async (newTier) => {
     const actor = new TestCharacter({tier: newTier - 1});
     (actor.system.advancement as unknown as {purchases: unknown[]}).purchases = Array.from({length: 4}, (_, index) => ({
-      id: `p-${index}`, kind: "extraEffort", otherKind: "none", tier: newTier - 1,
-      xpCost: 4, timestamp: 0
+      id: `p-${index}`,
+      kind: "extraEffort",
+      otherKind: "none",
+      tier: newTier - 1,
+      xpCost: 4,
+      timestamp: 0
     }));
-    expect((await makeService().advanceTier(actor)).genreChoice)
-      .toMatchObject({source: "newTier", grantTier: newTier});
+    expect((await makeService().advanceTier(actor)).genreChoice).toMatchObject({source: "newTier", grantTier: newTier});
   });
 
   it("keeps GM override separate and still validates duplicate slots", async () => {
     const actor = new TestCharacter({xp: 0});
     const service = makeService();
     expect((await service.purchaseWithGmOverride(actor, {kind: "extraEffort"})).record.xpCost).toBe(0);
-    await expect(service.purchaseWithGmOverride(actor, {kind: "extraEffort"}))
-      .rejects.toMatchObject({code: "already-purchased"});
+    await expect(service.purchaseWithGmOverride(actor, {kind: "extraEffort"})).rejects.toMatchObject({
+      code: "already-purchased"
+    });
   });
 
   it("treats progression guidance as explicit persistent user state", async () => {
@@ -445,7 +513,10 @@ describe("AdvancementService", () => {
     const service = makeService();
 
     expect(service.progressionGuidance(actor)).toEqual({
-      tier: 1, completed: false, focusAbilityCount: 2, includesGenreAbility: false
+      tier: 1,
+      completed: false,
+      focusAbilityCount: 2,
+      includesGenreAbility: false
     });
     await service.completeProgressionGuidance(actor);
     expect(actor.system.advancement.guidanceCompletedTiers).toEqual([1]);
@@ -463,7 +534,10 @@ describe("AdvancementService", () => {
     (actor.system.derived.tier as {value: number}).value = 3;
 
     expect(service.progressionGuidance(actor)).toMatchObject({
-      tier: 3, completed: false, focusAbilityCount: 1, includesGenreAbility: true
+      tier: 3,
+      completed: false,
+      focusAbilityCount: 1,
+      includesGenreAbility: true
     });
     await service.completeProgressionGuidance(actor);
     expect(actor.system.advancement.guidanceCompletedTiers).toEqual([1, 3]);
@@ -492,8 +566,10 @@ describe("AdvancementService", () => {
       expect(actor.items).toEqual(beforeItems);
       expect(actor.updates.at(-1)).toEqual({"system.advancement.purchases": []});
       expect(service.view(actor)).toMatchObject({purchasedCount: 0, remainingCount: 4, canAdvanceTier: false});
-      expect(service.view(actor).options.find((option) => option.kind === "extraEffort"))
-        .toMatchObject({purchased: false, available: true});
+      expect(service.view(actor).options.find((option) => option.kind === "extraEffort")).toMatchObject({
+        purchased: false,
+        available: true
+      });
     });
 
     it("reopens a completed cycle, blocks Tier advancement, and permits a different purchase", async () => {
@@ -502,10 +578,14 @@ describe("AdvancementService", () => {
       await service.purchase(actor, {kind: "extraEffort"});
       await service.purchase(actor, {kind: "moveTowardPerfection", pool: "might"});
       await service.purchase(actor, {
-        kind: "increaseCapabilities", allocation: {might: 4, speed: 0, intellect: 0}
+        kind: "increaseCapabilities",
+        allocation: {might: 4, speed: 0, intellect: 0}
       });
       const skill = new TestSkill("skill-1", "Navigation", {
-        rank: "untrained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
+        rank: "untrained",
+        category: "general",
+        contexts: [],
+        acquisition: {grantedByUuid: ""}
       });
       actor.items.push(skill);
       const fourth = await service.purchase(actor, {kind: "skillTraining", mode: "improve", skillId: skill.id});
@@ -535,21 +615,33 @@ describe("AdvancementService", () => {
 
     it("preserves Skills, familiarities, pending choices, and acquired Items", async () => {
       const skill = new TestSkill("skill-1", "Stealth", {
-        rank: "trained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
+        rank: "trained",
+        category: "general",
+        contexts: [],
+        acquisition: {grantedByUuid: ""}
       });
       const actor = new TestCharacter({tier: 3, skills: [skill]});
       (actor.system.recovery as {bonus: number}).bonus = 2;
       (actor.system.proficiencies.weaponCategories as string[]).push("light", "medium", "heavy");
       (actor.system.proficiencies.armorCategories as string[]).push("light", "medium", "heavy");
       (actor.system.advancement.pendingFocusChoices as PendingFocusChoice[]).push({
-        id: "focus-choice", source: "otherAdvancement", grantTier: 3, focusUuid: ""
+        id: "focus-choice",
+        source: "otherAdvancement",
+        grantTier: 3,
+        focusUuid: ""
       });
       (actor.system.advancement.pendingGenreChoices as PendingGenreChoice[]).push({
-        id: "genre-choice", source: "otherAdvancement", grantTier: 3
+        id: "genre-choice",
+        source: "otherAdvancement",
+        grantTier: 3
       });
       (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push({
-        id: "legacy-current-id", kind: "other", otherKind: "focus", tier: 3,
-        xpCost: 4, timestamp: 1
+        id: "legacy-current-id",
+        kind: "other",
+        otherKind: "focus",
+        tier: 3,
+        xpCost: 4,
+        timestamp: 1
       });
       const service = makeService();
 
@@ -568,7 +660,8 @@ describe("AdvancementService", () => {
       const capabilityActor = new TestCharacter();
       const capabilityService = makeService();
       const capability = await capabilityService.purchase(capabilityActor, {
-        kind: "increaseCapabilities", allocation: {might: 4, speed: 0, intellect: 0}
+        kind: "increaseCapabilities",
+        allocation: {might: 4, speed: 0, intellect: 0}
       });
       await capabilityService.undoPurchase(capabilityActor, capability.record.id);
       expect(capabilityActor.system.stats.might).toMatchObject({baseMax: 14, value: 12});
@@ -588,7 +681,10 @@ describe("AdvancementService", () => {
       const skillActor = new TestCharacter();
       const skillService = makeService();
       const learned = await skillService.purchase(skillActor, {
-        kind: "skillTraining", mode: "learn", customName: "Cartography", customCategory: "general"
+        kind: "skillTraining",
+        mode: "learn",
+        customName: "Cartography",
+        customCategory: "general"
       });
       await skillService.undoPurchase(skillActor, learned.record.id);
       expect(skillActor.items).toHaveLength(1);
@@ -604,8 +700,12 @@ describe("AdvancementService", () => {
     it("rejects stale, duplicate, malformed, and previous-Tier IDs without removing another record", async () => {
       const actor = new TestCharacter({tier: 2});
       const current = {
-        id: "current", kind: "extraEffort" as const, otherKind: "none" as const, tier: 2,
-        xpCost: 4, timestamp: 1
+        id: "current",
+        kind: "extraEffort" as const,
+        otherKind: "none" as const,
+        tier: 2,
+        xpCost: 4,
+        timestamp: 1
       };
       (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push(current);
       const service = makeService();

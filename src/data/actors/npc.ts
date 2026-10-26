@@ -60,10 +60,11 @@ export class NpcDataModel extends ActorDataModelBase {
         new fields.SchemaField({
           id: new fields.StringField({required: true, nullable: false, blank: false}),
           label: new fields.StringField({required: true, nullable: false, initial: ""}),
-          contexts: new fields.ArrayField(
-            new fields.StringField({required: true, nullable: false, blank: false}),
-            {required: true, nullable: false, initial: []}
-          ),
+          contexts: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+            required: true,
+            nullable: false,
+            initial: []
+          }),
           mode: new fields.StringField({
             required: true,
             nullable: false,

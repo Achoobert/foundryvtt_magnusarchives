@@ -50,15 +50,17 @@ describe("AbilityChatService", () => {
       expect.anything(),
       outcome.execution,
       "resultOnly",
-      expect.objectContaining({combat: expect.objectContaining({
-        damage: 8,
-        action: expect.objectContaining({
-          kind: "npcDamage",
-          targetTokenId: "synthetic-npc",
-          targetTokenUuid: "Scene.scene.Token.synthetic-npc",
-          requestedDamage: 8
+      expect.objectContaining({
+        combat: expect.objectContaining({
+          damage: 8,
+          action: expect.objectContaining({
+            kind: "npcDamage",
+            targetTokenId: "synthetic-npc",
+            targetTokenUuid: "Scene.scene.Token.synthetic-npc",
+            requestedDamage: 8
+          })
         })
-      })})
+      })
     );
   });
 
@@ -81,14 +83,16 @@ describe("AbilityChatService", () => {
       expect.anything(),
       outcome.execution,
       "resultOnly",
-      expect.objectContaining({combat: expect.objectContaining({
-        damage: 10,
-        damageBreakdown: [
-          {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: 5},
-          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: 3, additive: true},
-          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: 2, additive: true}
-        ]
-      })})
+      expect.objectContaining({
+        combat: expect.objectContaining({
+          damage: 10,
+          damageBreakdown: [
+            {label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: 5},
+            {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: 3, additive: true},
+            {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: 2, additive: true}
+          ]
+        })
+      })
     );
   });
 
@@ -146,13 +150,19 @@ describe("AbilityChatService", () => {
       "systems/magnusarchives/templates/chat/ability-card.hbs",
       expect.objectContaining({abilityName: "Mind Lance", targetName: "B", combatAction: true})
     );
-    expect(create).toHaveBeenCalledWith(expect.objectContaining({
-      flags: {magnusarchives: {combatAction: expect.objectContaining({
-        kind: "characterDamage",
-        targetTokenId: "token-b",
-        effect: "seriousInjury"
-      })}}
-    }));
+    expect(create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        flags: {
+          magnusarchives: {
+            combatAction: expect.objectContaining({
+              kind: "characterDamage",
+              targetTokenId: "token-b",
+              effect: "seriousInjury"
+            })
+          }
+        }
+      })
+    );
   });
 
   it("publishes a compact payment-only card with the synthetic Actor speaker and no roll", async () => {

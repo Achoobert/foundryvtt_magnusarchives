@@ -3,10 +3,7 @@ import {gmIntrusionController} from "../../intrusions/gm-intrusion-controller";
 import type {RollExecution} from "../../rolls/roll-types";
 import type {GMIntrusionCharacterLike} from "../../services/gm-intrusion-service";
 
-export async function publishRollOutcome(
-  actor: GMIntrusionCharacterLike,
-  execution: RollExecution
-): Promise<void> {
+export async function publishRollOutcome(actor: GMIntrusionCharacterLike, execution: RollExecution): Promise<void> {
   await game.magnusarchives.services.rollChat.publish(actor, execution, currentDifficultyVisibility(), {
     showGmAudit: showGmRollAuditEnabled()
   });

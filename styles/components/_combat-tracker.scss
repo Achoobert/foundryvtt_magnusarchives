@@ -37,9 +37,12 @@
     min-height: 1.45rem;
     padding: 0.18rem 0.3rem;
     text-transform: uppercase;
-    transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+    transition:
+      background-color 120ms ease,
+      border-color 120ms ease,
+      box-shadow 120ms ease,
+      color 120ms ease;
     width: 100%;
-
   }
 
   .combat-tracker .token-initiative button.magnusarchives-done-control {

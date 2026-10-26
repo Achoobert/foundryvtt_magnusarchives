@@ -28,7 +28,9 @@ export function weaponFamilyLabel(value: unknown): string {
 
 export function legacyWeaponFamilyFlags(value: unknown): string[] {
   if (!value || typeof value !== "object" || Array.isArray(value)) return [];
-  return normalizeWeaponFamilies(Object.entries(value as Record<string, unknown>)
-    .filter(([, enabled]) => enabled === true)
-    .map(([family]) => family));
+  return normalizeWeaponFamilies(
+    Object.entries(value as Record<string, unknown>)
+      .filter(([, enabled]) => enabled === true)
+      .map(([family]) => family)
+  );
 }

@@ -29,7 +29,7 @@ export class DepletionService {
       throw new Error(`This ${item.name} is already depleted.`);
     }
     const structuredCombatItem = ["weapon", "shield", "armor"].includes(item.type);
-    const explicitFormula = structuredCombatItem ? "" : rule.formula?.trim() ?? "";
+    const explicitFormula = structuredCombatItem ? "" : (rule.formula?.trim() ?? "");
     const sides = depletionDieSides(rule);
     if (!Number.isInteger(rule.threshold) || rule.threshold < 1) {
       throw new Error("Depletion threshold must be a positive whole number.");

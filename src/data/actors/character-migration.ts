@@ -13,13 +13,10 @@ function normalizeOverrideValue(value: unknown, minimum: number): number | null 
 
 function normalizeOverrides(overrides: Record<string, unknown>, partial = false): Record<string, unknown> {
   const normalized: Record<string, unknown> = {};
-  const stats = overrides.stats && typeof overrides.stats === "object"
-    ? overrides.stats as Record<string, unknown>
-    : {};
+  const stats =
+    overrides.stats && typeof overrides.stats === "object" ? (overrides.stats as Record<string, unknown>) : {};
   const pool = (key: string) => {
-    const value = stats[key] && typeof stats[key] === "object"
-      ? stats[key] as Record<string, unknown>
-      : {};
+    const value = stats[key] && typeof stats[key] === "object" ? (stats[key] as Record<string, unknown>) : {};
     const result: Record<string, unknown> = {};
     if (!partial || hasOwn(value, "max")) result.max = normalizeOverrideValue(value.max, 1);
     if (!partial || hasOwn(value, "edge")) result.edge = normalizeOverrideValue(value.edge, -20);
@@ -35,9 +32,8 @@ function normalizeOverrides(overrides: Record<string, unknown>, partial = false)
     normalized.stats = normalizedStats;
   }
   if (!partial || hasOwn(overrides, "wounds")) {
-    const wounds = overrides.wounds && typeof overrides.wounds === "object"
-      ? overrides.wounds as Record<string, unknown>
-      : {};
+    const wounds =
+      overrides.wounds && typeof overrides.wounds === "object" ? (overrides.wounds as Record<string, unknown>) : {};
     const normalizedWounds: Record<string, number> = {};
     for (const severity of ["minor", "moderate", "major"]) {
       if (!partial || hasOwn(wounds, severity)) {
@@ -53,10 +49,7 @@ function hasOwn(value: object, key: string): boolean {
   return Object.prototype.hasOwnProperty.call(value, key);
 }
 
-function normalizeAdvancement(
-  advancement: Record<string, unknown>,
-  partial: boolean
-): Record<string, unknown> {
+function normalizeAdvancement(advancement: Record<string, unknown>, partial: boolean): Record<string, unknown> {
   const normalized = {...advancement};
   if (!partial || hasOwn(advancement, "cycle")) {
     normalized.cycle = Number.isInteger(advancement.cycle) ? advancement.cycle : 1;
@@ -81,9 +74,13 @@ function normalizeAdvancement(
   }
   if (!partial || hasOwn(advancement, "guidanceCompletedTiers")) {
     normalized.guidanceCompletedTiers = Array.isArray(advancement.guidanceCompletedTiers)
-      ? [...new Set(advancement.guidanceCompletedTiers
-        .filter((tier): tier is number => Number.isInteger(tier) && Number(tier) >= 1)
-        .map(Number))].sort((left, right) => left - right)
+      ? [
+          ...new Set(
+            advancement.guidanceCompletedTiers
+              .filter((tier): tier is number => Number.isInteger(tier) && Number(tier) >= 1)
+              .map(Number)
+          )
+        ].sort((left, right) => left - right)
       : [];
   }
   if (!partial || hasOwn(advancement, "notes")) {
@@ -92,19 +89,14 @@ function normalizeAdvancement(
   return normalized;
 }
 
-function normalizeCreation(
-  creation: Record<string, unknown>,
-  partial: boolean
-): Record<string, unknown> {
+function normalizeCreation(creation: Record<string, unknown>, partial: boolean): Record<string, unknown> {
   const normalized = {...creation};
   if (!partial || hasOwn(creation, "coreInitialized")) {
     normalized.coreInitialized = creation.coreInitialized === true;
   }
   if (!partial || hasOwn(creation, "mode")) {
     const mode = creation.mode === "setup" ? "completed" : String(creation.mode);
-    normalized.mode = ["completed", "skipped", "manual"].includes(mode)
-      ? mode
-      : "uninitialized";
+    normalized.mode = ["completed", "skipped", "manual"].includes(mode) ? mode : "uninitialized";
   }
   if (!partial || hasOwn(creation, "initializedAt")) {
     normalized.initializedAt = Number.isInteger(creation.initializedAt) ? creation.initializedAt : 0;
@@ -112,10 +104,7 @@ function normalizeCreation(
   return normalized;
 }
 
-function normalizeAppearance(
-  appearance: Record<string, unknown>,
-  partial: boolean
-): Record<string, unknown> {
+function normalizeAppearance(appearance: Record<string, unknown>, partial: boolean): Record<string, unknown> {
   const normalized: Record<string, unknown> = {};
   if (!partial || hasOwn(appearance, "backgroundMode")) {
     const mode = String(appearance.backgroundMode ?? "theme");
@@ -143,9 +132,7 @@ export function migrateCharacterSystemData(
   const partial = options.partial === true;
   if (!partial) {
     source.overrides = normalizeOverrides(
-      source.overrides && typeof source.overrides === "object"
-        ? source.overrides as Record<string, unknown>
-        : {}
+      source.overrides && typeof source.overrides === "object" ? (source.overrides as Record<string, unknown>) : {}
     );
   } else if (source.overrides && typeof source.overrides === "object") {
     // Partial updates are path-based in normal operation. If Foundry supplies
@@ -157,9 +144,7 @@ export function migrateCharacterSystemData(
   }
   if (!partial) {
     source.appearance = normalizeAppearance(
-      source.appearance && typeof source.appearance === "object"
-        ? source.appearance as Record<string, unknown>
-        : {},
+      source.appearance && typeof source.appearance === "object" ? (source.appearance as Record<string, unknown>) : {},
       false
     );
   } else if (source.appearance && typeof source.appearance === "object") {
@@ -172,14 +157,14 @@ export function migrateCharacterSystemData(
       const acquisitionRecords = Array.isArray(progress.acquisitions)
         ? progress.acquisitions
         : ownedNodeIds.map((nodeId) => ({
-          nodeId,
-          mode: "legacy",
-          choiceId: "",
-          choiceSource: "none",
-          choiceGrantTier: 1,
-          choiceFocusUuid: "",
-          acquiredAt: 0
-        }));
+            nodeId,
+            mode: "legacy",
+            choiceId: "",
+            choiceSource: "none",
+            choiceGrantTier: 1,
+            choiceFocusUuid: "",
+            acquiredAt: 0
+          }));
       return {
         focusUuid: String(progress.focusUuid ?? progress.focusItemId ?? ""),
         ownedNodeIds,
@@ -194,12 +179,12 @@ export function migrateCharacterSystemData(
     source.advancement = normalizeAdvancement(source.advancement as Record<string, unknown>, partial);
   }
   if (!partial || (source.recovery && typeof source.recovery === "object")) {
-    const recovery = source.recovery && typeof source.recovery === "object"
-      ? source.recovery as Record<string, unknown>
-      : {};
-    const legacy = recovery.used && typeof recovery.used === "object"
-      ? {...createRecoveryUsage(false), ...recovery.used as Partial<RecoveryUsage>}
-      : createRecoveryUsage(false);
+    const recovery =
+      source.recovery && typeof source.recovery === "object" ? (source.recovery as Record<string, unknown>) : {};
+    const legacy =
+      recovery.used && typeof recovery.used === "object"
+        ? {...createRecoveryUsage(false), ...(recovery.used as Partial<RecoveryUsage>)}
+        : createRecoveryUsage(false);
     const normalized = {...recovery};
     if (!partial || hasOwn(recovery, "bonus")) normalized.bonus = Number.isInteger(recovery.bonus) ? recovery.bonus : 0;
     if (!partial || hasOwn(recovery, "slots")) {
@@ -212,17 +197,18 @@ export function migrateCharacterSystemData(
     }
     if (!partial || hasOwn(recovery, "history")) {
       normalized.history = Array.isArray(recovery.history)
-        ? recovery.history.map((raw) => raw && typeof raw === "object"
-          ? {slotId: "", ...raw as Record<string, unknown>}
-          : raw)
+        ? recovery.history.map((raw) =>
+            raw && typeof raw === "object" ? {slotId: "", ...(raw as Record<string, unknown>)} : raw
+          )
         : [];
     }
     source.recovery = normalized;
   }
   if (!partial) {
-    const presentation = source.presentation && typeof source.presentation === "object"
-      ? source.presentation as Record<string, unknown>
-      : {};
+    const presentation =
+      source.presentation && typeof source.presentation === "object"
+        ? (source.presentation as Record<string, unknown>)
+        : {};
     source.presentation = {
       hideFocusInSentence: presentation.hideFocusInSentence === true,
       powerShiftsEnabled: presentation.powerShiftsEnabled === true
@@ -230,14 +216,17 @@ export function migrateCharacterSystemData(
   } else if (source.presentation && typeof source.presentation === "object") {
     const presentation = source.presentation as Record<string, unknown>;
     const normalized = {...presentation};
-    if (hasOwn(presentation, "hideFocusInSentence")) normalized.hideFocusInSentence = presentation.hideFocusInSentence === true;
-    if (hasOwn(presentation, "powerShiftsEnabled")) normalized.powerShiftsEnabled = presentation.powerShiftsEnabled === true;
+    if (hasOwn(presentation, "hideFocusInSentence"))
+      normalized.hideFocusInSentence = presentation.hideFocusInSentence === true;
+    if (hasOwn(presentation, "powerShiftsEnabled"))
+      normalized.powerShiftsEnabled = presentation.powerShiftsEnabled === true;
     source.presentation = normalized;
   }
   if (!partial || (source.proficiencies && typeof source.proficiencies === "object")) {
-    const proficiencies = source.proficiencies && typeof source.proficiencies === "object"
-      ? source.proficiencies as Record<string, unknown>
-      : {};
+    const proficiencies =
+      source.proficiencies && typeof source.proficiencies === "object"
+        ? (source.proficiencies as Record<string, unknown>)
+        : {};
     const normalized = {...proficiencies};
     if (!partial || hasOwn(proficiencies, "weaponFamilies")) {
       normalized.weaponFamilies = normalizeWeaponFamilies(proficiencies.weaponFamilies);

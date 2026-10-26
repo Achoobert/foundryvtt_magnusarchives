@@ -10,7 +10,7 @@ function target(): ThemeTarget & {values: Map<string, string>} {
     dataset: {},
     style: {
       setProperty: vi.fn((name: string, value: string) => values.set(name, value)),
-      removeProperty: vi.fn((name: string) => values.delete(name) ? "removed" : "")
+      removeProperty: vi.fn((name: string) => (values.delete(name) ? "removed" : ""))
     }
   };
 }
@@ -82,11 +82,13 @@ describe("ThemeRegistry", () => {
     const registry = new ThemeRegistry();
     registry.register(CORE_THEME);
     expect(() => registry.register(CORE_THEME)).toThrow("already registered");
-    expect(() => registry.register({
-      id: "invalid",
-      label: "Invalid",
-      sourceId: "test",
-      properties: {"--unscoped": "red"}
-    })).toThrow("--magnusarchives- prefix");
+    expect(() =>
+      registry.register({
+        id: "invalid",
+        label: "Invalid",
+        sourceId: "test",
+        properties: {"--unscoped": "red"}
+      })
+    ).toThrow("--magnusarchives- prefix");
   });
 });

@@ -7,15 +7,24 @@ import {
 import {effectiveTier} from "../../rules/core/character-overrides";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function notify(error: unknown): void {
-  const key = error instanceof FocusAssociationError
-    ? `MAGNUSARCHIVES.Focus.Association.Errors.${error.code}`
-    : "MAGNUSARCHIVES.Focus.Errors.Unexpected";
+  const key =
+    error instanceof FocusAssociationError
+      ? `MAGNUSARCHIVES.Focus.Association.Errors.${error.code}`
+      : "MAGNUSARCHIVES.Focus.Errors.Unexpected";
   if (!(error instanceof FocusAssociationError)) console.error(error);
   ui.notifications.error(game.i18n.localize(key));
 }
@@ -33,21 +42,21 @@ export async function promptAttachFocus(
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Focus.Association.NoWorldFoci"));
       return;
     }
-    const choice = await foundry.applications.api.DialogV2.input({
+    const choice = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Add")},
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Focus")}
-        <select name="focusUuid">${foci.map((item) => (
-          `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`
-        )).join("")}</select></label></div>`,
+        <select name="focusUuid">${foci
+          .map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`)
+          .join("")}</select></label></div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!choice) return;
-    focus = await fromUuid(String(choice.focusUuid ?? "")) as FocusDocumentLike | null ?? undefined;
+    focus = ((await fromUuid(String(choice.focusUuid ?? ""))) as FocusDocumentLike | null) ?? undefined;
   }
   if (!focus) return;
-  const creationAllowed = effectiveTier(actor.system) === 1
-    && !actor.system.focusProgress.some((entry) => entry.provenance === "creation");
-  const mode = await foundry.applications.api.DialogV2.input({
+  const creationAllowed =
+    effectiveTier(actor.system) === 1 && !actor.system.focusProgress.some((entry) => entry.provenance === "creation");
+  const mode = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Add")},
     content: `<div class="magnusarchives-dialog-fields">
       <p><strong>${escapeHtml(focus.name)}</strong></p>
@@ -59,7 +68,7 @@ export async function promptAttachFocus(
       </label>
     </div>`,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Add")}
-  }) as Record<string, unknown> | null;
+  })) as Record<string, unknown> | null;
   if (!mode) return;
   try {
     const result = await game.magnusarchives.services.focusAssociations.attach(
@@ -67,25 +76,25 @@ export async function promptAttachFocus(
       focus,
       String(mode.provenance) as FocusAssociationProvenance
     );
-    ui.notifications.info(game.i18n.localize(
-      result.choicesGranted.length > 0
-        ? "MAGNUSARCHIVES.Focus.Association.Added"
-        : "MAGNUSARCHIVES.Focus.Association.Reattached"
-    ));
+    ui.notifications.info(
+      game.i18n.localize(
+        result.choicesGranted.length > 0
+          ? "MAGNUSARCHIVES.Focus.Association.Added"
+          : "MAGNUSARCHIVES.Focus.Association.Reattached"
+      )
+    );
   } catch (error) {
     notify(error);
   }
 }
 
-export async function promptRemoveFocus(
-  actor: FocusAssociationCharacterLike,
-  focusUuid: string
-): Promise<void> {
+export async function promptRemoveFocus(actor: FocusAssociationCharacterLike, focusUuid: string): Promise<void> {
   const progress = actor.system.focusProgress.find((entry) => entry.focusUuid === focusUuid);
   if (!progress) return;
-  const warning = progress.ownedNodeIds.length > 0
-    ? game.i18n.format("MAGNUSARCHIVES.Focus.Association.RemoveOwnedWarning", {count: progress.ownedNodeIds.length})
-    : game.i18n.localize("MAGNUSARCHIVES.Focus.Association.RemoveWarning");
+  const warning =
+    progress.ownedNodeIds.length > 0
+      ? game.i18n.format("MAGNUSARCHIVES.Focus.Association.RemoveOwnedWarning", {count: progress.ownedNodeIds.length})
+      : game.i18n.localize("MAGNUSARCHIVES.Focus.Association.RemoveWarning");
   const confirmed = await foundry.applications.api.DialogV2.confirm({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Association.Remove")},
     content: `<div class="magnusarchives magnusarchives-dialog"><p>${warning}</p></div>`,

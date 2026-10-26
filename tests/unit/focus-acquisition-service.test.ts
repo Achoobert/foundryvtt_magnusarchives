@@ -86,26 +86,28 @@ function focus(uuid = "Item.focus-a", sourceUuid = "Item.shared-ability"): Focus
     uuid,
     name: uuid,
     type: "focus",
-    system: {graph: {
-      version: 1,
-      nodes: [
-        {
-          id: "root",
-          abilityUuid: "",
-          abilitySnapshot: {name: "Root"},
-          tier: 1,
-          position: {x: null, y: null}
-        },
-        {
-          id: "target",
-          abilityUuid: sourceUuid,
-          abilitySnapshot: {name: "Target Snapshot", description: "Snapshot description"},
-          tier: 2,
-          position: {x: null, y: null}
-        }
-      ],
-      connections: [{id: "root-target", from: "root", to: "target"}]
-    }}
+    system: {
+      graph: {
+        version: 1,
+        nodes: [
+          {
+            id: "root",
+            abilityUuid: "",
+            abilitySnapshot: {name: "Root"},
+            tier: 1,
+            position: {x: null, y: null}
+          },
+          {
+            id: "target",
+            abilityUuid: sourceUuid,
+            abilitySnapshot: {name: "Target Snapshot", description: "Snapshot description"},
+            tier: 2,
+            position: {x: null, y: null}
+          }
+        ],
+        connections: [{id: "root-target", from: "root", to: "target"}]
+      }
+    }
   };
 }
 
@@ -147,9 +149,14 @@ describe("FocusAcquisitionService lifecycle", () => {
   it("requires and consumes exactly one pending Focus Choice", async () => {
     const item = focus();
     const actor = new TestCharacter([progress(item.uuid)]);
-    actor.system.advancement.pendingFocusChoices = [{
-      id: "choice", source: "newTier", grantTier: 2, focusUuid: ""
-    }];
+    actor.system.advancement.pendingFocusChoices = [
+      {
+        id: "choice",
+        source: "newTier",
+        grantTier: 2,
+        focusUuid: ""
+      }
+    ];
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
 
     await service.acquire(actor, item, "target");
@@ -171,10 +178,17 @@ describe("FocusAcquisitionService lifecycle", () => {
     const item = focus();
     const actor = new TestCharacter([progress(item.uuid)]);
     const choice: PendingFocusChoice = {
-      id: "creation-choice", source: "characterCreation", grantTier: 1, focusUuid: item.uuid
+      id: "creation-choice",
+      source: "characterCreation",
+      grantTier: 1,
+      focusUuid: item.uuid
     };
     actor.system.advancement.pendingFocusChoices = [choice];
-    const service = new FocusAcquisitionService(undefined, async () => sourceAbility(), () => 42);
+    const service = new FocusAcquisitionService(
+      undefined,
+      async () => sourceAbility(),
+      () => 42
+    );
     await service.acquire(actor, item, "target");
 
     const result = await service.undo(actor, item, "target");
@@ -239,9 +253,13 @@ describe("FocusAcquisitionService lifecycle", () => {
 
     expect(actor.system.focusProgress[0]!.ownedNodeIds).toEqual(["target"]);
     expect(actor.system.advancement.pendingFocusChoices).toEqual([]);
-    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(expect.objectContaining({
-      nodeId: "target", mode: "gmManual", choiceSource: "none"
-    }));
+    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(
+      expect.objectContaining({
+        nodeId: "target",
+        mode: "gmManual",
+        choiceSource: "none"
+      })
+    );
   });
 
   it("records an advisory acquisition without consuming a missing pending choice", async () => {
@@ -254,24 +272,35 @@ describe("FocusAcquisitionService lifecycle", () => {
 
     expect(actor.created).toHaveLength(1);
     expect(actor.system.advancement.pendingFocusChoices).toEqual([]);
-    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(expect.objectContaining({
-      nodeId: "target", mode: "manualOverride", choiceSource: "none"
-    }));
+    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(
+      expect.objectContaining({
+        nodeId: "target",
+        mode: "manualOverride",
+        choiceSource: "none"
+      })
+    );
   });
 
   it("keeps pending choices untouched in the Character-facing manual workflow", async () => {
     const item = focus();
     const actor = new TestCharacter([progress(item.uuid)]);
-    actor.system.advancement.pendingFocusChoices = [{
-      id: "legacy-pending", source: "newTier", grantTier: 2, focusUuid: ""
-    }];
+    actor.system.advancement.pendingFocusChoices = [
+      {
+        id: "legacy-pending",
+        source: "newTier",
+        grantTier: 2,
+        focusUuid: ""
+      }
+    ];
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
 
     await service.acquireManual(actor, item, "target");
 
     expect(actor.system.advancement.pendingFocusChoices).toHaveLength(1);
     expect(actor.system.focusProgress[0]!.acquisitions?.at(-1)).toMatchObject({
-      nodeId: "target", mode: "manualOverride", choiceSource: "none"
+      nodeId: "target",
+      mode: "manualOverride",
+      choiceSource: "none"
     });
     expect(actor.created[0]).toMatchObject({
       system: {sourceFocusUuid: item.uuid, sourceNodeId: "target", grantedBy: {kind: "focus"}}
@@ -282,10 +311,12 @@ describe("FocusAcquisitionService lifecycle", () => {
     const base = focus();
     const item: FocusDocumentLike = {
       ...base,
-      system: {graph: {
-        ...base.system.graph,
-        connections: [{id: "broken", from: "root", to: "missing"}]
-      }}
+      system: {
+        graph: {
+          ...base.system.graph,
+          connections: [{id: "broken", from: "root", to: "missing"}]
+        }
+      }
     };
     const actor = new TestCharacter([progress(item.uuid)]);
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
@@ -314,32 +345,39 @@ describe("FocusAcquisitionService lifecycle", () => {
       uuid: "Item.initial-focus",
       name: "Initial Focus",
       type: "focus",
-      system: {graph: {
-        version: 1,
-        nodes: [
-          ...["one", "two", "three"].map((id) => ({
-            id,
-            abilityUuid: "",
-            abilitySnapshot: {name: id},
-            tier: 1,
-            position: {x: null, y: null}
-          })),
-          {
-            id: "later",
-            abilityUuid: "",
-            abilitySnapshot: {name: "later"},
-            tier: 2,
-            position: {x: null, y: null}
-          }
-        ],
-        connections: ["one", "two", "three"].map((from) => ({
-          id: `${from}-later`, from, to: "later"
-        }))
-      }}
+      system: {
+        graph: {
+          version: 1,
+          nodes: [
+            ...["one", "two", "three"].map((id) => ({
+              id,
+              abilityUuid: "",
+              abilitySnapshot: {name: id},
+              tier: 1,
+              position: {x: null, y: null}
+            })),
+            {
+              id: "later",
+              abilityUuid: "",
+              abilitySnapshot: {name: "later"},
+              tier: 2,
+              position: {x: null, y: null}
+            }
+          ],
+          connections: ["one", "two", "three"].map((from) => ({
+            id: `${from}-later`,
+            from,
+            to: "later"
+          }))
+        }
+      }
     };
     const actor = new TestCharacter([progress(item.uuid, [])], 1);
     actor.system.advancement.pendingFocusChoices = ["a", "b"].map((id) => ({
-      id, source: "characterCreation", grantTier: 1, focusUuid: item.uuid
+      id,
+      source: "characterCreation",
+      grantTier: 1,
+      focusUuid: item.uuid
     }));
     const service = new FocusAcquisitionService(undefined, async () => null);
 
@@ -349,12 +387,17 @@ describe("FocusAcquisitionService lifecycle", () => {
     expect(actor.system.focusProgress[0]?.ownedNodeIds).toEqual(["one", "two", "three"]);
     expect(actor.system.advancement.pendingFocusChoices).toEqual([]);
     expect(actor.system.focusProgress[0]?.acquisitions?.at(-1)).toMatchObject({
-      nodeId: "three", mode: "manualOverride", choiceSource: "none"
+      nodeId: "three",
+      mode: "manualOverride",
+      choiceSource: "none"
     });
 
     actor.system.tier = 2;
     actor.system.advancement.pendingFocusChoices.push({
-      id: "later-choice", source: "newTier", grantTier: 2, focusUuid: ""
+      id: "later-choice",
+      source: "newTier",
+      grantTier: 2,
+      focusUuid: ""
     });
     await service.acquire(actor, item, "later");
     expect(actor.system.focusProgress[0]?.ownedNodeIds).toEqual(["one", "two", "three", "later"]);
@@ -401,9 +444,7 @@ describe("FocusAcquisitionService lifecycle", () => {
       return sourceAbility();
     });
 
-    const results = await Promise.all(Array.from({length: 12}, () => (
-      service.acquire(actor, item, "target")
-    )));
+    const results = await Promise.all(Array.from({length: 12}, () => service.acquire(actor, item, "target")));
 
     expect(results.filter((entry) => entry.status === "acquired")).toHaveLength(1);
     expect(actor.created).toHaveLength(1);
@@ -429,12 +470,13 @@ describe("FocusAcquisitionService lifecycle", () => {
     actor.items.push(embedded(item.uuid, "root"));
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
     await service.acquire(actor, item, "target");
-    actor.items.splice(actor.items.findIndex((entry) => entry.system.sourceNodeId === "target"), 1);
+    actor.items.splice(
+      actor.items.findIndex((entry) => entry.system.sourceNodeId === "target"),
+      1
+    );
 
     expect(actor.system.focusProgress[0]!.ownedNodeIds).toContain("target");
-    expect(service.missingOwnedNodeIds(actor, item, actor.system.focusProgress[0]!)).toEqual(
-      new Set(["target"])
-    );
+    expect(service.missingOwnedNodeIds(actor, item, actor.system.focusProgress[0]!)).toEqual(new Set(["target"]));
   });
 
   it("restores a missing owned Ability without changing XP or progression", async () => {
@@ -458,9 +500,7 @@ describe("FocusAcquisitionService lifecycle", () => {
     const actor = new TestCharacter([progress(item.uuid, ["root", "target"])]);
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
 
-    const results = await Promise.all(Array.from({length: 8}, () => (
-      service.restoreAbility(actor, item, "target")
-    )));
+    const results = await Promise.all(Array.from({length: 8}, () => service.restoreAbility(actor, item, "target")));
 
     expect(results.filter((entry) => entry.status === "restored")).toHaveLength(1);
     expect(actor.created).toHaveLength(1);
@@ -507,13 +547,18 @@ describe("FocusAcquisitionService lifecycle", () => {
     const target = item.system.graph.nodes[1]!;
     const invalid: FocusDocumentLike = {
       ...item,
-      system: {graph: {
-        ...item.system.graph,
-        nodes: [item.system.graph.nodes[0]!, {
-          ...target,
-          abilitySnapshot: {name: "", description: ""}
-        }]
-      }}
+      system: {
+        graph: {
+          ...item.system.graph,
+          nodes: [
+            item.system.graph.nodes[0]!,
+            {
+              ...target,
+              abilitySnapshot: {name: "", description: ""}
+            }
+          ]
+        }
+      }
     };
     const actor = new TestCharacter([progress(invalid.uuid, ["root", "target"])]);
     const service = new FocusAcquisitionService(undefined, async () => null);
@@ -545,10 +590,7 @@ describe("FocusAcquisitionService lifecycle", () => {
     const actor = new TestCharacter([progress(first.uuid), progress(second.uuid)]);
     const service = new FocusAcquisitionService(undefined, async () => sourceAbility());
 
-    await Promise.all([
-      service.acquire(actor, first, "target"),
-      service.acquire(actor, second, "target")
-    ]);
+    await Promise.all([service.acquire(actor, first, "target"), service.acquire(actor, second, "target")]);
 
     expect(actor.system.focusProgress[0]!.ownedNodeIds).toEqual(["root", "target"]);
     expect(actor.system.focusProgress[1]!.ownedNodeIds).toEqual(["root", "target"]);
@@ -580,10 +622,12 @@ describe("FocusAcquisitionService lifecycle", () => {
     await service.acquire(actor, first, "target");
     const choices = actor.system.advancement.pendingFocusChoices.length;
 
-    await expect(service.acquire(actor, second, "target", async (conflict) => {
-      expect(conflict).toMatchObject({context: "focus", allowSuppress: false, allowGmOverride: true});
-      return {action: "cancel"};
-    })).rejects.toBeInstanceOf(GrantConflictCancelledError);
+    await expect(
+      service.acquire(actor, second, "target", async (conflict) => {
+        expect(conflict).toMatchObject({context: "focus", allowSuppress: false, allowGmOverride: true});
+        return {action: "cancel"};
+      })
+    ).rejects.toBeInstanceOf(GrantConflictCancelledError);
 
     expect(actor.items).toHaveLength(1);
     expect(actor.system.focusProgress[1]!.ownedNodeIds).toEqual(["root"]);
@@ -616,9 +660,13 @@ describe("FocusAcquisitionService lifecycle", () => {
 
     expect(actor.created).toHaveLength(1);
     expect(actor.system.advancement.pendingFocusChoices).toHaveLength(choices);
-    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(expect.objectContaining({
-      nodeId: "target", mode: "manualOverride", choiceSource: "none"
-    }));
+    expect(actor.system.focusProgress[0]!.acquisitions).toContainEqual(
+      expect.objectContaining({
+        nodeId: "target",
+        mode: "manualOverride",
+        choiceSource: "none"
+      })
+    );
   });
 
   it("allows a tier-locked node without consuming a pending choice", async () => {
@@ -632,7 +680,9 @@ describe("FocusAcquisitionService lifecycle", () => {
     expect(actor.system.focusProgress[0]!.ownedNodeIds).toEqual(["root", "target"]);
     expect(actor.system.advancement.pendingFocusChoices).toHaveLength(choices);
     expect(actor.system.focusProgress[0]!.acquisitions?.at(-1)).toMatchObject({
-      nodeId: "target", mode: "manualOverride", choiceSource: "none"
+      nodeId: "target",
+      mode: "manualOverride",
+      choiceSource: "none"
     });
   });
 

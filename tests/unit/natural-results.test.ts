@@ -33,52 +33,59 @@ describe("Core natural results", () => {
   it("turns natural 1 into a free GM Intrusion independently from task failure", () => {
     const rolled = result(1, {mode: "known", value: 1});
     expect(rolled.success).toBe(false);
-    expect(rolled.naturalEffects).toContainEqual(expect.objectContaining({
-      kind: "gm-intrusion",
-      status: "applied",
-      triggersGMIntrusion: true,
-      intrusionProvenance: "natural-1"
-    }));
+    expect(rolled.naturalEffects).toContainEqual(
+      expect.objectContaining({
+        kind: "gm-intrusion",
+        status: "applied",
+        triggersGMIntrusion: true,
+        intrusionProvenance: "natural-1"
+      })
+    );
   });
 
   it("expands only the Free GM Intrusion range under Horror Mode and preserves provenance", () => {
-    expect(result(1, {mode: "known", value: 1}, "task", 0, 4).naturalEffects)
-      .toContainEqual(expect.objectContaining({intrusionProvenance: "natural-1"}));
+    expect(result(1, {mode: "known", value: 1}, "task", 0, 4).naturalEffects).toContainEqual(
+      expect.objectContaining({intrusionProvenance: "natural-1"})
+    );
     for (const natural of [2, 3, 4]) {
-      expect(result(natural, {mode: "known", value: 1}, "task", 0, 4).naturalEffects)
-        .toContainEqual(expect.objectContaining({
+      expect(result(natural, {mode: "known", value: 1}, "task", 0, 4).naturalEffects).toContainEqual(
+        expect.objectContaining({
           kind: "gm-intrusion",
           intrusionProvenance: "horror-mode",
           horrorIntrusionRange: 4
-        }));
+        })
+      );
     }
-    expect(result(5, {mode: "known", value: 1}, "task", 0, 4).naturalEffects)
-      .not.toContainEqual(expect.objectContaining({kind: "gm-intrusion"}));
+    expect(result(5, {mode: "known", value: 1}, "task", 0, 4).naturalEffects).not.toContainEqual(
+      expect.objectContaining({kind: "gm-intrusion"})
+    );
   });
 
   it("keeps range 1 normal and supports Horror Mode through natural 20", () => {
     expect(result(2).naturalEffects).not.toContainEqual(expect.objectContaining({kind: "gm-intrusion"}));
     const maximum = result(20, {mode: "known", value: 1}, "task", 0, 20).naturalEffects;
-    expect(maximum).toContainEqual(expect.objectContaining({
+    expect(maximum).toContainEqual(
+      expect.objectContaining({
         kind: "gm-intrusion",
         intrusionProvenance: "horror-mode",
         horrorIntrusionRange: 20
-      }));
+      })
+    );
     expect(maximum).toContainEqual(expect.objectContaining({kind: "major-effect"}));
   });
 
-  it.each([[17, 1], [18, 2]] as const)(
-    "applies natural %i only to a successful damage roll for +%i damage",
-    (natural, bonus) => {
-      expect(result(natural, {mode: "known", value: 3}, "damage").naturalEffects[0]).toMatchObject({
-        kind: "damage-bonus",
-        status: "applied",
-        damageBonus: bonus
-      });
-      expect(result(natural, {mode: "known", value: 3}, "task").naturalEffects[0]?.status).toBe("inapplicable");
-      expect(result(natural, {mode: "known", value: 10}, "damage").naturalEffects[0]?.status).toBe("inapplicable");
-    }
-  );
+  it.each([
+    [17, 1],
+    [18, 2]
+  ] as const)("applies natural %i only to a successful damage roll for +%i damage", (natural, bonus) => {
+    expect(result(natural, {mode: "known", value: 3}, "damage").naturalEffects[0]).toMatchObject({
+      kind: "damage-bonus",
+      status: "applied",
+      damageBonus: bonus
+    });
+    expect(result(natural, {mode: "known", value: 3}, "task").naturalEffects[0]?.status).toBe("inapplicable");
+    expect(result(natural, {mode: "known", value: 10}, "damage").naturalEffects[0]?.status).toBe("inapplicable");
+  });
 
   it("offers the natural 19 choice between +3 damage and a minor effect on a successful attack", () => {
     const rolled = result(19, {mode: "known", value: 3}, "damage");
@@ -95,11 +102,13 @@ describe("Core natural results", () => {
 
   it("offers the natural 20 damage/effect choice and refunds the action Pool cost", () => {
     const rolled = result(20, {mode: "known", value: 3}, "damage", 1);
-    expect(rolled.naturalEffects).toEqual(expect.arrayContaining([
-      expect.objectContaining({kind: "damage-bonus", damageBonus: 4, status: "available"}),
-      expect.objectContaining({kind: "major-effect", status: "available"}),
-      expect.objectContaining({kind: "pool-cost-refund", status: "applied"})
-    ]));
+    expect(rolled.naturalEffects).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({kind: "damage-bonus", damageBonus: 4, status: "available"}),
+        expect.objectContaining({kind: "major-effect", status: "available"}),
+        expect.objectContaining({kind: "pool-cost-refund", status: "applied"})
+      ])
+    );
   });
 
   it("keeps success and natural effects separate and marks unknown outcomes unresolved", () => {

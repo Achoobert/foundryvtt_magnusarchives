@@ -46,13 +46,11 @@ export function resolveDescriptorChoiceCatalogs(
     if (document.type !== "descriptor" || !document.uuid || descriptorsByUuid.has(document.uuid)) continue;
     descriptorsByUuid.set(document.uuid, document);
   }
-  const catalogOptions: DescriptorGrant[] = [...descriptorsByUuid.values()]
-    .sort(compareDocuments)
-    .map((document) => ({
-      id: document.uuid,
-      descriptorUuid: document.uuid,
-      snapshot: snapshot(document)
-    }));
+  const catalogOptions: DescriptorGrant[] = [...descriptorsByUuid.values()].sort(compareDocuments).map((document) => ({
+    id: document.uuid,
+    descriptorUuid: document.uuid,
+    snapshot: snapshot(document)
+  }));
 
   return groups.map((group) => {
     if ((group.sourceMode ?? "fixed") !== "catalog") return group;

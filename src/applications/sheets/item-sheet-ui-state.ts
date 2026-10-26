@@ -43,8 +43,9 @@ export function restoreItemSheetUiState(root: ParentNode, state: ItemSheetUiStat
   if (scroller) scroller.scrollTop = state.scrollTop;
 
   if (!state.focusedInput) return;
-  const input = [...root.querySelectorAll<HTMLInputElement>("[data-item-focus-key]")]
-    .find((candidate) => candidate.dataset.itemFocusKey === state.focusedInput?.key);
+  const input = [...root.querySelectorAll<HTMLInputElement>("[data-item-focus-key]")].find(
+    (candidate) => candidate.dataset.itemFocusKey === state.focusedInput?.key
+  );
   if (!input) return;
   input.focus({preventScroll: true});
 

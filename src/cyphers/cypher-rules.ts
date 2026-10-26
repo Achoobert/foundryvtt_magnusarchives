@@ -1,9 +1,4 @@
-import {
-  CYPHER_MANIFESTATIONS,
-  CYPHER_POWERS,
-  type CypherManifestation,
-  type CypherPower
-} from "../constants/system";
+import {CYPHER_MANIFESTATIONS, CYPHER_POWERS, type CypherManifestation, type CypherPower} from "../constants/system";
 
 export interface CypherRuleData {
   readonly manifestation?: unknown;
@@ -13,13 +8,11 @@ export interface CypherRuleData {
 }
 
 export function normalizeCypherManifestation(value: unknown): CypherManifestation {
-  return CYPHER_MANIFESTATIONS.includes(value as CypherManifestation)
-    ? value as CypherManifestation
-    : "subtle";
+  return CYPHER_MANIFESTATIONS.includes(value as CypherManifestation) ? (value as CypherManifestation) : "subtle";
 }
 
 export function normalizeCypherPower(value: unknown): CypherPower {
-  return CYPHER_POWERS.includes(value as CypherPower) ? value as CypherPower : "low";
+  return CYPHER_POWERS.includes(value as CypherPower) ? (value as CypherPower) : "low";
 }
 
 export function cypherLevel(data: CypherRuleData): number {

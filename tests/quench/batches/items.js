@@ -1,13 +1,13 @@
-import {createdDocsTracker, requireSystemActive} from '../helpers.js';
+import {createdDocsTracker, requireSystemActive} from "../helpers.js";
 
 export default function register(quench) {
   quench.registerBatch(
-    'magnusarchives.items',
+    "magnusarchives.items",
     (context) => {
       const {describe, it, assert} = context;
       const docs = createdDocsTracker(context);
 
-      describe('weapon damage', () => {
+      describe("weapon damage", () => {
         // The Magnus Archives Roleplaying Game, p100.
         const expected = {light: 2, medium: 4, heavy: 6};
 
@@ -16,31 +16,31 @@ export default function register(quench) {
             requireSystemActive();
             const item = await docs.createItem({
               name: `Quench ${category} weapon`,
-              type: 'weapon',
+              type: "weapon",
               system: {category}
             });
             assert.equal(item.system.baseDamage, damage);
           });
         }
 
-        it('adds bonus damage on top of the category damage', async () => {
+        it("adds bonus damage on top of the category damage", async () => {
           const item = await docs.createItem({
-            name: 'Quench bonus weapon',
-            type: 'weapon',
-            system: {category: 'medium', bonusDamage: 2}
+            name: "Quench bonus weapon",
+            type: "weapon",
+            system: {category: "medium", bonusDamage: 2}
           });
           assert.equal(item.system.baseDamage, 6);
         });
       });
 
-      describe('equipment', () => {
-        it('creates with a quantity and a price', async () => {
-          const item = await docs.createItem({name: 'Quench Torch', type: 'equipment'});
+      describe("equipment", () => {
+        it("creates with a quantity and a price", async () => {
+          const item = await docs.createItem({name: "Quench Torch", type: "equipment"});
           assert.isNumber(item.system.quantity);
-          assert.property(item.system, 'price');
+          assert.property(item.system, "price");
         });
       });
     },
-    {displayName: 'Items'}
+    {displayName: "Items"}
   );
 }

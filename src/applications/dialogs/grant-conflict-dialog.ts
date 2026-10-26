@@ -1,15 +1,19 @@
-import type {
-  GrantConflict,
-  GrantConflictResolution,
-  GrantReplacementOption
-} from "../../packages/grant-conflicts";
+import type {GrantConflict, GrantConflictResolution, GrantReplacementOption} from "../../packages/grant-conflicts";
 
 type DialogData = Record<string, unknown>;
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function rankLabel(rank: string): string {
@@ -45,9 +49,11 @@ async function replacementFromUuid(
       name: document.name,
       itemUuid: document.uuid,
       snapshot: documentSnapshot(document),
-      reason: game.i18n.localize(selectionKind === "compendium"
-        ? "MAGNUSARCHIVES.GrantConflict.CompendiumItem"
-        : "MAGNUSARCHIVES.GrantConflict.WorldItem"),
+      reason: game.i18n.localize(
+        selectionKind === "compendium"
+          ? "MAGNUSARCHIVES.GrantConflict.CompendiumItem"
+          : "MAGNUSARCHIVES.GrantConflict.WorldItem"
+      ),
       reasonSourceUuid: document.uuid
     }
   };
@@ -60,27 +66,35 @@ export async function resolveGrantConflictWithDialog(conflict: GrantConflict): P
     .filter((item) => item.uuid !== conflict.existing.contentUuid && item.uuid !== conflict.proposed.contentUuid)
     .sort((left, right) => left.name.localeCompare(right.name));
   const suggestionRows = conflict.suggestions.length
-    ? conflict.suggestions.map((suggestion) => `
+    ? conflict.suggestions
+        .map(
+          (suggestion) => `
       <label class="grant-conflict-option">
         <input type="radio" name="resolution" value="suggestion:${escapeHtml(suggestion.id)}">
         <span><strong>${escapeHtml(suggestion.name)}</strong><small>${escapeHtml(suggestion.reason)}</small></span>
-      </label>`).join("")
+      </label>`
+        )
+        .join("")
     : `<p class="empty-list">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoSuggestions")}</p>`;
-  const typeLabel = game.i18n.localize(conflict.type === "skill"
-    ? "MAGNUSARCHIVES.GrantConflict.Skill"
-    : "MAGNUSARCHIVES.GrantConflict.Ability");
+  const typeLabel = game.i18n.localize(
+    conflict.type === "skill" ? "MAGNUSARCHIVES.GrantConflict.Skill" : "MAGNUSARCHIVES.GrantConflict.Ability"
+  );
   const existingRank = conflict.existing.rank ? ` — ${escapeHtml(rankLabel(conflict.existing.rank))}` : "";
   const proposedRank = conflict.proposed.rank ? ` — ${escapeHtml(rankLabel(conflict.proposed.rank))}` : "";
-  const externalChoices = game.user.isGM ? `
+  const externalChoices = game.user.isGM
+    ? `
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="world"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.WorldItem")}</span></label>
       <select name="worldUuid">${worldItems.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select>
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="uuid"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CompendiumUuid")}</span></label>
       <input name="documentUuid" type="text" placeholder="Compendium.world.pack.Item.id">`
     : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.GmExternalOnly")}</p>`;
-  const replacementFields = conflict.context === "package" ? `<fieldset><legend>${game.i18n.format("MAGNUSARCHIVES.GrantConflict.ChooseAnother", {type: typeLabel})}</legend>
+  const replacementFields =
+    conflict.context === "package"
+      ? `<fieldset><legend>${game.i18n.format("MAGNUSARCHIVES.GrantConflict.ChooseAnother", {type: typeLabel})}</legend>
       ${externalChoices}
       ${conflict.allowCustom ? `<label class="grant-conflict-option"><input type="radio" name="resolution" value="custom"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill")}</span></label><input name="customName" type="text" placeholder="${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkillName")}">` : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoCustomAbility")}</p>`}
-    </fieldset>` : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.FocusRestriction")}</p>`;
+    </fieldset>`
+      : `<p class="hint">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.FocusRestriction")}</p>`;
   const content = `<div class="magnusarchives magnusarchives-dialog grant-conflict-dialog">
     <div class="grant-conflict-comparison">
       <p><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.AlreadyHave")}</span><strong>${escapeHtml(conflict.existing.name)}${existingRank}</strong></p>
@@ -93,11 +107,11 @@ export async function resolveGrantConflictWithDialog(conflict: GrantConflict): P
   </div>`;
 
   while (true) {
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.Title")},
       content,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm")}
-    }) as DialogData | null;
+    })) as DialogData | null;
     if (!data) return {action: "cancel"};
     const resolution = String(data.resolution ?? "");
     if (resolution === "suppress" && conflict.allowSuppress) return {action: "suppress"};
@@ -112,25 +126,30 @@ export async function resolveGrantConflictWithDialog(conflict: GrantConflict): P
     }
     if (resolution === "uuid") {
       const uuid = String(data.documentUuid ?? "").trim();
-      const selected = await replacementFromUuid(conflict, uuid, uuid.startsWith("Compendium.") ? "compendium" : "world");
+      const selected = await replacementFromUuid(
+        conflict,
+        uuid,
+        uuid.startsWith("Compendium.") ? "compendium" : "world"
+      );
       if (selected) return selected;
     }
     if (resolution === "custom" && conflict.type === "skill" && conflict.allowCustom) {
       const name = String(data.customName ?? "").trim();
-      if (name) return {
-        action: "replace",
-        selectionKind: "custom",
-        replacement: {
-          id: `custom:${name.toLocaleLowerCase()}`,
-          type: "skill",
-          name,
-          itemUuid: "",
-          snapshot: {name, system: {}},
-          reason: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill"),
-          reasonSourceUuid: "",
-          custom: true
-        }
-      };
+      if (name)
+        return {
+          action: "replace",
+          selectionKind: "custom",
+          replacement: {
+            id: `custom:${name.toLocaleLowerCase()}`,
+            type: "skill",
+            name,
+            itemUuid: "",
+            snapshot: {name, system: {}},
+            reason: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill"),
+            reasonSourceUuid: "",
+            custom: true
+          }
+        };
     }
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.GrantConflict.SelectResolution"));
   }

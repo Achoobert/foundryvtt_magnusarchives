@@ -19,7 +19,8 @@ describe("NPC Sheet presentation", () => {
       "system.health.value",
       "system.health.baseMax",
       "system.notes"
-    ]) expect(template).toContain(`name="${field}"`);
+    ])
+      expect(template).toContain(`name="${field}"`);
     expect(template.match(/elementType="prose-mirror"/g)).toHaveLength(1);
     expect(template).not.toContain('data-tab="');
   });
@@ -36,7 +37,8 @@ describe("NPC Sheet presentation", () => {
       "system.damage.stressAmount",
       "system.damage.defense.allowDodge",
       "system.damage.defense.allowBlock"
-    ]) expect(template).toContain(present);
+    ])
+      expect(template).toContain(present);
     expect(template).toContain("MAGNUSARCHIVES.Npc.Modifications");
   });
 
@@ -48,7 +50,8 @@ describe("NPC Sheet presentation", () => {
       "system.movement.category",
       "system.movement.distance",
       'name="system.description"'
-    ]) expect(template).not.toContain(absent);
+    ])
+      expect(template).not.toContain(absent);
   });
 
   it("derives a read-only TN from Level without persisting redundant data", () => {
@@ -82,9 +85,13 @@ describe("NPC Sheet presentation", () => {
   });
 
   it("uses persisted raw Notes and enriched read-mode Notes through native Application V2 ProseMirror", () => {
-    expect(template).toContain('formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes');
-    expect(template).toContain('elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid');
-    expect(sheet).toContain("const sourceNotes = typeof sourceSystem?.notes === \"string\"");
+    expect(template).toContain(
+      'formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes'
+    );
+    expect(template).toContain(
+      'elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid'
+    );
+    expect(sheet).toContain('const sourceNotes = typeof sourceSystem?.notes === "string"');
     expect(sheet).toContain("TextEditor.implementation.enrichHTML(sourceNotes");
     expect(sheet).toContain("relativeTo: this.actor");
     expect(sheet).not.toContain("TextEditor.implementation.create");
@@ -93,7 +100,17 @@ describe("NPC Sheet presentation", () => {
   it("retains every legacy NPC field and compatibility action without exposing its editor", () => {
     expect(actorBase).toContain("description: new fields.HTMLField");
     expect(actorBase).toContain("notes: new fields.HTMLField");
-    for (const field of ["armor", "armorBase", "damage", "effect", "stressAmount", "allowBlock", "allowDodge", "movement", "modifications"]) {
+    for (const field of [
+      "armor",
+      "armorBase",
+      "damage",
+      "effect",
+      "stressAmount",
+      "allowBlock",
+      "allowDodge",
+      "movement",
+      "modifications"
+    ]) {
       expect(model).toContain(field);
     }
     for (const action of ["requestDefense", "createModification", "editModification", "deleteModification"]) {
@@ -115,7 +132,7 @@ describe("NPC Sheet presentation", () => {
 
   it("keeps editable controls permission-aware and gives Notes the dominant responsive row", () => {
     expect(template).toContain('{{#if editable}}data-action="editImage"');
-    expect(template).toContain('{{#unless editable}}readonly{{/unless}}');
+    expect(template).toContain("{{#unless editable}}readonly{{/unless}}");
     expect(template.match(/\{\{#unless editable\}\}disabled\{\{\/unless\}\}/g)).toHaveLength(8);
     expect(styles).toContain("display: flex");
     expect(styles).toContain("flex: 1 1 auto");

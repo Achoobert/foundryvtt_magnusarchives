@@ -1,16 +1,7 @@
 import type {WoundSeverity} from "../constants/system";
-import type {
-  WoundCapacities,
-  WoundCollection,
-  WoundRecordData
-} from "../rules/core/core-types";
+import type {WoundCapacities, WoundCollection, WoundRecordData} from "../rules/core/core-types";
 import {SHIELD_WOUND_CAPACITIES} from "../rules/core/shield-rules";
-import {
-  WoundService,
-  type WoundApplicationResult,
-  type WoundEdit,
-  type WoundInput
-} from "./wound-service";
+import {WoundService, type WoundApplicationResult, type WoundEdit, type WoundInput} from "./wound-service";
 
 export interface ShieldItemLike {
   readonly id: string;
@@ -87,10 +78,9 @@ export class ShieldService {
       const functional = Number(this.isBroken(left)) - Number(this.isBroken(right));
       return functional || left.name.localeCompare(right.name) || left.id.localeCompare(right.id);
     });
-    await Promise.all(duplicates.map((shield) => shield.update(
-      {"system.equipped": false},
-      {magnusarchivesShieldEquipmentSync: true}
-    )));
+    await Promise.all(
+      duplicates.map((shield) => shield.update({"system.equipped": false}, {magnusarchivesShieldEquipmentSync: true}))
+    );
     return active ?? null;
   }
 
@@ -107,12 +97,11 @@ export class ShieldService {
       return null;
     }
     await shield.update({"system.equipped": true}, {magnusarchivesShieldEquipmentSync: true});
-    await Promise.all(this.shields(actor)
-      .filter((candidate) => candidate.id !== shield.id && candidate.system.equipped)
-      .map((candidate) => candidate.update(
-        {"system.equipped": false},
-        {magnusarchivesShieldEquipmentSync: true}
-      )));
+    await Promise.all(
+      this.shields(actor)
+        .filter((candidate) => candidate.id !== shield.id && candidate.system.equipped)
+        .map((candidate) => candidate.update({"system.equipped": false}, {magnusarchivesShieldEquipmentSync: true}))
+    );
     return shield;
   }
 
@@ -121,16 +110,10 @@ export class ShieldService {
   }
 
   capacities(shield: ShieldItemLike): WoundCapacities {
-    return shield.system.derived?.capacities
-      ?? shield.system.woundCapacities
-      ?? SHIELD_WOUND_CAPACITIES;
+    return shield.system.derived?.capacities ?? shield.system.woundCapacities ?? SHIELD_WOUND_CAPACITIES;
   }
 
-  async setCapacity(
-    shield: ShieldItemLike,
-    severity: WoundSeverity,
-    capacity: number
-  ): Promise<void> {
+  async setCapacity(shield: ShieldItemLike, severity: WoundSeverity, capacity: number): Promise<void> {
     if (!Number.isInteger(capacity) || capacity < 0) {
       throw new RangeError("Shield Wound capacity must be a non-negative whole number.");
     }
@@ -194,13 +177,9 @@ export class ShieldService {
     severity: WoundSeverity,
     count: number
   ): Promise<import("./wound-service").WoundCountResult> {
-    return this.#wounds.setTrackCount(
-      shield,
-      severity,
-      count,
-      this.capacities(shield)[severity],
-      {sourceUuid: "magnusarchives.manual.shield"}
-    );
+    return this.#wounds.setTrackCount(shield, severity, count, this.capacities(shield)[severity], {
+      sourceUuid: "magnusarchives.manual.shield"
+    });
   }
 
   async delete(

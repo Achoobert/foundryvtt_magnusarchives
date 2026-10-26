@@ -1,9 +1,6 @@
 import type {PoolKey} from "../rules/core/core-types";
 
-export type RollDifficulty =
-  | {mode: "known"; value: number}
-  | {mode: "hidden"; value: number}
-  | {mode: "unknown"};
+export type RollDifficulty = {mode: "known"; value: number} | {mode: "hidden"; value: number} | {mode: "unknown"};
 
 export type RollStepDirection = "ease" | "hinder";
 
@@ -126,19 +123,9 @@ export interface PreparedRoll {
   readonly targetNumber: number | null;
 }
 
-export type NaturalRollMarker =
-  | "natural-1"
-  | "natural-17"
-  | "natural-18"
-  | "natural-19"
-  | "natural-20";
+export type NaturalRollMarker = "natural-1" | "natural-17" | "natural-18" | "natural-19" | "natural-20";
 
-export type NaturalEffectKind =
-  | "gm-intrusion"
-  | "damage-bonus"
-  | "minor-effect"
-  | "major-effect"
-  | "pool-cost-refund";
+export type NaturalEffectKind = "gm-intrusion" | "damage-bonus" | "minor-effect" | "major-effect" | "pool-cost-refund";
 
 export type NaturalEffectStatus = "applied" | "available" | "unresolved" | "inapplicable";
 

@@ -4,7 +4,9 @@ import {ChatCardEntranceTracker} from "../../src/chat/chat-card-entrance";
 
 class FakeClassList {
   readonly values = new Set<string>();
-  add(value: string): void { this.values.add(value); }
+  add(value: string): void {
+    this.values.add(value);
+  }
 }
 
 class FakeCard {

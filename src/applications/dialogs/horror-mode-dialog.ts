@@ -4,10 +4,7 @@ import {
   HORROR_INTRUSION_RANGE_MAX,
   HORROR_INTRUSION_RANGE_MIN
 } from "../../horror/horror-mode";
-import {
-  currentHorrorIntrusionRange,
-  setHorrorIntrusionRange
-} from "../../config/settings";
+import {currentHorrorIntrusionRange, setHorrorIntrusionRange} from "../../config/settings";
 
 interface HorrorDialogLike {
   readonly element: HTMLElement;

@@ -1,8 +1,4 @@
-import type {
-  CombatTargetDocumentIdentity,
-  CombatTargetIdentity,
-  NpcTargetLike
-} from "./combat-types";
+import type {CombatTargetDocumentIdentity, CombatTargetIdentity, NpcTargetLike} from "./combat-types";
 
 interface NativeTokenLike {
   readonly id?: string;
@@ -19,7 +15,7 @@ export function targetIdentityFromDocument(
   const tokenUuid = actor.tokenUuid ?? token?.uuid;
   return {
     actorId: actor.id,
-    ...(actor.actorUuid ?? actor.uuid ? {actorUuid: actor.actorUuid ?? actor.uuid} : {}),
+    ...((actor.actorUuid ?? actor.uuid) ? {actorUuid: actor.actorUuid ?? actor.uuid} : {}),
     ...(tokenId ? {tokenId} : {}),
     ...(tokenUuid ? {tokenUuid} : {})
   };
@@ -77,7 +73,7 @@ export function immediateTargetActor(identity: CombatTargetIdentity): Actor | nu
 export async function resolveTargetActor(identity: CombatTargetIdentity): Promise<Actor | null> {
   if (identity.tokenUuid) {
     try {
-      const token = await fromUuid(identity.tokenUuid) as {actor?: Actor | null} | null;
+      const token = (await fromUuid(identity.tokenUuid)) as {actor?: Actor | null} | null;
       if (token?.actor instanceof Actor) return token.actor;
     } catch {
       // A deleted or unavailable authoritative Token must resolve to no target.

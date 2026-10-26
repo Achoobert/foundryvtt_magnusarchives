@@ -24,14 +24,16 @@ export class ItemDataModelBase extends foundry.abstract.TypeDataModel {
         duration: durationField(),
         rollDefaults: new fields.ObjectField({required: true, nullable: false, initial: {}})
       }),
-      ruleElements: new fields.ArrayField(
-        new fields.ObjectField({required: true, nullable: false}),
-        {required: true, nullable: false, initial: []}
-      ),
-      tags: new fields.ArrayField(
-        new fields.StringField({required: true, nullable: false, blank: false}),
-        {required: true, nullable: false, initial: []}
-      ),
+      ruleElements: new fields.ArrayField(new fields.ObjectField({required: true, nullable: false}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
+      tags: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       grantedBy: provenanceField()
     };
   }

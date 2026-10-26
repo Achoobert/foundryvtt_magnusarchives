@@ -34,9 +34,7 @@ describe("Genre Ability catalog persistence", () => {
     expect(reloaded.map((candidate) => candidate.abilityUuid)).toEqual(
       original.map((candidate) => candidate.abilityUuid)
     );
-    expect(reloaded.map((candidate) => candidate.snapshot)).toEqual(
-      original.map((candidate) => candidate.snapshot)
-    );
+    expect(reloaded.map((candidate) => candidate.snapshot)).toEqual(original.map((candidate) => candidate.snapshot));
   });
 
   it("keeps tiers through Description/options edits, snapshot refresh, and sibling removal", () => {
@@ -49,11 +47,10 @@ describe("Genre Ability catalog persistence", () => {
 
     genre.description = "New";
     genre.options = {totalEffortCapMode: "unlimited"};
-    genre.abilityCatalog = updateGenreAbilitySnapshot(
-      genre.abilityCatalog,
-      "a",
-      {name: "Ability A refreshed", system: {description: "Refreshed"}}
-    );
+    genre.abilityCatalog = updateGenreAbilitySnapshot(genre.abilityCatalog, "a", {
+      name: "Ability A refreshed",
+      system: {description: "Refreshed"}
+    });
     expect(genre.abilityCatalog.map((candidate) => candidate.minimumTier)).toEqual([3, 1]);
     expect(genre.abilityCatalog[0]).toMatchObject({
       id: "a",
@@ -71,8 +68,9 @@ describe("Genre Ability catalog persistence", () => {
     const catalog = [entry("a", 3), entry("b", 6)];
     const before = structuredClone(catalog);
     for (const value of [0, 7, 2.5, "", "not-a-tier"]) {
-      expect(() => updateGenreMinimumTier(catalog, "a", value))
-        .toThrow("Genre Ability Minimum Tier must be an integer from 1 to 6");
+      expect(() => updateGenreMinimumTier(catalog, "a", value)).toThrow(
+        "Genre Ability Minimum Tier must be an integer from 1 to 6"
+      );
       expect(catalog).toEqual(before);
     }
     expect(normalizeGenreMinimumTier("4")).toBe(4);

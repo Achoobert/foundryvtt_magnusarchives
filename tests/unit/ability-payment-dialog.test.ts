@@ -47,7 +47,10 @@ describe("Ability payment dialog", () => {
 
   it("offers only legal Pools and passes exactly one selected Pool for the whole cost", async () => {
     const previewPayment = vi.fn((_actor, _ability, pool: string) => ({
-      pool, currentBefore: 10, edge: 1, costPaid: 6
+      pool,
+      currentBefore: 10,
+      edge: 1,
+      costPaid: 6
     }));
     const payCost = vi.fn(async () => ({pool: "intellect"}));
     const publishPayment = vi.fn(async () => undefined);
@@ -75,10 +78,15 @@ describe("Ability payment dialog", () => {
     vi.stubGlobal("foundry", {applications: {api: {DialogV2: {input: vi.fn(async () => null)}}}});
     vi.stubGlobal("game", {
       i18n: {localize: (key: string) => key, format: (key: string) => key},
-      magnusarchives: {services: {
-        abilities: {previewPayment: vi.fn((_actor, _ability, pool) => ({pool, currentBefore: 10, edge: 0, costPaid: 7})), payCost},
-        abilityChat: {publishPayment}
-      }}
+      magnusarchives: {
+        services: {
+          abilities: {
+            previewPayment: vi.fn((_actor, _ability, pool) => ({pool, currentBefore: 10, edge: 0, costPaid: 7})),
+            payCost
+          },
+          abilityChat: {publishPayment}
+        }
+      }
     });
     await promptAbilityCostPayment({id: "actor", name: "Arthur"} as CombatCharacterLike, ability(["might", "speed"]));
     expect(payCost).not.toHaveBeenCalled();

@@ -4,10 +4,7 @@ import {describe, expect, it} from "vitest";
 const template = readFileSync("templates/actor/character-sheet.hbs", "utf8");
 const sheet = readFileSync("src/applications/sheets/character-sheet.ts", "utf8");
 const styles = readFileSync("styles/components/_character-header.scss", "utf8");
-const settings = template.slice(
-  template.indexOf('data-tab="settings"'),
-  template.indexOf('data-tab="skills"')
-);
+const settings = template.slice(template.indexOf('data-tab="settings"'), template.indexOf('data-tab="skills"'));
 
 describe("compact Character Settings UI", () => {
   it("orders Character tabs with Settings at the far right", () => {
@@ -92,14 +89,10 @@ describe("compact Character Settings UI", () => {
       "speciesItems",
       "additionalDescriptorItems",
       "speciesDescriptorItems"
-    ]) expect(settings).toContain(collection);
-    for (const action of [
-      "inspectPackage",
-      "removePackage",
-      "addType",
-      "addDescriptor",
-      "addSpecies"
-    ]) expect(settings).toContain(`data-action="${action}"`);
+    ])
+      expect(settings).toContain(collection);
+    for (const action of ["inspectPackage", "removePackage", "addType", "addDescriptor", "addSpecies"])
+      expect(settings).toContain(`data-action="${action}"`);
   });
 
   it("moves granted Items and provenance behind a collapsed native disclosure", () => {
@@ -111,7 +104,9 @@ describe("compact Character Settings UI", () => {
   });
 
   it("keeps editable base Pool values inside a collapsed transient disclosure", () => {
-    expect(settings).toContain('class="character-settings-section character-settings-disclosure character-base-values"');
+    expect(settings).toContain(
+      'class="character-settings-section character-settings-disclosure character-base-values"'
+    );
     expect(settings).toContain('data-persistent-disclosure="base-values"');
     expect(settings).not.toMatch(/data-persistent-disclosure="base-values"[^>]*\sopen(?:\s|>)/);
     expect(settings).toContain('class="character-base-values-grid"');
@@ -128,7 +123,9 @@ describe("compact Character Settings UI", () => {
   });
 
   it("keeps Effective Value Overrides collapsed without changing its controls", () => {
-    expect(settings).toContain('class="character-settings-section character-settings-disclosure character-override-settings"');
+    expect(settings).toContain(
+      'class="character-settings-section character-settings-disclosure character-override-settings"'
+    );
     expect(settings).toContain('data-persistent-disclosure="effective-overrides"');
     expect(settings).not.toMatch(/data-persistent-disclosure="effective-overrides"[^>]*\sopen(?:\s|>)/);
     expect(settings).toContain('data-action="editCharacterOverride"');

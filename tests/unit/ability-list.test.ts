@@ -37,27 +37,36 @@ describe("Ability accordion presentation", () => {
     ["choose", 1, true, "choose"],
     ["none", 0, false, "none"]
   ] as const)("renders %s cost semantically", (pool, amount, payable, expectedPool) => {
-    const allowedPools = pool === "choose"
-      ? ["might", "speed", "intellect"] as const
-      : pool === "none" ? [] as const : [expectedPool];
-    expect(abilityListPresentation(ability({pool, cost: {amount, ignoresEdge: false, allowedPools}})).cost)
-      .toEqual({amount, scalable: false, pools: allowedPools, payable});
+    const allowedPools =
+      pool === "choose" ? (["might", "speed", "intellect"] as const) : pool === "none" ? ([] as const) : [expectedPool];
+    expect(abilityListPresentation(ability({pool, cost: {amount, ignoresEdge: false, allowedPools}})).cost).toEqual({
+      amount,
+      scalable: false,
+      pools: allowedPools,
+      payable
+    });
   });
 
   it("preserves scalable cost metadata for compact presentation", () => {
-    expect(abilityListPresentation(ability({
-      cost: {amount: 2, scalable: true, ignoresEdge: false, allowedPools: ["intellect"]}
-    })).cost).toEqual({amount: 2, scalable: true, pools: ["intellect"], payable: true});
+    expect(
+      abilityListPresentation(
+        ability({
+          cost: {amount: 2, scalable: true, ignoresEdge: false, allowedPools: ["intellect"]}
+        })
+      ).cost
+    ).toEqual({amount: 2, scalable: true, pools: ["intellect"], payable: true});
   });
 
   it("does not classify passive or roll behavior in the normal presentation", () => {
-    const view = abilityListPresentation(ability({
-      activation: "passive",
-      cost: {amount: 5, ignoresEdge: true, allowedPools: ["intellect"]},
-      roll: "attack",
-      range: "long",
-      targetMode: "single"
-    }));
+    const view = abilityListPresentation(
+      ability({
+        activation: "passive",
+        cost: {amount: 5, ignoresEdge: true, allowedPools: ["intellect"]},
+        roll: "attack",
+        range: "long",
+        targetMode: "single"
+      })
+    );
     expect(view.cost).toEqual({amount: 5, scalable: false, pools: ["intellect"], payable: true});
     expect(view).not.toHaveProperty("passive");
     expect(view).not.toHaveProperty("summary");
@@ -65,10 +74,12 @@ describe("Ability accordion presentation", () => {
   });
 
   it("keeps archive as presentation state without changing ownership or deletion provenance", () => {
-    const view = abilityListPresentation(ability({
-      archived: true,
-      grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "active"}
-    }));
+    const view = abilityListPresentation(
+      ability({
+        archived: true,
+        grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "active"}
+      })
+    );
     expect(view.archived).toBe(true);
     expect(view.canDelete).toBe(false);
   });
@@ -91,12 +102,20 @@ describe("Ability accordion presentation", () => {
 
   it("protects active grants while allowing custom and retained Abilities to be deleted", () => {
     expect(abilityListPresentation(ability()).canDelete).toBe(true);
-    expect(abilityListPresentation(ability({
-      grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "active"}
-    })).canDelete).toBe(false);
-    expect(abilityListPresentation(ability({
-      grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "retained"}
-    })).canDelete).toBe(true);
+    expect(
+      abilityListPresentation(
+        ability({
+          grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "active"}
+        })
+      ).canDelete
+    ).toBe(false);
+    expect(
+      abilityListPresentation(
+        ability({
+          grantedBy: {kind: "focus", sourceUuid: "Item.focus", instanceId: "focus", grantId: "node", status: "retained"}
+        })
+      ).canDelete
+    ).toBe(true);
   });
 });
 

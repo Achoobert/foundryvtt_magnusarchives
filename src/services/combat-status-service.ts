@@ -5,10 +5,7 @@ export interface NpcStatusTarget extends CombatTargetDocumentIdentity {
   readonly id: string;
   readonly uuid?: string;
   readonly token?: {readonly id: string; readonly uuid: string};
-  toggleStatusEffect?(
-    statusId: string,
-    options: {active: boolean; overlay?: boolean}
-  ): Promise<unknown>;
+  toggleStatusEffect?(statusId: string, options: {active: boolean; overlay?: boolean}): Promise<unknown>;
 }
 
 export interface CombatStatusService {
@@ -26,7 +23,7 @@ export class FoundryCombatStatusService implements CombatStatusService {
 
     if (identity.tokenUuid) {
       try {
-        const token = await fromUuid(identity.tokenUuid) as {readonly actor?: Actor | null} | null;
+        const token = (await fromUuid(identity.tokenUuid)) as {readonly actor?: Actor | null} | null;
         actor = token?.actor ?? null;
       } catch {
         actor = null;
@@ -52,11 +49,7 @@ function healthValueChanged(changes: Record<string, unknown>): boolean {
 }
 
 export function initializeNpcDeadStatusSynchronization(service: CombatStatusService): void {
-  Hooks.on("updateActor", (
-    actor: Actor,
-    changes: Record<string, unknown>,
-    options: Record<string, unknown> = {}
-  ) => {
+  Hooks.on("updateActor", (actor: Actor, changes: Record<string, unknown>, options: Record<string, unknown> = {}) => {
     if (options.magnusarchivesSkipDeadStatusSync === true) return;
     if (actor.type !== "npc" || !healthValueChanged(changes)) return;
     const health = Number((actor.system.health as {value?: unknown} | undefined)?.value);

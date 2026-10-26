@@ -38,12 +38,7 @@ export interface FocusProgress {
   readonly attachedAt?: number;
 }
 
-export type FocusAcquisitionMode =
-  | "choice"
-  | "manualOverride"
-  | "gmOverride"
-  | "gmManual"
-  | "legacy";
+export type FocusAcquisitionMode = "choice" | "manualOverride" | "gmOverride" | "gmManual" | "legacy";
 
 /**
  * Audit data required to reverse one acquisition. This is not a campaign

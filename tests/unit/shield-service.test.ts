@@ -14,12 +14,14 @@ interface FakeShield extends ShieldItemLike {
   updates: Record<string, unknown>[];
 }
 
-function shield(options: {
-  equipped?: boolean;
-  wounds?: WoundCollection;
-  capacities?: WoundCapacities;
-  id?: string;
-} = {}): FakeShield {
+function shield(
+  options: {
+    equipped?: boolean;
+    wounds?: WoundCollection;
+    capacities?: WoundCapacities;
+    id?: string;
+  } = {}
+): FakeShield {
   const currentWounds = options.wounds ?? wounds();
   const capacities = options.capacities ?? {minor: 3, moderate: 2, major: 1};
   return {
@@ -51,7 +53,8 @@ function shield(options: {
         if (typeof capacity === "number") {
           (this.system.woundCapacities as WoundCapacities)[severity] = capacity;
           (this.system.derived.capacities as WoundCapacities)[severity] = capacity;
-          (this.system.derived as {broken: boolean}).broken = this.system.wounds.major.length >= this.system.derived.capacities.major;
+          (this.system.derived as {broken: boolean}).broken =
+            this.system.wounds.major.length >= this.system.derived.capacities.major;
         }
       }
       return this;
@@ -199,12 +202,13 @@ describe("ShieldService", () => {
     }
   );
 
-  it.each([[3, 2], [2, 1], [1, 0]] as const)(
-    "reduces a Shield Minor track from %i to %i contiguously",
-    async (before, count) => {
-      const item = shield({wounds: wounds({minor: before})});
-      await service.setCount(item, "minor", count);
-      expect(item.system.wounds.minor).toHaveLength(count);
-    }
-  );
+  it.each([
+    [3, 2],
+    [2, 1],
+    [1, 0]
+  ] as const)("reduces a Shield Minor track from %i to %i contiguously", async (before, count) => {
+    const item = shield({wounds: wounds({minor: before})});
+    await service.setCount(item, "minor", count);
+    expect(item.system.wounds.minor).toHaveLength(count);
+  });
 });

@@ -28,9 +28,15 @@ describe("native Application V2 rich-text controls", () => {
     expect(characterTemplate).toContain('name="system.notes" value=source.system.notes enriched=enriched.notes');
     expect(npcTemplate).toContain('name="system.notes" value=source.system.notes enriched=enriched.notes');
     expect(npcTemplate).not.toContain('name="system.description"');
-    expect(itemTemplate).toContain('name="system.description" value=source.system.description enriched=enriched.description');
-    expect(itemTemplate).toContain('name="system.backgroundOptions" value=source.system.backgroundOptions enriched=enriched.backgroundOptions');
-    expect(itemTemplate).toContain('name="system.equipmentNotes" value=source.system.equipmentNotes enriched=enriched.equipmentNotes');
+    expect(itemTemplate).toContain(
+      'name="system.description" value=source.system.description enriched=enriched.description'
+    );
+    expect(itemTemplate).toContain(
+      'name="system.backgroundOptions" value=source.system.backgroundOptions enriched=enriched.backgroundOptions'
+    );
+    expect(itemTemplate).toContain(
+      'name="system.equipmentNotes" value=source.system.equipmentNotes enriched=enriched.equipmentNotes'
+    );
   });
 
   it("passes document context and native disabled state to every editor", () => {
@@ -50,10 +56,7 @@ describe("native Application V2 rich-text controls", () => {
   });
 
   it("uses the DocumentSheetV2 form pipeline for native Save change events", () => {
-    const options = readFileSync(
-      resolve(root, "src/applications/sheets/document-sheet-options.ts"),
-      "utf8"
-    );
+    const options = readFileSync(resolve(root, "src/applications/sheets/document-sheet-options.ts"), "utf8");
     expect(options).toContain("submitOnChange: true");
     for (const source of sheetSources) {
       expect(source).not.toContain("persistEditorHtml");
@@ -95,7 +98,9 @@ describe("native Application V2 rich-text controls", () => {
     expect(styles).toMatch(/button\.toggle\s*\{[\s\S]*right:\s*var\(--magnusarchives-space\)/);
     expect(styles).toMatch(/> li:has\(> button\[data-action="save"\]\)\s*\{[^}]*order:\s*100/);
     expect(styles).toMatch(/> li:has\(> button\[data-action="save"\]\)\s*\{[^}]*margin-left:\s*auto/);
-    expect(styles).toMatch(/button\[data-action="save"\]\s*\{[\s\S]*background:\s*var\(--magnusarchives-color-accent\)/);
+    expect(styles).toMatch(
+      /button\[data-action="save"\]\s*\{[\s\S]*background:\s*var\(--magnusarchives-color-accent\)/
+    );
     expect(styles).toMatch(/button\[data-action="save"\]\s*\{[\s\S]*font-weight:\s*700/);
     expect(styles).not.toContain('li[data-action="save"]');
     expect(styles).not.toContain("magnusarchives-editor-save");
@@ -107,8 +112,12 @@ describe("native Application V2 rich-text controls", () => {
   });
 
   it("keeps semantic rich-text headings compact only in Item prose and embedded Character Item details", () => {
-    expect(styles).toContain(".magnusarchives-sheet.magnusarchives-item .magnusarchives-rich-description :is(.editor-content, .ProseMirror)");
-    expect(styles).toContain(".magnusarchives-sheet.magnusarchives-character :is(.ability-description, .compact-inventory-details)");
+    expect(styles).toMatch(
+      /\.magnusarchives-sheet\.magnusarchives-item\s+\.magnusarchives-rich-description\s+:is\(\.editor-content, \.ProseMirror\)/
+    );
+    expect(styles).toContain(
+      ".magnusarchives-sheet.magnusarchives-character :is(.ability-description, .compact-inventory-details)"
+    );
     expect(styles).toMatch(/h1\s*\{[\s\S]*font-size:\s*0\.9rem/);
     expect(styles).toMatch(/h2\s*\{[\s\S]*font-size:\s*0\.82rem/);
     expect(styles).toMatch(/h3\s*\{[\s\S]*font-size:\s*0\.76rem/);

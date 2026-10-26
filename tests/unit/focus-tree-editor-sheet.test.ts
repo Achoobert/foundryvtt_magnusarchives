@@ -6,10 +6,7 @@ const root = resolve(process.cwd());
 
 describe("Focus Tree Editor Item Sheet integration", () => {
   it("gates every persistent editor entry point behind GM context", () => {
-    const source = readFileSync(
-      resolve(root, "src/applications/sheets/item-sheet.ts"),
-      "utf8"
-    );
+    const source = readFileSync(resolve(root, "src/applications/sheets/item-sheet.ts"), "utf8");
     const template = readFileSync(resolve(root, "templates/item/item-sheet.hbs"), "utf8");
 
     expect(source).toMatch(/game\.user\.isGM/);
@@ -19,10 +16,7 @@ describe("Focus Tree Editor Item Sheet integration", () => {
   });
 
   it("uses ItemSheetV2 native drop resolution and one atomic graph update", () => {
-    const source = readFileSync(
-      resolve(root, "src/applications/sheets/item-sheet.ts"),
-      "utf8"
-    );
+    const source = readFileSync(resolve(root, "src/applications/sheets/item-sheet.ts"), "utf8");
 
     expect(source).toContain("override async _onDropDocument");
     expect(source).not.toMatch(/addEventListener\(["'](?:drop|dragover)/);
@@ -42,24 +36,17 @@ describe("Focus Tree Editor Item Sheet integration", () => {
       "refreshFocusSnapshot",
       "startFocusConnection",
       "deleteFocusNode"
-    ]) expect(template).toMatch(new RegExp(
-      `<button[^>]*type="button"[^>]*data-action="${action}"`
-    ));
+    ])
+      expect(template).toMatch(new RegExp(`<button[^>]*type="button"[^>]*data-action="${action}"`));
     expect(tree).toContain('type="button" class="focus-tree-node-inspect"');
     expect(tree).not.toMatch(/href=|type="submit"/);
-    const source = readFileSync(
-      resolve(root, "src/applications/sheets/item-sheet.ts"),
-      "utf8"
-    );
+    const source = readFileSync(resolve(root, "src/applications/sheets/item-sheet.ts"), "utf8");
     expect(source).toMatch(/#onSelectFocusEditorNode[\s\S]*event\.preventDefault\(\)[\s\S]*event\.stopPropagation\(\)/);
-    expect(source).toMatch(/addEventListener\("keydown"[\s\S]*event\.key !== "Escape"[\s\S]*cancelConnection/);
+    expect(source).toMatch(/addEventListener\(\s*"keydown"[\s\S]*event\.key !== "Escape"[\s\S]*cancelConnection/);
   });
 
   it("captures scroll before editor rerender and restores it after Application V2 render", () => {
-    const source = readFileSync(
-      resolve(root, "src/applications/sheets/item-sheet.ts"),
-      "utf8"
-    );
+    const source = readFileSync(resolve(root, "src/applications/sheets/item-sheet.ts"), "utf8");
     expect(source).toMatch(/#rerender[\s\S]*captureFocusEditorScroll\(this\.element\)[\s\S]*this\.render/);
     expect(source).toMatch(/_onRender[\s\S]*restoreFocusEditorScroll\(this\.element/);
     expect(source).not.toMatch(/scrollTop\s*=\s*0/);
@@ -73,8 +60,12 @@ describe("Focus Tree Editor Item Sheet integration", () => {
     expect(source).toMatch(/#onClearFocusConnections[\s\S]*DialogV2\.confirm[\s\S]*editor\.clearConnections/);
     expect(template).toContain('data-action="clearFocusConnections"');
     expect(template.match(/data-action="clearFocusConnections"/g)).toHaveLength(1);
-    expect(template).toMatch(/data-action="saveFocusTree"[\s\S]*data-action="clearFocusConnections"[\s\S]*data-action="cancelFocusTree"/);
-    expect(template).toMatch(/data-action="clearFocusConnections"[^>]*#unless focusEditor\.connections\.length|#unless focusEditor\.connections\.length[^>]*data-action="clearFocusConnections"/);
+    expect(template).toMatch(
+      /data-action="saveFocusTree"[\s\S]*data-action="clearFocusConnections"[\s\S]*data-action="cancelFocusTree"/
+    );
+    expect(template).toMatch(
+      /data-action="clearFocusConnections"[^>]*#unless focusEditor\.connections\.length|#unless focusEditor\.connections\.length[^>]*data-action="clearFocusConnections"/
+    );
     expect(tree).toContain("data-magnusarchives-tooltip");
     expect(tree).toContain("{{{node.descriptionHtml}}}");
     expect(tree).not.toMatch(/focus-tree-node-inspect[^>]*title=/);

@@ -1,8 +1,4 @@
-import type {
-  CharacterCoreSystemData,
-  CharacterOverrides,
-  PoolKey
-} from "./core-types";
+import type {CharacterCoreSystemData, CharacterOverrides, PoolKey} from "./core-types";
 
 export const CHARACTER_OVERRIDE_KEYS = [
   "tier",
@@ -108,30 +104,31 @@ export function effectiveTier(system: {
   readonly overrides?: {readonly tier?: number | null};
   readonly derived?: {readonly tier?: {readonly value: number}};
 }): number {
-  return system.derived?.tier?.value
-    ?? resolveNumericOverride(system.tier, system.overrides?.tier);
+  return system.derived?.tier?.value ?? resolveNumericOverride(system.tier, system.overrides?.tier);
 }
 
 export function characterOverrideView(
   system: CharacterCoreSystemData,
   key: CharacterOverrideKey
 ): CharacterOverrideView {
-  if (key === "tier") return {
-    key,
-    path: characterOverridePath(key),
-    calculated: system.derived.tier.calculated,
-    override: system.overrides?.tier ?? null,
-    effective: system.derived.tier.value,
-    minimum: 1
-  };
-  if (key === "effort") return {
-    key,
-    path: characterOverridePath(key),
-    calculated: system.derived.effort.calculatedMax,
-    override: system.overrides?.effort ?? null,
-    effective: system.derived.effort.max,
-    minimum: 0
-  };
+  if (key === "tier")
+    return {
+      key,
+      path: characterOverridePath(key),
+      calculated: system.derived.tier.calculated,
+      override: system.overrides?.tier ?? null,
+      effective: system.derived.tier.value,
+      minimum: 1
+    };
+  if (key === "effort")
+    return {
+      key,
+      path: characterOverridePath(key),
+      calculated: system.derived.effort.calculatedMax,
+      override: system.overrides?.effort ?? null,
+      effective: system.derived.effort.max,
+      minimum: 0
+    };
   const pool = poolKey(key)!;
   const field = key.endsWith("Max") ? "max" : "edge";
   const derived = system.derived.pools[pool];

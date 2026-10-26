@@ -21,9 +21,22 @@ function typeWithFamilies(system: Record<string, unknown>): CharacterPackageItem
       edgeGrant: {mode: "none", pool: "none", amount: 0},
       weaponUse: {light: false, medium: false, heavy: false},
       armorUse: {light: false, medium: false, heavy: false},
-      abilityGrants: [], abilityChoiceGroups: [], skillGrants: [], choiceGroups: [],
-      genre: "none", customGenreId: "", backgroundOptions: "", equipmentNotes: "", equipmentBundleUuid: "",
-      instance: {sourceUuid: "Item.type-1", instanceId: "instance-1", role: "primary", attachedAt: 1, selections: {edgePool: "none", skillChoices: []}},
+      abilityGrants: [],
+      abilityChoiceGroups: [],
+      skillGrants: [],
+      choiceGroups: [],
+      genre: "none",
+      customGenreId: "",
+      backgroundOptions: "",
+      equipmentNotes: "",
+      equipmentBundleUuid: "",
+      instance: {
+        sourceUuid: "Item.type-1",
+        instanceId: "instance-1",
+        role: "primary",
+        attachedAt: 1,
+        selections: {edgePool: "none", skillChoices: []}
+      },
       description: "",
       ...system
     }
@@ -45,10 +58,17 @@ describe("extensible Weapon families", () => {
   });
 
   it("deduplicates normalized family collections while preserving stable order", () => {
-    expect(normalizeWeaponFamilies(["Axes", " axes ", "Energy Blades", "Knives"]))
-      .toEqual(["axes", "energy-blades", "knives"]);
-    expect(normalizeWeaponFamilies("Axes, Energy Blades; Swords\nKnives"))
-      .toEqual(["axes", "energy-blades", "swords", "knives"]);
+    expect(normalizeWeaponFamilies(["Axes", " axes ", "Energy Blades", "Knives"])).toEqual([
+      "axes",
+      "energy-blades",
+      "knives"
+    ]);
+    expect(normalizeWeaponFamilies("Axes, Energy Blades; Swords\nKnives")).toEqual([
+      "axes",
+      "energy-blades",
+      "swords",
+      "knives"
+    ]);
   });
 
   it("keeps axes, knives, and swords as suggestions rather than a closed taxonomy", () => {
@@ -58,15 +78,22 @@ describe("extensible Weapon families", () => {
   });
 
   it.each(["axes", "knives", "swords"])("reads the legacy %s Type flag", (family) => {
-    expect(legacyWeaponFamilyFlags({axes: family === "axes", knives: family === "knives", swords: family === "swords"}))
-      .toEqual([family]);
+    expect(
+      legacyWeaponFamilyFlags({axes: family === "axes", knives: family === "knives", swords: family === "swords"})
+    ).toEqual([family]);
   });
 
   it("combines manual, extensible Type, and legacy Type families", () => {
-    const derived = collectPackageDerivedData([
-      typeWithFamilies({weaponFamilies: ["Energy Blades"]}),
-      typeWithFamilies({weaponFamilyUse: {axes: true, knives: false, swords: true}})
-    ], [], [], [], ["FIREARMS"]);
+    const derived = collectPackageDerivedData(
+      [
+        typeWithFamilies({weaponFamilies: ["Energy Blades"]}),
+        typeWithFamilies({weaponFamilyUse: {axes: true, knives: false, swords: true}})
+      ],
+      [],
+      [],
+      [],
+      ["FIREARMS"]
+    );
     expect(derived.weaponFamilies).toEqual(["firearms", "energy-blades", "axes", "swords"]);
   });
 });

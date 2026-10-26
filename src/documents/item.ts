@@ -3,34 +3,31 @@ import {POOL_KEYS, type PoolKey} from "../rules/core/core-types";
 import {itemDefaultIcon} from "../config/system-assets";
 
 function changesPoolBonus(changes: Record<string, unknown>): boolean {
-  return Object.keys(changes).some((path) => (
-    path === "system.poolBonuses"
-    || path.startsWith("system.poolBonuses.")
-    || path === "system.poolBonusChoiceGroups"
-    || path.startsWith("system.poolBonusChoiceGroups.")
-    || path === "system.instance.selections.poolChoices"
-    || path.startsWith("system.instance.selections.poolChoices.")
-    || path === "system.instance.selections.superheroicsPool"
-    || path === "system.superhero.superheroics.poolBonus"
-    || (path === "system" && typeof changes.system === "object" && changes.system !== null
-      && (
-        "poolBonuses" in changes.system
-        || "poolBonusChoiceGroups" in changes.system
-        || "superhero" in changes.system
-        || (
-          "instance" in changes.system
-          && typeof changes.system.instance === "object"
-          && changes.system.instance !== null
-          && "selections" in changes.system.instance
-          && typeof changes.system.instance.selections === "object"
-          && changes.system.instance.selections !== null
-          && (
-            "poolChoices" in changes.system.instance.selections
-            || "superheroicsPool" in changes.system.instance.selections
-          )
-        )
-      ))
-  ));
+  return Object.keys(changes).some(
+    (path) =>
+      path === "system.poolBonuses" ||
+      path.startsWith("system.poolBonuses.") ||
+      path === "system.poolBonusChoiceGroups" ||
+      path.startsWith("system.poolBonusChoiceGroups.") ||
+      path === "system.instance.selections.poolChoices" ||
+      path.startsWith("system.instance.selections.poolChoices.") ||
+      path === "system.instance.selections.superheroicsPool" ||
+      path === "system.superhero.superheroics.poolBonus" ||
+      (path === "system" &&
+        typeof changes.system === "object" &&
+        changes.system !== null &&
+        ("poolBonuses" in changes.system ||
+          "poolBonusChoiceGroups" in changes.system ||
+          "superhero" in changes.system ||
+          ("instance" in changes.system &&
+            typeof changes.system.instance === "object" &&
+            changes.system.instance !== null &&
+            "selections" in changes.system.instance &&
+            typeof changes.system.instance.selections === "object" &&
+            changes.system.instance.selections !== null &&
+            ("poolChoices" in changes.system.instance.selections ||
+              "superheroicsPool" in changes.system.instance.selections))))
+  );
 }
 
 function equipsItem(changes: Record<string, unknown>): boolean {
@@ -47,32 +44,32 @@ export class MagnusArchivesItem extends Item {
 
   override async update(changes: Record<string, unknown>, options: Record<string, unknown> = {}): Promise<unknown> {
     const character = this.actor?.type === "character" ? this.actor : null;
-    const preserve = character
-      && (this.type === "characterType" || this.type === "descriptor" || this.type === "species")
-      && changesPoolBonus(changes);
-    const oldMax = preserve ? Object.fromEntries(POOL_KEYS.map((pool) => [
-      pool,
-      Number((character.system as any).derived.pools[pool].max)
-    ])) as Record<PoolKey, number> : null;
-    const oldValues = preserve ? Object.fromEntries(POOL_KEYS.map((pool) => [
-      pool,
-      Number((character.system as any).stats[pool].value)
-    ])) as Record<PoolKey, number> : null;
+    const preserve =
+      character &&
+      (this.type === "characterType" || this.type === "descriptor" || this.type === "species") &&
+      changesPoolBonus(changes);
+    const oldMax = preserve
+      ? (Object.fromEntries(
+          POOL_KEYS.map((pool) => [pool, Number((character.system as any).derived.pools[pool].max)])
+        ) as Record<PoolKey, number>)
+      : null;
+    const oldValues = preserve
+      ? (Object.fromEntries(
+          POOL_KEYS.map((pool) => [pool, Number((character.system as any).stats[pool].value)])
+        ) as Record<PoolKey, number>)
+      : null;
     const result = await super.update(changes, options);
     if (
-      character
-      && (this.type === "shield" || this.type === "armor")
-      && equipsItem(changes)
-      && options.magnusarchivesCombatEquipmentSync !== true
-      && options.magnusarchivesShieldEquipmentSync !== true
+      character &&
+      (this.type === "shield" || this.type === "armor") &&
+      equipsItem(changes) &&
+      options.magnusarchivesCombatEquipmentSync !== true &&
+      options.magnusarchivesShieldEquipmentSync !== true
     ) {
       for (const item of character.items) {
         if (item.id === this.id || item.type !== this.type) continue;
         if ((item.system as {equipped?: boolean}).equipped) {
-          await item.update(
-            {"system.equipped": false},
-            {magnusarchivesCombatEquipmentSync: true}
-          );
+          await item.update({"system.equipped": false}, {magnusarchivesCombatEquipmentSync: true});
         }
       }
     }

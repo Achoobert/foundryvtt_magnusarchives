@@ -2,11 +2,7 @@ import {readFileSync} from "node:fs";
 
 import {afterEach, describe, expect, it, vi} from "vitest";
 
-import {
-  horrorRangeBand,
-  horrorRangeFillPercentage,
-  normalizeHorrorIntrusionRange
-} from "../../src/horror/horror-mode";
+import {horrorRangeBand, horrorRangeFillPercentage, normalizeHorrorIntrusionRange} from "../../src/horror/horror-mode";
 import {registerGMIntrusionSceneControl} from "../../src/intrusions/gm-intrusion-scene-control";
 
 const dialog = readFileSync("src/applications/dialogs/horror-mode-dialog.ts", "utf8");
@@ -23,19 +19,25 @@ describe("Horror Mode World control", () => {
     expect(normalizeHorrorIntrusionRange(25)).toBe(20);
     expect(horrorRangeFillPercentage(1)).toBe(0);
     expect(horrorRangeFillPercentage(20)).toBe(100);
-    expect([
-      1, 2, 4, 6, 9, 13, 17
-    ].map(horrorRangeBand)).toEqual([
-      "neutral", "low", "elevated", "severe", "extreme", "catastrophic", "maximum"
+    expect([1, 2, 4, 6, 9, 13, 17].map(horrorRangeBand)).toEqual([
+      "neutral",
+      "low",
+      "elevated",
+      "severe",
+      "extreme",
+      "catastrophic",
+      "maximum"
     ]);
     expect(horrorRangeBand(10)).toBe("extreme");
   });
 
   it("places a GM-only Horror button immediately below GM Intrusion", () => {
     let callback: ((controls: Record<string, unknown>) => void) | undefined;
-    vi.stubGlobal("Hooks", {on: vi.fn((_hook: string, handler: typeof callback) => {
-      callback = handler;
-    })});
+    vi.stubGlobal("Hooks", {
+      on: vi.fn((_hook: string, handler: typeof callback) => {
+        callback = handler;
+      })
+    });
     vi.stubGlobal("game", {user: {isGM: true}});
     registerGMIntrusionSceneControl();
     const tools: Record<string, TestSceneTool> = {select: {order: 0}};
@@ -51,9 +53,11 @@ describe("Horror Mode World control", () => {
 
   it("keeps the Horror control hidden from players", () => {
     let callback: ((controls: Record<string, unknown>) => void) | undefined;
-    vi.stubGlobal("Hooks", {on: vi.fn((_hook: string, handler: typeof callback) => {
-      callback = handler;
-    })});
+    vi.stubGlobal("Hooks", {
+      on: vi.fn((_hook: string, handler: typeof callback) => {
+        callback = handler;
+      })
+    });
     vi.stubGlobal("game", {user: {isGM: false}});
     registerGMIntrusionSceneControl();
     const tools: Record<string, TestSceneTool> = {};
@@ -76,15 +80,15 @@ describe("Horror Mode World control", () => {
     expect(styles).toContain("var(--magnusarchives-pool-gauge-high)");
     expect(styles).toContain("var(--magnusarchives-color-warning)");
     expect(styles).toContain("var(--magnusarchives-danger)");
-    expect(styles).toContain('--magnusarchives-horror-glow: 43%');
-    expect(styles).toContain('--magnusarchives-horror-glow: 72%');
-    expect(styles).toContain('@media (prefers-reduced-motion: reduce)');
+    expect(styles).toContain("--magnusarchives-horror-glow: 43%");
+    expect(styles).toContain("--magnusarchives-horror-glow: 72%");
+    expect(styles).toContain("@media (prefers-reduced-motion: reduce)");
     expect(styles).not.toMatch(/animation|@keyframes/);
   });
 
   it("keeps explicit accessible range and normal-state copy localized", () => {
     expect(localization["MAGNUSARCHIVES.Horror.RangeSummary"]).toContain("1–{range}");
     expect(localization["MAGNUSARCHIVES.Horror.NormalSummary"]).toBe("Normal · Natural 1");
-    expect(dialog).toContain('aria-valuetext');
+    expect(dialog).toContain("aria-valuetext");
   });
 });

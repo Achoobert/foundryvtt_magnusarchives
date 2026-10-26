@@ -1,7 +1,4 @@
-import {
-  currentRollPolicyRequest,
-  hiddenDifficultyEnabled
-} from "../../config/settings";
+import {currentRollPolicyRequest, hiddenDifficultyEnabled} from "../../config/settings";
 import {SKILL_RANKS, type SkillRank} from "../../constants/system";
 import type {PoolKey} from "../../rules/core/core-types";
 import type {GMIntrusionCharacterLike} from "../../services/gm-intrusion-service";
@@ -31,16 +28,10 @@ function selectedRank(data: RollDialogData, fallback: SkillRank): SkillRank {
   return SKILL_RANKS.includes(rank) ? rank : fallback;
 }
 
-function skillRequest(
-  skill: SkillItemLike,
-  data: RollDialogData,
-  enabledRuleModuleIds: readonly string[]
-) {
+function skillRequest(skill: SkillItemLike, data: RollDialogData, enabledRuleModuleIds: readonly string[]) {
   const pool = rollDialogText(data, "pool");
   return game.magnusarchives.services.skills.buildRollRequest(skill, {
-    ...(pool === "might" || pool === "speed" || pool === "intellect"
-      ? {pool: pool as PoolKey}
-      : {}),
+    ...(pool === "might" || pool === "speed" || pool === "intellect" ? {pool: pool as PoolKey} : {}),
     rankOverride: selectedRank(data, skill.system.rank),
     difficulty: rollDialogDifficulty(data),
     assets: rollDialogNumber(data, "assets"),
@@ -51,10 +42,7 @@ function skillRequest(
   });
 }
 
-export async function promptSkillRoll(
-  actor: GMIntrusionCharacterLike,
-  skill: SkillItemLike
-): Promise<void> {
+export async function promptSkillRoll(actor: GMIntrusionCharacterLike, skill: SkillItemLike): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
   const policy = game.magnusarchives.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
@@ -64,9 +52,10 @@ export async function promptSkillRoll(
     <option value="might"${selected(configuredPool, "might")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}</option>
     <option value="speed"${selected(configuredPool, "speed")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}</option>
     <option value="intellect"${selected(configuredPool, "intellect")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}</option>`;
-  const rankChoices = SKILL_RANKS.map((rank) => (
-    `<option value="${rank}"${rank === skill.system.rank ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)} · ${skillRankSteps(rank) === 0 ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified") : skillRankSteps(rank) > 0 ? `+${skillRankSteps(rank)}` : skillRankSteps(rank)}</option>`
-  )).join("");
+  const rankChoices = SKILL_RANKS.map(
+    (rank) =>
+      `<option value="${rank}"${rank === skill.system.rank ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)} · ${skillRankSteps(rank) === 0 ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified") : skillRankSteps(rank) > 0 ? `+${skillRankSteps(rank)}` : skillRankSteps(rank)}</option>`
+  ).join("");
   const settings = `
     ${difficultyFields(policy.difficultyCeiling, hiddenDifficultyEnabled())}
     <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}<select name="pool">${poolChoices}</select></label>
@@ -76,7 +65,7 @@ export async function promptSkillRoll(
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}`;
 
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Skill.Roll")}: ${skill.name}`, resizable: true},
     position: {width: 800},
     content: rollDialogShell({identity: skill.name, settings}),
@@ -89,7 +78,7 @@ export async function promptSkillRoll(
         buildRequest: (formData) => skillRequest(skill, formData, enabled)
       });
     }
-  }) as RollDialogData | null;
+  })) as RollDialogData | null;
   if (!data) return;
 
   try {

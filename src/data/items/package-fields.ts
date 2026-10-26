@@ -34,7 +34,12 @@ export function provenanceField(): unknown {
       replacementName: new fields.StringField({required: true, nullable: false, initial: ""}),
       replacementContentUuid: new fields.StringField({required: true, nullable: false, initial: ""}),
       replacementContentKey: new fields.StringField({required: true, nullable: false, initial: ""}),
-      selectionKind: new fields.StringField({required: true, nullable: false, initial: "none", choices: ["none", "suggested", "world", "compendium", "custom"]})
+      selectionKind: new fields.StringField({
+        required: true,
+        nullable: false,
+        initial: "none",
+        choices: ["none", "suggested", "world", "compendium", "custom"]
+      })
     })
   });
 }
@@ -51,7 +56,11 @@ export function grantAlternativeField(): unknown {
 function selectionField(): unknown {
   return new fields.SchemaField({
     groupId: new fields.StringField({required: true, nullable: false, blank: false}),
-    optionIds: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {required: true, nullable: false, initial: []})
+    optionIds: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+      required: true,
+      nullable: false,
+      initial: []
+    })
   });
 }
 
@@ -72,17 +81,31 @@ export function packageInstanceField(): unknown {
     role: new fields.StringField({required: true, nullable: false, initial: "primary", choices: [...PACKAGE_ROLES]}),
     attachedAt: integerField(),
     selections: new fields.SchemaField({
-      edgePool: new fields.StringField({required: true, nullable: false, initial: "none", choices: ["none", "might", "speed", "intellect"]}),
-      superheroicsPool: new fields.StringField({required: true, nullable: false, initial: "none", choices: ["none", ...POOL_KEYS]}),
-      powerShifts: new fields.ArrayField(
-        new fields.StringField({required: true, nullable: false, initial: ""}),
-        {required: true, nullable: false, initial: []}
-      ),
+      edgePool: new fields.StringField({
+        required: true,
+        nullable: false,
+        initial: "none",
+        choices: ["none", "might", "speed", "intellect"]
+      }),
+      superheroicsPool: new fields.StringField({
+        required: true,
+        nullable: false,
+        initial: "none",
+        choices: ["none", ...POOL_KEYS]
+      }),
+      powerShifts: new fields.ArrayField(new fields.StringField({required: true, nullable: false, initial: ""}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       poolChoices: new fields.ArrayField(poolChoiceSelectionField(), {required: true, nullable: false, initial: []}),
       skillChoices: new fields.ArrayField(selectionField(), {required: true, nullable: false, initial: []}),
       abilityChoices: new fields.ArrayField(selectionField(), {required: true, nullable: false, initial: []}),
       descriptorChoices: new fields.ArrayField(selectionField(), {required: true, nullable: false, initial: []}),
-      suppressedGrantIds: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {required: true, nullable: false, initial: []})
+      suppressedGrantIds: new fields.ArrayField(
+        new fields.StringField({required: true, nullable: false, blank: false}),
+        {required: true, nullable: false, initial: []}
+      )
     }),
     parent: provenanceField()
   });

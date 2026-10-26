@@ -113,9 +113,9 @@ export class RecoveryService {
     requestedSlotId?: string
   ): Promise<RecoveryRollResult> {
     assertLiving(actor);
-    const slot = this.availableSlots(actor).find((entry) => (
-      entry.type === type && (!requestedSlotId || entry.id === requestedSlotId)
-    ));
+    const slot = this.availableSlots(actor).find(
+      (entry) => entry.type === type && (!requestedSlotId || entry.id === requestedSlotId)
+    );
     if (!slot) {
       throw new Error(`The '${type}' Core Recovery has already been used today.`);
     }
@@ -190,12 +190,16 @@ export class RecoveryService {
     return {...distribution, kind: "normal", used, slots: updatedSlots, historyEntry};
   }
 
-  prepareNonRest(actor: CharacterDocumentLike, type: RecoveryType, requestedSlotId?: string): RecoveryApplicationResult {
+  prepareNonRest(
+    actor: CharacterDocumentLike,
+    type: RecoveryType,
+    requestedSlotId?: string
+  ): RecoveryApplicationResult {
     assertLiving(actor);
     const slots = this.slots(actor);
-    const slot = availableRecoverySlots(slots).find((entry) => (
-      entry.type === type && (!requestedSlotId || entry.id === requestedSlotId)
-    ));
+    const slot = availableRecoverySlots(slots).find(
+      (entry) => entry.type === type && (!requestedSlotId || entry.id === requestedSlotId)
+    );
     if (!slot) {
       throw new Error(`The '${type}' Core Recovery has already been used today.`);
     }

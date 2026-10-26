@@ -50,8 +50,10 @@ describe("RallyService", () => {
     expect(service.costFor("minor")).toBe(2);
     expect(service.costFor("moderate")).toBe(5);
 
-    expect(service.rally(wounds({minor: 1}), 10, "minor", undefined, 11))
-      .toMatchObject({success: false, failure: "invalid-cost"});
+    expect(service.rally(wounds({minor: 1}), 10, "minor", undefined, 11)).toMatchObject({
+      success: false,
+      failure: "invalid-cost"
+    });
   });
 
   it("uses the same authoritative result for preview and application", async () => {

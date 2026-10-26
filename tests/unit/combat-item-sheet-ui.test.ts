@@ -24,13 +24,19 @@ describe("compact Combat Item Sheets", () => {
     const weapon = section("Weapon", "Armor");
     const description = weapon.indexOf("compact-rule-description");
     for (const field of [
-      "system.category", "system.rangeCategory", "system.skillLevel",
-      "system.ammo.enabled", "system.ammo.value", "system.ammo.max", "system.ammo.perAttack",
+      "system.category",
+      "system.rangeCategory",
+      "system.skillLevel",
+      "system.ammo.enabled",
+      "system.ammo.value",
+      "system.ammo.max",
+      "system.ammo.perAttack",
       "system.depletion.enabled"
-    ]) expect(weapon.indexOf(`name="${field}"`)).toBeLessThan(description);
+    ])
+      expect(weapon.indexOf(`name="${field}"`)).toBeLessThan(description);
     expect(weapon).not.toContain('name="system.equipped"');
-    expect(weapon).toContain('data-depletion-threshold');
-    expect(weapon).toContain('data-depletion-sides');
+    expect(weapon).toContain("data-depletion-threshold");
+    expect(weapon).toContain("data-depletion-sides");
     expect(weapon).toContain('data-persistent-disclosure="combat-resources"');
     expect(weapon).toContain('data-action="reloadWeapon"');
     expect(weapon).toContain('name="system.depleted"');
@@ -50,7 +56,7 @@ describe("compact Combat Item Sheets", () => {
     expect(armor).not.toContain('name="system.freelyUsed"');
     expect(armor).toContain('name="system.depletion.enabled"');
     expect(armor).toContain('name="system.depleted"');
-    expect(armor).toContain('data-depletion-threshold');
+    expect(armor).toContain("data-depletion-threshold");
     expect(armor).toContain('name="system.description"');
     expect(armor).toContain("compact-technical-area");
     expect(armor).toContain('class="compact-depletion-controls"');
@@ -112,7 +118,12 @@ describe("compact Combat Item Sheets", () => {
   it("keeps all Depleted controls on the shared semantic component", () => {
     const artifactStart = template.indexOf("{{#if isArtifact}}");
     const artifact = template.slice(artifactStart, template.indexOf("{{#if isWeapon}}", artifactStart));
-    for (const content of [artifact, section("Weapon", "Armor"), section("Armor", "Shield"), section("Shield", "CharacterType")]) {
+    for (const content of [
+      artifact,
+      section("Weapon", "Armor"),
+      section("Armor", "Shield"),
+      section("Shield", "CharacterType")
+    ]) {
       expect(content).toContain("compact-depletion-controls");
       expect(content).toContain("compact-depleted-control");
       expect(content).toContain('name="system.depleted"');

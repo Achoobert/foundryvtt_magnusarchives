@@ -51,7 +51,11 @@ export interface GrantConflict {
 
 export type GrantConflictResolution =
   | {readonly action: "suppress"}
-  | {readonly action: "replace"; readonly replacement: GrantReplacementOption; readonly selectionKind: "suggested" | "world" | "compendium" | "custom"}
+  | {
+      readonly action: "replace";
+      readonly replacement: GrantReplacementOption;
+      readonly selectionKind: "suggested" | "world" | "compendium" | "custom";
+    }
   | {readonly action: "gmOverride"}
   | {readonly action: "cancel"};
 
@@ -65,7 +69,10 @@ export class GrantConflictCancelledError extends Error {
 }
 
 export function normalizedContentKey(type: "ability" | "skill", name: string): string {
-  return `${type}:${String(name ?? "").trim().toLocaleLowerCase().replace(/\s+/g, " ")}`;
+  return `${type}:${String(name ?? "")
+    .trim()
+    .toLocaleLowerCase()
+    .replace(/\s+/g, " ")}`;
 }
 
 export function grantIdentity(type: "ability" | "skill", name: string, contentUuid = ""): GrantIdentity {
@@ -92,9 +99,14 @@ export function hasGrantConflict(documents: Iterable<GrantDocumentLike>, candida
   return Boolean(findGrantConflict(documents, candidate));
 }
 
-export function findGrantConflict(documents: Iterable<GrantDocumentLike>, candidate: GrantIdentity): GrantDocumentLike | null {
-  return [...documents].find((document) => {
-    const existing = documentGrantIdentity(document);
-    return existing ? sameGrant(existing, candidate) : false;
-  }) ?? null;
+export function findGrantConflict(
+  documents: Iterable<GrantDocumentLike>,
+  candidate: GrantIdentity
+): GrantDocumentLike | null {
+  return (
+    [...documents].find((document) => {
+      const existing = documentGrantIdentity(document);
+      return existing ? sameGrant(existing, candidate) : false;
+    }) ?? null
+  );
 }

@@ -47,7 +47,10 @@ describe("Character Package UI", () => {
 
   it("uses Foundry's resolved document drop path for world and Compendium Species", () => {
     const source = readFileSync(resolve(root, "src/applications/sheets/character-sheet.ts"), "utf8");
-    const dropHandler = source.slice(source.indexOf("override async _onDropDocument"), source.indexOf("static async #onAddType"));
+    const dropHandler = source.slice(
+      source.indexOf("override async _onDropDocument"),
+      source.indexOf("static async #onAddType")
+    );
     expect(dropHandler).toContain('item?.type === "species"');
     expect(dropHandler).toContain("promptAttachSpecies");
     expect(dropHandler).not.toContain("game.items.get");

@@ -3,11 +3,7 @@ import type {CombatOutcomeAction, DefenseRequestData} from "./combat-chat-types"
 import type {NpcTargetLike} from "./combat-types";
 import type {CombatCharacterLike} from "../services/combat-service";
 import {promptDefenseRoll} from "../applications/dialogs/combat-dialogs";
-import {
-  actorWithTargetIdentity,
-  immediateTargetActor,
-  resolveTargetActor
-} from "./combat-targets";
+import {actorWithTargetIdentity, immediateTargetActor, resolveTargetActor} from "./combat-targets";
 import type {CombatTargetIdentity} from "./combat-types";
 
 const SOCKET = `system.${SYSTEM_ID}`;
@@ -97,15 +93,17 @@ export async function applyCombatOutcome(message: ChatMessage, button: HTMLButto
         action.effect,
         action.stressAmount
       );
-      ui.notifications.info(game.i18n.localize(action.effect === "stress"
-        ? "MAGNUSARCHIVES.Combat.StressApplied"
-        : "MAGNUSARCHIVES.Combat.SeriousInjuryApplied"));
+      ui.notifications.info(
+        game.i18n.localize(
+          action.effect === "stress"
+            ? "MAGNUSARCHIVES.Combat.StressApplied"
+            : "MAGNUSARCHIVES.Combat.SeriousInjuryApplied"
+        )
+      );
     } else {
       const shield = target.items.get(action.shieldId);
       if (!shield || shield.type !== "shield") throw new Error("Resolved Shield Item not found.");
-      const source = action.sourceActorId
-        ? {id: action.sourceActorId, name: action.sourceName ?? "NPC"}
-        : undefined;
+      const source = action.sourceActorId ? {id: action.sourceActorId, name: action.sourceName ?? "NPC"} : undefined;
       await game.magnusarchives.services.combat.applyShieldWound(
         exactTarget as unknown as CombatCharacterLike,
         shield as unknown as import("../services/shield-service").ShieldItemLike,
@@ -187,11 +185,9 @@ function renderCombatChat(message: ChatMessage, html: HTMLElement): void {
       button.remove();
       continue;
     }
-    button.addEventListener(
-      "click",
-      () => void requestDefense(message, request, defense as DefenseType, button),
-      {once: true}
-    );
+    button.addEventListener("click", () => void requestDefense(message, request, defense as DefenseType, button), {
+      once: true
+    });
   }
 }
 

@@ -1,15 +1,9 @@
 import {WOUND_SEVERITIES, type RecoveryKind, type RecoveryType, type WoundSeverity} from "../../constants/system";
 import type {CharacterDocumentLike, PoolKey} from "../../rules/core/core-types";
 import {availableRecoverySlots, defaultRecoverySlots} from "../../rules/core/recovery-track";
-import {
-  characterOverrideView,
-  type CharacterOverrideKey
-} from "../../rules/core/character-overrides";
+import {characterOverrideView, type CharacterOverrideKey} from "../../rules/core/character-overrides";
 import type {OneHourRestChoice} from "../../services/rest-service";
-import {
-  RALLY_EXECUTION_COST_MAX,
-  type RallySeverity
-} from "../../services/rally-service";
+import {RALLY_EXECUTION_COST_MAX, type RallySeverity} from "../../services/rally-service";
 
 type DialogData = Record<string, unknown>;
 
@@ -21,15 +15,10 @@ export interface RecoveryDialogResolution {
 }
 
 export function recoveryDialogModes(type: RecoveryType): readonly RecoveryDialogMode[] {
-  return type === "one-action"
-    ? ["normal", "lastAction", "nonRest"]
-    : ["normal", "nonRest"];
+  return type === "one-action" ? ["normal", "lastAction", "nonRest"] : ["normal", "nonRest"];
 }
 
-export function resolveRecoveryDialogMode(
-  type: RecoveryType,
-  mode: RecoveryDialogMode
-): RecoveryDialogResolution {
+export function resolveRecoveryDialogMode(type: RecoveryType, mode: RecoveryDialogMode): RecoveryDialogResolution {
   if (!recoveryDialogModes(type).includes(mode)) {
     throw new Error(`Recovery mode '${mode}' is not available for '${type}'.`);
   }
@@ -70,13 +59,17 @@ async function input(
 }
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 export async function promptEditWound(
@@ -89,7 +82,7 @@ export async function promptEditWound(
     notifyError(new Error(`Wound '${woundId}' was not found in ${severity} Wounds.`));
     return;
   }
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Wounds.EditTitle")},
     content: `<div class="magnusarchives-dialog-fields">
       <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.Label")}
@@ -101,7 +94,7 @@ export async function promptEditWound(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return;
   try {
     await game.magnusarchives.services.wounds.edit(actor, severity, woundId, {
@@ -220,7 +213,7 @@ export async function promptRecovery(
   let type = selectedType;
   let slotId = selectedSlotId;
   if (!type || !slotId) {
-    const selection = await foundry.applications.api.DialogV2.input({
+    const selection = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Recovery.Choose")},
       content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
         <section class="magnusarchives-dialog-section">
@@ -232,7 +225,7 @@ export async function promptRecovery(
       </div>`,
       rejectClose: false,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Next")}
-    }) as DialogData | null;
+    })) as DialogData | null;
     if (!selection) return;
     slotId = stringValue(selection, "slotId");
     type = availableSlots.find((slot) => slot.id === slotId)?.type;
@@ -242,8 +235,10 @@ export async function promptRecovery(
     }
   }
   const modes = recoveryDialogModes(type);
-  const setup = await foundry.applications.api.DialogV2.input({
-    window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}`},
+  const setup = (await foundry.applications.api.DialogV2.input({
+    window: {
+      title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}`
+    },
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
       <header class="magnusarchives-dialog-heading">
         <span>${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")}</span>
@@ -262,7 +257,7 @@ export async function promptRecovery(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Recovery.Recover")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!setup) return;
   try {
     const resolution = resolveRecoveryDialogMode(type, stringValue(setup, "mode") as RecoveryDialogMode);
@@ -271,25 +266,21 @@ export async function promptRecovery(
       ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Recovery.NonRestCompleted"));
       return;
     }
-    const roll = await game.magnusarchives.services.recovery.rollNormal(
-      actor,
-      type,
-      resolution.lastAction,
-      slotId
-    );
-    const restControls = type === "1-hour"
-      ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Rest.OneHourChoice")}
+    const roll = await game.magnusarchives.services.recovery.rollNormal(actor, type, resolution.lastAction, slotId);
+    const restControls =
+      type === "1-hour"
+        ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Rest.OneHourChoice")}
           <select name="oneHourChoice">
             <option value="remove-moderate">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveModerate")}</option>
             <option value="remove-minors">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveMinors")}</option>
           </select>
         </label>`
-      : type === "10-hours"
-        ? `<label><input name="exchange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.ExchangeMinor")}</label>
+        : type === "10-hours"
+          ? `<label><input name="exchange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.ExchangeMinor")}</label>
           <label><input name="majorSuccess" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.MajorTaskSuccess")}</label>`
-        : type === "10-minutes"
-          ? `<p>${game.i18n.localize("MAGNUSARCHIVES.Recovery.TenMinuteBenefit")}</p>`
-          : "";
+          : type === "10-minutes"
+            ? `<p>${game.i18n.localize("MAGNUSARCHIVES.Recovery.TenMinuteBenefit")}</p>`
+            : "";
     const allocation = await input(
       `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${roll.total}`,
       `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog magnusarchives-recovery-allocation-dialog">
@@ -339,7 +330,7 @@ export async function promptRally(actor: CharacterDocumentLike): Promise<void> {
   const minorCost = rally.costFor("minor");
   const moderateCost = rally.costFor("moderate");
   const initialPreview = rally.preview(actor, "minor", minorCost);
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")},
     content: rallyDialogContent(
       current,
@@ -351,7 +342,7 @@ export async function promptRally(actor: CharacterDocumentLike): Promise<void> {
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Rally")},
     render: (_event: Event, dialog: {element: HTMLElement}) => bindRallyDialog(dialog.element, actor)
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return;
   try {
     const result = await game.magnusarchives.services.rally.apply(
@@ -408,37 +399,35 @@ export function bindRallyDialog(root: HTMLElement, actor: CharacterDocumentLike)
   const refresh = () => {
     const amount = Number(cost.value);
     const severity = modes.find((mode) => mode.checked)?.value as RallySeverity | undefined;
-    const preview = severity
-      ? game.magnusarchives.services.rally.preview(actor, severity, amount)
-      : null;
+    const preview = severity ? game.magnusarchives.services.rally.preview(actor, severity, amount) : null;
     if (costSummary) costSummary.textContent = Number.isInteger(amount) ? String(amount) : "—";
     if (afterSummary) afterSummary.textContent = preview?.success ? String(preview.mightValue) : "—";
     if (error) {
       error.hidden = preview?.success === true;
-      error.textContent = game.i18n.localize(preview?.failure === "insufficient-might"
-        ? "MAGNUSARCHIVES.Rally.InsufficientMight"
-        : preview?.failure === "invalid-cost"
-          ? "MAGNUSARCHIVES.Rally.InvalidCost"
-          : "MAGNUSARCHIVES.Rally.NoWound");
+      error.textContent = game.i18n.localize(
+        preview?.failure === "insufficient-might"
+          ? "MAGNUSARCHIVES.Rally.InsufficientMight"
+          : preview?.failure === "invalid-cost"
+            ? "MAGNUSARCHIVES.Rally.InvalidCost"
+            : "MAGNUSARCHIVES.Rally.NoWound"
+      );
     }
     if (submit) submit.disabled = preview?.success !== true;
   };
-  for (const mode of modes) mode.addEventListener("change", () => {
-    if (!mode.checked) return;
-    cost.value = String(Number(mode.dataset.defaultCost ?? 0));
-    if (heading) heading.textContent = mode.nextElementSibling?.textContent ?? mode.value;
-    refresh();
-  });
+  for (const mode of modes)
+    mode.addEventListener("change", () => {
+      if (!mode.checked) return;
+      cost.value = String(Number(mode.dataset.defaultCost ?? 0));
+      if (heading) heading.textContent = mode.nextElementSibling?.textContent ?? mode.value;
+      refresh();
+    });
   cost.addEventListener("input", refresh);
   refresh();
 }
 
-export async function promptCharacterOverride(
-  actor: CharacterDocumentLike,
-  key: CharacterOverrideKey
-): Promise<void> {
+export async function promptCharacterOverride(actor: CharacterDocumentLike, key: CharacterOverrideKey): Promise<void> {
   const view = characterOverrideView(actor.system, key);
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.Edit")},
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-override-dialog">
       <section class="magnusarchives-dialog-section">
@@ -451,7 +440,7 @@ export async function promptCharacterOverride(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return;
   const value = Number(data.value);
   if (!Number.isInteger(value) || value < view.minimum) {

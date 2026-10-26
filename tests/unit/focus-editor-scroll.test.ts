@@ -1,9 +1,6 @@
 import {describe, expect, it} from "vitest";
 
-import {
-  captureFocusEditorScroll,
-  restoreFocusEditorScroll
-} from "../../src/applications/sheets/focus-editor-scroll";
+import {captureFocusEditorScroll, restoreFocusEditorScroll} from "../../src/applications/sheets/focus-editor-scroll";
 
 class FakeElement {
   scrollTop = 0;

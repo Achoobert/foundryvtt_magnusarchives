@@ -43,9 +43,7 @@ describe("shared DepletionService", () => {
 
   it("leaves a Weapon without Depletion unchanged and does not roll", async () => {
     const roller = vi.fn(async () => ({total: 1}));
-    await expect(new DepletionService(roller).roll(weapon(false))).rejects.toThrow(
-      "not enabled"
-    );
+    await expect(new DepletionService(roller).roll(weapon(false))).rejects.toThrow("not enabled");
     expect(roller).not.toHaveBeenCalled();
   });
 
@@ -64,7 +62,9 @@ describe("shared DepletionService", () => {
     async (type) => {
       const update = vi.fn(async () => undefined);
       const item: DepletionItemLike = {
-        id: `${type}-1`, name: `Test ${type}`, type,
+        id: `${type}-1`,
+        name: `Test ${type}`,
+        type,
         system: {depleted: false, depletion: {enabled: true, die: "d20", threshold: 3}},
         update
       };

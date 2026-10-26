@@ -10,11 +10,7 @@ import {
   stressLevel,
   stressToNextLevel
 } from "../../rules/core/condition-track";
-import {
-  type RecoverySlotData,
-  type RecoveryUsage,
-  type WoundCapacities
-} from "../../rules/core/core-types";
+import {type RecoverySlotData, type RecoveryUsage, type WoundCapacities} from "../../rules/core/core-types";
 import type {PackageRole} from "../../packages/package-types";
 import {defaultRecoverySlots} from "../../rules/core/recovery-track";
 
@@ -104,10 +100,12 @@ const DESCRIPTOR_ROLE_ORDER: Readonly<Record<PackageRole, number>> = {
 };
 
 function descriptorIdentity(reference: HeaderIdentityReference): string {
-  return reference.instanceId
-    || reference.id
-    || reference.uuid
-    || `${reference.role ?? "custom"}:${reference.name.trim().toLocaleLowerCase("en-US")}`;
+  return (
+    reference.instanceId ||
+    reference.id ||
+    reference.uuid ||
+    `${reference.role ?? "custom"}:${reference.name.trim().toLocaleLowerCase("en-US")}`
+  );
 }
 
 export function orderedHeaderDescriptors(
@@ -118,16 +116,20 @@ export function orderedHeaderDescriptors(
     const key = descriptorIdentity(reference);
     if (!unique.has(key)) unique.set(key, reference);
   }
-  return [...unique.values()].sort((left, right) => (
-    (DESCRIPTOR_ROLE_ORDER[left.role ?? "custom"] - DESCRIPTOR_ROLE_ORDER[right.role ?? "custom"])
-    || ((left.attachedAt ?? 0) - (right.attachedAt ?? 0))
-    || left.name.localeCompare(right.name, "en-US")
-    || descriptorIdentity(left).localeCompare(descriptorIdentity(right), "en-US")
-  ));
+  return [...unique.values()].sort(
+    (left, right) =>
+      DESCRIPTOR_ROLE_ORDER[left.role ?? "custom"] - DESCRIPTOR_ROLE_ORDER[right.role ?? "custom"] ||
+      (left.attachedAt ?? 0) - (right.attachedAt ?? 0) ||
+      left.name.localeCompare(right.name, "en-US") ||
+      descriptorIdentity(left).localeCompare(descriptorIdentity(right), "en-US")
+  );
 }
 
 export function indefiniteArticle(value: string): "A" | "AN" {
-  const word = value.trim().replace(/^[^a-z]+/i, "").toLocaleLowerCase("en-US");
+  const word = value
+    .trim()
+    .replace(/^[^a-z]+/i, "")
+    .toLocaleLowerCase("en-US");
   if (/^(honest|honor|hour|heir)/.test(word)) return "AN";
   if (/^(one|once|euro|user|use|uni(?:t|v|q))/.test(word)) return "A";
   return /^[aeiou]/.test(word) ? "AN" : "A";
@@ -156,9 +158,7 @@ export function characterHeaderIdentity(input: CharacterHeaderIdentityInput = {}
   const label = input.descriptorLabel?.trim() ?? "";
   const descriptorSlots = orderedDescriptors.map((descriptor) => {
     const slot = identitySlot("descriptor", descriptor);
-    return label && descriptor.role === "primary"
-      ? {...slot, displayName: label.toLocaleUpperCase("en-US")}
-      : slot;
+    return label && descriptor.role === "primary" ? {...slot, displayName: label.toLocaleUpperCase("en-US")} : slot;
   });
   if (!orderedDescriptors.some((descriptor) => descriptor.role === "primary")) {
     descriptorSlots.unshift(identitySlot("descriptor"));
@@ -233,10 +233,7 @@ const DAMAGE_TRACK_NOTE_COUNT: Readonly<Record<DamageTrackStep, number>> = {
  * The damage track as the printed sheet shows it (p381): one box per step, with
  * "hurt" only present for Characters who have that extra step.
  */
-export function headerDamageTrack(
-  step: DamageTrackStep,
-  hurtAvailable: boolean
-): readonly HeaderDamageTrackStep[] {
+export function headerDamageTrack(step: DamageTrackStep, hurtAvailable: boolean): readonly HeaderDamageTrackStep[] {
   const steps = damageTrackSteps(hurtAvailable);
   const current = normalizeDamageTrackStep(step, hurtAvailable);
   const currentIndex = steps.indexOf(current);
@@ -275,11 +272,9 @@ export function headerStress(value: number, supernatural = 0): HeaderStress {
   };
 }
 
-export function headerRecoveries(
-  source: RecoveryUsage | readonly RecoverySlotData[]
-): readonly HeaderRecoveryButton[] {
+export function headerRecoveries(source: RecoveryUsage | readonly RecoverySlotData[]): readonly HeaderRecoveryButton[] {
   const slots = Array.isArray(source)
-    ? source as readonly RecoverySlotData[]
+    ? (source as readonly RecoverySlotData[])
     : defaultRecoverySlots(source as RecoveryUsage);
   return slots.map((slot) => {
     const used = slot.used;
@@ -289,9 +284,7 @@ export function headerRecoveries(
 
 export function headerPoolGauge(current: number, maximum: number): HeaderPoolGauge {
   const safeMaximum = Number.isFinite(maximum) ? Math.max(0, maximum) : 0;
-  const safeCurrent = Number.isFinite(current)
-    ? Math.max(0, Math.min(safeMaximum, current))
-    : 0;
+  const safeCurrent = Number.isFinite(current) ? Math.max(0, Math.min(safeMaximum, current)) : 0;
   const ratio = safeMaximum > 0 ? safeCurrent / safeMaximum : 0;
   return {current: safeCurrent, max: safeMaximum, ratio, percent: ratio * 100};
 }

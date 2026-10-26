@@ -46,16 +46,22 @@ describe("SkillService", () => {
 
   it("uses the configured Pool, permits an explicit override, and requires a choice otherwise", () => {
     const {skills} = services();
-    expect(skills.buildRollRequest(skill("trained", "speed"), {
-      difficulty: {mode: "unknown"}
-    }).pool).toBe("speed");
-    expect(skills.buildRollRequest(skill("trained", "speed"), {
-      pool: "intellect",
-      difficulty: {mode: "unknown"}
-    }).pool).toBe("intellect");
-    expect(() => skills.buildRollRequest(skill("trained"), {
-      difficulty: {mode: "unknown"}
-    })).toThrow("Choose a Pool");
+    expect(
+      skills.buildRollRequest(skill("trained", "speed"), {
+        difficulty: {mode: "unknown"}
+      }).pool
+    ).toBe("speed");
+    expect(
+      skills.buildRollRequest(skill("trained", "speed"), {
+        pool: "intellect",
+        difficulty: {mode: "unknown"}
+      }).pool
+    ).toBe("intellect");
+    expect(() =>
+      skills.buildRollRequest(skill("trained"), {
+        difficulty: {mode: "unknown"}
+      })
+    ).toThrow("Choose a Pool");
   });
 
   it("supports a contextual rank override without mutating the Skill Item", () => {
@@ -91,9 +97,13 @@ describe("SkillService", () => {
   it("executes a roll built directly from a Skill", async () => {
     const {skills, rolls} = services();
     const actor = character();
-    const execution = await rolls.execute(actor, skills.buildRollRequest(skill("trained", "speed"), {
-      difficulty: {mode: "known", value: 5}
-    }), policy);
+    const execution = await rolls.execute(
+      actor,
+      skills.buildRollRequest(skill("trained", "speed"), {
+        difficulty: {mode: "known", value: 5}
+      }),
+      policy
+    );
 
     expect(execution.result).toMatchObject({naturalRoll: 12, success: true});
     expect(execution.result.prepared.context).toMatchObject({
@@ -123,25 +133,29 @@ describe("SkillService", () => {
 
   it("retains shared automatic modifiers and privacy for Quick Rolls", async () => {
     const {skills, rolls} = services();
-    const actor = character({wounds: {
-      minor: [],
-      moderate: [
-        {id: "m1", label: "m1", description: "", sourceUuid: "test", treated: false},
-        {id: "m2", label: "m2", description: "", sourceUuid: "test", treated: false},
-        {id: "m3", label: "m3", description: "", sourceUuid: "test", treated: false}
-      ],
-      major: []
-    }});
+    const actor = character({
+      wounds: {
+        minor: [],
+        moderate: [
+          {id: "m1", label: "m1", description: "", sourceUuid: "test", treated: false},
+          {id: "m2", label: "m2", description: "", sourceUuid: "test", treated: false},
+          {id: "m3", label: "m3", description: "", sourceUuid: "test", treated: false}
+        ],
+        major: []
+      }
+    });
     const request = skills.buildQuickRollRequest(skill("trained"), {
       difficulty: {mode: "hidden", value: 5}
     });
     const execution = await rolls.execute(actor, request, policy);
     const card = buildPublicRollCardData(execution.result, "resultOnly");
 
-    expect(execution.result.prepared.breakdown).toEqual(expect.arrayContaining([
-      expect.objectContaining({source: "skill", direction: "ease", steps: 1}),
-      expect.objectContaining({source: "condition", direction: "hinder", steps: 1})
-    ]));
+    expect(execution.result.prepared.breakdown).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({source: "skill", direction: "ease", steps: 1}),
+        expect.objectContaining({source: "condition", direction: "hinder", steps: 1})
+      ])
+    );
     expect(card.presentation).toBe("concealed");
     expect(card).not.toHaveProperty("poolLabel");
     expect(card).not.toHaveProperty("finalDifficulty");
@@ -160,13 +174,15 @@ describe("SkillService", () => {
       speedTaskHindrance: 2,
       blockContributions: [],
       dodgeContributions: [],
-      speedTaskContributions: [{
-        id: "armor.medium.speed-task",
-        sourceId: "armor-medium",
-        sourceType: "item",
-        label: "",
-        value: 2
-      }]
+      speedTaskContributions: [
+        {
+          id: "armor.medium.speed-task",
+          sourceId: "armor-medium",
+          sourceType: "item",
+          label: "",
+          value: 2
+        }
+      ]
     };
 
     const speedSkill = skills.buildQuickRollRequest(skill("untrained", "speed"), {
@@ -175,9 +191,11 @@ describe("SkillService", () => {
     const preview = rolls.preview(actor, speedSkill, policy);
 
     expect(preview.totalHindrance).toBe(2);
-    expect(preview.breakdown).toContainEqual(expect.objectContaining({
-      id: "armor.medium.speed-task",
-      label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium"
-    }));
+    expect(preview.breakdown).toContainEqual(
+      expect.objectContaining({
+        id: "armor.medium.speed-task",
+        label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium"
+      })
+    );
   });
 });

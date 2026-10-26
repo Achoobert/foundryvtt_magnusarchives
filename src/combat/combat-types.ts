@@ -127,7 +127,7 @@ export function combatTargetIdentity(target: NpcTargetLike): CombatTargetIdentit
   const tokenUuid = target.tokenUuid ?? target.token?.uuid;
   return {
     actorId: target.id,
-    ...(target.actorUuid ?? target.uuid ? {actorUuid: target.actorUuid ?? target.uuid} : {}),
+    ...((target.actorUuid ?? target.uuid) ? {actorUuid: target.actorUuid ?? target.uuid} : {}),
     ...(tokenId ? {tokenId} : {}),
     ...(tokenUuid ? {tokenUuid} : {})
   };
@@ -148,17 +148,9 @@ export interface ArmorItemLike {
   };
 }
 
-export const WOUND_SEVERITY_ORDER: readonly (WoundSeverity | "none")[] = [
-  "none",
-  "minor",
-  "moderate",
-  "major"
-];
+export const WOUND_SEVERITY_ORDER: readonly (WoundSeverity | "none")[] = ["none", "minor", "moderate", "major"];
 
-export function reduceWoundSeverity(
-  severity: WoundSeverity,
-  steps: number
-): WoundSeverity | "none" {
+export function reduceWoundSeverity(severity: WoundSeverity, steps: number): WoundSeverity | "none" {
   const index = WOUND_SEVERITY_ORDER.indexOf(severity);
   return WOUND_SEVERITY_ORDER[Math.max(0, index - Math.max(0, Math.trunc(steps)))] ?? "none";
 }

@@ -1,10 +1,6 @@
 import {describe, expect, it} from "vitest";
 
-import {
-  characterOverridePath,
-  characterOverrideView,
-  effectiveTier
-} from "../../src/rules/core/character-overrides";
+import {characterOverridePath, characterOverrideView, effectiveTier} from "../../src/rules/core/character-overrides";
 import {RecoveryService} from "../../src/services/recovery-service";
 import {character} from "../helpers/core-fixtures";
 

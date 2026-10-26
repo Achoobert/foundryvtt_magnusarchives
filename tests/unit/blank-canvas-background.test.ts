@@ -18,8 +18,7 @@ describe("blank canvas lobby background", () => {
   it("uses the packaged lobby image without a dist-relative path", () => {
     expect(SYSTEM_UI_ASSETS.lobby).toBe("systems/magnusarchives/assets/magnuslobby.webp");
     expect(SYSTEM_UI_ASSETS.lobby).not.toContain("/dist/");
-    expect(existsSync(resolve(root, SYSTEM_UI_ASSETS.lobby.replace("systems/magnusarchives/", ""))))
-      .toBe(true);
+    expect(existsSync(resolve(root, SYSTEM_UI_ASSETS.lobby.replace("systems/magnusarchives/", "")))).toBe(true);
   });
 
   it("resolves the image through Foundry's route helper before assigning the CSS URL", () => {

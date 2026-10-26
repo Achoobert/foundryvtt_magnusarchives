@@ -4,7 +4,9 @@ export const DEPLETION_DIE_MIN = 2;
 export const DEPLETION_DIE_MAX = 1000;
 
 export function depletionDieSides(rule: Pick<DepletionRule, "die">): number {
-  const match = String(rule.die).trim().match(/^d(\d+)$/i);
+  const match = String(rule.die)
+    .trim()
+    .match(/^d(\d+)$/i);
   const sides = Number(match?.[1]);
   if (!Number.isInteger(sides) || sides < DEPLETION_DIE_MIN || sides > DEPLETION_DIE_MAX) {
     throw new Error(`Depletion die must have ${DEPLETION_DIE_MIN} to ${DEPLETION_DIE_MAX} sides.`);

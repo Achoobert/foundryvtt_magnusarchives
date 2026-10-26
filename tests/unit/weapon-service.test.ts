@@ -10,12 +10,25 @@ function weapon(ammo: WeaponItemLike["system"]["ammo"]): WeaponItemLike {
     }
   });
   item = {
-    id: "weapon-1", name: "Glock 17", type: "weapon", update,
+    id: "weapon-1",
+    name: "Glock 17",
+    type: "weapon",
+    update,
     system: {
-      category: "medium", attackType: "ranged", rangeCategory: "long", rangeNotes: "",
-      damageOverride: null, baseDamage: 4, attackModifier: 0, bonusDamage: 0,
-      freelyUsed: false, equipped: false, description: "", ammo,
-      depletion: {enabled: false, die: "d6", threshold: 1}, depleted: false
+      category: "medium",
+      attackType: "ranged",
+      rangeCategory: "long",
+      rangeNotes: "",
+      damageOverride: null,
+      baseDamage: 4,
+      attackModifier: 0,
+      bonusDamage: 0,
+      freelyUsed: false,
+      equipped: false,
+      description: "",
+      ammo,
+      depletion: {enabled: false, die: "d6", threshold: 1},
+      depleted: false
     }
   };
   return item;

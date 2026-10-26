@@ -1,9 +1,4 @@
-import type {
-  CombatRollContext,
-  NpcModificationData,
-  NpcTargetLike,
-  TargetResolution
-} from "../combat/combat-types";
+import type {CombatRollContext, NpcModificationData, NpcTargetLike, TargetResolution} from "../combat/combat-types";
 import type {RuleRegistry} from "../rules/rule-registry";
 import type {RollStepContribution} from "../rolls/roll-types";
 import {combatTargetIdentity} from "../combat/combat-types";
@@ -20,32 +15,28 @@ function contextMatches(modification: NpcModificationData, context: CombatRollCo
   return modification.contexts.every((entry) => context.tags.includes(entry));
 }
 
-function predicateMatches(
-  predicate: Readonly<Record<string, unknown>>,
-  context: CombatRollContext
-): boolean {
+function predicateMatches(predicate: Readonly<Record<string, unknown>>, context: CombatRollContext): boolean {
   for (const [key, expected] of Object.entries(predicate)) {
     if (key === "tagsAll") {
-      if (!Array.isArray(expected) || !expected.every((tag) => (
-        typeof tag === "string" && context.tags.includes(tag)
-      ))) return false;
+      if (!Array.isArray(expected) || !expected.every((tag) => typeof tag === "string" && context.tags.includes(tag)))
+        return false;
       continue;
     }
     if (key === "tagsAny") {
-      if (!Array.isArray(expected) || !expected.some((tag) => (
-        typeof tag === "string" && context.tags.includes(tag)
-      ))) return false;
+      if (!Array.isArray(expected) || !expected.some((tag) => typeof tag === "string" && context.tags.includes(tag)))
+        return false;
       continue;
     }
-    const actual = key === "pool"
-      ? context.pool
-      : key === "attackType"
-        ? context.attackType
-        : key === "weaponCategory"
-          ? context.weaponCategory
-          : key === "defenseType"
-            ? context.defenseType
-            : undefined;
+    const actual =
+      key === "pool"
+        ? context.pool
+        : key === "attackType"
+          ? context.attackType
+          : key === "weaponCategory"
+            ? context.weaponCategory
+            : key === "defenseType"
+              ? context.defenseType
+              : undefined;
     if (actual === undefined) return false;
     if (Array.isArray(expected)) {
       if (!expected.includes(actual)) return false;
@@ -86,17 +77,15 @@ export class TargetResolver {
     const baseLevel = integer(target.system.level, "NPC Level", 0);
     const matches = target.system.modifications
       .map((modification, index) => ({modification, index}))
-      .filter(({modification}) => (
-        contextMatches(modification, context) && predicateMatches(modification.predicate, context)
-      ));
+      .filter(
+        ({modification}) => contextMatches(modification, context) && predicateMatches(modification.predicate, context)
+      );
     const override = matches
       .filter(({modification}) => modification.mode === "levelOverride")
-      .sort((left, right) => (
-        specificity(right.modification) - specificity(left.modification) || right.index - left.index
-      ))[0]?.modification;
-    let difficulty = override
-      ? integer(override.value, `NPC modification '${override.id}'`, 0)
-      : baseLevel;
+      .sort(
+        (left, right) => specificity(right.modification) - specificity(left.modification) || right.index - left.index
+      )[0]?.modification;
+    let difficulty = override ? integer(override.value, `NPC modification '${override.id}'`, 0) : baseLevel;
     const applied = override ? [override.id] : [];
     for (const {modification} of matches) {
       if (modification.mode !== "levelDelta") continue;
@@ -111,15 +100,20 @@ export class TargetResolver {
         applied.push(modification.id);
         return stepContribution(modification);
       });
-    return this.#rules.enrichTargetResolution({
-      targetId: target.id,
-      targetIdentity: combatTargetIdentity(target),
-      targetName: target.name,
-      baseLevel,
-      difficulty,
-      contributions,
-      appliedModificationIds: applied
-    }, target, context, enabledRuleModuleIds);
+    return this.#rules.enrichTargetResolution(
+      {
+        targetId: target.id,
+        targetIdentity: combatTargetIdentity(target),
+        targetName: target.name,
+        baseLevel,
+        difficulty,
+        contributions,
+        appliedModificationIds: applied
+      },
+      target,
+      context,
+      enabledRuleModuleIds
+    );
   }
 
   nativeNpcTargets(): readonly NpcTargetLike[] {

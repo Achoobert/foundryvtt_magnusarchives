@@ -35,10 +35,7 @@ import type {CharacterPackageItemLike} from "../../packages/package-types";
 import {GENRE_ASSOCIATION_PROVENANCES} from "../../genre/genre-types";
 import {effectiveGenre} from "../../genre/genre-rules";
 import type {GenreAssociationData, GenreDocumentLike} from "../../genre/genre-types";
-import {
-  CHARACTER_HEADER_BACKGROUND_MODES,
-  type CharacterAppearanceData
-} from "../../themes/character-appearance";
+import {CHARACTER_HEADER_BACKGROUND_MODES, type CharacterAppearanceData} from "../../themes/character-appearance";
 import {defaultRecoverySlots} from "../../rules/core/recovery-track";
 import {normalizeWeaponFamilies} from "../../combat/weapon-family";
 import type {PowerShiftAllocation} from "../../packages/power-shifts";
@@ -322,13 +319,16 @@ export class CharacterDataModel extends ActorDataModelBase {
         hideFocusInSentence: new fields.BooleanField({required: true, nullable: false, initial: false}),
         powerShiftsEnabled: new fields.BooleanField({required: true, nullable: false, initial: false})
       }),
-      powerShifts: new fields.ArrayField(new fields.SchemaField({
-        id: new fields.StringField({required: true, nullable: false, blank: false}),
-        category: new fields.StringField({required: true, nullable: false, blank: false}),
-        shifts: integerField(1, 1),
-        specification: new fields.StringField({required: true, nullable: false, initial: ""}),
-        description: new fields.StringField({required: true, nullable: false, initial: ""})
-      }), {required: true, nullable: false, initial: []}),
+      powerShifts: new fields.ArrayField(
+        new fields.SchemaField({
+          id: new fields.StringField({required: true, nullable: false, blank: false}),
+          category: new fields.StringField({required: true, nullable: false, blank: false}),
+          shifts: integerField(1, 1),
+          specification: new fields.StringField({required: true, nullable: false, initial: ""}),
+          description: new fields.StringField({required: true, nullable: false, initial: ""})
+        }),
+        {required: true, nullable: false, initial: []}
+      ),
       advancement: new fields.SchemaField({
         cycle: integerField(1, 1),
         purchases: new fields.ArrayField(advancementPurchaseField(), {
@@ -522,11 +522,20 @@ export class CharacterDataModel extends ActorDataModelBase {
           slug?: string;
         }
       }));
-    const proficiencies = (this as unknown as {
-      proficiencies: {weaponCategories: string[]; weaponFamilies: string[]; armorCategories: string[]; freelyUse: string[]};
-    }).proficiencies;
+    const proficiencies = (
+      this as unknown as {
+        proficiencies: {
+          weaponCategories: string[];
+          weaponFamilies: string[];
+          armorCategories: string[];
+          freelyUse: string[];
+        };
+      }
+    ).proficiencies;
     const packages = collectPackageDerivedData(
-      allItems.filter((item) => item.type === "characterType" || item.type === "descriptor" || item.type === "species") as unknown as CharacterPackageItemLike[],
+      allItems.filter(
+        (item) => item.type === "characterType" || item.type === "descriptor" || item.type === "species"
+      ) as unknown as CharacterPackageItemLike[],
       proficiencies.weaponCategories,
       proficiencies.armorCategories,
       [],

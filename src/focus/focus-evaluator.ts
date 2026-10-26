@@ -1,10 +1,5 @@
 import {assertValidFocusGraph} from "./focus-graph-validator";
-import type {
-  EvaluatedFocusNode,
-  FocusEvaluation,
-  FocusGraph,
-  FocusProgress
-} from "./focus-types";
+import type {EvaluatedFocusNode, FocusEvaluation, FocusGraph, FocusProgress} from "./focus-types";
 
 export class FocusEvaluator {
   evaluate(
@@ -18,12 +13,13 @@ export class FocusEvaluator {
     const nodeIds = new Set(graph.nodes.map((node) => node.id));
     const owned = new Set(character.ownedNodeIds);
     for (const nodeId of owned) {
-      if (!nodeIds.has(nodeId)) diagnostics.push({
-        severity: "warning",
-        code: "unknown-owned-node",
-        nodeId,
-        message: `Focus progression references unknown node '${nodeId}'.`
-      });
+      if (!nodeIds.has(nodeId))
+        diagnostics.push({
+          severity: "warning",
+          code: "unknown-owned-node",
+          nodeId,
+          message: `Focus progression references unknown node '${nodeId}'.`
+        });
     }
     const incoming = new Map<string, string[]>();
     for (const node of graph.nodes) incoming.set(node.id, []);
@@ -31,9 +27,9 @@ export class FocusEvaluator {
       incoming.get(connection.to)!.push(connection.from);
     }
 
-    const validOwned = new Set(graph.nodes
-      .filter((node) => node.tier === 1 && owned.has(node.id))
-      .map((node) => node.id));
+    const validOwned = new Set(
+      graph.nodes.filter((node) => node.tier === 1 && owned.has(node.id)).map((node) => node.id)
+    );
     let changed = true;
     while (changed) {
       changed = false;
@@ -45,57 +41,63 @@ export class FocusEvaluator {
       }
     }
     for (const node of graph.nodes) {
-      if (node.tier > 1 && owned.has(node.id) && !validOwned.has(node.id)) diagnostics.push({
-        severity: "warning",
-        code: "invalid-owned-progression",
-        nodeId: node.id,
-        message: `Owned node '${node.abilitySnapshot.name || node.id}' is no longer connected to an owned Tier 1 path.`
-      });
+      if (node.tier > 1 && owned.has(node.id) && !validOwned.has(node.id))
+        diagnostics.push({
+          severity: "warning",
+          code: "invalid-owned-progression",
+          nodeId: node.id,
+          message: `Owned node '${node.abilitySnapshot.name || node.id}' is no longer connected to an owned Tier 1 path.`
+        });
     }
 
-    const evaluated: EvaluatedFocusNode[] = graph.nodes.map((node) => {
-      const reachableFrom = [...new Set((incoming.get(node.id) ?? []).filter((id) => validOwned.has(id)))]
-        .sort((left, right) => left.localeCompare(right));
-      if (owned.has(node.id)) return {
-        node,
-        state: "owned" as const,
-        reason: "owned" as const,
-        requiredTier: node.tier,
-        reachableFrom
-      };
-      // Cypher V2 creation and later Focus choices may select any unowned
-      // Tier 1 Ability. Tier 1 graph links remain presentational only.
-      if (node.tier === 1) return {
-        node,
-        state: "available" as const,
-        reason: "tier-one-choice" as const,
-        requiredTier: node.tier,
-        reachableFrom: []
-      };
-      if (reachableFrom.length > 0 && node.tier > character.tier) return {
-        node,
-        state: "future" as const,
-        reason: "tier-too-low" as const,
-        requiredTier: node.tier,
-        reachableFrom
-      };
-      if (reachableFrom.length > 0) return {
-        node,
-        state: "available" as const,
-        reason: "connected-from-owned" as const,
-        requiredTier: node.tier,
-        reachableFrom
-      };
-      return {
-        node,
-        state: "locked" as const,
-        reason: "no-owned-prerequisite" as const,
-        requiredTier: node.tier,
-        reachableFrom: []
-      };
-    }).sort((left, right) => (
-      left.node.tier - right.node.tier || left.node.id.localeCompare(right.node.id)
-    ));
+    const evaluated: EvaluatedFocusNode[] = graph.nodes
+      .map((node) => {
+        const reachableFrom = [...new Set((incoming.get(node.id) ?? []).filter((id) => validOwned.has(id)))].sort(
+          (left, right) => left.localeCompare(right)
+        );
+        if (owned.has(node.id))
+          return {
+            node,
+            state: "owned" as const,
+            reason: "owned" as const,
+            requiredTier: node.tier,
+            reachableFrom
+          };
+        // Cypher V2 creation and later Focus choices may select any unowned
+        // Tier 1 Ability. Tier 1 graph links remain presentational only.
+        if (node.tier === 1)
+          return {
+            node,
+            state: "available" as const,
+            reason: "tier-one-choice" as const,
+            requiredTier: node.tier,
+            reachableFrom: []
+          };
+        if (reachableFrom.length > 0 && node.tier > character.tier)
+          return {
+            node,
+            state: "future" as const,
+            reason: "tier-too-low" as const,
+            requiredTier: node.tier,
+            reachableFrom
+          };
+        if (reachableFrom.length > 0)
+          return {
+            node,
+            state: "available" as const,
+            reason: "connected-from-owned" as const,
+            requiredTier: node.tier,
+            reachableFrom
+          };
+        return {
+          node,
+          state: "locked" as const,
+          reason: "no-owned-prerequisite" as const,
+          requiredTier: node.tier,
+          reachableFrom: []
+        };
+      })
+      .sort((left, right) => left.node.tier - right.node.tier || left.node.id.localeCompare(right.node.id));
     return {
       characterTier: character.tier,
       ownedNodeIds: [...owned].sort((left, right) => left.localeCompare(right)),
@@ -104,11 +106,7 @@ export class FocusEvaluator {
     };
   }
 
-  evaluateProgress(
-    graph: FocusGraph,
-    characterTier: number,
-    progress: FocusProgress
-  ): FocusEvaluation {
+  evaluateProgress(graph: FocusGraph, characterTier: number, progress: FocusProgress): FocusEvaluation {
     return this.evaluate(graph, {tier: characterTier, ownedNodeIds: progress.ownedNodeIds});
   }
 
@@ -124,13 +122,9 @@ export class FocusEvaluator {
     });
   }
 
-  invalidOwnedNodeIds(
-    graph: FocusGraph,
-    characterTier: number,
-    ownedNodeIds: readonly string[]
-  ): readonly string[] {
-    return this.evaluate(graph, {tier: characterTier, ownedNodeIds}).diagnostics
-      .filter((entry) => entry.code === "invalid-owned-progression" && entry.nodeId)
+  invalidOwnedNodeIds(graph: FocusGraph, characterTier: number, ownedNodeIds: readonly string[]): readonly string[] {
+    return this.evaluate(graph, {tier: characterTier, ownedNodeIds})
+      .diagnostics.filter((entry) => entry.code === "invalid-owned-progression" && entry.nodeId)
       .map((entry) => entry.nodeId!);
   }
 }

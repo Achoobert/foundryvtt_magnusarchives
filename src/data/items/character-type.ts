@@ -19,26 +19,48 @@ export class CharacterTypeDataModel extends ItemDataModelBase {
       poolBonuses: new fields.SchemaField({might: integerField(), speed: integerField(), intellect: integerField()}),
       woundBonuses: new fields.SchemaField({minor: integerField(), moderate: integerField(), major: integerField()}),
       edgeGrant: new fields.SchemaField({
-        mode: new fields.StringField({required: true, nullable: false, initial: "none", choices: [...EDGE_GRANT_MODES]}),
-        pool: new fields.StringField({required: true, nullable: false, initial: "none", choices: ["none", "might", "speed", "intellect"]}),
+        mode: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "none",
+          choices: [...EDGE_GRANT_MODES]
+        }),
+        pool: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "none",
+          choices: ["none", "might", "speed", "intellect"]
+        }),
         amount: integerField(1)
       }),
       weaponUse: categoryFlagsField(),
-      weaponFamilies: new fields.ArrayField(
-        new fields.StringField({required: true, nullable: false, blank: false}),
-        {required: true, nullable: false, initial: []}
-      ),
+      weaponFamilies: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       armorUse: categoryFlagsField(),
       superhero: new fields.SchemaField({
         rank: new fields.NumberField({required: true, nullable: false, integer: true, min: 0, max: 5, initial: 0}),
-        powerShiftCount: new fields.NumberField({required: true, nullable: false, integer: true, min: 0, max: 10, initial: 0}),
+        powerShiftCount: new fields.NumberField({
+          required: true,
+          nullable: false,
+          integer: true,
+          min: 0,
+          max: 10,
+          initial: 0
+        }),
         superheroics: new fields.SchemaField({
           enabled: new fields.BooleanField({required: true, nullable: false, initial: false}),
           poolBonus: integerField()
         })
       }),
       abilityGrants: new fields.ArrayField(abilityGrantField(), {required: true, nullable: false, initial: []}),
-      abilityChoiceGroups: new fields.ArrayField(abilityChoiceGroupField(), {required: true, nullable: false, initial: []}),
+      abilityChoiceGroups: new fields.ArrayField(abilityChoiceGroupField(), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       skillGrants: new fields.ArrayField(skillGrantField(), {required: true, nullable: false, initial: []}),
       choiceGroups: new fields.ArrayField(skillChoiceGroupField(), {required: true, nullable: false, initial: []}),
       genre: new fields.StringField({required: true, nullable: false, initial: "none", choices: [...PACKAGE_GENRES]}),

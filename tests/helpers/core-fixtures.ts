@@ -46,19 +46,21 @@ function setPath(target: Record<string, unknown>, path: string, value: unknown):
   cursor[parts.at(-1)!] = value;
 }
 
-export function character(options: {
-  tier?: number;
-  poolValues?: Partial<Record<"might" | "speed" | "intellect", number>>;
-  wounds?: WoundCollection;
-  usedRecoveries?: Partial<RecoveryUsage>;
-  mightEdge?: number;
-  effortBase?: number;
-  xp?: number;
-  stress?: number;
-  damageTrackStep?: DamageTrackStep;
-  supernaturalStress?: number;
-  hurtAvailable?: boolean;
-} = {}): FakeCharacter {
+export function character(
+  options: {
+    tier?: number;
+    poolValues?: Partial<Record<"might" | "speed" | "intellect", number>>;
+    wounds?: WoundCollection;
+    usedRecoveries?: Partial<RecoveryUsage>;
+    mightEdge?: number;
+    effortBase?: number;
+    xp?: number;
+    stress?: number;
+    damageTrackStep?: DamageTrackStep;
+    supernaturalStress?: number;
+    hurtAvailable?: boolean;
+  } = {}
+): FakeCharacter {
   const stats = pools(options.poolValues);
   stats.might.baseEdge = options.mightEdge ?? 0;
   const currentWounds = options.wounds ?? wounds();

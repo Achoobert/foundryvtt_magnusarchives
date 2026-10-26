@@ -26,7 +26,9 @@ function shield(equipped = true, major = 0): ShieldItemLike {
     },
     async update(changes): Promise<unknown> {
       if (changes["system.wounds"]) {
-        (this.system as {wounds: ReturnType<typeof wounds>}).wounds = changes["system.wounds"] as ReturnType<typeof wounds>;
+        (this.system as {wounds: ReturnType<typeof wounds>}).wounds = changes["system.wounds"] as ReturnType<
+          typeof wounds
+        >;
       }
       if (typeof changes["system.equipped"] === "boolean") {
         (this.system as {equipped: boolean}).equipped = changes["system.equipped"] as boolean;
@@ -98,41 +100,38 @@ describe("Block with Shield", () => {
   it.each([
     ["stress", "minor"],
     ["seriousInjury", "major"]
-  ] as const)(
-    "defers a %s to the Shield after a successful Block With Shield",
-    async (effect, severity) => {
-      const item = shield();
-      const {actor, combat, shieldWound} = setup([item]);
-      const before = structuredClone(actor.system.wounds);
-      const resolution = await combat.resolveDefenseDamage(
-        actor, result(true), "blockWithShield", effect, 3, {id: "npc-1", name: "Sentinel"}
-      );
-      expect(resolution).toMatchObject({
-        recipient: "shield",
-        severity,
-        shieldId: item.id,
-        shieldName: item.name
-      });
-      expect(item.system.wounds[severity]).toHaveLength(0);
-      expect(actor.system.wounds).toEqual(before);
-      expect(shieldWound).not.toHaveBeenCalled();
+  ] as const)("defers a %s to the Shield after a successful Block With Shield", async (effect, severity) => {
+    const item = shield();
+    const {actor, combat, shieldWound} = setup([item]);
+    const before = structuredClone(actor.system.wounds);
+    const resolution = await combat.resolveDefenseDamage(actor, result(true), "blockWithShield", effect, 3, {
+      id: "npc-1",
+      name: "Sentinel"
+    });
+    expect(resolution).toMatchObject({
+      recipient: "shield",
+      severity,
+      shieldId: item.id,
+      shieldName: item.name
+    });
+    expect(item.system.wounds[severity]).toHaveLength(0);
+    expect(actor.system.wounds).toEqual(before);
+    expect(shieldWound).not.toHaveBeenCalled();
 
-      const applied = await combat.applyShieldWound(
-        actor, item, severity, {id: "npc-1", name: "Sentinel"}
-      );
-      expect(applied.requestedSeverity).toBe(severity);
-      expect(item.system.wounds[severity]).toHaveLength(1);
-      expect(actor.system.wounds).toEqual(before);
-      expect(shieldWound).toHaveBeenCalledWith(actor, "Round Shield", severity, severity === "major");
-    }
-  );
+    const applied = await combat.applyShieldWound(actor, item, severity, {id: "npc-1", name: "Sentinel"});
+    expect(applied.requestedSeverity).toBe(severity);
+    expect(item.system.wounds[severity]).toHaveLength(1);
+    expect(actor.system.wounds).toEqual(before);
+    expect(shieldWound).toHaveBeenCalledWith(actor, "Round Shield", severity, severity === "major");
+  });
 
   it("applies the damage to the Character and nothing to the Shield after failure", async () => {
     const item = shield();
     const {actor, combat, shieldWound} = setup([item]);
-    const resolution = await combat.resolveDefenseDamage(
-      actor, result(false), "blockWithShield", "seriousInjury", 0, {id: "npc-1", name: "Sentinel"}
-    );
+    const resolution = await combat.resolveDefenseDamage(actor, result(false), "blockWithShield", "seriousInjury", 0, {
+      id: "npc-1",
+      name: "Sentinel"
+    });
     expect(resolution).toEqual({recipient: "character", effect: "seriousInjury", stressAmount: 0});
     expect(item.system.wounds).toEqual(wounds());
     expect(shieldWound).not.toHaveBeenCalled();
@@ -140,25 +139,30 @@ describe("Block with Shield", () => {
 
   it("resolves a successful normal Block and Dodge to no recipient", async () => {
     const {actor, combat} = setup();
-    await expect(combat.resolveDefenseDamage(actor, result(true), "block", "seriousInjury", 0))
-      .resolves.toEqual({recipient: "none"});
-    await expect(combat.resolveDefenseDamage(actor, result(true), "dodge", "seriousInjury", 0))
-      .resolves.toEqual({recipient: "none"});
-    await expect(combat.resolveDefenseDamage(actor, result(false), "block", "stress", 2))
-      .resolves.toEqual({recipient: "character", effect: "stress", stressAmount: 2});
+    await expect(combat.resolveDefenseDamage(actor, result(true), "block", "seriousInjury", 0)).resolves.toEqual({
+      recipient: "none"
+    });
+    await expect(combat.resolveDefenseDamage(actor, result(true), "dodge", "seriousInjury", 0)).resolves.toEqual({
+      recipient: "none"
+    });
+    await expect(combat.resolveDefenseDamage(actor, result(false), "block", "stress", 2)).resolves.toEqual({
+      recipient: "character",
+      effect: "stress",
+      stressAmount: 2
+    });
   });
 
   it("rejects a successful Block With Shield without a functional equipped Shield", async () => {
     const broken = shield(true, 1);
     const brokenSetup = setup([broken]);
-    await expect(brokenSetup.combat.resolveDefenseDamage(
-      brokenSetup.actor, result(true), "blockWithShield", "stress", 1
-    )).rejects.toThrow("functional Shield");
+    await expect(
+      brokenSetup.combat.resolveDefenseDamage(brokenSetup.actor, result(true), "blockWithShield", "stress", 1)
+    ).rejects.toThrow("functional Shield");
 
     const stored = shield(false);
     const storedSetup = setup([stored]);
-    await expect(storedSetup.combat.resolveDefenseDamage(
-      storedSetup.actor, result(true), "blockWithShield", "stress", 1
-    )).rejects.toThrow("functional Shield");
+    await expect(
+      storedSetup.combat.resolveDefenseDamage(storedSetup.actor, result(true), "blockWithShield", "stress", 1)
+    ).rejects.toThrow("functional Shield");
   });
 });

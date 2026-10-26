@@ -5,4 +5,3 @@ export function registerDocumentClasses(): void {
   CONFIG.Actor.documentClass = MagnusArchivesActor;
   CONFIG.Item.documentClass = MagnusArchivesItem;
 }
-

@@ -41,9 +41,7 @@ export class CypherDataModel extends ItemDataModelBase {
     }
     if (!options.partial && !Object.hasOwn(migrated, "levelOverride")) {
       const legacyLevel = Number(migrated.level);
-      migrated.levelOverride = Object.hasOwn(migrated, "level")
-        && Number.isInteger(legacyLevel)
-        && legacyLevel > 1;
+      migrated.levelOverride = Object.hasOwn(migrated, "level") && Number.isInteger(legacyLevel) && legacyLevel > 1;
     }
     return migrated;
   }

@@ -101,8 +101,16 @@ export function deriveCharacterData(
   proficiencies: CharacterProficienciesLike = {armorCategories: [], freelyUse: []},
   recoveryBonus = 0,
   packagePresentation: CharacterDerivedData["packages"] = {
-    weaponCategories: [], weaponFamilies: [], armorCategories: [], genre: "none", genreUuid: "", totalEffortCapMode: "core",
-    typeNames: [], descriptorNames: [], speciesNames: [], characterSentence: ""
+    weaponCategories: [],
+    weaponFamilies: [],
+    armorCategories: [],
+    genre: "none",
+    genreUuid: "",
+    totalEffortCapMode: "core",
+    typeNames: [],
+    descriptorNames: [],
+    speciesNames: [],
+    characterSentence: ""
   },
   cypherLimitBase = 2,
   tier = 1,
@@ -147,24 +155,12 @@ export function deriveCharacterData(
   }
 
   const effortContributions = [
-    contribution(
-      "effort.max.base",
-      "system.stats.effortBase",
-      "base",
-      "Base Effort",
-      stats.effortBase ?? 0
-    ),
+    contribution("effort.max.base", "system.stats.effortBase", "base", "Base Effort", stats.effortBase ?? 0),
     ...(extensions.effortMax ?? [])
   ];
   const calculatedEffort = Math.max(0, total(effortContributions));
   const recoveryBonusContributions = [
-    contribution(
-      "recovery.bonus.base",
-      "system.recovery.bonus",
-      "base",
-      "Permanent Recovery bonus",
-      recoveryBonus
-    ),
+    contribution("recovery.bonus.base", "system.recovery.bonus", "base", "Permanent Recovery bonus", recoveryBonus),
     ...(extensions.recoveryBonus ?? [])
   ];
   const derivedRecoveryBonus = total(recoveryBonusContributions);
@@ -178,97 +174,66 @@ export function deriveCharacterData(
   const capacities = {} as CharacterDerivedData["wounds"]["capacities"];
   for (const severity of WOUND_SEVERITIES) {
     const contributions = [
-      contribution(
-        `wound.${severity}.capacity.core`,
-        "magnusarchives.core",
-        "core",
-        `${severity} Wound capacity`,
-        3
-      ),
+      contribution(`wound.${severity}.capacity.core`, "magnusarchives.core", "core", `${severity} Wound capacity`, 3),
       ...(extensions.woundCapacity?.[severity] ?? [])
     ];
     const calculated = Math.max(1, total(contributions));
     const modifier = overrides.wounds?.[severity] ?? 0;
     calculatedCapacities[severity] = calculated;
-    capacityContributions[severity] = modifier === 0 ? contributions : [...contributions, contribution(
-      `wound.${severity}.capacity.manual`,
-      `system.overrides.wounds.${severity}`,
-      "base",
-      `Manual ${severity} Wound capacity modifier`,
-      modifier
-    )];
+    capacityContributions[severity] =
+      modifier === 0
+        ? contributions
+        : [
+            ...contributions,
+            contribution(
+              `wound.${severity}.capacity.manual`,
+              `system.overrides.wounds.${severity}`,
+              "base",
+              `Manual ${severity} Wound capacity modifier`,
+              modifier
+            )
+          ];
     capacities[severity] = Math.max(1, calculated + modifier);
   }
 
   const hindranceContributions: DerivedContribution[] = [];
   if (wounds.moderate.length >= capacities.moderate) {
     hindranceContributions.push(
-      contribution(
-        "wound.moderate.full.hindrance",
-        "magnusarchives.core",
-        "core",
-        "Moderate Wounds full",
-        1
-      )
+      contribution("wound.moderate.full.hindrance", "magnusarchives.core", "core", "Moderate Wounds full", 1)
     );
   }
   for (const wound of wounds.major) {
     hindranceContributions.push(
-      contribution(
-        `wound.major.${wound.id}.hindrance`,
-        wound.id,
-        "wound",
-        wound.label || "Major Wound",
-        1
-      )
+      contribution(`wound.major.${wound.id}.hindrance`, wound.id, "wound", wound.label || "Major Wound", 1)
     );
   }
   const stressPoints = Math.max(0, conditions.stressPoints);
   const level = stressLevel(stressPoints);
   if (level > 0) {
     hindranceContributions.push(
-      contribution(
-        "stress.level.hindrance",
-        "magnusarchives.core",
-        "stress",
-        `Stress Level ${level}`,
-        level
-      )
+      contribution("stress.level.hindrance", "magnusarchives.core", "stress", `Stress Level ${level}`, level)
     );
   }
   hindranceContributions.push(...(extensions.hindrance ?? []));
 
   const equippedArmor = [...armorItems].filter((item) => item.type === "armor" && item.system.equipped);
   const armorGrantsHurtStep = equippedArmor.some((item) => item.system.grantsHurtStep !== false);
-  const hurtAvailable = conditions.hurtAvailable
-    || armorGrantsHurtStep
-    || (extensions.hurtStep?.length ?? 0) > 0;
+  const hurtAvailable = conditions.hurtAvailable || armorGrantsHurtStep || (extensions.hurtStep?.length ?? 0) > 0;
   const step = normalizeDamageTrackStep(conditions.damageTrackStep, hurtAvailable);
   const effects = damageTrackEffects(step);
 
   const armor = [...armorItems]
     .filter((item) => item.type === "armor" && item.system.equipped)
     .filter((item) => ARMOR_CATEGORIES.includes(item.system.category))
-    .sort((left, right) => (
-      ARMOR_STEPS[right.system.category] - ARMOR_STEPS[left.system.category]
-      || left.id.localeCompare(right.id)
-    ))[0];
+    .sort(
+      (left, right) =>
+        ARMOR_STEPS[right.system.category] - ARMOR_STEPS[left.system.category] || left.id.localeCompare(right.id)
+    )[0];
   const armorCategory = armor?.system.category ?? "none";
   const armorSteps = armor ? ARMOR_STEPS[armor.system.category] : 0;
-  const freelyUsed = armor
-    ? proficiencies.armorCategories.includes(armor.system.category)
-    : true;
-  const armorContribution = (
-    suffix: string,
-    label: string,
-    value: number
-  ): DerivedContribution[] => armor && value > 0 ? [contribution(
-    `armor.${armor.id}.${suffix}`,
-    armor.id,
-    "item",
-    label,
-    value
-  )] : [];
+  const freelyUsed = armor ? proficiencies.armorCategories.includes(armor.system.category) : true;
+  const armorContribution = (suffix: string, label: string, value: number): DerivedContribution[] =>
+    armor && value > 0 ? [contribution(`armor.${armor.id}.${suffix}`, armor.id, "item", label, value)] : [];
   const blockContributions = armorContribution("block", "Armor: Block", armorSteps);
   const dodgeContributions = armorContribution("dodge", "Armor: Dodge", armorSteps);
   // Magnus body armor hinders every Speed-based task, familiar or not (p100).
@@ -321,9 +286,10 @@ export function deriveCharacterData(
       manualModifier: recoveryRollModifier,
       bonus: derivedRecoveryBonus + recoveryRollModifier,
       bonusContributions: recoveryBonusContributions,
-      availableTypes: recoverySlots.length > 0
-        ? [...new Set(availableRecoverySlots(recoverySlots).map((slot) => slot.type))]
-        : availableRecoveryTypes(recoveryUsage)
+      availableTypes:
+        recoverySlots.length > 0
+          ? [...new Set(availableRecoverySlots(recoverySlots).map((slot) => slot.type))]
+          : availableRecoveryTypes(recoveryUsage)
     },
     cypherLimit: {max: Math.max(0, total(cypherLimitContributions)), contributions: cypherLimitContributions},
     combat: {

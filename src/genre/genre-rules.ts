@@ -19,12 +19,13 @@ export function effectiveGenre(
   if (!association.sourceUuid) return null;
   const genre = resolve(association.sourceUuid);
   if (
-    !genre
-    || genre.type !== "genre"
-    || !genre.system
-    || !genre.system.options
-    || !GENRE_EFFORT_CAP_MODES.includes(genre.system.options.totalEffortCapMode)
-  ) return null;
+    !genre ||
+    genre.type !== "genre" ||
+    !genre.system ||
+    !genre.system.options ||
+    !GENRE_EFFORT_CAP_MODES.includes(genre.system.options.totalEffortCapMode)
+  )
+    return null;
   return {
     sourceUuid: association.sourceUuid,
     name: genre.name,

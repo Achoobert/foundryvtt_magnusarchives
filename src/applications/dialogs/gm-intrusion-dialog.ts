@@ -22,13 +22,19 @@ export async function promptManualGMIntrusion(): Promise<void> {
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Intrusion.NoCharacters"));
     return;
   }
-  const targetedOptions = characters.map((actor) => (
-    '<option value="' + actor.id + '">' + escapeHtml(actor.name) + "</option>"
-  )).join("");
-  const groupOptions = characters.map((actor) => (
-    '<label class="intrusion-character-choice"><input name="group-' + actor.id
-      + '" type="checkbox"> ' + escapeHtml(actor.name) + "</label>"
-  )).join("");
+  const targetedOptions = characters
+    .map((actor) => '<option value="' + actor.id + '">' + escapeHtml(actor.name) + "</option>")
+    .join("");
+  const groupOptions = characters
+    .map(
+      (actor) =>
+        '<label class="intrusion-character-choice"><input name="group-' +
+        actor.id +
+        '" type="checkbox"> ' +
+        escapeHtml(actor.name) +
+        "</label>"
+    )
+    .join("");
   const content = [
     '<div class="magnusarchives-dialog-fields magnusarchives-intrusion-dialog">',
     "<label>" + game.i18n.localize("MAGNUSARCHIVES.Intrusion.ModeLabel"),
@@ -44,7 +50,7 @@ export async function promptManualGMIntrusion(): Promise<void> {
     groupOptions,
     "</fieldset></div>"
   ].join("");
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Intrusion.ManualTitle")},
     content,
     rejectClose: false,
@@ -61,12 +67,13 @@ export async function promptManualGMIntrusion(): Promise<void> {
       mode?.addEventListener("change", update);
       update();
     }
-  }) as Record<string, unknown> | null;
+  })) as Record<string, unknown> | null;
   if (!data) return;
   const mode = data.mode === "group" || data.mode === "free" ? data.mode : "targeted";
-  const actorIds = mode === "group"
-    ? characters.filter((actor) => checked(data["group-" + actor.id])).map((actor) => actor.id)
-    : [String(data.targetActorId ?? "")];
+  const actorIds =
+    mode === "group"
+      ? characters.filter((actor) => checked(data["group-" + actor.id])).map((actor) => actor.id)
+      : [String(data.targetActorId ?? "")];
   try {
     await gmIntrusionController().createManual({mode, actorIds});
   } catch (error) {

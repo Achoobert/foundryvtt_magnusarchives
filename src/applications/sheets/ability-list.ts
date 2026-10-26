@@ -28,9 +28,8 @@ function mayDeleteAbility(ability: AbilityItemLike): boolean {
 
 export function abilityListPresentation(ability: AbilityItemLike): AbilityListPresentation {
   const allowedPools = abilityAllowedPools(ability);
-  const amount = Number.isInteger(ability.system.cost.amount) && ability.system.cost.amount > 0
-    ? ability.system.cost.amount
-    : 0;
+  const amount =
+    Number.isInteger(ability.system.cost.amount) && ability.system.cost.amount > 0 ? ability.system.cost.amount : 0;
 
   return {
     archived: ability.system.archived === true,
@@ -51,11 +50,9 @@ export function sortAbilityList<T extends AbilityItemLike>(abilities: readonly T
   return abilities
     .map((ability, index) => ({ability, index}))
     .sort((left, right) => {
-      const archiveOrder = Number(left.ability.system.archived === true)
-        - Number(right.ability.system.archived === true);
-      return archiveOrder
-        || collator.compare(left.ability.name, right.ability.name)
-        || left.index - right.index;
+      const archiveOrder =
+        Number(left.ability.system.archived === true) - Number(right.ability.system.archived === true);
+      return archiveOrder || collator.compare(left.ability.name, right.ability.name) || left.index - right.index;
     })
     .map(({ability}) => ability);
 }

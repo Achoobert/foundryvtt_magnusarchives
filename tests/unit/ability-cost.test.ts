@@ -19,9 +19,10 @@ describe("Ability allowed Pool normalization", () => {
   });
 
   it("normalizes explicit combinations, removes invalid values, duplicates, and source ordering", () => {
-    expect(normalizeAbilityAllowedPools([
-      "intellect", "might", "might", "invalid"
-    ], "speed")).toEqual(["might", "intellect"]);
+    expect(normalizeAbilityAllowedPools(["intellect", "might", "might", "invalid"], "speed")).toEqual([
+      "might",
+      "intellect"
+    ]);
     expect(normalizeAbilityAllowedPools(["speed", "intellect"])).toEqual(["speed", "intellect"]);
   });
 
@@ -30,28 +31,40 @@ describe("Ability allowed Pool normalization", () => {
   });
 
   it("reads normalized documents and legacy documents through one compatibility boundary", () => {
-    expect(abilityAllowedPools({system: {
-      pool: "might",
-      cost: {allowedPools: ["speed", "intellect"]}
-    }})).toEqual(["speed", "intellect"]);
-    expect(abilityAllowedPools({system: {
-      pool: "choose",
-      cost: {}
-    }})).toEqual(["might", "speed", "intellect"]);
+    expect(
+      abilityAllowedPools({
+        system: {
+          pool: "might",
+          cost: {allowedPools: ["speed", "intellect"]}
+        }
+      })
+    ).toEqual(["speed", "intellect"]);
+    expect(
+      abilityAllowedPools({
+        system: {
+          pool: "choose",
+          cost: {}
+        }
+      })
+    ).toEqual(["might", "speed", "intellect"]);
   });
 });
 
 describe("natural Ability cost notation", () => {
-  const label = (pool: "might" | "speed" | "intellect") => ({
-    might: "Might", speed: "Speed", intellect: "Intellect"
-  })[pool];
+  const label = (pool: "might" | "speed" | "intellect") =>
+    ({
+      might: "Might",
+      speed: "Speed",
+      intellect: "Intellect"
+    })[pool];
   const separators = {pair: " or ", middle: ", ", final: ", or "};
 
   it("formats one, two, and three legal whole-cost Pool choices", () => {
     expect(formatAbilityPoolList(["might"], label, separators)).toBe("Might");
     expect(formatAbilityPoolList(["might", "intellect"], label, separators)).toBe("Might or Intellect");
-    expect(formatAbilityPoolList(["might", "speed", "intellect"], label, separators))
-      .toBe("Might, Speed, or Intellect");
+    expect(formatAbilityPoolList(["might", "speed", "intellect"], label, separators)).toBe(
+      "Might, Speed, or Intellect"
+    );
   });
 
   it("omits Free, Passive, zero, and Pool-less classifications", () => {

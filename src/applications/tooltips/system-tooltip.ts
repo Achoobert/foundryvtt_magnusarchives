@@ -14,9 +14,7 @@ export function tooltipPosition(
   margin = 8
 ): {left: number; top: number} {
   const right = target.right + margin;
-  const left = right + tooltip.width <= viewport.width - margin
-    ? right
-    : target.left - tooltip.width - margin;
+  const left = right + tooltip.width <= viewport.width - margin ? right : target.left - tooltip.width - margin;
   return {
     left: Math.max(margin, Math.min(left, viewport.width - tooltip.width - margin)),
     top: Math.max(margin, Math.min(target.top, viewport.height - tooltip.height - margin))

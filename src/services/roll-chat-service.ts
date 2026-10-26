@@ -102,10 +102,7 @@ export interface RollChatPublishOptions {
   readonly showGmAudit?: boolean;
 }
 
-function cardNaturalEffects(
-  result: RollResult,
-  localize: Localize
-): readonly RollCardNaturalEffect[] {
+function cardNaturalEffects(result: RollResult, localize: Localize): readonly RollCardNaturalEffect[] {
   return result.naturalEffects
     .filter((effect) => effect.status !== "inapplicable")
     .map((effect) => ({
@@ -118,22 +115,20 @@ function cardNaturalEffects(
 }
 
 /** Describe the resolved Special Roll consequence without deriving rules from the d20 in Handlebars. */
-function specialRollPresentation(
-  result: RollResult,
-  localize: Localize
-): RollCardSpecialRollPresentation | null {
+function specialRollPresentation(result: RollResult, localize: Localize): RollCardSpecialRollPresentation | null {
   const effects = result.naturalEffects.filter((effect) => effect.status !== "inapplicable");
   if (effects.some((effect) => effect.kind === "gm-intrusion")) {
     return {label: localize("MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion")};
   }
   const damage = effects.find((effect) => effect.kind === "damage-bonus");
-  const damageText = damage?.damageBonus === undefined
-    ? undefined
-    : `+${damage.damageBonus} ${localize("MAGNUSARCHIVES.Roll.NaturalEffects.Damage")}`;
-  const hasMinorEffect = effects.some((effect) => effect.kind === "minor-effect")
-    || (result.naturalRoll === 19 && damage !== undefined);
-  const hasMajorEffect = effects.some((effect) => effect.kind === "major-effect")
-    || (result.naturalRoll === 20 && damage !== undefined);
+  const damageText =
+    damage?.damageBonus === undefined
+      ? undefined
+      : `+${damage.damageBonus} ${localize("MAGNUSARCHIVES.Roll.NaturalEffects.Damage")}`;
+  const hasMinorEffect =
+    effects.some((effect) => effect.kind === "minor-effect") || (result.naturalRoll === 19 && damage !== undefined);
+  const hasMajorEffect =
+    effects.some((effect) => effect.kind === "major-effect") || (result.naturalRoll === 20 && damage !== undefined);
   if (hasMinorEffect) {
     return {
       label: localize("MAGNUSARCHIVES.Roll.SpecialRoll.MinorEffect"),
@@ -156,116 +151,148 @@ function specialRollPresentation(
   return first ? {label: localize(first.label)} : null;
 }
 
-function pluralizedStepSummary(
-  amount: number,
-  direction: "ease" | "hinder",
-  localize: Localize
-): string {
+function pluralizedStepSummary(amount: number, direction: "ease" | "hinder", localize: Localize): string {
   const modifier = formatStepModifier(direction, amount);
-  const key = direction === "ease"
-    ? amount === 1 ? "MAGNUSARCHIVES.Roll.EaseStep" : "MAGNUSARCHIVES.Roll.EaseSteps"
-    : amount === 1 ? "MAGNUSARCHIVES.Roll.HindranceStep" : "MAGNUSARCHIVES.Roll.HindranceSteps";
+  const key =
+    direction === "ease"
+      ? amount === 1
+        ? "MAGNUSARCHIVES.Roll.EaseStep"
+        : "MAGNUSARCHIVES.Roll.EaseSteps"
+      : amount === 1
+        ? "MAGNUSARCHIVES.Roll.HindranceStep"
+        : "MAGNUSARCHIVES.Roll.HindranceSteps";
   return `${modifier} ${localize(key)}`;
 }
 
-function modifierDetailRows(
-  prepared: RollResult["prepared"],
-  localize: Localize
-): readonly RollCardDetailEntry[] {
+function modifierDetailRows(prepared: RollResult["prepared"], localize: Localize): readonly RollCardDetailEntry[] {
   return prepared.breakdown.map((entry) => ({
     label: localize(entry.label),
     value: formatStepModifier(entry.direction, entry.steps)
   }));
 }
 
-function modifierTotalRows(
-  prepared: RollResult["prepared"],
-  localize: Localize
-): readonly RollCardDetailEntry[] {
-  if (prepared.breakdown.length === 0
-    && prepared.totalEase === 0
-    && prepared.totalHindrance === 0) return [];
-  return [{
-    label: localize("MAGNUSARCHIVES.Roll.TotalEase"),
-    value: prepared.totalEase === 0 ? 0 : formatStepModifier("ease", prepared.totalEase)
-  }, {
-    label: localize("MAGNUSARCHIVES.Roll.TotalHindrance"),
-    value: prepared.totalHindrance === 0 ? 0 : formatStepModifier("hinder", prepared.totalHindrance)
-  }];
+function modifierTotalRows(prepared: RollResult["prepared"], localize: Localize): readonly RollCardDetailEntry[] {
+  if (prepared.breakdown.length === 0 && prepared.totalEase === 0 && prepared.totalHindrance === 0) return [];
+  return [
+    {
+      label: localize("MAGNUSARCHIVES.Roll.TotalEase"),
+      value: prepared.totalEase === 0 ? 0 : formatStepModifier("ease", prepared.totalEase)
+    },
+    {
+      label: localize("MAGNUSARCHIVES.Roll.TotalHindrance"),
+      value: prepared.totalHindrance === 0 ? 0 : formatStepModifier("hinder", prepared.totalHindrance)
+    }
+  ];
 }
 
-function effortDetailRows(
-  result: RollResult,
-  localize: Localize
-): readonly RollCardDetailEntry[] {
+function effortDetailRows(result: RollResult, localize: Localize): readonly RollCardDetailEntry[] {
   const prepared = result.prepared;
   const context = prepared.context;
   return [
-    ...(context.paidEffort > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.PaidEffort"), value: context.paidEffort
-    }] : []),
-    ...((context.damageEffort ?? 0) > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.PaidDamageEffort"), value: context.damageEffort ?? 0
-    }] : []),
-    ...(context.freeEffort > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.FreeEffort"), value: context.freeEffort
-    }] : []),
-    ...((context.freeDamageEffort ?? 0) > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.FreeDamageEffort"), value: context.freeDamageEffort ?? 0
-    }] : []),
-    ...(prepared.totalEffortApplied > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
-      value: prepared.totalEffortMaximum === null
-        ? String(prepared.totalEffortApplied)
-        : `${prepared.totalEffortApplied} / ${prepared.totalEffortMaximum}`
-    }] : [])
+    ...(context.paidEffort > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.PaidEffort"),
+            value: context.paidEffort
+          }
+        ]
+      : []),
+    ...((context.damageEffort ?? 0) > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.PaidDamageEffort"),
+            value: context.damageEffort ?? 0
+          }
+        ]
+      : []),
+    ...(context.freeEffort > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.FreeEffort"),
+            value: context.freeEffort
+          }
+        ]
+      : []),
+    ...((context.freeDamageEffort ?? 0) > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.FreeDamageEffort"),
+            value: context.freeDamageEffort ?? 0
+          }
+        ]
+      : []),
+    ...(prepared.totalEffortApplied > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
+            value:
+              prepared.totalEffortMaximum === null
+                ? String(prepared.totalEffortApplied)
+                : `${prepared.totalEffortApplied} / ${prepared.totalEffortMaximum}`
+          }
+        ]
+      : [])
   ];
 }
 
-function costDetailRows(
-  result: RollResult,
-  localize: Localize
-): readonly RollCardDetailEntry[] {
+function costDetailRows(result: RollResult, localize: Localize): readonly RollCardDetailEntry[] {
   const prepared = result.prepared;
-  const hasPoolCost = prepared.actionCostBeforeEdge > 0
-    || prepared.effortCostBeforeEdge > 0
-    || result.poolCostPaid > 0;
+  const hasPoolCost = prepared.actionCostBeforeEdge > 0 || prepared.effortCostBeforeEdge > 0 || result.poolCostPaid > 0;
   return [
-    ...(prepared.actionCostBeforeEdge > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Ability.Cost"), value: prepared.actionCostBeforeEdge
-    }] : []),
-    ...(prepared.edgeApplied > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Pools.Edge"), value: prepared.edgeApplied
-    }] : []),
-    ...(hasPoolCost ? [{
-      label: localize("MAGNUSARCHIVES.Roll.CostPaid"), value: result.poolCostPaid
-    }] : []),
-    ...(result.poolCostRefunded > 0 ? [{
-      label: localize("MAGNUSARCHIVES.Roll.NaturalEffects.Refunded"), value: result.poolCostRefunded
-    }] : [])
+    ...(prepared.actionCostBeforeEdge > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Ability.Cost"),
+            value: prepared.actionCostBeforeEdge
+          }
+        ]
+      : []),
+    ...(prepared.edgeApplied > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Pools.Edge"),
+            value: prepared.edgeApplied
+          }
+        ]
+      : []),
+    ...(hasPoolCost
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.CostPaid"),
+            value: result.poolCostPaid
+          }
+        ]
+      : []),
+    ...(result.poolCostRefunded > 0
+      ? [
+          {
+            label: localize("MAGNUSARCHIVES.Roll.NaturalEffects.Refunded"),
+            value: result.poolCostRefunded
+          }
+        ]
+      : [])
   ];
 }
 
-function horrorModeDetailRows(
-  result: RollResult,
-  localize: Localize
-): readonly RollCardDetailEntry[] {
-  const effect = result.naturalEffects.find((candidate) => (
-    candidate.kind === "gm-intrusion"
-    && candidate.status === "applied"
-    && candidate.intrusionProvenance === "horror-mode"
-    && candidate.horrorIntrusionRange !== undefined
-  ));
-  return effect?.horrorIntrusionRange === undefined ? [] : [{
-    label: localize("MAGNUSARCHIVES.Horror.Title"),
-    value: `1–${effect.horrorIntrusionRange}`
-  }];
+function horrorModeDetailRows(result: RollResult, localize: Localize): readonly RollCardDetailEntry[] {
+  const effect = result.naturalEffects.find(
+    (candidate) =>
+      candidate.kind === "gm-intrusion" &&
+      candidate.status === "applied" &&
+      candidate.intrusionProvenance === "horror-mode" &&
+      candidate.horrorIntrusionRange !== undefined
+  );
+  return effect?.horrorIntrusionRange === undefined
+    ? []
+    : [
+        {
+          label: localize("MAGNUSARCHIVES.Horror.Title"),
+          value: `1–${effect.horrorIntrusionRange}`
+        }
+      ];
 }
 
-function baseCardData(
-  result: RollResult,
-  localize: Localize
-): RollCardBase {
+function baseCardData(result: RollResult, localize: Localize): RollCardBase {
   const prepared = result.prepared;
   const poolKey = prepared.context.pool
     ? `${prepared.context.pool[0]!.toUpperCase()}${prepared.context.pool.slice(1)}`
@@ -273,12 +300,8 @@ function baseCardData(
   const naturalEffects = cardNaturalEffects(result, localize);
   const visibleNaturalEffects = naturalEffects.filter((effect) => !effect.isIntrusion);
   const stepSummary = [
-    ...(prepared.totalEase > 0
-      ? [pluralizedStepSummary(prepared.totalEase, "ease", localize)]
-      : []),
-    ...(prepared.totalHindrance > 0
-      ? [pluralizedStepSummary(prepared.totalHindrance, "hinder", localize)]
-      : [])
+    ...(prepared.totalEase > 0 ? [pluralizedStepSummary(prepared.totalEase, "ease", localize)] : []),
+    ...(prepared.totalHindrance > 0 ? [pluralizedStepSummary(prepared.totalHindrance, "hinder", localize)] : [])
   ].join(" · ");
   return {
     actorName: prepared.context.actor.name,
@@ -290,9 +313,7 @@ function baseCardData(
     showNaturalDifficulty: result.naturalDifficulty !== null,
     breakdown: prepared.breakdown.map((entry) => ({
       label: localize(entry.label),
-      direction: localize(
-        entry.direction === "ease" ? "MAGNUSARCHIVES.Roll.Ease" : "MAGNUSARCHIVES.Roll.Hinder"
-      ),
+      direction: localize(entry.direction === "ease" ? "MAGNUSARCHIVES.Roll.Ease" : "MAGNUSARCHIVES.Roll.Hinder"),
       steps: entry.steps,
       isEase: entry.direction === "ease",
       modifier: formatStepModifier(entry.direction, entry.steps)
@@ -326,21 +347,30 @@ function baseCardData(
         }
       : {}),
     ...(prepared.context.target ? {targetName: prepared.context.target.name} : {}),
-    ...(prepared.context.origin?.kind === "weapon" ? {
-      weaponName: prepared.context.origin.name,
-      weaponCategory: localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${prepared.context.origin.category}`)
-    } : {}),
-    ...(prepared.context.origin?.kind === "defense" ? {
-      defenseType: localize(`MAGNUSARCHIVES.Combat.Defense.${prepared.context.origin.defenseType}`)
-    } : {}),
-    ...(prepared.context.origin?.kind === "ability" ? {
-      abilityName: prepared.context.origin.name,
-      abilityActivation: localize(`MAGNUSARCHIVES.Ability.Activation.${prepared.context.origin.activation}`)
-    } : {})
+    ...(prepared.context.origin?.kind === "weapon"
+      ? {
+          weaponName: prepared.context.origin.name,
+          weaponCategory: localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${prepared.context.origin.category}`)
+        }
+      : {}),
+    ...(prepared.context.origin?.kind === "defense"
+      ? {
+          defenseType: localize(`MAGNUSARCHIVES.Combat.Defense.${prepared.context.origin.defenseType}`)
+        }
+      : {}),
+    ...(prepared.context.origin?.kind === "ability"
+      ? {
+          abilityName: prepared.context.origin.name,
+          abilityActivation: localize(`MAGNUSARCHIVES.Ability.Activation.${prepared.context.origin.activation}`)
+        }
+      : {})
   };
 }
 
-function outcomeData(success: boolean, localize: Localize): {
+function outcomeData(
+  success: boolean,
+  localize: Localize
+): {
   outcome: string;
   outcomeIcon: "✓" | "✕";
   outcomeClass: "success" | "failure";
@@ -350,7 +380,11 @@ function outcomeData(success: boolean, localize: Localize): {
     : {outcome: localize("MAGNUSARCHIVES.Roll.Failure"), outcomeIcon: "✕", outcomeClass: "failure"};
 }
 
-function resultOutcomeData(result: RollResult, localize: Localize, discloseAutomatic = true): {
+function resultOutcomeData(
+  result: RollResult,
+  localize: Localize,
+  discloseAutomatic = true
+): {
   outcome: string;
   outcomeIcon: "✓" | "✕";
   outcomeClass: "success" | "failure";
@@ -366,10 +400,13 @@ export function buildPublicRollCardData(
   localize: Localize = (key) => key
 ): PublicRollCardData {
   const base = baseCardData(result, localize);
-  const performance = result.beatsDifficulty === null ? {} : {
-    beatsDifficulty: result.beatsDifficulty,
-    showBeatsDifficulty: true as const
-  };
+  const performance =
+    result.beatsDifficulty === null
+      ? {}
+      : {
+          beatsDifficulty: result.beatsDifficulty,
+          showBeatsDifficulty: true as const
+        };
   const horrorDetails = horrorModeDetailRows(result, localize);
   const difficulty = result.prepared.context.difficulty;
   if (difficulty.mode === "unknown") {
@@ -378,21 +415,26 @@ export function buildPublicRollCardData(
       ...performance,
       presentation: "unknown",
       resolutionDetails: horrorDetails,
-      hasDetails: horrorDetails.length > 0
-        || base.modifierDetails.length > 0
-        || base.modifierTotalDetails.length > 0
-        || base.effortDetails.length > 0
-        || base.costDetails.length > 0
+      hasDetails:
+        horrorDetails.length > 0 ||
+        base.modifierDetails.length > 0 ||
+        base.modifierTotalDetails.length > 0 ||
+        base.effortDetails.length > 0 ||
+        base.costDetails.length > 0
     };
   }
   if (difficulty.mode === "known") {
-    const resolutionDetails: readonly RollCardDetailEntry[] = [{
-      label: localize("MAGNUSARCHIVES.Roll.Difficulty"),
-      value: result.prepared.finalDifficulty ?? 0
-    }, {
-      label: localize("MAGNUSARCHIVES.Roll.TargetNumber"),
-      value: result.prepared.targetNumber ?? 0
-    }, ...horrorDetails];
+    const resolutionDetails: readonly RollCardDetailEntry[] = [
+      {
+        label: localize("MAGNUSARCHIVES.Roll.Difficulty"),
+        value: result.prepared.finalDifficulty ?? 0
+      },
+      {
+        label: localize("MAGNUSARCHIVES.Roll.TargetNumber"),
+        value: result.prepared.targetNumber ?? 0
+      },
+      ...horrorDetails
+    ];
     return {
       ...base,
       ...performance,
@@ -411,11 +453,12 @@ export function buildPublicRollCardData(
     presentation: "concealed",
     ...resultOutcomeData(result, localize, false),
     resolutionDetails: horrorDetails,
-    hasDetails: horrorDetails.length > 0
-      || base.modifierDetails.length > 0
-      || base.modifierTotalDetails.length > 0
-      || base.effortDetails.length > 0
-      || base.costDetails.length > 0
+    hasDetails:
+      horrorDetails.length > 0 ||
+      base.modifierDetails.length > 0 ||
+      base.modifierTotalDetails.length > 0 ||
+      base.effortDetails.length > 0 ||
+      base.costDetails.length > 0
   };
 }
 
@@ -447,10 +490,7 @@ export function buildRollCardCombatData(
   };
 }
 
-export function buildAuditRollCardData(
-  result: RollResult,
-  localize: Localize = (key) => key
-): AuditRollCardData {
+export function buildAuditRollCardData(result: RollResult, localize: Localize = (key) => key): AuditRollCardData {
   const difficulty = result.prepared.context.difficulty;
   if (difficulty.mode !== "hidden") throw new Error("Only hidden-difficulty rolls require an audit card.");
   return {
@@ -475,31 +515,34 @@ export class RollChatService {
     const publicData = {
       ...basePublicData,
       ...combatData,
-      hasDetails: basePublicData.hasDetails
-        || combatData.damageDetails.length > 0
-        || combatData.damageTotalDetails.length > 0,
+      hasDetails:
+        basePublicData.hasDetails || combatData.damageDetails.length > 0 || combatData.damageTotalDetails.length > 0,
       ...chatCardActorImageData(actor as unknown as import("./chat-card-presentation").ChatCardActorLike),
-      ...(options.combat?.damageEffect === undefined ? {} : {
-        combatDamageEffect: localize(`MAGNUSARCHIVES.CharacterDamage.${options.combat.damageEffect}`),
-        ...(options.combat.damageEffect === "stress"
-          ? {combatStressAmount: options.combat.stressAmount ?? 0}
-          : {})
-      }),
-      ...(options.combat?.shieldTransfer === undefined ? {} : {
-        shieldTransfer: true,
-        shieldName: options.combat.shieldTransfer.shieldName,
-        shieldSeverity: localize(`MAGNUSARCHIVES.Wounds.Severity.${options.combat.shieldTransfer.severity}`)
-      }),
-      ...(options.combat?.action ? {
-        combatAction: true,
-        combatActionLabel: localize(
-          options.combat.action.kind === "npcDamage"
-            ? "MAGNUSARCHIVES.Combat.ApplyDamage"
-            : options.combat.action.kind === "shieldWound"
-              ? "MAGNUSARCHIVES.Combat.ApplyWoundToShield"
-              : "MAGNUSARCHIVES.Combat.ApplyWound"
-        )
-      } : {})
+      ...(options.combat?.damageEffect === undefined
+        ? {}
+        : {
+            combatDamageEffect: localize(`MAGNUSARCHIVES.CharacterDamage.${options.combat.damageEffect}`),
+            ...(options.combat.damageEffect === "stress" ? {combatStressAmount: options.combat.stressAmount ?? 0} : {})
+          }),
+      ...(options.combat?.shieldTransfer === undefined
+        ? {}
+        : {
+            shieldTransfer: true,
+            shieldName: options.combat.shieldTransfer.shieldName,
+            shieldSeverity: localize(`MAGNUSARCHIVES.Wounds.Severity.${options.combat.shieldTransfer.severity}`)
+          }),
+      ...(options.combat?.action
+        ? {
+            combatAction: true,
+            combatActionLabel: localize(
+              options.combat.action.kind === "npcDamage"
+                ? "MAGNUSARCHIVES.Combat.ApplyDamage"
+                : options.combat.action.kind === "shieldWound"
+                  ? "MAGNUSARCHIVES.Combat.ApplyWoundToShield"
+                  : "MAGNUSARCHIVES.Combat.ApplyWound"
+            )
+          }
+        : {})
     };
     const publicContent = await foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/roll-card.hbs",

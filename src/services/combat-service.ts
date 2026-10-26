@@ -31,19 +31,9 @@ import {SkillService} from "./skill-service";
 import {TargetResolver} from "./target-resolver";
 import {WoundService, type WoundApplicationResult} from "./wound-service";
 import {ConditionService, type DamageTrackResult, type StressResult} from "./condition-service";
-import {
-  NoopCombatFeedbackService,
-  type CombatFeedbackService
-} from "./combat-feedback-service";
-import {
-  NoopCombatStatusService,
-  type CombatStatusService
-} from "./combat-status-service";
-import {
-  ShieldService,
-  type ShieldItemLike,
-  type ShieldWoundApplication
-} from "./shield-service";
+import {NoopCombatFeedbackService, type CombatFeedbackService} from "./combat-feedback-service";
+import {NoopCombatStatusService, type CombatStatusService} from "./combat-status-service";
+import {ShieldService, type ShieldItemLike, type ShieldWoundApplication} from "./shield-service";
 import {WeaponService} from "./weapon-service";
 import {normalizeWeaponFamily} from "../combat/weapon-family";
 
@@ -190,10 +180,7 @@ export function naturalDamageBonus(result: RollResult): number {
     .reduce((total, effect) => total + (effect.damageBonus ?? 0), 0);
 }
 
-export function chooseNaturalAttackEffect(
-  result: RollResult,
-  choice: "damage" | "effect"
-): RollResult {
+export function chooseNaturalAttackEffect(result: RollResult, choice: "damage" | "effect"): RollResult {
   const available = result.naturalEffects.filter((effect) => effect.status === "available");
   if (available.length === 0) return result;
   return {
@@ -201,8 +188,7 @@ export function chooseNaturalAttackEffect(
     naturalEffects: result.naturalEffects.map((effect) => {
       if (effect.status !== "available") return effect;
       const chooseDamage = choice === "damage" && effect.kind === "damage-bonus";
-      const chooseEffect = choice === "effect"
-        && (effect.kind === "minor-effect" || effect.kind === "major-effect");
+      const chooseEffect = choice === "effect" && (effect.kind === "minor-effect" || effect.kind === "major-effect");
       return {...effect, status: chooseDamage || chooseEffect ? "applied" : "inapplicable"};
     })
   };
@@ -264,17 +250,19 @@ export class CombatService {
   }
 
   weaponFreelyUsed(actor: CombatCharacterLike, weapon: WeaponItemLike): boolean {
-    const effectiveCategories = actor.system.derived.packages?.weaponCategories
-      ?? actor.system.proficiencies.weaponCategories;
+    const effectiveCategories =
+      actor.system.derived.packages?.weaponCategories ?? actor.system.proficiencies.weaponCategories;
     const effectiveFamilies = actor.system.derived.packages?.weaponFamilies ?? [];
     const family = normalizeWeaponFamily(weapon.system.family);
-    return effectiveCategories.includes(weapon.system.category)
-      || (family !== "" && effectiveFamilies.some((entry) => normalizeWeaponFamily(entry) === family));
+    return (
+      effectiveCategories.includes(weapon.system.category) ||
+      (family !== "" && effectiveFamilies.some((entry) => normalizeWeaponFamily(entry) === family))
+    );
   }
 
   armorFreelyUsed(actor: CombatCharacterLike, armor: import("../combat/combat-types").ArmorItemLike): boolean {
-    const effectiveCategories = actor.system.derived.packages?.armorCategories
-      ?? actor.system.proficiencies.armorCategories;
+    const effectiveCategories =
+      actor.system.derived.packages?.armorCategories ?? actor.system.proficiencies.armorCategories;
     return effectiveCategories.includes(armor.system.category);
   }
 
@@ -300,12 +288,11 @@ export class CombatService {
     weapon: WeaponItemLike,
     enabledRuleModuleIds: readonly string[] = []
   ): readonly SkillItemLike[] {
-    return this.#applicableSkills(actor, [
-      "attack",
-      "attack.weapon",
-      `attack.${weapon.system.attackType}`,
-      `weapon.${weapon.system.category}`
-    ], enabledRuleModuleIds);
+    return this.#applicableSkills(
+      actor,
+      ["attack", "attack.weapon", `attack.${weapon.system.attackType}`, `weapon.${weapon.system.category}`],
+      enabledRuleModuleIds
+    );
   }
 
   applicableDefenseSkills(
@@ -313,11 +300,11 @@ export class CombatService {
     defenseType: DefenseType,
     enabledRuleModuleIds: readonly string[] = []
   ): readonly SkillItemLike[] {
-    return this.#applicableSkills(actor, [
-      "defense",
-      ...(defenseType === "blockWithShield" ? ["defense.block"] : []),
-      `defense.${defenseType}`
-    ], enabledRuleModuleIds);
+    return this.#applicableSkills(
+      actor,
+      ["defense", ...(defenseType === "blockWithShield" ? ["defense.block"] : []), `defense.${defenseType}`],
+      enabledRuleModuleIds
+    );
   }
 
   buildWeaponAttackPlan(
@@ -345,9 +332,7 @@ export class CombatService {
     const targetActors = options.targets ?? [];
     const targetResolutions = targetActors.map((target) => this.#targets.resolve(target, context, enabled));
     const targets: readonly (NpcTargetLike | null)[] = targetActors.length > 0 ? targetActors : [null];
-    const resolutions: readonly (TargetResolution | null)[] = targetResolutions.length > 0
-      ? targetResolutions
-      : [null];
+    const resolutions: readonly (TargetResolution | null)[] = targetResolutions.length > 0 ? targetResolutions : [null];
     const commonContributions: RollStepContribution[] = [];
     if (weapon.system.category === "light" && policy.lightWeaponEase > 0) {
       commonContributions.push({
@@ -371,9 +356,11 @@ export class CombatService {
         sourceId: weapon.id
       });
     }
-    if (!Number.isInteger(weapon.system.attackModifier)
-      || weapon.system.attackModifier < -2
-      || weapon.system.attackModifier > 2) {
+    if (
+      !Number.isInteger(weapon.system.attackModifier) ||
+      weapon.system.attackModifier < -2 ||
+      weapon.system.attackModifier > 2
+    ) {
       throw new Error("Weapon attack modifier must be an integer from -2 to +2.");
     }
     if (weapon.system.attackModifier !== 0) {
@@ -386,9 +373,7 @@ export class CombatService {
         sourceId: weapon.id
       });
     }
-    const skillContribution = options.skill
-      ? this.#skills.rankContribution(options.skill, enabled)
-      : null;
+    const skillContribution = options.skill ? this.#skills.rankContribution(options.skill, enabled) : null;
     if (skillContribution) commonContributions.push(skillContribution);
     const categoryDamage = policy.weaponDamage[weapon.system.category];
     const weaponBonusDamage = weapon.system.bonusDamage;
@@ -398,7 +383,7 @@ export class CombatService {
       pool,
       difficulty: resolution
         ? {mode: "hidden", value: resolution.difficulty}
-        : options.difficulty ?? {mode: "unknown"},
+        : (options.difficulty ?? {mode: "unknown"}),
       skillSteps: options.skillSteps ?? 0,
       assets: options.assets ?? 0,
       paidEffort: options.paidEffort ?? 0,
@@ -407,11 +392,13 @@ export class CombatService {
       freeEffort: options.freeEffort ?? 0,
       otherEase: options.otherEase ?? 0,
       otherHindrance: options.otherHindrance ?? 0,
-      contributions: [...new Map([
-        ...commonContributions,
-        ...(resolution?.contributions ?? []),
-        ...(options.contributions ?? [])
-      ].map((entry) => [entry.id, entry])).values()],
+      contributions: [
+        ...new Map(
+          [...commonContributions, ...(resolution?.contributions ?? []), ...(options.contributions ?? [])].map(
+            (entry) => [entry.id, entry]
+          )
+        ).values()
+      ],
       purpose: "damage",
       tags: [
         ...context.tags,
@@ -426,13 +413,15 @@ export class CombatService {
         attackType: weapon.system.attackType,
         baseDamage
       },
-      ...(targets[index] ? {
-        target: {
-          ...combatTargetIdentity(targets[index]!),
-          name: targets[index]!.name,
-          type: "npc"
-        }
-      } : {})
+      ...(targets[index]
+        ? {
+            target: {
+              ...combatTargetIdentity(targets[index]!),
+              name: targets[index]!.name,
+              type: "npc"
+            }
+          }
+        : {})
     }));
     return {
       weapon,
@@ -458,8 +447,7 @@ export class CombatService {
     const executions = await this.#rolls.executeBatch(actor, plan.requests, policyRequest);
     const weaponUse = executions.length > 0 ? await this.#consumeWeaponUse(weapon) : undefined;
     return executions.map((execution, index) => {
-      const effortDamage = execution.result.prepared.damageEffortApplied
-        * plan.policy.damageEffortBonus;
+      const effortDamage = execution.result.prepared.damageEffortApplied * plan.policy.damageEffortBonus;
       const naturalDamage = naturalDamageBonus(execution.result);
       const grossDamage = plan.baseDamage + effortDamage + naturalDamage;
       const target = plan.targets[index] ?? null;
@@ -495,9 +483,8 @@ export class CombatService {
       const result = chooseNaturalAttackEffect(outcome.execution.result, choice);
       const origin = result.prepared.context.origin;
       if (origin?.kind !== "weapon") return outcome;
-      const grossDamage = origin.baseDamage
-        + (result.prepared.damageEffortApplied * policy.damageEffortBonus)
-        + naturalDamageBonus(result);
+      const grossDamage =
+        origin.baseDamage + result.prepared.damageEffortApplied * policy.damageEffortBonus + naturalDamageBonus(result);
       const effortDamage = result.prepared.damageEffortApplied * policy.damageEffortBonus;
       const naturalDamage = naturalDamageBonus(result);
       return {
@@ -520,22 +507,22 @@ export class CombatService {
     const enabled = options.enabledRuleModuleIds ?? [];
     const pool: PoolKey = defenseType === "dodge" ? "speed" : "might";
     const armor = actor.system.derived.combat.armor;
-    const armorContributions = defenseType === "dodge"
-      ? armor.dodgeContributions.map((entry) => (
-          derivedContribution(entry, "hinder", "MAGNUSARCHIVES.Combat.Armor.DodgeHindrance")
-        ))
-      : armor.blockContributions.map((entry) => (
-          derivedContribution(entry, "ease", "MAGNUSARCHIVES.Combat.Armor.BlockEase")
-        ));
-    const skillContribution = options.skill
-      ? this.#skills.rankContribution(options.skill, enabled)
-      : null;
+    const armorContributions =
+      defenseType === "dodge"
+        ? armor.dodgeContributions.map((entry) =>
+            derivedContribution(entry, "hinder", "MAGNUSARCHIVES.Combat.Armor.DodgeHindrance")
+          )
+        : armor.blockContributions.map((entry) =>
+            derivedContribution(entry, "ease", "MAGNUSARCHIVES.Combat.Armor.BlockEase")
+          );
+    const skillContribution = options.skill ? this.#skills.rankContribution(options.skill, enabled) : null;
     return {
-      label: defenseType === "dodge"
-        ? "MAGNUSARCHIVES.Combat.Defense.DodgeRoll"
-        : defenseType === "blockWithShield"
-          ? "MAGNUSARCHIVES.Combat.Defense.BlockWithShieldRoll"
-          : "MAGNUSARCHIVES.Combat.Defense.BlockRoll",
+      label:
+        defenseType === "dodge"
+          ? "MAGNUSARCHIVES.Combat.Defense.DodgeRoll"
+          : defenseType === "blockWithShield"
+            ? "MAGNUSARCHIVES.Combat.Defense.BlockWithShieldRoll"
+            : "MAGNUSARCHIVES.Combat.Defense.BlockRoll",
       pool,
       difficulty: options.difficulty,
       skillSteps: options.skillSteps ?? 0,
@@ -585,10 +572,7 @@ export class CombatService {
   }
 
   /** A successful defense avoids the attack entirely; a failed one takes it in full. */
-  damageAfterDefense(
-    result: RollResult,
-    effect: Exclude<CharacterDamageEffect, "none">
-  ): CharacterDamageEffect {
+  damageAfterDefense(result: RollResult, effect: Exclude<CharacterDamageEffect, "none">): CharacterDamageEffect {
     return result.success === true ? "none" : effect;
   }
 
@@ -630,12 +614,7 @@ export class CombatService {
       sourceUuid: source ? `Actor.${source.id}` : "magnusarchives.combat"
     });
     if (result.appliedSeverity) {
-      await this.#feedback.shieldWound?.(
-        actor,
-        shield.name,
-        result.appliedSeverity,
-        result.broken
-      );
+      await this.#feedback.shieldWound?.(actor, shield.name, result.appliedSeverity, result.broken);
     }
     return result;
   }
@@ -657,10 +636,7 @@ export class CombatService {
     const previousHealth = nonNegativeInteger(target.system.health.value, "NPC Health");
     const appliedDamage = Math.max(0, damage - armor);
     const health = Math.max(0, previousHealth - appliedDamage);
-    await target.update(
-      {"system.health.value": health},
-      {magnusarchivesSkipDeadStatusSync: true}
-    );
+    await target.update({"system.health.value": health}, {magnusarchivesSkipDeadStatusSync: true});
     const result = {
       requestedDamage: damage,
       armor,
@@ -679,7 +655,9 @@ export class CombatService {
    * them one step down the damage track (p12).
    */
   async applyCharacterDamage(
-    target: CharacterDocumentLike & {readonly id: string} & import("../combat/combat-types").CombatTargetDocumentIdentity,
+    target: CharacterDocumentLike & {
+      readonly id: string;
+    } & import("../combat/combat-types").CombatTargetDocumentIdentity,
     effect: Exclude<CharacterDamageEffect, "none">,
     stressAmount = 0
   ): Promise<CharacterDamageApplication> {
@@ -710,9 +688,8 @@ export class CombatService {
       .sort((left, right) => {
         const leftContribution = this.#skills.rankContribution(left, enabledRuleModuleIds);
         const rightContribution = this.#skills.rankContribution(right, enabledRuleModuleIds);
-        const score = (entry: RollStepContribution | null): number => entry
-          ? entry.steps * (entry.direction === "ease" ? 1 : -1)
-          : 0;
+        const score = (entry: RollStepContribution | null): number =>
+          entry ? entry.steps * (entry.direction === "ease" ? 1 : -1) : 0;
         return score(rightContribution) - score(leftContribution) || left.name.localeCompare(right.name);
       });
   }

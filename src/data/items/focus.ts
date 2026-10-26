@@ -65,12 +65,12 @@ export class FocusDataModel extends ItemDataModelBase {
       version: Number(migrated.graphVersion ?? 1),
       nodes: legacyNodes.map((raw) => {
         const node = raw as Record<string, unknown>;
-        const snapshot = node.abilitySnapshot && typeof node.abilitySnapshot === "object"
-          ? node.abilitySnapshot as Record<string, unknown>
-          : {};
-        const position = node.position && typeof node.position === "object"
-          ? node.position as Record<string, unknown>
-          : {};
+        const snapshot =
+          node.abilitySnapshot && typeof node.abilitySnapshot === "object"
+            ? (node.abilitySnapshot as Record<string, unknown>)
+            : {};
+        const position =
+          node.position && typeof node.position === "object" ? (node.position as Record<string, unknown>) : {};
         return {
           id: String(node.id ?? ""),
           abilityUuid: String(node.abilitySourceUuid ?? ""),

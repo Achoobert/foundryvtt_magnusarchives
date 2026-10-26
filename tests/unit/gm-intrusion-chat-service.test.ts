@@ -15,11 +15,14 @@ function record(mode: GMIntrusionRecord["mode"] = "targeted"): GMIntrusionRecord
   return {
     id: "intrusion-1",
     mode,
-    targets: mode === "group" ? [
-      {actorId: "actor-1", actorName: "Leon Kennedy", actorImage: "leon.webp"},
-      {actorId: "actor-2", actorName: "Dada Wong", actorImage: "dada.webp"},
-      {actorId: "actor-3", actorName: "Jill Valentine", actorImage: "jill.webp"}
-    ] : [{actorId: "actor-1", actorName: "Arthur", actorImage: "arthur.webp"}],
+    targets:
+      mode === "group"
+        ? [
+            {actorId: "actor-1", actorName: "Leon Kennedy", actorImage: "leon.webp"},
+            {actorId: "actor-2", actorName: "Dada Wong", actorImage: "dada.webp"},
+            {actorId: "actor-3", actorName: "Jill Valentine", actorImage: "jill.webp"}
+          ]
+        : [{actorId: "actor-1", actorName: "Arthur", actorImage: "arthur.webp"}],
     targetXp: mode === "free" ? 0 : 1,
     sharedXp: mode === "targeted" ? 1 : 0,
     naturalRoll: mode === "free" ? 1 : 0
@@ -83,8 +86,9 @@ describe("GM Intrusion Chat presentation", () => {
     expect(template).toContain("sourceCharacter.actorImage");
     expect(template).toContain("sourceCharacter.actorName");
     expect(template).toContain("MAGNUSARCHIVES.Intrusion.Chat.FreeHint");
-    expect(template.slice(template.indexOf("{{else}}", template.indexOf("{{else if isGroup}}"))))
-      .not.toContain("assignSharedIntrusionXp");
+    expect(template.slice(template.indexOf("{{else}}", template.indexOf("{{else if isGroup}}")))).not.toContain(
+      "assignSharedIntrusionXp"
+    );
   });
 
   it("uses one full-width row for each recipient and each Group Character", () => {
@@ -95,8 +99,8 @@ describe("GM Intrusion Chat presentation", () => {
     expect(template).toContain('class="intrusion-recipient-list"');
     expect(template).toContain('class="intrusion-group-list"');
     expect(template).toContain('class="intrusion-group-character"');
-    expect(template).toContain('MAGNUSARCHIVES.Intrusion.Chat.XPAmount');
-    expect(template).toContain('xp=../targetXp');
+    expect(template).toContain("MAGNUSARCHIVES.Intrusion.Chat.XPAmount");
+    expect(template).toContain("xp=../targetXp");
     expect(styles).toMatch(/\.intrusion-recipient-list\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, 1fr\)/);
     expect(styles).toMatch(/button\.intrusion-recipient\s*\{[\s\S]*?width:\s*100%/);
     expect(styles).not.toMatch(/\.intrusion-recipient-list\s*\{[\s\S]*?repeat\(auto-fit/);

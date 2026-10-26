@@ -153,7 +153,11 @@
     }
 
     &.state-owned {
-      background: color-mix(in srgb, var(--magnusarchives-color-accent) 24%, var(--magnusarchives-color-surface-raised));
+      background: color-mix(
+        in srgb,
+        var(--magnusarchives-color-accent) 24%,
+        var(--magnusarchives-color-surface-raised)
+      );
       border-color: var(--magnusarchives-color-accent);
     }
 

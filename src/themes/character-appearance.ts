@@ -29,9 +29,7 @@ export type FoundryAssetRouteResolver = (path: string) => string;
 function normalizeHex(value: string): string | null {
   const match = value.trim().match(/^#([\da-f]{3}|[\da-f]{6})$/i);
   if (!match) return null;
-  const hex = match[1]!.length === 3
-    ? [...match[1]!].map((digit) => `${digit}${digit}`).join("")
-    : match[1]!;
+  const hex = match[1]!.length === 3 ? [...match[1]!].map((digit) => `${digit}${digit}`).join("") : match[1]!;
   return `#${hex.toLocaleLowerCase("en-US")}`;
 }
 
@@ -44,9 +42,13 @@ function rgb(hex: string): {r: number; g: number; b: number} {
 }
 
 function hex({r, g, b}: {r: number; g: number; b: number}): string {
-  return `#${[r, g, b].map((channel) => (
-    Math.max(0, Math.min(255, Math.round(channel))).toString(16).padStart(2, "0")
-  )).join("")}`;
+  return `#${[r, g, b]
+    .map((channel) =>
+      Math.max(0, Math.min(255, Math.round(channel)))
+        .toString(16)
+        .padStart(2, "0")
+    )
+    .join("")}`;
 }
 
 function mix(
@@ -56,23 +58,21 @@ function mix(
 ): {r: number; g: number; b: number} {
   const backgroundWeight = 1 - foregroundWeight;
   return {
-    r: (foreground.r * foregroundWeight) + (background.r * backgroundWeight),
-    g: (foreground.g * foregroundWeight) + (background.g * backgroundWeight),
-    b: (foreground.b * foregroundWeight) + (background.b * backgroundWeight)
+    r: foreground.r * foregroundWeight + background.r * backgroundWeight,
+    g: foreground.g * foregroundWeight + background.g * backgroundWeight,
+    b: foreground.b * foregroundWeight + background.b * backgroundWeight
   };
 }
 
 function readableAccent(color: string): string {
   const source = rgb(color);
-  return Math.max(source.r, source.g, source.b) < 96
-    ? hex(mix(source, {r: 255, g: 255, b: 255}, 0.72))
-    : color;
+  return Math.max(source.r, source.g, source.b) < 96 ? hex(mix(source, {r: 255, g: 255, b: 255}, 0.72)) : color;
 }
 
 /** Composite any player color onto a fixed charcoal base for a guaranteed dark large-surface tint. */
 export function safeCharacterTint(color: string): string | null {
   const normalized = normalizeHex(color);
-  return normalized ? hex(mix(rgb(normalized), TINT_BASE, 0.20)) : null;
+  return normalized ? hex(mix(rgb(normalized), TINT_BASE, 0.2)) : null;
 }
 
 /** Normalize a player color for small decorative accents without changing semantic Theme colors. */
@@ -118,18 +118,13 @@ export function resolveCharacterAppearance(
   const storedColor = normalizeHex(appearance.color);
   const accent = storedColor ? safeCharacterAccent(storedColor) : null;
   const tint = storedColor ? safeCharacterTint(storedColor) : null;
-  const backgroundSource = backgroundMode === "portrait"
-    ? portrait.trim()
-    : backgroundMode === "custom"
-      ? customImage
-      : "";
+  const backgroundSource =
+    backgroundMode === "portrait" ? portrait.trim() : backgroundMode === "custom" ? customImage : "";
   const backgroundImage = resolveFoundryAssetUrl(backgroundSource, getRoute);
   const properties = [
     ...(accent ? [`--magnusarchives-character-accent: ${accent}`] : []),
     ...(tint ? [`--magnusarchives-character-tint: ${tint}`] : []),
-    ...(backgroundImage
-      ? [`--magnusarchives-character-background-image: ${cssUrl(backgroundImage)}`]
-      : [])
+    ...(backgroundImage ? [`--magnusarchives-character-background-image: ${cssUrl(backgroundImage)}`] : [])
   ];
   return {
     backgroundMode,

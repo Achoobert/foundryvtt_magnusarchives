@@ -127,9 +127,8 @@ export class RollService {
     }
     const tags = request.tags ?? [];
     const armor = actor.system.derived.combat?.armor;
-    const isDodge = tags.includes("defense.dodge") || (
-      request.origin?.kind === "defense" && request.origin.defenseType === "dodge"
-    );
+    const isDodge =
+      tags.includes("defense.dodge") || (request.origin?.kind === "defense" && request.origin.defenseType === "dodge");
     if (request.pool === "speed" && !isDodge) {
       for (const entry of armor?.speedTaskContributions ?? []) {
         contributions.push({
@@ -144,11 +143,10 @@ export class RollService {
     }
     contributions.push(...(request.contributions ?? []));
 
-    if (request.pool === null && (
-      request.paidEffort > 0
-      || (request.damageEffort ?? 0) > 0
-      || (request.actionCost ?? 0) > 0
-    )) {
+    if (
+      request.pool === null &&
+      (request.paidEffort > 0 || (request.damageEffort ?? 0) > 0 || (request.actionCost ?? 0) > 0)
+    ) {
       throw new Error("A Pool-less roll cannot pay Effort or an action cost.");
     }
 
@@ -203,17 +201,17 @@ export class RollService {
     if (requests.length === 0) return [];
     const preparedRolls = requests.map((request) => this.preview(actor, request, policyRequest));
     const first = preparedRolls[0]!;
-    if (preparedRolls.some((prepared) => (
-      prepared.context.pool !== first.context.pool || prepared.poolCost !== first.poolCost
-    ))) {
+    if (
+      preparedRolls.some(
+        (prepared) => prepared.context.pool !== first.context.pool || prepared.poolCost !== first.poolCost
+      )
+    ) {
       throw new Error("Batch rolls must use one Pool and one shared action cost.");
     }
     const pool = first.context.pool;
     const currentPool = pool === null ? 0 : actor.system.stats[pool].value;
     if (currentPool < first.poolCost) {
-      throw new Error(
-        `${pool ?? "No Pool"} has ${currentPool} points but this action costs ${first.poolCost}.`
-      );
+      throw new Error(`${pool ?? "No Pool"} has ${currentPool} points but this action costs ${first.poolCost}.`);
     }
     if (first.poolCost > 0 && pool !== null) {
       await actor.update({[`system.stats.${pool}.value`]: currentPool - first.poolCost});
@@ -221,18 +219,16 @@ export class RollService {
     const needsD20 = preparedRolls.some((prepared) => prepared.finalDifficulty !== 0);
     const rolled = needsD20 ? await this.#roller() : null;
     const results = preparedRolls.map((prepared) => {
-      const resolved = prepared.finalDifficulty === 0
-        ? resolveAutomaticSuccess(prepared)
-        : resolveRoll(prepared, rolled!.naturalRoll);
-      const naturalEffects = this.#rules.resolveNaturalEffects(
-        resolved,
-        policyRequest.enabledRuleModuleIds ?? []
-      );
+      const resolved =
+        prepared.finalDifficulty === 0 ? resolveAutomaticSuccess(prepared) : resolveRoll(prepared, rolled!.naturalRoll);
+      const naturalEffects = this.#rules.resolveNaturalEffects(resolved, policyRequest.enabledRuleModuleIds ?? []);
       return {...resolved, naturalEffects};
     });
-    const refund = results.some((result) => result.naturalEffects.some(
-      (effect) => effect.status === "applied" && effect.refundsPoolCost === true
-    )) ? first.poolCost : 0;
+    const refund = results.some((result) =>
+      result.naturalEffects.some((effect) => effect.status === "applied" && effect.refundsPoolCost === true)
+    )
+      ? first.poolCost
+      : 0;
     if (refund > 0 && pool !== null) {
       await actor.update({[`system.stats.${pool}.value`]: currentPool});
     }

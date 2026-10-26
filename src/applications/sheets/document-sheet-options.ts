@@ -14,10 +14,10 @@ export const DOCUMENT_SHEET_FORM_OPTIONS = {
 } as const;
 
 /** Expose TypeDataModel SchemaFields to Foundry's native form helpers. */
-export function documentSystemFields(
-  document: {readonly system: Record<string, unknown>}
-): Record<string, unknown> {
-  return (document.system as unknown as {
-    readonly schema: {readonly fields: Record<string, unknown>};
-  }).schema.fields;
+export function documentSystemFields(document: {readonly system: Record<string, unknown>}): Record<string, unknown> {
+  return (
+    document.system as unknown as {
+      readonly schema: {readonly fields: Record<string, unknown>};
+    }
+  ).schema.fields;
 }

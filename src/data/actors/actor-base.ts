@@ -11,4 +11,3 @@ export abstract class ActorDataModelBase extends foundry.abstract.TypeDataModel 
     };
   }
 }
-

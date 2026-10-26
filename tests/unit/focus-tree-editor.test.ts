@@ -12,11 +12,7 @@ import type {FocusGraph} from "../../src/focus/focus-types";
 
 const emptyGraph = (): FocusGraph => ({version: 1, nodes: [], connections: []});
 
-function ability(
-  uuid: string,
-  name = uuid,
-  description = `<p>${name} description</p>`
-): FocusEditorAbilityLike {
+function ability(uuid: string, name = uuid, description = `<p>${name} description</p>`): FocusEditorAbilityLike {
   return {uuid, name, type: "ability", system: {description}};
 }
 
@@ -51,16 +47,15 @@ describe("FocusTreeEditorSession", () => {
     expect(session.cancel()).toEqual(initial);
     session.clearConnections();
     let persisted: FocusGraph | undefined;
-    await session.save(async (graph) => { persisted = graph; });
+    await session.save(async (graph) => {
+      persisted = graph;
+    });
     expect(persisted).toEqual({...initial, connections: []});
     expect(session.dirty).toBe(false);
   });
 
   it("adds only Abilities with unique stable node IDs and a current snapshot", () => {
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("first", "second")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("first", "second"));
     const sourceA = ability("Item.a", "Ability A", "<p>Original A</p>");
     const sourceB = ability("Item.b", "Ability B", "<p>Original B</p>");
     const first = session.addAbility(sourceA, 2);
@@ -87,11 +82,13 @@ describe("FocusTreeEditorSession", () => {
 
   it("rejects a dropped Item that is not an Ability", () => {
     const session = new FocusTreeEditorSession(emptyGraph());
-    expect(() => session.addAbility({
-      uuid: "Item.weapon",
-      name: "Not an Ability",
-      type: "weapon"
-    })).toThrowError(expect.objectContaining<Partial<FocusTreeEditorError>>({code: "not-ability"}));
+    expect(() =>
+      session.addAbility({
+        uuid: "Item.weapon",
+        name: "Not an Ability",
+        type: "weapon"
+      })
+    ).toThrowError(expect.objectContaining<Partial<FocusTreeEditorError>>({code: "not-ability"}));
     expect(session.graph.nodes).toEqual([]);
   });
 
@@ -118,10 +115,7 @@ describe("FocusTreeEditorSession", () => {
   });
 
   it("creates explicit A -> B and B -> A links and rejects duplicates and self-links", () => {
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("a", "b", "ab", "ba")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("a", "b", "ab", "ba"));
     const a = session.addAbility(ability("Item.a"));
     const b = session.addAbility(ability("Item.b"));
     expect(session.connect(a.id, b.id)).toMatchObject({
@@ -143,10 +137,7 @@ describe("FocusTreeEditorSession", () => {
   });
 
   it("deletes one connection without affecting its nodes", () => {
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("a", "b", "ab")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("a", "b", "ab"));
     const a = session.addAbility(ability("Item.a"));
     const b = session.addAbility(ability("Item.b"));
     const connection = session.connect(a.id, b.id);
@@ -156,10 +147,7 @@ describe("FocusTreeEditorSession", () => {
   });
 
   it("deletes a node and every incident connection but no unrelated connection", () => {
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("a", "b", "c", "ab", "ba", "bc")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("a", "b", "c", "ab", "ba", "bc"));
     const a = session.addAbility(ability("Item.a"));
     const b = session.addAbility(ability("Item.b"));
     const c = session.addAbility(ability("Item.c"));
@@ -205,10 +193,7 @@ describe("FocusTreeEditorSession", () => {
 
   it("validates and persists the entire graph with one coherent Save Tree update", async () => {
     const persist = vi.fn(async () => undefined);
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("a", "b", "ab")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("a", "b", "ab"));
     const a = session.addAbility(ability("Item.a"));
     const b = session.addAbility(ability("Item.b"));
     session.connect(a.id, b.id);
@@ -241,10 +226,7 @@ describe("FocusTreeEditorSession", () => {
 
   it("shows a longer directed-cycle warning but allows Save Tree", async () => {
     const persist = vi.fn(async () => undefined);
-    const session = new FocusTreeEditorSession(
-      emptyGraph(),
-      sequentialIds("a", "b", "c", "ab", "bc", "ca")
-    );
+    const session = new FocusTreeEditorSession(emptyGraph(), sequentialIds("a", "b", "c", "ab", "bc", "ca"));
     const a = session.addAbility(ability("Item.a"));
     const b = session.addAbility(ability("Item.b"));
     const c = session.addAbility(ability("Item.c"));
@@ -253,10 +235,12 @@ describe("FocusTreeEditorSession", () => {
     session.connect(c.id, a.id);
 
     const result = await session.save(persist);
-    expect(result.diagnostics).toContainEqual(expect.objectContaining({
-      severity: "warning",
-      code: "directed-cycle"
-    }));
+    expect(result.diagnostics).toContainEqual(
+      expect.objectContaining({
+        severity: "warning",
+        code: "directed-cycle"
+      })
+    );
     expect(persist).toHaveBeenCalledTimes(1);
   });
 
@@ -270,30 +254,30 @@ describe("FocusTreeEditorSession", () => {
     const characterBefore = structuredClone(character);
     const initial: FocusGraph = {
       version: 1,
-      nodes: [{
-        id: "node-a",
-        abilityUuid: source.uuid,
-        abilitySnapshot: {name: source.name},
-        tier: 1,
-        position: {x: 0, y: null}
-      }],
+      nodes: [
+        {
+          id: "node-a",
+          abilityUuid: source.uuid,
+          abilitySnapshot: {name: source.name},
+          tier: 1,
+          position: {x: 0, y: null}
+        }
+      ],
       connections: []
     };
     const session = new FocusTreeEditorSession(initial);
     session.deleteNode("node-a");
     await session.save(async () => undefined);
 
-    const evaluation = new FocusEvaluator().evaluateCharacterFocus(
-      session.graph,
-      character,
-      "Item.focus"
-    );
+    const evaluation = new FocusEvaluator().evaluateCharacterFocus(session.graph, character, "Item.focus");
     expect(evaluation.ownedNodeIds).toEqual(["node-a"]);
-    expect(evaluation.diagnostics).toContainEqual(expect.objectContaining({
-      severity: "warning",
-      code: "unknown-owned-node",
-      nodeId: "node-a"
-    }));
+    expect(evaluation.diagnostics).toContainEqual(
+      expect.objectContaining({
+        severity: "warning",
+        code: "unknown-owned-node",
+        nodeId: "node-a"
+      })
+    );
     expect(character).toEqual(characterBefore);
     expect(source).toEqual(sourceBefore);
   });

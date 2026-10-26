@@ -10,8 +10,12 @@ describe("Ability Runtime UI", () => {
   it("uses the Ability name and chevron only for accordion disclosure", () => {
     expect(source).toContain('{id: "abilities"');
     expect(characterSheet).toContain('data-tab="abilities"');
-    expect(characterSheet).toContain('class="ability-details-toggle magnusarchives-icon-action" data-action="toggleAbilityDetails"');
-    expect(characterSheet).toContain('class="ability-reference magnusarchives-primary-action" data-action="toggleAbilityDetails"');
+    expect(characterSheet).toContain(
+      'class="ability-details-toggle magnusarchives-icon-action" data-action="toggleAbilityDetails"'
+    );
+    expect(characterSheet).toContain(
+      'class="ability-reference magnusarchives-primary-action" data-action="toggleAbilityDetails"'
+    );
     expect(characterSheet).toContain('aria-expanded="{{ability.expanded}}"');
     expect(characterSheet).not.toContain('data-action="useAbility"');
   });
@@ -23,8 +27,8 @@ describe("Ability Runtime UI", () => {
     expect(characterSheet).toContain('data-action="inspectAbility"');
     expect(characterSheet).toContain('data-action="deleteAbility"');
     expect(characterSheet).toContain('class="fa-solid fa-coins"');
-    expect(characterSheet).toContain('fa-box-archive');
-    expect(characterSheet).toContain('fa-arrow-rotate-left');
+    expect(characterSheet).toContain("fa-box-archive");
+    expect(characterSheet).toContain("fa-arrow-rotate-left");
     expect(characterSheet).toContain('class="fa-solid fa-pen"');
     expect(characterSheet).toContain('class="fa-solid fa-trash"');
     expect(source).toContain('await ability.update({"system.archived": !archived})');
@@ -60,7 +64,8 @@ describe("Ability Runtime UI", () => {
       "system.damageEffect",
       "system.range",
       "system.targetMode"
-    ]) expect(itemSheet).toContain(`name="${field}"`);
+    ])
+      expect(itemSheet).toContain(`name="${field}"`);
     expect(itemSheet).toContain("data-ability-allowed-pool");
     expect(itemSheet).toContain('name="system.description"');
     expect(itemSheet).toContain('elementType="prose-mirror"');

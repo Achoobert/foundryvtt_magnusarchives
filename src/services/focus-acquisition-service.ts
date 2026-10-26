@@ -1,11 +1,6 @@
 import {FocusEvaluator} from "../focus/focus-evaluator";
 import {FocusGraphValidationError} from "../focus/focus-graph-validator";
-import type {
-  FocusAcquisitionRecord,
-  FocusDocumentLike,
-  FocusNode,
-  FocusProgress
-} from "../focus/focus-types";
+import type {FocusAcquisitionRecord, FocusDocumentLike, FocusNode, FocusProgress} from "../focus/focus-types";
 import type {PendingFocusChoice} from "../advancement/advancement-types";
 import {effectiveTier} from "../rules/core/character-overrides";
 import {
@@ -126,14 +121,10 @@ function progressionMatches(progress: FocusProgress, focus: FocusDocumentLike): 
   return progress.focusUuid === focus.uuid || progress.focusUuid === focus.id;
 }
 
-function provenanceMatches(
-  ability: EmbeddedFocusAbilityLike,
-  focusUuid: string,
-  nodeId: string
-): boolean {
-  return ability.type === "ability"
-    && ability.system.sourceFocusUuid === focusUuid
-    && ability.system.sourceNodeId === nodeId;
+function provenanceMatches(ability: EmbeddedFocusAbilityLike, focusUuid: string, nodeId: string): boolean {
+  return (
+    ability.type === "ability" && ability.system.sourceFocusUuid === focusUuid && ability.system.sourceNodeId === nodeId
+  );
 }
 
 /** Stable Foundry embedded-document ID scoped by the provenance pair. */
@@ -171,9 +162,11 @@ export class FocusAcquisitionService {
     progress: FocusProgress
   ): ReadonlySet<string> {
     const embedded = [...actor.items];
-    return new Set(progress.ownedNodeIds.filter((nodeId) => !embedded.some((ability) => (
-      provenanceMatches(ability, focus.uuid, nodeId)
-    ))));
+    return new Set(
+      progress.ownedNodeIds.filter(
+        (nodeId) => !embedded.some((ability) => provenanceMatches(ability, focus.uuid, nodeId))
+      )
+    );
   }
 
   async acquire(
@@ -182,9 +175,9 @@ export class FocusAcquisitionService {
     nodeId: string,
     conflictResolver?: GrantConflictResolver
   ): Promise<FocusAcquisitionResult> {
-    return this.#exclusive(this.#key(actor), () => (
+    return this.#exclusive(this.#key(actor), () =>
       this.#acquireLocked(actor, focus, nodeId, false, true, conflictResolver)
-    ));
+    );
   }
 
   /** Character-facing permissive acquisition. Pending choices remain untouched. */
@@ -194,9 +187,9 @@ export class FocusAcquisitionService {
     nodeId: string,
     conflictResolver?: GrantConflictResolver
   ): Promise<FocusAcquisitionResult> {
-    return this.#exclusive(this.#key(actor), () => (
+    return this.#exclusive(this.#key(actor), () =>
       this.#acquireLocked(actor, focus, nodeId, false, false, conflictResolver)
-    ));
+    );
   }
 
   /** Explicit GM-only sheet action; callers must enforce GM authorization. */
@@ -205,9 +198,7 @@ export class FocusAcquisitionService {
     focus: FocusDocumentLike,
     nodeId: string
   ): Promise<FocusAcquisitionResult> {
-    return this.#exclusive(this.#key(actor), () => (
-      this.#acquireLocked(actor, focus, nodeId, true, false)
-    ));
+    return this.#exclusive(this.#key(actor), () => this.#acquireLocked(actor, focus, nodeId, true, false));
   }
 
   /** GM repair/import action. It intentionally bypasses both eligibility and choices. */
@@ -216,9 +207,7 @@ export class FocusAcquisitionService {
     focus: FocusDocumentLike,
     nodeId: string
   ): Promise<FocusAcquisitionResult> {
-    return this.#exclusive(this.#key(actor), () => (
-      this.#markOwnedLocked(actor, focus, nodeId)
-    ));
+    return this.#exclusive(this.#key(actor), () => this.#markOwnedLocked(actor, focus, nodeId));
   }
 
   async undo(
@@ -227,9 +216,7 @@ export class FocusAcquisitionService {
     nodeId: string,
     options: FocusUndoOptions = {}
   ): Promise<FocusUndoResult> {
-    return this.#exclusive(this.#key(actor), () => (
-      this.#undoLocked(actor, focus, nodeId, options)
-    ));
+    return this.#exclusive(this.#key(actor), () => this.#undoLocked(actor, focus, nodeId, options));
   }
 
   hasEmbeddedAbility(actor: FocusCharacterLike, focusUuid: string, nodeId: string): boolean {
@@ -241,9 +228,7 @@ export class FocusAcquisitionService {
     focus: FocusDocumentLike,
     nodeId: string
   ): Promise<FocusRestorationResult> {
-    return this.#exclusive(this.#key(actor), () => (
-      this.#restoreLocked(actor, focus, nodeId)
-    ));
+    return this.#exclusive(this.#key(actor), () => this.#restoreLocked(actor, focus, nodeId));
   }
 
   async #acquireLocked(
@@ -263,23 +248,21 @@ export class FocusAcquisitionService {
 
     let evaluated;
     try {
-      evaluated = this.#evaluator.evaluateProgress(focus.system.graph, effectiveTier(actor.system), progress)
+      evaluated = this.#evaluator
+        .evaluateProgress(focus.system.graph, effectiveTier(actor.system), progress)
         .nodes.find((entry) => entry.node.id === nodeId);
     } catch (error) {
       if (!(error instanceof FocusGraphValidationError)) throw error;
       // A malformed graph remains diagnostic information, not a blocker for
       // explicit Character ownership changes.
     }
-    const choice = actor.system.advancement.pendingFocusChoices.find((entry) => (
-      entry.focusUuid === ""
-      || entry.focusUuid === focus.uuid
-      || entry.focusUuid === focus.id
-    ));
+    const choice = actor.system.advancement.pendingFocusChoices.find(
+      (entry) => entry.focusUuid === "" || entry.focusUuid === focus.uuid || entry.focusUuid === focus.id
+    );
     // Availability remains fully evaluated for guidance, diagnostics, and normal
     // choice consumption. An authorized sheet action may still acquire an
     // advisory-unavailable node, but it is recorded explicitly as an override.
-    const normalAcquisition = consumeChoice && !gmOverride
-      && evaluated?.state === "available" && Boolean(choice);
+    const normalAcquisition = consumeChoice && !gmOverride && evaluated?.state === "available" && Boolean(choice);
 
     let abilityCreated = false;
     let conflictOverridden = false;
@@ -314,33 +297,32 @@ export class FocusAcquisitionService {
 
     const latestProgress = this.#progress(actor, focus);
     if (!latestProgress.ownedNodeIds.includes(nodeId)) {
-      const nextProgress = actor.system.focusProgress.map((entry) => (
+      const nextProgress = actor.system.focusProgress.map((entry) =>
         progressionMatches(entry, focus)
           ? {
-            ...entry,
-            ownedNodeIds: [...entry.ownedNodeIds, nodeId],
-            acquisitions: [
-              ...(entry.acquisitions ?? []),
-              this.#acquisitionRecord(
-                nodeId,
-                gmOverride || conflictOverridden
-                  ? "gmOverride"
-                  : normalAcquisition
-                    ? "choice"
-                    : "manualOverride",
-                normalAcquisition ? choice : null
-              )
-            ]
-          }
+              ...entry,
+              ownedNodeIds: [...entry.ownedNodeIds, nodeId],
+              acquisitions: [
+                ...(entry.acquisitions ?? []),
+                this.#acquisitionRecord(
+                  nodeId,
+                  gmOverride || conflictOverridden ? "gmOverride" : normalAcquisition ? "choice" : "manualOverride",
+                  normalAcquisition ? choice : null
+                )
+              ]
+            }
           : {...entry, ownedNodeIds: [...entry.ownedNodeIds], acquisitions: [...(entry.acquisitions ?? [])]}
-      ));
+      );
       try {
         await actor.update({
           "system.focusProgress": nextProgress,
-          ...(normalAcquisition && !conflictOverridden && choice ? {
-            "system.advancement.pendingFocusChoices": actor.system.advancement.pendingFocusChoices
-              .filter((entry) => entry.id !== choice.id)
-          } : {})
+          ...(normalAcquisition && !conflictOverridden && choice
+            ? {
+                "system.advancement.pendingFocusChoices": actor.system.advancement.pendingFocusChoices.filter(
+                  (entry) => entry.id !== choice.id
+                )
+              }
+            : {})
         });
       } catch (error) {
         if (createdDocument?.delete) await createdDocument.delete();
@@ -369,16 +351,15 @@ export class FocusAcquisitionService {
         createdDocument = await this.#createAbility(actor, focus, nodeId, data);
       }
     }
-    const nextProgress = actor.system.focusProgress.map((entry) => progressionMatches(entry, focus)
-      ? {
-        ...entry,
-        ownedNodeIds: [...entry.ownedNodeIds, nodeId],
-        acquisitions: [
-          ...(entry.acquisitions ?? []),
-          this.#acquisitionRecord(nodeId, "gmManual", null)
-        ]
-      }
-      : {...entry, ownedNodeIds: [...entry.ownedNodeIds], acquisitions: [...(entry.acquisitions ?? [])]});
+    const nextProgress = actor.system.focusProgress.map((entry) =>
+      progressionMatches(entry, focus)
+        ? {
+            ...entry,
+            ownedNodeIds: [...entry.ownedNodeIds, nodeId],
+            acquisitions: [...(entry.acquisitions ?? []), this.#acquisitionRecord(nodeId, "gmManual", null)]
+          }
+        : {...entry, ownedNodeIds: [...entry.ownedNodeIds], acquisitions: [...(entry.acquisitions ?? [])]}
+    );
     try {
       await actor.update({"system.focusProgress": nextProgress});
     } catch (error) {
@@ -401,9 +382,7 @@ export class FocusAcquisitionService {
       throw new FocusAcquisitionError("undo-not-owned", `Focus node '${nodeId}' is not owned.`);
     }
     const remainingOwnedNodeIds = progress.ownedNodeIds.filter((id) => id !== nodeId);
-    const beforeInvalid = new Set(this.#invalidOwnedNodeIds(
-      focus, effectiveTier(actor.system), progress.ownedNodeIds
-    ));
+    const beforeInvalid = new Set(this.#invalidOwnedNodeIds(focus, effectiveTier(actor.system), progress.ownedNodeIds));
     const afterInvalid = this.#invalidOwnedNodeIds(focus, effectiveTier(actor.system), remainingOwnedNodeIds);
     const dependentNodeIds = afterInvalid.filter((id) => !beforeInvalid.has(id));
     if (dependentNodeIds.length > 0 && !options.force) {
@@ -415,25 +394,28 @@ export class FocusAcquisitionService {
     }
 
     const record = (progress.acquisitions ?? []).find((entry) => entry.nodeId === nodeId);
-    const choiceRestored = record && record.choiceSource !== "none" && record.choiceId
-      ? {
-        id: record.choiceId,
-        source: record.choiceSource,
-        grantTier: record.choiceGrantTier,
-        focusUuid: record.choiceFocusUuid
-      } satisfies PendingFocusChoice
-      : null;
-    const nextProgress = actor.system.focusProgress.map((entry) => progressionMatches(entry, focus)
-      ? {
-        ...entry,
-        ownedNodeIds: remainingOwnedNodeIds,
-        acquisitions: (entry.acquisitions ?? []).filter((acquisition) => acquisition.nodeId !== nodeId)
-      }
-      : {...entry, ownedNodeIds: [...entry.ownedNodeIds], acquisitions: [...(entry.acquisitions ?? [])]});
-    const nextChoices = choiceRestored
-      && !actor.system.advancement.pendingFocusChoices.some((choice) => choice.id === choiceRestored.id)
-      ? [...actor.system.advancement.pendingFocusChoices, choiceRestored]
-      : [...actor.system.advancement.pendingFocusChoices];
+    const choiceRestored =
+      record && record.choiceSource !== "none" && record.choiceId
+        ? ({
+            id: record.choiceId,
+            source: record.choiceSource,
+            grantTier: record.choiceGrantTier,
+            focusUuid: record.choiceFocusUuid
+          } satisfies PendingFocusChoice)
+        : null;
+    const nextProgress = actor.system.focusProgress.map((entry) =>
+      progressionMatches(entry, focus)
+        ? {
+            ...entry,
+            ownedNodeIds: remainingOwnedNodeIds,
+            acquisitions: (entry.acquisitions ?? []).filter((acquisition) => acquisition.nodeId !== nodeId)
+          }
+        : {...entry, ownedNodeIds: [...entry.ownedNodeIds], acquisitions: [...(entry.acquisitions ?? [])]}
+    );
+    const nextChoices =
+      choiceRestored && !actor.system.advancement.pendingFocusChoices.some((choice) => choice.id === choiceRestored.id)
+        ? [...actor.system.advancement.pendingFocusChoices, choiceRestored]
+        : [...actor.system.advancement.pendingFocusChoices];
     await actor.update({
       "system.focusProgress": nextProgress,
       "system.advancement.pendingFocusChoices": nextChoices
@@ -450,11 +432,7 @@ export class FocusAcquisitionService {
     return {choiceRestored, abilityDeleted, invalidOwnedNodeIds: afterInvalid};
   }
 
-  #invalidOwnedNodeIds(
-    focus: FocusDocumentLike,
-    tier: number,
-    ownedNodeIds: readonly string[]
-  ): readonly string[] {
+  #invalidOwnedNodeIds(focus: FocusDocumentLike, tier: number, ownedNodeIds: readonly string[]): readonly string[] {
     try {
       return this.#evaluator.invalidOwnedNodeIds(focus.system.graph, tier, ownedNodeIds);
     } catch (error) {
@@ -492,16 +470,12 @@ export class FocusAcquisitionService {
     };
   }
 
-  async #abilityData(
-    focus: FocusDocumentLike,
-    node: FocusNode
-  ): Promise<Record<string, unknown>> {
+  async #abilityData(focus: FocusDocumentLike, node: FocusNode): Promise<Record<string, unknown>> {
     const source = await this.#resolveSource(node.abilityUuid);
     if (source?.type === "ability" && source.name.trim()) {
       const raw = source.toObject?.() ?? {};
-      const rawSystem = raw.system && typeof raw.system === "object"
-        ? raw.system as Record<string, unknown>
-        : source.system;
+      const rawSystem =
+        raw.system && typeof raw.system === "object" ? (raw.system as Record<string, unknown>) : source.system;
       return {
         _id: focusAbilityDocumentId(focus.uuid, node.id),
         name: source.name,
@@ -511,7 +485,15 @@ export class FocusAcquisitionService {
           ...structuredClone(rawSystem),
           sourceFocusUuid: focus.uuid,
           sourceNodeId: node.id,
-          grantedBy: {kind: "focus", sourceUuid: focus.uuid, instanceId: focus.uuid, grantId: node.id, status: "active", contentUuid: node.abilityUuid, contentKey: `ability:${source.name.trim().toLocaleLowerCase()}`}
+          grantedBy: {
+            kind: "focus",
+            sourceUuid: focus.uuid,
+            instanceId: focus.uuid,
+            grantId: node.id,
+            status: "active",
+            contentUuid: node.abilityUuid,
+            contentKey: `ability:${source.name.trim().toLocaleLowerCase()}`
+          }
         }
       };
     }
@@ -532,16 +514,20 @@ export class FocusAcquisitionService {
         description: node.abilitySnapshot.description ?? "",
         sourceFocusUuid: focus.uuid,
         sourceNodeId: node.id,
-        grantedBy: {kind: "focus", sourceUuid: focus.uuid, instanceId: focus.uuid, grantId: node.id, status: "active", contentUuid: node.abilityUuid, contentKey: `ability:${snapshotName.toLocaleLowerCase()}`}
+        grantedBy: {
+          kind: "focus",
+          sourceUuid: focus.uuid,
+          instanceId: focus.uuid,
+          grantId: node.id,
+          status: "active",
+          contentUuid: node.abilityUuid,
+          contentKey: `ability:${snapshotName.toLocaleLowerCase()}`
+        }
       }
     };
   }
 
-  #embeddedAbility(
-    actor: FocusCharacterLike,
-    focusUuid: string,
-    nodeId: string
-  ): EmbeddedFocusAbilityLike | null {
+  #embeddedAbility(actor: FocusCharacterLike, focusUuid: string, nodeId: string): EmbeddedFocusAbilityLike | null {
     return [...actor.items].find((ability) => provenanceMatches(ability, focusUuid, nodeId)) ?? null;
   }
 
@@ -569,12 +555,20 @@ export class FocusAcquisitionService {
   ): GrantConflict | null {
     const system = (data.system ?? {}) as Record<string, unknown>;
     const provenance = (system.grantedBy ?? {}) as {contentUuid?: string; contentKey?: string};
-    const identity = grantIdentity("ability", String(data.name ?? node.abilitySnapshot.name), String(provenance.contentUuid ?? node.abilityUuid));
+    const identity = grantIdentity(
+      "ability",
+      String(data.name ?? node.abilitySnapshot.name),
+      String(provenance.contentUuid ?? node.abilityUuid)
+    );
     const existing = findGrantConflict(actor.items as unknown as Iterable<GrantDocumentLike>, identity);
     if (!existing) return null;
     const existingSystem = existing.system ?? {};
     const existingProvenance = (existingSystem.grantedBy ?? {}) as {contentUuid?: string; contentKey?: string};
-    const existingIdentity = grantIdentity("ability", existing.name ?? "", String(existingProvenance.contentUuid ?? ""));
+    const existingIdentity = grantIdentity(
+      "ability",
+      existing.name ?? "",
+      String(existingProvenance.contentUuid ?? "")
+    );
     return {
       id: `${focus.uuid}:${node.id}`,
       type: "ability",
@@ -613,11 +607,18 @@ export class FocusAcquisitionService {
   ): Promise<EmbeddedFocusAbilityLike | null> {
     const system = (data.system ?? {}) as Record<string, unknown>;
     const provenance = (system.grantedBy ?? {}) as {contentUuid?: string; contentKey?: string};
-    if (hasGrantConflict(actor.items as unknown as Iterable<GrantDocumentLike>, {
-      type: "ability",
-      contentUuid: String(provenance.contentUuid ?? ""),
-      contentKey: String(provenance.contentKey ?? `ability:${String(data.name ?? "").trim().toLocaleLowerCase()}`)
-    })) {
+    if (
+      hasGrantConflict(actor.items as unknown as Iterable<GrantDocumentLike>, {
+        type: "ability",
+        contentUuid: String(provenance.contentUuid ?? ""),
+        contentKey: String(
+          provenance.contentKey ??
+            `ability:${String(data.name ?? "")
+              .trim()
+              .toLocaleLowerCase()}`
+        )
+      })
+    ) {
       throw new FocusAcquisitionError(
         "duplicate-grant",
         `Focus node '${nodeId}' grants an Ability already present on this Character; choose a replacement with the GM.`
@@ -625,7 +626,7 @@ export class FocusAcquisitionService {
     }
     try {
       const created = await actor.createEmbeddedDocuments("Item", [data], {keepId: true});
-      return created[0] as EmbeddedFocusAbilityLike | undefined ?? null;
+      return (created[0] as EmbeddedFocusAbilityLike | undefined) ?? null;
     } catch (error) {
       // A concurrent owner may have won the same deterministic-ID creation.
       if (this.#embeddedAbility(actor, focus.uuid, nodeId)) return null;

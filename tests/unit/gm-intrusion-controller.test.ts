@@ -33,26 +33,32 @@ describe("GM Intrusion distribution coordinator", () => {
   });
 
   it("assigns one inactive owner so pending XP survives until they reconnect", () => {
-    expect(selectDistributionResponder([
-      {id: "user-a", active: false, isGM: false},
-      {id: "gm-a", active: true, isGM: true}
-    ])?.id).toBe("user-a");
+    expect(
+      selectDistributionResponder([
+        {id: "user-a", active: false, isGM: false},
+        {id: "gm-a", active: true, isGM: true}
+      ])?.id
+    ).toBe("user-a");
   });
 
   it("accepts only the minimal pending-XP persistence shape", () => {
-    expect(isPendingXP({
-      intrusionId: "intrusion-1",
-      messageId: "message-1",
-      sourceActorId: "actor-1",
-      amount: 1,
-      responderUserId: "user-a"
-    })).toBe(true);
-    expect(isPendingXP({
-      id: "legacy-history",
-      title: "Old persistent intrusion",
-      description: "Should be discarded",
-      targets: []
-    })).toBe(false);
+    expect(
+      isPendingXP({
+        intrusionId: "intrusion-1",
+        messageId: "message-1",
+        sourceActorId: "actor-1",
+        amount: 1,
+        responderUserId: "user-a"
+      })
+    ).toBe(true);
+    expect(
+      isPendingXP({
+        id: "legacy-history",
+        title: "Old persistent intrusion",
+        description: "Should be discarded",
+        targets: []
+      })
+    ).toBe(false);
   });
 
   it("lists distinct Characters assigned to non-GM Users regardless of connection state", () => {
@@ -71,25 +77,23 @@ describe("GM Intrusion distribution coordinator", () => {
     const npc = actor("npc", "NPC", ["user-d"], "npc");
     const gmOnly = actor("gm-only", "GM Only", ["gm-a"]);
     const sharedOwnership = actor("shared", "Shared Ownership", ["user-a", "user-b"]);
-    vi.stubGlobal("game", {users: [
-      {id: "user-a", active: true, isGM: false, character: source},
-      {id: "user-b", active: true, isGM: false, character: connected},
-      {id: "user-c", active: false, isGM: false, character: offline},
-      {id: "user-d", active: true, isGM: false, character: npc},
-      {id: "user-e", active: true, isGM: false, character: sharedOwnership},
-      {id: "user-f", active: false, isGM: false, character: sharedOwnership},
-      {id: "gm-a", active: true, isGM: true, character: gmOnly}
-    ]});
-    expect(eligibleSharedXpRecipients([
-      source,
-      connected,
-      offline,
-      unusedPregen,
-      npc,
-      gmOnly,
-      sharedOwnership,
-      sharedOwnership
-    ] as never, "source")).toEqual([
+    vi.stubGlobal("game", {
+      users: [
+        {id: "user-a", active: true, isGM: false, character: source},
+        {id: "user-b", active: true, isGM: false, character: connected},
+        {id: "user-c", active: false, isGM: false, character: offline},
+        {id: "user-d", active: true, isGM: false, character: npc},
+        {id: "user-e", active: true, isGM: false, character: sharedOwnership},
+        {id: "user-f", active: false, isGM: false, character: sharedOwnership},
+        {id: "gm-a", active: true, isGM: true, character: gmOnly}
+      ]
+    });
+    expect(
+      eligibleSharedXpRecipients(
+        [source, connected, offline, unusedPregen, npc, gmOnly, sharedOwnership, sharedOwnership] as never,
+        "source"
+      )
+    ).toEqual([
       {actorId: "connected", actorName: "Connected", actorImage: "connected.webp"},
       {actorId: "offline", actorName: "Offline", actorImage: "offline.webp"},
       {actorId: "shared", actorName: "Shared Ownership", actorImage: "shared.webp"}
@@ -126,7 +130,7 @@ describe("GM Intrusion distribution coordinator", () => {
     let chatState: GMIntrusionChatState | undefined;
     const message = {
       id: "message-1",
-      getFlag: (_scope: string, key: string) => key === "gmIntrusion" ? chatState : undefined
+      getFlag: (_scope: string, key: string) => (key === "gmIntrusion" ? chatState : undefined)
     };
     const messageEntries = [message];
     const messages = Object.assign(messageEntries, {
@@ -165,10 +169,7 @@ describe("GM Intrusion distribution coordinator", () => {
 
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
-    const controller = new GMIntrusionController(
-      new GMIntrusionService(rules, () => "intrusion-1"),
-      chat as never
-    );
+    const controller = new GMIntrusionController(new GMIntrusionService(rules, () => "intrusion-1"), chat as never);
 
     await controller.createManual({mode: "targeted", actorIds: [source.id]});
     expect(source.system.xp).toBe(1);
@@ -182,8 +183,9 @@ describe("GM Intrusion distribution coordinator", () => {
     expect(chatState).toMatchObject({status: "resolved", recipients: []});
     expect(pending).toEqual([]);
 
-    await expect(controller.requestDistribution("intrusion-1", recipient.id))
-      .rejects.toThrow("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved");
+    await expect(controller.requestDistribution("intrusion-1", recipient.id)).rejects.toThrow(
+      "MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"
+    );
     expect(recipient.system.xp).toBe(5);
   });
 
@@ -199,20 +201,23 @@ describe("GM Intrusion distribution coordinator", () => {
     const actors = Object.assign([leon, dada, jill], {
       get: (id: string) => [leon, dada, jill].find((actor) => actor.id === id)
     });
-    const state = createGMIntrusionChatState({
-      id: "intrusion-1",
-      mode: "targeted",
-      targets: [{actorId: leon.id, actorName: leon.name, actorImage: leon.img}],
-      targetXp: 1,
-      sharedXp: 1,
-      naturalRoll: 0
-    }, [
-      {actorId: dada.id, actorName: dada.name, actorImage: dada.img},
-      {actorId: jill.id, actorName: jill.name, actorImage: jill.img}
-    ]);
+    const state = createGMIntrusionChatState(
+      {
+        id: "intrusion-1",
+        mode: "targeted",
+        targets: [{actorId: leon.id, actorName: leon.name, actorImage: leon.img}],
+        targetXp: 1,
+        sharedXp: 1,
+        naturalRoll: 0
+      },
+      [
+        {actorId: dada.id, actorName: dada.name, actorImage: dada.img},
+        {actorId: jill.id, actorName: jill.name, actorImage: jill.img}
+      ]
+    );
     const message = {
       id: "message-1",
-      getFlag: (_scope: string, key: string) => key === "gmIntrusion" ? state : undefined
+      getFlag: (_scope: string, key: string) => (key === "gmIntrusion" ? state : undefined)
     };
     const buttons = [dada, jill].map((actor) => ({
       dataset: {recipientActorId: actor.id} as Record<string, string>,
@@ -230,7 +235,7 @@ describe("GM Intrusion distribution coordinator", () => {
       socket: {on: vi.fn(), emit: vi.fn()},
       settings: {
         // Reproduces the first Chat render, before createManual has stored pending XP.
-        get: (_scope: string, key: string) => key === "gmIntrusions" ? [] : key === "enabledRuleModules" ? [] : 10,
+        get: (_scope: string, key: string) => (key === "gmIntrusions" ? [] : key === "enabledRuleModules" ? [] : 10),
         set: vi.fn(async () => undefined)
       },
       i18n: {localize: (key: string) => key}
@@ -246,10 +251,7 @@ describe("GM Intrusion distribution coordinator", () => {
 
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
-    new GMIntrusionController(
-      new GMIntrusionService(rules),
-      {publish: vi.fn(), update: vi.fn()} as never
-    ).initialize();
+    new GMIntrusionController(new GMIntrusionService(rules), {publish: vi.fn(), update: vi.fn()} as never).initialize();
     renderHook?.(message, {querySelectorAll: () => buttons});
 
     expect(buttons.map((button) => button.dataset.recipientActorId)).toEqual(["dada", "jill"]);
@@ -277,17 +279,20 @@ describe("GM Intrusion distribution coordinator", () => {
     const actors = Object.assign([source, recipient], {
       get: (id: string) => [source, recipient].find((actor) => actor.id === id)
     });
-    const state = createGMIntrusionChatState({
-      id: "intrusion-1",
-      mode: "targeted",
-      targets: [{actorId: source.id, actorName: source.name, actorImage: source.img}],
-      targetXp: 1,
-      sharedXp: 1,
-      naturalRoll: 0
-    }, [{actorId: recipient.id, actorName: recipient.name, actorImage: recipient.img}]);
+    const state = createGMIntrusionChatState(
+      {
+        id: "intrusion-1",
+        mode: "targeted",
+        targets: [{actorId: source.id, actorName: source.name, actorImage: source.img}],
+        targetXp: 1,
+        sharedXp: 1,
+        naturalRoll: 0
+      },
+      [{actorId: recipient.id, actorName: recipient.name, actorImage: recipient.img}]
+    );
     const message = {
       id: "message-1",
-      getFlag: (_scope: string, key: string) => key === "gmIntrusion" ? state : undefined
+      getFlag: (_scope: string, key: string) => (key === "gmIntrusion" ? state : undefined)
     };
     let socketHandler: ((message: unknown) => void) | undefined;
     const emit = vi.fn();
@@ -304,13 +309,20 @@ describe("GM Intrusion distribution coordinator", () => {
       },
       i18n: {localize: (key: string) => key},
       settings: {
-        get: (_scope: string, key: string) => key === "gmIntrusions" ? [{
-          intrusionId: "intrusion-1",
-          messageId: message.id,
-          sourceActorId: source.id,
-          amount: 1,
-          responderUserId: sourceOwner.id
-        }] : key === "enabledRuleModules" ? [] : 10,
+        get: (_scope: string, key: string) =>
+          key === "gmIntrusions"
+            ? [
+                {
+                  intrusionId: "intrusion-1",
+                  messageId: message.id,
+                  sourceActorId: source.id,
+                  amount: 1,
+                  responderUserId: sourceOwner.id
+                }
+              ]
+            : key === "enabledRuleModules"
+              ? []
+              : 10,
         set: vi.fn(async () => undefined)
       }
     };
@@ -321,10 +333,10 @@ describe("GM Intrusion distribution coordinator", () => {
 
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
-    const controller = new GMIntrusionController(
-      new GMIntrusionService(rules),
-      {publish: vi.fn(), update: vi.fn()} as never
-    );
+    const controller = new GMIntrusionController(new GMIntrusionService(rules), {
+      publish: vi.fn(),
+      update: vi.fn()
+    } as never);
     controller.initialize();
     const request = controller.requestDistribution("intrusion-1", recipient.id);
     const socketRequest = emit.mock.calls[0]?.[1] as {requestId: string; requesterUserId: string};
@@ -338,8 +350,9 @@ describe("GM Intrusion distribution coordinator", () => {
     await expect(request).resolves.toBeUndefined();
 
     gameState.user = unrelated;
-    await expect(controller.requestDistribution("intrusion-1", recipient.id))
-      .rejects.toThrow("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized");
+    await expect(controller.requestDistribution("intrusion-1", recipient.id)).rejects.toThrow(
+      "MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"
+    );
     expect(emit).toHaveBeenCalledTimes(1);
   });
 
@@ -353,22 +366,25 @@ describe("GM Intrusion distribution coordinator", () => {
     });
     const gm = {id: "gm-a", active: true, isGM: true, character: null};
     const actors = Object.assign([source], {
-      get: (id: string) => id === source.id ? source : undefined
+      get: (id: string) => (id === source.id ? source : undefined)
     });
-    const state = createGMIntrusionChatState({
-      id: "intrusion-1",
-      mode: "targeted",
-      targets: [{actorId: source.id, actorName: source.name, actorImage: source.img}],
-      targetXp: 1,
-      sharedXp: 1,
-      naturalRoll: 0
-    }, [{actorId: "missing", actorName: "Missing", actorImage: "missing.webp"}]);
+    const state = createGMIntrusionChatState(
+      {
+        id: "intrusion-1",
+        mode: "targeted",
+        targets: [{actorId: source.id, actorName: source.name, actorImage: source.img}],
+        targetXp: 1,
+        sharedXp: 1,
+        naturalRoll: 0
+      },
+      [{actorId: "missing", actorName: "Missing", actorImage: "missing.webp"}]
+    );
     const message = {
       id: "message-1",
-      getFlag: (_scope: string, key: string) => key === "gmIntrusion" ? state : undefined
+      getFlag: (_scope: string, key: string) => (key === "gmIntrusion" ? state : undefined)
     };
     const messages = Object.assign([message], {
-      get: (id: string) => id === message.id ? message : undefined
+      get: (id: string) => (id === message.id ? message : undefined)
     });
     const errorNotification = vi.fn();
     let renderHook: ((message: unknown, html: unknown) => void) | undefined;
@@ -391,12 +407,19 @@ describe("GM Intrusion distribution coordinator", () => {
       socket: {on: vi.fn(), emit: vi.fn()},
       i18n: {localize: (key: string) => key},
       settings: {
-        get: (_scope: string, key: string) => key === "gmIntrusions" ? [{
-          intrusionId: "intrusion-1",
-          messageId: message.id,
-          sourceActorId: source.id,
-          amount: 1
-        }] : key === "enabledRuleModules" ? [] : 10,
+        get: (_scope: string, key: string) =>
+          key === "gmIntrusions"
+            ? [
+                {
+                  intrusionId: "intrusion-1",
+                  messageId: message.id,
+                  sourceActorId: source.id,
+                  amount: 1
+                }
+              ]
+            : key === "enabledRuleModules"
+              ? []
+              : 10,
         set: vi.fn(async () => undefined)
       }
     });
@@ -411,10 +434,7 @@ describe("GM Intrusion distribution coordinator", () => {
 
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
-    new GMIntrusionController(
-      new GMIntrusionService(rules),
-      {publish: vi.fn(), update: vi.fn()} as never
-    ).initialize();
+    new GMIntrusionController(new GMIntrusionService(rules), {publish: vi.fn(), update: vi.fn()} as never).initialize();
     renderHook?.(message, html);
     click?.({preventDefault: vi.fn(), stopPropagation: vi.fn()});
     await vi.advanceTimersByTimeAsync(0);

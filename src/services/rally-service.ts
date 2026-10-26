@@ -41,15 +41,13 @@ export class RallyService {
       return false;
     }
     const {wounds, stats} = actor.system;
-    return this.rally(wounds, stats.might.value, "minor").success
-      || this.rally(wounds, stats.might.value, "moderate").success;
+    return (
+      this.rally(wounds, stats.might.value, "minor").success ||
+      this.rally(wounds, stats.might.value, "moderate").success
+    );
   }
 
-  preview(
-    actor: CharacterDocumentLike,
-    severity: RallySeverity,
-    executionCost = this.costFor(severity)
-  ): RallyResult {
+  preview(actor: CharacterDocumentLike, severity: RallySeverity, executionCost = this.costFor(severity)): RallyResult {
     try {
       assertLiving(actor);
     } catch {
@@ -63,13 +61,7 @@ export class RallyService {
         failure: "no-wound"
       };
     }
-    return this.rally(
-      actor.system.wounds,
-      actor.system.stats.might.value,
-      severity,
-      undefined,
-      executionCost
-    );
+    return this.rally(actor.system.wounds, actor.system.stats.might.value, severity, undefined, executionCost);
   }
 
   rally(
@@ -143,13 +135,7 @@ export class RallyService {
     executionCost?: number
   ): Promise<RallyResult> {
     assertLiving(actor);
-    const result = this.rally(
-      actor.system.wounds,
-      actor.system.stats.might.value,
-      severity,
-      woundId,
-      executionCost
-    );
+    const result = this.rally(actor.system.wounds, actor.system.stats.might.value, severity, woundId, executionCost);
     if (result.success) {
       await actor.update({
         "system.stats.might.value": result.mightValue,

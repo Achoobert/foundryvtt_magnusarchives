@@ -1,9 +1,6 @@
 import {describe, expect, it} from "vitest";
 
-import {
-  captureItemSheetUiState,
-  restoreItemSheetUiState
-} from "../../src/applications/sheets/item-sheet-ui-state";
+import {captureItemSheetUiState, restoreItemSheetUiState} from "../../src/applications/sheets/item-sheet-ui-state";
 
 class FakeScroller {
   scrollTop = 0;
@@ -102,10 +99,7 @@ describe("Item Sheet transient UI state", () => {
     );
     const replacement = new FakeInput(key);
 
-    restoreItemSheetUiState(
-      new FakeRoot(new FakeScroller(), null, [replacement]) as unknown as ParentNode,
-      state
-    );
+    restoreItemSheetUiState(new FakeRoot(new FakeScroller(), null, [replacement]) as unknown as ParentNode, state);
 
     expect(replacement.focusOptions).toEqual({preventScroll: true});
     expect(replacement.restoredSelection).toBeUndefined();

@@ -15,7 +15,7 @@ describe("shared Cypher V2 checkbox presentation", () => {
     expect(styleIndex).toContain('@use "components/checkbox";');
     expect(checkboxStyles).toContain('.magnusarchives-sheet input[type="checkbox"]');
     expect(checkboxStyles).toContain('.magnusarchives-dialog input[type="checkbox"]');
-    expect(checkboxStyles).toContain('.application.dialog:has(.magnusarchives-dialog-fields)');
+    expect(checkboxStyles).toContain(".application.dialog:has(.magnusarchives-dialog-fields)");
     expect(checkboxStyles).toContain("appearance: none");
   });
 
@@ -66,9 +66,13 @@ describe("shared Cypher V2 checkbox presentation", () => {
   });
 
   it("leaves native label associations and checkbox form fields intact", () => {
-    expect(itemTemplate).toContain('<label class="compact-mechanic-checkbox"><input name="system.ammo.enabled" type="checkbox"');
+    expect(itemTemplate).toContain(
+      '<label class="compact-mechanic-checkbox"><input name="system.ammo.enabled" type="checkbox"'
+    );
     expect(itemTemplate).toContain('<input name="system.depletion.enabled" type="checkbox"');
-    expect(itemTemplate).toContain('<label class="checkbox-field"><input name="system.weaponUse.light" type="checkbox"');
+    expect(itemTemplate).toContain(
+      '<label class="checkbox-field"><input name="system.weaponUse.light" type="checkbox"'
+    );
     expect(intrusionDialog).toContain('<label class="intrusion-character-choice"><input name="group-');
     expect(checkboxStyles).not.toMatch(/pointer-events:\s*none/);
   });

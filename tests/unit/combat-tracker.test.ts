@@ -41,19 +41,14 @@ function combatant(
   };
 }
 
-function combat(
-  turns: CombatTrackerCombatantLike[],
-  turn: number | null,
-  round = 1,
-  started = true
-) {
+function combat(turns: CombatTrackerCombatantLike[], turn: number | null, round = 1, started = true) {
   const state = {
     started,
     turn,
     round,
     turns,
     get combatant() {
-      return this.turn === null ? null : this.turns[this.turn] ?? null;
+      return this.turn === null ? null : (this.turns[this.turn] ?? null);
     },
     nextTurn: vi.fn(async () => {
       if (state.turn === null || state.turn >= state.turns.length - 1) {
@@ -128,16 +123,26 @@ describe("Cypher V2 Combat Tracker", () => {
   it("rejects stale, unauthorized, unstarted, empty, and missing-current mutations", async () => {
     const current = combatant("current", ["owner"]);
     const encounter = combat([current, combatant("other")], 0);
-    await expect(endCurrentCombatantTurn(encounter, user("owner"), "other"))
-      .resolves.toEqual({ok: false, reason: "stale"});
-    await expect(endCurrentCombatantTurn(encounter, user("stranger"), "current"))
-      .resolves.toEqual({ok: false, reason: "not-authorized"});
-    await expect(endCurrentCombatantTurn(combat([current], 0, 0, false), user("owner"), "current"))
-      .resolves.toEqual({ok: false, reason: "not-started"});
-    await expect(endCurrentCombatantTurn(combat([], null), user("gm", true), "missing"))
-      .resolves.toEqual({ok: false, reason: "empty"});
-    await expect(endCurrentCombatantTurn(combat([current], null), user("owner"), "current"))
-      .resolves.toEqual({ok: false, reason: "no-current"});
+    await expect(endCurrentCombatantTurn(encounter, user("owner"), "other")).resolves.toEqual({
+      ok: false,
+      reason: "stale"
+    });
+    await expect(endCurrentCombatantTurn(encounter, user("stranger"), "current")).resolves.toEqual({
+      ok: false,
+      reason: "not-authorized"
+    });
+    await expect(endCurrentCombatantTurn(combat([current], 0, 0, false), user("owner"), "current")).resolves.toEqual({
+      ok: false,
+      reason: "not-started"
+    });
+    await expect(endCurrentCombatantTurn(combat([], null), user("gm", true), "missing")).resolves.toEqual({
+      ok: false,
+      reason: "empty"
+    });
+    await expect(endCurrentCombatantTurn(combat([current], null), user("owner"), "current")).resolves.toEqual({
+      ok: false,
+      reason: "no-current"
+    });
     expect(encounter.nextTurn).not.toHaveBeenCalled();
   });
 
@@ -152,8 +157,8 @@ describe("Cypher V2 Combat Tracker", () => {
       {_id: "b", initiative: 20},
       {_id: "c", initiative: 10}
     ]);
-    expect(trackerSource).toContain('turnEvents: false');
-    expect(trackerSource).toContain('{combatTurn}');
+    expect(trackerSource).toContain("turnEvents: false");
+    expect(trackerSource).toContain("{combatTurn}");
     expect(trackerTemplate).toContain('draggable="true"');
     expect(isCombatantDoneThisRound(completed, 2)).toBe(true);
   });
@@ -177,10 +182,7 @@ describe("Cypher V2 Combat Tracker", () => {
     const second = combatant("second");
     await first.setFlag("magnusarchives", "doneThisRound", 1);
     await second.setFlag("magnusarchives", "doneThisRound", 1);
-    const updateEmbeddedDocuments = vi.fn(async (
-      _type: string,
-      updates: Record<string, unknown>[]
-    ) => {
+    const updateEmbeddedDocuments = vi.fn(async (_type: string, updates: Record<string, unknown>[]) => {
       for (const update of updates) {
         const target = [first, second].find((entry) => entry.id === update._id);
         target?.flags.delete("magnusarchives.doneThisRound");
@@ -189,10 +191,14 @@ describe("Cypher V2 Combat Tracker", () => {
 
     expect(isCombatantDoneThisRound(first, 2)).toBe(false);
     await clearCombatantDoneStates({combatants: [first, second], updateEmbeddedDocuments});
-    expect(updateEmbeddedDocuments).toHaveBeenCalledWith("Combatant", [
-      {_id: "first", "flags.magnusarchives.-=doneThisRound": null},
-      {_id: "second", "flags.magnusarchives.-=doneThisRound": null}
-    ], {turnEvents: false});
+    expect(updateEmbeddedDocuments).toHaveBeenCalledWith(
+      "Combatant",
+      [
+        {_id: "first", "flags.magnusarchives.-=doneThisRound": null},
+        {_id: "second", "flags.magnusarchives.-=doneThisRound": null}
+      ],
+      {turnEvents: false}
+    );
     expect(first.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
     expect(second.getFlag("magnusarchives", "doneThisRound")).toBeUndefined();
     expect(trackerSource).toContain('Hooks.on("updateCombat"');

@@ -1,9 +1,5 @@
-import {readFile} from "node:fs/promises";
-import path from "node:path";
 import {describe, expect, it} from "vitest";
-
-const projectRoot = path.resolve(import.meta.dirname, "../..");
-const source = JSON.parse(await readFile(path.join(projectRoot, "content/core-items/reviewed-packs.json"), "utf8"));
+import {loadYmlPack} from "../helpers/yml-packs";
 
 interface PackDocument {
   _id: string;
@@ -15,7 +11,7 @@ interface PackDocument {
 }
 
 function documents(packId: string): PackDocument[] {
-  return source.packs[packId].documents;
+  return loadYmlPack(packId);
 }
 
 function items(packId: string) {
@@ -31,9 +27,8 @@ function allStrings(value: unknown, strings: string[] = []): string[] {
 
 const types = items("types");
 const abilities = items("type-abilities");
-const byName = (typeName: string, abilityName: string) => abilities.find((document) => (
-  document.name === abilityName && document.system.tags.includes(typeName.toLowerCase())
-));
+const byName = (typeName: string, abilityName: string) =>
+  abilities.find((document) => document.name === abilityName && document.system.tags.includes(typeName.toLowerCase()));
 
 describe("Magnus character types (chapter 3)", () => {
   it("ships the four types and their tiered ability lists", () => {
@@ -49,8 +44,9 @@ describe("Magnus character types (chapter 3)", () => {
       "type-abilities": new Set(abilities.map((document) => document._id)),
       skills: new Set(items("skills").map((document) => document._id))
     };
-    const references = allStrings([types, abilities])
-      .flatMap((value) => [...value.matchAll(/Compendium\.magnusarchives\.(type-abilities|skills)\.Item\.([A-Za-z0-9]{16})/g)]);
+    const references = allStrings([types, abilities]).flatMap((value) => [
+      ...value.matchAll(/Compendium\.magnusarchives\.(type-abilities|skills)\.Item\.([A-Za-z0-9]{16})/g)
+    ]);
     expect(references.length).toBeGreaterThan(100);
     for (const [, pack, id] of references) expect(ids[pack as keyof typeof ids].has(id as string)).toBe(true);
     const folders = new Set(documents("type-abilities").map((document) => document._id));
@@ -66,7 +62,9 @@ describe("Magnus character types (chapter 3)", () => {
     expect(investigator.system.choiceGroups[0].choose).toBe(2);
 
     const occultist = types.find((document) => document.name === "Occultist")!;
-    expect(occultist.system.skillGrants.map((grant: {snapshot: {name: string}}) => grant.snapshot.name)).toEqual(["Occultism"]);
+    expect(occultist.system.skillGrants.map((grant: {snapshot: {name: string}}) => grant.snapshot.name)).toEqual([
+      "Occultism"
+    ]);
     expect(occultist.system.description).toContain("Might Pool starts at 7");
   });
 
@@ -77,9 +75,17 @@ describe("Magnus character types (chapter 3)", () => {
     expect(dream.system.tags).toContain("supernatural");
     expect(dream.system.description).toContain("3 Stress");
 
-    expect(byName("Protector", "One Against Many")!.system.cost).toMatchObject({amount: 1, scalable: true, allowedPools: ["speed"]});
+    expect(byName("Protector", "One Against Many")!.system.cost).toMatchObject({
+      amount: 1,
+      scalable: true,
+      allowedPools: ["speed"]
+    });
     expect(byName("Protector", "Slow Them Down")!.system.cost.allowedPools).toEqual(["might", "speed"]);
-    expect(byName("Occultist", "Stressed Mind")!.system).toMatchObject({tier: 5, damageEffect: "stress", stressAmount: 6});
+    expect(byName("Occultist", "Stressed Mind")!.system).toMatchObject({
+      tier: 5,
+      damageEffect: "stress",
+      stressAmount: 6
+    });
     expect(byName("Elocutionist", "Mastery With Defense")!.system.tier).toBe(6);
   });
 });

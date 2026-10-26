@@ -20,7 +20,8 @@ describe("All-in-One Roll Dialog UI", () => {
   });
 
   it("never detaches Foundry localization methods in the shared Roll Dialog path", () => {
-    const detachedMethod = /(?:const\s+\w+\s*=\s*game\.i18n\.(?:localize|format)\b(?!\s*\()|const\s*\{[^}]*\b(?:localize|format)\b[^}]*\}\s*=\s*game\.i18n\b|[,(]\s*game\.i18n\.(?:localize|format)\s*[,)]\s*)/;
+    const detachedMethod =
+      /(?:const\s+\w+\s*=\s*game\.i18n\.(?:localize|format)\b(?!\s*\()|const\s*\{[^}]*\b(?:localize|format)\b[^}]*\}\s*=\s*game\.i18n\b|[,(]\s*game\.i18n\.(?:localize|format)\s*[,)]\s*)/;
     for (const source of [common, generic, skill, combat, ability]) {
       expect(source).not.toMatch(detachedMethod);
     }
@@ -55,15 +56,15 @@ describe("All-in-One Roll Dialog UI", () => {
     expect(skill).not.toContain('name="freeDamageEffort"');
     expect(combat).toContain('name="damageEffort"');
     expect(combat.match(/name="freeDamageEffort"/g)).toHaveLength(1);
-    expect(ability).toContain('ability.system.roll === "attack" ? `<label>');
+    expect(ability).toMatch(/ability\.system\.roll === "attack"\s*\? `<label>/);
     expect(ability.match(/name="freeDamageEffort"/g)).toHaveLength(1);
   });
 
   it("renders the Effort summary from PreparedRoll values and the authoritative cap", () => {
     expect(common).toContain('data-roll-summary-section="effort"');
-    expect(common).toContain('`${view.paidEffortApplied} / ${view.effortMaximum}`');
-    expect(common).toContain('`${view.totalEffortApplied} / ${view.totalEffortMaximum}`');
-    expect(common).toContain('String(view.freeEffortApplied)');
+    expect(common).toContain("`${view.paidEffortApplied} / ${view.effortMaximum}`");
+    expect(common).toContain("`${view.totalEffortApplied} / ${view.totalEffortMaximum}`");
+    expect(common).toContain("String(view.freeEffortApplied)");
     expect(common).toContain("prepared.totalEffortMaximum");
     expect(common).not.toContain("totalEffortMaximum: 6");
     expect(common).not.toContain("freeDamageEffortCostReduction");
@@ -77,9 +78,9 @@ describe("All-in-One Roll Dialog UI", () => {
 
   it("protects hidden difficulty in the player view model", () => {
     expect(common).toContain('prepared.context.difficulty.mode === "hidden"');
-    expect(common).toContain('baseDifficulty: known ? prepared.context.difficulty.value : null');
-    expect(common).toContain('finalDifficulty: known ? prepared.finalDifficulty : null');
-    expect(common).toContain('targetNumber: known ? prepared.targetNumber : null');
+    expect(common).toContain("baseDifficulty: known ? prepared.context.difficulty.value : null");
+    expect(common).toContain("finalDifficulty: known ? prepared.finalDifficulty : null");
+    expect(common).toContain("targetNumber: known ? prepared.targetNumber : null");
     expect(common).toContain('entry.id.startsWith("npc-modification.")');
   });
 

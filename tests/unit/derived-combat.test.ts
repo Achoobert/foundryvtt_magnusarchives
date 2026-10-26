@@ -8,15 +8,25 @@ const usage = {oneAction: false, tenMinutes: false, oneHour: false, tenHours: fa
 describe("derived Combat data", () => {
   it("selects the strongest equipped armor without stacking source values", () => {
     const stats = Object.assign(pools(), {effortBase: 1});
-    const derived = deriveCharacterData(stats, wounds(), usage, {}, [{
-      id: "light",
-      type: "armor",
-      system: {category: "light", equipped: true, freelyUsed: true, slug: "light"}
-    }, {
-      id: "heavy",
-      type: "armor",
-      system: {category: "heavy", equipped: true, freelyUsed: true, slug: "heavy"}
-    }], {armorCategories: ["heavy"], freelyUse: []});
+    const derived = deriveCharacterData(
+      stats,
+      wounds(),
+      usage,
+      {},
+      [
+        {
+          id: "light",
+          type: "armor",
+          system: {category: "light", equipped: true, freelyUsed: true, slug: "light"}
+        },
+        {
+          id: "heavy",
+          type: "armor",
+          system: {category: "heavy", equipped: true, freelyUsed: true, slug: "heavy"}
+        }
+      ],
+      {armorCategories: ["heavy"], freelyUse: []}
+    );
 
     expect(derived.combat.armor).toMatchObject({
       itemId: "heavy",
@@ -28,15 +38,19 @@ describe("derived Combat data", () => {
     expect(derived.combat.armor.blockContributions).toHaveLength(1);
   });
 
-  it.each([["light", 1], ["medium", 2], ["heavy", 3]] as const)(
-    "derives unfamiliar %s Armor Hindrance %i for other Speed tasks",
-    (category, steps) => {
+  it.each([
+    ["light", 1],
+    ["medium", 2],
+    ["heavy", 3]
+  ] as const)("derives unfamiliar %s Armor Hindrance %i for other Speed tasks", (category, steps) => {
     const stats = Object.assign(pools(), {effortBase: 1});
-    const derived = deriveCharacterData(stats, wounds(), usage, {}, [{
-      id: category,
-      type: "armor",
-      system: {category, equipped: true, freelyUsed: true, slug: "legacy-local-flag"}
-    }]);
+    const derived = deriveCharacterData(stats, wounds(), usage, {}, [
+      {
+        id: category,
+        type: "armor",
+        system: {category, equipped: true, freelyUsed: true, slug: "legacy-local-flag"}
+      }
+    ]);
 
     expect(derived.combat.armor.freelyUsed).toBe(false);
     expect(derived.combat.armor.speedTaskHindrance).toBe(steps);
@@ -67,11 +81,20 @@ describe("derived Combat data", () => {
     "removes global Speed-task Hindrance for familiar %s Armor",
     (category) => {
       const stats = Object.assign(pools(), {effortBase: 1});
-      const derived = deriveCharacterData(stats, wounds(), usage, {}, [{
-        id: category,
-        type: "armor",
-        system: {category, equipped: true, freelyUsed: false, slug: category}
-      }], {armorCategories: [category], freelyUse: []});
+      const derived = deriveCharacterData(
+        stats,
+        wounds(),
+        usage,
+        {},
+        [
+          {
+            id: category,
+            type: "armor",
+            system: {category, equipped: true, freelyUsed: false, slug: category}
+          }
+        ],
+        {armorCategories: [category], freelyUse: []}
+      );
       expect(derived.combat.armor.freelyUsed).toBe(true);
       expect(derived.combat.armor.speedTaskHindrance).toBe(0);
     }

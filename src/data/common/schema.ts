@@ -1,12 +1,4 @@
-const {
-  ArrayField,
-  BooleanField,
-  HTMLField,
-  NumberField,
-  ObjectField,
-  SchemaField,
-  StringField
-} = foundry.data.fields;
+const {ArrayField, BooleanField, HTMLField, NumberField, ObjectField, SchemaField, StringField} = foundry.data.fields;
 
 export const fields = {
   ArrayField,
@@ -23,10 +15,11 @@ export function integerField(initial = 0, min = 0): unknown {
 }
 
 export function stringArrayField(initial: readonly string[] = []): unknown {
-  return new ArrayField(
-    new StringField({required: true, nullable: false, blank: false}),
-    {required: true, nullable: false, initial: [...initial]}
-  );
+  return new ArrayField(new StringField({required: true, nullable: false, blank: false}), {
+    required: true,
+    nullable: false,
+    initial: [...initial]
+  });
 }
 
 export function statPoolField(initial = 10): unknown {
@@ -93,13 +86,7 @@ export function durationField(): unknown {
       required: true,
       nullable: false,
       initial: "recovery",
-      choices: [
-        "recovery",
-        "10-minute-or-longer",
-        "1-hour-or-longer",
-        "10-hour",
-        "non-rest-recovery"
-      ]
+      choices: ["recovery", "10-minute-or-longer", "1-hour-or-longer", "10-hour", "non-rest-recovery"]
     })
   });
 }

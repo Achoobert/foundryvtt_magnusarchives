@@ -23,4 +23,3 @@ export function registerSheets(): void {
     label: "MAGNUSARCHIVES.Sheets.Item"
   });
 }
-

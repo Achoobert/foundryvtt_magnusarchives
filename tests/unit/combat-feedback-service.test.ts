@@ -9,9 +9,7 @@ describe("Token combat feedback", () => {
     const createScrollingText = vi.fn(async () => undefined);
     vi.stubGlobal("canvas", {
       tokens: {
-        get: (id: string) => id === "token-a"
-          ? {actor: null, center: {x: 100, y: 200}}
-          : undefined,
+        get: (id: string) => (id === "token-a" ? {actor: null, center: {x: 100, y: 200}} : undefined),
         placeables: []
       },
       interface: {createScrollingText}
@@ -19,7 +17,7 @@ describe("Token combat feedback", () => {
     vi.stubGlobal("CONST", {TEXT_ANCHOR_POINTS: {CENTER: 0, TOP: 1}});
     vi.stubGlobal("game", {
       i18n: {
-        localize: (key: string) => key === "MAGNUSARCHIVES.Combat.Feedback.Dead" ? "DEAD" : key,
+        localize: (key: string) => (key === "MAGNUSARCHIVES.Combat.Feedback.Dead" ? "DEAD" : key),
         format: (key: string) => key
       }
     });
@@ -36,27 +34,15 @@ describe("Token combat feedback", () => {
       }
     );
 
-    expect(createScrollingText).toHaveBeenNthCalledWith(
-      1,
-      {x: 100, y: 200},
-      "-4",
-      expect.anything()
-    );
-    expect(createScrollingText).toHaveBeenNthCalledWith(
-      2,
-      {x: 100, y: 200},
-      "DEAD",
-      expect.anything()
-    );
+    expect(createScrollingText).toHaveBeenNthCalledWith(1, {x: 100, y: 200}, "-4", expect.anything());
+    expect(createScrollingText).toHaveBeenNthCalledWith(2, {x: 100, y: 200}, "DEAD", expect.anything());
   });
 
   it("shows Shield Wound and Broken feedback on the Character Token", async () => {
     const createScrollingText = vi.fn(async () => undefined);
     vi.stubGlobal("canvas", {
       tokens: {
-        get: (id: string) => id === "character-token"
-          ? {actor: null, center: {x: 25, y: 50}}
-          : undefined,
+        get: (id: string) => (id === "character-token" ? {actor: null, center: {x: 25, y: 50}} : undefined),
         placeables: []
       },
       interface: {createScrollingText}
@@ -64,10 +50,9 @@ describe("Token combat feedback", () => {
     vi.stubGlobal("CONST", {TEXT_ANCHOR_POINTS: {CENTER: 0, TOP: 1}});
     vi.stubGlobal("game", {
       i18n: {
-        localize: (key: string) => key.endsWith("moderate") ? "Moderate" : key,
-        format: (key: string, data: Record<string, unknown>) => key.endsWith("Broken")
-          ? `${data.shield} Broken`
-          : `${data.shield}: ${data.severity} Wound`
+        localize: (key: string) => (key.endsWith("moderate") ? "Moderate" : key),
+        format: (key: string, data: Record<string, unknown>) =>
+          key.endsWith("Broken") ? `${data.shield} Broken` : `${data.shield}: ${data.severity} Wound`
       }
     });
     const service = new TokenCombatFeedbackService();
@@ -82,12 +67,7 @@ describe("Token combat feedback", () => {
       "Round Shield: Moderate Wound",
       expect.anything()
     );
-    expect(createScrollingText).toHaveBeenNthCalledWith(
-      2,
-      {x: 25, y: 50},
-      "Round Shield Broken",
-      expect.anything()
-    );
+    expect(createScrollingText).toHaveBeenNthCalledWith(2, {x: 25, y: 50}, "Round Shield Broken", expect.anything());
   });
 
   it("does not redirect feedback to another Token when the authoritative Token is gone", async () => {
@@ -99,13 +79,21 @@ describe("Token combat feedback", () => {
       },
       interface: {createScrollingText}
     });
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
     vi.stubGlobal("CONST", {TEXT_ANCHOR_POINTS: {CENTER: 0, TOP: 1}});
     vi.stubGlobal("game", {i18n: {localize: (key: string) => key, format: (key: string) => key}});
 
-    await new TokenCombatFeedbackService().characterWound({
-      id: "npc-source", tokenId: "deleted", tokenUuid: "Scene.scene.Token.deleted"
-    }, "major");
+    await new TokenCombatFeedbackService().characterWound(
+      {
+        id: "npc-source",
+        tokenId: "deleted",
+        tokenUuid: "Scene.scene.Token.deleted"
+      },
+      "major"
+    );
 
     expect(createScrollingText).not.toHaveBeenCalled();
   });

@@ -32,7 +32,9 @@ function target(): NpcTargetLike {
         notes: ""
       }
     },
-    async update(): Promise<unknown> { return this; }
+    async update(): Promise<unknown> {
+      return this;
+    }
   };
 }
 
@@ -101,13 +103,15 @@ function unresolvedAttackOutcome(): WeaponAttackOutcome {
     edge: 0,
     poolValue: 10,
     limits: {difficultyCeiling: 10, assetLimit: 2, paidEffortMaximum: 3, totalEffortMaximum: CORE_TOTAL_EFFORT_CAP},
-    contributions: [{
-      id: "skill.specialized",
-      label: "MAGNUSARCHIVES.Skill.Ranks.specialized",
-      direction: "ease",
-      steps: 1,
-      source: "skill"
-    }],
+    contributions: [
+      {
+        id: "skill.specialized",
+        label: "MAGNUSARCHIVES.Skill.Ranks.specialized",
+        direction: "ease",
+        steps: 1,
+        source: "skill"
+      }
+    ],
     purpose: "damage",
     origin: {
       kind: "weapon",
@@ -144,13 +148,17 @@ function actor(items: readonly ShieldItemLike[] = []): CombatCharacterLike {
 }
 
 function shield(options: {equipped?: boolean; broken?: boolean} = {}): ShieldItemLike {
-  const major = options.broken ? [{
-    id: "major-1",
-    label: "Broken",
-    description: "",
-    sourceUuid: "test",
-    treated: false
-  }] : [];
+  const major = options.broken
+    ? [
+        {
+          id: "major-1",
+          label: "Broken",
+          description: "",
+          sourceUuid: "test",
+          treated: false
+        }
+      ]
+    : [];
   return {
     id: "shield-1",
     name: "Round Shield",
@@ -171,19 +179,21 @@ function shield(options: {equipped?: boolean; broken?: boolean} = {}): ShieldIte
 }
 
 function combatChat(): CombatChatService {
-  return new CombatChatService(
-    new RollChatService(),
-    new ShieldService(new WoundService(() => "shield-wound"))
-  );
+  return new CombatChatService(new RollChatService(), new ShieldService(new WoundService(() => "shield-wound")));
 }
 
 function stubFoundry(messages: Record<string, unknown>[]): void {
   vi.stubGlobal("game", {i18n: {localize}});
   vi.stubGlobal("foundry", {
-    applications: {handlebars: {renderTemplate: vi.fn(async (_path: string, data: Record<string, unknown>) => JSON.stringify(data))}}
+    applications: {
+      handlebars: {renderTemplate: vi.fn(async (_path: string, data: Record<string, unknown>) => JSON.stringify(data))}
+    }
   });
   vi.stubGlobal("ChatMessage", {
-    create: vi.fn(async (message: Record<string, unknown>) => { messages.push(message); return {}; }),
+    create: vi.fn(async (message: Record<string, unknown>) => {
+      messages.push(message);
+      return {};
+    }),
     getSpeaker: () => ({actor: "character-1"}),
     getWhisperRecipients: () => [{id: "gm-1"}]
   });
@@ -208,16 +218,19 @@ describe("CombatChatService", () => {
       finalDamage: 8,
       combatAction: true
     });
-    expect(publicPayload.damageTotalDetails).toEqual(expect.arrayContaining([
-      expect.objectContaining({label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 8})
-    ]));
-    expect(publicMessage).toHaveProperty("flags.magnusarchives.combatAction", expect.objectContaining({
-      kind: "npcDamage",
-      targetActorId: "npc-1",
-      targetTokenId: "npc-token-1",
-      targetTokenUuid: "Scene.scene.Token.npc-token-1",
-      requestedDamage: 8
-    }));
+    expect(publicPayload.damageTotalDetails).toEqual(
+      expect.arrayContaining([expect.objectContaining({label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 8})])
+    );
+    expect(publicMessage).toHaveProperty(
+      "flags.magnusarchives.combatAction",
+      expect.objectContaining({
+        kind: "npcDamage",
+        targetActorId: "npc-1",
+        targetTokenId: "npc-token-1",
+        targetTokenUuid: "Scene.scene.Token.npc-token-1",
+        requestedDamage: 8
+      })
+    );
     expect(JSON.stringify(publicPayload)).not.toContain('"value":7');
     expect(JSON.stringify(publicPayload)).not.toContain("originalDifficulty");
     expect(JSON.stringify(publicPayload)).not.toContain("finalDifficulty");
@@ -232,9 +245,7 @@ describe("CombatChatService", () => {
     const unresolved = unresolvedAttackOutcome();
     expect(unresolved.execution.result.success).toBeNull();
 
-    await new CombatChatService(new RollChatService()).publishWeaponAttack(
-      actor(), unresolved, "rollOnly"
-    );
+    await new CombatChatService(new RollChatService()).publishWeaponAttack(actor(), unresolved, "rollOnly");
     const unresolvedPayload = JSON.parse(String(messages[0]!.content)) as Record<string, unknown>;
     expect(unresolvedPayload).toMatchObject({
       presentation: "unknown",
@@ -247,15 +258,17 @@ describe("CombatChatService", () => {
       {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: 4},
       {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: "+2"}
     ]);
-    expect(unresolvedPayload.damageTotalDetails).toEqual([
-      {label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 6}
-    ]);
+    expect(unresolvedPayload.damageTotalDetails).toEqual([{label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 6}]);
 
     const failed = outcome();
-    await new CombatChatService(new RollChatService()).publishWeaponAttack(actor(), {
-      ...failed,
-      execution: {result: {...failed.execution.result, success: false}}
-    }, "rollOnly");
+    await new CombatChatService(new RollChatService()).publishWeaponAttack(
+      actor(),
+      {
+        ...failed,
+        execution: {result: {...failed.execution.result, success: false}}
+      },
+      "rollOnly"
+    );
     const failedPayload = JSON.parse(String(messages[1]!.content)) as Record<string, unknown>;
     expect(failedPayload).toMatchObject({
       showFinalDamage: false,
@@ -268,26 +281,23 @@ describe("CombatChatService", () => {
   it("publishes a defense request with no NPC difficulty in content or flags", async () => {
     const messages: Record<string, unknown>[] = [];
     stubFoundry(messages);
-    await combatChat().createDefenseRequest(
-      target(),
-      actor(),
-      "seriousInjury",
-      0,
-      ["block", "dodge"]
-    );
+    await combatChat().createDefenseRequest(target(), actor(), "seriousInjury", 0, ["block", "dodge"]);
 
     expect(messages).toHaveLength(1);
     const serialized = JSON.stringify(messages[0]);
     expect(serialized).not.toContain('"level"');
     expect(serialized).not.toContain('"difficulty"');
-    expect(messages[0]).toHaveProperty("flags.magnusarchives.defenseRequest", expect.objectContaining({
-      sourceActorId: "npc-1",
-      targetActorId: "character-1",
-      targetTokenId: "character-token-1",
-      targetTokenUuid: "Scene.scene.Token.character-token-1",
-      effect: "seriousInjury",
-      allowedDefenses: ["block", "dodge"]
-    }));
+    expect(messages[0]).toHaveProperty(
+      "flags.magnusarchives.defenseRequest",
+      expect.objectContaining({
+        sourceActorId: "npc-1",
+        targetActorId: "character-1",
+        targetTokenId: "character-token-1",
+        targetTokenUuid: "Scene.scene.Token.character-token-1",
+        effect: "seriousInjury",
+        allowedDefenses: ["block", "dodge"]
+      })
+    );
     expect(JSON.parse(String(messages[0]!.content))).toMatchObject({
       allowDodge: true,
       allowBlock: true,
@@ -299,23 +309,16 @@ describe("CombatChatService", () => {
     const messages: Record<string, unknown>[] = [];
     stubFoundry(messages);
 
-    await combatChat().createDefenseRequest(
-      target(),
-      actor([shield()]),
-      "seriousInjury",
-      0,
-      ["block", "dodge"]
-    );
-    await combatChat().createDefenseRequest(
-      target(),
-      actor([shield({broken: true})]),
-      "seriousInjury",
-      0,
-      ["block", "dodge"]
-    );
+    await combatChat().createDefenseRequest(target(), actor([shield()]), "seriousInjury", 0, ["block", "dodge"]);
+    await combatChat().createDefenseRequest(target(), actor([shield({broken: true})]), "seriousInjury", 0, [
+      "block",
+      "dodge"
+    ]);
 
     expect(messages[0]).toHaveProperty("flags.magnusarchives.defenseRequest.allowedDefenses", [
-      "block", "dodge", "blockWithShield"
+      "block",
+      "dodge",
+      "blockWithShield"
     ]);
     expect(JSON.parse(String(messages[0]!.content))).toMatchObject({allowBlockWithShield: true});
     expect(messages[1]).toHaveProperty("flags.magnusarchives.defenseRequest.allowedDefenses", ["block", "dodge"]);
@@ -342,13 +345,16 @@ describe("CombatChatService", () => {
       shieldSeverity: "MAGNUSARCHIVES.Wounds.Severity.major",
       combatAction: true
     });
-    expect(messages[0]).toHaveProperty("flags.magnusarchives.combatAction", expect.objectContaining({
-      kind: "shieldWound",
-      targetActorId: "character-1",
-      shieldId: "shield-1",
-      shieldName: "Round Shield",
-      severity: "major",
-      applied: false
-    }));
+    expect(messages[0]).toHaveProperty(
+      "flags.magnusarchives.combatAction",
+      expect.objectContaining({
+        kind: "shieldWound",
+        targetActorId: "character-1",
+        shieldId: "shield-1",
+        shieldName: "Round Shield",
+        severity: "major",
+        applied: false
+      })
+    );
   });
 });

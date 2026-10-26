@@ -37,12 +37,8 @@ describe("V1 presentation polish", () => {
 
   it("keeps the normal NPC sheet to its compact baseline and one native Notes editor", () => {
     expect(npcTemplate).not.toContain("MAGNUSARCHIVES.Phase1");
-    for (const field of [
-      "system.level",
-      "system.armor",
-      "system.health.value",
-      "system.health.baseMax"
-    ]) expect(npcTemplate).toContain(`name="${field}"`);
+    for (const field of ["system.level", "system.armor", "system.health.value", "system.health.baseMax"])
+      expect(npcTemplate).toContain(`name="${field}"`);
     expect(npcTemplate).toContain('name="system.notes"');
     expect(npcTemplate).toContain('elementType="prose-mirror"');
     expect(npcTemplate).not.toContain('name="system.description"');
@@ -94,10 +90,12 @@ describe("V1 presentation polish", () => {
 
 describe("Chat card actor watermark", () => {
   it("prefers the directly attached synthetic Token image", () => {
-    expect(chatCardActorImage({
-      img: "actor.webp",
-      token: {texture: {src: "synthetic-token.webp"}}
-    })).toBe("synthetic-token.webp");
+    expect(
+      chatCardActorImage({
+        img: "actor.webp",
+        token: {texture: {src: "synthetic-token.webp"}}
+      })
+    ).toBe("synthetic-token.webp");
   });
 
   it("falls back to the acting Actor image and omits an unavailable image", () => {
@@ -107,10 +105,12 @@ describe("Chat card actor watermark", () => {
   });
 
   it("derives an optional safe Character accent without changing the fallback", () => {
-    expect(chatCardActorImageData({
-      img: "actor.webp",
-      system: {appearance: {color: "#00ffff"}}
-    })).toMatchObject({
+    expect(
+      chatCardActorImageData({
+        img: "actor.webp",
+        system: {appearance: {color: "#00ffff"}}
+      })
+    ).toMatchObject({
       actorImage: "actor.webp",
       chatCardStyle: expect.stringContaining("--magnusarchives-chat-accent: #00ffff")
     });

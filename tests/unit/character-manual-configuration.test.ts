@@ -37,10 +37,26 @@ describe("Character manual configuration", () => {
   it("applies independent signed Wound modifiers without deleting over-capacity records", () => {
     const currentWounds = wounds({minor: 4, moderate: 2, major: 1});
     const derived = deriveCharacterData(
-      pools(), currentWounds, createRecoveryUsage(), {}, [], undefined, 0, undefined, 2, 1,
-      {tier: null, effort: null, stats: {
-        might: {max: null, edge: null}, speed: {max: null, edge: null}, intellect: {max: null, edge: null}
-      }, wounds: {minor: 1, moderate: 0, major: -1}}
+      pools(),
+      currentWounds,
+      createRecoveryUsage(),
+      {},
+      [],
+      undefined,
+      0,
+      undefined,
+      2,
+      1,
+      {
+        tier: null,
+        effort: null,
+        stats: {
+          might: {max: null, edge: null},
+          speed: {max: null, edge: null},
+          intellect: {max: null, edge: null}
+        },
+        wounds: {minor: 1, moderate: 0, major: -1}
+      }
     );
     expect(derived.wounds.calculatedCapacities).toEqual({minor: 3, moderate: 3, major: 3});
     expect(derived.wounds.capacities).toEqual({minor: 4, moderate: 3, major: 2});
@@ -51,17 +67,20 @@ describe("Character manual configuration", () => {
   it("keeps zero Wound modifiers neutral and clamps invalid effective capacity to the invariant minimum", () => {
     const neutral = deriveCharacterData(pools(), wounds(), createRecoveryUsage());
     expect(neutral.wounds.capacities).toEqual({minor: 3, moderate: 3, major: 3});
-    const low = deriveCharacterData(
-      pools(), wounds(), createRecoveryUsage(), {}, [], undefined, 0, undefined, 2, 1,
-      {tier: null, effort: null, stats: {
-        might: {max: null, edge: null}, speed: {max: null, edge: null}, intellect: {max: null, edge: null}
-      }, wounds: {minor: -20, moderate: -20, major: -20}}
-    );
+    const low = deriveCharacterData(pools(), wounds(), createRecoveryUsage(), {}, [], undefined, 0, undefined, 2, 1, {
+      tier: null,
+      effort: null,
+      stats: {
+        might: {max: null, edge: null},
+        speed: {max: null, edge: null},
+        intellect: {max: null, edge: null}
+      },
+      wounds: {minor: -20, moderate: -20, major: -20}
+    });
     expect(low.wounds.capacities).toEqual({minor: 1, moderate: 1, major: 1});
-    expect(() => validateWoundCapacityModifiers(
-      {minor: 3, moderate: 3, major: 3},
-      {minor: -3, moderate: 0, major: 0}
-    )).toThrow(/at least 1/i);
+    expect(() =>
+      validateWoundCapacityModifiers({minor: 3, moderate: 3, major: 3}, {minor: -3, moderate: 0, major: 0})
+    ).toThrow(/at least 1/i);
   });
 
   it("resets all Wound modifiers without touching recorded Wounds", async () => {
@@ -74,9 +93,12 @@ describe("Character manual configuration", () => {
   });
 
   it("migrates legacy Recovery usage into four stable default slots", () => {
-    const migrated = migrateCharacterSystemData({recovery: {
-      used: {oneAction: true, tenMinutes: false, oneHour: true, tenHours: false}, history: []
-    }}) as {recovery: {slots: Array<{id: string; type: string; used: boolean}>}};
+    const migrated = migrateCharacterSystemData({
+      recovery: {
+        used: {oneAction: true, tenMinutes: false, oneHour: true, tenHours: false},
+        history: []
+      }
+    }) as {recovery: {slots: Array<{id: string; type: string; used: boolean}>}};
     expect(migrated.recovery.slots).toEqual([
       {id: "core-recovery-action", type: "one-action", used: true},
       {id: "core-recovery-ten-minutes", type: "10-minutes", used: false},
@@ -131,11 +153,13 @@ describe("Character manual configuration", () => {
   });
 
   it("normalizes invalid Recovery entries without index-based identities", () => {
-    expect(normalizeRecoverySlots([
-      {id: "stable", type: "one-action", used: true},
-      {id: "stable", type: "1-hour", used: false},
-      {id: "bad", type: "tomorrow", used: false}
-    ])).toEqual([{id: "stable", type: "one-action", used: true}]);
+    expect(
+      normalizeRecoverySlots([
+        {id: "stable", type: "one-action", used: true},
+        {id: "stable", type: "1-hour", used: false},
+        {id: "bad", type: "tomorrow", used: false}
+      ])
+    ).toEqual([{id: "stable", type: "one-action", used: true}]);
   });
 
   it("parses reordered duplicate-type slots while preserving usage by stable ID", () => {
@@ -143,13 +167,18 @@ describe("Character manual configuration", () => {
       {id: "a", type: "one-action" as const, used: true},
       {id: "b", type: "10-minutes" as const, used: false}
     ];
-    expect(parseRecoveryOverrideDialogData({
-      slotOrder: "b,a,new",
-      "slotType__b": "one-action",
-      "slotType__a": "one-action",
-      "slotType__new": "1-hour",
-      rollModifier: "1"
-    }, current)).toEqual({
+    expect(
+      parseRecoveryOverrideDialogData(
+        {
+          slotOrder: "b,a,new",
+          slotType__b: "one-action",
+          slotType__a: "one-action",
+          slotType__new: "1-hour",
+          rollModifier: "1"
+        },
+        current
+      )
+    ).toEqual({
       slots: [
         {id: "b", type: "one-action", used: false},
         {id: "a", type: "one-action", used: true},

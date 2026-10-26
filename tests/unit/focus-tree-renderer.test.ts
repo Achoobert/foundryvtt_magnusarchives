@@ -1,10 +1,7 @@
 import {describe, expect, it, vi} from "vitest";
 
 import fixture from "../../fixtures/abides-in-stone-focus.json";
-import {
-  focusDescriptionExcerpt,
-  FocusTreeRenderer
-} from "../../src/focus/focus-tree-renderer";
+import {focusDescriptionExcerpt, FocusTreeRenderer} from "../../src/focus/focus-tree-renderer";
 import type {FocusDocumentLike, FocusGraph} from "../../src/focus/focus-types";
 
 function focus(graph = fixture.system.graph as unknown as FocusGraph): FocusDocumentLike {
@@ -27,7 +24,7 @@ describe("FocusTreeRenderer", () => {
 
   it("creates deterministic positions when all coordinates are absent", async () => {
     const graph: FocusGraph = {
-      ...fixture.system.graph as unknown as FocusGraph,
+      ...(fixture.system.graph as unknown as FocusGraph),
       nodes: fixture.system.graph.nodes.map((node) => ({
         ...node,
         position: {x: null, y: null}
@@ -36,13 +33,14 @@ describe("FocusTreeRenderer", () => {
     const renderer = new FocusTreeRenderer(undefined, async () => null);
     const first = await renderer.prepare(focus(graph));
     const second = await renderer.prepare(focus({...graph, nodes: [...graph.nodes].reverse()}));
-    expect(Object.fromEntries(first.nodes.map((node) => [node.id, [node.xPercent, node.tier]])))
-      .toEqual(Object.fromEntries(second.nodes.map((node) => [node.id, [node.xPercent, node.tier]])));
+    expect(Object.fromEntries(first.nodes.map((node) => [node.id, [node.xPercent, node.tier]]))).toEqual(
+      Object.fromEntries(second.nodes.map((node) => [node.id, [node.xPercent, node.tier]]))
+    );
   });
 
   it("returns diagnostics instead of silently rendering an invalid graph", async () => {
     const invalid: FocusGraph = {
-      ...fixture.system.graph as unknown as FocusGraph,
+      ...(fixture.system.graph as unknown as FocusGraph),
       connections: [{id: "bad", from: "stone-body", to: "missing"}]
     };
     const renderer = new FocusTreeRenderer(undefined, async () => null);
@@ -62,11 +60,11 @@ describe("FocusTreeRenderer", () => {
   });
 
   it("prepares compact node dimensions and a read-only Ability description excerpt", async () => {
-    const renderer = new FocusTreeRenderer(undefined, async (uuid) => uuid
-      ? {name: "Linked Ability", description: "<p>A concise <strong>linked</strong> description.</p>"}
-      : null);
+    const renderer = new FocusTreeRenderer(undefined, async (uuid) =>
+      uuid ? {name: "Linked Ability", description: "<p>A concise <strong>linked</strong> description.</p>"} : null
+    );
     const graph: FocusGraph = {
-      ...fixture.system.graph as unknown as FocusGraph,
+      ...(fixture.system.graph as unknown as FocusGraph),
       nodes: fixture.system.graph.nodes.map((node, index) => ({
         ...node,
         abilityUuid: index === 0 ? "Item.ability" : ""
@@ -90,22 +88,39 @@ describe("FocusTreeRenderer", () => {
   it("enriches the complete source description and falls back to the snapshot", async () => {
     const longDescription = `<p>${"Complete description ".repeat(20)}</p>`;
     const enrich = vi.fn(async (html: string) => `<section>${html}</section>`);
-    const renderer = new FocusTreeRenderer(undefined, async (uuid) => uuid === "Item.source"
-      ? {name: "Source", description: longDescription, relativeTo: {uuid}}
-      : null, enrich);
+    const renderer = new FocusTreeRenderer(
+      undefined,
+      async (uuid) =>
+        uuid === "Item.source" ? {name: "Source", description: longDescription, relativeTo: {uuid}} : null,
+      enrich
+    );
     const graph: FocusGraph = {
       version: 1,
       nodes: [
-        {id: "source", abilityUuid: "Item.source", abilitySnapshot: {name: "Old", description: "snapshot"}, tier: 1, position: {x: 0, y: null}},
-        {id: "snapshot", abilityUuid: "", abilitySnapshot: {name: "Snapshot", description: "<p>Snapshot HTML</p>"}, tier: 2, position: {x: 0, y: null}}
+        {
+          id: "source",
+          abilityUuid: "Item.source",
+          abilitySnapshot: {name: "Old", description: "snapshot"},
+          tier: 1,
+          position: {x: 0, y: null}
+        },
+        {
+          id: "snapshot",
+          abilityUuid: "",
+          abilitySnapshot: {name: "Snapshot", description: "<p>Snapshot HTML</p>"},
+          tier: 2,
+          position: {x: 0, y: null}
+        }
       ],
       connections: []
     };
     const view = await renderer.prepare(focus(graph));
-    expect(view.nodes.find((node) => node.id === "source")?.descriptionHtml)
-      .toBe(`<section>${longDescription}</section>`);
-    expect(view.nodes.find((node) => node.id === "snapshot")?.descriptionHtml)
-      .toBe("<section><p>Snapshot HTML</p></section>");
+    expect(view.nodes.find((node) => node.id === "source")?.descriptionHtml).toBe(
+      `<section>${longDescription}</section>`
+    );
+    expect(view.nodes.find((node) => node.id === "snapshot")?.descriptionHtml).toBe(
+      "<section><p>Snapshot HTML</p></section>"
+    );
     expect(enrich).toHaveBeenCalledTimes(2);
   });
 
@@ -155,7 +170,7 @@ describe("FocusTreeRenderer", () => {
   it("renders structurally invalid Character graphs as diagnostic but clickable", async () => {
     const renderer = new FocusTreeRenderer(undefined, async () => null);
     const invalid = focus({
-      ...fixture.system.graph as unknown as FocusGraph,
+      ...(fixture.system.graph as unknown as FocusGraph),
       connections: [{id: "broken", from: "intimidating-presence", to: "missing"}]
     });
     const view = await renderer.prepare(invalid, {

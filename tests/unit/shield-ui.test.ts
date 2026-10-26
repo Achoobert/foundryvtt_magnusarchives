@@ -18,7 +18,9 @@ describe("Shield V1 UI", () => {
     expect(characterTemplate).toContain("shield.capacities.moderate");
     expect(characterTemplate).toContain("shield.capacities.major");
     expect(characterTemplate).toContain("shield.broken");
-    expect(itemTemplate).not.toMatch(/\{\{#if isShield\}\}[\s\S]*?name="system\.equipped"[\s\S]*?\{\{#if isCharacterType\}\}/);
+    expect(itemTemplate).not.toMatch(
+      /\{\{#if isShield\}\}[\s\S]*?name="system\.equipped"[\s\S]*?\{\{#if isCharacterType\}\}/
+    );
     expect(itemTemplate).toContain("system.derived.broken");
   });
 
@@ -46,7 +48,7 @@ describe("Shield V1 UI", () => {
 
   it("automatically unequips other embedded Shields when one is equipped", () => {
     expect(itemDocument).toContain('this.type === "shield"');
-    expect(itemDocument).toContain('item.type !== this.type');
+    expect(itemDocument).toContain("item.type !== this.type");
     expect(itemDocument).toContain('{"system.equipped": false}');
     expect(itemDocument).toContain("magnusarchivesCombatEquipmentSync");
   });

@@ -89,10 +89,7 @@ function privateHiddenContribution(entry: RollStepContribution, prepared: Prepar
   return prepared.context.difficulty.mode === "hidden" && entry.id.startsWith("npc-modification.");
 }
 
-function modifierRow(
-  entry: RollStepContribution,
-  localize: (key: string) => string
-): RollDialogModifierRow {
+function modifierRow(entry: RollStepContribution, localize: (key: string) => string): RollDialogModifierRow {
   return {
     id: entry.id,
     label: localize(entry.label),
@@ -149,9 +146,8 @@ export function buildRollDialogPreview(
 export function readRollDialogData(root: HTMLElement): RollDialogData {
   const data: RollDialogData = {};
   for (const element of root.querySelectorAll<HTMLInputElement | HTMLSelectElement>("[name]")) {
-    data[element.name] = element instanceof HTMLInputElement && element.type === "checkbox"
-      ? element.checked
-      : element.value;
+    data[element.name] =
+      element instanceof HTMLInputElement && element.type === "checkbox" ? element.checked : element.value;
   }
   return data;
 }
@@ -169,10 +165,7 @@ export function rollDialogChecked(data: RollDialogData, key: string): boolean {
   return value === true || value === "true" || value === "on";
 }
 
-export function rollDialogDifficulty(
-  data: RollDialogData,
-  forced?: RollDifficulty
-): RollDifficulty {
+export function rollDialogDifficulty(data: RollDialogData, forced?: RollDifficulty): RollDifficulty {
   if (forced) return forced;
   const value = rollDialogText(data, "difficulty").trim();
   if (!value) return {mode: "unknown"};
@@ -193,15 +186,19 @@ export function situationalModifier(data: RollDialogData): {
 }
 
 export function selectOptions(maximum: number, selectedValue = 0): string {
-  return Array.from({length: maximum + 1}, (_, value) => (
-    `<option value="${value}"${value === selectedValue ? " selected" : ""}>${value}</option>`
-  )).join("");
+  return Array.from(
+    {length: maximum + 1},
+    (_, value) => `<option value="${value}"${value === selectedValue ? " selected" : ""}>${value}</option>`
+  ).join("");
 }
 
 export function poolOptions(selected: PoolKey): string {
-  return (["might", "speed", "intellect"] as const).map((pool) => (
-    `<option value="${pool}"${pool === selected ? " selected" : ""}>${escapeHtml(poolLabel(pool, foundryLocalize))}</option>`
-  )).join("");
+  return (["might", "speed", "intellect"] as const)
+    .map(
+      (pool) =>
+        `<option value="${pool}"${pool === selected ? " selected" : ""}>${escapeHtml(poolLabel(pool, foundryLocalize))}</option>`
+    )
+    .join("");
 }
 
 const SKILL_RANK_STEPS: Readonly<Record<SkillRank, number>> = Object.freeze({
@@ -220,9 +217,10 @@ export function skillRankOptions(selectedSteps: number | null = 0, valuePrefix =
   return SKILL_RANKS.map((rank) => {
     const steps = skillRankSteps(rank);
     const label = game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`);
-    const modifier = steps === 0
-      ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified")
-      : formatStepModifier(steps > 0 ? "ease" : "hinder", steps);
+    const modifier =
+      steps === 0
+        ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified")
+        : formatStepModifier(steps > 0 ? "ease" : "hinder", steps);
     return `<option value="${valuePrefix}${steps}"${selectedSteps !== null && steps === selectedSteps ? " selected" : ""}>${escapeHtml(label)} · ${modifier}</option>`;
   }).join("");
 }
@@ -306,11 +304,9 @@ function modifierRows(rows: readonly RollDialogModifierRow[]): string {
   if (rows.length === 0) {
     return `<p class="roll-summary-empty">${game.i18n.localize("MAGNUSARCHIVES.Common.None")}</p>`;
   }
-  return rows.map((row) => summaryRow(
-    row.label,
-    row.modifier,
-    row.direction === "ease" ? "is-ease" : "is-hindrance"
-  )).join("");
+  return rows
+    .map((row) => summaryRow(row.label, row.modifier, row.direction === "ease" ? "is-ease" : "is-hindrance"))
+    .join("");
 }
 
 function setHtml(root: HTMLElement, key: string, html: string): void {
@@ -323,11 +319,7 @@ function setText(root: HTMLElement, key: string, value: string): void {
   if (target) target.textContent = value;
 }
 
-function renderPreview(
-  root: HTMLElement,
-  view: RollDialogPreviewViewModel,
-  attackSummary?: string
-): void {
+function renderPreview(root: HTMLElement, view: RollDialogPreviewViewModel, attackSummary?: string): void {
   setText(root, "label", view.rollLabel);
   setText(root, "pool", view.poolLabel);
   setHtml(root, "modifiers", modifierRows(view.modifiers));
@@ -339,35 +331,46 @@ function renderPreview(
 
   const effortSection = root.querySelector<HTMLElement>('[data-roll-summary-section="effort"]');
   if (effortSection) effortSection.hidden = view.totalEffortApplied === 0;
-  setHtml(root, "effort", [
-    summaryRow(
-      game.i18n.localize("MAGNUSARCHIVES.Roll.PaidAppliedEffort"),
-      `${view.paidEffortApplied} / ${view.effortMaximum}`
-    ),
-    summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.FreeAppliedEffort"), String(view.freeEffortApplied)),
-    summaryRow(
-      game.i18n.localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
-      view.totalEffortMaximum === null
-        ? `${view.totalEffortApplied} / ${game.i18n.localize("MAGNUSARCHIVES.Genre.Unlimited")}`
-        : `${view.totalEffortApplied} / ${view.totalEffortMaximum}`,
-      view.totalEffortMaximum !== null && view.totalEffortApplied === view.totalEffortMaximum ? "is-total" : ""
-    )
-  ].join(""));
+  setHtml(
+    root,
+    "effort",
+    [
+      summaryRow(
+        game.i18n.localize("MAGNUSARCHIVES.Roll.PaidAppliedEffort"),
+        `${view.paidEffortApplied} / ${view.effortMaximum}`
+      ),
+      summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.FreeAppliedEffort"), String(view.freeEffortApplied)),
+      summaryRow(
+        game.i18n.localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
+        view.totalEffortMaximum === null
+          ? `${view.totalEffortApplied} / ${game.i18n.localize("MAGNUSARCHIVES.Genre.Unlimited")}`
+          : `${view.totalEffortApplied} / ${view.totalEffortMaximum}`,
+        view.totalEffortMaximum !== null && view.totalEffortApplied === view.totalEffortMaximum ? "is-total" : ""
+      )
+    ].join("")
+  );
 
-  const difficulty = view.difficultyMode === "hidden"
-    ? summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue"))
-    : view.difficultyMode === "unknown"
-      ? summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.NotProvided"))
-      : [
-          summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), String(view.baseDifficulty)),
-          summaryRow(
-            game.i18n.localize("MAGNUSARCHIVES.Roll.FinalDifficulty"),
-            view.automaticSuccess
-              ? game.i18n.localize("MAGNUSARCHIVES.Roll.AutomaticSuccess")
-              : String(view.finalDifficulty)
-          ),
-          summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.TargetNumber"), String(view.targetNumber))
-        ].join("");
+  const difficulty =
+    view.difficultyMode === "hidden"
+      ? summaryRow(
+          game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"),
+          game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")
+        )
+      : view.difficultyMode === "unknown"
+        ? summaryRow(
+            game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"),
+            game.i18n.localize("MAGNUSARCHIVES.Roll.NotProvided")
+          )
+        : [
+            summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), String(view.baseDifficulty)),
+            summaryRow(
+              game.i18n.localize("MAGNUSARCHIVES.Roll.FinalDifficulty"),
+              view.automaticSuccess
+                ? game.i18n.localize("MAGNUSARCHIVES.Roll.AutomaticSuccess")
+                : String(view.finalDifficulty)
+            ),
+            summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.TargetNumber"), String(view.targetNumber))
+          ].join("");
   setHtml(root, "difficulty", difficulty);
 
   const attackSection = root.querySelector<HTMLElement>('[data-roll-summary-section="attack"]');
@@ -377,34 +380,47 @@ function renderPreview(
   }
 
   const costRows = [
-    ...(view.actionCost > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.ActionCost"), String(view.actionCost))] : []),
-    ...(view.effortCost > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EffortCost"), String(view.effortCost))] : []),
-    ...(view.edgeApplied > 0 ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EdgeApplied"), `-${view.edgeApplied}`)] : []),
+    ...(view.actionCost > 0
+      ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.ActionCost"), String(view.actionCost))]
+      : []),
+    ...(view.effortCost > 0
+      ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EffortCost"), String(view.effortCost))]
+      : []),
+    ...(view.edgeApplied > 0
+      ? [summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.EdgeApplied"), `-${view.edgeApplied}`)]
+      : []),
     summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.TotalCost"), `${view.totalCost} ${view.poolLabel}`, "is-total"),
     summaryRow(game.i18n.localize("MAGNUSARCHIVES.Roll.PoolAfterRoll"), `${view.poolValue} → ${view.poolAfter}`)
   ];
   setHtml(root, "cost", costRows.join(""));
 
-  const pools = (["might", "speed", "intellect"] as const).map((pool) => {
-    const value = view.pool === pool ? view.poolAfter : null;
-    const current = view.pool === pool ? view.poolValue : null;
-    const actorPool = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}`];
-    const actorMax = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}Max`];
-    const actorEdge = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}Edge`];
-    return `<div class="roll-summary-pool${view.pool === pool ? " is-selected" : ""}">
+  const pools = (["might", "speed", "intellect"] as const)
+    .map((pool) => {
+      const value = view.pool === pool ? view.poolAfter : null;
+      const current = view.pool === pool ? view.poolValue : null;
+      const actorPool = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}`];
+      const actorMax = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}Max`];
+      const actorEdge = root.dataset[`pool${pool[0]!.toUpperCase()}${pool.slice(1)}Edge`];
+      return `<div class="roll-summary-pool${view.pool === pool ? " is-selected" : ""}">
       <span>${escapeHtml(poolLabel(pool, foundryLocalize))}</span>
       <strong>${current === null ? actorPool : `${current} → ${value}`} / ${actorMax}</strong>
       <small>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")} ${actorEdge}</small>
     </div>`;
-  }).join("");
-  setHtml(root, "character", `${pools}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${view.effortUsed} / ${view.effortMaximum}</strong></div>`);
-  setText(root, "error", view.poolValue < view.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : "");
+    })
+    .join("");
+  setHtml(
+    root,
+    "character",
+    `${pools}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${view.effortUsed} / ${view.effortMaximum}</strong></div>`
+  );
+  setText(
+    root,
+    "error",
+    view.poolValue < view.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : ""
+  );
 }
 
-export function bindRollDialogPreview(
-  root: HTMLElement,
-  options: BindRollDialogOptions
-): () => void {
+export function bindRollDialogPreview(root: HTMLElement, options: BindRollDialogOptions): () => void {
   for (const pool of ["might", "speed", "intellect"] as const) {
     const key = `pool${pool[0]!.toUpperCase()}${pool.slice(1)}`;
     root.dataset[key] = String(options.actor.system.stats[pool].value);

@@ -1,10 +1,6 @@
 import type {DurationTrigger, RecoveryKind, RecoveryType, RestType} from "../constants/system";
 import {assertLiving, type CharacterDocumentLike} from "../rules/core/core-types";
-import type {
-  RecoveryAllocation,
-  RecoveryApplicationResult,
-  RecoveryRollResult
-} from "./recovery-service";
+import type {RecoveryAllocation, RecoveryApplicationResult, RecoveryRollResult} from "./recovery-service";
 import {RecoveryService} from "./recovery-service";
 import type {RestOptions, RestPreparation} from "./rest-service";
 import {RestService} from "./rest-service";
@@ -58,11 +54,7 @@ export class RecoveryWorkflowService {
   readonly #rest: RestService;
   readonly #hooks: RecoveryWorkflowHooks;
 
-  constructor(
-    recovery: RecoveryService,
-    rest: RestService,
-    hooks: RecoveryWorkflowHooks = FOUNDRY_RECOVERY_HOOKS
-  ) {
+  constructor(recovery: RecoveryService, rest: RestService, hooks: RecoveryWorkflowHooks = FOUNDRY_RECOVERY_HOOKS) {
     this.#recovery = recovery;
     this.#rest = rest;
     this.#hooks = hooks;

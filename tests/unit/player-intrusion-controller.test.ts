@@ -23,15 +23,15 @@ function setup(options: {xp?: number; confirmed?: boolean; owner?: boolean} = {}
   vi.stubGlobal("foundry", {
     applications: {api: {DialogV2: {confirm: vi.fn(async () => options.confirmed ?? true)}}}
   });
-  vi.stubGlobal("fromUuid", vi.fn(async () => actor));
+  vi.stubGlobal(
+    "fromUuid",
+    vi.fn(async () => actor)
+  );
   vi.stubGlobal("Hooks", {callAll: vi.fn()});
   return {
     actor,
     publish,
-    controller: new PlayerIntrusionController(
-      new PlayerIntrusionService(),
-      {publish} as never
-    )
+    controller: new PlayerIntrusionController(new PlayerIntrusionService(), {publish} as never)
   };
 }
 
@@ -66,7 +66,9 @@ describe("PlayerIntrusionController", () => {
   it("suppresses a rapid second activation while the first confirmation is pending", async () => {
     const {actor, controller} = setup();
     let finish!: (value: boolean) => void;
-    const pending = new Promise<boolean>((resolve) => { finish = resolve; });
+    const pending = new Promise<boolean>((resolve) => {
+      finish = resolve;
+    });
     (foundry.applications.api.DialogV2.confirm as ReturnType<typeof vi.fn>).mockReturnValueOnce(pending);
     const first = controller.activate(actor);
     await expect(controller.activate(actor)).resolves.toBe(false);

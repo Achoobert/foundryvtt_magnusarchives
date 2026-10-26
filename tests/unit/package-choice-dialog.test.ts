@@ -1,9 +1,6 @@
 import {readFileSync} from "node:fs";
 import {describe, expect, it} from "vitest";
-import {
-  packageChoiceSubmissionGuard,
-  togglePackageChoice
-} from "../../src/applications/dialogs/package-choice-dialog";
+import {packageChoiceSubmissionGuard, togglePackageChoice} from "../../src/applications/dialogs/package-choice-dialog";
 
 const dialogSource = readFileSync("src/applications/dialogs/package-choice-dialog.ts", "utf8");
 const packageSource = readFileSync("src/applications/dialogs/character-package-dialogs.ts", "utf8");
@@ -22,7 +19,7 @@ describe("Package Choice Dialog V2", () => {
 
   it("resolves Choose 1 from the option action with no visible footer confirmation", () => {
     expect(dialogSource).toContain('data-action="package-choice-${index}"');
-    expect(dialogSource).toContain("callback: (): string[] => claimSubmission() ? [option.id] : []");
+    expect(dialogSource).toContain("callback: (): string[] => (claimSubmission() ? [option.id] : [])");
     expect(styles).toContain(".application.dialog:has(.package-choice-single) .form-footer");
     expect(styles).toMatch(/\.application\.dialog:has\(\.package-choice-single\) \.form-footer\s*\{\s*display: none;/);
   });

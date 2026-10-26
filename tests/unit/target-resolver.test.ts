@@ -23,7 +23,9 @@ function npc(modifications: readonly NpcModificationData[] = [], level = 4): Npc
       },
       modifications
     },
-    async update(): Promise<unknown> { return this; }
+    async update(): Promise<unknown> {
+      return this;
+    }
   };
 }
 
@@ -81,11 +83,13 @@ describe("TargetResolver", () => {
 
     expect(result.difficulty).toBe(6);
     expect(result.appliedModificationIds).toEqual(["ranged", "delta", "hinder"]);
-    expect(result.contributions).toContainEqual(expect.objectContaining({
-      direction: "hinder",
-      steps: 1,
-      label: "MAGNUSARCHIVES.Combat.TargetModification"
-    }));
+    expect(result.contributions).toContainEqual(
+      expect.objectContaining({
+        direction: "hinder",
+        steps: 1,
+        label: "MAGNUSARCHIVES.Combat.TargetModification"
+      })
+    );
   });
 
   it("supports predicates without treating unknown predicates as matches", () => {
@@ -98,10 +102,12 @@ describe("TargetResolver", () => {
       }),
       modification({id: "future", contexts: [], predicate: {futureRule: true}, value: 9})
     ]);
-    expect(resolver().resolve(target, {
-      tags: ["defense.speed"],
-      attackType: "ranged",
-      weaponCategory: "heavy"
-    }).difficulty).toBe(8);
+    expect(
+      resolver().resolve(target, {
+        tags: ["defense.speed"],
+        attackType: "ranged",
+        weaponCategory: "heavy"
+      }).difficulty
+    ).toBe(8);
   });
 });

@@ -1,18 +1,12 @@
 import {CHARACTER_DAMAGE_EFFECTS} from "../../constants/system";
 import {DOCUMENT_SHEET_FORM_OPTIONS, documentSystemFields} from "./document-sheet-options";
 import {requestNpcAttack} from "../dialogs/combat-dialogs";
-import {
-  createNpcModification,
-  deleteNpcModification,
-  editNpcModification
-} from "../dialogs/npc-modification-dialogs";
+import {createNpcModification, deleteNpcModification, editNpcModification} from "../dialogs/npc-modification-dialogs";
 import type {NpcTargetLike} from "../../combat/combat-types";
 import {enforceReadOnlySheetPresentation, guardEditableActions} from "./sheet-permissions";
 import {npcHealthGauge, npcTargetNumber} from "./npc-sheet-presentation";
 
-const ActorSheetV2 = foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ActorSheetV2
-);
+const ActorSheetV2 = foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2);
 
 const NPC_MUTATING_ACTIONS = new Set([
   "requestDefense",
@@ -25,12 +19,15 @@ export class NpcSheet extends ActorSheetV2 {
   static DEFAULT_OPTIONS = {
     ...DOCUMENT_SHEET_FORM_OPTIONS,
     classes: ["magnusarchives", "sheet", "actor", "npc-sheet"],
-    actions: guardEditableActions({
-      requestDefense: NpcSheet.#onRequestDefense,
-      createModification: NpcSheet.#onCreateModification,
-      editModification: NpcSheet.#onEditModification,
-      deleteModification: NpcSheet.#onDeleteModification
-    }, NPC_MUTATING_ACTIONS),
+    actions: guardEditableActions(
+      {
+        requestDefense: NpcSheet.#onRequestDefense,
+        createModification: NpcSheet.#onCreateModification,
+        editModification: NpcSheet.#onEditModification,
+        deleteModification: NpcSheet.#onDeleteModification
+      },
+      NPC_MUTATING_ACTIONS
+    ),
     position: {width: 680, height: 700},
     window: {resizable: true}
   };
@@ -47,30 +44,19 @@ export class NpcSheet extends ActorSheetV2 {
     await createNpcModification(this.actor as unknown as NpcTargetLike);
   }
 
-  static async #onEditModification(
-    this: NpcSheet,
-    _event: PointerEvent,
-    target: HTMLElement
-  ): Promise<void> {
+  static async #onEditModification(this: NpcSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const id = target.dataset.modificationId;
     if (!id) throw new Error("Missing NPC modification ID.");
     await editNpcModification(this.actor as unknown as NpcTargetLike, id);
   }
 
-  static async #onDeleteModification(
-    this: NpcSheet,
-    _event: PointerEvent,
-    target: HTMLElement
-  ): Promise<void> {
+  static async #onDeleteModification(this: NpcSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
     const id = target.dataset.modificationId;
     if (!id) throw new Error("Missing NPC modification ID.");
     await deleteNpcModification(this.actor as unknown as NpcTargetLike, id);
   }
 
-  override async _onRender(
-    context: Record<string, unknown>,
-    options: Record<string, unknown>
-  ): Promise<void> {
+  override async _onRender(context: Record<string, unknown>, options: Record<string, unknown>): Promise<void> {
     await super._onRender(context, options);
     enforceReadOnlySheetPresentation(this.element, this.isEditable, NPC_MUTATING_ACTIONS);
   }
@@ -86,9 +72,9 @@ export class NpcSheet extends ActorSheetV2 {
     const sourceNotes = typeof sourceSystem?.notes === "string" ? sourceSystem.notes : "";
     const enrichedNotes = sourceNotes
       ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(sourceNotes, {
-        async: true,
-        relativeTo: this.actor
-      })
+          async: true,
+          relativeTo: this.actor
+        })
       : "";
     return {
       ...context,
@@ -99,10 +85,7 @@ export class NpcSheet extends ActorSheetV2 {
       isGM: game.user.isGM,
       enriched: {notes: enrichedNotes},
       targetNumber: npcTargetNumber(npcSystem.level) ?? "—",
-      healthGauge: npcHealthGauge(
-        npcSystem.health.value,
-        npcSystem.health.max ?? npcSystem.health.baseMax
-      ),
+      healthGauge: npcHealthGauge(npcSystem.health.value, npcSystem.health.max ?? npcSystem.health.baseMax),
       damageEffectOptions: CHARACTER_DAMAGE_EFFECTS.map((value) => ({
         value,
         label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${value}`),

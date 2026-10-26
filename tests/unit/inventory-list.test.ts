@@ -7,12 +7,14 @@ import {
 
 describe("Inventory list presentation", () => {
   it("presents Equipment quantity without inventing Level or Depletion", () => {
-    expect(inventoryItemPresentation({
-      id: "rope",
-      name: "Rope",
-      type: "equipment",
-      system: {quantity: 3, equipped: true, description: "<p>Strong rope.</p>"}
-    })).toEqual({
+    expect(
+      inventoryItemPresentation({
+        id: "rope",
+        name: "Rope",
+        type: "equipment",
+        system: {quantity: 3, equipped: true, description: "<p>Strong rope.</p>"}
+      })
+    ).toEqual({
       id: "rope",
       name: "Rope",
       type: "equipment",
@@ -29,18 +31,22 @@ describe("Inventory list presentation", () => {
   });
 
   it("presents Cypher Level and structured Artifact Depletion", () => {
-    expect(inventoryItemPresentation({
-      id: "cypher",
-      name: "Curiosity",
-      type: "cypher",
-      system: {level: 4}
-    })).toMatchObject({type: "cypher", level: 4, quantity: null, depletion: null});
-    expect(inventoryItemPresentation({
-      id: "artifact",
-      name: "The Boneturner's Tale",
-      type: "artifact",
-      system: {level: 6, depletion: {enabled: true, die: "d10", threshold: 1}}
-    })).toMatchObject({
+    expect(
+      inventoryItemPresentation({
+        id: "cypher",
+        name: "Curiosity",
+        type: "cypher",
+        system: {level: 4}
+      })
+    ).toMatchObject({type: "cypher", level: 4, quantity: null, depletion: null});
+    expect(
+      inventoryItemPresentation({
+        id: "artifact",
+        name: "The Boneturner's Tale",
+        type: "artifact",
+        system: {level: 6, depletion: {enabled: true, die: "d10", threshold: 1}}
+      })
+    ).toMatchObject({
       type: "artifact",
       level: "6",
       depletion: {enabled: true, formula: "1d10", threshold: 1}

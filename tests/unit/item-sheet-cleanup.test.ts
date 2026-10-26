@@ -27,7 +27,9 @@ describe("Item Sheet Cleanup V1.1", () => {
   it("puts Descriptor Description before default-open Benefits without removing grant controls", () => {
     const descriptor = section("{{#if isDescriptor}}", "{{#if isSpecies}}");
     expect(descriptor.indexOf('name="system.description"')).toBeLessThan(descriptor.indexOf("descriptor-benefits"));
-    expect(descriptor).toContain('<details class="descriptor-benefits" data-persistent-disclosure="descriptor-benefits" open>');
+    expect(descriptor).toContain(
+      '<details class="descriptor-benefits" data-persistent-disclosure="descriptor-benefits" open>'
+    );
     expect(descriptor).toContain("MAGNUSARCHIVES.Packages.FixedPoolGrants");
     for (const functionality of [
       'name="system.poolBonuses.might"',
@@ -42,7 +44,8 @@ describe("Item Sheet Cleanup V1.1", () => {
       'data-action="inspectPackageGrant"',
       'data-action="refreshPackageGrant"',
       'data-action="removePackageGrant"'
-    ]) expect(descriptor).toContain(functionality);
+    ])
+      expect(descriptor).toContain(functionality);
     expect(descriptor).not.toContain('name="system.slug"');
     expect(descriptor).not.toContain("system.automation.mode");
     expect(descriptor).not.toContain("system.ruleElements.length");
@@ -80,12 +83,14 @@ describe("Item Sheet Cleanup V1.1", () => {
       ["inspectPackageGrant", "#onInspectPackageGrant"],
       ["refreshPackageGrant", "#onRefreshPackageGrant"],
       ["removePackageGrant", "#onRemovePackageGrant"]
-    ]) expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
+    ])
+      expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
     for (const [action, handler] of [
       ["addPoolBonusChoiceGroup", "#onAddPoolBonusChoiceGroup"],
       ["editPoolBonusChoiceGroup", "#onEditPoolBonusChoiceGroup"],
       ["removePoolBonusChoiceGroup", "#onRemovePoolBonusChoiceGroup"]
-    ]) expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
+    ])
+      expect(sheet).toContain(`${action}: MagnusArchivesItemSheet.${handler}`);
   });
 
   it("refreshes only the selected package snapshot from its source UUID", () => {
@@ -102,8 +107,8 @@ describe("Item Sheet Cleanup V1.1", () => {
 
     const replaceStart = sheet.indexOf("async #replacePackageEntry");
     const replace = sheet.slice(replaceStart, sheet.indexOf("#nodeId(target", replaceStart));
-    expect(replace).toContain('"system.skillGrants": grants.map((entry) => entry.id === id ? replacement : entry)');
-    expect(replace).toContain("options: group.options.map((entry) => entry.id === id ? replacement : entry)");
+    expect(replace).toContain('"system.skillGrants": grants.map((entry) => (entry.id === id ? replacement : entry))');
+    expect(replace).toContain("options: group.options.map((entry) => (entry.id === id ? replacement : entry))");
   });
 
   it("keeps inspect source resolution and targeted remove updates intact", () => {
@@ -149,7 +154,7 @@ describe("Ability multi-Pool Item and use UI", () => {
     expect(template).not.toContain('select name="system.cost.allowedPools"');
     expect(sheet).toContain("input[data-ability-allowed-pool]");
     expect(sheet).toContain('this.item.update({"system.cost.allowedPools": allowedPools})');
-    expect(sheet).toContain("abilityAllowedPoolOptions: isAbility ? POOL_KEYS.map");
+    expect(sheet).toMatch(/abilityAllowedPoolOptions: isAbility\s*\? POOL_KEYS\.map/);
   });
 
   it("limits the use dialog to configured Pools and still offers all Pools for a Pool-less roll", () => {
@@ -161,6 +166,6 @@ describe("Ability multi-Pool Item and use UI", () => {
   it("renders multi-Pool costs in the Character Ability list without a combination enum", () => {
     const characterSheet = readFileSync("src/applications/sheets/character-sheet.ts", "utf8");
     expect(characterSheet).toContain("formatAbilityCost(");
-    expect(characterSheet).toContain('MAGNUSARCHIVES.Ability.CostDisplay.FinalOr');
+    expect(characterSheet).toContain("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr");
   });
 });

@@ -30,7 +30,9 @@
     border: 0;
     border-bottom: 1px solid color-mix(in srgb, var(--magnusarchives-border) 42%, transparent);
     border-radius: 0.2rem 0.2rem 0 0;
-    transition: background 100ms ease, box-shadow 100ms ease;
+    transition:
+      background 100ms ease,
+      box-shadow 100ms ease;
 
     &.starts-archived-group {
       margin-top: 0.45rem;

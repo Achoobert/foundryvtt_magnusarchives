@@ -27,18 +27,14 @@ describe("Focus graph validation", () => {
 
   it("rejects duplicate directed connections, including different IDs", () => {
     const first = graph.connections[0]!;
-    const duplicate = changed({connections: [
-      ...graph.connections,
-      {...first, id: "another-id"}
-    ]});
+    const duplicate = changed({connections: [...graph.connections, {...first, id: "another-id"}]});
     expect(validateFocusGraph(duplicate).map((entry) => entry.code)).toContain("duplicate-connection");
   });
 
   it("rejects dangling connections", () => {
-    const dangling = changed({connections: [
-      ...graph.connections,
-      {id: "dangling", from: "stone-body", to: "missing-node"}
-    ]});
+    const dangling = changed({
+      connections: [...graph.connections, {id: "dangling", from: "stone-body", to: "missing-node"}]
+    });
     expect(() => assertValidFocusGraph(dangling)).toThrow(/missing node/i);
   });
 
@@ -64,21 +60,27 @@ describe("Focus graph validation", () => {
   });
 
   it("accepts missing presentation coordinates", () => {
-    const withoutCoordinates = changed({nodes: graph.nodes.map((node) => ({
-      ...node,
-      position: {x: null, y: null}
-    }))});
+    const withoutCoordinates = changed({
+      nodes: graph.nodes.map((node) => ({
+        ...node,
+        position: {x: null, y: null}
+      }))
+    });
     expect(assertValidFocusGraph(withoutCoordinates)).toEqual([]);
   });
 
   it("rejects Focus node Tiers outside the 1 to 6 editor contract", () => {
-    const invalidTier = changed({nodes: graph.nodes.map((node, index) => ({
-      ...node,
-      tier: index === 0 ? 7 : node.tier
-    }))});
-    expect(validateFocusGraph(invalidTier)).toContainEqual(expect.objectContaining({
-      severity: "error",
-      code: "invalid-tier"
-    }));
+    const invalidTier = changed({
+      nodes: graph.nodes.map((node, index) => ({
+        ...node,
+        tier: index === 0 ? 7 : node.tier
+      }))
+    });
+    expect(validateFocusGraph(invalidTier)).toContainEqual(
+      expect.objectContaining({
+        severity: "error",
+        code: "invalid-tier"
+      })
+    );
   });
 });

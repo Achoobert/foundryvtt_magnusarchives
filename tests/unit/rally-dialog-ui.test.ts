@@ -21,9 +21,9 @@ describe("Rally dialog V2", () => {
   it("exposes a per-use numeric cost and current/after Might summary", () => {
     const html = rallyDialogContent(9, 21, 2, 5, 7);
     expect(html).toContain('name="cost" type="number" min="0" max="10"');
-    expect(html).toContain('data-rally-after>7</span> / 21');
+    expect(html).toContain("data-rally-after>7</span> / 21");
     expect(source).toContain("cost.value = String(Number(mode.dataset.defaultCost ?? 0))");
     expect(source).toContain("services.rally.preview(actor, severity, amount)");
-    expect(source).toContain("numberValue(data, \"cost\")");
+    expect(source).toContain('numberValue(data, "cost")');
   });
 });

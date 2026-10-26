@@ -13,8 +13,15 @@ function workflow(hooks?: RecoveryWorkflowHooks): {
   recovery: RecoveryService;
   service: RecoveryWorkflowService;
 } {
-  const recovery = new RecoveryService(async () => 4, () => "recovery-id", () => 1000);
-  const rest = new RestService(() => "rest-id", () => 2000);
+  const recovery = new RecoveryService(
+    async () => 4,
+    () => "recovery-id",
+    () => 1000
+  );
+  const rest = new RestService(
+    () => "rest-id",
+    () => 2000
+  );
   return {recovery, service: new RecoveryWorkflowService(recovery, rest, hooks)};
 }
 
@@ -66,12 +73,7 @@ describe("RecoveryWorkflowService", () => {
     });
     const actor = character({wounds: wounds({minor: 2, moderate: 2})});
     const roll = recovery.calculateRoll("1-hour", 1, 1);
-    await service.completeNormal(
-      actor,
-      roll,
-      {might: 0, speed: 0, intellect: 0},
-      {oneHourChoice: "remove-minors"}
-    );
+    await service.completeNormal(actor, roll, {might: 0, speed: 0, intellect: 0}, {oneHourChoice: "remove-minors"});
 
     expect(actor.system.wounds.minor).toHaveLength(0);
     expect(actor.system.wounds.moderate).toHaveLength(2);
@@ -79,7 +81,9 @@ describe("RecoveryWorkflowService", () => {
 
   it("makes a Non-Rest Recovery consume availability without rolling or granting benefits", async () => {
     const recovery = new RecoveryService(
-      async () => { throw new Error("The d6 must not be rolled."); },
+      async () => {
+        throw new Error("The d6 must not be rolled.");
+      },
       () => "non-rest-id",
       () => 3000
     );
@@ -139,7 +143,9 @@ describe("RecoveryWorkflowService", () => {
       usedRecoveries: {oneAction: true, tenMinutes: true, oneHour: true}
     });
     const hooks: RecoveryWorkflowHooks = {
-      beforeComplete: () => { events.push("before"); },
+      beforeComplete: () => {
+        events.push("before");
+      },
       processDurations: () => {
         events.push("durations");
         expect(actor.system.wounds.moderate).toHaveLength(0);
@@ -151,17 +157,16 @@ describe("RecoveryWorkflowService", () => {
           tenHours: false
         });
       },
-      afterComplete: () => { events.push("after"); },
-      refresh: () => { events.push("refresh"); }
+      afterComplete: () => {
+        events.push("after");
+      },
+      refresh: () => {
+        events.push("refresh");
+      }
     };
     const {recovery, service} = workflow(hooks);
     const roll = recovery.calculateRoll("10-hours", 1, 1);
-    await service.completeNormal(
-      actor,
-      roll,
-      {might: 2, speed: 0, intellect: 0},
-      {majorTaskSucceeded: true}
-    );
+    await service.completeNormal(actor, roll, {might: 2, speed: 0, intellect: 0}, {majorTaskSucceeded: true});
 
     expect(actor.updates).toHaveLength(1);
     expect(events).toEqual(["before", "durations", "after", "refresh"]);

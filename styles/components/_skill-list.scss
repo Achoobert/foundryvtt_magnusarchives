@@ -57,7 +57,9 @@
     padding: 0.08rem 0.25rem;
     border: 0;
     border-radius: 0.2rem;
-    transition: background 100ms ease, box-shadow 100ms ease;
+    transition:
+      background 100ms ease,
+      box-shadow 100ms ease;
 
     &:hover,
     &:focus-within {

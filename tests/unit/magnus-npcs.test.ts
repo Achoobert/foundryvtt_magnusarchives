@@ -1,17 +1,16 @@
 import {readFile} from "node:fs/promises";
 import path from "node:path";
 import {describe, expect, it} from "vitest";
+import {loadYmlPack} from "../helpers/yml-packs";
 
-// The import pipeline deliberately remains plain Node.js so it can run before TypeScript/Vite.
-// @ts-expect-error Developer-only JavaScript module has no runtime-facing TypeScript declaration.
-const importer = await import("../../scripts/npc-importer.mjs");
-const {buildNpcDocuments, NPC_PACK_ID, NPC_PACK_LABEL, stableNpcId, validateNpcDocuments} = importer;
+const NPC_PACK_ID = "npcs";
+const NPC_PACK_LABEL = "NPCs & Monsters";
 
 const projectRoot = path.resolve(import.meta.dirname, "../..");
 const manifest = JSON.parse(await readFile(path.join(projectRoot, "system.json"), "utf8"));
 const packageJson = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8"));
 
-const documents = validateNpcDocuments(buildNpcDocuments());
+const documents = loadYmlPack(NPC_PACK_ID);
 const folders = documents.filter((document: any) => document._key.startsWith("!folders!"));
 const actors = documents.filter((document: any) => document._key.startsWith("!actors!"));
 
@@ -26,15 +25,16 @@ function folderName(document: any): string {
 }
 
 describe("NPCs & Monsters compendium", () => {
-  it("is declared as an Actor pack and built by the build script", () => {
-    expect(manifest.packs).toContainEqual(expect.objectContaining({
-      name: NPC_PACK_ID,
-      label: NPC_PACK_LABEL,
-      path: "packs/npcs",
-      type: "Actor",
-      system: "magnusarchives"
-    }));
-    expect(packageJson.scripts["import:npcs"]).toBe("node scripts/import-npcs.mjs");
+  it("is declared as an Actor pack and compiled by the build", () => {
+    expect(manifest.packs).toContainEqual(
+      expect.objectContaining({
+        name: NPC_PACK_ID,
+        label: NPC_PACK_LABEL,
+        path: "packs/npcs",
+        type: "Actor",
+        system: "magnusarchives"
+      })
+    );
     expect(packageJson.scripts.build).toContain("pnpm packs:build");
   });
 
@@ -50,8 +50,7 @@ describe("NPCs & Monsters compendium", () => {
   it("gives every document a unique, stable ID and a resolvable Folder", () => {
     const ids = documents.map((document: any) => document._id);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(validateNpcDocuments(buildNpcDocuments())).toEqual(documents);
-    expect(actor("The Archivist")._id).toBe(stableNpcId("npc", "archivist"));
+    expect(actor("The Archivist")._id).toBe("70cf3991210ed65e");
     for (const document of actors) expect(folderName(document)).toBeTruthy();
   });
 
@@ -59,7 +58,10 @@ describe("NPCs & Monsters compendium", () => {
     const anglerfish = actor("The Anglerfish");
     expect(anglerfish.system).toMatchObject({level: 7, health: {value: 23, baseMax: 23}});
     expect(anglerfish.system.damage).toMatchObject({effect: "seriousInjury"});
-    expect(anglerfish.system.modifications.map((entry: any) => [entry.label, entry.value])).toEqual([["Stealth", 8], ["Persuasion", 2]]);
+    expect(anglerfish.system.modifications.map((entry: any) => [entry.label, entry.value])).toEqual([
+      ["Stealth", 8],
+      ["Persuasion", 2]
+    ]);
     expect(anglerfish.system.gmIntrusion).toContain("3 Stress");
     expect(folderName(anglerfish)).toBe("The Stranger");
 
@@ -68,15 +70,31 @@ describe("NPCs & Monsters compendium", () => {
     expect(archivist.system.modifications[0]).toMatchObject({label: "Attacks", contexts: ["defense"], value: 3});
 
     const clown = actor("Clown Doll");
-    expect(clown.system.modifications[0]).toMatchObject({label: "Speed defense", contexts: ["attack"], mode: "levelOverride", value: 5});
+    expect(clown.system.modifications[0]).toMatchObject({
+      label: "Speed defense",
+      contexts: ["attack"],
+      mode: "levelOverride",
+      value: 5
+    });
 
-    expect(actor("Silver Worm").system).toMatchObject({level: 1, health: {baseMax: 3}, movement: {category: "immediate"}});
+    expect(actor("Silver Worm").system).toMatchObject({
+      level: 1,
+      health: {baseMax: 3},
+      movement: {category: "immediate"}
+    });
     expect(actor("Death").system.notes).toContain("Stress on first realizing its horror:</strong> 4");
   });
 
   it("derives health and damage from level for the simple encounters", () => {
-    expect(actor("Cat").system).toMatchObject({level: 1, health: {baseMax: 3}, damage: {effect: "stress", stressAmount: 1}});
-    expect(actor("Shark, great white").system).toMatchObject({health: {baseMax: 20}, damage: {effect: "seriousInjury"}});
+    expect(actor("Cat").system).toMatchObject({
+      level: 1,
+      health: {baseMax: 3},
+      damage: {effect: "stress", stressAmount: 1}
+    });
+    expect(actor("Shark, great white").system).toMatchObject({
+      health: {baseMax: 20},
+      damage: {effect: "seriousInjury"}
+    });
     expect(actor("Mugger").system.damage).toMatchObject({effect: "stress", stressAmount: 3});
     expect(actor("Police officer").system.damage).toMatchObject({effect: "seriousInjury"});
     expect(actor("Cat").prototypeToken.disposition).toBe(0);

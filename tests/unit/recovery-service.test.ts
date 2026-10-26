@@ -4,7 +4,11 @@ import {RecoveryService} from "../../src/services/recovery-service";
 import {character, wounds} from "../helpers/core-fixtures";
 
 describe("RecoveryService", () => {
-  const service = new RecoveryService(async () => 4, () => "recovery-id", () => 1234);
+  const service = new RecoveryService(
+    async () => 4,
+    () => "recovery-id",
+    () => 1234
+  );
 
   it("calculates every Core Recovery as 1d6 + Tier", () => {
     for (const type of ["one-action", "10-minutes", "1-hour", "10-hours"] as const) {
@@ -59,11 +63,7 @@ describe("RecoveryService", () => {
 
   it("rejects only Recoveries already used today", async () => {
     const actor = character({usedRecoveries: {oneHour: true}});
-    expect(service.availableTypes(actor.system.recovery.used)).toEqual([
-      "one-action",
-      "10-minutes",
-      "10-hours"
-    ]);
+    expect(service.availableTypes(actor.system.recovery.used)).toEqual(["one-action", "10-minutes", "10-hours"]);
     await expect(service.roll(actor, "1-hour")).rejects.toThrow(/already been used/i);
     await expect(service.roll(actor, "one-action")).resolves.toMatchObject({type: "one-action"});
   });

@@ -5,10 +5,7 @@ import {coreNaturalEffects, prepareRoll, resolveRoll} from "../../src/rolls/roll
 import type {RollContext, RollResult} from "../../src/rolls/roll-types";
 import {CORE_TOTAL_EFFORT_CAP} from "../../src/rules/core/effort-rules";
 import {chooseNaturalAttackEffect} from "../../src/services/combat-service";
-import {
-  buildPublicRollCardData,
-  buildRollCardCombatData
-} from "../../src/services/roll-chat-service";
+import {buildPublicRollCardData, buildRollCardCombatData} from "../../src/services/roll-chat-service";
 
 const template = readFileSync("templates/chat/roll-card.hbs", "utf8");
 const paymentTemplate = readFileSync("templates/chat/ability-payment-card.hbs", "utf8");
@@ -16,18 +13,20 @@ const styles = readFileSync("styles/components/_roll-card.scss", "utf8");
 const intrusionController = readFileSync("src/intrusions/gm-intrusion-controller.ts", "utf8");
 const localization = JSON.parse(readFileSync("lang/en.json", "utf8")) as Record<string, string>;
 
-function context(options: {
-  difficulty?: RollContext["difficulty"];
-  pool?: RollContext["pool"];
-  contributions?: RollContext["contributions"];
-  purpose?: RollContext["purpose"];
-  origin?: RollContext["origin"];
-  paidEffort?: number;
-  damageEffort?: number;
-  freeEffort?: number;
-  freeDamageEffort?: number;
-  horrorIntrusionRange?: number;
-} = {}): RollContext {
+function context(
+  options: {
+    difficulty?: RollContext["difficulty"];
+    pool?: RollContext["pool"];
+    contributions?: RollContext["contributions"];
+    purpose?: RollContext["purpose"];
+    origin?: RollContext["origin"];
+    paidEffort?: number;
+    damageEffort?: number;
+    freeEffort?: number;
+    freeDamageEffort?: number;
+    horrorIntrusionRange?: number;
+  } = {}
+): RollContext {
   return {
     actor: {id: "actor-1", name: "Ada"},
     label: "Cooking",
@@ -47,9 +46,11 @@ function context(options: {
       totalEffortMaximum: CORE_TOTAL_EFFORT_CAP
     },
     contributions: options.contributions ?? [],
-    ...(options.horrorIntrusionRange === undefined ? {} : {
-      horrorIntrusionRange: options.horrorIntrusionRange
-    }),
+    ...(options.horrorIntrusionRange === undefined
+      ? {}
+      : {
+          horrorIntrusionRange: options.horrorIntrusionRange
+        }),
     ...(options.purpose ? {purpose: options.purpose} : {}),
     ...(options.origin ? {origin: options.origin} : {})
   };
@@ -77,18 +78,36 @@ describe("Roll Card V2 presentation data", () => {
   });
 
   it("uses engine-provided natural difficulty and PreparedRoll step totals", () => {
-    const data = buildPublicRollCardData(result(6, {contributions: [{
-      id: "trained", label: "Trained", direction: "ease", steps: 2, source: "skill"
-    }, {
-      id: "wound", label: "Wound", direction: "hinder", steps: 1, source: "wound"
-    }]}), "full");
+    const data = buildPublicRollCardData(
+      result(6, {
+        contributions: [
+          {
+            id: "trained",
+            label: "Trained",
+            direction: "ease",
+            steps: 2,
+            source: "skill"
+          },
+          {
+            id: "wound",
+            label: "Wound",
+            direction: "hinder",
+            steps: 1,
+            source: "wound"
+          }
+        ]
+      }),
+      "full"
+    );
 
     expect(data).toMatchObject({naturalRoll: 6, naturalDifficulty: 2});
     expect(data.stepSummary).toBe("+2 MAGNUSARCHIVES.Roll.EaseSteps · -1 MAGNUSARCHIVES.Roll.HindranceStep");
-    expect(data.modifierDetails).toEqual(expect.arrayContaining([
-      {label: "Trained", value: "+2"},
-      {label: "Wound", value: "-1"}
-    ]));
+    expect(data.modifierDetails).toEqual(
+      expect.arrayContaining([
+        {label: "Trained", value: "+2"},
+        {label: "Wound", value: "-1"}
+      ])
+    );
     expect(data.modifierTotalDetails).toEqual([
       {label: "MAGNUSARCHIVES.Roll.TotalEase", value: "+2"},
       {label: "MAGNUSARCHIVES.Roll.TotalHindrance", value: "-1"}
@@ -103,9 +122,20 @@ describe("Roll Card V2 presentation data", () => {
   });
 
   it("keeps Ease and Hindrance totals as a stable pair when modifiers exist", () => {
-    const data = buildPublicRollCardData(result(6, {contributions: [{
-      id: "trained", label: "Trained", direction: "ease", steps: 2, source: "skill"
-    }]}), "full");
+    const data = buildPublicRollCardData(
+      result(6, {
+        contributions: [
+          {
+            id: "trained",
+            label: "Trained",
+            direction: "ease",
+            steps: 2,
+            source: "skill"
+          }
+        ]
+      }),
+      "full"
+    );
     expect(data.modifierDetails).toEqual([{label: "Trained", value: "+2"}]);
     expect(data.modifierTotalDetails).toEqual([
       {label: "MAGNUSARCHIVES.Roll.TotalEase", value: "+2"},
@@ -114,10 +144,14 @@ describe("Roll Card V2 presentation data", () => {
   });
 
   it("shows success and failure only when a difficulty can be resolved", () => {
-    expect(buildPublicRollCardData(result(12, {difficulty: {mode: "known", value: 3}}), "full"))
-      .toMatchObject({outcomeClass: "success", outcomeIcon: "✓"});
-    expect(buildPublicRollCardData(result(3, {difficulty: {mode: "known", value: 3}}), "full"))
-      .toMatchObject({outcomeClass: "failure", outcomeIcon: "✕"});
+    expect(buildPublicRollCardData(result(12, {difficulty: {mode: "known", value: 3}}), "full")).toMatchObject({
+      outcomeClass: "success",
+      outcomeIcon: "✓"
+    });
+    expect(buildPublicRollCardData(result(3, {difficulty: {mode: "known", value: 3}}), "full")).toMatchObject({
+      outcomeClass: "failure",
+      outcomeIcon: "✕"
+    });
     expect(buildPublicRollCardData(result(12), "full")).not.toHaveProperty("outcome");
   });
 
@@ -130,18 +164,25 @@ describe("Roll Card V2 presentation data", () => {
   });
 
   it("does not disclose the automatic-success mechanism for a hidden difficulty", () => {
-    const data = buildPublicRollCardData(result(20, {
-      difficulty: {mode: "hidden", value: 1},
-      contributions: [{id: "ease", label: "Ease", direction: "ease", steps: 1, source: "other"}]
-    }), "full");
+    const data = buildPublicRollCardData(
+      result(20, {
+        difficulty: {mode: "hidden", value: 1},
+        contributions: [{id: "ease", label: "Ease", direction: "ease", steps: 1, source: "other"}]
+      }),
+      "full"
+    );
     expect(data).toMatchObject({presentation: "concealed", outcome: "MAGNUSARCHIVES.Roll.Success"});
     expect(JSON.stringify(data)).not.toContain("AutomaticSuccess");
   });
 
   it.each([17, 18, 19, 20])("presents natural %i from engine-provided effects", (natural) => {
-    const data = buildPublicRollCardData(result(natural, {
-      difficulty: {mode: "known", value: 1}, purpose: "damage"
-    }), "full");
+    const data = buildPublicRollCardData(
+      result(natural, {
+        difficulty: {mode: "known", value: 1},
+        purpose: "damage"
+      }),
+      "full"
+    );
     expect(data).toMatchObject({hasNaturalResult: true, hasExceptionalResult: true});
     expect(data.naturalEffects.length).toBeGreaterThan(0);
     expect(data.gmIntrusion).toBe(false);
@@ -184,18 +225,21 @@ describe("Roll Card V2 presentation data", () => {
 
   it("shows Horror provenance in Details only when Horror Mode caused the Intrusion", () => {
     const normal = buildPublicRollCardData(result(1, {horrorIntrusionRange: 1}), "full");
-    const normalWithinHorror = buildPublicRollCardData(
-      result(1, {horrorIntrusionRange: 4}),
-      "full"
-    );
+    const normalWithinHorror = buildPublicRollCardData(result(1, {horrorIntrusionRange: 4}), "full");
     const horror = buildPublicRollCardData(result(3, {horrorIntrusionRange: 4}), "full");
     const outside = buildPublicRollCardData(result(5, {horrorIntrusionRange: 4}), "full");
 
-    expect(normal.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
-    expect(normalWithinHorror.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
+    expect(normal.resolutionDetails).not.toContainEqual(
+      expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"})
+    );
+    expect(normalWithinHorror.resolutionDetails).not.toContainEqual(
+      expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"})
+    );
     expect(horror.resolutionDetails).toContainEqual({label: "MAGNUSARCHIVES.Horror.Title", value: "1–4"});
     expect(horror.hasDetails).toBe(true);
-    expect(outside.resolutionDetails).not.toContainEqual(expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"}));
+    expect(outside.resolutionDetails).not.toContainEqual(
+      expect.objectContaining({label: "MAGNUSARCHIVES.Horror.Title"})
+    );
   });
 
   it("exposes final attack damage and its existing breakdown without recalculation", () => {
@@ -215,9 +259,7 @@ describe("Roll Card V2 presentation data", () => {
         {label: "Damage Effort", value: "+6"},
         {label: "Natural", value: "+2"}
       ],
-      damageTotalDetails: [
-        {label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 12}
-      ]
+      damageTotalDetails: [{label: "MAGNUSARCHIVES.Combat.FinalDamage", value: 12}]
     });
     expect(buildRollCardCombatData(undefined)).toEqual({
       showFinalDamage: false,
@@ -231,17 +273,22 @@ describe("Roll Card V2 presentation data", () => {
     expect(empty.effortDetails).toEqual([]);
     expect(empty.costDetails).toEqual([]);
 
-    const used = buildPublicRollCardData(result(10, {
-      paidEffort: 1,
-      damageEffort: 1,
-      freeDamageEffort: 1
-    }), "full");
-    expect(used.effortDetails).toEqual(expect.arrayContaining([
-      {label: "MAGNUSARCHIVES.Roll.PaidEffort", value: 1},
-      {label: "MAGNUSARCHIVES.Roll.PaidDamageEffort", value: 1},
-      {label: "MAGNUSARCHIVES.Roll.FreeDamageEffort", value: 1},
-      {label: "MAGNUSARCHIVES.Roll.TotalAppliedEffort", value: "3 / 6"}
-    ]));
+    const used = buildPublicRollCardData(
+      result(10, {
+        paidEffort: 1,
+        damageEffort: 1,
+        freeDamageEffort: 1
+      }),
+      "full"
+    );
+    expect(used.effortDetails).toEqual(
+      expect.arrayContaining([
+        {label: "MAGNUSARCHIVES.Roll.PaidEffort", value: 1},
+        {label: "MAGNUSARCHIVES.Roll.PaidDamageEffort", value: 1},
+        {label: "MAGNUSARCHIVES.Roll.FreeDamageEffort", value: 1},
+        {label: "MAGNUSARCHIVES.Roll.TotalAppliedEffort", value: "3 / 6"}
+      ])
+    );
     expect(used.costDetails).toContainEqual({label: "MAGNUSARCHIVES.Roll.CostPaid", value: 5});
   });
 });

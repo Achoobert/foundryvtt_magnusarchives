@@ -24,11 +24,13 @@ const lang = JSON.parse(readFileSync(resolve(root, "lang/en.json"), "utf8"));
 
 describe("Character Header HUD V1.1", () => {
   it("builds the Descriptor / Type / Focus sentence and missing placeholders", () => {
-    expect(characterHeaderIdentity({
-      descriptors: [{id: "descriptor-1", name: "Fast", role: "primary"}],
-      type: {id: "type-1", name: "Monk"},
-      focus: {uuid: "Item.focus-1", name: "Abides in Stone"}
-    }).sentence).toBe("I AM A FAST MONK WHO ABIDES IN STONE");
+    expect(
+      characterHeaderIdentity({
+        descriptors: [{id: "descriptor-1", name: "Fast", role: "primary"}],
+        type: {id: "type-1", name: "Monk"},
+        focus: {uuid: "Item.focus-1", name: "Abides in Stone"}
+      }).sentence
+    ).toBe("I AM A FAST MONK WHO ABIDES IN STONE");
 
     const empty = characterHeaderIdentity();
     expect(empty.sentence).toBe("I AM A [DESCRIPTOR] [TYPE] WHO [FOCUS]");
@@ -51,11 +53,13 @@ describe("Character Header HUD V1.1", () => {
     expect(identity.sentence).toBe("I AM A PRETENTIOUS AND BOLD ELOCUTIONIST WHO LEADS");
     expect(identity.descriptors[0]).toMatchObject({id: "fastidious", name: "Fastidious", displayName: "PRETENTIOUS"});
 
-    expect(characterHeaderIdentity({
-      descriptors: [{id: "bold", name: "Bold", role: "primary"}],
-      type: {id: "occultist", name: "Occultist"},
-      descriptorLabel: "Eerie"
-    }).article).toBe("AN");
+    expect(
+      characterHeaderIdentity({
+        descriptors: [{id: "bold", name: "Bold", role: "primary"}],
+        type: {id: "occultist", name: "Occultist"},
+        descriptorLabel: "Eerie"
+      }).article
+    ).toBe("AN");
     expect(characterHeaderIdentity({descriptorLabel: "Eerie"}).descriptors[0]).toMatchObject({missing: true});
   });
 
@@ -67,29 +71,35 @@ describe("Character Header HUD V1.1", () => {
       {id: "daring", instanceId: "daring-instance", name: "Daring", role: "additional" as const, attachedAt: 25}
     ];
     expect(orderedHeaderDescriptors(descriptors).map(({name}) => name)).toEqual(["Brash", "Daring", "Rugged"]);
-    expect(characterHeaderIdentity({
-      descriptors,
-      species: {id: "human", name: "Human"},
-      type: {id: "fighter", name: "Fighter"},
-      focus: {uuid: "Item.mastery", name: "Masters Weaponry"}
-    }).sentence).toBe("I AM A BRASH AND DARING AND RUGGED HUMAN FIGHTER WHO MASTERS WEAPONRY");
-    expect(characterHeaderIdentity({
-      descriptors: [descriptors[1]!, descriptors[0]!],
-      species: {id: "human", name: "Human"},
-      type: {id: "fighter", name: "Fighter"},
-      focus: {uuid: "Item.mastery", name: "Masters Weaponry"}
-    }).sentence).toBe("I AM A BRASH AND RUGGED HUMAN FIGHTER WHO MASTERS WEAPONRY");
+    expect(
+      characterHeaderIdentity({
+        descriptors,
+        species: {id: "human", name: "Human"},
+        type: {id: "fighter", name: "Fighter"},
+        focus: {uuid: "Item.mastery", name: "Masters Weaponry"}
+      }).sentence
+    ).toBe("I AM A BRASH AND DARING AND RUGGED HUMAN FIGHTER WHO MASTERS WEAPONRY");
+    expect(
+      characterHeaderIdentity({
+        descriptors: [descriptors[1]!, descriptors[0]!],
+        species: {id: "human", name: "Human"},
+        type: {id: "fighter", name: "Fighter"},
+        focus: {uuid: "Item.mastery", name: "Masters Weaponry"}
+      }).sentence
+    ).toBe("I AM A BRASH AND RUGGED HUMAN FIGHTER WHO MASTERS WEAPONRY");
   });
 
   it("chooses A or AN from the first displayed Descriptor", () => {
     expect(indefiniteArticle("Honorable")).toBe("AN");
     expect(indefiniteArticle("Fast")).toBe("A");
-    expect(characterHeaderIdentity({
-      descriptors: [{id: "honorable", name: "Honorable", role: "primary"}],
-      species: {id: "elf", name: "Elf"},
-      type: {id: "mage", name: "Mage"},
-      focus: {uuid: "Item.quells-evil", name: "Quells Evil"}
-    }).sentence).toBe("I AM AN HONORABLE ELF MAGE WHO QUELLS EVIL");
+    expect(
+      characterHeaderIdentity({
+        descriptors: [{id: "honorable", name: "Honorable", role: "primary"}],
+        species: {id: "elf", name: "Elf"},
+        type: {id: "mage", name: "Mage"},
+        focus: {uuid: "Item.quells-evil", name: "Quells Evil"}
+      }).sentence
+    ).toBe("I AM AN HONORABLE ELF MAGE WHO QUELLS EVIL");
   });
 
   it("can hide the complete Focus clause without discarding the Focus reference", () => {
@@ -107,10 +117,7 @@ describe("Character Header HUD V1.1", () => {
   it("generates exactly the dynamic Wound capacity and fill count", () => {
     expect(headerPips(2, 5)).toHaveLength(5);
     expect(headerPips(2, 5).filter((pip) => pip.filled)).toHaveLength(2);
-    const tracks = headerWoundTracks(
-      {minor: 3, moderate: 1, major: 0},
-      {minor: 4, moderate: 2, major: 1}
-    );
+    const tracks = headerWoundTracks({minor: 3, moderate: 1, major: 0}, {minor: 4, moderate: 2, major: 1});
     expect(tracks.map((track) => [track.severity, track.pips.length, track.count])).toEqual([
       ["minor", 4, 3],
       ["moderate", 2, 1],
@@ -156,7 +163,9 @@ describe("Character Header HUD V1.1", () => {
     expect(styles).toContain("position: absolute");
     expect(styles).toContain("background: transparent");
     expect(styles).toContain("pointer-events: none");
-    expect(styles).not.toContain("var(--magnusarchives-character-accent) calc((1 - var(--magnusarchives-pool-gauge-ratio))");
+    expect(styles).not.toContain(
+      "var(--magnusarchives-character-accent) calc((1 - var(--magnusarchives-pool-gauge-ratio))"
+    );
   });
 
   it("wires identity inspection, placeholder drops, whole-card Pool rolls, and direct XP editing", () => {
@@ -172,7 +181,7 @@ describe("Character Header HUD V1.1", () => {
     expect(template).toContain('role="button" tabindex="0"');
     expect(template).toContain('name="system.xp"');
     // Resource Points are a Cypher V2 concept with no Magnus equivalent.
-    expect(template).not.toContain('system.resourcePoints');
+    expect(template).not.toContain("system.resourcePoints");
     expect(template).not.toContain('data-action="editHeaderStats"');
     expect(template).not.toContain('data-action="testRoll"');
     expect(sheet).toContain('event.target.closest("input, button, select, textarea, a")');
@@ -229,11 +238,8 @@ describe("Character Header HUD V1.1", () => {
     expect(sheet).toContain("services.conditions.applySeriousInjury(");
     expect(sheet).toContain("services.conditions.setDamageTrackStep(");
 
-    for (const declaration of [
-      "flex: 0 0 0.58rem",
-      "aspect-ratio: 1 / 1",
-      "border-radius: 50%"
-    ]) expect(styles).toContain(declaration);
+    for (const declaration of ["flex: 0 0 0.58rem", "aspect-ratio: 1 / 1", "border-radius: 50%"])
+      expect(styles).toContain(declaration);
     expect(styles).toContain("--magnusarchives-stress-pip");
     expect(styles).toContain("--magnusarchives-damage-track-reached");
     expect(styles).toContain(".character-hud-damage-track-steps");
@@ -252,7 +258,8 @@ describe("Character Header HUD V1.1", () => {
       "MAGNUSARCHIVES.DamageTrack.Note.impaired.1",
       "MAGNUSARCHIVES.DamageTrack.Note.impaired.3",
       "MAGNUSARCHIVES.DamageTrack.Note.debilitated.2"
-    ]) expect(lang).toHaveProperty(key);
+    ])
+      expect(lang).toHaveProperty(key);
     expect(styles).toContain(".character-hud-damage-step-notes");
   });
 
@@ -319,7 +326,8 @@ describe("Character Header HUD V1.1", () => {
       "--magnusarchives-accent-hover",
       "--magnusarchives-border",
       "--magnusarchives-danger"
-    ]) expect(styles).toContain(`var(${token})`);
+    ])
+      expect(styles).toContain(`var(${token})`);
   });
 
   it("keeps base/source editing in Settings without the obsolete override notice", () => {

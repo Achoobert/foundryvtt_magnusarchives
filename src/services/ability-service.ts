@@ -39,9 +39,10 @@ function modifierContribution(
   if (modifier === 0) return null;
   return {
     id: `ability.${ability.id}.${kind}-modifier`,
-    label: kind === "attack"
-      ? "MAGNUSARCHIVES.Ability.AttackModifierContribution"
-      : "MAGNUSARCHIVES.Ability.RollModifierContribution",
+    label:
+      kind === "attack"
+        ? "MAGNUSARCHIVES.Ability.AttackModifierContribution"
+        : "MAGNUSARCHIVES.Ability.RollModifierContribution",
     direction: modifier > 0 ? "ease" : "hinder",
     steps: Math.abs(modifier),
     source: "other",
@@ -54,7 +55,7 @@ function targetIdentity(target: AbilityTargetLike): ReturnType<typeof combatTarg
     ? combatTargetIdentity(target)
     : {
         actorId: target.id,
-        ...(target.actorUuid ?? target.uuid ? {actorUuid: target.actorUuid ?? target.uuid} : {}),
+        ...((target.actorUuid ?? target.uuid) ? {actorUuid: target.actorUuid ?? target.uuid} : {}),
         ...(target.tokenId ? {tokenId: target.tokenId} : {}),
         ...(target.tokenUuid ? {tokenUuid: target.tokenUuid} : {})
       };
@@ -66,12 +67,7 @@ export class AbilityService {
   readonly #targets: TargetResolver;
   readonly #combat: CombatService;
 
-  constructor(
-    rolls: RollService,
-    skills: SkillService,
-    targets: TargetResolver,
-    combat: CombatService
-  ) {
+  constructor(rolls: RollService, skills: SkillService, targets: TargetResolver, combat: CombatService) {
     this.#rolls = rolls;
     this.#skills = skills;
     this.#targets = targets;
@@ -79,8 +75,7 @@ export class AbilityService {
   }
 
   canUse(ability: AbilityItemLike): boolean {
-    return ability.type === "ability"
-      && !["passive", "enabler", "perpetual"].includes(ability.system.activation);
+    return ability.type === "ability" && !["passive", "enabler", "perpetual"].includes(ability.system.activation);
   }
 
   pool(ability: AbilityItemLike, selected?: PoolKey): PoolKey | null {
@@ -92,11 +87,7 @@ export class AbilityService {
     return selected ?? null;
   }
 
-  previewPayment(
-    actor: CombatCharacterLike,
-    ability: AbilityItemLike,
-    pool: PoolKey
-  ): AbilityPaymentPreview {
+  previewPayment(actor: CombatCharacterLike, ability: AbilityItemLike, pool: PoolKey): AbilityPaymentPreview {
     assertCharacter(actor);
     this.#assertAbility(ability);
     const allowedPools = abilityAllowedPools(ability);
@@ -123,11 +114,7 @@ export class AbilityService {
     };
   }
 
-  async payCost(
-    actor: CombatCharacterLike,
-    ability: AbilityItemLike,
-    pool: PoolKey
-  ): Promise<AbilityPaymentOutcome> {
+  async payCost(actor: CombatCharacterLike, ability: AbilityItemLike, pool: PoolKey): Promise<AbilityPaymentOutcome> {
     const payment = this.previewPayment(actor, ability, pool);
     if (!payment.canPay) {
       throw new Error(`${pool} has ${payment.currentBefore} points but this Ability costs ${payment.costPaid}.`);
@@ -150,14 +137,10 @@ export class AbilityService {
     const pool = this.pool(ability, options.pool);
     const amount = this.#costAmount(ability);
     if (amount > 0 && !pool) throw new Error("A Pool is required to pay this Ability cost.");
-    if (!pool) return {ability, actor: {id: actor.id, name: actor.name}, pool: null, costPaid: 0, edgeApplied: 0, targets};
+    if (!pool)
+      return {ability, actor: {id: actor.id, name: actor.name}, pool: null, costPaid: 0, edgeApplied: 0, targets};
     const current = actor.system.stats[pool].value;
-    const costs = calculatePoolCost(
-      amount,
-      0,
-      actor.system.derived.pools[pool].edge,
-      ability.system.cost.ignoresEdge
-    );
+    const costs = calculatePoolCost(amount, 0, actor.system.derived.pools[pool].edge, ability.system.cost.ignoresEdge);
     if (current < costs.poolCost) {
       throw new Error(`${pool} has ${current} points but this action costs ${costs.poolCost}.`);
     }
@@ -195,9 +178,9 @@ export class AbilityService {
       ...(pool === "speed" ? ["speed-task"] : [])
     ];
     const combatContext: CombatRollContext = {tags, pool};
-    const resolutions = targets.map((target) => target?.type === "npc"
-      ? this.#targets.resolve(target, combatContext, enabled)
-      : null);
+    const resolutions = targets.map((target) =>
+      target?.type === "npc" ? this.#targets.resolve(target, combatContext, enabled) : null
+    );
     const common: RollStepContribution[] = [];
     const rollModifier = modifierContribution(ability, ability.system.rollModifier, "roll");
     if (rollModifier) common.push(rollModifier);
@@ -212,22 +195,18 @@ export class AbilityService {
       pool,
       difficulty: resolutions[index]
         ? {mode: "hidden", value: resolutions[index]!.difficulty}
-        : options.difficulty ?? {mode: "unknown"},
+        : (options.difficulty ?? {mode: "unknown"}),
       skillSteps: options.skillSteps ?? 0,
       assets: options.assets ?? 0,
       paidEffort: options.paidEffort ?? 0,
-      damageEffort: ability.system.roll === "attack" ? options.damageEffort ?? 0 : 0,
-      freeDamageEffort: ability.system.roll === "attack" ? options.freeDamageEffort ?? 0 : 0,
+      damageEffort: ability.system.roll === "attack" ? (options.damageEffort ?? 0) : 0,
+      freeDamageEffort: ability.system.roll === "attack" ? (options.freeDamageEffort ?? 0) : 0,
       freeEffort: options.freeEffort ?? 0,
       actionCost: this.#costAmount(ability),
       actionCostIgnoresEdge: ability.system.cost.ignoresEdge,
       otherEase: options.otherEase ?? 0,
       otherHindrance: options.otherHindrance ?? 0,
-      contributions: [
-        ...common,
-        ...(resolutions[index]?.contributions ?? []),
-        ...(options.contributions ?? [])
-      ],
+      contributions: [...common, ...(resolutions[index]?.contributions ?? []), ...(options.contributions ?? [])],
       purpose: ability.system.roll === "attack" ? "damage" : "task",
       tags,
       origin: {
@@ -240,13 +219,15 @@ export class AbilityService {
         damageEffect: ability.system.damageEffect,
         stressAmount: ability.system.stressAmount
       },
-      ...(target ? {
-        target: {
-          ...targetIdentity(target),
-          name: target.name,
-          type: target.type === "npc" ? "npc" as const : "character" as const
-        }
-      } : {})
+      ...(target
+        ? {
+            target: {
+              ...targetIdentity(target),
+              name: target.name,
+              type: target.type === "npc" ? ("npc" as const) : ("character" as const)
+            }
+          }
+        : {})
     }));
     return {ability, pool, requests, targets, targetResolutions: resolutions, damage: ability.system.damage};
   }
@@ -261,9 +242,8 @@ export class AbilityService {
     const executions = await this.#rolls.executeBatch(actor, plan.requests, policy);
     const damageEffortBonus = this.#combat.policy(options.enabledRuleModuleIds ?? []).damageEffortBonus;
     return executions.map((execution, index) => {
-      const effortDamage = ability.system.roll === "attack"
-        ? execution.result.prepared.damageEffortApplied * damageEffortBonus
-        : 0;
+      const effortDamage =
+        ability.system.roll === "attack" ? execution.result.prepared.damageEffortApplied * damageEffortBonus : 0;
       const naturalDamage = ability.system.roll === "attack" ? naturalDamageBonus(execution.result) : 0;
       return {
         ability,
@@ -297,10 +277,7 @@ export class AbilityService {
     });
   }
 
-  #validatedTargets(
-    ability: AbilityItemLike,
-    targets: readonly AbilityTargetLike[]
-  ): readonly AbilityTargetLike[] {
+  #validatedTargets(ability: AbilityItemLike, targets: readonly AbilityTargetLike[]): readonly AbilityTargetLike[] {
     if (ability.system.targetMode === "none") return [];
     if (ability.system.targetMode === "single" && targets.length > 1) {
       throw new Error("This Ability can target only one Character or NPC.");

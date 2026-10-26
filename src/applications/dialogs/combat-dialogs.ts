@@ -1,8 +1,4 @@
-import {
-  currentDifficultyVisibility,
-  currentRollPolicyRequest,
-  showGmRollAuditEnabled
-} from "../../config/settings";
+import {currentDifficultyVisibility, currentRollPolicyRequest, showGmRollAuditEnabled} from "../../config/settings";
 import {gmIntrusionController} from "../../intrusions/gm-intrusion-controller";
 import type {CharacterDamageEffect, DefenseType} from "../../constants/system";
 import type {NpcTargetLike, WeaponItemLike} from "../../combat/combat-types";
@@ -45,15 +41,14 @@ function skills(actor: CombatCharacterLike): SkillItemLike[] {
 }
 
 function skillOptions(actor: CombatCharacterLike, selectedValue = "manual:0"): string {
-  const manualSteps = selectedValue.startsWith("manual:")
-    ? Number(selectedValue.slice(7))
-    : null;
+  const manualSteps = selectedValue.startsWith("manual:") ? Number(selectedValue.slice(7)) : null;
   return [
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ManualSkillLevel")}">${skillRankOptions(manualSteps, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Skill.Title")}">`,
-    ...skills(actor).map((skill) => (
-      `<option value="${skill.id}"${skill.id === selectedValue ? " selected" : ""}>${skill.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`)}</option>`
-    )),
+    ...skills(actor).map(
+      (skill) =>
+        `<option value="${skill.id}"${skill.id === selectedValue ? " selected" : ""}>${skill.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`)}</option>`
+    ),
     "</optgroup>"
   ].join("");
 }
@@ -75,20 +70,19 @@ export function defenseDialogDefaults(
   return {
     pool: dodge ? "speed" : "might",
     armorDirection: dodge ? "hinder" : "ease",
-    armorSteps: dodge
-      ? actor.system.derived.combat.armor.dodgeHindrance
-      : actor.system.derived.combat.armor.blockEase
+    armorSteps: dodge ? actor.system.derived.combat.armor.dodgeHindrance : actor.system.derived.combat.armor.blockEase
   };
 }
 
 export async function promptNaturalAttackChoice(
   outcomes: readonly {readonly execution: WeaponAttackOutcome["execution"]}[]
 ): Promise<"damage" | "effect" | null> {
-  const available = outcomes.flatMap((outcome) => outcome.execution.result.naturalEffects)
+  const available = outcomes
+    .flatMap((outcome) => outcome.execution.result.naturalEffects)
     .find((effect) => effect.status === "available");
   if (!available) return null;
   const natural = outcomes[0]?.execution.result.naturalRoll ?? 19;
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Combat.NaturalChoice.Title")},
     content: `<div class="magnusarchives-dialog-fields">
       <p>${game.i18n.format("MAGNUSARCHIVES.Combat.NaturalChoice.Prompt", {natural})}</p>
@@ -101,15 +95,12 @@ export async function promptNaturalAttackChoice(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return "effect";
   return stringValue(data, "choice") === "damage" ? "damage" : "effect";
 }
 
-export async function promptWeaponAttack(
-  actor: CombatCharacterLike,
-  weapon: WeaponItemLike
-): Promise<void> {
+export async function promptWeaponAttack(actor: CombatCharacterLike, weapon: WeaponItemLike): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
   const policy = game.magnusarchives.rules.resolveDifficultyPolicy(policyRequest.base, enabled);
@@ -135,14 +126,14 @@ export async function promptWeaponAttack(
       freeDamageEffort: rollDialogNumber(data, "freeDamageEffort"),
       freeEffort: rollDialogNumber(data, "freeEffort"),
       ...situationalModifier(data),
-      extremeRange: rollDialogText(data, "extremeRange") === "true"
-        || data.extremeRange === true
-        || data.extremeRange === "on",
+      extremeRange:
+        rollDialogText(data, "extremeRange") === "true" || data.extremeRange === true || data.extremeRange === "on",
       enabledRuleModuleIds: enabled
     };
   };
   const buildRequest = (data: RollDialogData) => {
-    const request = game.magnusarchives.services.combat.buildWeaponAttackPlan(actor, weapon, buildOptions(data)).requests[0];
+    const request = game.magnusarchives.services.combat.buildWeaponAttackPlan(actor, weapon, buildOptions(data))
+      .requests[0];
     if (!request) throw new Error("Weapon attack preview did not produce a roll request.");
     return request;
   };
@@ -158,7 +149,7 @@ export async function promptWeaponAttack(
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}
     ${weapon.system.attackType === "ranged" ? `<label class="roll-dialog-checkbox"><input name="extremeRange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</label>` : ""}`;
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Combat.Attack")}: ${weapon.name}`, resizable: true},
     position: {width: 800},
     content: rollDialogShell({identity: weapon.name, settings, attackSummary: " "}),
@@ -169,18 +160,31 @@ export async function promptWeaponAttack(
         actor,
         policyRequest,
         buildRequest,
-        attackSummary: (formData, prepared) => [
-          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${baseDamage}</strong></div>`,
-          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
-          ...((prepared.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`] : []),
-          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
-          `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
-          ...(weapon.system.rangeCategory !== "immediate" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${weapon.system.rangeCategory}`)}</strong></div>`] : []),
-          ...(rollDialogText(formData, "extremeRange") === "true" || formData.extremeRange === true ? [`<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`] : [])
-        ].join("")
+        attackSummary: (formData, prepared) =>
+          [
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${baseDamage}</strong></div>`,
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
+            ...((prepared.context.freeDamageEffort ?? 0) > 0
+              ? [
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`
+                ]
+              : []),
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
+            ...(weapon.system.rangeCategory !== "immediate"
+              ? [
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${weapon.system.rangeCategory}`)}</strong></div>`
+                ]
+              : []),
+            ...(rollDialogText(formData, "extremeRange") === "true" || formData.extremeRange === true
+              ? [
+                  `<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`
+                ]
+              : [])
+          ].join("")
       });
     }
-  }) as RollDialogData | null;
+  })) as RollDialogData | null;
   if (!data) return;
 
   try {
@@ -191,11 +195,7 @@ export async function promptWeaponAttack(
       policyRequest
     );
     const choice = await promptNaturalAttackChoice(outcomes);
-    if (choice) outcomes = game.magnusarchives.services.combat.chooseAttackOutcomes(
-      outcomes,
-      choice,
-      enabled
-    );
+    if (choice) outcomes = game.magnusarchives.services.combat.chooseAttackOutcomes(outcomes, choice, enabled);
     for (const outcome of outcomes) {
       await game.magnusarchives.services.combatChat.publishWeaponAttack(
         actor,
@@ -238,11 +238,7 @@ export async function promptDefenseRoll(
   const difficultyControl = request
     ? `<div class="roll-dialog-context"><strong>${request.source.name} → ${actor.name}</strong><small>${game.i18n.localize("MAGNUSARCHIVES.Combat.HiddenTargetDifficulty")}</small></div>`
     : difficultyFields(policy.difficultyCeiling, true);
-  const defaultSkill = game.magnusarchives.services.combat.applicableDefenseSkills(
-    actor,
-    defenseType,
-    enabled
-  )[0];
+  const defaultSkill = game.magnusarchives.services.combat.applicableDefenseSkills(actor, defenseType, enabled)[0];
   const defaults = defenseDialogDefaults(actor, defenseType);
   const buildOptions = (data: RollDialogData): Omit<DefenseRollOptions, "difficulty" | "source"> => {
     const selectedSkill = findSkill(actor, rollDialogText(data, "skillId"));
@@ -256,17 +252,18 @@ export async function promptDefenseRoll(
       enabledRuleModuleIds: enabled
     };
   };
-  const buildRequest = (data: RollDialogData) => request
-    ? game.magnusarchives.services.combat.buildDefenseAgainstNpcRequest(
-        actor,
-        request.source,
-        defenseType,
-        buildOptions(data)
-      )
-    : game.magnusarchives.services.combat.buildDefenseRequest(actor, defenseType, {
-        ...buildOptions(data),
-        difficulty: rollDialogDifficulty(data)
-      });
+  const buildRequest = (data: RollDialogData) =>
+    request
+      ? game.magnusarchives.services.combat.buildDefenseAgainstNpcRequest(
+          actor,
+          request.source,
+          defenseType,
+          buildOptions(data)
+        )
+      : game.magnusarchives.services.combat.buildDefenseRequest(actor, defenseType, {
+          ...buildOptions(data),
+          difficulty: rollDialogDifficulty(data)
+        });
   const settings = `
     ${difficultyControl}
     <div class="roll-dialog-context roll-dialog-fixed-pool"><strong>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}</strong><span>${game.i18n.localize(`MAGNUSARCHIVES.Pools.${defaults.pool === "speed" ? "Speed" : "Might"}`)}</span></div>
@@ -275,7 +272,7 @@ export async function promptDefenseRoll(
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${rollSelectOptions(actor.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}`;
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize(`MAGNUSARCHIVES.Combat.Defense.${defenseType}`), resizable: true},
     position: {width: 800},
     content: rollDialogShell({
@@ -287,7 +284,7 @@ export async function promptDefenseRoll(
     render: (_event: Event, dialog: {element: HTMLElement}) => {
       bindRollDialogPreview(dialog.element, {actor, policyRequest, buildRequest});
     }
-  }) as RollDialogData | null;
+  })) as RollDialogData | null;
   if (!data) return false;
 
   try {
@@ -325,7 +322,9 @@ export async function requestNpcAttack(source: NpcTargetLike): Promise<void> {
   if (!game.user.isGM) return;
   const targets = [...(game.user.targets ?? [])]
     .map((token) => characterTargetFromToken<Actor>(token))
-    .filter((actor): actor is Actor & import("../../combat/combat-types").CombatTargetDocumentIdentity => actor !== null)
+    .filter(
+      (actor): actor is Actor & import("../../combat/combat-types").CombatTargetDocumentIdentity => actor !== null
+    )
     .map((actor) => actor as unknown as CombatCharacterLike);
   if (targets.length === 0) {
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.NoCharacterTargets"));

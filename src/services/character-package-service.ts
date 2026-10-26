@@ -128,8 +128,13 @@ function grantProvenance(
   identity: GrantIdentity
 ): GrantedByData {
   return {
-    kind, sourceUuid, instanceId, grantId, status: "active",
-    contentUuid: identity.contentUuid, contentKey: identity.contentKey,
+    kind,
+    sourceUuid,
+    instanceId,
+    grantId,
+    status: "active",
+    contentUuid: identity.contentUuid,
+    contentKey: identity.contentKey,
     replacement: emptyReplacement()
   };
 }
@@ -149,8 +154,14 @@ function emptyReplacement(): GrantedByData["replacement"] {
 
 function emptyProvenance(): GrantedByData {
   return {
-    kind: "other", sourceUuid: "", instanceId: "", grantId: "", status: "active",
-    contentUuid: "", contentKey: "", replacement: emptyReplacement()
+    kind: "other",
+    sourceUuid: "",
+    instanceId: "",
+    grantId: "",
+    status: "active",
+    contentUuid: "",
+    contentKey: "",
+    replacement: emptyReplacement()
   };
 }
 
@@ -165,14 +176,15 @@ function embeddedData(source: PackageSourceLike, type: "ability" | "skill"): Rec
 }
 
 function packageItems(actor: PackageCharacterLike): CharacterPackageItemLike[] {
-  return [...actor.items]
-    .filter((item) => item.type === "characterType" || item.type === "descriptor" || item.type === "species") as unknown as CharacterPackageItemLike[];
+  return [...actor.items].filter(
+    (item) => item.type === "characterType" || item.type === "descriptor" || item.type === "species"
+  ) as unknown as CharacterPackageItemLike[];
 }
 
 function grantsFor(actor: PackageCharacterLike, instanceId: string): Item[] {
-  return [...actor.items].filter((item) => (
-    (item.system as {grantedBy?: GrantedByData}).grantedBy?.instanceId === instanceId
-  ));
+  return [...actor.items].filter(
+    (item) => (item.system as {grantedBy?: GrantedByData}).grantedBy?.instanceId === instanceId
+  );
 }
 
 function grantTree(actor: PackageCharacterLike, instanceId: string): Item[] {
@@ -190,7 +202,7 @@ export class CharacterPackageService {
   readonly #now: () => number;
 
   constructor(
-    resolve: PackageResolver = async (uuid) => await fromUuid(uuid) as PackageSourceLike | null,
+    resolve: PackageResolver = async (uuid) => (await fromUuid(uuid)) as PackageSourceLike | null,
     idFactory: () => string = () => globalThis.crypto?.randomUUID?.() ?? `package-${Date.now()}-${Math.random()}`,
     now: () => number = Date.now
   ) {
@@ -214,8 +226,7 @@ export class CharacterPackageService {
     const system = clone(source.system) as unknown as CharacterTypeSystemData;
     const edgePool = system.edgeGrant.mode === "choice" ? options.edgePool : system.edgeGrant.pool;
     if (system.edgeGrant.mode === "choice" && !edgePool) throw new Error("This Type requires an Edge Pool choice.");
-    const requiresSuperheroicsPool = system.genre === "superhero"
-      && system.superhero?.superheroics?.enabled === true;
+    const requiresSuperheroicsPool = system.genre === "superhero" && system.superhero?.superheroics?.enabled === true;
     const superheroicsPool = options.superheroicsPool;
     if (requiresSuperheroicsPool && !superheroicsPool) {
       throw new Error("This Superhero Type requires a Superheroics Pool choice.");
@@ -226,23 +237,36 @@ export class CharacterPackageService {
     const powerShiftCount = Number.isInteger(system.superhero?.powerShiftCount)
       ? Math.max(0, Number(system.superhero?.powerShiftCount))
       : 0;
-    const powerShifts = Array.from({length: powerShiftCount}, (_, index) => (
+    const powerShifts = Array.from({length: powerShiftCount}, (_, index) =>
       String(options.powerShifts?.[index] ?? "").trim()
-    ));
+    );
     const skillSelections = this.#validateChoices(system.choiceGroups ?? [], options.skillChoices ?? {});
-    const abilitySelections = this.#validateAbilityChoices(system.abilityChoiceGroups ?? [], options.abilityChoices ?? {});
+    const abilitySelections = this.#validateAbilityChoices(
+      system.abilityChoiceGroups ?? [],
+      options.abilityChoices ?? {}
+    );
     const instanceId = this.#idFactory();
     const sourceUuid = system.instance?.sourceUuid || source.uuid;
-    const selectedAbilities = (system.abilityChoiceGroups ?? []).flatMap((group) => group.options
-      .filter((option) => abilitySelections[group.id]?.includes(option.id))
-      .map((option) => ({...option, id: `${group.id}:${option.id}`})));
+    const selectedAbilities = (system.abilityChoiceGroups ?? []).flatMap((group) =>
+      group.options
+        .filter((option) => abilitySelections[group.id]?.includes(option.id))
+        .map((option) => ({...option, id: `${group.id}:${option.id}`}))
+    );
     const prepared = [
-      ...await this.#prepareAbilityGrants([...(system.abilityGrants ?? []), ...selectedAbilities], "type", sourceUuid, instanceId),
-      ...await this.#prepareSkillGrants(system.skillGrants ?? [], "type", sourceUuid, instanceId),
-      ...await this.#prepareChoiceGrants(system.choiceGroups ?? [], skillSelections, "type", sourceUuid, instanceId)
+      ...(await this.#prepareAbilityGrants(
+        [...(system.abilityGrants ?? []), ...selectedAbilities],
+        "type",
+        sourceUuid,
+        instanceId
+      )),
+      ...(await this.#prepareSkillGrants(system.skillGrants ?? [], "type", sourceUuid, instanceId)),
+      ...(await this.#prepareChoiceGrants(system.choiceGroups ?? [], skillSelections, "type", sourceUuid, instanceId))
     ];
     const {grants: preparedGrants, skippedGrantIds} = await this.#resolveConflicts(
-      actor, prepared, source, options.conflictResolver
+      actor,
+      prepared,
+      source,
+      options.conflictResolver
     );
     const packageData = sourceData(source);
     packageData.system = {
@@ -265,7 +289,14 @@ export class CharacterPackageService {
         parent: emptyProvenance()
       }
     };
-    return this.#commitAttach(actor, packageData, preparedGrants, oldType, options.replaceGrantedItemsMode ?? "delete", skippedGrantIds);
+    return this.#commitAttach(
+      actor,
+      packageData,
+      preparedGrants,
+      oldType,
+      options.replaceGrantedItemsMode ?? "delete",
+      skippedGrantIds
+    );
   }
 
   async attachDescriptor(
@@ -276,21 +307,27 @@ export class CharacterPackageService {
     this.#assert(actor, source, "descriptor");
     const system = clone(source.system) as unknown as DescriptorSystemData;
     const sourceUuid = system.instance?.sourceUuid || source.uuid;
-    if (packageItems(actor).some((item) => (
-      item.type === "descriptor" && item.system.instance.sourceUuid === sourceUuid
-    ))) throw new Error("This Descriptor is already attached.");
-    if (options.role === "primary" && packageItems(actor).some((item) => (
-      item.type === "descriptor" && item.system.instance.role === "primary"
-    ))) throw new Error("This Character already has a primary Descriptor.");
+    if (
+      packageItems(actor).some((item) => item.type === "descriptor" && item.system.instance.sourceUuid === sourceUuid)
+    )
+      throw new Error("This Descriptor is already attached.");
+    if (
+      options.role === "primary" &&
+      packageItems(actor).some((item) => item.type === "descriptor" && item.system.instance.role === "primary")
+    )
+      throw new Error("This Character already has a primary Descriptor.");
     const instanceId = this.#idFactory();
     const poolSelections = this.#validatePoolChoices(system.poolBonusChoiceGroups ?? [], options.poolChoices ?? {});
     const selected = this.#validateChoices(system.choiceGroups ?? [], options.skillChoices ?? {});
     const prepared = [
-      ...await this.#prepareSkillGrants(system.skillGrants ?? [], "descriptor", sourceUuid, instanceId),
-      ...await this.#prepareChoiceGrants(system.choiceGroups ?? [], selected, "descriptor", sourceUuid, instanceId)
+      ...(await this.#prepareSkillGrants(system.skillGrants ?? [], "descriptor", sourceUuid, instanceId)),
+      ...(await this.#prepareChoiceGrants(system.choiceGroups ?? [], selected, "descriptor", sourceUuid, instanceId))
     ];
     const {grants: preparedGrants, skippedGrantIds} = await this.#resolveConflicts(
-      actor, prepared, source, options.conflictResolver
+      actor,
+      prepared,
+      source,
+      options.conflictResolver
     );
     const packageData = sourceData(source);
     packageData.system = {
@@ -333,7 +370,10 @@ export class CharacterPackageService {
     const edgePool = system.edgeGrant.mode === "choice" ? options.edgePool : system.edgeGrant.pool;
     if (system.edgeGrant.mode === "choice" && !edgePool) throw new Error("This Species requires an Edge Pool choice.");
     const skillSelections = this.#validateChoices(system.choiceGroups ?? [], options.skillChoices ?? {});
-    const abilitySelections = this.#validateAbilityChoices(system.abilityChoiceGroups ?? [], options.abilityChoices ?? {});
+    const abilitySelections = this.#validateAbilityChoices(
+      system.abilityChoiceGroups ?? [],
+      options.abilityChoices ?? {}
+    );
     const runtimeDescriptorGroups = new Map(
       (options.resolvedDescriptorChoiceGroups ?? []).map((group) => [group.id, group])
     );
@@ -348,30 +388,41 @@ export class CharacterPackageService {
     );
     const instanceId = this.#idFactory();
     const sourceUuid = system.instance?.sourceUuid || source.uuid;
-    const selectedAbilities = (system.abilityChoiceGroups ?? []).flatMap((group) => (
+    const selectedAbilities = (system.abilityChoiceGroups ?? []).flatMap((group) =>
       group.options
         .filter((option) => abilitySelections[group.id]?.includes(option.id))
         .map((option) => ({...option, id: `${group.id}:${option.id}`}))
-    ));
-    const selectedDescriptors = descriptorChoiceGroups.flatMap((group) => (
+    );
+    const selectedDescriptors = descriptorChoiceGroups.flatMap((group) =>
       group.options
         .filter((option) => descriptorSelections[group.id]?.includes(option.id))
         .map((option) => ({...option, id: `${group.id}:${option.id}`}))
-    ));
-    const ownPrepared = [
-      ...await this.#prepareAbilityGrants([...(system.abilityGrants ?? []), ...selectedAbilities], "species", sourceUuid, instanceId),
-      ...await this.#prepareSkillGrants(system.skillGrants ?? [], "species", sourceUuid, instanceId),
-      ...await this.#prepareChoiceGrants(system.choiceGroups ?? [], skillSelections, "species", sourceUuid, instanceId)
-    ];
-    const ownFiltered = await this.#resolveConflicts(
-      actor, ownPrepared, source, options.conflictResolver
     );
+    const ownPrepared = [
+      ...(await this.#prepareAbilityGrants(
+        [...(system.abilityGrants ?? []), ...selectedAbilities],
+        "species",
+        sourceUuid,
+        instanceId
+      )),
+      ...(await this.#prepareSkillGrants(system.skillGrants ?? [], "species", sourceUuid, instanceId)),
+      ...(await this.#prepareChoiceGrants(
+        system.choiceGroups ?? [],
+        skillSelections,
+        "species",
+        sourceUuid,
+        instanceId
+      ))
+    ];
+    const ownFiltered = await this.#resolveConflicts(actor, ownPrepared, source, options.conflictResolver);
     const accepted: Record<string, unknown>[] = [...ownFiltered.grants];
     const speciesSuppressed = [...ownFiltered.skippedGrantIds];
     const allSkippedGrantIds = [...ownFiltered.skippedGrantIds];
-    const descriptorIdentities = new Set(packageItems(actor)
-      .filter((item) => item.type === "descriptor")
-      .map((item) => item.system.instance.sourceUuid || `snapshot:${item.name.trim().toLocaleLowerCase()}`));
+    const descriptorIdentities = new Set(
+      packageItems(actor)
+        .filter((item) => item.type === "descriptor")
+        .map((item) => item.system.instance.sourceUuid || `snapshot:${item.name.trim().toLocaleLowerCase()}`)
+    );
 
     const descriptorGrants = [...(system.descriptorGrants ?? []), ...selectedDescriptors];
     if (!unique(descriptorGrants.map((grant) => grant.id))) {
@@ -379,12 +430,17 @@ export class CharacterPackageService {
     }
     for (const grant of descriptorGrants) {
       const resolved = grant.descriptorUuid ? await this.#resolve(grant.descriptorUuid) : null;
-      if (resolved && resolved.type !== "descriptor") throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
+      if (resolved && resolved.type !== "descriptor")
+        throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
       const descriptorData = resolved ? sourceData(resolved) : snapshotPackageData(grant.snapshot, "descriptor");
-      if (!descriptorData) throw new Error(`Descriptor grant '${grant.id}' has neither a source nor a usable snapshot.`);
-      const descriptorSystem = clone(descriptorData.system as Record<string, unknown>) as unknown as DescriptorSystemData;
+      if (!descriptorData)
+        throw new Error(`Descriptor grant '${grant.id}' has neither a source nor a usable snapshot.`);
+      const descriptorSystem = clone(
+        descriptorData.system as Record<string, unknown>
+      ) as unknown as DescriptorSystemData;
       const descriptorSourceUuid = descriptorSystem.instance?.sourceUuid || grant.descriptorUuid;
-      const descriptorIdentityKey = descriptorSourceUuid || `snapshot:${String(descriptorData.name).trim().toLocaleLowerCase()}`;
+      const descriptorIdentityKey =
+        descriptorSourceUuid || `snapshot:${String(descriptorData.name).trim().toLocaleLowerCase()}`;
       if (descriptorIdentities.has(descriptorIdentityKey)) {
         speciesSuppressed.push(grant.id);
         allSkippedGrantIds.push(grant.id);
@@ -401,8 +457,19 @@ export class CharacterPackageService {
         options.descriptorSkillChoices?.[grant.id] ?? {}
       );
       const descriptorPrepared = [
-        ...await this.#prepareSkillGrants(descriptorSystem.skillGrants ?? [], "descriptor", descriptorSourceUuid, descriptorInstanceId),
-        ...await this.#prepareChoiceGrants(descriptorSystem.choiceGroups ?? [], selected, "descriptor", descriptorSourceUuid, descriptorInstanceId)
+        ...(await this.#prepareSkillGrants(
+          descriptorSystem.skillGrants ?? [],
+          "descriptor",
+          descriptorSourceUuid,
+          descriptorInstanceId
+        )),
+        ...(await this.#prepareChoiceGrants(
+          descriptorSystem.choiceGroups ?? [],
+          selected,
+          "descriptor",
+          descriptorSourceUuid,
+          descriptorInstanceId
+        ))
       ];
       const descriptorDefinition: PackageSourceLike = {
         id: String((resolved as PackageSourceLike | null)?.id ?? grant.id),
@@ -413,7 +480,11 @@ export class CharacterPackageService {
         system: descriptorSystem as unknown as Record<string, unknown>
       };
       const descriptorFiltered = await this.#resolveConflicts(
-        actor, descriptorPrepared, descriptorDefinition, options.conflictResolver, accepted
+        actor,
+        descriptorPrepared,
+        descriptorDefinition,
+        options.conflictResolver,
+        accepted
       );
       allSkippedGrantIds.push(...descriptorFiltered.skippedGrantIds);
       const descriptorIdentity = {
@@ -421,7 +492,11 @@ export class CharacterPackageService {
         contentKey: `descriptor:${String(descriptorData.name).trim().toLocaleLowerCase()}`
       };
       const parent = {
-        kind: "species", sourceUuid, instanceId, grantId: grant.id, status: "active",
+        kind: "species",
+        sourceUuid,
+        instanceId,
+        grantId: grant.id,
+        status: "active",
         ...descriptorIdentity,
         replacement: emptyReplacement()
       } satisfies GrantedByData;
@@ -489,19 +564,30 @@ export class CharacterPackageService {
     if (!packageItem) throw new Error("Character Package not found.");
     const instanceId = packageItem.system.instance.instanceId;
     const granted = grantTree(actor, instanceId);
-    const oldMax = Object.fromEntries(POOL_KEYS.map((pool) => [pool, actor.system.derived.pools[pool].max])) as Record<PoolKey, number>;
+    const oldMax = Object.fromEntries(POOL_KEYS.map((pool) => [pool, actor.system.derived.pools[pool].max])) as Record<
+      PoolKey,
+      number
+    >;
     const bonuses = packagePoolBonuses(packageItem);
     const deleteIds = grantedItemsMode === "delete" ? granted.map((item) => item.id) : [];
     if (grantedItemsMode === "keep") {
-      await Promise.all(granted.map((item) => item.update({
-        "system.grantedBy.status": "retained",
-        ...((item.type === "descriptor" || item.type === "characterType" || item.type === "species")
-          ? {"system.instance.parent.status": "retained"}
-          : {})
-      })));
+      await Promise.all(
+        granted.map((item) =>
+          item.update({
+            "system.grantedBy.status": "retained",
+            ...(item.type === "descriptor" || item.type === "characterType" || item.type === "species"
+              ? {"system.instance.parent.status": "retained"}
+              : {})
+          })
+        )
+      );
     }
     await actor.deleteEmbeddedDocuments("Item", [packageItem.id, ...deleteIds]);
-    await this.#updatePoolValues(actor, oldMax, Object.fromEntries(POOL_KEYS.map((pool) => [pool, oldMax[pool] - bonuses[pool]])) as Record<PoolKey, number>);
+    await this.#updatePoolValues(
+      actor,
+      oldMax,
+      Object.fromEntries(POOL_KEYS.map((pool) => [pool, oldMax[pool] - bonuses[pool]])) as Record<PoolKey, number>
+    );
     return {
       removedPackageId: packageItem.id,
       deletedGrantedItemIds: deleteIds,
@@ -517,7 +603,10 @@ export class CharacterPackageService {
     replaceGrantedItemsMode: RemoveGrantedItemsMode = "delete",
     skippedGrantIds: readonly string[] = []
   ): Promise<PackageAttachResult> {
-    const oldMax = Object.fromEntries(POOL_KEYS.map((pool) => [pool, actor.system.derived.pools[pool].max])) as Record<PoolKey, number>;
+    const oldMax = Object.fromEntries(POOL_KEYS.map((pool) => [pool, actor.system.derived.pools[pool].max])) as Record<
+      PoolKey,
+      number
+    >;
     const added = packagePoolBonuses(packageData as unknown as CharacterPackageItemLike);
     const removed = replacing ? packagePoolBonuses(replacing) : {might: 0, speed: 0, intellect: 0};
     const created = await actor.createEmbeddedDocuments("Item", [packageData, ...grants]);
@@ -525,33 +614,48 @@ export class CharacterPackageService {
       if (replacing) {
         const oldGrants = grantTree(actor, replacing.system.instance.instanceId);
         if (replaceGrantedItemsMode === "keep") {
-          await Promise.all(oldGrants.map((item) => item.update({
-            "system.grantedBy.status": "retained",
-            ...((item.type === "descriptor" || item.type === "characterType" || item.type === "species")
-              ? {"system.instance.parent.status": "retained"}
-              : {})
-          })));
+          await Promise.all(
+            oldGrants.map((item) =>
+              item.update({
+                "system.grantedBy.status": "retained",
+                ...(item.type === "descriptor" || item.type === "characterType" || item.type === "species"
+                  ? {"system.instance.parent.status": "retained"}
+                  : {})
+              })
+            )
+          );
         }
         await actor.deleteEmbeddedDocuments("Item", [
           replacing.id,
           ...(replaceGrantedItemsMode === "delete" ? oldGrants.map((item) => item.id) : [])
         ]);
       }
-      const newMax = Object.fromEntries(POOL_KEYS.map((pool) => [pool, oldMax[pool] + added[pool] - removed[pool]])) as Record<PoolKey, number>;
+      const newMax = Object.fromEntries(
+        POOL_KEYS.map((pool) => [pool, oldMax[pool] + added[pool] - removed[pool]])
+      ) as Record<PoolKey, number>;
       await this.#updatePoolValues(actor, oldMax, newMax);
     } catch (error) {
       const createdIds = created.map((entry) => (entry as {id?: string}).id).filter((id): id is string => Boolean(id));
       if (createdIds.length) await actor.deleteEmbeddedDocuments("Item", createdIds);
       throw error;
     }
-    const instanceId = ((packageData.system as CharacterTypeSystemData | DescriptorSystemData | SpeciesSystemData).instance.instanceId);
+    const instanceId = (packageData.system as CharacterTypeSystemData | DescriptorSystemData | SpeciesSystemData)
+      .instance.instanceId;
     return {packageItem: created[0], grantedItems: created.slice(1), instanceId, skippedGrantIds};
   }
 
-  async #updatePoolValues(actor: PackageCharacterLike, oldMax: Record<PoolKey, number>, newMax: Record<PoolKey, number>): Promise<void> {
+  async #updatePoolValues(
+    actor: PackageCharacterLike,
+    oldMax: Record<PoolKey, number>,
+    newMax: Record<PoolKey, number>
+  ): Promise<void> {
     const changes: Record<string, unknown> = {};
     for (const pool of POOL_KEYS) {
-      changes[`system.stats.${pool}.value`] = preservePoolDeficit(actor.system.stats[pool].value, oldMax[pool], Math.max(0, newMax[pool]));
+      changes[`system.stats.${pool}.value`] = preservePoolDeficit(
+        actor.system.stats[pool].value,
+        oldMax[pool],
+        Math.max(0, newMax[pool])
+      );
     }
     await actor.update(changes);
   }
@@ -563,15 +667,20 @@ export class CharacterPackageService {
     instanceId: string
   ): Promise<Record<string, unknown>[]> {
     if (!unique(grants.map((grant) => grant.id))) throw new Error("Type Ability grant IDs must be unique.");
-    return Promise.all(grants.map(async (grant) => {
-      const source = grant.abilityUuid ? await this.#resolve(grant.abilityUuid) : null;
-      if (source && source.type !== "ability") throw new Error("An Ability grant references a non-Ability Item.");
-      const data = source ? embeddedData(source, "ability") : snapshotData(grant.snapshot, "ability");
-      if (!data) throw new Error(`Ability grant '${grant.id}' has neither a source nor a usable snapshot.`);
-      const identity = grantIdentity("ability", String(data.name ?? grant.snapshot.name), grant.abilityUuid);
-      data.system = {...data.system as Record<string, unknown>, grantedBy: grantProvenance(kind, sourceUuid, instanceId, grant.id, identity)};
-      return data;
-    }));
+    return Promise.all(
+      grants.map(async (grant) => {
+        const source = grant.abilityUuid ? await this.#resolve(grant.abilityUuid) : null;
+        if (source && source.type !== "ability") throw new Error("An Ability grant references a non-Ability Item.");
+        const data = source ? embeddedData(source, "ability") : snapshotData(grant.snapshot, "ability");
+        if (!data) throw new Error(`Ability grant '${grant.id}' has neither a source nor a usable snapshot.`);
+        const identity = grantIdentity("ability", String(data.name ?? grant.snapshot.name), grant.abilityUuid);
+        data.system = {
+          ...(data.system as Record<string, unknown>),
+          grantedBy: grantProvenance(kind, sourceUuid, instanceId, grant.id, identity)
+        };
+        return data;
+      })
+    );
   }
 
   async #prepareSkillGrants(
@@ -581,7 +690,9 @@ export class CharacterPackageService {
     instanceId: string
   ): Promise<Record<string, unknown>[]> {
     if (!unique(grants.map((grant) => grant.id))) throw new Error("Descriptor Skill grant IDs must be unique.");
-    return Promise.all(grants.map((grant) => this.#prepareSkill(grant, grant.rank, kind, sourceUuid, instanceId, grant.id)));
+    return Promise.all(
+      grants.map((grant) => this.#prepareSkill(grant, grant.rank, kind, sourceUuid, instanceId, grant.id))
+    );
   }
 
   async #prepareChoiceGrants(
@@ -595,24 +706,35 @@ export class CharacterPackageService {
     for (const group of groups) {
       for (const optionId of selected[group.id] ?? []) {
         const option = group.options.find((entry) => entry.id === optionId)!;
-        prepared.push(await this.#prepareSkill(option, group.rank, kind, sourceUuid, instanceId, `${group.id}:${option.id}`));
+        prepared.push(
+          await this.#prepareSkill(option, group.rank, kind, sourceUuid, instanceId, `${group.id}:${option.id}`)
+        );
       }
     }
     return prepared;
   }
 
-  async #prepareSkill(option: SkillGrantOption, rank: string, kind: "type" | "descriptor" | "species", sourceUuid: string, instanceId: string, grantId: string): Promise<Record<string, unknown>> {
+  async #prepareSkill(
+    option: SkillGrantOption,
+    rank: string,
+    kind: "type" | "descriptor" | "species",
+    sourceUuid: string,
+    instanceId: string,
+    grantId: string
+  ): Promise<Record<string, unknown>> {
     const source = option.skillUuid ? await this.#resolve(option.skillUuid) : null;
     if (source && source.type !== "skill") throw new Error("A Skill grant references a non-Skill Item.");
     const data = source
       ? embeddedData(source, "skill")
-      : snapshotData(option.snapshot, "skill") ?? (option.customName ? {name: option.customName, type: "skill", system: {}} : null);
+      : (snapshotData(option.snapshot, "skill") ??
+        (option.customName ? {name: option.customName, type: "skill", system: {}} : null));
     if (!data) throw new Error(`Skill grant '${grantId}' has neither a source, custom name, nor usable snapshot.`);
     const identity = grantIdentity("skill", String(data.name ?? option.customName), option.skillUuid);
     const skillSystem = data.system as Record<string, unknown>;
-    const acquisition = skillSystem.acquisition && typeof skillSystem.acquisition === "object"
-      ? skillSystem.acquisition as Record<string, unknown>
-      : {};
+    const acquisition =
+      skillSystem.acquisition && typeof skillSystem.acquisition === "object"
+        ? (skillSystem.acquisition as Record<string, unknown>)
+        : {};
     const notes = String(option.notes ?? "");
     data.system = {
       ...skillSystem,
@@ -633,7 +755,9 @@ export class CharacterPackageService {
     const accepted: Record<string, unknown>[] = [];
     const skippedGrantIds: string[] = [];
     const existing = [...actor.items] as unknown as GrantDocumentLike[];
-    const additionalDocuments = additional.filter((entry) => entry.type === "ability" || entry.type === "skill") as unknown as GrantDocumentLike[];
+    const additionalDocuments = additional.filter(
+      (entry) => entry.type === "ability" || entry.type === "skill"
+    ) as unknown as GrantDocumentLike[];
     for (const originalData of grants) {
       let data = originalData;
       const type = data.type;
@@ -644,7 +768,7 @@ export class CharacterPackageService {
       while (true) {
         const provenance = ((data.system as Record<string, unknown>).grantedBy ?? {}) as GrantedByData;
         const identity: GrantIdentity = {type, contentUuid: provenance.contentUuid, contentKey: provenance.contentKey};
-        const documents = [...existing, ...additionalDocuments, ...accepted as unknown as GrantDocumentLike[]];
+        const documents = [...existing, ...additionalDocuments, ...(accepted as unknown as GrantDocumentLike[])];
         const conflicting = findGrantConflict(documents, identity);
         if (!conflicting) {
           accepted.push(data);
@@ -683,7 +807,10 @@ export class CharacterPackageService {
     return {grants: accepted, skippedGrantIds};
   }
 
-  #conflictDocument(document: GrantDocumentLike | Record<string, unknown>, type: "ability" | "skill"): GrantConflictDocument {
+  #conflictDocument(
+    document: GrantDocumentLike | Record<string, unknown>,
+    type: "ability" | "skill"
+  ): GrantConflictDocument {
     const data = document as {id?: string; uuid?: string; name?: string; system?: Record<string, unknown>};
     const system = data.system ?? {};
     const provenance = (system.grantedBy ?? {}) as Partial<GrantedByData>;
@@ -710,8 +837,8 @@ export class CharacterPackageService {
     if (source && source.type !== type) throw new Error(`The selected replacement is not a ${type} Item.`);
     const data = source
       ? embeddedData(source, type)
-      : snapshotData(replacement.snapshot, type)
-        ?? (type === "skill" && replacement.custom ? {name: replacement.name, type, system: {}} : null);
+      : (snapshotData(replacement.snapshot, type) ??
+        (type === "skill" && replacement.custom ? {name: replacement.name, type, system: {}} : null));
     if (!data) throw new Error(`The selected ${type} replacement is unavailable and has no usable snapshot.`);
     const originalSystem = original.system as Record<string, unknown>;
     const originalProvenance = (originalSystem.grantedBy ?? {}) as GrantedByData;
@@ -724,12 +851,14 @@ export class CharacterPackageService {
         };
     const replacementIdentity = grantIdentity(type, String(data.name ?? replacement.name), replacement.itemUuid);
     const replacementSystem = data.system as Record<string, unknown>;
-    const originalAcquisition = originalSystem.acquisition && typeof originalSystem.acquisition === "object"
-      ? originalSystem.acquisition as Record<string, unknown>
-      : {};
-    const replacementAcquisition = replacementSystem.acquisition && typeof replacementSystem.acquisition === "object"
-      ? replacementSystem.acquisition as Record<string, unknown>
-      : {};
+    const originalAcquisition =
+      originalSystem.acquisition && typeof originalSystem.acquisition === "object"
+        ? (originalSystem.acquisition as Record<string, unknown>)
+        : {};
+    const replacementAcquisition =
+      replacementSystem.acquisition && typeof replacementSystem.acquisition === "object"
+        ? (replacementSystem.acquisition as Record<string, unknown>)
+        : {};
     data.system = {
       ...replacementSystem,
       ...(type === "skill" ? {rank: originalSystem.rank} : {}),
@@ -780,14 +909,17 @@ export class CharacterPackageService {
         ...(type === "skill" && !option.itemUuid ? {custom: true} : {})
       });
     };
-    const addAlternatives = (alternatives: readonly GrantAlternative[] | undefined, reason: string, sourceUuid: string): void => {
+    const addAlternatives = (
+      alternatives: readonly GrantAlternative[] | undefined,
+      reason: string,
+      sourceUuid: string
+    ): void => {
       for (const alternative of alternatives ?? []) add(alternative, reason, sourceUuid);
     };
-    const inspect = (
-      packageItem: PackageSourceLike | CharacterPackageItemLike,
-      selectedOnly = false
-    ): void => {
-      const system = packageItem.system as unknown as SpeciesSystemData & DescriptorSystemData & CharacterTypeSystemData;
+    const inspect = (packageItem: PackageSourceLike | CharacterPackageItemLike, selectedOnly = false): void => {
+      const system = packageItem.system as unknown as SpeciesSystemData &
+        DescriptorSystemData &
+        CharacterTypeSystemData;
       const selections = "instance" in system ? system.instance?.selections : undefined;
       if (type === "skill") {
         for (const grant of system.skillGrants ?? []) {
@@ -799,13 +931,23 @@ export class CharacterPackageService {
           const selected = selections?.skillChoices.find((entry) => entry.groupId === group.id)?.optionIds ?? [];
           const currentOptionId = grantId.startsWith(`${group.id}:`) ? grantId.slice(group.id.length + 1) : "";
           if (packageItem.uuid === packageSource.uuid && currentOptionId) {
-            for (const option of group.options) if (option.id !== currentOptionId) {
-              add({id: option.id, itemUuid: option.skillUuid, customName: option.customName, snapshot: option.snapshot}, `${packageItem.name} — Skill choice`, packageItem.uuid);
-            }
+            for (const option of group.options)
+              if (option.id !== currentOptionId) {
+                add(
+                  {id: option.id, itemUuid: option.skillUuid, customName: option.customName, snapshot: option.snapshot},
+                  `${packageItem.name} — Skill choice`,
+                  packageItem.uuid
+                );
+              }
           } else if (!selectedOnly) {
-            for (const option of group.options) if (!selected.includes(option.id)) {
-              add({id: option.id, itemUuid: option.skillUuid, customName: option.customName, snapshot: option.snapshot}, `${packageItem.name} — unused Skill choice`, packageItem.uuid);
-            }
+            for (const option of group.options)
+              if (!selected.includes(option.id)) {
+                add(
+                  {id: option.id, itemUuid: option.skillUuid, customName: option.customName, snapshot: option.snapshot},
+                  `${packageItem.name} — unused Skill choice`,
+                  packageItem.uuid
+                );
+              }
           }
         }
       } else {
@@ -818,13 +960,23 @@ export class CharacterPackageService {
           const selected = selections?.abilityChoices.find((entry) => entry.groupId === group.id)?.optionIds ?? [];
           const currentOptionId = grantId.startsWith(`${group.id}:`) ? grantId.slice(group.id.length + 1) : "";
           if (packageItem.uuid === packageSource.uuid && currentOptionId) {
-            for (const option of group.options) if (option.id !== currentOptionId) {
-              add({id: option.id, itemUuid: option.abilityUuid, customName: "", snapshot: option.snapshot}, `${packageItem.name} — Ability choice`, packageItem.uuid);
-            }
+            for (const option of group.options)
+              if (option.id !== currentOptionId) {
+                add(
+                  {id: option.id, itemUuid: option.abilityUuid, customName: "", snapshot: option.snapshot},
+                  `${packageItem.name} — Ability choice`,
+                  packageItem.uuid
+                );
+              }
           } else if (!selectedOnly) {
-            for (const option of group.options) if (!selected.includes(option.id)) {
-              add({id: option.id, itemUuid: option.abilityUuid, customName: "", snapshot: option.snapshot}, `${packageItem.name} — unused Ability choice`, packageItem.uuid);
-            }
+            for (const option of group.options)
+              if (!selected.includes(option.id)) {
+                add(
+                  {id: option.id, itemUuid: option.abilityUuid, customName: "", snapshot: option.snapshot},
+                  `${packageItem.name} — unused Ability choice`,
+                  packageItem.uuid
+                );
+              }
           }
         }
       }
@@ -835,17 +987,25 @@ export class CharacterPackageService {
     return suggestions.filter((suggestion) => {
       const identity = grantIdentity(type, suggestion.name, suggestion.itemUuid);
       const key = identity.contentUuid || identity.contentKey;
-      if (seen.has(key) || hasGrantConflict(actor.items as unknown as Iterable<GrantDocumentLike>, identity)) return false;
+      if (seen.has(key) || hasGrantConflict(actor.items as unknown as Iterable<GrantDocumentLike>, identity))
+        return false;
       seen.add(key);
       return true;
     });
   }
 
-  #validateChoices(groups: readonly SkillChoiceGroup[], selections: Readonly<Record<string, readonly string[]>>): Record<string, readonly string[]> {
+  #validateChoices(
+    groups: readonly SkillChoiceGroup[],
+    selections: Readonly<Record<string, readonly string[]>>
+  ): Record<string, readonly string[]> {
     const result: Record<string, readonly string[]> = {};
     for (const group of groups) {
       const selected = selections[group.id] ?? [];
-      if (selected.length !== group.choose || !unique(selected) || selected.some((id) => !group.options.some((option) => option.id === id))) {
+      if (
+        selected.length !== group.choose ||
+        !unique(selected) ||
+        selected.some((id) => !group.options.some((option) => option.id === id))
+      ) {
         throw new Error(`Descriptor choice '${group.id}' requires exactly ${group.choose} valid option(s).`);
       }
       result[group.id] = [...selected];
@@ -860,7 +1020,11 @@ export class CharacterPackageService {
     const result: Record<string, readonly string[]> = {};
     for (const group of groups) {
       const selected = selections[group.id] ?? [];
-      if (selected.length !== group.choose || !unique(selected) || selected.some((id) => !group.options.some((option) => option.id === id))) {
+      if (
+        selected.length !== group.choose ||
+        !unique(selected) ||
+        selected.some((id) => !group.options.some((option) => option.id === id))
+      ) {
         throw new Error(`Ability choice '${group.id}' requires exactly ${group.choose} valid option(s).`);
       }
       result[group.id] = [...selected];
@@ -882,12 +1046,12 @@ export class CharacterPackageService {
       }
       const selected = selections[group.id] ?? [];
       if (
-        !Number.isInteger(group.choose)
-        || group.choose < 1
-        || group.choose > group.options.length
-        || selected.length !== group.choose
-        || !unique(selected)
-        || selected.some((id) => !group.options.some((option) => option.id === id))
+        !Number.isInteger(group.choose) ||
+        group.choose < 1 ||
+        group.choose > group.options.length ||
+        selected.length !== group.choose ||
+        !unique(selected) ||
+        selected.some((id) => !group.options.some((option) => option.id === id))
       ) {
         throw new Error(`Descriptor choice '${group.id}' requires exactly ${group.choose} valid option(s).`);
       }
@@ -907,12 +1071,12 @@ export class CharacterPackageService {
     for (const group of groups) {
       const allowed = [...new Set(group.pools)].filter((pool): pool is PoolKey => POOL_KEYS.includes(pool));
       if (
-        allowed.length !== group.pools.length
-        || !Number.isInteger(group.choose)
-        || group.choose < 1
-        || group.choose > allowed.length
-        || !Number.isInteger(group.amount)
-        || group.amount < 1
+        allowed.length !== group.pools.length ||
+        !Number.isInteger(group.choose) ||
+        group.choose < 1 ||
+        group.choose > allowed.length ||
+        !Number.isInteger(group.amount) ||
+        group.amount < 1
       ) {
         throw new Error(`Descriptor Pool choice '${group.id}' is invalid.`);
       }

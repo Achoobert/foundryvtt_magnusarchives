@@ -82,10 +82,7 @@ export class ConditionService {
     return this.#setStep(actor, previousStep, healDamageTrack(previousStep, hurtAvailable, steps));
   }
 
-  async setDamageTrackStep(
-    actor: CharacterDocumentLike,
-    step: DamageTrackStep
-  ): Promise<DamageTrackResult> {
+  async setDamageTrackStep(actor: CharacterDocumentLike, step: DamageTrackStep): Promise<DamageTrackResult> {
     assertCharacter(actor);
     const {step: previousStep, hurtAvailable} = this.#track(actor);
     return this.#setStep(actor, previousStep, normalizeDamageTrackStep(step, hurtAvailable));

@@ -23,8 +23,12 @@ describe("Combat Tab UI V1", () => {
     expect(bar.match(/data-action="(?:dodge|block)"/g)).toHaveLength(2);
     expect(bar).toContain('data-action="dodge"');
     expect(bar).toContain('data-action="block"');
-    expect(bar).toMatch(/data-action="dodge"[^>]*>[\s\S]*?fa-person-running[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.dodge[\s\S]*?MAGNUSARCHIVES\.Pools\.Speed/);
-    expect(bar).toMatch(/data-action="block"[^>]*>[\s\S]*?fa-shield-halved[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.block[\s\S]*?MAGNUSARCHIVES\.Pools\.Might/);
+    expect(bar).toMatch(
+      /data-action="dodge"[^>]*>[\s\S]*?fa-person-running[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.dodge[\s\S]*?MAGNUSARCHIVES\.Pools\.Speed/
+    );
+    expect(bar).toMatch(
+      /data-action="block"[^>]*>[\s\S]*?fa-shield-halved[\s\S]*?MAGNUSARCHIVES\.Combat\.Defense\.block[\s\S]*?MAGNUSARCHIVES\.Pools\.Might/
+    );
     expect(bar).not.toContain("blockWithShield");
     expect(source).toMatch(/#onDodge[\s\S]*?promptDefenseRoll\(this\.actor[\s\S]*?, "dodge"\)/);
     expect(source).toMatch(/#onBlock[\s\S]*?promptDefenseRoll\(this\.actor[\s\S]*?, "block"\)/);
@@ -53,8 +57,12 @@ describe("Combat Tab UI V1", () => {
   });
 
   it("makes the whole Weapon row invoke the existing targeted Weapon workflow", () => {
-    expect(combat).toContain('class="compact-inventory-row compact-combat-row combat-weapon-row" data-action="attackWeapon"');
-    expect(combat).toContain('class="inventory-item-name combat-attack-name magnusarchives-primary-action" data-action="attackWeapon"');
+    expect(combat).toContain(
+      'class="compact-inventory-row compact-combat-row combat-weapon-row" data-action="attackWeapon"'
+    );
+    expect(combat).toContain(
+      'class="inventory-item-name combat-attack-name magnusarchives-primary-action" data-action="attackWeapon"'
+    );
     expect(source).toContain("await promptWeaponAttack(");
     expect(source).toMatch(/#onAttackWeapon[\s\S]*?event\.preventDefault\(\);[\s\S]*?event\.stopPropagation\(\);/);
     expect(dialogs).toContain("buildWeaponAttackPlan(actor, weapon, buildOptions(data))");
@@ -78,10 +86,14 @@ describe("Combat Tab UI V1", () => {
 
   it("renders compact conditional Weapon category, Damage, Ammunition, and Depletion metadata", () => {
     expect(combat).toMatch(/weapon\.name[\s\S]*?\(\{\{weapon\.category\}\}\)/);
-    expect(combat).toMatch(/weapon\.ammoEnabled[\s\S]*?weapon\.ammoLabel[\s\S]*?weapon\.depletionEnabled[\s\S]*?weapon\.depletionLabel[\s\S]*?weapon\.damage/);
+    expect(combat).toMatch(
+      /weapon\.ammoEnabled[\s\S]*?weapon\.ammoLabel[\s\S]*?weapon\.depletionEnabled[\s\S]*?weapon\.depletionLabel[\s\S]*?weapon\.damage/
+    );
     expect(source).toContain("depletionLabel(weapon.system.depletion)");
-    expect(source).toContain('`${weapon.system.ammo.value} / ${weapon.system.ammo.max}`');
-    expect(combat).toMatch(/combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-damage-column[\s\S]*?combat-item-actions/);
+    expect(source).toContain("`${weapon.system.ammo.value} / ${weapon.system.ammo.max}`");
+    expect(combat).toMatch(
+      /combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-damage-column[\s\S]*?combat-item-actions/
+    );
     expect(combat).toMatch(/weapon\.ammoLabel[\s\S]*?data-action="reloadWeapon"/);
     expect(source).toMatch(/#onReloadWeapon[\s\S]*?event\.stopPropagation\(\);[\s\S]*?services\.weapons\.reload/);
     expect(styles).toContain('grid-template-areas: "identity secondary ammo depletion status actions"');
@@ -107,7 +119,9 @@ describe("Combat Tab UI V1", () => {
   it("uses explicit equip hands while Shield and Armor rows only toggle details", () => {
     expect(combat).toMatch(/combat-shield-row" data-action="toggleCombatDetails"/);
     expect(combat).toMatch(/combat-armor-row" data-action="toggleCombatDetails"/);
-    expect(combat).toMatch(/combat-shield-row[\s\S]*?toggleCombatDetails[\s\S]*?toggleShieldEquipped[\s\S]*?shield\.name/);
+    expect(combat).toMatch(
+      /combat-shield-row[\s\S]*?toggleCombatDetails[\s\S]*?toggleShieldEquipped[\s\S]*?shield\.name/
+    );
     expect(combat).toMatch(/combat-armor-row[\s\S]*?toggleCombatDetails[\s\S]*?toggleArmorEquipped[\s\S]*?armor\.name/);
     expect(combat.match(/fa-hand/g)).toHaveLength(2);
     expect(combat).toContain("MAGNUSARCHIVES.Combat.EquipShield");
@@ -127,40 +141,59 @@ describe("Combat Tab UI V1", () => {
     expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel");
     expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip");
     expect(localization["MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel"]).toBe("Unfamiliar");
-    expect(localization["MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip"])
-      .toBe("Cannot freely use this Armor category · relevant Speed tasks are hindered.");
+    expect(localization["MAGNUSARCHIVES.Combat.Armor.UnfamiliarTooltip"]).toBe(
+      "Cannot freely use this Armor category · relevant Speed tasks are hindered."
+    );
     expect(combat).toContain("shield.woundTracks");
-    expect(combat).toMatch(/combat-row-left[\s\S]*?combat-shield-wounds-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/);
+    expect(combat).toMatch(
+      /combat-row-left[\s\S]*?combat-shield-wounds-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/
+    );
     expect(combat).not.toContain("MAGNUSARCHIVES.Combat.Armor.Active");
     expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?var\(--magnusarchives-success\)/);
-    expect(styles).toMatch(/\.combat-equipped-toggle[\s\S]*?var\(--magnusarchives-text-muted\)[\s\S]*?&\.is-equipped[\s\S]*?var\(--magnusarchives-success\)/);
+    expect(styles).toMatch(
+      /\.combat-equipped-toggle[\s\S]*?var\(--magnusarchives-text-muted\)[\s\S]*?&\.is-equipped[\s\S]*?var\(--magnusarchives-success\)/
+    );
   });
 
   it("uses one six-column Combat grid with fixed Depletion and Actions positions", () => {
     expect(styles).toContain("--combat-grid-columns: minmax(6.5rem, 1fr) 10.75rem 4.75rem 7.25rem 7.25rem 4.25rem");
-    expect(styles).toMatch(/\.combat-weapon-row,[\s\S]*?\.combat-shield-row,[\s\S]*?\.combat-armor-row[\s\S]*?grid-template-areas: "identity secondary ammo depletion status actions"[\s\S]*?grid-template-columns: var\(--combat-grid-columns\)/);
+    expect(styles).toMatch(
+      /\.combat-weapon-row,[\s\S]*?\.combat-shield-row,[\s\S]*?\.combat-armor-row[\s\S]*?grid-template-areas: "identity secondary ammo depletion status actions"[\s\S]*?grid-template-columns: var\(--combat-grid-columns\)/
+    );
     expect(styles).toMatch(/\.combat-depletion-column[\s\S]*?grid-area: depletion/);
     expect(styles).toMatch(/\.combat-item-actions[\s\S]*?grid-area: actions/);
 
-    expect(combat).toMatch(/combat-weapon-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-damage-column[\s\S]*?combat-item-actions/);
-    expect(combat).toMatch(/combat-shield-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column combat-shield-wounds-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/);
-    expect(combat).toMatch(/combat-armor-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column combat-familiarity-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/);
+    expect(combat).toMatch(
+      /combat-weapon-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-damage-column[\s\S]*?combat-item-actions/
+    );
+    expect(combat).toMatch(
+      /combat-shield-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column combat-shield-wounds-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/
+    );
+    expect(combat).toMatch(
+      /combat-armor-row[\s\S]*?combat-row-left[\s\S]*?combat-secondary-column combat-familiarity-column[\s\S]*?combat-ammo-column[\s\S]*?combat-depletion-column[\s\S]*?combat-status-column[\s\S]*?combat-item-actions/
+    );
   });
 
   it("uses shared semantic status colors without allowing secondary data to move Depletion", () => {
     expect(combat.match(/class="combat-item-summary combat-depleted-state"/g)).toHaveLength(3);
     expect(styles).toMatch(/\.combat-item-summary\.combat-depleted-state[\s\S]*?color: var\(--magnusarchives-danger\)/);
     expect(combat.match(/combat-equipped-state/g)).toHaveLength(2);
-    expect(styles).toMatch(/\.combat-item-summary\.combat-equipped-state[\s\S]*?color: var\(--magnusarchives-success\)/);
-    expect(styles.indexOf(".combat-item-summary.combat-equipped-state"))
-      .toBeGreaterThan(styles.indexOf(".combat-item-summary {"));
-    expect(styles.indexOf(".combat-item-summary.combat-depleted-state"))
-      .toBeGreaterThan(styles.indexOf(".combat-item-summary {"));
+    expect(styles).toMatch(
+      /\.combat-item-summary\.combat-equipped-state[\s\S]*?color: var\(--magnusarchives-success\)/
+    );
+    expect(styles.indexOf(".combat-item-summary.combat-equipped-state")).toBeGreaterThan(
+      styles.indexOf(".combat-item-summary {")
+    );
+    expect(styles.indexOf(".combat-item-summary.combat-depleted-state")).toBeGreaterThan(
+      styles.indexOf(".combat-item-summary {")
+    );
     expect(styles).not.toContain("!important");
     expect(combat).toContain("combat-secondary-column combat-familiarity-column");
     expect(combat).toContain("MAGNUSARCHIVES.Combat.Armor.UnfamiliarLabel");
     expect(combat).toContain("combat-secondary-column combat-shield-wounds-column");
-    expect(styles).toMatch(/\.combat-secondary-column[\s\S]*?grid-area: secondary[\s\S]*?width: 100%[\s\S]*?min-width: 0/);
+    expect(styles).toMatch(
+      /\.combat-secondary-column[\s\S]*?grid-area: secondary[\s\S]*?width: 100%[\s\S]*?min-width: 0/
+    );
     expect(styles).toMatch(/\.combat-shield-wounds-column[\s\S]*?overflow: hidden/);
   });
 

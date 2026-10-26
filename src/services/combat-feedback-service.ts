@@ -33,7 +33,7 @@ async function tokenObject(target: CombatFeedbackTarget): Promise<{
   }
   if (target.tokenUuid) {
     try {
-      const document = await fromUuid(target.tokenUuid) as {
+      const document = (await fromUuid(target.tokenUuid)) as {
         readonly object?: {readonly center?: {readonly x: number; readonly y: number}} | null;
       } | null;
       if (document?.object?.center) {
@@ -70,23 +70,35 @@ export class TokenCombatFeedbackService implements CombatFeedbackService {
   }
 
   async characterWound(target: CombatFeedbackTarget, severity: WoundSeverity): Promise<void> {
-    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Wound", {
-      severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)
-    }), "#ffb347");
+    await this.#show(
+      target,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Wound", {
+        severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)
+      }),
+      "#ffb347"
+    );
   }
 
   async characterStress(target: CombatFeedbackTarget, points: number, level: number): Promise<void> {
     if (points <= 0) return;
-    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Stress", {
-      points,
-      level
-    }), "#d6b24a");
+    await this.#show(
+      target,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Stress", {
+        points,
+        level
+      }),
+      "#d6b24a"
+    );
   }
 
   async characterSeriousInjury(target: CombatFeedbackTarget, step: DamageTrackStep): Promise<void> {
-    await this.#show(target, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.SeriousInjury", {
-      step: game.i18n.localize(`MAGNUSARCHIVES.DamageTrack.${step}`)
-    }), step === "dead" ? "#ff3030" : "#ff5c5c");
+    await this.#show(
+      target,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.SeriousInjury", {
+        step: game.i18n.localize(`MAGNUSARCHIVES.DamageTrack.${step}`)
+      }),
+      step === "dead" ? "#ff3030" : "#ff5c5c"
+    );
   }
 
   async shieldWound(

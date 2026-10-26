@@ -1,14 +1,9 @@
-import {
-  actorDefaultIcon,
-  shouldDefaultPrototypeActorLink
-} from "../config/system-assets";
+import {actorDefaultIcon, shouldDefaultPrototypeActorLink} from "../config/system-assets";
 
 export class MagnusArchivesActor extends Actor {
   static override getDefaultArtwork(data: Record<string, unknown>): {img: string; texture: {src: string}} {
     const icon = actorDefaultIcon(String(data.type ?? ""));
-    return icon
-      ? {img: icon, texture: {src: icon}}
-      : super.getDefaultArtwork(data);
+    return icon ? {img: icon, texture: {src: icon}} : super.getDefaultArtwork(data);
   }
 
   override async _preCreate(

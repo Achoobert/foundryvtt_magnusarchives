@@ -19,18 +19,30 @@ import {effectiveTier} from "../rules/core/character-overrides";
 
 export type GenreAssociationErrorCode = "not-character" | "not-genre" | "duplicate" | "missing";
 export type GenreChoiceErrorCode =
-  | "not-character" | "genre-required" | "genre-unavailable" | "choice-missing"
-  | "entry-missing" | "entry-ineligible" | "ability-unavailable" | "duplicate-grant";
+  | "not-character"
+  | "genre-required"
+  | "genre-unavailable"
+  | "choice-missing"
+  | "entry-missing"
+  | "entry-ineligible"
+  | "ability-unavailable"
+  | "duplicate-grant";
 
 export class GenreAssociationError extends Error {
-  constructor(readonly code: GenreAssociationErrorCode, message: string) {
+  constructor(
+    readonly code: GenreAssociationErrorCode,
+    message: string
+  ) {
     super(message);
     this.name = "GenreAssociationError";
   }
 }
 
 export class GenreChoiceError extends Error {
-  constructor(readonly code: GenreChoiceErrorCode, message: string) {
+  constructor(
+    readonly code: GenreChoiceErrorCode,
+    message: string
+  ) {
     super(message);
     this.name = "GenreChoiceError";
   }
@@ -116,8 +128,8 @@ export class GenreService {
   readonly #operations = new Map<string, Promise<unknown>>();
 
   constructor(
-    resolveGenre: GenreResolver = async (uuid) => await fromUuid(uuid) as GenreDocumentLike | null,
-    resolveAbility: AbilityResolver = async (uuid) => await fromUuid(uuid) as GenreAbilitySourceLike | null,
+    resolveGenre: GenreResolver = async (uuid) => (await fromUuid(uuid)) as GenreDocumentLike | null,
+    resolveAbility: AbilityResolver = async (uuid) => (await fromUuid(uuid)) as GenreAbilitySourceLike | null,
     idFactory: () => string = () => globalThis.crypto?.randomUUID?.() ?? `genre-${Date.now()}-${Math.random()}`,
     now: () => number = Date.now
   ) {
@@ -175,25 +187,25 @@ export class GenreService {
     genre: GenreDocumentLike,
     choice: PendingGenreChoice
   ): readonly GenreAbilityEntry[] {
-    return genre.system.abilityCatalog.filter((entry) => (
-      (entry.catalog ?? "progression") === "progression"
-      && entry.minimumTier <= effectiveTier(actor.system) && entry.minimumTier <= choice.grantTier
-    ));
+    return genre.system.abilityCatalog.filter(
+      (entry) =>
+        (entry.catalog ?? "progression") === "progression" &&
+        entry.minimumTier <= effectiveTier(actor.system) &&
+        entry.minimumTier <= choice.grantTier
+    );
   }
 
-  manualCatalog(
-    actor: GenreCharacterLike,
-    genre: GenreDocumentLike
-  ): readonly GenreManualCatalogEntry[] {
-    return genre.system.abilityCatalog.filter((entry) => (
-      (entry.catalog ?? "progression") === "progression"
-    )).map((entry) => ({
-      id: entry.id,
-      name: entry.snapshot.name || entry.id,
-      minimumTier: entry.minimumTier,
-      normallyAvailable: entry.minimumTier <= effectiveTier(actor.system),
-      owned: Boolean(this.#provenanceAbility(actor, genre, actor.system.genre, entry, "active"))
-    })).sort((left, right) => left.minimumTier - right.minimumTier || left.name.localeCompare(right.name));
+  manualCatalog(actor: GenreCharacterLike, genre: GenreDocumentLike): readonly GenreManualCatalogEntry[] {
+    return genre.system.abilityCatalog
+      .filter((entry) => (entry.catalog ?? "progression") === "progression")
+      .map((entry) => ({
+        id: entry.id,
+        name: entry.snapshot.name || entry.id,
+        minimumTier: entry.minimumTier,
+        normallyAvailable: entry.minimumTier <= effectiveTier(actor.system),
+        owned: Boolean(this.#provenanceAbility(actor, genre, actor.system.genre, entry, "active"))
+      }))
+      .sort((left, right) => left.minimumTier - right.minimumTier || left.name.localeCompare(right.name));
   }
 
   async acquireManual(
@@ -204,11 +216,14 @@ export class GenreService {
     return this.#exclusive(actor, async () => {
       this.#assertCharacter(actor);
       const association = actor.system.genre;
-      if (!association.sourceUuid) throw new GenreChoiceError("genre-required", "Attach a Genre before acquiring an Ability.");
+      if (!association.sourceUuid)
+        throw new GenreChoiceError("genre-required", "Attach a Genre before acquiring an Ability.");
       const genre = await this.#resolveGenre(association.sourceUuid);
-      if (!genre || genre.type !== "genre") throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
+      if (!genre || genre.type !== "genre")
+        throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
       const entry = genre.system.abilityCatalog.find((candidate) => candidate.id === entryId);
-      if (!entry) throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!entry)
+        throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       if ((entry.catalog ?? "progression") !== "progression") {
         throw new GenreChoiceError("entry-ineligible", "Origin Abilities are not part of Genre progression.");
       }
@@ -225,42 +240,44 @@ export class GenreService {
       const conflict = this.#conflict(actor, genre, entry, data);
       let conflictOverridden = false;
       if (conflict) {
-        if (!conflictResolver) throw new GenreChoiceError("duplicate-grant", "This Ability is already present on the Character.");
+        if (!conflictResolver)
+          throw new GenreChoiceError("duplicate-grant", "This Ability is already present on the Character.");
         const resolution = await conflictResolver(conflict);
         if (resolution.action === "cancel") throw new GrantConflictCancelledError();
         if (resolution.action !== "gmOverride") {
-          throw new GenreChoiceError("duplicate-grant", "A Genre acquisition must use an Ability from its Genre catalog.");
+          throw new GenreChoiceError(
+            "duplicate-grant",
+            "A Genre acquisition must use an Ability from its Genre catalog."
+          );
         }
         conflictOverridden = true;
       }
-      const created = conflict
-        ? undefined
-        : (await actor.createEmbeddedDocuments("Item", [data]))[0];
+      const created = conflict ? undefined : (await actor.createEmbeddedDocuments("Item", [data]))[0];
       return {entry, abilityCreated: Boolean(created), conflictOverridden};
     });
   }
 
-  async undoManual(
-    actor: GenreCharacterLike,
-    entryId: string,
-    deleteAbility: boolean
-  ): Promise<GenreManualUndoResult> {
+  async undoManual(actor: GenreCharacterLike, entryId: string, deleteAbility: boolean): Promise<GenreManualUndoResult> {
     return this.#exclusive(actor, async () => {
       this.#assertCharacter(actor);
       const association = actor.system.genre;
       if (!association.sourceUuid) throw new GenreChoiceError("genre-required", "No active Genre is attached.");
       const genre = await this.#resolveGenre(association.sourceUuid);
-      if (!genre || genre.type !== "genre") throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
+      if (!genre || genre.type !== "genre")
+        throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
       const entry = genre.system.abilityCatalog.find((candidate) => candidate.id === entryId);
-      if (!entry) throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!entry)
+        throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       const ability = this.#provenanceAbility(actor, genre, association, entry, "active");
       if (!ability) throw new GenreChoiceError("entry-missing", "This Genre Ability is not currently owned.");
       if (deleteAbility) {
-        if (!ability.delete) throw new GenreChoiceError("ability-unavailable", "The embedded Genre Ability cannot be deleted.");
+        if (!ability.delete)
+          throw new GenreChoiceError("ability-unavailable", "The embedded Genre Ability cannot be deleted.");
         await ability.delete();
         return {abilityDeleted: true, abilityRetained: false};
       }
-      if (!ability.update) throw new GenreChoiceError("ability-unavailable", "The embedded Genre Ability cannot be retained.");
+      if (!ability.update)
+        throw new GenreChoiceError("ability-unavailable", "The embedded Genre Ability cannot be retained.");
       await ability.update({"system.grantedBy.status": "retained"});
       return {abilityDeleted: false, abilityRetained: true};
     });
@@ -275,13 +292,16 @@ export class GenreService {
     return this.#exclusive(actor, async () => {
       this.#assertCharacter(actor);
       const association = actor.system.genre;
-      if (!association.sourceUuid) throw new GenreChoiceError("genre-required", "Attach a Genre before spending this choice.");
+      if (!association.sourceUuid)
+        throw new GenreChoiceError("genre-required", "Attach a Genre before spending this choice.");
       const genre = await this.#resolveGenre(association.sourceUuid);
-      if (!genre || genre.type !== "genre") throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
+      if (!genre || genre.type !== "genre")
+        throw new GenreChoiceError("genre-unavailable", "The active Genre source is unavailable.");
       const choice = actor.system.advancement.pendingGenreChoices.find((entry) => entry.id === choiceId);
       if (!choice) throw new GenreChoiceError("choice-missing", "The pending Genre Choice no longer exists.");
       const entry = genre.system.abilityCatalog.find((candidate) => candidate.id === entryId);
-      if (!entry) throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!entry)
+        throw new GenreChoiceError("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       if (!this.eligibleEntries(actor, genre, choice).some((candidate) => candidate.id === entry.id)) {
         throw new GenreChoiceError("entry-ineligible", "This Genre Ability is not eligible for the selected choice.");
       }
@@ -290,7 +310,8 @@ export class GenreService {
       const conflict = this.#conflict(actor, genre, entry, data);
       let conflictOverridden = false;
       if (conflict) {
-        if (!conflictResolver) throw new GenreChoiceError("duplicate-grant", "This Ability is already present on the Character.");
+        if (!conflictResolver)
+          throw new GenreChoiceError("duplicate-grant", "This Ability is already present on the Character.");
         const resolution = await conflictResolver(conflict);
         if (resolution.action === "cancel") throw new GrantConflictCancelledError();
         if (resolution.action !== "gmOverride") {
@@ -305,8 +326,9 @@ export class GenreService {
       }
       try {
         await actor.update({
-          "system.advancement.pendingGenreChoices": actor.system.advancement.pendingGenreChoices
-            .filter((candidate) => candidate.id !== choice.id)
+          "system.advancement.pendingGenreChoices": actor.system.advancement.pendingGenreChoices.filter(
+            (candidate) => candidate.id !== choice.id
+          )
         });
       } catch (error) {
         await created?.delete?.();
@@ -351,15 +373,19 @@ export class GenreService {
     entry: GenreAbilityEntry,
     status: "active" | "retained"
   ): GenreEmbeddedAbilityLike | null {
-    return [...actor.items].find((item) => {
-      if (item.type !== "ability") return false;
-      const provenance = (item.system.grantedBy ?? {}) as Partial<GrantedByData>;
-      return provenance.kind === "genre"
-        && provenance.sourceUuid === genre.uuid
-        && provenance.instanceId === association.instanceId
-        && provenance.grantId === entry.id
-        && provenance.status === status;
-    }) ?? null;
+    return (
+      [...actor.items].find((item) => {
+        if (item.type !== "ability") return false;
+        const provenance = (item.system.grantedBy ?? {}) as Partial<GrantedByData>;
+        return (
+          provenance.kind === "genre" &&
+          provenance.sourceUuid === genre.uuid &&
+          provenance.instanceId === association.instanceId &&
+          provenance.grantId === entry.id &&
+          provenance.status === status
+        );
+      }) ?? null
+    );
   }
 
   #conflict(
@@ -389,7 +415,11 @@ export class GenreService {
       packageName: genre.name,
       packageSourceUuid: genre.uuid,
       grantId: entry.id,
-      existing: document(existing, String((existing as {id?: string}).id ?? existingIdentity.contentKey), existingIdentity),
+      existing: document(
+        existing,
+        String((existing as {id?: string}).id ?? existingIdentity.contentKey),
+        existingIdentity
+      ),
       proposed: document({type: "ability", name: String(data.name), system}, entry.id, identity),
       suggestions: [],
       allowCustom: false,
@@ -400,7 +430,8 @@ export class GenreService {
   }
 
   #assertCharacter(actor: GenreCharacterLike): void {
-    if (actor.type !== "character") throw new GenreAssociationError("not-character", "Genre association requires a Character.");
+    if (actor.type !== "character")
+      throw new GenreAssociationError("not-character", "Genre association requires a Character.");
   }
 
   async #exclusive<T>(actor: GenreCharacterLike, operation: () => Promise<T>): Promise<T> {
@@ -408,7 +439,10 @@ export class GenreService {
     const previous = this.#operations.get(key) ?? Promise.resolve();
     const current = previous.catch(() => undefined).then(operation);
     this.#operations.set(key, current);
-    try { return await current; }
-    finally { if (this.#operations.get(key) === current) this.#operations.delete(key); }
+    try {
+      return await current;
+    } finally {
+      if (this.#operations.get(key) === current) this.#operations.delete(key);
+    }
   }
 }

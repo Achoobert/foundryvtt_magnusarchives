@@ -4,7 +4,10 @@ import {RestService} from "../../src/services/rest-service";
 import {character, wounds} from "../helpers/core-fixtures";
 
 describe("RestService", () => {
-  const service = new RestService(() => "rest-id", () => 5678);
+  const service = new RestService(
+    () => "rest-id",
+    () => 5678
+  );
 
   it("removes every Minor Wound after 10 minutes", () => {
     const result = service.rest(wounds({minor: 3, moderate: 1}), "10-minutes");

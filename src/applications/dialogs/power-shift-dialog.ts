@@ -7,9 +7,17 @@ import {
 } from "../../packages/power-shifts";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 export function powerShiftDialogContent(allocation?: PowerShiftAllocation): string {
@@ -36,12 +44,12 @@ export async function promptPowerShiftAllocation(
   allocations: readonly PowerShiftAllocation[],
   current?: PowerShiftAllocation
 ): Promise<void> {
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize(current ? "MAGNUSARCHIVES.PowerShifts.Edit" : "MAGNUSARCHIVES.PowerShifts.Add")},
     content: powerShiftDialogContent(current),
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-  }) as Record<string, unknown> | null;
+  })) as Record<string, unknown> | null;
   if (!data) return;
   const next = savePowerShiftAllocation(allocations, {
     ...(current ? {id: current.id} : {}),

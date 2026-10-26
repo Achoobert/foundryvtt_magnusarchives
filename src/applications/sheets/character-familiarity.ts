@@ -1,9 +1,4 @@
-import {
-  ARMOR_CATEGORIES,
-  WEAPON_CATEGORIES,
-  type ArmorCategory,
-  type WeaponCategory
-} from "../../constants/system";
+import {ARMOR_CATEGORIES, WEAPON_CATEGORIES, type ArmorCategory, type WeaponCategory} from "../../constants/system";
 import {
   BUILT_IN_WEAPON_FAMILIES,
   normalizeWeaponFamilies,
@@ -40,14 +35,13 @@ export async function addManualWeaponFamily(actor: FamiliarityActorLike, value: 
 
 export async function removeManualWeaponFamily(actor: FamiliarityActorLike, value: unknown): Promise<string[]> {
   const family = normalizeWeaponFamily(value);
-  const next = normalizeWeaponFamilies(actor.system.proficiencies.weaponFamilies)
-    .filter((entry) => entry !== family);
+  const next = normalizeWeaponFamilies(actor.system.proficiencies.weaponFamilies).filter((entry) => entry !== family);
   await actor.update({"system.proficiencies.weaponFamilies": next});
   return next;
 }
 
 export async function promptAddManualWeaponFamily(actor: FamiliarityActorLike): Promise<void> {
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Settings.Character.AddWeaponFamily")},
     content: `<div class="magnusarchives magnusarchives-dialog"><label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Settings.Character.WeaponFamily")}
       <input name="family" type="text" list="magnusarchives-character-weapon-families" required autofocus>
@@ -55,13 +49,14 @@ export async function promptAddManualWeaponFamily(actor: FamiliarityActorLike): 
     </label></div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-  }) as Record<string, unknown> | null;
+  })) as Record<string, unknown> | null;
   if (data) await addManualWeaponFamily(actor, data.family);
 }
 
-export function parseFamiliarityActionData(
-  dataset: Readonly<Record<string, string | undefined>> | DOMStringMap
-): {family: FamiliarityFamily; category: FamiliarityCategory} {
+export function parseFamiliarityActionData(dataset: Readonly<Record<string, string | undefined>> | DOMStringMap): {
+  family: FamiliarityFamily;
+  category: FamiliarityCategory;
+} {
   const family = dataset.family;
   const category = dataset.category;
   if (family !== "weapon" && family !== "armor") throw new Error("Invalid familiarity action data.");
@@ -75,7 +70,9 @@ export function toggledFamiliarityCategories(
   category: FamiliarityCategory
 ): FamiliarityCategory[] {
   const valid = new Set([...WEAPON_CATEGORIES, ...ARMOR_CATEGORIES]);
-  const next = new Set(current.filter((entry): entry is FamiliarityCategory => valid.has(entry as FamiliarityCategory)));
+  const next = new Set(
+    current.filter((entry): entry is FamiliarityCategory => valid.has(entry as FamiliarityCategory))
+  );
   if (next.has(category)) next.delete(category);
   else next.add(category);
   return [...next];

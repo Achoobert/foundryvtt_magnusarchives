@@ -1,16 +1,7 @@
-import {
-  SKILL_DEFAULT_POOLS,
-  SKILL_RANKS,
-  type SkillDefaultPool,
-  type SkillRank
-} from "../constants/system";
+import {SKILL_DEFAULT_POOLS, SKILL_RANKS, type SkillDefaultPool, type SkillRank} from "../constants/system";
 import type {RuleRegistry} from "../rules/rule-registry";
 import {POOL_KEYS, type PoolKey} from "../rules/core/core-types";
-import type {
-  CharacterRollRequest,
-  RollDifficulty,
-  RollStepContribution
-} from "../rolls/roll-types";
+import type {CharacterRollRequest, RollDifficulty, RollStepContribution} from "../rolls/roll-types";
 
 export interface SkillItemLike {
   readonly id: string;
@@ -63,10 +54,7 @@ export class SkillService {
     return isPool(skill.system.defaultPool) ? skill.system.defaultPool : null;
   }
 
-  rankContribution(
-    skill: SkillItemLike,
-    enabledRuleModuleIds: readonly string[] = []
-  ): RollStepContribution | null {
+  rankContribution(skill: SkillItemLike, enabledRuleModuleIds: readonly string[] = []): RollStepContribution | null {
     if (skill.type !== "skill") throw new Error("Skill contributions require a Skill Item.");
     if (!SKILL_RANKS.includes(skill.system.rank)) throw new Error(`Unknown Skill rank '${skill.system.rank}'.`);
     return this.#rules.resolveSkillRankContribution(
@@ -98,10 +86,7 @@ export class SkillService {
       freeEffort: options.freeEffort ?? 0,
       otherEase: options.otherEase ?? 0,
       otherHindrance: options.otherHindrance ?? 0,
-      contributions: [
-        ...(rankContribution ? [rankContribution] : []),
-        ...(options.contributions ?? [])
-      ],
+      contributions: [...(rankContribution ? [rankContribution] : []), ...(options.contributions ?? [])],
       purpose: "task",
       origin: {
         kind: "skill",
@@ -112,10 +97,7 @@ export class SkillService {
     };
   }
 
-  buildQuickRollRequest(
-    skill: SkillItemLike,
-    options: SkillQuickRollOptions = {}
-  ): CharacterRollRequest {
+  buildQuickRollRequest(skill: SkillItemLike, options: SkillQuickRollOptions = {}): CharacterRollRequest {
     if (skill.type !== "skill") throw new Error("Skill rolls require a Skill Item.");
     if (!SKILL_RANKS.includes(skill.system.rank)) throw new Error(`Unknown Skill rank '${skill.system.rank}'.`);
     const rankContribution = this.rankContribution(skill, options.enabledRuleModuleIds ?? []);
@@ -129,10 +111,7 @@ export class SkillService {
       freeEffort: 0,
       otherEase: 0,
       otherHindrance: 0,
-      contributions: [
-        ...(rankContribution ? [rankContribution] : []),
-        ...(options.contributions ?? [])
-      ],
+      contributions: [...(rankContribution ? [rankContribution] : []), ...(options.contributions ?? [])],
       purpose: "task",
       origin: {
         kind: "skill",

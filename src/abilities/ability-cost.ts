@@ -2,10 +2,7 @@ import {POOL_KEYS, type PoolKey} from "../rules/core/core-types";
 
 export const ALL_ABILITY_COST_POOLS: readonly PoolKey[] = [...POOL_KEYS];
 
-export function normalizeAbilityAllowedPools(
-  allowedPools: unknown,
-  legacyPool: unknown = "none"
-): PoolKey[] {
+export function normalizeAbilityAllowedPools(allowedPools: unknown, legacyPool: unknown = "none"): PoolKey[] {
   if (Array.isArray(allowedPools)) {
     return POOL_KEYS.filter((pool) => allowedPools.includes(pool));
   }

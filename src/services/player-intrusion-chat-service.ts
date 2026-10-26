@@ -12,10 +12,7 @@ export function buildPlayerIntrusionCardData(record: PlayerIntrusionRecord): Pla
 }
 
 export class PlayerIntrusionChatService {
-  async publish(
-    record: PlayerIntrusionRecord,
-    actor: PlayerIntrusionCharacterLike
-  ): Promise<ChatMessage> {
+  async publish(record: PlayerIntrusionRecord, actor: PlayerIntrusionCharacterLike): Promise<ChatMessage> {
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/player-intrusion-card.hbs",
       {
@@ -23,10 +20,10 @@ export class PlayerIntrusionChatService {
         ...chatCardActorImageData(actor as unknown as import("./chat-card-presentation").ChatCardActorLike)
       }
     );
-    return await ChatMessage.create({
+    return (await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({actor: actor as unknown as Actor}),
       content,
       flags: {magnusarchives: {playerIntrusion: record}}
-    }) as ChatMessage;
+    })) as ChatMessage;
   }
 }

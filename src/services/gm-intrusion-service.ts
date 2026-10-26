@@ -1,11 +1,6 @@
 import type {GMIntrusionPolicy, GMIntrusionRecord} from "../intrusions/gm-intrusion-types";
 import type {RuleRegistry} from "../rules/rule-registry";
-import {
-  assertCharacter,
-  defaultIdFactory,
-  type CharacterDocumentLike,
-  type IdFactory
-} from "../rules/core/core-types";
+import {assertCharacter, defaultIdFactory, type CharacterDocumentLike, type IdFactory} from "../rules/core/core-types";
 import type {RollResult} from "../rolls/roll-types";
 
 const BASE_POLICY: GMIntrusionPolicy = Object.freeze({
@@ -49,12 +44,7 @@ export class GMIntrusionService {
     assertCharacter(actor);
     const policy = this.policy(enabledRuleModuleIds);
     await this.#awardXp(actor, policy.targetedXpToTarget);
-    return this.#record(
-      "targeted",
-      [actor],
-      policy.targetedXpToTarget,
-      policy.targetedXpToShare
-    );
+    return this.#record("targeted", [actor], policy.targetedXpToTarget, policy.targetedXpToShare);
   }
 
   async createGroup(
@@ -66,12 +56,7 @@ export class GMIntrusionService {
     unique.forEach(assertCharacter);
     const policy = this.policy(enabledRuleModuleIds);
     await Promise.all(unique.map((actor) => this.#awardXp(actor, policy.groupXpPerTarget)));
-    return this.#record(
-      "group",
-      unique,
-      policy.groupXpPerTarget,
-      0
-    );
+    return this.#record("group", unique, policy.groupXpPerTarget, 0);
   }
 
   async createFreeFromNaturalResult(
@@ -94,13 +79,7 @@ export class GMIntrusionService {
     assertCharacter(actor);
     const policy = this.policy(enabledRuleModuleIds);
     await this.#awardXp(actor, policy.freeXp);
-    return this.#record(
-      "free",
-      [actor],
-      policy.freeXp,
-      0,
-      naturalRoll
-    );
+    return this.#record("free", [actor], policy.freeXp, 0, naturalRoll);
   }
 
   async distributeSecondXp(

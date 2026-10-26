@@ -30,14 +30,17 @@ export class ShieldDataModel extends ItemDataModelBase {
         moderate: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []}),
         major: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []})
       }),
-      derived: new fields.SchemaField({
-        capacities: new fields.SchemaField({
-          minor: integerField(SHIELD_WOUND_CAPACITIES.minor),
-          moderate: integerField(SHIELD_WOUND_CAPACITIES.moderate),
-          major: integerField(SHIELD_WOUND_CAPACITIES.major)
-        }),
-        broken: new fields.BooleanField({required: true, nullable: false, initial: false})
-      }, {required: true, nullable: false, persisted: false})
+      derived: new fields.SchemaField(
+        {
+          capacities: new fields.SchemaField({
+            minor: integerField(SHIELD_WOUND_CAPACITIES.minor),
+            moderate: integerField(SHIELD_WOUND_CAPACITIES.moderate),
+            major: integerField(SHIELD_WOUND_CAPACITIES.major)
+          }),
+          broken: new fields.BooleanField({required: true, nullable: false, initial: false})
+        },
+        {required: true, nullable: false, persisted: false}
+      )
     };
   }
 

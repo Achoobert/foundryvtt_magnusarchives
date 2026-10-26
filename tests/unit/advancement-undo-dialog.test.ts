@@ -29,10 +29,15 @@ describe("Advancement status-only Undo dialog", () => {
       defaultYes: false,
       buttons: [
         {
-          action: "no", label: "MAGNUSARCHIVES.Actions.Cancel", icon: "fa-solid fa-xmark", default: true
+          action: "no",
+          label: "MAGNUSARCHIVES.Actions.Cancel",
+          icon: "fa-solid fa-xmark",
+          default: true
         },
         {
-          action: "yes", label: "MAGNUSARCHIVES.Advancement.Undo.Confirm", icon: "fa-solid fa-check"
+          action: "yes",
+          label: "MAGNUSARCHIVES.Advancement.Undo.Confirm",
+          icon: "fa-solid fa-check"
         }
       ]
     });

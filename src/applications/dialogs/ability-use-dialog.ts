@@ -1,11 +1,7 @@
 import type {AbilityItemLike, AbilityTargetLike, AbilityUseOptions} from "../../abilities/ability-types";
 import {ALL_ABILITY_COST_POOLS, abilityAllowedPools} from "../../abilities/ability-cost";
 import {characterTargetFromToken, npcTargetFromToken} from "../../combat/combat-targets";
-import {
-  currentDifficultyVisibility,
-  currentRollPolicyRequest,
-  showGmRollAuditEnabled
-} from "../../config/settings";
+import {currentDifficultyVisibility, currentRollPolicyRequest, showGmRollAuditEnabled} from "../../config/settings";
 import {gmIntrusionController} from "../../intrusions/gm-intrusion-controller";
 import type {PoolKey} from "../../rules/core/core-types";
 import type {CombatCharacterLike} from "../../services/combat-service";
@@ -56,7 +52,10 @@ function skillOptions(actor: CombatCharacterLike): string {
   return [
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ManualSkillLevel")}">${skillRankOptions(0, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Skill.Title")}">`,
-    ...embeddedSkills(actor).map((skill) => `<option value="${skill.id}">${skill.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`)}</option>`),
+    ...embeddedSkills(actor).map(
+      (skill) =>
+        `<option value="${skill.id}">${skill.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${skill.system.rank}`)}</option>`
+    ),
     "</optgroup>"
   ].join("");
 }
@@ -76,10 +75,7 @@ function selectedPool(data: RollDialogData): PoolKey | undefined {
   return value === "might" || value === "speed" || value === "intellect" ? value : undefined;
 }
 
-export async function promptAbilityUse(
-  actor: CombatCharacterLike,
-  ability: AbilityItemLike
-): Promise<void> {
+export async function promptAbilityUse(actor: CombatCharacterLike, ability: AbilityItemLike): Promise<void> {
   if (!game.magnusarchives.services.abilities.canUse(ability)) return;
   const policyRequest = currentRollPolicyRequest();
   const enabled = policyRequest.enabledRuleModuleIds ?? [];
@@ -87,17 +83,18 @@ export async function promptAbilityUse(
   const targets = ability.system.targetMode === "none" ? [] : nativeTargets();
   const npcTargets = targets.filter((target) => target.type === "npc");
   const requiresRoll = ability.system.roll !== "none";
-  const targetSummary = ability.system.targetMode === "none"
-    ? ""
-    : `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Combat.Targets")}</strong><span>${targets.length ? targets.map((target) => target.name).join(", ") : game.i18n.localize("MAGNUSARCHIVES.Common.None")}</span></div>`;
+  const targetSummary =
+    ability.system.targetMode === "none"
+      ? ""
+      : `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Combat.Targets")}</strong><span>${targets.length ? targets.map((target) => target.name).join(", ") : game.i18n.localize("MAGNUSARCHIVES.Common.None")}</span></div>`;
 
   if (!requiresRoll) {
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Ability.Use")}: ${ability.name}`},
       content: `<div class="magnusarchives magnusarchives-dialog-fields"><p><strong>${ability.name}</strong></p>${targetSummary}${abilityPoolField(ability, false)}</div>`,
       rejectClose: false,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Ability.Use")}
-    }) as RollDialogData | null;
+    })) as RollDialogData | null;
     if (!data) return;
     try {
       const pool = selectedPool(data);
@@ -113,9 +110,10 @@ export async function promptAbilityUse(
     return;
   }
 
-  const difficulty = npcTargets.length > 0
-    ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Roll.Difficulty")}</strong><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")}</span></div>`
-    : difficultyFields(policy.difficultyCeiling, true);
+  const difficulty =
+    npcTargets.length > 0
+      ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Roll.Difficulty")}</strong><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")}</span></div>`
+      : difficultyFields(policy.difficultyCeiling, true);
   const buildOptions = (data: RollDialogData): AbilityUseOptions => {
     const skill = selectedSkill(actor, data);
     const pool = selectedPool(data);
@@ -135,7 +133,8 @@ export async function promptAbilityUse(
     };
   };
   const buildRequest = (data: RollDialogData) => {
-    const request = game.magnusarchives.services.abilities.buildRollPlan(actor, ability, buildOptions(data)).requests[0];
+    const request = game.magnusarchives.services.abilities.buildRollPlan(actor, ability, buildOptions(data))
+      .requests[0];
     if (!request) throw new Error("Ability preview did not produce a roll request.");
     return request;
   };
@@ -146,12 +145,16 @@ export async function promptAbilityUse(
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillId">${skillOptions(actor)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}<select name="assets">${selectOptions(policy.assetLimit)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${selectOptions(actor.system.derived.effort.max)}</select></label>
-    ${ability.system.roll === "attack" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamageEffort")}<select name="damageEffort">${selectOptions(actor.system.derived.effort.max)}</select></label>
-    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>` : ""}
+    ${
+      ability.system.roll === "attack"
+        ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamageEffort")}<select name="damageEffort">${selectOptions(actor.system.derived.effort.max)}</select></label>
+    <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>`
+        : ""
+    }
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${situationalModifierFields()}`;
   const combatPolicy = game.magnusarchives.services.combat.policy(enabled);
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: `${game.i18n.localize("MAGNUSARCHIVES.Ability.Use")}: ${ability.name}`, resizable: true},
     position: {width: 800},
     content: rollDialogShell({
@@ -166,20 +169,35 @@ export async function promptAbilityUse(
         actor,
         policyRequest,
         buildRequest,
-        ...(ability.system.roll === "attack" ? {
-          attackSummary: (_formData, prepared) => [
-            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${ability.system.damage}</strong></div>`,
-            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
-            ...((prepared.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`] : []),
-            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
-            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
-            ...(ability.system.damageEffect !== "none" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Npc.DamageEffect")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${ability.system.damageEffect}`)}${ability.system.damageEffect === "stress" ? ` (${ability.system.stressAmount})` : ""}</strong></div>`] : []),
-            ...(ability.system.range ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${ability.system.range}</strong></div>`] : [])
-          ].join("")
-        } : {})
+        ...(ability.system.roll === "attack"
+          ? {
+              attackSummary: (_formData, prepared) =>
+                [
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${ability.system.damage}</strong></div>`,
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${prepared.context.damageEffort ?? 0}</strong></div>`,
+                  ...((prepared.context.freeDamageEffort ?? 0) > 0
+                    ? [
+                        `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${prepared.context.freeDamageEffort}</strong></div>`
+                      ]
+                    : []),
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${prepared.damageEffortApplied}</strong></div>`,
+                  `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${combatPolicy.damageEffortBonus}</strong></div>`,
+                  ...(ability.system.damageEffect !== "none"
+                    ? [
+                        `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Npc.DamageEffect")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${ability.system.damageEffect}`)}${ability.system.damageEffect === "stress" ? ` (${ability.system.stressAmount})` : ""}</strong></div>`
+                      ]
+                    : []),
+                  ...(ability.system.range
+                    ? [
+                        `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${ability.system.range}</strong></div>`
+                      ]
+                    : [])
+                ].join("")
+            }
+          : {})
       });
     }
-  }) as RollDialogData | null;
+  })) as RollDialogData | null;
   if (!data) return;
 
   try {

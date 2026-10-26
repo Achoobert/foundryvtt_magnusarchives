@@ -149,10 +149,7 @@ export {CombatChatService} from "./combat-chat-service";
 export {TokenCombatFeedbackService} from "./combat-feedback-service";
 export {DepletionService} from "./depletion-service";
 export {DepletionChatService} from "./depletion-chat-service";
-export {
-  FoundryCombatStatusService,
-  initializeNpcDeadStatusSynchronization
-} from "./combat-status-service";
+export {FoundryCombatStatusService, initializeNpcDeadStatusSynchronization} from "./combat-status-service";
 export {FocusEvaluator} from "../focus/focus-evaluator";
 export {FocusTreeRenderer} from "../focus/focus-tree-renderer";
 export {FocusAcquisitionService} from "./focus-acquisition-service";

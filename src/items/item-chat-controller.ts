@@ -2,9 +2,7 @@ import type {DepletionItemLike} from "../depletion/depletion-types";
 import {rollItemDepletion} from "../applications/dialogs/depletion-roll";
 
 function canControl(item: Item): boolean {
-  return item.actor
-    ? item.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
-    : game.user.isGM;
+  return item.actor ? item.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) : game.user.isGM;
 }
 
 export function initializeItemChatController(): void {
@@ -14,7 +12,7 @@ export function initializeItemChatController(): void {
         event.preventDefault();
         event.stopPropagation();
         const uuid = button.dataset.itemUuid;
-        const item = uuid ? await fromUuid(uuid) as Item | null : null;
+        const item = uuid ? ((await fromUuid(uuid)) as Item | null) : null;
         if (!item || item.type !== "artifact" || !canControl(item)) {
           ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Inventory.NotAuthorized"));
           return;

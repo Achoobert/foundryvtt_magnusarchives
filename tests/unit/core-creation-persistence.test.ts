@@ -40,11 +40,14 @@ class EmbeddedItem {
   readonly name: string;
   system: Record<string, unknown>;
 
-  constructor(readonly owner: PersistentCharacter, data: Record<string, unknown>) {
+  constructor(
+    readonly owner: PersistentCharacter,
+    data: Record<string, unknown>
+  ) {
     this.id = String(data._id ?? `item-${owner.items.length + 1}`);
     this.type = String(data.type);
     this.name = String(data.name);
-    this.system = structuredClone(data.system as Record<string, unknown> ?? {});
+    this.system = structuredClone((data.system as Record<string, unknown>) ?? {});
   }
 
   async update(changes: Record<string, unknown>): Promise<unknown> {
@@ -69,8 +72,7 @@ class PersistentCharacter {
   constructor() {
     this.system.creation = {coreInitialized: false, mode: "uninitialized", initializedAt: 0};
     this.system.proficiencies = {weaponCategories: ["light"], weaponFamilies: [], armorCategories: [], freelyUse: []};
-    (this.system.advancement as unknown as {guidanceCompletedTiers: number[]})
-      .guidanceCompletedTiers = [];
+    (this.system.advancement as unknown as {guidanceCompletedTiers: number[]}).guidanceCompletedTiers = [];
   }
 
   async update(changes: Record<string, unknown>): Promise<unknown> {
@@ -87,10 +89,7 @@ class PersistentCharacter {
     return this;
   }
 
-  async createEmbeddedDocuments(
-    _type: string,
-    data: Record<string, unknown>[]
-  ): Promise<unknown[]> {
+  async createEmbeddedDocuments(_type: string, data: Record<string, unknown>[]): Promise<unknown[]> {
     return data.map((entry) => {
       const item = new EmbeddedItem(this, entry);
       this.items.push(item);
@@ -109,24 +108,32 @@ function focus(): FocusDocumentLike {
     uuid: "Item.focus",
     name: "Focus",
     type: "focus",
-    system: {graph: {
-      version: 1,
-      nodes: [{
-        id: "tier-one",
-        abilityUuid: "",
-        abilitySnapshot: {name: "Tier One"},
-        tier: 1,
-        position: {x: null, y: null}
-      }],
-      connections: []
-    }}
+    system: {
+      graph: {
+        version: 1,
+        nodes: [
+          {
+            id: "tier-one",
+            abilityUuid: "",
+            abilitySnapshot: {name: "Tier One"},
+            tier: 1,
+            position: {x: null, y: null}
+          }
+        ],
+        connections: []
+      }
+    }
   };
 }
 
 function advancement(): AdvancementService {
   const rules = new RuleRegistry();
   registerCoreRuleModule(rules);
-  return new AdvancementService(rules, () => "advancement", () => 1000);
+  return new AdvancementService(
+    rules,
+    () => "advancement",
+    () => 1000
+  );
 }
 
 const noRecoveryHooks = {
@@ -139,12 +146,15 @@ const noRecoveryHooks = {
 describe("Core Creation persistence across partial Actor updates", () => {
   it("does not inject creation defaults while migrating unrelated partial system data", () => {
     expect(migrateCharacterSystemData({xp: 7}, {partial: true})).toEqual({xp: 7});
-    expect(migrateCharacterSystemData({advancement: {purchases: []}}, {partial: true}))
-      .toEqual({advancement: {purchases: []}});
-    expect(migrateCharacterSystemData({advancement: {guidanceCompletedTiers: [3, 1, 3]}}, {partial: true}))
-      .toEqual({advancement: {guidanceCompletedTiers: [1, 3]}});
-    expect(migrateCharacterSystemData({recovery: {used: {oneAction: true}}}, {partial: true}))
-      .toEqual({recovery: {used: {oneAction: true}}});
+    expect(migrateCharacterSystemData({advancement: {purchases: []}}, {partial: true})).toEqual({
+      advancement: {purchases: []}
+    });
+    expect(migrateCharacterSystemData({advancement: {guidanceCompletedTiers: [3, 1, 3]}}, {partial: true})).toEqual({
+      advancement: {guidanceCompletedTiers: [1, 3]}
+    });
+    expect(migrateCharacterSystemData({recovery: {used: {oneAction: true}}}, {partial: true})).toEqual({
+      recovery: {used: {oneAction: true}}
+    });
   });
 
   it("preserves completed initialization through Character, Advancement, Focus, Skill, Wound, and Recovery updates", async () => {
@@ -159,9 +169,10 @@ describe("Core Creation persistence across partial Actor updates", () => {
 
     const advancementService = advancement();
     await advancementService.completeProgressionGuidance(actor as never);
-    const expectGuidanceComplete = (): void => expect(
-      (actor.system.advancement as unknown as {guidanceCompletedTiers: number[]}).guidanceCompletedTiers
-    ).toEqual([1]);
+    const expectGuidanceComplete = (): void =>
+      expect(
+        (actor.system.advancement as unknown as {guidanceCompletedTiers: number[]}).guidanceCompletedTiers
+      ).toEqual([1]);
     expectGuidanceComplete();
 
     await actor.update({"system.xp": 32, "system.stats.might.value": 9});
@@ -173,20 +184,25 @@ describe("Core Creation persistence across partial Actor updates", () => {
     expectGuidanceComplete();
 
     const item = focus();
-    await new FocusAssociationService(() => "focus-choice", () => 20)
-      .attach(actor as never, item, "creation");
+    await new FocusAssociationService(
+      () => "focus-choice",
+      () => 20
+    ).attach(actor as never, item, "creation");
     expectCreation(actor, "completed");
     expectGuidanceComplete();
 
-    const focusAcquisition = new FocusAcquisitionService(undefined, async () => null, () => 30);
+    const focusAcquisition = new FocusAcquisitionService(
+      undefined,
+      async () => null,
+      () => 30
+    );
     await focusAcquisition.acquireManual(actor as never, item, "tier-one");
     expectCreation(actor, "completed");
     expectGuidanceComplete();
     await focusAcquisition.undo(actor as never, item, "tier-one");
     expectGuidanceComplete();
 
-    await actor.items.find((entry) => entry.type === "skill")!
-      .update({"system.rank": "untrained"});
+    await actor.items.find((entry) => entry.type === "skill")!.update({"system.rank": "untrained"});
     expectCreation(actor, "completed");
     expectGuidanceComplete();
 
@@ -195,8 +211,15 @@ describe("Core Creation persistence across partial Actor updates", () => {
     expectGuidanceComplete();
 
     const workflow = new RecoveryWorkflowService(
-      new RecoveryService(async () => 3, () => "recovery", () => 50),
-      new RestService(() => "rest", () => 50),
+      new RecoveryService(
+        async () => 3,
+        () => "recovery",
+        () => 50
+      ),
+      new RestService(
+        () => "rest",
+        () => 50
+      ),
       noRecoveryHooks
     );
     await workflow.completeNonRest(actor as never, "one-action");
@@ -206,8 +229,7 @@ describe("Core Creation persistence across partial Actor updates", () => {
 
   it("preserves the skipped state through later partial updates", async () => {
     const actor = new PersistentCharacter();
-    await new CharacterInitializationService(() => 60)
-      .markInitialized(actor as never, "skipped");
+    await new CharacterInitializationService(() => 60).markInitialized(actor as never, "skipped");
     expectCreation(actor, "skipped");
 
     await actor.update({"system.tier": 2, "system.xp": 4});

@@ -1,8 +1,4 @@
-import type {
-  GMIntrusionChatState,
-  GMIntrusionRecipient,
-  GMIntrusionRecord
-} from "../intrusions/gm-intrusion-types";
+import type {GMIntrusionChatState, GMIntrusionRecipient, GMIntrusionRecord} from "../intrusions/gm-intrusion-types";
 import type {GMIntrusionCharacterLike} from "./gm-intrusion-service";
 import {chatCardActorImageData} from "./chat-card-presentation";
 
@@ -49,12 +45,15 @@ export function createGMIntrusionChatState(
 
 export function buildGMIntrusionCardData(state: GMIntrusionChatState): GMIntrusionCardData {
   const affectedCharacters = state.affectedCharacters ?? [];
-  const sourceCharacter = affectedCharacters.find((character) => character.actorId === state.sourceActorId)
-    ?? (state.sourceActorId ? {
-      actorId: state.sourceActorId,
-      actorName: state.sourceActorName,
-      actorImage: ""
-    } : undefined);
+  const sourceCharacter =
+    affectedCharacters.find((character) => character.actorId === state.sourceActorId) ??
+    (state.sourceActorId
+      ? {
+          actorId: state.sourceActorId,
+          actorName: state.sourceActorName,
+          actorImage: ""
+        }
+      : undefined);
   return {
     mode: state.mode,
     isTargeted: state.mode === "targeted",
@@ -78,12 +77,14 @@ export function buildGMIntrusionCardData(state: GMIntrusionChatState): GMIntrusi
 export function isGMIntrusionChatState(value: unknown): value is GMIntrusionChatState {
   if (!value || typeof value !== "object") return false;
   const state = value as Partial<GMIntrusionChatState>;
-  return state.kind === "gm-intrusion"
-    && typeof state.intrusionId === "string"
-    && typeof state.sourceActorId === "string"
-    && (state.mode === "targeted" || state.mode === "group" || state.mode === "free")
-    && (state.status === "pending" || state.status === "resolving" || state.status === "resolved")
-    && Array.isArray(state.recipients);
+  return (
+    state.kind === "gm-intrusion" &&
+    typeof state.intrusionId === "string" &&
+    typeof state.sourceActorId === "string" &&
+    (state.mode === "targeted" || state.mode === "group" || state.mode === "free") &&
+    (state.status === "pending" || state.status === "resolving" || state.status === "resolved") &&
+    Array.isArray(state.recipients)
+  );
 }
 
 export class GMIntrusionChatService {
@@ -94,13 +95,11 @@ export class GMIntrusionChatService {
   ): Promise<ChatMessage> {
     const state = createGMIntrusionChatState(record, recipients);
     const content = await this.render(state, speakerActor);
-    return await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker(
-        speakerActor ? {actor: speakerActor as unknown as Actor} : undefined
-      ),
+    return (await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker(speakerActor ? {actor: speakerActor as unknown as Actor} : undefined),
       content,
       flags: {magnusarchives: {gmIntrusion: state}}
-    }) as ChatMessage;
+    })) as ChatMessage;
   }
 
   async update(
@@ -112,10 +111,7 @@ export class GMIntrusionChatService {
     await message.update({content, "flags.magnusarchives.gmIntrusion": state});
   }
 
-  async render(
-    state: GMIntrusionChatState,
-    speakerActor?: GMIntrusionCharacterLike
-  ): Promise<string> {
+  async render(state: GMIntrusionChatState, speakerActor?: GMIntrusionCharacterLike): Promise<string> {
     return foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/gm-intrusion-card.hbs",
       {

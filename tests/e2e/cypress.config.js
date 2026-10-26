@@ -1,23 +1,22 @@
-import {defineConfig} from 'cypress';
-import {pathToFileURL} from 'node:url';
-import path from 'node:path';
-import {applyChromeLaunchArgs} from './cypress/chrome-launch-args.js';
+import {defineConfig} from "cypress";
+import {pathToFileURL} from "node:url";
+import path from "node:path";
+import {applyChromeLaunchArgs} from "./cypress/chrome-launch-args.js";
 
 let fvttConfig;
 try {
-  const configPath = path.resolve(import.meta.dirname, '..', '..', 'fvtt.config.js');
+  const configPath = path.resolve(import.meta.dirname, "..", "..", "fvtt.config.js");
   ({default: fvttConfig} = await import(pathToFileURL(configPath).href));
 } catch {
   fvttConfig = undefined;
 }
 
-const baseUrl = process.env.FOUNDRY_BASE_URL || fvttConfig?.baseURL || 'http://localhost:30000';
-const adminPassword =
-  process.env.FOUNDRY_ADMIN_KEY || process.env.FOUNDRY_PASSWORD || fvttConfig?.adminPassword || '';
-const foundryWorld = process.env.FOUNDRY_WORLD || fvttConfig?.testWorldName || 'magnusarchives';
-const gmPassword = process.env.FOUNDRY_GM_PASSWORD || fvttConfig?.gmPassword || '';
+const baseUrl = process.env.FOUNDRY_BASE_URL || fvttConfig?.baseURL || "http://localhost:30000";
+const adminPassword = process.env.FOUNDRY_ADMIN_KEY || process.env.FOUNDRY_PASSWORD || fvttConfig?.adminPassword || "";
+const foundryWorld = process.env.FOUNDRY_WORLD || fvttConfig?.testWorldName || "magnusarchives";
+const gmPassword = process.env.FOUNDRY_GM_PASSWORD || fvttConfig?.gmPassword || "";
 
-const isCiRun = process.env.CI === 'true' || process.env.CYPRESS_CI === '1';
+const isCiRun = process.env.CI === "true" || process.env.CYPRESS_CI === "1";
 
 export default defineConfig({
   e2e: {
@@ -34,13 +33,18 @@ export default defineConfig({
         }
       : {}),
     setupNodeEvents(on, config) {
-      on('before:browser:launch', (browser, launchOptions) => {
-        if (browser.name === 'chrome' || browser.name === 'chromium') {
+      on("before:browser:launch", (browser, launchOptions) => {
+        if (browser.name === "chrome" || browser.name === "chromium") {
           applyChromeLaunchArgs(launchOptions);
         }
         return launchOptions;
       });
-      on('task', {log(message) { console.log(message); return null; }});
+      on("task", {
+        log(message) {
+          console.log(message);
+          return null;
+        }
+      });
       return config;
     }
   },

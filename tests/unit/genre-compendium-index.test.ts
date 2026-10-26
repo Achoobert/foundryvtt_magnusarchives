@@ -24,8 +24,7 @@ describe("Genre Compendium index preparation", () => {
   });
 
   it("recognizes only canonical Compendium Item UUIDs", () => {
-    expect(genreCompendiumPackId("Compendium.magnusarchives.genres.Item.superhero"))
-      .toBe("magnusarchives.genres");
+    expect(genreCompendiumPackId("Compendium.magnusarchives.genres.Item.superhero")).toBe("magnusarchives.genres");
     expect(genreCompendiumPackId("Item.world-genre")).toBeNull();
     expect(genreCompendiumPackId("Compendium.magnusarchives.genres.Actor.superhero")).toBeNull();
   });
@@ -53,14 +52,17 @@ describe("Genre Compendium index preparation", () => {
     const character = actor("Compendium.private.genres.Item.hidden");
     const error = new Error("permission denied");
     const warn = vi.fn();
-    const packs = {get: vi.fn(() => ({getIndex: vi.fn(async () => { throw error; })}))};
+    const packs = {
+      get: vi.fn(() => ({
+        getIndex: vi.fn(async () => {
+          throw error;
+        })
+      }))
+    };
 
     await prepareCharacterGenreCompendiumIndexes([character], packs, warn);
 
-    expect(warn).toHaveBeenCalledWith(
-      "magnusarchives | Could not enrich Genre Compendium index private.genres",
-      error
-    );
+    expect(warn).toHaveBeenCalledWith("magnusarchives | Could not enrich Genre Compendium index private.genres", error);
     expect(character.reset).toHaveBeenCalledOnce();
   });
 });

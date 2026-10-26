@@ -6,7 +6,10 @@ export interface LegacyTypeGenreData {
 }
 
 function key(value: string): string {
-  return value.trim().toLocaleLowerCase().replace(/[^a-z0-9]+/g, "");
+  return value
+    .trim()
+    .toLocaleLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
 }
 
 export function legacyGenreSuggestion(
@@ -16,11 +19,13 @@ export function legacyGenreSuggestion(
   const legacy = type.genre === "custom" ? String(type.customGenreId ?? "") : String(type.genre ?? "");
   if (!legacy || legacy === "none") return null;
   const ordered = [...genres].sort((left, right) => left.uuid.localeCompare(right.uuid));
-  return ordered.find((genre) => genre.uuid === legacy)
-    ?? ordered.find((genre) => key(genre.system.legacyKey) === key(legacy))
-    ?? ordered.find((genre) => key(String((genre.system as unknown as {slug?: string}).slug ?? "")) === key(legacy))
-    ?? ordered.find((genre) => key(genre.name) === key(legacy))
-    ?? null;
+  return (
+    ordered.find((genre) => genre.uuid === legacy) ??
+    ordered.find((genre) => key(genre.system.legacyKey) === key(legacy)) ??
+    ordered.find((genre) => key(String((genre.system as unknown as {slug?: string}).slug ?? "")) === key(legacy)) ??
+    ordered.find((genre) => key(genre.name) === key(legacy)) ??
+    null
+  );
 }
 
 export function legacyGenreMigrationCandidate(

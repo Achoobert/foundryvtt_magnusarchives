@@ -19,34 +19,46 @@ describe("native NPC Dead status synchronization", () => {
     vi.stubGlobal("Actor", MockActor);
     vi.stubGlobal("CONFIG", {specialStatusEffects: {DEFEATED: "dead"}});
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
-    vi.stubGlobal("fromUuid", vi.fn(async (uuid: string) => ({
-      actor: uuid.endsWith("token-a") ? firstSynthetic : secondSynthetic
-    })));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async (uuid: string) => ({
+        actor: uuid.endsWith("token-a") ? firstSynthetic : secondSynthetic
+      }))
+    );
 
     const service = new FoundryCombatStatusService();
-    await service.syncNpcDead({
-      id: "npc-source",
-      tokenId: "token-a",
-      tokenUuid: "Scene.scene.Token.token-a",
-      toggleStatusEffect: source.toggleStatusEffect
-    }, true);
-    await service.syncNpcDead({
-      id: "npc-source",
-      tokenId: "token-b",
-      tokenUuid: "Scene.scene.Token.token-b",
-      toggleStatusEffect: source.toggleStatusEffect
-    }, false);
+    await service.syncNpcDead(
+      {
+        id: "npc-source",
+        tokenId: "token-a",
+        tokenUuid: "Scene.scene.Token.token-a",
+        toggleStatusEffect: source.toggleStatusEffect
+      },
+      true
+    );
+    await service.syncNpcDead(
+      {
+        id: "npc-source",
+        tokenId: "token-b",
+        tokenUuid: "Scene.scene.Token.token-b",
+        toggleStatusEffect: source.toggleStatusEffect
+      },
+      false
+    );
 
     expect(firstSynthetic.toggleStatusEffect).toHaveBeenCalledWith("dead", {active: true});
     expect(secondSynthetic.toggleStatusEffect).toHaveBeenCalledWith("dead", {active: false});
     expect(source.toggleStatusEffect).not.toHaveBeenCalled();
 
-    await service.syncNpcDead({
-      id: "npc-source",
-      tokenId: "token-a",
-      tokenUuid: "Scene.scene.Token.token-a",
-      toggleStatusEffect: source.toggleStatusEffect
-    }, false);
+    await service.syncNpcDead(
+      {
+        id: "npc-source",
+        tokenId: "token-a",
+        tokenUuid: "Scene.scene.Token.token-a",
+        toggleStatusEffect: source.toggleStatusEffect
+      },
+      false
+    );
     expect(firstSynthetic.toggleStatusEffect).toHaveBeenLastCalledWith("dead", {active: false});
   });
 
@@ -65,7 +77,10 @@ describe("native NPC Dead status synchronization", () => {
     vi.stubGlobal("Actor", MockActor);
     vi.stubGlobal("CONFIG", {specialStatusEffects: {DEFEATED: "dead"}});
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
-    vi.stubGlobal("fromUuid", vi.fn(async () => ({actor})));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => ({actor}))
+    );
     vi.stubGlobal("Hooks", {
       on: vi.fn((hook: string, callback: typeof updateActor) => {
         if (hook === "updateActor") updateActor = callback;
@@ -83,14 +98,20 @@ describe("native NPC Dead status synchronization", () => {
     const sourceToggle = vi.fn(async () => undefined);
     vi.stubGlobal("CONFIG", {specialStatusEffects: {DEFEATED: "dead"}});
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(), placeables: []}});
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
 
-    await new FoundryCombatStatusService().syncNpcDead({
-      id: "npc-source",
-      tokenId: "deleted",
-      tokenUuid: "Scene.scene.Token.deleted",
-      toggleStatusEffect: sourceToggle
-    }, true);
+    await new FoundryCombatStatusService().syncNpcDead(
+      {
+        id: "npc-source",
+        tokenId: "deleted",
+        tokenUuid: "Scene.scene.Token.deleted",
+        toggleStatusEffect: sourceToggle
+      },
+      true
+    );
 
     expect(sourceToggle).not.toHaveBeenCalled();
   });

@@ -9,7 +9,10 @@ const styles = readFileSync(resolve(root, "styles/components/_skill-list.scss"),
 const skillsStart = template.indexOf('data-tab="skills"');
 const skillsEnd = template.indexOf('data-tab="abilities"');
 const skills = template.slice(skillsStart, skillsEnd);
-const skillsControls = skills.slice(skills.indexOf('<header class="skills-header">'), skills.indexOf('<ol class="compact-skill-list">'));
+const skillsControls = skills.slice(
+  skills.indexOf('<header class="skills-header">'),
+  skills.indexOf('<ol class="compact-skill-list">')
+);
 
 describe("Skills UI V1", () => {
   it("renders dense rows without a table header or a separate Roll button", () => {
@@ -42,11 +45,11 @@ describe("Skills UI V1", () => {
     expect(skills).toContain('data-action="createSkill"');
     expect(skills).toContain("MAGNUSARCHIVES.Skill.Add");
     expect(skills).toContain('data-action="editSkill"');
-    expect(skills).toContain('fa-solid fa-pen');
+    expect(skills).toContain("fa-solid fa-pen");
     expect(skills).toContain('data-action="deleteSkill"');
-    expect(skills).toContain('fa-solid fa-trash');
-    expect(skills).not.toContain(">{{localize \"MAGNUSARCHIVES.Actions.Edit\"}}</button>");
-    expect(skills).not.toContain(">{{localize \"MAGNUSARCHIVES.Actions.Delete\"}}</button>");
+    expect(skills).toContain("fa-solid fa-trash");
+    expect(skills).not.toContain('>{{localize "MAGNUSARCHIVES.Actions.Edit"}}</button>');
+    expect(skills).not.toContain('>{{localize "MAGNUSARCHIVES.Actions.Delete"}}</button>');
     expect(skillsControls).not.toContain("<h2>");
     expect(styles).toContain("justify-content: flex-end");
   });
@@ -82,9 +85,9 @@ describe("Skills UI V1", () => {
   it("uses a transient one-shot Quick Roll pulse without persistent state", () => {
     expect(styles).toContain("&.is-quick-roll-pulse");
     expect(styles).toContain("animation: magnusarchives-skill-quick-roll-pulse 200ms ease-out");
-    expect(sheet).toContain('target.classList.add(SKILL_QUICK_ROLL_PULSE_CLASS)');
-    expect(sheet).toContain('target.addEventListener("animationend"');
-    expect(sheet).toContain('target.classList.remove(SKILL_QUICK_ROLL_PULSE_CLASS)');
+    expect(sheet).toContain("target.classList.add(SKILL_QUICK_ROLL_PULSE_CLASS)");
+    expect(sheet).toMatch(/target\.addEventListener\(\s*"animationend"/);
+    expect(sheet).toContain("target.classList.remove(SKILL_QUICK_ROLL_PULSE_CLASS)");
   });
 
   it("uses only a transient hover/focus surface and subtle left indicator", () => {

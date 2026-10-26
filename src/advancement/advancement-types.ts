@@ -7,21 +7,10 @@ export const CORE_ADVANCEMENT_KINDS = [
   "skillTraining"
 ] as const;
 
-export const OTHER_ADVANCEMENT_KINDS = [
-  "recovery",
-  "focus",
-  "armor",
-  "weapons",
-  "genre"
-] as const;
+export const OTHER_ADVANCEMENT_KINDS = ["recovery", "focus", "armor", "weapons", "genre"] as const;
 
 export const ADVANCEMENT_RECORD_KINDS = [...CORE_ADVANCEMENT_KINDS, "other"] as const;
-export const FOCUS_CHOICE_SOURCES = [
-  "characterCreation",
-  "additionalFocus",
-  "otherAdvancement",
-  "newTier"
-] as const;
+export const FOCUS_CHOICE_SOURCES = ["characterCreation", "additionalFocus", "otherAdvancement", "newTier"] as const;
 export const GENRE_CHOICE_SOURCES = ["otherAdvancement", "newTier"] as const;
 
 export type CoreAdvancementKind = (typeof CORE_ADVANCEMENT_KINDS)[number];
@@ -81,12 +70,12 @@ export type AdvancementRequest =
   | {readonly kind: "extraEffort"}
   | {readonly kind: "skillTraining"; readonly mode: "improve"; readonly skillId: string}
   | {
-    readonly kind: "skillTraining";
-    readonly mode: "learn";
-    readonly sourceUuid?: string;
-    readonly customName?: string;
-    readonly customCategory?: "general" | "attack" | "defense";
-  }
+      readonly kind: "skillTraining";
+      readonly mode: "learn";
+      readonly sourceUuid?: string;
+      readonly customName?: string;
+      readonly customCategory?: "general" | "attack" | "defense";
+    }
   | {readonly kind: "other"; readonly otherKind: OtherAdvancementKind};
 
 export const CORE_ADVANCEMENT_POLICY: AdvancementPolicy = Object.freeze({

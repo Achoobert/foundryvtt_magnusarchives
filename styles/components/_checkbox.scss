@@ -24,7 +24,10 @@ $checkmark-mask: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/200
   border: 1px solid var(--magnusarchives-border);
   border-radius: 0.16rem;
   cursor: pointer;
-  transition: border-color 100ms ease, background-color 100ms ease, box-shadow 100ms ease;
+  transition:
+    border-color 100ms ease,
+    background-color 100ms ease,
+    box-shadow 100ms ease;
 
   &::before {
     content: "";
@@ -88,7 +91,8 @@ $checkmark-mask: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/200
 .magnusarchives-sheet label:has(> input[type="checkbox"]),
 .magnusarchives-dialog label:has(> input[type="checkbox"]),
 .application.dialog:has(.magnusarchives-dialog-fields)
-  .magnusarchives-dialog-fields label:has(> input[type="checkbox"]) {
+  .magnusarchives-dialog-fields
+  label:has(> input[type="checkbox"]) {
   display: inline-flex;
   gap: var(--magnusarchives-space-compact);
   align-items: center;

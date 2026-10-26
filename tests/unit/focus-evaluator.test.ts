@@ -14,8 +14,11 @@ function states(result: ReturnType<FocusEvaluator["evaluate"]>): Record<string, 
 describe("FocusEvaluator", () => {
   it("makes every Tier 1 node available before any Ability is owned", () => {
     const result = evaluator.evaluate(graph, {tier: 1, ownedNodeIds: []});
-    expect(result.nodes.filter((entry) => entry.reason === "tier-one-choice").map((entry) => entry.state))
-      .toEqual(["available", "available", "available"]);
+    expect(result.nodes.filter((entry) => entry.reason === "tier-one-choice").map((entry) => entry.state)).toEqual([
+      "available",
+      "available",
+      "available"
+    ]);
   });
 
   it("keeps every other Tier 1 node available after the first acquisition", () => {
@@ -25,7 +28,7 @@ describe("FocusEvaluator", () => {
     });
     expect(states(result)).toMatchObject({
       "intimidating-presence": "owned",
-      "stoneknowing": "available",
+      stoneknowing: "available",
       "stone-body": "available",
       "stone-bash": "future",
       "field-of-stones": "locked",
@@ -52,27 +55,32 @@ describe("FocusEvaluator", () => {
 
   it("changes a directly reachable node from future to available at its required Tier", () => {
     const ownedNodeIds = ["intimidating-presence", "stone-bash"];
-    expect(states(evaluator.evaluate(graph, {tier: 2, ownedNodeIds}))["improved-stone-body"])
-      .toBe("future");
-    expect(states(evaluator.evaluate(graph, {tier: 3, ownedNodeIds}))["improved-stone-body"])
-      .toBe("available");
+    expect(states(evaluator.evaluate(graph, {tier: 2, ownedNodeIds}))["improved-stone-body"]).toBe("future");
+    expect(states(evaluator.evaluate(graph, {tier: 3, ownedNodeIds}))["improved-stone-body"]).toBe("available");
   });
 
   it("keeps an unconnected Tier 1 node available at every Character Tier", () => {
     const disconnected: FocusGraph = {
       ...graph,
-      nodes: [...graph.nodes, {
-        id: "isolated",
-        abilityUuid: "",
-        abilitySnapshot: {name: "Isolated"},
-        tier: 1,
-        position: {x: null, y: null}
-      }]
+      nodes: [
+        ...graph.nodes,
+        {
+          id: "isolated",
+          abilityUuid: "",
+          abilitySnapshot: {name: "Isolated"},
+          tier: 1,
+          position: {x: null, y: null}
+        }
+      ]
     };
-    expect(states(evaluator.evaluate(disconnected, {
-      tier: 6,
-      ownedNodeIds: ["intimidating-presence"]
-    })).isolated).toBe("available");
+    expect(
+      states(
+        evaluator.evaluate(disconnected, {
+          tier: 6,
+          ownedNodeIds: ["intimidating-presence"]
+        })
+      ).isolated
+    ).toBe("available");
   });
 
   it("reports an owned Tier 2+ node whose owned path has been broken", () => {
@@ -80,11 +88,13 @@ describe("FocusEvaluator", () => {
       tier: 2,
       ownedNodeIds: ["stone-bash"]
     });
-    expect(result.diagnostics).toContainEqual(expect.objectContaining({
-      code: "invalid-owned-progression",
-      nodeId: "stone-bash",
-      severity: "warning"
-    }));
+    expect(result.diagnostics).toContainEqual(
+      expect.objectContaining({
+        code: "invalid-owned-progression",
+        nodeId: "stone-bash",
+        severity: "warning"
+      })
+    );
   });
 
   it("keeps multiple Focus progressions isolated by Focus UUID", () => {

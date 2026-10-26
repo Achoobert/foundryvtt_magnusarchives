@@ -37,10 +37,11 @@ describe("Ability Item mechanical field visibility", () => {
   });
 
   it("shows cost options only when a cost exists or ignoresEdge is already configured", () => {
-    expect(abilityMechanicsVisibility(ability({cost: {amount: 2, ignoresEdge: false, allowedPools: ["might"]}})).showIgnoresEdge)
-      .toBe(true);
-    expect(abilityMechanicsVisibility(ability({cost: {amount: 0, ignoresEdge: true}})).showIgnoresEdge)
-      .toBe(true);
+    expect(
+      abilityMechanicsVisibility(ability({cost: {amount: 2, ignoresEdge: false, allowedPools: ["might"]}}))
+        .showIgnoresEdge
+    ).toBe(true);
+    expect(abilityMechanicsVisibility(ability({cost: {amount: 0, ignoresEdge: true}})).showIgnoresEdge).toBe(true);
   });
 
   it("shows only the task modifier for a Task", () => {
@@ -71,16 +72,18 @@ describe("Ability Item mechanical field visibility", () => {
   });
 
   it("never hides configured legacy or atypical values for a no-roll/passive Ability", () => {
-    const view = abilityMechanicsVisibility(ability({
-      activation: "passive",
-      rollModifier: 1,
-      attackModifier: -1,
-      damage: 4,
-      damageEffect: "seriousInjury",
-      stressAmount: 3,
-      range: "long",
-      targetMode: "multiple"
-    }));
+    const view = abilityMechanicsVisibility(
+      ability({
+        activation: "passive",
+        rollModifier: 1,
+        attackModifier: -1,
+        damage: 4,
+        damageEffect: "seriousInjury",
+        stressAmount: 3,
+        range: "long",
+        targetMode: "multiple"
+      })
+    );
     expect(view).toMatchObject({
       showRollModifier: true,
       showAttackModifier: true,

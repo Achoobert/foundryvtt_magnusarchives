@@ -1,9 +1,6 @@
 import {SYSTEM_ID} from "../../constants/system";
 import {CHARACTER_ARCS, characterArc} from "../../creation/character-arcs";
-import type {
-  CharacterArcSelection,
-  CoreCharacterSetupRequest
-} from "../../creation/character-creation-types";
+import type {CharacterArcSelection, CoreCharacterSetupRequest} from "../../creation/character-creation-types";
 import type {FocusDocumentLike} from "../../focus/focus-types";
 import type {PoolKey} from "../../rules/core/core-types";
 import {
@@ -11,10 +8,7 @@ import {
   type InitializationCharacterLike
 } from "../../services/character-initialization-service";
 import type {PackageCharacterLike, PackageSourceLike} from "../../services/character-package-service";
-import {
-  FocusAssociationError,
-  type FocusAssociationCharacterLike
-} from "../../services/focus-association-service";
+import {FocusAssociationError, type FocusAssociationCharacterLike} from "../../services/focus-association-service";
 import {promptAttachDescriptor, promptAttachType} from "./character-package-dialogs";
 
 type DialogData = Record<string, unknown>;
@@ -55,9 +49,17 @@ function text(data: DialogData, key: string): string {
 }
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function poolLabel(pool: PoolKey): string {
@@ -74,9 +76,7 @@ async function input(
     window: {title},
     content: `<div class="magnusarchives-dialog-fields">${content}</div>`,
     rejectClose: false,
-    render: render
-      ? (_event: Event, dialog: {element: HTMLElement}) => render(dialog.element)
-      : undefined,
+    render: render ? (_event: Event, dialog: {element: HTMLElement}) => render(dialog.element) : undefined,
     ok: {label: okLabel}
   }) as Promise<DialogData | null>;
 }
@@ -86,8 +86,9 @@ async function packOrWorldOptions(packName: string, itemType: string): Promise<P
   const packId = `${SYSTEM_ID}.${packName}`;
   const options: PackOption[] = [];
   try {
-    const index = await game.packs.get(packId)?.getIndex({fields: ["type"]}) as
-      Iterable<{_id: string; uuid?: string; name: string; type?: string}> | undefined;
+    const index = (await game.packs.get(packId)?.getIndex({fields: ["type"]})) as
+      | Iterable<{_id: string; uuid?: string; name: string; type?: string}>
+      | undefined;
     for (const entry of index ?? []) {
       if (entry.type && entry.type !== itemType) continue;
       options.push({uuid: entry.uuid ?? `Compendium.${packId}.Item.${entry._id}`, name: entry.name});
@@ -104,7 +105,9 @@ async function packOrWorldOptions(packName: string, itemType: string): Promise<P
 }
 
 function optionList(options: readonly PackOption[]): string {
-  return options.map((entry) => `<option value="${escapeHtml(entry.uuid)}">${escapeHtml(entry.name)}</option>`).join("");
+  return options
+    .map((entry) => `<option value="${escapeHtml(entry.uuid)}">${escapeHtml(entry.name)}</option>`)
+    .join("");
 }
 
 async function pickFromPack(
@@ -125,8 +128,11 @@ async function pickFromPack(
 }
 
 function primaryDescriptorName(actor: SetupCharacterLike): string | null {
-  return [...actor.items].find((item) => item.type === "descriptor"
-    && (item.system.instance as {role?: string} | undefined)?.role === "primary")?.name ?? null;
+  return (
+    [...actor.items].find(
+      (item) => item.type === "descriptor" && (item.system.instance as {role?: string} | undefined)?.role === "primary"
+    )?.name ?? null
+  );
 }
 
 function typeName(actor: SetupCharacterLike): string | null {
@@ -140,13 +146,15 @@ function hasCreationFocus(actor: SetupCharacterLike): boolean {
 async function creationFocusName(actor: SetupCharacterLike): Promise<string> {
   const progress = actor.system.focusProgress.find((entry) => entry.provenance === "creation");
   if (!progress) return "";
-  const focus = await fromUuid(progress.focusUuid) as {name?: string} | null;
+  const focus = (await fromUuid(progress.focusUuid)) as {name?: string} | null;
   return focus?.name ?? "";
 }
 
 /** Step 1: a listed Descriptor gives the mechanics; the player may show a custom word in its place. */
 async function descriptorStep(actor: SetupCharacterLike): Promise<string | null> {
-  const wordField = (placeholder: string): string => `<label>${game.i18n.localize("MAGNUSARCHIVES.Creation.DescriptorWord")}
+  const wordField = (
+    placeholder: string
+  ): string => `<label>${game.i18n.localize("MAGNUSARCHIVES.Creation.DescriptorWord")}
       <input name="descriptorLabel" type="text" placeholder="${escapeHtml(placeholder)}" value="${escapeHtml(actor.system.identity?.descriptorLabel ?? "")}">
     </label>
     <p class="hint">${game.i18n.localize("MAGNUSARCHIVES.Creation.DescriptorWordHint")}</p>`;
@@ -166,7 +174,7 @@ async function descriptorStep(actor: SetupCharacterLike): Promise<string | null>
     `<p>${game.i18n.localize("MAGNUSARCHIVES.Creation.DescriptorPrompt")}</p>${wordField("")}`
   );
   if (!picked) return null;
-  const source = await fromUuid(picked.uuid) as PackageSourceLike | null;
+  const source = (await fromUuid(picked.uuid)) as PackageSourceLike | null;
   if (!source) return null;
   const attached = await promptAttachDescriptor(actor as unknown as PackageCharacterLike, source, "primary");
   return attached ? text(picked.data, "descriptorLabel") : null;
@@ -182,7 +190,7 @@ async function typeStep(actor: SetupCharacterLike): Promise<boolean> {
     "characterType"
   );
   if (!picked) return false;
-  const source = await fromUuid(picked.uuid) as PackageSourceLike | null;
+  const source = (await fromUuid(picked.uuid)) as PackageSourceLike | null;
   return source ? promptAttachType(actor as unknown as PackageCharacterLike, source) : false;
 }
 
@@ -196,7 +204,7 @@ async function focusStep(actor: SetupCharacterLike): Promise<boolean> {
     "focus"
   );
   if (!picked) return false;
-  const focus = await fromUuid(picked.uuid) as FocusDocumentLike | null;
+  const focus = (await fromUuid(picked.uuid)) as FocusDocumentLike | null;
   if (!focus) return false;
   try {
     await game.magnusarchives.services.focusAssociations.attach(
@@ -206,9 +214,10 @@ async function focusStep(actor: SetupCharacterLike): Promise<boolean> {
     );
     return true;
   } catch (error) {
-    const key = error instanceof FocusAssociationError
-      ? `MAGNUSARCHIVES.Focus.Association.Errors.${error.code}`
-      : "MAGNUSARCHIVES.Focus.Errors.Unexpected";
+    const key =
+      error instanceof FocusAssociationError
+        ? `MAGNUSARCHIVES.Focus.Association.Errors.${error.code}`
+        : "MAGNUSARCHIVES.Focus.Errors.Unexpected";
     if (!(error instanceof FocusAssociationError)) console.error(error);
     ui.notifications.error(game.i18n.localize(key));
     return false;
@@ -216,10 +225,10 @@ async function focusStep(actor: SetupCharacterLike): Promise<boolean> {
 }
 
 function bindPoolRemainder(root: HTMLElement): void {
-  const inputs = [...root.querySelectorAll<HTMLInputElement>(
-    'input[name="might"], input[name="speed"], input[name="intellect"]'
-  )];
-  const output = root.querySelector<HTMLOutputElement>('[data-core-points-remaining]');
+  const inputs = [
+    ...root.querySelectorAll<HTMLInputElement>('input[name="might"], input[name="speed"], input[name="intellect"]')
+  ];
+  const output = root.querySelector<HTMLOutputElement>("[data-core-points-remaining]");
   const submit = root.querySelector<HTMLButtonElement>('button[data-action="ok"]');
   const refresh = (): void => {
     const values = inputs.map((element) => Number(element.value));
@@ -240,9 +249,10 @@ function startingPool(actor: SetupCharacterLike, pool: PoolKey): number {
 
 /** Step 4: six free Pool points. */
 async function poolStep(actor: SetupCharacterLike): Promise<CoreCharacterSetupRequest["pools"] | null> {
-  const rows = POOLS.map((pool) => (
-    `<label>${poolLabel(pool)} ${startingPool(actor, pool)} + <input name="${pool}" type="number" min="0" max="6" value="0"></label>`
-  )).join("");
+  const rows = POOLS.map(
+    (pool) =>
+      `<label>${poolLabel(pool)} ${startingPool(actor, pool)} + <input name="${pool}" type="number" min="0" max="6" value="0"></label>`
+  ).join("");
   const data = await input(
     game.i18n.localize("MAGNUSARCHIVES.Creation.StepPools"),
     `<p>${game.i18n.localize("MAGNUSARCHIVES.Creation.PoolsPrompt")}</p>${rows}
@@ -251,8 +261,10 @@ async function poolStep(actor: SetupCharacterLike): Promise<CoreCharacterSetupRe
   );
   if (!data) return null;
   const allocation = {might: number(data, "might"), speed: number(data, "speed"), intellect: number(data, "intellect")};
-  if (Object.values(allocation).reduce((sum, value) => sum + value, 0) !== 6
-    || Object.values(allocation).some((value) => !Number.isInteger(value) || value < 0)) {
+  if (
+    Object.values(allocation).reduce((sum, value) => sum + value, 0) !== 6 ||
+    Object.values(allocation).some((value) => !Number.isInteger(value) || value < 0)
+  ) {
     notify(new CharacterInitializationError("invalid-pools", "Invalid Pool allocation."));
     return null;
   }
@@ -262,9 +274,8 @@ async function poolStep(actor: SetupCharacterLike): Promise<CoreCharacterSetupRe
 export function arcDetailsHtml(key: string): string {
   const definition = characterArc(key);
   if (!definition) return "";
-  const beat = (label: string, value: string): string => (
-    `<li><strong>${game.i18n.localize(`MAGNUSARCHIVES.Arc.Beat.${label}`)}:</strong> ${escapeHtml(value)}</li>`
-  );
+  const beat = (label: string, value: string): string =>
+    `<li><strong>${game.i18n.localize(`MAGNUSARCHIVES.Arc.Beat.${label}`)}:</strong> ${escapeHtml(value)}</li>`;
   return `<p>${escapeHtml(definition.summary)}</p><ul>
     ${beat("opening", definition.beats.opening)}
     ${definition.beats.steps.map((step) => beat("step", step)).join("")}
@@ -292,9 +303,8 @@ export async function promptArcSelection(
   okLabel?: string
 ): Promise<CharacterArcSelection | undefined | null> {
   const selected = current?.key || (current?.name ? CUSTOM_ARC : "");
-  const option = (value: string, label: string): string => (
-    `<option value="${escapeHtml(value)}"${value === selected ? " selected" : ""}>${escapeHtml(label)}</option>`
-  );
+  const option = (value: string, label: string): string =>
+    `<option value="${escapeHtml(value)}"${value === selected ? " selected" : ""}>${escapeHtml(label)}</option>`;
   const data = await input(
     game.i18n.localize("MAGNUSARCHIVES.Creation.StepArc"),
     `<p>${game.i18n.localize("MAGNUSARCHIVES.Creation.ArcPrompt")}</p>
@@ -304,7 +314,7 @@ export async function promptArcSelection(
        ${option(CUSTOM_ARC, game.i18n.localize("MAGNUSARCHIVES.Creation.CustomArc"))}
      </select></label>
      <label data-arc-custom hidden>${game.i18n.localize("MAGNUSARCHIVES.Creation.CustomArcName")}
-       <input name="arcName" type="text" value="${escapeHtml(current?.key ? "" : current?.name ?? "")}">
+       <input name="arcName" type="text" value="${escapeHtml(current?.key ? "" : (current?.name ?? ""))}">
      </label>
      <div data-arc-details></div>`,
     bindArcPicker,
@@ -337,9 +347,10 @@ export async function promptChooseArc(actor: InitializationCharacterLike): Promi
 }
 
 function notify(error: unknown): void {
-  const key = error instanceof CharacterInitializationError
-    ? `MAGNUSARCHIVES.Creation.Errors.${error.code}`
-    : "MAGNUSARCHIVES.Creation.Errors.Unexpected";
+  const key =
+    error instanceof CharacterInitializationError
+      ? `MAGNUSARCHIVES.Creation.Errors.${error.code}`
+      : "MAGNUSARCHIVES.Creation.Errors.Unexpected";
   if (!(error instanceof CharacterInitializationError)) console.error(error);
   ui.notifications.error(game.i18n.localize(key));
 }
@@ -353,8 +364,8 @@ export async function promptCoreCharacterSetup(target: InitializationCharacterLi
   const actor = target as unknown as SetupCharacterLike;
   const descriptorLabel = await descriptorStep(actor);
   if (descriptorLabel === null) return;
-  if (!await typeStep(actor)) return;
-  if (!await focusStep(actor)) return;
+  if (!(await typeStep(actor))) return;
+  if (!(await focusStep(actor))) return;
   const pools = await poolStep(actor);
   if (!pools) return;
   const arc = await promptArcSelection(actor.system.arc);
@@ -372,9 +383,16 @@ export async function promptCoreCharacterSetup(target: InitializationCharacterLi
     content: `<div class="magnusarchives-dialog-fields">
       <p><strong>${identity}</strong></p>
       <p>${POOLS.map((pool) => `${poolLabel(pool)} ${startingPool(actor, pool) + pools[pool]}`).join(" · ")}</p>
-      ${skills.length ? `<ul>${skills.map((item) => (
-        `<li>${escapeHtml(item.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${String(item.system.rank)}`)}</li>`
-      )).join("")}</ul>` : ""}
+      ${
+        skills.length
+          ? `<ul>${skills
+              .map(
+                (item) =>
+                  `<li>${escapeHtml(item.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${String(item.system.rank)}`)}</li>`
+              )
+              .join("")}</ul>`
+          : ""
+      }
       <p>${game.i18n.localize("MAGNUSARCHIVES.Arc.Label")}: ${escapeHtml(arc?.name ?? game.i18n.localize("MAGNUSARCHIVES.Creation.NoArc"))}</p>
     </div>`,
     yes: {label: game.i18n.localize("MAGNUSARCHIVES.Creation.Finalize")},
@@ -398,9 +416,9 @@ export async function markCoreInitialized(
   try {
     await game.magnusarchives.services.characterInitialization.markInitialized(actor, mode);
     await actor.sheet?.render({force: true});
-    ui.notifications.info(game.i18n.localize(
-      mode === "skipped" ? "MAGNUSARCHIVES.Creation.Skipped" : "MAGNUSARCHIVES.Creation.Marked"
-    ));
+    ui.notifications.info(
+      game.i18n.localize(mode === "skipped" ? "MAGNUSARCHIVES.Creation.Skipped" : "MAGNUSARCHIVES.Creation.Marked")
+    );
   } catch (error) {
     notify(error);
   }

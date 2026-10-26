@@ -50,18 +50,14 @@ export type NaturalResultRule = (
   result: Readonly<RollResult>,
   effects: readonly NaturalEffect[]
 ) => readonly NaturalEffect[];
-export type GMIntrusionPolicyProvider = (
-  policy: Readonly<GMIntrusionPolicy>
-) => GMIntrusionPolicy;
+export type GMIntrusionPolicyProvider = (policy: Readonly<GMIntrusionPolicy>) => GMIntrusionPolicy;
 export type CombatPolicyProvider = (policy: Readonly<CombatPolicy>) => CombatPolicy;
 export type TargetResolutionRule = (
   resolution: Readonly<TargetResolution>,
   target: Readonly<NpcTargetLike>,
   context: Readonly<CombatRollContext>
 ) => TargetResolution;
-export type AdvancementPolicyProvider = (
-  policy: Readonly<AdvancementPolicy>
-) => AdvancementPolicy;
+export type AdvancementPolicyProvider = (policy: Readonly<AdvancementPolicy>) => AdvancementPolicy;
 
 export class RuleRegistry {
   readonly #modules = new Map<string, Readonly<RuleModuleDefinition>>();
@@ -225,10 +221,7 @@ export class RuleRegistry {
     this.#gmIntrusionPolicies.set(moduleId, providers);
   }
 
-  resolveGMIntrusionPolicy(
-    base: GMIntrusionPolicy,
-    enabledIds: readonly string[] = []
-  ): GMIntrusionPolicy {
+  resolveGMIntrusionPolicy(base: GMIntrusionPolicy, enabledIds: readonly string[] = []): GMIntrusionPolicy {
     let policy = {...base};
     for (const module of this.active(enabledIds)) {
       for (const provider of this.#gmIntrusionPolicies.get(module.id) ?? []) {
@@ -284,10 +277,7 @@ export class RuleRegistry {
     this.#advancementPolicies.set(moduleId, providers);
   }
 
-  resolveAdvancementPolicy(
-    base: AdvancementPolicy,
-    enabledIds: readonly string[] = []
-  ): AdvancementPolicy {
+  resolveAdvancementPolicy(base: AdvancementPolicy, enabledIds: readonly string[] = []): AdvancementPolicy {
     let policy = {...base};
     for (const module of this.active(enabledIds)) {
       for (const provider of this.#advancementPolicies.get(module.id) ?? []) {
@@ -321,16 +311,5 @@ export class RuleRegistry {
 import type {SkillRank} from "../constants/system";
 import type {AdvancementPolicy} from "../advancement/advancement-types";
 import type {GMIntrusionPolicy} from "../intrusions/gm-intrusion-types";
-import type {
-  CombatPolicy,
-  CombatRollContext,
-  NpcTargetLike,
-  TargetResolution
-} from "../combat/combat-types";
-import type {
-  NaturalEffect,
-  RollContext,
-  RollPolicy,
-  RollResult,
-  RollStepContribution
-} from "../rolls/roll-types";
+import type {CombatPolicy, CombatRollContext, NpcTargetLike, TargetResolution} from "../combat/combat-types";
+import type {NaturalEffect, RollContext, RollPolicy, RollResult, RollStepContribution} from "../rolls/roll-types";

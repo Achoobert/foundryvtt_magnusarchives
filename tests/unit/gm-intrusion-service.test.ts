@@ -104,5 +104,4 @@ describe("GMIntrusionService", () => {
     expect(record).toMatchObject({mode: "free", naturalRoll: 3, targetXp: 0, sharedXp: 0});
     expect(actor.system.xp).toBe(2);
   });
-
 });

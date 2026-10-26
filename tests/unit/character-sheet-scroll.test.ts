@@ -11,7 +11,9 @@ const root = resolve(process.cwd());
 describe("Character Sheet overflow", () => {
   it("gives every active tab an independent themed vertical scroll area", () => {
     const sheets = readFileSync(resolve(root, "styles/sheets/_sheets.scss"), "utf8");
-    expect(sheets).toMatch(/\.magnusarchives-sheet\.magnusarchives-character[\s\S]*> \.tab\.active[\s\S]*overflow-y:\s*auto/);
+    expect(sheets).toMatch(
+      /\.magnusarchives-sheet\.magnusarchives-character[\s\S]*> \.tab\.active[\s\S]*overflow-y:\s*auto/
+    );
     expect(sheets).toContain("var(--magnusarchives-scrollbar-thumb)");
     expect(sheets).toContain("var(--magnusarchives-scrollbar-track)");
     expect(sheets).toContain("var(--magnusarchives-scrollbar-size)");
@@ -32,9 +34,9 @@ describe("Character Sheet overflow", () => {
       {dataset: {persistentDisclosure: "base-values"}, open: true},
       {dataset: {persistentDisclosure: "effective-overrides"}, open: false}
     ];
-    const rootNode = {querySelectorAll: (selector: string) => (
-      selector === "details[data-persistent-disclosure]" ? disclosures : tabs
-    )};
+    const rootNode = {
+      querySelectorAll: (selector: string) => (selector === "details[data-persistent-disclosure]" ? disclosures : tabs)
+    };
     const state = captureCharacterSheetUiState(rootNode as unknown as ParentNode);
     expect(state).toEqual({
       activeTab: "combat",
@@ -57,8 +59,9 @@ describe("Character Sheet overflow", () => {
     const source = readFileSync(resolve(root, "src/applications/sheets/character-sheet.ts"), "utf8");
     expect(source).toContain("captureCharacterSheetUiState(this.element)");
     expect(source).toContain('changeTab.call(this, this.#activeTab, "primary")');
-    expect(source.indexOf('changeTab.call(this, this.#activeTab, "primary")'))
-      .toBeLessThan(source.indexOf("restoreCharacterSheetScroll(this.element"));
+    expect(source.indexOf('changeTab.call(this, this.#activeTab, "primary")')).toBeLessThan(
+      source.indexOf("restoreCharacterSheetScroll(this.element")
+    );
     expect(source).not.toContain('"system.activeTab"');
   });
 
@@ -69,7 +72,8 @@ describe("Character Sheet overflow", () => {
       "#onToggleArmorEquipped",
       "#onReloadWeapon",
       "#onRollCombatDepletion"
-    ]) expect(source).toContain(action);
+    ])
+      expect(source).toContain(action);
     expect(source).toMatch(/_prepareContext[\s\S]*?captureCharacterSheetUiState\(this\.element\)/);
     expect(source).toMatch(/_onRender[\s\S]*?restoreCharacterSheetScroll\(this\.element/);
   });

@@ -1,10 +1,5 @@
 import {RECOVERY_TYPES, type RecoveryType} from "../../constants/system";
-import {
-  RECOVERY_USAGE_KEYS,
-  createRecoveryUsage,
-  type RecoverySlotData,
-  type RecoveryUsage
-} from "./core-types";
+import {RECOVERY_USAGE_KEYS, createRecoveryUsage, type RecoverySlotData, type RecoveryUsage} from "./core-types";
 
 const DEFAULT_SLOT_DEFINITIONS = [
   {id: "core-recovery-action", type: "one-action"},
@@ -62,7 +57,7 @@ export function useRecoverySlot(
   if (!selected) throw new Error(`Recovery slot '${slotId}' is not available for '${type}'.`);
   if (selected.used) throw new Error(`Recovery slot '${slotId}' has already been used today.`);
   if (type === "10-hours") return slots.map((slot) => ({...slot, used: false}));
-  return slots.map((slot) => slot.id === slotId ? {...slot, used: true} : {...slot});
+  return slots.map((slot) => (slot.id === slotId ? {...slot, used: true} : {...slot}));
 }
 
 /** Restore the Core track while conservatively carrying forward any used state by type. */

@@ -12,7 +12,10 @@ export type FocusAssociationErrorCode =
   | "progress-missing";
 
 export class FocusAssociationError extends Error {
-  constructor(readonly code: FocusAssociationErrorCode, message: string) {
+  constructor(
+    readonly code: FocusAssociationErrorCode,
+    message: string
+  ) {
     super(message);
     this.name = "FocusAssociationError";
   }
@@ -44,8 +47,8 @@ export interface FocusRemoveResult {
 }
 
 type IdFactory = () => string;
-const defaultIdFactory: IdFactory = () => globalThis.crypto?.randomUUID?.()
-  ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+const defaultIdFactory: IdFactory = () =>
+  globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export class FocusAssociationService {
   readonly #idFactory: IdFactory;
@@ -86,18 +89,17 @@ export class FocusAssociationService {
         attachedAt: this.#now()
       };
       const choiceSource = provenance === "creation" ? "characterCreation" : "additionalFocus";
-      const choicesGranted: PendingFocusChoice[] = alreadyInitialized ? [] : Array.from({length: 2}, () => ({
-        id: this.#idFactory(),
-        source: choiceSource,
-        grantTier: 1,
-        focusUuid: focus.uuid
-      }));
+      const choicesGranted: PendingFocusChoice[] = alreadyInitialized
+        ? []
+        : Array.from({length: 2}, () => ({
+            id: this.#idFactory(),
+            source: choiceSource,
+            grantTier: 1,
+            focusUuid: focus.uuid
+          }));
       await actor.update({
         "system.focusProgress": [...actor.system.focusProgress, progress],
-        "system.advancement.pendingFocusChoices": [
-          ...actor.system.advancement.pendingFocusChoices,
-          ...choicesGranted
-        ],
+        "system.advancement.pendingFocusChoices": [...actor.system.advancement.pendingFocusChoices, ...choicesGranted],
         "system.advancement.initializedFocusUuids": alreadyInitialized
           ? [...actor.system.advancement.initializedFocusUuids]
           : [...actor.system.advancement.initializedFocusUuids, focus.uuid]
@@ -118,8 +120,9 @@ export class FocusAssociationService {
         .map((choice) => choice.id);
       await actor.update({
         "system.focusProgress": actor.system.focusProgress.filter((entry) => entry !== progress),
-        "system.advancement.pendingFocusChoices": actor.system.advancement.pendingFocusChoices
-          .filter((choice) => choice.focusUuid !== focusUuid)
+        "system.advancement.pendingFocusChoices": actor.system.advancement.pendingFocusChoices.filter(
+          (choice) => choice.focusUuid !== focusUuid
+        )
       });
       return {progress, removedPendingChoiceIds};
     });

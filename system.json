@@ -17,12 +17,8 @@
       "name": "Cypher V2 Contributors"
     }
   ],
-  "esmodules": [
-    "dist/magnusarchives.mjs"
-  ],
-  "styles": [
-    "dist/magnusarchives.css"
-  ],
+  "esmodules": ["dist/magnusarchives.mjs"],
+  "styles": ["dist/magnusarchives.css"],
   "media": [
     {
       "type": "setup",
@@ -137,34 +133,21 @@
         ]
       },
       "npc": {
-        "htmlFields": [
-          "description",
-          "notes",
-          "gmNotes",
-          "gmIntrusion"
-        ]
+        "htmlFields": ["description", "notes", "gmNotes", "gmIntrusion"]
       }
     },
     "Item": {
       "ability": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "skill": {
-        "htmlFields": [
-          "acquisition.notes"
-        ]
+        "htmlFields": ["acquisition.notes"]
       },
       "weapon": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "armor": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "shield": {
         "htmlFields": [
@@ -175,46 +158,28 @@
         ]
       },
       "equipment": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "cypher": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "artifact": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "descriptor": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "characterType": {
-        "htmlFields": [
-          "description",
-          "backgroundOptions",
-          "equipmentNotes"
-        ]
+        "htmlFields": ["description", "backgroundOptions", "equipmentNotes"]
       },
       "focus": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "genre": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       },
       "species": {
-        "htmlFields": [
-          "description"
-        ]
+        "htmlFields": ["description"]
       }
     }
   },

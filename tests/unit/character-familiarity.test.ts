@@ -15,7 +15,9 @@ function actor(): FamiliarityActorLike & {updates: Record<string, unknown>[]} {
   const result = {
     system: {
       stats: {
-        might: {value: 11}, speed: {value: 12}, intellect: {value: 13}
+        might: {value: 11},
+        speed: {value: 12},
+        intellect: {value: 13}
       },
       proficiencies: {
         weaponCategories: [] as string[],
@@ -52,9 +54,22 @@ function warrior(): CharacterPackageItemLike {
       edgeGrant: {mode: "fixed", pool: "none", amount: 0},
       weaponUse: {light: false, medium: true, heavy: false},
       armorUse: {light: true, medium: false, heavy: false},
-      abilityGrants: [], abilityChoiceGroups: [], skillGrants: [], choiceGroups: [],
-      genre: "none", customGenreId: "", backgroundOptions: "", equipmentNotes: "", equipmentBundleUuid: "",
-      instance: {sourceUuid: "Item.warrior", instanceId: "warrior-instance", role: "primary", attachedAt: 1, selections: {edgePool: "none", skillChoices: []}},
+      abilityGrants: [],
+      abilityChoiceGroups: [],
+      skillGrants: [],
+      choiceGroups: [],
+      genre: "none",
+      customGenreId: "",
+      backgroundOptions: "",
+      equipmentNotes: "",
+      equipmentBundleUuid: "",
+      instance: {
+        sourceUuid: "Item.warrior",
+        instanceId: "warrior-instance",
+        role: "primary",
+        attachedAt: 1,
+        selections: {edgePool: "none", skillChoices: []}
+      },
       description: ""
     }
   } as unknown as CharacterPackageItemLike;
@@ -109,8 +124,14 @@ describe("Character familiarity Settings actions", () => {
   });
 
   it("parses only supported button families and categories", () => {
-    expect(parseFamiliarityActionData({family: "weapon", category: "light"})).toEqual({family: "weapon", category: "light"});
-    expect(parseFamiliarityActionData({family: "armor", category: "heavy"})).toEqual({family: "armor", category: "heavy"});
+    expect(parseFamiliarityActionData({family: "weapon", category: "light"})).toEqual({
+      family: "weapon",
+      category: "light"
+    });
+    expect(parseFamiliarityActionData({family: "armor", category: "heavy"})).toEqual({
+      family: "armor",
+      category: "heavy"
+    });
     expect(() => parseFamiliarityActionData({family: "weapon", category: "plate"})).toThrow();
     expect(() => parseFamiliarityActionData({family: "skill", category: "light"})).toThrow();
   });

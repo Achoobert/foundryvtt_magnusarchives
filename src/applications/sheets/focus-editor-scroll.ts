@@ -12,16 +12,16 @@ export interface FocusEditorScrollState {
 export function captureFocusEditorScroll(root: ParentNode): FocusEditorScrollState {
   const sheet = root.querySelector<HTMLElement>(".magnusarchives-sheet.magnusarchives-item");
   const windowContent = root.querySelector<HTMLElement>(".window-content");
-  const trees = [...root.querySelectorAll<HTMLElement>(
-    ".magnusarchives-focus-tree-section[data-focus-uuid]"
-  )].map((section) => {
-    const scroller = section.querySelector<HTMLElement>(".focus-tree-scroll");
-    return {
-      focusUuid: section.dataset.focusUuid ?? "",
-      left: scroller?.scrollLeft ?? 0,
-      top: scroller?.scrollTop ?? 0
-    };
-  });
+  const trees = [...root.querySelectorAll<HTMLElement>(".magnusarchives-focus-tree-section[data-focus-uuid]")].map(
+    (section) => {
+      const scroller = section.querySelector<HTMLElement>(".focus-tree-scroll");
+      return {
+        focusUuid: section.dataset.focusUuid ?? "",
+        left: scroller?.scrollLeft ?? 0,
+        top: scroller?.scrollTop ?? 0
+      };
+    }
+  );
   return {
     vertical: sheet?.scrollTop ?? 0,
     windowVertical: windowContent?.scrollTop ?? 0,
@@ -30,18 +30,13 @@ export function captureFocusEditorScroll(root: ParentNode): FocusEditorScrollSta
 }
 
 /** Restore after Application V2 replaces the sheet content during a rerender. */
-export function restoreFocusEditorScroll(
-  root: ParentNode,
-  state: FocusEditorScrollState
-): void {
+export function restoreFocusEditorScroll(root: ParentNode, state: FocusEditorScrollState): void {
   const sheet = root.querySelector<HTMLElement>(".magnusarchives-sheet.magnusarchives-item");
   if (sheet) sheet.scrollTop = state.vertical;
   const windowContent = root.querySelector<HTMLElement>(".window-content");
   if (windowContent) windowContent.scrollTop = state.windowVertical;
 
-  const sections = [...root.querySelectorAll<HTMLElement>(
-    ".magnusarchives-focus-tree-section[data-focus-uuid]"
-  )];
+  const sections = [...root.querySelectorAll<HTMLElement>(".magnusarchives-focus-tree-section[data-focus-uuid]")];
   for (const tree of state.trees) {
     const section = sections.find((entry) => entry.dataset.focusUuid === tree.focusUuid);
     const scroller = section?.querySelector<HTMLElement>(".focus-tree-scroll");

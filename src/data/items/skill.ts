@@ -19,10 +19,11 @@ export class SkillDataModel extends ItemDataModelBase {
         choices: [...SKILL_DEFAULT_POOLS]
       }),
       category: new fields.StringField({required: true, nullable: false, initial: "general"}),
-      contexts: new fields.ArrayField(
-        new fields.StringField({required: true, nullable: false, blank: false}),
-        {required: true, nullable: false, initial: []}
-      ),
+      contexts: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       initiative: new fields.BooleanField({required: true, nullable: false, initial: false}),
       acquisition: new fields.SchemaField({
         minimumTier: integerField(1, 1),
@@ -38,8 +39,10 @@ export class SkillDataModel extends ItemDataModelBase {
   ): Record<string, unknown> {
     const migrated = super.migrateData(source, options);
     const includesDefaultPool = Object.hasOwn(migrated, "defaultPool");
-    if ((!options.partial || includesDefaultPool)
-      && (migrated.defaultPool === "" || migrated.defaultPool === null || migrated.defaultPool === undefined)) {
+    if (
+      (!options.partial || includesDefaultPool) &&
+      (migrated.defaultPool === "" || migrated.defaultPool === null || migrated.defaultPool === undefined)
+    ) {
       migrated.defaultPool = "choose";
     }
     return migrated;

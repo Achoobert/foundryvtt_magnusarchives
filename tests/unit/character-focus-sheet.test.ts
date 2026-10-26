@@ -30,14 +30,15 @@ describe("Character Focus association UI", () => {
     expect(template).toContain('data-action="chooseArc"');
     const dialog = readFileSync(resolve(root, "src/applications/dialogs/character-setup-dialog.ts"), "utf8");
     const flow = dialog.slice(dialog.indexOf("export async function promptCoreCharacterSetup"));
-    const order = ["descriptorStep(", "typeStep(", "focusStep(", "poolStep(", "promptArcSelection("]
-      .map((step) => flow.indexOf(step));
+    const order = ["descriptorStep(", "typeStep(", "focusStep(", "poolStep(", "promptArcSelection("].map((step) =>
+      flow.indexOf(step)
+    );
     expect(order.every((index) => index > 0)).toBe(true);
     expect([...order].sort((left, right) => left - right)).toEqual(order);
     expect(dialog).not.toMatch(/StartingSkill|OptionalThird/);
     expect(dialog).toContain("data-core-points-remaining");
-    expect(dialog).toContain('submit.disabled = !valid || remaining !== 0');
-    expect(dialog).toContain('target.sheet?.render({force: true})');
+    expect(dialog).toContain("submit.disabled = !valid || remaining !== 0");
+    expect(dialog).toContain("target.sheet?.render({force: true})");
   });
 
   it("keeps GM progression repair controls internal and removes Edit Progression from normal UI", () => {
@@ -58,7 +59,7 @@ describe("Character Focus association UI", () => {
     const advancement = template.indexOf('class="advancement-section progression-section"');
     const focus = template.indexOf('class="focus-progression-section progression-section"');
 
-    expect(template).toContain('{{#unless advancement.guidance.completed}}');
+    expect(template).toContain("{{#unless advancement.guidance.completed}}");
     expect(template).toContain('data-action="completeProgressionGuidance"');
     expect(template).toContain('data-action="resetProgressionGuidance"');
     expect(guidance).toBeGreaterThan(-1);
@@ -80,7 +81,7 @@ describe("Character Focus association UI", () => {
     expect(template).toContain("{{option.xpCost}} XP");
     expect(template).toContain("{{advancement.other.xpCost}} XP");
     expect(template).toContain('class="{{#if option.purchased}}purchased{{/if}}"');
-    expect(template).toContain('fa-{{#if option.purchased}}solid fa-check{{else}}regular fa-square{{/if}}');
+    expect(template).toContain("fa-{{#if option.purchased}}solid fa-check{{else}}regular fa-square{{/if}}");
     expect(source).toContain("xpCost: advancement.policy.xpCost");
   });
 
@@ -91,13 +92,15 @@ describe("Character Focus association UI", () => {
     expect(template).toContain('class="magnusarchives-icon-action advancement-undo-action"');
     expect(template).toContain('data-action="undoAdvancement"');
     expect(template).toContain('data-purchase-id="{{purchase.id}}"');
-    expect(template).toContain('fa-arrow-rotate-left');
-    expect(source).toContain('undoAdvancement: CharacterSheet.#onUndoAdvancement');
-    expect(source).toContain('target.dataset.purchaseId');
+    expect(template).toContain("fa-arrow-rotate-left");
+    expect(source).toContain("undoAdvancement: CharacterSheet.#onUndoAdvancement");
+    expect(source).toContain("target.dataset.purchaseId");
   });
 
   it("shows the Genre browser action only inside the active-Genre condition", () => {
     const template = readFileSync(resolve(root, "templates/actor/character-sheet.hbs"), "utf8");
-    expect(template).toContain('{{#if genre.available}}<button type="button" class="compact-inline-action" data-action="browseGenreAbilities"');
+    expect(template).toContain(
+      '{{#if genre.available}}<button type="button" class="compact-inline-action" data-action="browseGenreAbilities"'
+    );
   });
 });

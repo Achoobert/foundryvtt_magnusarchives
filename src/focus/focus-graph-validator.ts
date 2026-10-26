@@ -48,15 +48,30 @@ export function validateFocusGraph(graph: FocusGraph): readonly FocusGraphDiagno
       continue;
     }
     if (nodeIds.has(node.id)) {
-      diagnostics.push({severity: "error", code: "duplicate-node-id", nodeId: node.id, message: `Duplicate Focus node ID '${node.id}'.`});
+      diagnostics.push({
+        severity: "error",
+        code: "duplicate-node-id",
+        nodeId: node.id,
+        message: `Duplicate Focus node ID '${node.id}'.`
+      });
     }
     nodeIds.add(node.id);
     if (!Number.isInteger(node.tier) || node.tier < 1 || node.tier > 6) {
-      diagnostics.push({severity: "error", code: "invalid-tier", nodeId: node.id, message: `Focus node '${node.id}' must use a Tier from 1 to 6.`});
+      diagnostics.push({
+        severity: "error",
+        code: "invalid-tier",
+        nodeId: node.id,
+        message: `Focus node '${node.id}' must use a Tier from 1 to 6.`
+      });
     }
     for (const [axis, value] of Object.entries(node.position ?? {})) {
       if (value !== null && !Number.isFinite(value)) {
-        diagnostics.push({severity: "error", code: "invalid-position", nodeId: node.id, message: `Focus node '${node.id}' has an invalid ${axis} position.`});
+        diagnostics.push({
+          severity: "error",
+          code: "invalid-position",
+          nodeId: node.id,
+          message: `Focus node '${node.id}' has an invalid ${axis} position.`
+        });
       }
     }
   }
@@ -65,19 +80,39 @@ export function validateFocusGraph(graph: FocusGraph): readonly FocusGraphDiagno
   const directedEdges = new Set<string>();
   for (const connection of graph.connections) {
     if (!connection.id.trim() || connectionIds.has(connection.id)) {
-      diagnostics.push({severity: "error", code: "duplicate-connection-id", connectionId: connection.id, message: `Duplicate or blank Focus connection ID '${connection.id}'.`});
+      diagnostics.push({
+        severity: "error",
+        code: "duplicate-connection-id",
+        connectionId: connection.id,
+        message: `Duplicate or blank Focus connection ID '${connection.id}'.`
+      });
     }
     connectionIds.add(connection.id);
     const edge = `${connection.from}\u0000${connection.to}`;
     if (directedEdges.has(edge)) {
-      diagnostics.push({severity: "error", code: "duplicate-connection", connectionId: connection.id, message: `Duplicate Focus connection '${connection.from}' -> '${connection.to}'.`});
+      diagnostics.push({
+        severity: "error",
+        code: "duplicate-connection",
+        connectionId: connection.id,
+        message: `Duplicate Focus connection '${connection.from}' -> '${connection.to}'.`
+      });
     }
     directedEdges.add(edge);
     if (!nodeIds.has(connection.from) || !nodeIds.has(connection.to)) {
-      diagnostics.push({severity: "error", code: "missing-connection-node", connectionId: connection.id, message: `Focus connection '${connection.id}' references a missing node.`});
+      diagnostics.push({
+        severity: "error",
+        code: "missing-connection-node",
+        connectionId: connection.id,
+        message: `Focus connection '${connection.id}' references a missing node.`
+      });
     }
     if (connection.from === connection.to) {
-      diagnostics.push({severity: "error", code: "self-connection", connectionId: connection.id, message: `Focus connection '${connection.id}' cannot target itself.`});
+      diagnostics.push({
+        severity: "error",
+        code: "self-connection",
+        connectionId: connection.id,
+        message: `Focus connection '${connection.id}' cannot target itself.`
+      });
     }
   }
 

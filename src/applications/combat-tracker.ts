@@ -70,10 +70,7 @@ export class MagnusArchivesCombatTracker extends BaseCombatTracker {
     }
   }
 
-  override async _prepareTrackerContext(
-    context: TrackerContext,
-    options: Record<string, unknown>
-  ): Promise<void> {
+  override async _prepareTrackerContext(context: TrackerContext, options: Record<string, unknown>): Promise<void> {
     await super._prepareTrackerContext(context, options);
     context.manualOrderEditable = game.user.isGM;
     const combat = this.viewed;
@@ -81,10 +78,7 @@ export class MagnusArchivesCombatTracker extends BaseCombatTracker {
       const combatant = combat?.combatants.get(turn.id);
       turn.doneThisRound = isCombatantDoneThisRound(combatant, combat?.round ?? 0);
       turn.canEndTurn = Boolean(
-        combat?.started
-        && turn.active
-        && !turn.doneThisRound
-        && canEndCombatantTurn(game.user, combatant)
+        combat?.started && turn.active && !turn.doneThisRound && canEndCombatantTurn(game.user, combatant)
       );
     }
   }
@@ -104,16 +98,16 @@ export class MagnusArchivesCombatTracker extends BaseCombatTracker {
   }
 
   override _getEntryContextOptions(): ContextOption[] {
-    return super._getEntryContextOptions().filter((entry: ContextOption) => (
-      entry.label !== "COMBATANT.ACTIONS.Clear"
-      && entry.label !== "COMBATANT.ACTIONS.Reroll"
-    ));
+    return super
+      ._getEntryContextOptions()
+      .filter(
+        (entry: ContextOption) =>
+          entry.label !== "COMBATANT.ACTIONS.Clear" && entry.label !== "COMBATANT.ACTIONS.Reroll"
+      );
   }
 
   override _getCombatContextOptions(): ContextOption[] {
-    return super._getCombatContextOptions().filter((entry: ContextOption) => (
-      entry.label !== "COMBAT.InitiativeReset"
-    ));
+    return super._getCombatContextOptions().filter((entry: ContextOption) => entry.label !== "COMBAT.InitiativeReset");
   }
 
   #onDragStart(event: DragEvent): void {
@@ -143,7 +137,7 @@ export class MagnusArchivesCombatTracker extends BaseCombatTracker {
     const targetRow = (event.target as Element | null)?.closest(".combatant[data-combatant-id]") ?? null;
     const targetId = combatantIdFrom(targetRow);
     const targetRect = targetRow?.getBoundingClientRect();
-    const placeAfter = Boolean(targetRect && event.clientY > targetRect.top + (targetRect.height / 2));
+    const placeAfter = Boolean(targetRect && event.clientY > targetRect.top + targetRect.height / 2);
     const currentOrder = combat.turns.map((combatant) => combatant.id);
     const reordered = reorderCombatantIds(currentOrder, draggedId, targetId, placeAfter);
     if (reordered.every((id, index) => id === currentOrder[index])) {
@@ -153,14 +147,10 @@ export class MagnusArchivesCombatTracker extends BaseCombatTracker {
 
     const currentId = combat.combatant?.id;
     const combatTurn = currentId ? reordered.indexOf(currentId) : undefined;
-    await combat.updateEmbeddedDocuments(
-      "Combatant",
-      manualOrderInitiativeUpdates(reordered),
-      {
-        ...(combatTurn === undefined || combatTurn < 0 ? {} : {combatTurn}),
-        turnEvents: false
-      }
-    );
+    await combat.updateEmbeddedDocuments("Combatant", manualOrderInitiativeUpdates(reordered), {
+      ...(combatTurn === undefined || combatTurn < 0 ? {} : {combatTurn}),
+      turnEvents: false
+    });
     this.#clearDragState();
   }
 

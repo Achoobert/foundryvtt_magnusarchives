@@ -7,7 +7,12 @@ import {
 } from "../constants/system";
 import type {CharacterDerivedExtensions} from "../rules/core/derived-data";
 import {POOL_KEYS, type DerivedContribution, type PoolKey} from "../rules/core/core-types";
-import type {CharacterPackageItemLike, CharacterTypeSystemData, DescriptorSystemData, SpeciesSystemData} from "./package-types";
+import type {
+  CharacterPackageItemLike,
+  CharacterTypeSystemData,
+  DescriptorSystemData,
+  SpeciesSystemData
+} from "./package-types";
 import {legacyWeaponFamilyFlags, normalizeWeaponFamilies} from "../combat/weapon-family";
 
 export interface ResolvedPoolBonusChoice {
@@ -88,9 +93,13 @@ export function collectPackageDerivedData(
   const poolMax: Partial<Record<PoolKey, DerivedContribution[]>> = {};
   const poolEdge: Partial<Record<PoolKey, DerivedContribution[]>> = {};
   const woundCapacity: Partial<Record<WoundSeverity, DerivedContribution[]>> = {};
-  const weaponCategories = new Set(baseWeaponCategories.filter((entry): entry is WeaponCategory => WEAPON_CATEGORIES.includes(entry as WeaponCategory)));
+  const weaponCategories = new Set(
+    baseWeaponCategories.filter((entry): entry is WeaponCategory => WEAPON_CATEGORIES.includes(entry as WeaponCategory))
+  );
   const weaponFamilies = new Set(normalizeWeaponFamilies(baseWeaponFamilies));
-  const armorCategories = new Set(baseArmorCategories.filter((entry): entry is ArmorCategory => ARMOR_CATEGORIES.includes(entry as ArmorCategory)));
+  const armorCategories = new Set(
+    baseArmorCategories.filter((entry): entry is ArmorCategory => ARMOR_CATEGORIES.includes(entry as ArmorCategory))
+  );
   const typeNames: string[] = [];
   const descriptorNames: string[] = [];
   const speciesNames: string[] = [];
@@ -109,14 +118,14 @@ export function collectPackageDerivedData(
       for (const family of normalizeWeaponFamilies([
         ...(system.weaponFamilies ?? []),
         ...legacyWeaponFamilyFlags(system.weaponFamilyUse)
-      ])) weaponFamilies.add(family);
+      ]))
+        weaponFamilies.add(family);
       for (const severity of ["minor", "moderate", "major"] as const) {
         const value = positiveInteger(system.woundBonuses[severity]);
         if (value) (woundCapacity[severity] ??= []).push(contribution(item, `wound.${severity}`, value));
       }
-      const selectedPool = system.edgeGrant.mode === "choice"
-        ? system.instance.selections.edgePool
-        : system.edgeGrant.pool;
+      const selectedPool =
+        system.edgeGrant.mode === "choice" ? system.instance.selections.edgePool : system.edgeGrant.pool;
       if (selectedPool !== "none" && POOL_KEYS.includes(selectedPool)) {
         const value = positiveInteger(system.edgeGrant.amount);
         if (value) (poolEdge[selectedPool] ??= []).push(contribution(item, `edge.${selectedPool}`, value));
@@ -132,19 +141,15 @@ export function collectPackageDerivedData(
       if (value) (poolMax[pool] ??= []).push(contribution(item, `pool.${pool}`, value));
     }
     for (const selected of resolvedPoolBonusChoices(item)) {
-      (poolMax[selected.pool] ??= []).push(contribution(
-        item,
-        `pool-choice.${selected.groupId}.${selected.pool}`,
-        selected.amount
-      ));
+      (poolMax[selected.pool] ??= []).push(
+        contribution(item, `pool-choice.${selected.groupId}.${selected.pool}`, selected.amount)
+      );
     }
     const superheroics = resolvedSuperheroicsPoolBonus(item);
     if (superheroics) {
-      (poolMax[superheroics.pool] ??= []).push(contribution(
-        item,
-        `superheroics.${superheroics.pool}`,
-        superheroics.amount
-      ));
+      (poolMax[superheroics.pool] ??= []).push(
+        contribution(item, `superheroics.${superheroics.pool}`, superheroics.amount)
+      );
     }
   }
 
@@ -162,7 +167,9 @@ export function collectPackageDerivedData(
 
 export function packagePoolBonuses(item: CharacterPackageItemLike): Record<PoolKey, number> {
   const system = item.system as CharacterTypeSystemData | DescriptorSystemData | SpeciesSystemData;
-  const bonuses = Object.fromEntries(POOL_KEYS.map((pool) => [pool, positiveInteger(system.poolBonuses[pool])])) as Record<PoolKey, number>;
+  const bonuses = Object.fromEntries(
+    POOL_KEYS.map((pool) => [pool, positiveInteger(system.poolBonuses[pool])])
+  ) as Record<PoolKey, number>;
   for (const selected of resolvedPoolBonusChoices(item)) bonuses[selected.pool] += selected.amount;
   const superheroics = resolvedSuperheroicsPoolBonus(item);
   if (superheroics) bonuses[superheroics.pool] += superheroics.amount;

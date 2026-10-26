@@ -44,34 +44,43 @@ function equipArmor(
     blockEase: steps,
     dodgeHindrance: steps,
     speedTaskHindrance: familiar ? 0 : steps,
-    blockContributions: [{
-      id: `armor.${category}.block`,
-      sourceId: `armor-${category}`,
-      sourceType: "item",
-      label: "",
-      value: steps
-    }],
-    dodgeContributions: [{
-      id: `armor.${category}.dodge`,
-      sourceId: `armor-${category}`,
-      sourceType: "item",
-      label: "",
-      value: steps
-    }],
-    speedTaskContributions: familiar ? [] : [{
-      id: `armor.${category}.speed-task`,
-      sourceId: `armor-${category}`,
-      sourceType: "item",
-      label: "",
-      value: steps
-    }]
+    blockContributions: [
+      {
+        id: `armor.${category}.block`,
+        sourceId: `armor-${category}`,
+        sourceType: "item",
+        label: "",
+        value: steps
+      }
+    ],
+    dodgeContributions: [
+      {
+        id: `armor.${category}.dodge`,
+        sourceId: `armor-${category}`,
+        sourceType: "item",
+        label: "",
+        value: steps
+      }
+    ],
+    speedTaskContributions: familiar
+      ? []
+      : [
+          {
+            id: `armor.${category}.speed-task`,
+            sourceId: `armor-${category}`,
+            sourceType: "item",
+            label: "",
+            value: steps
+          }
+        ]
   };
 }
 
 describe("RollService", () => {
   it("uses prepared Actor Genre data when Foundry only has a Compendium index entry", () => {
     const actor = character({effortBase: 10, poolValues: {might: 50}});
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid =
+      "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     const previousResolver = globalThis.fromUuidSync;
     globalThis.fromUuidSync = (() => ({
@@ -82,11 +91,9 @@ describe("RollService", () => {
     })) as typeof fromUuidSync;
 
     try {
-      expect(serviceWithRoll(10).preview(
-        actor as RollCharacterDocumentLike,
-        request({paidEffort: 1, freeEffort: 6}),
-        policy
-      )).toMatchObject({totalEffortApplied: 7, totalEffortMaximum: null});
+      expect(
+        serviceWithRoll(10).preview(actor as RollCharacterDocumentLike, request({paidEffort: 1, freeEffort: 6}), policy)
+      ).toMatchObject({totalEffortApplied: 7, totalEffortMaximum: null});
     } finally {
       globalThis.fromUuidSync = previousResolver;
     }
@@ -99,40 +106,34 @@ describe("RollService", () => {
     globalThis.fromUuidSync = resolver as typeof fromUuidSync;
 
     try {
-      expect(serviceWithRoll(10).preview(
-        actor as RollCharacterDocumentLike,
-        request(),
-        policy
-      ).totalEffortMaximum).toBe(6);
+      expect(
+        serviceWithRoll(10).preview(actor as RollCharacterDocumentLike, request(), policy).totalEffortMaximum
+      ).toBe(6);
       expect(resolver).not.toHaveBeenCalled();
     } finally {
       globalThis.fromUuidSync = previousResolver;
     }
   });
 
-  it.each([[
-    "light", 1
-  ], [
-    "medium", 2
-  ], [
-    "heavy", 3
-  ]] as const)("applies unfamiliar %s Armor to every generic Speed task", (category, steps) => {
+  it.each([
+    ["light", 1],
+    ["medium", 2],
+    ["heavy", 3]
+  ] as const)("applies unfamiliar %s Armor to every generic Speed task", (category, steps) => {
     const actor = character();
     equipArmor(actor, category, false);
 
-    const preview = serviceWithRoll(10).preview(
-      actor as RollCharacterDocumentLike,
-      request({pool: "speed"}),
-      policy
-    );
+    const preview = serviceWithRoll(10).preview(actor as RollCharacterDocumentLike, request({pool: "speed"}), policy);
 
     expect(preview.totalHindrance).toBe(steps);
-    expect(preview.breakdown).toContainEqual(expect.objectContaining({
-      id: `armor.${category}.speed-task`,
-      label: `MAGNUSARCHIVES.Combat.Armor.Unfamiliar.${category}`,
-      direction: "hinder",
-      steps
-    }));
+    expect(preview.breakdown).toContainEqual(
+      expect.objectContaining({
+        id: `armor.${category}.speed-task`,
+        label: `MAGNUSARCHIVES.Combat.Armor.Unfamiliar.${category}`,
+        direction: "hinder",
+        steps
+      })
+    );
   });
 
   it("leaves Might and Intellect tasks unaffected by unfamiliar Armor", () => {
@@ -140,11 +141,7 @@ describe("RollService", () => {
     equipArmor(actor, "heavy", false);
 
     for (const pool of ["might", "intellect"] as const) {
-      const preview = serviceWithRoll(10).preview(
-        actor as RollCharacterDocumentLike,
-        request({pool}),
-        policy
-      );
+      const preview = serviceWithRoll(10).preview(actor as RollCharacterDocumentLike, request({pool}), policy);
       expect(preview.totalHindrance).toBe(0);
       expect(preview.breakdown.some((entry) => entry.id.includes("speed-task"))).toBe(false);
     }
@@ -170,13 +167,15 @@ describe("RollService", () => {
       actor as RollCharacterDocumentLike,
       request({
         pool: "speed",
-        contributions: [{
-          id: "armor.medium.dodge",
-          label: "MAGNUSARCHIVES.Combat.Armor.Dodge",
-          direction: "hinder",
-          steps: 2,
-          source: "other"
-        }],
+        contributions: [
+          {
+            id: "armor.medium.dodge",
+            label: "MAGNUSARCHIVES.Combat.Armor.Dodge",
+            direction: "hinder",
+            steps: 2,
+            source: "other"
+          }
+        ],
         origin: {kind: "defense", defenseType: "dodge"}
       }),
       policy
@@ -189,41 +188,33 @@ describe("RollService", () => {
 
   it("automatically includes derived condition Hindrance", () => {
     const actor = character({wounds: wounds({moderate: 3, major: 1})});
-    const preview = serviceWithRoll(10).preview(
-      actor as RollCharacterDocumentLike,
-      request(),
-      policy
-    );
+    const preview = serviceWithRoll(10).preview(actor as RollCharacterDocumentLike, request(), policy);
 
     expect(preview.totalHindrance).toBe(2);
     expect(preview.finalDifficulty).toBe(7);
-    expect(preview.breakdown).toContainEqual(expect.objectContaining({
-      id: "core.conditions.hindrance",
-      source: "condition",
-      steps: 2
-    }));
+    expect(preview.breakdown).toContainEqual(
+      expect.objectContaining({
+        id: "core.conditions.hindrance",
+        source: "condition",
+        steps: 2
+      })
+    );
   });
 
   it("uses the Character derived Effort maximum", () => {
     const actor = character({effortBase: 1});
     const service = serviceWithRoll(10);
 
-    expect(() => service.preview(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 2}),
-      policy
-    )).toThrow("maximum of 1");
+    expect(() => service.preview(actor as RollCharacterDocumentLike, request({paidEffort: 2}), policy)).toThrow(
+      "maximum of 1"
+    );
   });
 
   it("allows generic Free Effort beyond Rating while combining paid Task and Damage Effort", async () => {
     const actor = character({effortBase: 1, poolValues: {might: 10}});
     const service = serviceWithRoll(10);
     const rollRequest = request({paidEffort: 1, freeEffort: 2});
-    const preview = service.preview(
-      actor as RollCharacterDocumentLike,
-      rollRequest,
-      policy
-    );
+    const preview = service.preview(actor as RollCharacterDocumentLike, rollRequest, policy);
     expect(preview).toMatchObject({paidEffortApplied: 1, freeEffortApplied: 2, totalEffortApplied: 3});
     const execution = await service.execute(actor as RollCharacterDocumentLike, rollRequest, policy);
     expect(execution.result.prepared).toMatchObject({
@@ -232,11 +223,9 @@ describe("RollService", () => {
       totalEffortApplied: preview.totalEffortApplied,
       poolCost: preview.poolCost
     });
-    expect(() => service.preview(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 1, damageEffort: 1}),
-      policy
-    )).toThrow("Paid Effort cannot exceed the Character maximum of 1");
+    expect(() =>
+      service.preview(actor as RollCharacterDocumentLike, request({paidEffort: 1, damageEffort: 1}), policy)
+    ).toThrow("Paid Effort cannot exceed the Character maximum of 1");
   });
 
   it("enforces the same Core total Effort cap in preview and execute", async () => {
@@ -246,7 +235,12 @@ describe("RollService", () => {
 
     const preview = service.preview(actor as RollCharacterDocumentLike, valid, policy);
     const execution = await service.execute(actor as RollCharacterDocumentLike, valid, policy);
-    expect(preview).toMatchObject({totalEffortApplied: 6, damageEffortApplied: 3, paidEffortApplied: 5, freeEffortApplied: 1});
+    expect(preview).toMatchObject({
+      totalEffortApplied: 6,
+      damageEffortApplied: 3,
+      paidEffortApplied: 5,
+      freeEffortApplied: 1
+    });
     expect(execution.result.prepared).toMatchObject({
       totalEffortApplied: preview.totalEffortApplied,
       effortCostBeforeEdge: preview.effortCostBeforeEdge,
@@ -254,10 +248,12 @@ describe("RollService", () => {
     });
 
     const invalid = request({paidEffort: 3, damageEffort: 2, freeDamageEffort: 2});
-    expect(() => service.preview(actor as RollCharacterDocumentLike, invalid, policy))
-      .toThrow("Maximum total Effort: 6");
-    await expect(service.execute(actor as RollCharacterDocumentLike, invalid, policy))
-      .rejects.toThrow("Maximum total Effort: 6");
+    expect(() => service.preview(actor as RollCharacterDocumentLike, invalid, policy)).toThrow(
+      "Maximum total Effort: 6"
+    );
+    await expect(service.execute(actor as RollCharacterDocumentLike, invalid, policy)).rejects.toThrow(
+      "Maximum total Effort: 6"
+    );
   });
 
   it("uses the Character active Genre's generic Effort cap option", async () => {
@@ -265,11 +261,16 @@ describe("RollService", () => {
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
     let capMode: "core" | "unlimited" = "core";
-    const rolls = new RollService(rules, async () => ({naturalRoll: 12}), () => capMode);
+    const rolls = new RollService(
+      rules,
+      async () => ({naturalRoll: 12}),
+      () => capMode
+    );
     const sevenLevels = request({paidEffort: 1, freeEffort: 6});
 
-    expect(() => rolls.preview(actor as RollCharacterDocumentLike, sevenLevels, policy))
-      .toThrow("Maximum total Effort: 6");
+    expect(() => rolls.preview(actor as RollCharacterDocumentLike, sevenLevels, policy)).toThrow(
+      "Maximum total Effort: 6"
+    );
 
     capMode = "unlimited";
     const preview = rolls.preview(actor as RollCharacterDocumentLike, sevenLevels, policy);
@@ -278,20 +279,17 @@ describe("RollService", () => {
     expect(execution.result.prepared).toMatchObject({totalEffortApplied: 7, totalEffortMaximum: null});
 
     actor.system.derived.effort.max = 1;
-    expect(rolls.preview(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 1, freeEffort: 8}),
-      policy
-    )).toMatchObject({paidEffortApplied: 1, freeEffortApplied: 8, totalEffortMaximum: null});
-    expect(() => rolls.preview(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 2}),
-      policy
-    )).toThrow("Paid Effort cannot exceed the Character maximum of 1");
+    expect(
+      rolls.preview(actor as RollCharacterDocumentLike, request({paidEffort: 1, freeEffort: 8}), policy)
+    ).toMatchObject({paidEffortApplied: 1, freeEffortApplied: 8, totalEffortMaximum: null});
+    expect(() => rolls.preview(actor as RollCharacterDocumentLike, request({paidEffort: 2}), policy)).toThrow(
+      "Paid Effort cannot exceed the Character maximum of 1"
+    );
 
     capMode = "core";
-    expect(() => rolls.preview(actor as RollCharacterDocumentLike, sevenLevels, policy))
-      .toThrow("Maximum total Effort: 6");
+    expect(() => rolls.preview(actor as RollCharacterDocumentLike, sevenLevels, policy)).toThrow(
+      "Maximum total Effort: 6"
+    );
   });
 
   it("blocks an insufficient Pool before updating or rolling", async () => {
@@ -301,11 +299,9 @@ describe("RollService", () => {
     registerCoreRuleModule(rules);
     const service = new RollService(rules, roller);
 
-    await expect(service.execute(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 1}),
-      policy
-    )).rejects.toThrow("costs 3");
+    await expect(service.execute(actor as RollCharacterDocumentLike, request({paidEffort: 1}), policy)).rejects.toThrow(
+      "costs 3"
+    );
     expect(actor.updates).toHaveLength(0);
     expect(roller).not.toHaveBeenCalled();
   });
@@ -320,11 +316,7 @@ describe("RollService", () => {
     registerCoreRuleModule(rules);
     const service = new RollService(rules, roller);
 
-    const execution = await service.execute(
-      actor as RollCharacterDocumentLike,
-      request({paidEffort: 2}),
-      policy
-    );
+    const execution = await service.execute(actor as RollCharacterDocumentLike, request({paidEffort: 2}), policy);
 
     expect(execution.result.prepared).toMatchObject({
       effortCostBeforeEdge: 5,
@@ -398,10 +390,12 @@ describe("RollService", () => {
     const execution = await rolls.execute(actor as RollCharacterDocumentLike, request(), policy);
 
     expect(execution.result.prepared.context.horrorIntrusionRange).toBe(4);
-    expect(execution.result.naturalEffects).toContainEqual(expect.objectContaining({
-      kind: "gm-intrusion",
-      intrusionProvenance: "horror-mode",
-      horrorIntrusionRange: 4
-    }));
+    expect(execution.result.naturalEffects).toContainEqual(
+      expect.objectContaining({
+        kind: "gm-intrusion",
+        intrusionProvenance: "horror-mode",
+        horrorIntrusionRange: 4
+      })
+    );
   });
 });

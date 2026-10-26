@@ -35,26 +35,47 @@ describe("Character Header appearance", () => {
   });
 
   it("normalizes and preserves independent custom appearance values", () => {
-    expect(migrateCharacterSystemData({appearance: {
-      backgroundMode: "custom",
-      customImage: "worlds/example/header.webp",
-      color: "#FF00AA"
-    }}).appearance).toEqual({
+    expect(
+      migrateCharacterSystemData({
+        appearance: {
+          backgroundMode: "custom",
+          customImage: "worlds/example/header.webp",
+          color: "#FF00AA"
+        }
+      }).appearance
+    ).toEqual({
       backgroundMode: "custom",
       customImage: "worlds/example/header.webp",
       color: "#ff00aa"
     });
-    expect(migrateCharacterSystemData({appearance: {color: "#00FFFF"}}, {partial: true}))
-      .toEqual({appearance: {color: "#00ffff"}});
+    expect(migrateCharacterSystemData({appearance: {color: "#00FFFF"}}, {partial: true})).toEqual({
+      appearance: {color: "#00ffff"}
+    });
   });
 
   it("resolves Theme, portrait, and custom backgrounds without duplicating color logic", () => {
-    const theme = resolveCharacterAppearance({backgroundMode: "theme", customImage: "", color: ""}, "portrait.webp", getRoute);
-    const portrait = resolveCharacterAppearance({backgroundMode: "portrait", customImage: "", color: "#ff00aa"}, "portrait.webp", getRoute);
-    const custom = resolveCharacterAppearance({backgroundMode: "custom", customImage: "custom.webp", color: "#00ffff"}, "portrait.webp", getRoute);
+    const theme = resolveCharacterAppearance(
+      {backgroundMode: "theme", customImage: "", color: ""},
+      "portrait.webp",
+      getRoute
+    );
+    const portrait = resolveCharacterAppearance(
+      {backgroundMode: "portrait", customImage: "", color: "#ff00aa"},
+      "portrait.webp",
+      getRoute
+    );
+    const custom = resolveCharacterAppearance(
+      {backgroundMode: "custom", customImage: "custom.webp", color: "#00ffff"},
+      "portrait.webp",
+      getRoute
+    );
 
     expect(theme).toMatchObject({hasBackgroundImage: false, hasCharacterColor: false, isTheme: true});
-    expect(portrait).toMatchObject({backgroundImage: "/foundry/portrait.webp", hasBackgroundImage: true, isPortrait: true});
+    expect(portrait).toMatchObject({
+      backgroundImage: "/foundry/portrait.webp",
+      hasBackgroundImage: true,
+      isPortrait: true
+    });
     expect(custom).toMatchObject({backgroundImage: "/foundry/custom.webp", hasBackgroundImage: true, isCustom: true});
     expect(custom.style).toContain("--magnusarchives-character-background-image");
   });
@@ -88,8 +109,9 @@ describe("Character Header appearance", () => {
   });
 
   it("preserves already absolute asset URLs", () => {
-    expect(resolveFoundryAssetUrl("https://cdn.example.test/header image.webp", getRoute))
-      .toBe("https://cdn.example.test/header image.webp");
+    expect(resolveFoundryAssetUrl("https://cdn.example.test/header image.webp", getRoute)).toBe(
+      "https://cdn.example.test/header image.webp"
+    );
   });
 
   it.each(["#ffffff", "#ff00ff", "#00ffff", "#ffff00", "#000000"])(
@@ -112,7 +134,7 @@ describe("Character Header appearance", () => {
     expect(sheet).toContain('"system.appearance.backgroundMode": "theme"');
     expect(sheet).toContain('"system.appearance.customImage": ""');
     expect(sheet).toContain('"system.appearance.color": ""');
-    expect(sheet).toContain('input[data-header-color]');
+    expect(sheet).toContain("input[data-header-color]");
     expect(sheet).toContain('{"system.appearance.color": color.value}');
   });
 

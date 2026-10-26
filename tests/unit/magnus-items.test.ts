@@ -38,7 +38,12 @@ function derive(armorItems: ReturnType<typeof armorItem>[] = []) {
 describe("Magnus equipment", () => {
   it("prices goods by the six categories rather than a currency amount", () => {
     expect(PRICE_CATEGORIES).toEqual([
-      "inexpensive", "moderate", "expensive", "veryExpensive", "exorbitant", "priceless"
+      "inexpensive",
+      "moderate",
+      "expensive",
+      "veryExpensive",
+      "exorbitant",
+      "priceless"
     ]);
     expect(equipment).toContain("choices: [...PRICE_CATEGORIES]");
     expect(equipment).toContain("priceNote");

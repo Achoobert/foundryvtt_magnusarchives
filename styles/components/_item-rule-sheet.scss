@@ -203,7 +203,6 @@
     letter-spacing: normal;
     line-height: 1.15;
     text-transform: none;
-
   }
 
   .ability-pool-field small {
@@ -227,7 +226,6 @@
     min-width: 0;
     color: var(--magnusarchives-text-muted);
     font-size: 0.67rem;
-
   }
 
   .inventory-item-core-mechanics {
@@ -411,7 +409,6 @@
     font-size: 0.62rem;
     font-weight: 700;
     text-transform: uppercase;
-
   }
 
   .compact-shield-capacity {
@@ -976,7 +973,9 @@
     min-width: 0;
     padding-top: 0.15rem;
 
-    &[hidden] { display: none; }
+    &[hidden] {
+      display: none;
+    }
   }
 
   .type-superhero-mechanics {
@@ -990,7 +989,9 @@
     color: var(--magnusarchives-text-muted);
     font-size: 0.68rem;
 
-    strong { color: var(--magnusarchives-text-primary); }
+    strong {
+      color: var(--magnusarchives-text-primary);
+    }
   }
 
   .compact-technical-grid {
@@ -1381,7 +1382,9 @@
     .compact-item-header.weapon-item-header {
       grid-template-columns: 2.75rem minmax(0, 1fr);
 
-      .weapon-default-pool { grid-column: 2; }
+      .weapon-default-pool {
+        grid-column: 2;
+      }
     }
 
     .ability-core-mechanics,

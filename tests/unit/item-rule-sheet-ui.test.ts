@@ -16,18 +16,19 @@ describe("compact Ability Item Sheet", () => {
     expect(ability).toContain('class="compact-mechanic-field ability-pool-field"');
     expect(ability).toContain('class="compact-mechanic-field ability-edge-field"');
     expect(ability).toContain('class="ability-edge-control"><input name="system.cost.ignoresEdge"');
-    expect(styles).toContain("grid-template-columns: minmax(5rem, 6rem) minmax(6.5rem, auto) minmax(0, 1fr) minmax(8rem, 10rem)");
+    expect(styles).toContain(
+      "grid-template-columns: minmax(5rem, 6rem) minmax(6.5rem, auto) minmax(0, 1fr) minmax(8rem, 10rem)"
+    );
     expect(styles).not.toContain(".ability-pool-field {\n    grid-column: span 2");
-    expect(styles).toMatch(/\.ability-edge-control\s*\{[\s\S]*?justify-content:\s*center;[\s\S]*?min-height:\s*1\.65rem;\s*\}/);
+    expect(styles).toMatch(
+      /\.ability-edge-control\s*\{[\s\S]*?justify-content:\s*center;[\s\S]*?min-height:\s*1\.65rem;\s*\}/
+    );
   });
 
   it("keeps only payment mechanics above the Description", () => {
     const description = ability.indexOf("compact-rule-description");
-    for (const field of [
-      "system.cost.amount",
-      "system.cost.scalable",
-      "system.cost.ignoresEdge"
-    ]) expect(ability.indexOf(`name=\"${field}\"`)).toBeLessThan(description);
+    for (const field of ["system.cost.amount", "system.cost.scalable", "system.cost.ignoresEdge"])
+      expect(ability.indexOf(`name=\"${field}\"`)).toBeLessThan(description);
     expect(ability.indexOf("data-ability-allowed-pool")).toBeLessThan(description);
     expect(ability.indexOf('name="system.activation"')).toBeGreaterThan(description);
     expect(ability.indexOf('name="system.roll"')).toBeGreaterThan(description);
@@ -44,8 +45,15 @@ describe("compact Ability Item Sheet", () => {
       "showDamageEffect",
       "showRange",
       "showTargetMode"
-    ]) expect(ability).toContain(`abilityMechanics.${condition}`);
-    for (const field of ["system.activation", "system.roll", "system.rollModifier", "system.damage", "system.targetMode"]) {
+    ])
+      expect(ability).toContain(`abilityMechanics.${condition}`);
+    for (const field of [
+      "system.activation",
+      "system.roll",
+      "system.rollModifier",
+      "system.damage",
+      "system.targetMode"
+    ]) {
       expect(ability.indexOf(`name="${field}"`)).toBeGreaterThan(advanced);
     }
   });
@@ -64,7 +72,13 @@ describe("compact Ability Item Sheet", () => {
     expect(ability).toContain('elementType="prose-mirror"');
     const advanced = ability.indexOf("compact-technical-area");
     expect(advanced).toBeGreaterThan(ability.indexOf("compact-rule-description"));
-    for (const technical of ["system.slug", "system.tier", "system.category", "system.ruleElements.length", "system.grantedBy.instanceId"]) {
+    for (const technical of [
+      "system.slug",
+      "system.tier",
+      "system.category",
+      "system.ruleElements.length",
+      "system.grantedBy.instanceId"
+    ]) {
       expect(ability.indexOf(technical)).toBeGreaterThan(advanced);
     }
   });

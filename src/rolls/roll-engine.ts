@@ -27,7 +27,7 @@ export function effortCost(levels: number, surcharge = 0): number {
   const safeLevels = integer(levels, "Paid Effort");
   if (safeLevels === 0) return 0;
   const safeSurcharge = Math.max(0, Math.trunc(surcharge));
-  return 3 + ((safeLevels - 1) * 2) + (safeLevels * safeSurcharge);
+  return 3 + (safeLevels - 1) * 2 + safeLevels * safeSurcharge;
 }
 
 export interface PoolCostCalculation {
@@ -91,9 +91,10 @@ export function prepareRoll(context: RollContext): PreparedRoll {
   const damageEffort = integer(context.damageEffort ?? 0, "Damage Effort");
   const freeDamageEffort = integer(context.freeDamageEffort ?? 0, "Free Damage Effort");
   const freeEffort = integer(context.freeEffort, "Free Effort");
-  const totalEffortMaximum = context.limits.totalEffortMaximum === null
-    ? null
-    : integer(context.limits.totalEffortMaximum, "Maximum total Effort");
+  const totalEffortMaximum =
+    context.limits.totalEffortMaximum === null
+      ? null
+      : integer(context.limits.totalEffortMaximum, "Maximum total Effort");
   integer(context.poolValue, "Pool value");
 
   if (assets > assetLimit) throw new Error(`Assets cannot exceed the current limit of ${assetLimit}.`);
@@ -110,31 +111,17 @@ export function prepareRoll(context: RollContext): PreparedRoll {
 
   const breakdown: RollStepContribution[] = [];
   if (assets > 0) {
-    breakdown.push(contribution(
-      "core.assets",
-      "MAGNUSARCHIVES.Roll.Breakdown.Assets",
-      "ease",
-      assets,
-      "asset"
-    ));
+    breakdown.push(contribution("core.assets", "MAGNUSARCHIVES.Roll.Breakdown.Assets", "ease", assets, "asset"));
   }
   if (paidEffort > 0) {
-    breakdown.push(contribution(
-      "core.effort.paid",
-      "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort",
-      "ease",
-      paidEffort,
-      "effort"
-    ));
+    breakdown.push(
+      contribution("core.effort.paid", "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort", "ease", paidEffort, "effort")
+    );
   }
   if (freeEffort > 0) {
-    breakdown.push(contribution(
-      "core.effort.free",
-      "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort",
-      "ease",
-      freeEffort,
-      "free-effort"
-    ));
+    breakdown.push(
+      contribution("core.effort.free", "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort", "ease", freeEffort, "free-effort")
+    );
   }
   for (const entry of context.contributions) {
     integer(entry.steps, `Steps for '${entry.id}'`);
@@ -188,11 +175,7 @@ export function resolveRoll(prepared: PreparedRoll, naturalRoll: number): RollRe
   const markers = naturalRollMarkers(naturalRoll);
   const success = prepared.targetNumber === null ? null : naturalRoll >= prepared.targetNumber;
   const naturalDifficulty = naturalDifficultyForRoll(naturalRoll);
-  const beatsDifficulty = clamp(
-    naturalDifficulty + prepared.netSteps,
-    0,
-    prepared.context.limits.difficultyCeiling
-  );
+  const beatsDifficulty = clamp(naturalDifficulty + prepared.netSteps, 0, prepared.context.limits.difficultyCeiling);
 
   return {
     prepared,
@@ -231,102 +214,122 @@ function effectStatus(success: boolean | null): NaturalEffect["status"] {
   return success ? "applied" : "inapplicable";
 }
 
-export function coreNaturalEffects(
-  result: RollResult,
-  horrorIntrusionRange = 1
-): readonly NaturalEffect[] {
+export function coreNaturalEffects(result: RollResult, horrorIntrusionRange = 1): readonly NaturalEffect[] {
   const natural = result.naturalRoll;
   if (natural === null) return [];
   const base = {sourceId: "magnusarchives.core", naturalRoll: natural} as const;
   const horrorRange = normalizeHorrorIntrusionRange(horrorIntrusionRange);
   if (natural === 1) {
-    return [{
-      ...base,
-      id: "core.natural-1.intrusion",
-      kind: "gm-intrusion",
-      status: "applied",
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
-      triggersGMIntrusion: true,
-      intrusionProvenance: "natural-1"
-    }];
+    return [
+      {
+        ...base,
+        id: "core.natural-1.intrusion",
+        kind: "gm-intrusion",
+        status: "applied",
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
+        triggersGMIntrusion: true,
+        intrusionProvenance: "natural-1"
+      }
+    ];
   }
-  const intrusionEffects: NaturalEffect[] = natural <= horrorRange ? [{
-    id: `core.horror-mode.natural-${natural}.intrusion`,
-    sourceId: "magnusarchives.horror-mode",
-    naturalRoll: natural,
-    kind: "gm-intrusion",
-    status: "applied",
-    label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
-    triggersGMIntrusion: true,
-    intrusionProvenance: "horror-mode",
-    horrorIntrusionRange: horrorRange
-  }] : [];
+  const intrusionEffects: NaturalEffect[] =
+    natural <= horrorRange
+      ? [
+          {
+            id: `core.horror-mode.natural-${natural}.intrusion`,
+            sourceId: "magnusarchives.horror-mode",
+            naturalRoll: natural,
+            kind: "gm-intrusion",
+            status: "applied",
+            label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
+            triggersGMIntrusion: true,
+            intrusionProvenance: "horror-mode",
+            horrorIntrusionRange: horrorRange
+          }
+        ]
+      : [];
   if (natural === 17 || natural === 18) {
     const damageRoll = result.prepared.context.purpose === "damage";
-    return [...intrusionEffects, {
-      ...base,
-      id: `core.natural-${natural}.damage`,
-      kind: "damage-bonus",
-      status: damageRoll ? effectStatus(result.success) : "inapplicable",
-      label: `MAGNUSARCHIVES.Roll.NaturalEffects.Damage${natural}`,
-      damageBonus: natural === 17 ? 1 : 2
-    }];
+    return [
+      ...intrusionEffects,
+      {
+        ...base,
+        id: `core.natural-${natural}.damage`,
+        kind: "damage-bonus",
+        status: damageRoll ? effectStatus(result.success) : "inapplicable",
+        label: `MAGNUSARCHIVES.Roll.NaturalEffects.Damage${natural}`,
+        damageBonus: natural === 17 ? 1 : 2
+      }
+    ];
   }
   if (natural === 19) {
     const status = effectStatus(result.success);
     if (result.prepared.context.purpose === "damage") {
       const choiceStatus = status === "applied" ? "available" : status;
-      return [...intrusionEffects, {
-        ...base,
-        id: "core.natural-19.damage",
-        kind: "damage-bonus",
-        status: choiceStatus,
-        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19",
-        damageBonus: 3,
-        choiceGroup: "core.natural-19.choice"
-      }, {
+      return [
+        ...intrusionEffects,
+        {
+          ...base,
+          id: "core.natural-19.damage",
+          kind: "damage-bonus",
+          status: choiceStatus,
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19",
+          damageBonus: 3,
+          choiceGroup: "core.natural-19.choice"
+        },
+        {
+          ...base,
+          id: "core.natural-19.minor",
+          kind: "minor-effect",
+          status: choiceStatus,
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor",
+          choiceGroup: "core.natural-19.choice"
+        }
+      ];
+    }
+    return [
+      ...intrusionEffects,
+      {
         ...base,
         id: "core.natural-19.minor",
         kind: "minor-effect",
-        status: choiceStatus,
-        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor",
-        choiceGroup: "core.natural-19.choice"
-      }];
-    }
-    return [...intrusionEffects, {
-      ...base,
-      id: "core.natural-19.minor",
-      kind: "minor-effect",
-      status,
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
-    }];
+        status,
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
+      }
+    ];
   }
   if (natural === 20) {
     const status = effectStatus(result.success);
-    const effects: NaturalEffect[] = result.prepared.context.purpose === "damage"
-      ? [{
-          ...base,
-          id: "core.natural-20.damage",
-          kind: "damage-bonus",
-          status: status === "applied" ? "available" : status,
-          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20",
-          damageBonus: 4,
-          choiceGroup: "core.natural-20.choice"
-        }, {
-          ...base,
-          id: "core.natural-20.major",
-          kind: "major-effect",
-          status: status === "applied" ? "available" : status,
-          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major",
-          choiceGroup: "core.natural-20.choice"
-        }]
-      : [{
-          ...base,
-          id: "core.natural-20.major",
-          kind: "major-effect",
-          status,
-          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major"
-        }];
+    const effects: NaturalEffect[] =
+      result.prepared.context.purpose === "damage"
+        ? [
+            {
+              ...base,
+              id: "core.natural-20.damage",
+              kind: "damage-bonus",
+              status: status === "applied" ? "available" : status,
+              label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20",
+              damageBonus: 4,
+              choiceGroup: "core.natural-20.choice"
+            },
+            {
+              ...base,
+              id: "core.natural-20.major",
+              kind: "major-effect",
+              status: status === "applied" ? "available" : status,
+              label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major",
+              choiceGroup: "core.natural-20.choice"
+            }
+          ]
+        : [
+            {
+              ...base,
+              id: "core.natural-20.major",
+              kind: "major-effect",
+              status,
+              label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major"
+            }
+          ];
     if (result.prepared.poolCost > 0) {
       effects.push({
         ...base,

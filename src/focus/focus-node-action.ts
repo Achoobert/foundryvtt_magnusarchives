@@ -1,13 +1,17 @@
 import type {FocusDocumentLike} from "./focus-types";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>'"]/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    "\"": "&quot;"
-  })[character]!);
+  return value.replace(
+    /[&<>'"]/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+      })[character]!
+  );
 }
 
 export async function openFocusNode(focus: FocusDocumentLike, nodeId: string): Promise<void> {
@@ -15,7 +19,7 @@ export async function openFocusNode(focus: FocusDocumentLike, nodeId: string): P
   if (!node) throw new Error(`Focus node '${nodeId}' was not found.`);
   if (node.abilityUuid) {
     try {
-      const ability = await fromUuid(node.abilityUuid) as {
+      const ability = (await fromUuid(node.abilityUuid)) as {
         readonly sheet?: {render(force?: boolean): unknown};
       } | null;
       if (ability?.sheet) {

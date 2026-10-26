@@ -25,42 +25,62 @@ import {prepareDescriptorChoiceGroups} from "../../packages/package-choice-catal
 type DialogData = Record<string, unknown>;
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function embeddedPackages(actor: PackageCharacterLike): CharacterPackageItemLike[] {
-  return [...actor.items].filter((item) => (
-    item.type === "characterType" || item.type === "descriptor" || item.type === "species"
-  )) as unknown as CharacterPackageItemLike[];
+  return [...actor.items].filter(
+    (item) => item.type === "characterType" || item.type === "descriptor" || item.type === "species"
+  ) as unknown as CharacterPackageItemLike[];
 }
 
 async function selectWorldPackage(type: "characterType" | "descriptor" | "species"): Promise<PackageSourceLike | null> {
   const items = [...game.items].filter((item) => item.type === type).sort((a, b) => a.name.localeCompare(b.name));
   if (!items.length) {
-    ui.notifications.warn(game.i18n.localize(`MAGNUSARCHIVES.Packages.NoWorld${type === "characterType" ? "Types" : type === "descriptor" ? "Descriptors" : "Species"}`));
+    ui.notifications.warn(
+      game.i18n.localize(
+        `MAGNUSARCHIVES.Packages.NoWorld${type === "characterType" ? "Types" : type === "descriptor" ? "Descriptors" : "Species"}`
+      )
+    );
     return null;
   }
-  const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize(type === "characterType" ? "MAGNUSARCHIVES.Packages.AddType" : type === "descriptor" ? "MAGNUSARCHIVES.Packages.AddDescriptor" : "MAGNUSARCHIVES.Packages.AddSpecies")},
+  const data = (await foundry.applications.api.DialogV2.input({
+    window: {
+      title: game.i18n.localize(
+        type === "characterType"
+          ? "MAGNUSARCHIVES.Packages.AddType"
+          : type === "descriptor"
+            ? "MAGNUSARCHIVES.Packages.AddDescriptor"
+            : "MAGNUSARCHIVES.Packages.AddSpecies"
+      )
+    },
     content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}
       <select name="uuid">${items.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select>
     </label></div>`,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-  }) as DialogData | null;
-  return data ? await fromUuid(String(data.uuid ?? "")) as PackageSourceLike | null : null;
+  })) as DialogData | null;
+  return data ? ((await fromUuid(String(data.uuid ?? ""))) as PackageSourceLike | null) : null;
 }
 
 async function removalMode(name: string): Promise<RemoveGrantedItemsMode | null> {
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.Remove")},
     content: `<div class="magnusarchives-dialog-fields"><p>${game.i18n.format("MAGNUSARCHIVES.Packages.RemoveConfirm", {name: escapeHtml(name)})}</p>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Packages.GrantedItems")}
         <select name="mode"><option value="delete">${game.i18n.localize("MAGNUSARCHIVES.Packages.RemoveWithGrants")}</option><option value="keep">${game.i18n.localize("MAGNUSARCHIVES.Packages.KeepGrants")}</option></select>
       </label></div>`,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Packages.Remove")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   return data && (data.mode === "delete" || data.mode === "keep") ? data.mode : null;
 }
 
@@ -87,7 +107,7 @@ async function promptEdgePool(title: string): Promise<PoolKey | null> {
     options: poolChoiceOptions(POOL_KEYS)
   });
   const pool = result?.[0];
-  return POOL_KEYS.includes(pool as PoolKey) ? pool as PoolKey : null;
+  return POOL_KEYS.includes(pool as PoolKey) ? (pool as PoolKey) : null;
 }
 
 async function promptSuperheroicsPool(title: string): Promise<PoolKey | null> {
@@ -99,11 +119,11 @@ async function promptSuperheroicsPool(title: string): Promise<PoolKey | null> {
     options: poolChoiceOptions(POOL_KEYS)
   });
   const pool = result?.[0];
-  return POOL_KEYS.includes(pool as PoolKey) ? pool as PoolKey : null;
+  return POOL_KEYS.includes(pool as PoolKey) ? (pool as PoolKey) : null;
 }
 
 export async function promptAttachType(actor: PackageCharacterLike, dropped?: PackageSourceLike): Promise<boolean> {
-  const source = dropped ?? await selectWorldPackage("characterType");
+  const source = dropped ?? (await selectWorldPackage("characterType"));
   if (!source) return false;
   const existing = embeddedPackages(actor).find((item) => item.type === "characterType");
   let replaceItemId: string | undefined;
@@ -117,24 +137,32 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
     });
     if (!confirmed) return false;
     replaceItemId = existing.id;
-    replaceGrantedItemsMode = await removalMode(existing.name) ?? undefined;
+    replaceGrantedItemsMode = (await removalMode(existing.name)) ?? undefined;
     if (!replaceGrantedItemsMode) return false;
   }
   const system = source.system as unknown as CharacterTypeSystemData;
   let attached = false;
   let edgePool: PoolKey | undefined;
   if (system.edgeGrant.mode === "choice") {
-    edgePool = await promptEdgePool(source.name) ?? undefined;
+    edgePool = (await promptEdgePool(source.name)) ?? undefined;
     if (!edgePool) return false;
   }
   let superheroicsPool: PoolKey | undefined;
   if (system.genre === "superhero" && system.superhero?.superheroics?.enabled) {
-    superheroicsPool = await promptSuperheroicsPool(source.name) ?? undefined;
+    superheroicsPool = (await promptSuperheroicsPool(source.name)) ?? undefined;
     if (!superheroicsPool) return false;
   }
-  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+  const skillChoices = await promptGroupChoices(
+    source.name,
+    system.choiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+  );
   if (skillChoices === null) return false;
-  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
+  const abilityChoices = await promptGroupChoices(
+    source.name,
+    system.abilityChoiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice")
+  );
   if (abilityChoices === null) return false;
   try {
     await game.magnusarchives.services.characterPackages.attachType(actor, source, {
@@ -154,7 +182,7 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
       const suggestion = await resolveLegacyGenreSuggestion(
         system,
         genres,
-        async (uuid) => await fromUuid(uuid) as GenreDocumentLike | null
+        async (uuid) => (await fromUuid(uuid)) as GenreDocumentLike | null
       );
       if (suggestion) {
         const useSuggestion = await foundry.applications.api.DialogV2.confirm({
@@ -166,7 +194,9 @@ export async function promptAttachType(actor: PackageCharacterLike, dropped?: Pa
         if (useSuggestion) await promptAttachGenre(genreActor, suggestion, "typeSuggestion");
       }
     }
-  } catch (error) { if (!(error instanceof GrantConflictCancelledError)) notify(error); }
+  } catch (error) {
+    if (!(error instanceof GrantConflictCancelledError)) notify(error);
+  }
   return attached;
 }
 
@@ -175,16 +205,20 @@ export async function promptAttachDescriptor(
   dropped?: PackageSourceLike,
   fixedRole?: PackageRole
 ): Promise<boolean> {
-  const source = dropped ?? await selectWorldPackage("descriptor");
+  const source = dropped ?? (await selectWorldPackage("descriptor"));
   if (!source) return false;
-  const hasPrimary = embeddedPackages(actor).some((item) => item.type === "descriptor" && item.system.instance.role === "primary");
-  const roleData = fixedRole ? {role: fixedRole} : await foundry.applications.api.DialogV2.input({
-    window: {title: source.name},
-    content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorRole")}
+  const hasPrimary = embeddedPackages(actor).some(
+    (item) => item.type === "descriptor" && item.system.instance.role === "primary"
+  );
+  const roleData = fixedRole
+    ? {role: fixedRole}
+    : ((await foundry.applications.api.DialogV2.input({
+        window: {title: source.name},
+        content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorRole")}
       <select name="role">${hasPrimary ? "" : `<option value="primary">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.primary")}</option>`}<option value="additional">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.additional")}</option><option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.custom")}</option></select>
     </label></div>`,
-    ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Next")}
-  }) as DialogData | null;
+        ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Next")}
+      })) as DialogData | null);
   if (!roleData) return false;
   const system = source.system as unknown as DescriptorSystemData;
   const poolChoices = await promptPoolBonusChoices(source.name, system.poolBonusChoiceGroups ?? []);
@@ -204,7 +238,9 @@ export async function promptAttachDescriptor(
     });
     ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorAttached"));
     return true;
-  } catch (error) { if (!(error instanceof GrantConflictCancelledError)) notify(error); }
+  } catch (error) {
+    if (!(error instanceof GrantConflictCancelledError)) notify(error);
+  }
   return false;
 }
 
@@ -221,9 +257,10 @@ async function promptPoolBonusChoices(
     }
     const selected = await promptPackageChoice({
       title,
-      prompt: group.choose === 1
-        ? game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseOnePool")
-        : game.i18n.format("MAGNUSARCHIVES.Packages.ChooseManyPools", {count: group.choose}),
+      prompt:
+        group.choose === 1
+          ? game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseOnePool")
+          : game.i18n.format("MAGNUSARCHIVES.Packages.ChooseManyPools", {count: group.choose}),
       ariaLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllowedPools"),
       choose: group.choose,
       options: poolChoiceOptions(allowed)
@@ -254,13 +291,13 @@ async function promptGroupChoices(
   for (const group of groups) {
     const prompt = group.rank
       ? game.i18n.format("MAGNUSARCHIVES.Packages.ChooseSkills", {
-        count: group.choose,
-        rank: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
-      })
+          count: group.choose,
+          rank: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
+        })
       : game.i18n.format(
-        group.choose === 1 ? "MAGNUSARCHIVES.Packages.ChooseOne" : "MAGNUSARCHIVES.Packages.ChooseMany",
-        {count: group.choose, label}
-      );
+          group.choose === 1 ? "MAGNUSARCHIVES.Packages.ChooseOne" : "MAGNUSARCHIVES.Packages.ChooseMany",
+          {count: group.choose, label}
+        );
     const selected = await promptPackageChoice({
       title,
       prompt,
@@ -278,7 +315,7 @@ async function promptGroupChoices(
 }
 
 export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?: PackageSourceLike): Promise<void> {
-  const source = dropped ?? await selectWorldPackage("species");
+  const source = dropped ?? (await selectWorldPackage("species"));
   if (!source) return;
   const existing = embeddedPackages(actor).find((item) => item.type === "species");
   let replaceItemId: string | undefined;
@@ -292,18 +329,26 @@ export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?:
     });
     if (!confirmed) return;
     replaceItemId = existing.id;
-    replaceGrantedItemsMode = await removalMode(existing.name) ?? undefined;
+    replaceGrantedItemsMode = (await removalMode(existing.name)) ?? undefined;
     if (!replaceGrantedItemsMode) return;
   }
   const system = source.system as unknown as SpeciesSystemData;
   let edgePool: PoolKey | undefined;
   if (system.edgeGrant.mode === "choice") {
-    edgePool = await promptEdgePool(source.name) ?? undefined;
+    edgePool = (await promptEdgePool(source.name)) ?? undefined;
     if (!edgePool) return;
   }
-  const skillChoices = await promptGroupChoices(source.name, system.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+  const skillChoices = await promptGroupChoices(
+    source.name,
+    system.choiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+  );
   if (skillChoices === null) return;
-  const abilityChoices = await promptGroupChoices(source.name, system.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
+  const abilityChoices = await promptGroupChoices(
+    source.name,
+    system.abilityChoiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice")
+  );
   if (abilityChoices === null) return;
   const descriptorChoiceGroups = await prepareDescriptorChoiceGroups(system.descriptorChoiceGroups ?? []);
   const descriptorChoices = await promptGroupChoices(
@@ -312,36 +357,49 @@ export async function promptAttachSpecies(actor: PackageCharacterLike, dropped?:
     game.i18n.localize("MAGNUSARCHIVES.Species.DescriptorChoice")
   );
   if (descriptorChoices === null) return;
-  const selectedDescriptors: DescriptorGrant[] = descriptorChoiceGroups.flatMap((group) => (
+  const selectedDescriptors: DescriptorGrant[] = descriptorChoiceGroups.flatMap((group) =>
     group.options
       .filter((option) => descriptorChoices[group.id]?.includes(option.id))
       .map((option) => ({...option, id: `${group.id}:${option.id}`}))
-  ));
+  );
   const descriptorSkillChoices: Record<string, Record<string, string[]>> = {};
   const descriptorPoolChoices: Record<string, Record<string, PoolKey[]>> = {};
   for (const grant of [...(system.descriptorGrants ?? []), ...selectedDescriptors]) {
-    const descriptor = grant.descriptorUuid ? await fromUuid(grant.descriptorUuid) as PackageSourceLike | null : null;
+    const descriptor = grant.descriptorUuid
+      ? ((await fromUuid(grant.descriptorUuid)) as PackageSourceLike | null)
+      : null;
     const descriptorSystem = (descriptor?.system ?? grant.snapshot.system) as unknown as DescriptorSystemData;
     const poolSelections = await promptPoolBonusChoices(
       grant.snapshot.name || descriptor?.name || source.name,
       descriptorSystem.poolBonusChoiceGroups ?? []
     );
     if (poolSelections === null) return;
-    const selections = await promptGroupChoices(grant.snapshot.name || descriptor?.name || source.name, descriptorSystem.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+    const selections = await promptGroupChoices(
+      grant.snapshot.name || descriptor?.name || source.name,
+      descriptorSystem.choiceGroups ?? [],
+      game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+    );
     if (selections === null) return;
     descriptorSkillChoices[grant.id] = selections;
     descriptorPoolChoices[grant.id] = poolSelections;
   }
   try {
     await game.magnusarchives.services.characterPackages.attachSpecies(actor, source, {
-      ...(edgePool ? {edgePool} : {}), skillChoices, abilityChoices, descriptorChoices,
-      resolvedDescriptorChoiceGroups: descriptorChoiceGroups, descriptorSkillChoices, descriptorPoolChoices,
+      ...(edgePool ? {edgePool} : {}),
+      skillChoices,
+      abilityChoices,
+      descriptorChoices,
+      resolvedDescriptorChoiceGroups: descriptorChoiceGroups,
+      descriptorSkillChoices,
+      descriptorPoolChoices,
       conflictResolver: resolveGrantConflictWithDialog,
       ...(replaceItemId ? {replaceItemId} : {}),
       ...(replaceGrantedItemsMode ? {replaceGrantedItemsMode} : {})
     });
     ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Species.Attached"));
-  } catch (error) { if (!(error instanceof GrantConflictCancelledError)) notify(error); }
+  } catch (error) {
+    if (!(error instanceof GrantConflictCancelledError)) notify(error);
+  }
 }
 
 export async function promptRemovePackage(actor: PackageCharacterLike, packageItemId: string): Promise<void> {
@@ -352,5 +410,7 @@ export async function promptRemovePackage(actor: PackageCharacterLike, packageIt
   try {
     await game.magnusarchives.services.characterPackages.remove(actor, packageItemId, mode);
     ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.Removed"));
-  } catch (error) { notify(error); }
+  } catch (error) {
+    notify(error);
+  }
 }

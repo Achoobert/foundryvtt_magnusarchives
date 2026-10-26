@@ -5,15 +5,17 @@ export function guardEditableActions<T extends Record<string, SheetAction>>(
   actions: T,
   mutatingActions: ReadonlySet<string>
 ): T {
-  return Object.fromEntries(Object.entries(actions).map(([name, handler]) => [
-    name,
-    mutatingActions.has(name)
-      ? function guardedEditableAction(this: {readonly isEditable: boolean}, ...args: any[]): unknown {
-          if (!this.isEditable) return undefined;
-          return handler.apply(this, args);
-        }
-      : handler
-  ])) as T;
+  return Object.fromEntries(
+    Object.entries(actions).map(([name, handler]) => [
+      name,
+      mutatingActions.has(name)
+        ? function guardedEditableAction(this: {readonly isEditable: boolean}, ...args: any[]): unknown {
+            if (!this.isEditable) return undefined;
+            return handler.apply(this, args);
+          }
+        : handler
+    ])
+  ) as T;
 }
 
 /**
@@ -28,7 +30,8 @@ export function enforceReadOnlySheetPresentation(
   if (editable) return;
   for (const field of root.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
     "input[name], select[name], textarea[name]"
-  )) field.disabled = true;
+  ))
+    field.disabled = true;
   for (const editableRegion of root.querySelectorAll<HTMLElement>("[data-edit]")) {
     editableRegion.removeAttribute("data-edit");
   }

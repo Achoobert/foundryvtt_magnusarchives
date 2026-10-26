@@ -1,7 +1,4 @@
-import type {
-  CoreCharacterSetupRequest,
-  CoreCreationMode
-} from "../creation/character-creation-types";
+import type {CoreCharacterSetupRequest, CoreCreationMode} from "../creation/character-creation-types";
 
 export type CharacterInitializationErrorCode =
   | "not-character"
@@ -10,7 +7,10 @@ export type CharacterInitializationErrorCode =
   | "state-not-persisted";
 
 export class CharacterInitializationError extends Error {
-  constructor(readonly code: CharacterInitializationErrorCode, message: string) {
+  constructor(
+    readonly code: CharacterInitializationErrorCode,
+    message: string
+  ) {
     super(message);
     this.name = "CharacterInitializationError";
   }
@@ -32,14 +32,13 @@ export class CharacterInitializationService {
     this.#now = now;
   }
 
-  async setup(
-    actor: InitializationCharacterLike,
-    request: CoreCharacterSetupRequest
-  ): Promise<void> {
+  async setup(actor: InitializationCharacterLike, request: CoreCharacterSetupRequest): Promise<void> {
     this.#assertAvailable(actor);
     const allocation = Object.values(request.pools);
-    if (allocation.some((value) => !Number.isInteger(value) || value < 0)
-      || allocation.reduce((sum, value) => sum + value, 0) !== 6) {
+    if (
+      allocation.some((value) => !Number.isInteger(value) || value < 0) ||
+      allocation.reduce((sum, value) => sum + value, 0) !== 6
+    ) {
       throw new CharacterInitializationError("invalid-pools", "Core Setup must distribute exactly six Pool points.");
     }
     const descriptorLabel = request.descriptorLabel?.trim().replace(/\s+/g, " ") ?? "";
@@ -60,12 +59,14 @@ export class CharacterInitializationService {
       "system.proficiencies.weaponCategories": ["light"],
       "system.proficiencies.armorCategories": [],
       "system.identity.descriptorLabel": descriptorLabel,
-      ...(arcName ? {
-        "system.arc.key": request.arc?.key ?? "",
-        "system.arc.name": arcName,
-        "system.arc.stage": "none",
-        "system.arc.stepsCompleted": 0
-      } : {}),
+      ...(arcName
+        ? {
+            "system.arc.key": request.arc?.key ?? "",
+            "system.arc.name": arcName,
+            "system.arc.stage": "none",
+            "system.arc.stepsCompleted": 0
+          }
+        : {}),
       "system.creation": {
         coreInitialized: true,
         mode: "completed",
@@ -80,19 +81,18 @@ export class CharacterInitializationService {
     }
   }
 
-  async markInitialized(
-    actor: InitializationCharacterLike,
-    mode: "skipped" | "manual"
-  ): Promise<void> {
+  async markInitialized(actor: InitializationCharacterLike, mode: "skipped" | "manual"): Promise<void> {
     if (actor.type !== "character") {
       throw new CharacterInitializationError("not-character", "Core Setup requires a Character.");
     }
     if (actor.system.creation.coreInitialized) return;
-    await actor.update({"system.creation": {
-      coreInitialized: true,
-      mode,
-      initializedAt: this.#now()
-    }});
+    await actor.update({
+      "system.creation": {
+        coreInitialized: true,
+        mode,
+        initializedAt: this.#now()
+      }
+    });
     if (!actor.system.creation.coreInitialized) {
       throw new CharacterInitializationError(
         "state-not-persisted",

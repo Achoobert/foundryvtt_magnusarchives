@@ -1,13 +1,26 @@
 import {RECOVERY_TYPES, WOUND_SEVERITIES, type RecoveryType} from "../../constants/system";
-import {defaultIdFactory, type CharacterDocumentLike, type RecoverySlotData, type WoundCapacities} from "../../rules/core/core-types";
+import {
+  defaultIdFactory,
+  type CharacterDocumentLike,
+  type RecoverySlotData,
+  type WoundCapacities
+} from "../../rules/core/core-types";
 import {recoveryUsageFromSlots, resetRecoveryTrack} from "../../rules/core/recovery-track";
 
 type DialogData = Record<string, unknown>;
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function integer(value: unknown, label: string): number {
@@ -36,22 +49,26 @@ export function validateWoundCapacityModifiers(
 export async function promptWoundCapacityOverride(actor: CharacterDocumentLike): Promise<void> {
   const calculated = actor.system.derived.wounds.calculatedCapacities;
   const current = actor.system.overrides.wounds ?? {minor: 0, moderate: 0, major: 0};
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundsEdit")},
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-wound-override-dialog">
       <section class="magnusarchives-dialog-section">
         <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundModifiers")}</span>
         <div class="magnusarchives-dialog-field-grid">
-          ${WOUND_SEVERITIES.map((severity) => `<label class="magnusarchives-dialog-field">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)}
+          ${WOUND_SEVERITIES.map(
+            (
+              severity
+            ) => `<label class="magnusarchives-dialog-field">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${severity}`)}
             <input name="${severity}" type="number" step="1" value="${current[severity]}">
             <small>${game.i18n.localize("MAGNUSARCHIVES.Overrides.Calculated")}: ${calculated[severity]}</small>
-          </label>`).join("")}
+          </label>`
+          ).join("")}
         </div>
       </section>
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return;
   try {
     const modifiers = validateWoundCapacityModifiers(calculated, {
@@ -66,7 +83,10 @@ export async function promptWoundCapacityOverride(actor: CharacterDocumentLike):
 }
 
 function recoveryTypeOptions(selected: RecoveryType): string {
-  return RECOVERY_TYPES.map((type) => `<option value="${type}"${type === selected ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}</option>`).join("");
+  return RECOVERY_TYPES.map(
+    (type) =>
+      `<option value="${type}"${type === selected ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${type}`)}</option>`
+  ).join("");
 }
 
 function recoverySlotRow(slot: RecoverySlotData): string {
@@ -101,7 +121,11 @@ export function recoveryOverrideDialogContent(slots: readonly RecoverySlotData[]
 function syncRecoverySlotControls(root: HTMLElement): void {
   const rows = [...root.querySelectorAll<HTMLElement>("[data-recovery-slot-id]")];
   const order = root.querySelector<HTMLInputElement>('input[name="slotOrder"]');
-  if (order) order.value = rows.map((row) => row.dataset.recoverySlotId ?? "").filter(Boolean).join(",");
+  if (order)
+    order.value = rows
+      .map((row) => row.dataset.recoverySlotId ?? "")
+      .filter(Boolean)
+      .join(",");
   for (const [index, row] of rows.entries()) {
     const up = row.querySelector<HTMLButtonElement>('[data-recovery-slot-move="up"]');
     const down = row.querySelector<HTMLButtonElement>('[data-recovery-slot-move="down"]');
@@ -141,8 +165,11 @@ export function parseRecoveryOverrideDialogData(
   data: DialogData,
   currentSlots: readonly RecoverySlotData[]
 ): {slots: RecoverySlotData[]; rollModifier: number} {
-  const order = String(data.slotOrder ?? "").split(",").filter(Boolean);
-  if (order.length === 0 || new Set(order).size !== order.length) throw new Error("Recovery track must contain unique slots.");
+  const order = String(data.slotOrder ?? "")
+    .split(",")
+    .filter(Boolean);
+  if (order.length === 0 || new Set(order).size !== order.length)
+    throw new Error("Recovery track must contain unique slots.");
   const current = new Map(currentSlots.map((slot) => [slot.id, slot]));
   const slots = order.map((id) => {
     const type = String(data[`slotType__${id}`] ?? "") as RecoveryType;
@@ -156,13 +183,13 @@ export function parseRecoveryOverrideDialogData(
 
 export async function promptRecoveryOverride(actor: CharacterDocumentLike): Promise<void> {
   const slots = actor.system.recovery.slots;
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Overrides.RecoveryEdit")},
     content: recoveryOverrideDialogContent(slots, actor.system.recovery.rollModifier),
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")},
     render: (_event: Event, dialog: {element: HTMLElement}) => bindRecoveryOverrideDialog(dialog.element)
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return;
   try {
     const result = parseRecoveryOverrideDialogData(data, slots);

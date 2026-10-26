@@ -1,7 +1,11 @@
 import {describe, expect, it, vi} from "vitest";
 
 import type {GenreDocumentLike} from "../../src/genre/genre-types";
-import {legacyGenreMigrationCandidate, legacyGenreSuggestion, resolveLegacyGenreSuggestion} from "../../src/genre/genre-suggestion";
+import {
+  legacyGenreMigrationCandidate,
+  legacyGenreSuggestion,
+  resolveLegacyGenreSuggestion
+} from "../../src/genre/genre-suggestion";
 import {GenreChoiceError, GenreService, type GenreCharacterLike} from "../../src/services/genre-service";
 
 function genre(overrides: Partial<GenreDocumentLike["system"]> = {}): GenreDocumentLike {
@@ -13,12 +17,14 @@ function genre(overrides: Partial<GenreDocumentLike["system"]> = {}): GenreDocum
     img: "genre.svg",
     system: {
       description: "<p>Genre text</p>",
-      abilityCatalog: [{
-        id: "entry-1",
-        abilityUuid: "Item.ability-1",
-        minimumTier: 3,
-        snapshot: {name: "Power Shift", img: "power.svg", system: {description: "<p>Power</p>", tier: 3}}
-      }],
+      abilityCatalog: [
+        {
+          id: "entry-1",
+          abilityUuid: "Item.ability-1",
+          minimumTier: 3,
+          snapshot: {name: "Power Shift", img: "power.svg", system: {description: "<p>Power</p>", tier: 3}}
+        }
+      ],
       options: {totalEffortCapMode: "unlimited"},
       legacyKey: "superhero",
       ...overrides
@@ -66,7 +72,9 @@ function actor(): GenreCharacterLike & {documents: any[]; updates: Record<string
             }
             return document;
           },
-          async delete() { documents.splice(documents.indexOf(document), 1); }
+          async delete() {
+            documents.splice(documents.indexOf(document), 1);
+          }
         };
         return document;
       });
@@ -79,14 +87,17 @@ function actor(): GenreCharacterLike & {documents: any[]; updates: Record<string
 
 function service(activeGenre = genre()): GenreService {
   return new GenreService(
-    async (uuid) => uuid === activeGenre.uuid ? activeGenre : null,
-    async (uuid) => uuid === "Item.ability-1" ? {
-      uuid,
-      name: "Power Shift",
-      type: "ability",
-      img: "power.svg",
-      system: {description: "<p>Authoritative source</p>", activation: "passive"}
-    } : null,
+    async (uuid) => (uuid === activeGenre.uuid ? activeGenre : null),
+    async (uuid) =>
+      uuid === "Item.ability-1"
+        ? {
+            uuid,
+            name: "Power Shift",
+            type: "ability",
+            img: "power.svg",
+            system: {description: "<p>Authoritative source</p>", activation: "passive"}
+          }
+        : null,
     () => "genre-instance",
     () => 1234
   );
@@ -96,23 +107,27 @@ describe("GenreService", () => {
   it("keeps future Origin entries distinct from ordinary Genre progression", async () => {
     const character = actor();
     await character.update({"system.genre.sourceUuid": "Item.genre-1"});
-    const sourceGenre = genre({abilityCatalog: [
-      ...genre().system.abilityCatalog,
-      {
-        id: "origin-armored-body",
-        abilityUuid: "Item.armored-body",
-        minimumTier: 1,
-        catalog: "origin",
-        minimumSuperheroRank: 2,
-        snapshot: {name: "Armored Body", system: {description: "<p>Origin</p>"}}
-      }
-    ]});
+    const sourceGenre = genre({
+      abilityCatalog: [
+        ...genre().system.abilityCatalog,
+        {
+          id: "origin-armored-body",
+          abilityUuid: "Item.armored-body",
+          minimumTier: 1,
+          catalog: "origin",
+          minimumSuperheroRank: 2,
+          snapshot: {name: "Armored Body", system: {description: "<p>Origin</p>"}}
+        }
+      ]
+    });
     const genres = service(sourceGenre);
-    expect(genres.eligibleEntries(character, sourceGenre, character.system.advancement.pendingGenreChoices[0]!))
-      .toHaveLength(1);
+    expect(
+      genres.eligibleEntries(character, sourceGenre, character.system.advancement.pendingGenreChoices[0]!)
+    ).toHaveLength(1);
     expect(genres.manualCatalog(character, sourceGenre).map((entry) => entry.id)).toEqual(["entry-1"]);
-    await expect(genres.acquireManual(character, "origin-armored-body"))
-      .rejects.toThrow("not part of Genre progression");
+    await expect(genres.acquireManual(character, "origin-armored-body")).rejects.toThrow(
+      "not part of Genre progression"
+    );
   });
 
   it("attaches exactly one authoritative Genre reference and replaces it explicitly", async () => {
@@ -167,15 +182,14 @@ describe("GenreService", () => {
         }
       }
     });
-    await expect(genres.acquire(character, "choice-1", "entry-1"))
-      .rejects.toBeInstanceOf(GenreChoiceError);
+    await expect(genres.acquire(character, "choice-1", "entry-1")).rejects.toBeInstanceOf(GenreChoiceError);
   });
 
   it("never treats a non-Ability UUID target as the authoritative catalog source", async () => {
     const character = actor();
     const sourceGenre = genre();
     const genres = new GenreService(
-      async (uuid) => uuid === sourceGenre.uuid ? sourceGenre : null,
+      async (uuid) => (uuid === sourceGenre.uuid ? sourceGenre : null),
       async (uuid) => ({
         uuid,
         name: "Wrong Document",
@@ -198,14 +212,12 @@ describe("GenreService", () => {
   it("does not consume a choice when no Genre is attached or an entry is ineligible", async () => {
     const character = actor();
     const genres = service();
-    await expect(genres.acquire(character, "choice-1", "entry-1"))
-      .rejects.toMatchObject({code: "genre-required"});
+    await expect(genres.acquire(character, "choice-1", "entry-1")).rejects.toMatchObject({code: "genre-required"});
     expect(character.system.advancement.pendingGenreChoices).toHaveLength(1);
 
     await genres.attach(character, genre());
     (character.system as {tier: number}).tier = 2;
-    await expect(genres.acquire(character, "choice-1", "entry-1"))
-      .rejects.toMatchObject({code: "entry-ineligible"});
+    await expect(genres.acquire(character, "choice-1", "entry-1")).rejects.toMatchObject({code: "entry-ineligible"});
     expect(character.system.advancement.pendingGenreChoices).toHaveLength(1);
   });
 
@@ -220,8 +232,7 @@ describe("GenreService", () => {
       name: "Power Shift",
       system: {grantedBy: {contentUuid: "Item.ability-1", contentKey: "ability:power shift"}}
     });
-    await expect(genres.acquire(character, "choice-1", "entry-1"))
-      .rejects.toMatchObject({code: "duplicate-grant"});
+    await expect(genres.acquire(character, "choice-1", "entry-1")).rejects.toMatchObject({code: "duplicate-grant"});
     const resolver = vi.fn(async () => ({action: "gmOverride" as const}));
     const result = await genres.acquire(character, "choice-1", "entry-1", resolver);
     expect(resolver).toHaveBeenCalledWith(expect.objectContaining({context: "genre"}));
@@ -244,9 +255,14 @@ describe("GenreService", () => {
     expect(character.system.advancement.pendingGenreChoices).toEqual(pendingBefore);
     expect(genres.manualCatalog(character, sourceGenre)[0]?.owned).toBe(true);
     expect(character.documents[0]).toMatchObject({
-      system: {grantedBy: {
-        kind: "genre", sourceUuid: sourceGenre.uuid, instanceId: "genre-instance", grantId: "entry-1"
-      }}
+      system: {
+        grantedBy: {
+          kind: "genre",
+          sourceUuid: sourceGenre.uuid,
+          instanceId: "genre-instance",
+          grantId: "entry-1"
+        }
+      }
     });
   });
 
@@ -258,7 +274,8 @@ describe("GenreService", () => {
     await genres.acquireManual(character, "entry-1");
 
     expect(await genres.undoManual(character, "entry-1", false)).toEqual({
-      abilityDeleted: false, abilityRetained: true
+      abilityDeleted: false,
+      abilityRetained: true
     });
     expect(character.documents).toHaveLength(1);
     expect(character.documents[0].system.grantedBy.status).toBe("retained");
@@ -267,13 +284,20 @@ describe("GenreService", () => {
     await genres.acquireManual(character, "entry-1");
     expect(character.documents[0].system.grantedBy.status).toBe("active");
     expect(await genres.undoManual(character, "entry-1", true)).toEqual({
-      abilityDeleted: true, abilityRetained: false
+      abilityDeleted: true,
+      abilityRetained: false
     });
     expect(character.documents).toEqual([]);
   });
 
   it("matches legacy Type suggestions deterministically without overriding Character data", () => {
-    const fantasy = {...genre(), id: "b", uuid: "Item.b", name: "Fantasy", system: {...genre().system, legacyKey: "fantasy"}} as GenreDocumentLike;
+    const fantasy = {
+      ...genre(),
+      id: "b",
+      uuid: "Item.b",
+      name: "Fantasy",
+      system: {...genre().system, legacyKey: "fantasy"}
+    } as GenreDocumentLike;
     const duplicate = {...fantasy, id: "a", uuid: "Item.a"} as GenreDocumentLike;
     expect(legacyGenreSuggestion({genre: "fantasy"}, [fantasy, duplicate])?.uuid).toBe("Item.a");
     expect(legacyGenreSuggestion({genre: "none"}, [fantasy])).toBeNull();
@@ -282,11 +306,9 @@ describe("GenreService", () => {
 
   it("resolves a legacy custom Type suggestion by UUID, including compendium sources", async () => {
     const compendium = {...genre(), uuid: "Compendium.magnusarchives.genres.Item.hero"} as GenreDocumentLike;
-    const resolve = vi.fn(async (uuid: string) => uuid === compendium.uuid ? compendium : null);
-    await expect(resolveLegacyGenreSuggestion(
-      {genre: "custom", customGenreId: compendium.uuid},
-      [],
-      resolve
-    )).resolves.toBe(compendium);
+    const resolve = vi.fn(async (uuid: string) => (uuid === compendium.uuid ? compendium : null));
+    await expect(
+      resolveLegacyGenreSuggestion({genre: "custom", customGenreId: compendium.uuid}, [], resolve)
+    ).resolves.toBe(compendium);
   });
 });

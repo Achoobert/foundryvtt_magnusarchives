@@ -20,13 +20,7 @@ export const ITEM_TYPES = [
   "species"
 ] as const;
 
-export const SKILL_RANKS = [
-  "inability",
-  "untrained",
-  "trained",
-  "specialized",
-  "expert"
-] as const;
+export const SKILL_RANKS = ["inability", "untrained", "trained", "specialized", "expert"] as const;
 
 export const SKILL_DEFAULT_POOLS = ["choose", "might", "speed", "intellect"] as const;
 

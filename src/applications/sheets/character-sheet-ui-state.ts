@@ -6,36 +6,28 @@ export interface CharacterSheetUiState {
 
 /** Capture tab and viewport state before Application V2 replaces the Character Sheet DOM. */
 export function captureCharacterSheetUiState(root: ParentNode): CharacterSheetUiState {
-  const tabs = [...root.querySelectorAll<HTMLElement>(
-    ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
-  )];
+  const tabs = [
+    ...root.querySelectorAll<HTMLElement>(".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]")
+  ];
   const active = tabs.find((tab) => tab.classList.contains("active"));
-  const disclosures = [...root.querySelectorAll<HTMLDetailsElement>(
-    "details[data-persistent-disclosure]"
-  )];
+  const disclosures = [...root.querySelectorAll<HTMLDetailsElement>("details[data-persistent-disclosure]")];
   return {
     activeTab: active?.dataset.tab ?? "skills",
     tabScroll: Object.fromEntries(tabs.map((tab) => [tab.dataset.tab ?? "", tab.scrollTop])),
-    disclosures: Object.fromEntries(disclosures.map((details) => [
-      details.dataset.persistentDisclosure ?? "",
-      details.open
-    ]))
+    disclosures: Object.fromEntries(
+      disclosures.map((details) => [details.dataset.persistentDisclosure ?? "", details.open])
+    )
   };
 }
 
 /** Restore independent tab scroll positions after the active tab has been restored. */
-export function restoreCharacterSheetScroll(
-  root: ParentNode,
-  state: CharacterSheetUiState
-): void {
+export function restoreCharacterSheetScroll(root: ParentNode, state: CharacterSheetUiState): void {
   for (const tab of root.querySelectorAll<HTMLElement>(
     ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
   )) {
     tab.scrollTop = state.tabScroll[tab.dataset.tab ?? ""] ?? 0;
   }
-  for (const details of root.querySelectorAll<HTMLDetailsElement>(
-    "details[data-persistent-disclosure]"
-  )) {
+  for (const details of root.querySelectorAll<HTMLDetailsElement>("details[data-persistent-disclosure]")) {
     const key = details.dataset.persistentDisclosure ?? "";
     if (Object.hasOwn(state.disclosures, key)) details.open = state.disclosures[key] ?? false;
   }

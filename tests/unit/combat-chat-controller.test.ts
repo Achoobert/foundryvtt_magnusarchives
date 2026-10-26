@@ -16,7 +16,10 @@ describe("deferred Combat Chat outcomes", () => {
     vi.stubGlobal("Actor", FakeActor);
     vi.stubGlobal("CONST", {DOCUMENT_OWNERSHIP_LEVELS: {OWNER: 3}});
     vi.stubGlobal("canvas", {tokens: {get: () => undefined}});
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
     vi.stubGlobal("game", {
       user: {isGM: true},
       actors: new Map([[actor.id, actor]]),
@@ -64,17 +67,25 @@ describe("deferred Combat Chat outcomes", () => {
     vi.stubGlobal("Actor", FakeActor);
     vi.stubGlobal("CONST", {DOCUMENT_OWNERSHIP_LEVELS: {OWNER: 3}});
     vi.stubGlobal("canvas", {tokens: {get: vi.fn(() => undefined)}});
-    vi.stubGlobal("fromUuid", vi.fn(async () => null));
+    vi.stubGlobal(
+      "fromUuid",
+      vi.fn(async () => null)
+    );
     vi.stubGlobal("game", {
-      user: {isGM: true}, actors: new Map([[source.id, source]]),
+      user: {isGM: true},
+      actors: new Map([[source.id, source]]),
       i18n: {localize: () => "The original token no longer exists."},
       magnusarchives: {services: {combat: {applyCharacterDamage}}}
     });
     vi.stubGlobal("ui", {notifications: {info: vi.fn(), error}});
     const action = {
-      kind: "characterDamage", targetActorId: source.id,
-      targetTokenId: "deleted", targetTokenUuid: "Scene.scene.Token.deleted",
-      effect: "seriousInjury", stressAmount: 0, applied: false
+      kind: "characterDamage",
+      targetActorId: source.id,
+      targetTokenId: "deleted",
+      targetTokenUuid: "Scene.scene.Token.deleted",
+      effect: "seriousInjury",
+      stressAmount: 0,
+      applied: false
     };
     const setFlag = vi.fn(async () => undefined);
     const message = {getFlag: () => action, setFlag} as unknown as ChatMessage;

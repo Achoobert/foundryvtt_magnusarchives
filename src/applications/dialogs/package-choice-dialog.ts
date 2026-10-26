@@ -16,17 +16,21 @@ interface DialogLike {
 }
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 /** Toggle one multi-choice option without ever exceeding the required count. */
-export function togglePackageChoice(
-  selected: readonly string[],
-  optionId: string,
-  required: number
-): string[] {
+export function togglePackageChoice(selected: readonly string[], optionId: string, required: number): string[] {
   if (selected.includes(optionId)) return selected.filter((id) => id !== optionId);
   if (selected.length >= required) return [...selected];
   return [...selected, optionId];
@@ -43,10 +47,12 @@ export function packageChoiceSubmissionGuard(): () => boolean {
 }
 
 function choiceRows(options: readonly PackageChoiceOption[], single: boolean): string {
-  return options.map((option, index) => {
-    const action = single ? ` data-action="package-choice-${index}"` : "";
-    return `<button type="button" class="package-choice-option"${action} data-package-choice-option data-option-id="${escapeHtml(option.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${escapeHtml(option.label)}</span></button>`;
-  }).join("");
+  return options
+    .map((option, index) => {
+      const action = single ? ` data-action="package-choice-${index}"` : "";
+      return `<button type="button" class="package-choice-option"${action} data-package-choice-option data-option-id="${escapeHtml(option.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${escapeHtml(option.label)}</span></button>`;
+    })
+    .join("");
 }
 
 /**
@@ -54,9 +60,9 @@ function choiceRows(options: readonly PackageChoiceOption[], single: boolean): s
  * The caller remains responsible for passing the returned IDs to its existing resolver.
  */
 export async function promptPackageChoice(request: PackageChoiceRequest): Promise<string[] | null> {
-  const options = request.options.filter((option, index, all) => (
-    option.id && all.findIndex((candidate) => candidate.id === option.id) === index
-  ));
+  const options = request.options.filter(
+    (option, index, all) => option.id && all.findIndex((candidate) => candidate.id === option.id) === index
+  );
   if (!Number.isInteger(request.choose) || request.choose < 1 || request.choose > options.length) return null;
 
   const single = request.choose === 1;
@@ -71,48 +77,55 @@ export async function promptPackageChoice(request: PackageChoiceRequest): Promis
 
   const buttons = single
     ? options.map((option, index) => ({
-      action: `package-choice-${index}`,
-      label: option.label,
-      callback: (): string[] => claimSubmission() ? [option.id] : []
-    }))
-    : [{
-      action: "confirm-package-choice",
-      label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm"),
-      icon: "fa-solid fa-check",
-      disabled: true,
-      callback: (): string[] => claimSubmission() ? [...selected] : []
-    }];
+        action: `package-choice-${index}`,
+        label: option.label,
+        callback: (): string[] => (claimSubmission() ? [option.id] : [])
+      }))
+    : [
+        {
+          action: "confirm-package-choice",
+          label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm"),
+          icon: "fa-solid fa-check",
+          disabled: true,
+          callback: (): string[] => (claimSubmission() ? [...selected] : [])
+        }
+      ];
 
-  const result = await foundry.applications.api.DialogV2.wait({
+  const result = (await foundry.applications.api.DialogV2.wait({
     window: {title: request.title},
     position: {width: 430},
     content,
     buttons,
     close: (): null => null,
-    render: single ? undefined : (_event: Event, dialog: DialogLike): void => {
-      const rows = [...dialog.element.querySelectorAll<HTMLButtonElement>("button[data-package-choice-option]")];
-      const confirm = dialog.element.querySelector<HTMLButtonElement>('button[data-action="confirm-package-choice"]');
-      const count = dialog.element.querySelector<HTMLElement>("[data-package-choice-count]");
-      const synchronize = (): void => {
-        for (const row of rows) {
-          const isSelected = selected.includes(row.dataset.optionId ?? "");
-          row.classList.toggle("is-selected", isSelected);
-          row.setAttribute("aria-pressed", String(isSelected));
-        }
-        if (confirm) confirm.disabled = selected.length !== request.choose;
-        if (count) count.textContent = game.i18n.format("MAGNUSARCHIVES.Packages.SelectionCount", {
-          selected: selected.length,
-          required: request.choose
-        });
-      };
-      for (const row of rows) {
-        row.addEventListener("click", () => {
-          selected = togglePackageChoice(selected, row.dataset.optionId ?? "", request.choose);
+    render: single
+      ? undefined
+      : (_event: Event, dialog: DialogLike): void => {
+          const rows = [...dialog.element.querySelectorAll<HTMLButtonElement>("button[data-package-choice-option]")];
+          const confirm = dialog.element.querySelector<HTMLButtonElement>(
+            'button[data-action="confirm-package-choice"]'
+          );
+          const count = dialog.element.querySelector<HTMLElement>("[data-package-choice-count]");
+          const synchronize = (): void => {
+            for (const row of rows) {
+              const isSelected = selected.includes(row.dataset.optionId ?? "");
+              row.classList.toggle("is-selected", isSelected);
+              row.setAttribute("aria-pressed", String(isSelected));
+            }
+            if (confirm) confirm.disabled = selected.length !== request.choose;
+            if (count)
+              count.textContent = game.i18n.format("MAGNUSARCHIVES.Packages.SelectionCount", {
+                selected: selected.length,
+                required: request.choose
+              });
+          };
+          for (const row of rows) {
+            row.addEventListener("click", () => {
+              selected = togglePackageChoice(selected, row.dataset.optionId ?? "", request.choose);
+              synchronize();
+            });
+          }
           synchronize();
-        });
-      }
-      synchronize();
-    }
-  }) as string[] | null;
+        }
+  })) as string[] | null;
   return Array.isArray(result) && result.length === request.choose ? result : null;
 }

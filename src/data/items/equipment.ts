@@ -27,12 +27,13 @@ export class EquipmentDataModel extends ItemDataModelBase {
   ): Record<string, unknown> {
     const migrated = super.migrateData(source, options);
     // `price` was free text. Keep anything unrecognised as a note.
-    if (typeof migrated.price === "string"
-      && !PRICE_CATEGORIES.includes(migrated.price as (typeof PRICE_CATEGORIES)[number])) {
+    if (
+      typeof migrated.price === "string" &&
+      !PRICE_CATEGORIES.includes(migrated.price as (typeof PRICE_CATEGORIES)[number])
+    ) {
       if (migrated.priceNote === undefined && migrated.price !== "") migrated.priceNote = migrated.price;
       migrated.price = "inexpensive";
     }
     return migrated;
   }
 }
-

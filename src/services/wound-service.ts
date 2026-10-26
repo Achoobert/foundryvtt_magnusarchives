@@ -126,14 +126,16 @@ export class WoundService {
     };
   }
 
-  removeOne(current: WoundCollection, severity: WoundSeverity, woundId?: string): {
+  removeOne(
+    current: WoundCollection,
+    severity: WoundSeverity,
+    woundId?: string
+  ): {
     wounds: WoundCollection;
     removed: WoundRecordData | null;
   } {
     const wounds = cloneWounds(current);
-    const index = woundId
-      ? wounds[severity].findIndex((wound) => wound.id === woundId)
-      : wounds[severity].length - 1;
+    const index = woundId ? wounds[severity].findIndex((wound) => wound.id === woundId) : wounds[severity].length - 1;
     if (index < 0) return {wounds, removed: null};
     const [removed] = wounds[severity].splice(index, 1);
     return {wounds, removed: removed ?? null};
@@ -157,7 +159,10 @@ export class WoundService {
     return {wounds, updated};
   }
 
-  removeAll(current: WoundCollection, severity: WoundSeverity): {
+  removeAll(
+    current: WoundCollection,
+    severity: WoundSeverity
+  ): {
     wounds: WoundCollection;
     removed: WoundRecordData[];
   } {
@@ -277,13 +282,7 @@ export class WoundService {
     input: WoundInput = {}
   ): Promise<WoundCountResult> {
     assertCharacter(actor);
-    return this.setTrackCount(
-      actor,
-      severity,
-      count,
-      actor.system.derived.wounds.capacities[severity],
-      input
-    );
+    return this.setTrackCount(actor, severity, count, actor.system.derived.wounds.capacities[severity], input);
   }
 
   async setTrackCount(

@@ -1,7 +1,4 @@
-import {
-  currentRollPolicyRequest,
-  hiddenDifficultyEnabled
-} from "../../config/settings";
+import {currentRollPolicyRequest, hiddenDifficultyEnabled} from "../../config/settings";
 import type {PoolKey} from "../../rules/core/core-types";
 import type {CharacterRollRequest} from "../../rolls/roll-types";
 import type {RollCharacterDocumentLike} from "../../services/roll-service";
@@ -39,10 +36,7 @@ function notifyError(error: unknown): void {
   ui.notifications.error(error instanceof Error ? error.message : String(error));
 }
 
-export async function promptTestRoll(
-  actor: RollCharacterDocumentLike,
-  selectedPool: PoolKey = "might"
-): Promise<void> {
+export async function promptTestRoll(actor: RollCharacterDocumentLike, selectedPool: PoolKey = "might"): Promise<void> {
   const policyRequest = currentRollPolicyRequest();
   const policy = game.magnusarchives.rules.resolveDifficultyPolicy(
     policyRequest.base,
@@ -66,7 +60,7 @@ export async function promptTestRoll(
       <input name="freeEffort" type="number" value="0" min="0" step="1">
     </label>
     ${situationalModifierFields()}`;
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Roll.TaskRoll"), resizable: true},
     position: {width: 800},
     content: rollDialogShell({
@@ -82,15 +76,11 @@ export async function promptTestRoll(
         buildRequest: genericTaskRequest
       });
     }
-  }) as RollDialogData | null;
+  })) as RollDialogData | null;
   if (!data) return;
 
   try {
-    const execution = await game.magnusarchives.services.rolls.execute(
-      actor,
-      genericTaskRequest(data),
-      policyRequest
-    );
+    const execution = await game.magnusarchives.services.rolls.execute(actor, genericTaskRequest(data), policyRequest);
     await publishRollOutcome(actor, execution);
   } catch (error) {
     notifyError(error);

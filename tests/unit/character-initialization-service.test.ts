@@ -62,12 +62,16 @@ describe("CharacterInitializationService", () => {
 
   it("blocks an invalid allocation before updating the Actor", async () => {
     const actor = new TestCharacter();
-    await expect(new CharacterInitializationService().setup(actor, {
-      pools: {might: 2, speed: 2, intellect: 1}
-    })).rejects.toMatchObject({code: "invalid-pools"});
-    await expect(new CharacterInitializationService().setup(actor, {
-      pools: {might: 7, speed: -1, intellect: 0}
-    })).rejects.toMatchObject({code: "invalid-pools"});
+    await expect(
+      new CharacterInitializationService().setup(actor, {
+        pools: {might: 2, speed: 2, intellect: 1}
+      })
+    ).rejects.toMatchObject({code: "invalid-pools"});
+    await expect(
+      new CharacterInitializationService().setup(actor, {
+        pools: {might: 7, speed: -1, intellect: 0}
+      })
+    ).rejects.toMatchObject({code: "invalid-pools"});
     expect(actor.updates).toEqual([]);
   });
 
@@ -86,7 +90,10 @@ describe("CharacterInitializationService", () => {
       arc: {key: "solve-a-mystery", name: "Solve a Mystery"}
     });
     expect(actor.system.arc).toMatchObject({
-      key: "solve-a-mystery", name: "Solve a Mystery", stage: "none", stepsCompleted: 0
+      key: "solve-a-mystery",
+      name: "Solve a Mystery",
+      stage: "none",
+      stepsCompleted: 0
     });
   });
 

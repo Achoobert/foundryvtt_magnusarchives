@@ -51,10 +51,7 @@ describe("Genre rules", () => {
       type: "genre"
     };
 
-    expect(() => effectiveGenre(
-      association,
-      () => indexEntry as never
-    )).not.toThrow();
+    expect(() => effectiveGenre(association, () => indexEntry as never)).not.toThrow();
     expect(effectiveGenre(association, () => indexEntry as never)).toBeNull();
   });
 });

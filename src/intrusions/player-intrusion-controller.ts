@@ -1,10 +1,7 @@
 import {SYSTEM_ID} from "../constants/system";
 import {defaultIdFactory} from "../rules/core/core-types";
 import type {PlayerIntrusionChatService} from "../services/player-intrusion-chat-service";
-import type {
-  PlayerIntrusionCharacterLike,
-  PlayerIntrusionService
-} from "../services/player-intrusion-service";
+import type {PlayerIntrusionCharacterLike, PlayerIntrusionService} from "../services/player-intrusion-service";
 
 const SOCKET_NAME = "system." + SYSTEM_ID;
 
@@ -38,9 +35,11 @@ function users(): PlayerIntrusionUserLike[] {
 }
 
 function primaryGM(): PlayerIntrusionUserLike | null {
-  return users()
-    .filter((user) => user.active && user.isGM)
-    .sort((left, right) => left.id.localeCompare(right.id))[0] ?? null;
+  return (
+    users()
+      .filter((user) => user.active && user.isGM)
+      .sort((left, right) => left.id.localeCompare(right.id))[0] ?? null
+  );
 }
 
 function canControl(actor: ControlledPlayerIntrusionCharacter, user: PlayerIntrusionUserLike): boolean {
@@ -50,8 +49,7 @@ function canControl(actor: ControlledPlayerIntrusionCharacter, user: PlayerIntru
 function completedRequest(requestId: string): boolean {
   return [...game.messages].some((message) => {
     const flag = message.getFlag(SYSTEM_ID, "playerIntrusion");
-    return Boolean(flag && typeof flag === "object"
-      && (flag as {requestId?: unknown}).requestId === requestId);
+    return Boolean(flag && typeof flag === "object" && (flag as {requestId?: unknown}).requestId === requestId);
   });
 }
 
@@ -84,9 +82,10 @@ export class PlayerIntrusionController {
     try {
       const confirmed = await foundry.applications.api.DialogV2.confirm({
         window: {title: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Title")},
-        content: '<div class="magnusarchives magnusarchives-dialog player-intrusion-dialog"><p>'
-          + game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.ConfirmPrompt")
-          + "</p></div>",
+        content:
+          '<div class="magnusarchives magnusarchives-dialog player-intrusion-dialog"><p>' +
+          game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.ConfirmPrompt") +
+          "</p></div>",
         yes: {label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Confirm")},
         no: {label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Player.Cancel")}
       });

@@ -29,25 +29,26 @@ import {
   type FocusEditorAbilityLike
 } from "../../focus/focus-tree-editor";
 import {FocusGraphValidationError} from "../../focus/focus-graph-validator";
-import {
-  captureFocusEditorScroll,
-  restoreFocusEditorScroll,
-  type FocusEditorScrollState
-} from "./focus-editor-scroll";
+import {captureFocusEditorScroll, restoreFocusEditorScroll, type FocusEditorScrollState} from "./focus-editor-scroll";
 import {SystemTooltip} from "../tooltips/system-tooltip";
-import type {AbilityGrant, CharacterTypeSystemData, DescriptorChoiceGroup, DescriptorGrant, DescriptorSystemData, PoolBonusChoiceGroup, SkillChoiceGroup, SkillGrant, SkillGrantOption, SpeciesSystemData} from "../../packages/package-types";
-import {
-  ShieldCapacityBelowWoundsError,
-  type ShieldItemLike
-} from "../../services/shield-service";
+import type {
+  AbilityGrant,
+  CharacterTypeSystemData,
+  DescriptorChoiceGroup,
+  DescriptorGrant,
+  DescriptorSystemData,
+  PoolBonusChoiceGroup,
+  SkillChoiceGroup,
+  SkillGrant,
+  SkillGrantOption,
+  SpeciesSystemData
+} from "../../packages/package-types";
+import {ShieldCapacityBelowWoundsError, type ShieldItemLike} from "../../services/shield-service";
 import {promptDeleteShieldWound, promptEditShieldWound} from "../dialogs/shield-wound-dialogs";
 import {abilityAllowedPools} from "../../abilities/ability-cost";
 import {cypherLevel} from "../../cyphers/cypher-rules";
 import {artifactLevelIsRollable} from "../../artifacts/artifact-rules";
-import {
-  abilityMechanicsVisibility,
-  skillHasOptionalMechanics
-} from "./item-mechanics-visibility";
+import {abilityMechanicsVisibility, skillHasOptionalMechanics} from "./item-mechanics-visibility";
 import {headerWoundTracks} from "./character-header";
 import {parseWoundCountActionData} from "./wound-count-action";
 import type {GenreAbilityEntry, GenreSystemData} from "../../genre/genre-types";
@@ -60,46 +61,62 @@ import {
   updateGenreMinimumTier
 } from "../../genre/genre-catalog";
 import {depletionDieSides, depletionThresholdLabel} from "../../depletion/depletion-rules";
-import {
-  captureItemSheetUiState,
-  restoreItemSheetUiState,
-  type ItemSheetUiState
-} from "./item-sheet-ui-state";
+import {captureItemSheetUiState, restoreItemSheetUiState, type ItemSheetUiState} from "./item-sheet-ui-state";
 import {enforceReadOnlySheetPresentation, guardEditableActions} from "./sheet-permissions";
-import {
-  BUILT_IN_WEAPON_FAMILIES,
-  normalizeWeaponFamilies,
-  weaponFamilyLabel
-} from "../../combat/weapon-family";
+import {BUILT_IN_WEAPON_FAMILIES, normalizeWeaponFamilies, weaponFamilyLabel} from "../../combat/weapon-family";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 function notifyError(error: unknown): void {
   ui.notifications.error(error instanceof Error ? error.message : String(error));
 }
 
-const ItemSheetV2 = foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ItemSheetV2
-);
+const ItemSheetV2 = foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2);
 
 const ITEM_MUTATING_ACTIONS = new Set([
-  "rollDepletion", "reloadWeapon",
-  "editFocusTree", "addFocusAbility", "saveFocusTree", "cancelFocusTree",
-  "selectFocusEditorNode", "moveFocusNode", "setFocusNodeTier",
-  "startFocusConnection", "completeFocusConnection", "cancelFocusConnection",
-  "deleteFocusConnection", "clearFocusConnections", "refreshFocusSnapshot", "deleteFocusNode",
-  "addPackageGrant", "addChoiceGroup", "addChoiceOption", "editSkillGrantNote", "refreshPackageGrant", "removePackageGrant",
-  "addPoolBonusChoiceGroup", "editPoolBonusChoiceGroup", "removePoolBonusChoiceGroup",
-  "setShieldWoundCount", "editShieldWound", "deleteShieldWound",
-  "addGenreAbility", "refreshGenreAbility", "removeGenreAbility"
+  "rollDepletion",
+  "reloadWeapon",
+  "editFocusTree",
+  "addFocusAbility",
+  "saveFocusTree",
+  "cancelFocusTree",
+  "selectFocusEditorNode",
+  "moveFocusNode",
+  "setFocusNodeTier",
+  "startFocusConnection",
+  "completeFocusConnection",
+  "cancelFocusConnection",
+  "deleteFocusConnection",
+  "clearFocusConnections",
+  "refreshFocusSnapshot",
+  "deleteFocusNode",
+  "addPackageGrant",
+  "addChoiceGroup",
+  "addChoiceOption",
+  "editSkillGrantNote",
+  "refreshPackageGrant",
+  "removePackageGrant",
+  "addPoolBonusChoiceGroup",
+  "editPoolBonusChoiceGroup",
+  "removePoolBonusChoiceGroup",
+  "setShieldWoundCount",
+  "editShieldWound",
+  "deleteShieldWound",
+  "addGenreAbility",
+  "refreshGenreAbility",
+  "removeGenreAbility"
 ]);
 
 export class MagnusArchivesItemSheet extends ItemSheetV2 {
@@ -137,10 +154,12 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     event.preventDefault();
     event.stopPropagation();
     if (!this.isEditable) return;
-    if (this.item.actor && !game.user.isGM && !this.item.actor.testUserPermission(
-      game.user,
-      CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
-    )) return;
+    if (
+      this.item.actor &&
+      !game.user.isGM &&
+      !this.item.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+    )
+      return;
     const data = parseWoundCountActionData(target.dataset);
     if (data.track !== "shield" || data.shieldId !== this.item.id) {
       throw new Error("Invalid Shield Wound count action data.");
@@ -173,49 +192,54 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
 
   static async #onReloadWeapon(this: MagnusArchivesItemSheet): Promise<void> {
     if (!this.isEditable || this.item.type !== "weapon") return;
-    await game.magnusarchives.services.weapons.reload(this.item as unknown as import("../../combat/combat-types").WeaponItemLike);
+    await game.magnusarchives.services.weapons.reload(
+      this.item as unknown as import("../../combat/combat-types").WeaponItemLike
+    );
     await this.render({force: true});
   }
 
   static DEFAULT_OPTIONS = {
     ...DOCUMENT_SHEET_FORM_OPTIONS,
     classes: ["magnusarchives", "sheet", "item", "item-sheet"],
-    actions: guardEditableActions({
-      rollDepletion: MagnusArchivesItemSheet.#onRollDepletion,
-      reloadWeapon: MagnusArchivesItemSheet.#onReloadWeapon,
-      openFocusNode: MagnusArchivesItemSheet.#onOpenFocusNode,
-      editFocusTree: MagnusArchivesItemSheet.#onEditFocusTree,
-      addFocusAbility: MagnusArchivesItemSheet.#onAddFocusAbility,
-      saveFocusTree: MagnusArchivesItemSheet.#onSaveFocusTree,
-      cancelFocusTree: MagnusArchivesItemSheet.#onCancelFocusTree,
-      selectFocusEditorNode: MagnusArchivesItemSheet.#onSelectFocusEditorNode,
-      moveFocusNode: MagnusArchivesItemSheet.#onMoveFocusNode,
-      setFocusNodeTier: MagnusArchivesItemSheet.#onSetFocusNodeTier,
-      startFocusConnection: MagnusArchivesItemSheet.#onStartFocusConnection,
-      completeFocusConnection: MagnusArchivesItemSheet.#onCompleteFocusConnection,
-      cancelFocusConnection: MagnusArchivesItemSheet.#onCancelFocusConnection,
-      deleteFocusConnection: MagnusArchivesItemSheet.#onDeleteFocusConnection,
-      clearFocusConnections: MagnusArchivesItemSheet.#onClearFocusConnections,
-      refreshFocusSnapshot: MagnusArchivesItemSheet.#onRefreshFocusSnapshot,
-      deleteFocusNode: MagnusArchivesItemSheet.#onDeleteFocusNode,
-      addPackageGrant: MagnusArchivesItemSheet.#onAddPackageGrant,
-      addChoiceGroup: MagnusArchivesItemSheet.#onAddChoiceGroup,
-      addChoiceOption: MagnusArchivesItemSheet.#onAddChoiceOption,
-      editSkillGrantNote: MagnusArchivesItemSheet.#onEditSkillGrantNote,
-      inspectPackageGrant: MagnusArchivesItemSheet.#onInspectPackageGrant,
-      refreshPackageGrant: MagnusArchivesItemSheet.#onRefreshPackageGrant,
-      removePackageGrant: MagnusArchivesItemSheet.#onRemovePackageGrant,
-      addPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onAddPoolBonusChoiceGroup,
-      editPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onEditPoolBonusChoiceGroup,
-      removePoolBonusChoiceGroup: MagnusArchivesItemSheet.#onRemovePoolBonusChoiceGroup,
-      setShieldWoundCount: MagnusArchivesItemSheet.#onSetShieldWoundCount,
-      editShieldWound: MagnusArchivesItemSheet.#onEditShieldWound,
-      deleteShieldWound: MagnusArchivesItemSheet.#onDeleteShieldWound,
-      addGenreAbility: MagnusArchivesItemSheet.#onAddGenreAbility,
-      inspectGenreAbility: MagnusArchivesItemSheet.#onInspectGenreAbility,
-      refreshGenreAbility: MagnusArchivesItemSheet.#onRefreshGenreAbility,
-      removeGenreAbility: MagnusArchivesItemSheet.#onRemoveGenreAbility
-    }, ITEM_MUTATING_ACTIONS),
+    actions: guardEditableActions(
+      {
+        rollDepletion: MagnusArchivesItemSheet.#onRollDepletion,
+        reloadWeapon: MagnusArchivesItemSheet.#onReloadWeapon,
+        openFocusNode: MagnusArchivesItemSheet.#onOpenFocusNode,
+        editFocusTree: MagnusArchivesItemSheet.#onEditFocusTree,
+        addFocusAbility: MagnusArchivesItemSheet.#onAddFocusAbility,
+        saveFocusTree: MagnusArchivesItemSheet.#onSaveFocusTree,
+        cancelFocusTree: MagnusArchivesItemSheet.#onCancelFocusTree,
+        selectFocusEditorNode: MagnusArchivesItemSheet.#onSelectFocusEditorNode,
+        moveFocusNode: MagnusArchivesItemSheet.#onMoveFocusNode,
+        setFocusNodeTier: MagnusArchivesItemSheet.#onSetFocusNodeTier,
+        startFocusConnection: MagnusArchivesItemSheet.#onStartFocusConnection,
+        completeFocusConnection: MagnusArchivesItemSheet.#onCompleteFocusConnection,
+        cancelFocusConnection: MagnusArchivesItemSheet.#onCancelFocusConnection,
+        deleteFocusConnection: MagnusArchivesItemSheet.#onDeleteFocusConnection,
+        clearFocusConnections: MagnusArchivesItemSheet.#onClearFocusConnections,
+        refreshFocusSnapshot: MagnusArchivesItemSheet.#onRefreshFocusSnapshot,
+        deleteFocusNode: MagnusArchivesItemSheet.#onDeleteFocusNode,
+        addPackageGrant: MagnusArchivesItemSheet.#onAddPackageGrant,
+        addChoiceGroup: MagnusArchivesItemSheet.#onAddChoiceGroup,
+        addChoiceOption: MagnusArchivesItemSheet.#onAddChoiceOption,
+        editSkillGrantNote: MagnusArchivesItemSheet.#onEditSkillGrantNote,
+        inspectPackageGrant: MagnusArchivesItemSheet.#onInspectPackageGrant,
+        refreshPackageGrant: MagnusArchivesItemSheet.#onRefreshPackageGrant,
+        removePackageGrant: MagnusArchivesItemSheet.#onRemovePackageGrant,
+        addPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onAddPoolBonusChoiceGroup,
+        editPoolBonusChoiceGroup: MagnusArchivesItemSheet.#onEditPoolBonusChoiceGroup,
+        removePoolBonusChoiceGroup: MagnusArchivesItemSheet.#onRemovePoolBonusChoiceGroup,
+        setShieldWoundCount: MagnusArchivesItemSheet.#onSetShieldWoundCount,
+        editShieldWound: MagnusArchivesItemSheet.#onEditShieldWound,
+        deleteShieldWound: MagnusArchivesItemSheet.#onDeleteShieldWound,
+        addGenreAbility: MagnusArchivesItemSheet.#onAddGenreAbility,
+        inspectGenreAbility: MagnusArchivesItemSheet.#onInspectGenreAbility,
+        refreshGenreAbility: MagnusArchivesItemSheet.#onRefreshGenreAbility,
+        removeGenreAbility: MagnusArchivesItemSheet.#onRemoveGenreAbility
+      },
+      ITEM_MUTATING_ACTIONS
+    ),
     position: {width: 620, height: 680},
     window: {resizable: true}
   };
@@ -224,10 +248,7 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     main: {template: "systems/magnusarchives/templates/item/item-sheet.hbs"}
   };
 
-  override async _onRender(
-    context: Record<string, unknown>,
-    options: Record<string, unknown>
-  ): Promise<void> {
+  override async _onRender(context: Record<string, unknown>, options: Record<string, unknown>): Promise<void> {
     await super._onRender(context, options);
     enforceReadOnlySheetPresentation(this.element, this.isEditable, ITEM_MUTATING_ACTIONS);
     this.#focusEditorKeyBindings?.abort();
@@ -243,15 +264,18 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     if (this.#focusEditorInteraction.connectionSourceNodeId) {
       const controller = new AbortController();
       this.#focusEditorKeyBindings = controller;
-      this.element.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        event.preventDefault();
-        event.stopPropagation();
-        this.#focusEditorInteraction.cancelConnection();
-        void this.#rerender();
-      }, {signal: controller.signal});
-      this.element.querySelector<HTMLElement>(".focus-tree-node-editor")
-        ?.focus({preventScroll: true});
+      this.element.addEventListener(
+        "keydown",
+        (event) => {
+          if (event.key !== "Escape") return;
+          event.preventDefault();
+          event.stopPropagation();
+          this.#focusEditorInteraction.cancelConnection();
+          void this.#rerender();
+        },
+        {signal: controller.signal}
+      );
+      this.element.querySelector<HTMLElement>(".focus-tree-node-editor")?.focus({preventScroll: true});
     }
     this.#focusTreeConnections.bind(this.element);
     this.#systemTooltip.bind(this.element);
@@ -299,15 +323,19 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       const stableKey = details.dataset.persistentDisclosure ?? `item-details-${index}`;
       if (this.#openDisclosures.has(stableKey)) details.open = true;
       else if (this.#closedDisclosures.has(stableKey)) details.open = false;
-      details.addEventListener("toggle", () => {
-        if (details.open) {
-          this.#openDisclosures.add(stableKey);
-          this.#closedDisclosures.delete(stableKey);
-        } else {
-          this.#openDisclosures.delete(stableKey);
-          this.#closedDisclosures.add(stableKey);
-        }
-      }, {signal: controller.signal});
+      details.addEventListener(
+        "toggle",
+        () => {
+          if (details.open) {
+            this.#openDisclosures.add(stableKey);
+            this.#closedDisclosures.delete(stableKey);
+          } else {
+            this.#openDisclosures.delete(stableKey);
+            this.#closedDisclosures.add(stableKey);
+          }
+        },
+        {signal: controller.signal}
+      );
     }
   }
 
@@ -320,27 +348,35 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     if ((!sidesInput && !thresholdInput) || !["weapon", "shield", "armor"].includes(this.item.type)) return;
     const controller = new AbortController();
     this.#weaponResourceBindings = controller;
-    sidesInput?.addEventListener("change", async () => {
-      const sides = Number(sidesInput.value);
-      const threshold = Number((this.item.system as unknown as {depletion: {threshold: number}}).depletion.threshold);
-      if (!Number.isInteger(sides) || sides < 2 || sides > 1000 || threshold > sides) {
-        ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Depletion.InvalidDie"));
-        await this.render({force: true});
-        return;
-      }
-      await this.item.update({"system.depletion.die": `d${sides}`});
-    }, {signal: controller.signal});
-    thresholdInput?.addEventListener("change", async () => {
-      const match = thresholdInput.value.trim().match(/^1(?:-(\d+))?$/);
-      const threshold = Number(match?.[1] ?? (match ? 1 : Number.NaN));
-      const sides = depletionDieSides((this.item.system as unknown as {depletion: {die: string}}).depletion);
-      if (!Number.isInteger(threshold) || threshold < 1 || threshold > sides) {
-        ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Depletion.InvalidThreshold", {sides}));
-        await this.render({force: true});
-        return;
-      }
-      await this.item.update({"system.depletion.threshold": threshold});
-    }, {signal: controller.signal});
+    sidesInput?.addEventListener(
+      "change",
+      async () => {
+        const sides = Number(sidesInput.value);
+        const threshold = Number((this.item.system as unknown as {depletion: {threshold: number}}).depletion.threshold);
+        if (!Number.isInteger(sides) || sides < 2 || sides > 1000 || threshold > sides) {
+          ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Depletion.InvalidDie"));
+          await this.render({force: true});
+          return;
+        }
+        await this.item.update({"system.depletion.die": `d${sides}`});
+      },
+      {signal: controller.signal}
+    );
+    thresholdInput?.addEventListener(
+      "change",
+      async () => {
+        const match = thresholdInput.value.trim().match(/^1(?:-(\d+))?$/);
+        const threshold = Number(match?.[1] ?? (match ? 1 : Number.NaN));
+        const sides = depletionDieSides((this.item.system as unknown as {depletion: {die: string}}).depletion);
+        if (!Number.isInteger(threshold) || threshold < 1 || threshold > sides) {
+          ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Depletion.InvalidThreshold", {sides}));
+          await this.render({force: true});
+          return;
+        }
+        await this.item.update({"system.depletion.threshold": threshold});
+      },
+      {signal: controller.signal}
+    );
   }
 
   #bindShieldCapacities(): void {
@@ -352,27 +388,33 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const controller = new AbortController();
     this.#shieldCapacityBindings = controller;
     for (const input of inputs) {
-      input.addEventListener("change", async (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const severity = input.dataset.severity;
-        if (!WOUND_SEVERITIES.includes(severity as WoundSeverity)) return;
-        try {
-          await game.magnusarchives.services.shields.setCapacity(
-            this.item as unknown as ShieldItemLike,
-            severity as WoundSeverity,
-            Number(input.value)
-          );
-        } catch (error) {
-          if (error instanceof ShieldCapacityBelowWoundsError) {
-            ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Shield.CapacityTooLow", {
-              severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${error.severity}`),
-              count: error.current
-            }));
-          } else notifyError(error);
-          await this.render({force: true});
-        }
-      }, {signal: controller.signal});
+      input.addEventListener(
+        "change",
+        async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const severity = input.dataset.severity;
+          if (!WOUND_SEVERITIES.includes(severity as WoundSeverity)) return;
+          try {
+            await game.magnusarchives.services.shields.setCapacity(
+              this.item as unknown as ShieldItemLike,
+              severity as WoundSeverity,
+              Number(input.value)
+            );
+          } catch (error) {
+            if (error instanceof ShieldCapacityBelowWoundsError) {
+              ui.notifications.warn(
+                game.i18n.format("MAGNUSARCHIVES.Shield.CapacityTooLow", {
+                  severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${error.severity}`),
+                  count: error.current
+                })
+              );
+            } else notifyError(error);
+            await this.render({force: true});
+          }
+        },
+        {signal: controller.signal}
+      );
     }
   }
 
@@ -380,28 +422,30 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     this.#abilityPoolBindings?.abort();
     this.#abilityPoolBindings = null;
     if (this.item.type !== "ability" || !this.isEditable) return;
-    const checkboxes = [...this.element.querySelectorAll<HTMLInputElement>(
-      "input[data-ability-allowed-pool]"
-    )];
+    const checkboxes = [...this.element.querySelectorAll<HTMLInputElement>("input[data-ability-allowed-pool]")];
     if (!checkboxes.length) return;
     const controller = new AbortController();
     this.#abilityPoolBindings = controller;
     for (const checkbox of checkboxes) {
-      checkbox.addEventListener("change", async (event) => {
-        // These checkboxes intentionally have no form name: an empty selection must
-        // still write [], so this scoped binding owns the normalized array update.
-        event.stopPropagation();
-        const allowedPools = checkboxes
-          .filter((input) => input.checked)
-          .map((input) => input.value)
-          .filter((value): value is PoolKey => POOL_KEYS.includes(value as PoolKey));
-        try {
-          await this.item.update({"system.cost.allowedPools": allowedPools});
-        } catch (error) {
-          notifyError(error);
-          await this.render({force: true});
-        }
-      }, {signal: controller.signal});
+      checkbox.addEventListener(
+        "change",
+        async (event) => {
+          // These checkboxes intentionally have no form name: an empty selection must
+          // still write [], so this scoped binding owns the normalized array update.
+          event.stopPropagation();
+          const allowedPools = checkboxes
+            .filter((input) => input.checked)
+            .map((input) => input.value)
+            .filter((value): value is PoolKey => POOL_KEYS.includes(value as PoolKey));
+          try {
+            await this.item.update({"system.cost.allowedPools": allowedPools});
+          } catch (error) {
+            notifyError(error);
+            await this.render({force: true});
+          }
+        },
+        {signal: controller.signal}
+      );
     }
   }
 
@@ -409,28 +453,30 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     this.#genreCatalogBindings?.abort();
     this.#genreCatalogBindings = null;
     if (this.item.type !== "genre" || !this.isEditable) return;
-    const inputs = [...this.element.querySelectorAll<HTMLInputElement>(
-      "input[data-genre-minimum-tier]"
-    )];
+    const inputs = [...this.element.querySelectorAll<HTMLInputElement>("input[data-genre-minimum-tier]")];
     if (!inputs.length) return;
     const controller = new AbortController();
     this.#genreCatalogBindings = controller;
     for (const input of inputs) {
-      input.addEventListener("change", async (event) => {
-        // ArrayField entries cannot be safely patched through a numeric dotted form
-        // path. Own this edit by stable entry ID and submit one complete preserved array.
-        event.preventDefault();
-        event.stopPropagation();
-        const entryId = input.dataset.entryId ?? "";
-        const catalog = (this.item.system as unknown as GenreSystemData).abilityCatalog;
-        try {
-          const updated = updateGenreMinimumTier(catalog, entryId, Number(input.value));
-          await this.item.update({"system.abilityCatalog": updated});
-        } catch (error) {
-          notifyError(error);
-          await this.render({force: true});
-        }
-      }, {signal: controller.signal});
+      input.addEventListener(
+        "change",
+        async (event) => {
+          // ArrayField entries cannot be safely patched through a numeric dotted form
+          // path. Own this edit by stable entry ID and submit one complete preserved array.
+          event.preventDefault();
+          event.stopPropagation();
+          const entryId = input.dataset.entryId ?? "";
+          const catalog = (this.item.system as unknown as GenreSystemData).abilityCatalog;
+          try {
+            const updated = updateGenreMinimumTier(catalog, entryId, Number(input.value));
+            await this.item.update({"system.abilityCatalog": updated});
+          } catch (error) {
+            notifyError(error);
+            await this.render({force: true});
+          }
+        },
+        {signal: controller.signal}
+      );
     }
   }
 
@@ -460,16 +506,20 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     if (!input) return;
     const controller = new AbortController();
     this.#weaponFamilyBindings = controller;
-    input.addEventListener("change", async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      try {
-        await this.item.update({"system.weaponFamilies": normalizeWeaponFamilies(input.value)});
-      } catch (error) {
-        notifyError(error);
-        await this.render({force: true});
-      }
-    }, {signal: controller.signal});
+    input.addEventListener(
+      "change",
+      async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        try {
+          await this.item.update({"system.weaponFamilies": normalizeWeaponFamilies(input.value)});
+        } catch (error) {
+          notifyError(error);
+          await this.render({force: true});
+        }
+      },
+      {signal: controller.signal}
+    );
   }
 
   override _canDragDrop(_selector: string): boolean {
@@ -511,31 +561,57 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     }
   }
 
-  static async #onAddPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
-    const expected = this.item.type === "characterType"
-      ? target.dataset.grantTarget ?? "ability"
-      : this.item.type === "descriptor" ? "skill" : target.dataset.grantTarget;
+  static async #onAddPackageGrant(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
+    const expected =
+      this.item.type === "characterType"
+        ? (target.dataset.grantTarget ?? "ability")
+        : this.item.type === "descriptor"
+          ? "skill"
+          : target.dataset.grantTarget;
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     if (expected !== "ability" && expected !== "skill" && expected !== "descriptor") return;
-    const sources = [...game.items].filter((item) => item.type === expected).sort((a, b) => a.name.localeCompare(b.name));
-    const custom = expected === "skill" ? `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>` : "";
+    const sources = [...game.items]
+      .filter((item) => item.type === expected)
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const custom =
+      expected === "skill"
+        ? `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>`
+        : "";
     if (!sources.length && expected === "ability") {
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.NoWorldAbilities"));
       return;
     }
-    const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(expected === "ability" ? "MAGNUSARCHIVES.Packages.AddAbility" : expected === "skill" ? "MAGNUSARCHIVES.Packages.AddFixedSkill" : "MAGNUSARCHIVES.Species.AddDescriptorGrant")},
+    const data = (await foundry.applications.api.DialogV2.input({
+      window: {
+        title: game.i18n.localize(
+          expected === "ability"
+            ? "MAGNUSARCHIVES.Packages.AddAbility"
+            : expected === "skill"
+              ? "MAGNUSARCHIVES.Packages.AddFixedSkill"
+              : "MAGNUSARCHIVES.Species.AddDescriptorGrant"
+        )
+      },
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${custom}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${expected === "skill" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>` : ""}</div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
     if (data.uuid === "custom") {
       const name = String(data.customName ?? "").trim();
       if (!name) return;
       await this.#addCustomSkill(name, String(data.rank ?? "trained") as SkillRank, String(data.notes ?? ""));
     } else {
-      const source = await fromUuid(String(data.uuid ?? "")) as Item | null;
-      if (source) await this.#addPackageDocument(source, "fixed", String(data.rank ?? "trained") as SkillRank, String(data.notes ?? ""));
+      const source = (await fromUuid(String(data.uuid ?? ""))) as Item | null;
+      if (source)
+        await this.#addPackageDocument(
+          source,
+          "fixed",
+          String(data.rank ?? "trained") as SkillRank,
+          String(data.notes ?? "")
+        );
     }
   }
 
@@ -548,23 +624,30 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Genre.NoWorldAbilities"));
       return;
     }
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Genre.AddAbility")},
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Genre.Ability")}
         <select name="uuid">${abilities.map((ability) => `<option value="${escapeHtml(ability.uuid)}">${escapeHtml(ability.name)}</option>`).join("")}</select></label>
         <label>${game.i18n.localize("MAGNUSARCHIVES.Genre.MinimumTier")}<input name="minimumTier" type="number" min="${GENRE_MINIMUM_TIER_MIN}" max="${GENRE_MINIMUM_TIER_MAX}" value="${GENRE_MINIMUM_TIER_MIN}"></label></div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
-    const source = await fromUuid(String(data.uuid ?? "")) as Item | null;
+    const source = (await fromUuid(String(data.uuid ?? ""))) as Item | null;
     if (source) await this.#addGenreAbility(source, Number(data.minimumTier ?? 1));
   }
 
-  static async #onInspectGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onInspectGenreAbility(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const entry = this.#genreEntry(target.dataset.entryId);
     if (!entry) return;
-    const source = entry.abilityUuid ? await fromUuid(entry.abilityUuid) as Item | null : null;
-    if (source) { await source.sheet?.render(true); return; }
+    const source = entry.abilityUuid ? ((await fromUuid(entry.abilityUuid)) as Item | null) : null;
+    if (source) {
+      await source.sheet?.render(true);
+      return;
+    }
     await foundry.applications.api.DialogV2.confirm({
       window: {title: entry.snapshot.name},
       content: `<div class="magnusarchives magnusarchives-dialog package-snapshot">${String(entry.snapshot.system.description ?? "")}</div>`,
@@ -573,10 +656,14 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     });
   }
 
-  static async #onRefreshGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRefreshGenreAbility(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const entry = this.#genreEntry(target.dataset.entryId);
     if (!entry) return;
-    const source = entry.abilityUuid ? await fromUuid(entry.abilityUuid) as Item | null : null;
+    const source = entry.abilityUuid ? ((await fromUuid(entry.abilityUuid)) as Item | null) : null;
     if (!source) {
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.SourceUnavailable"));
       return;
@@ -587,32 +674,46 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     });
   }
 
-  static async #onRemoveGenreAbility(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRemoveGenreAbility(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const id = target.dataset.entryId;
     if (!id || this.item.type !== "genre") return;
     const entries = (this.item.system as unknown as GenreSystemData).abilityCatalog;
     await this.item.update({"system.abilityCatalog": removeGenreAbilityEntry(entries, id)});
   }
 
-  static async #onAddChoiceGroup(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onAddChoiceGroup(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const choiceKind = target.dataset.choiceKind ?? "skill";
     const abilityChoice = this.item.type !== "descriptor" && choiceKind === "ability";
     const descriptorChoice = this.item.type === "species" && choiceKind === "descriptor";
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.AddChoiceGroup")},
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.ChooseCount")}<input name="choose" type="number" min="1" value="1"></label>${descriptorChoice ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.ChoiceSource")}<select name="sourceMode"><option value="fixed">${game.i18n.localize("MAGNUSARCHIVES.Packages.FixedOptions")}</option><option value="catalog">${game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")}</option></select></label>` : abilityChoice ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Rank")}<select name="rank">${SKILL_RANKS.map((rank) => `<option value="${rank}" ${rank === "trained" ? "selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${rank}`)}</option>`).join("")}</select></label>`}</div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
     const system = this.item.system as unknown as DescriptorSystemData | SpeciesSystemData | CharacterTypeSystemData;
     if (abilityChoice) {
       const group = {id: crypto.randomUUID(), choose: Math.max(1, Number(data.choose) || 1), options: []};
-      await this.item.update({"system.abilityChoiceGroups": [...((system as SpeciesSystemData | CharacterTypeSystemData).abilityChoiceGroups), group]});
+      await this.item.update({
+        "system.abilityChoiceGroups": [
+          ...(system as SpeciesSystemData | CharacterTypeSystemData).abilityChoiceGroups,
+          group
+        ]
+      });
     } else if (descriptorChoice) {
       const catalogMode = data.sourceMode === "catalog";
       const group: DescriptorChoiceGroup = {
-        id: crypto.randomUUID(), choose: Math.max(1, Number(data.choose) || 1),
+        id: crypto.randomUUID(),
+        choose: Math.max(1, Number(data.choose) || 1),
         sourceMode: catalogMode ? "catalog" : "fixed",
         catalogItemType: catalogMode ? "descriptor" : "none",
         options: []
@@ -620,16 +721,25 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       const groups = (system as SpeciesSystemData).descriptorChoiceGroups ?? [];
       await this.item.update({"system.descriptorChoiceGroups": [...groups, group]});
     } else {
-      const group: SkillChoiceGroup = {id: crypto.randomUUID(), choose: Math.max(1, Number(data.choose) || 1), rank: String(data.rank) as SkillRank, options: []};
+      const group: SkillChoiceGroup = {
+        id: crypto.randomUUID(),
+        choose: Math.max(1, Number(data.choose) || 1),
+        rank: String(data.rank) as SkillRank,
+        options: []
+      };
       await this.item.update({"system.choiceGroups": [...system.choiceGroups, group]});
     }
   }
 
-  async #promptPoolBonusChoiceGroup(
-    existing?: PoolBonusChoiceGroup
-  ): Promise<Omit<PoolBonusChoiceGroup, "id"> | null> {
-    const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(existing ? "MAGNUSARCHIVES.Packages.EditPoolBonusChoiceGroup" : "MAGNUSARCHIVES.Packages.AddPoolBonusChoiceGroup")},
+  async #promptPoolBonusChoiceGroup(existing?: PoolBonusChoiceGroup): Promise<Omit<PoolBonusChoiceGroup, "id"> | null> {
+    const data = (await foundry.applications.api.DialogV2.input({
+      window: {
+        title: game.i18n.localize(
+          existing
+            ? "MAGNUSARCHIVES.Packages.EditPoolBonusChoiceGroup"
+            : "MAGNUSARCHIVES.Packages.AddPoolBonusChoiceGroup"
+        )
+      },
       content: `<div class="magnusarchives magnusarchives-dialog package-pool-choice-authoring">
         <div class="magnusarchives-dialog-section magnusarchives-dialog-field-grid">
           <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Packages.Amount")}<input name="amount" type="number" min="1" value="${existing?.amount ?? 1}"></label>
@@ -641,7 +751,7 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
         </div>
       </div>`,
       ok: {label: game.i18n.localize(existing ? "MAGNUSARCHIVES.Actions.Save" : "MAGNUSARCHIVES.Actions.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return null;
     const amount = Math.trunc(Number(data.amount));
     const choose = Math.trunc(Number(data.choose));
@@ -673,7 +783,7 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const data = await this.#promptPoolBonusChoiceGroup(existing);
     if (!data) return;
     await this.item.update({
-      "system.poolBonusChoiceGroups": groups.map((group) => group.id === existing.id ? {...group, ...data} : group)
+      "system.poolBonusChoiceGroups": groups.map((group) => (group.id === existing.id ? {...group, ...data} : group))
     });
   }
 
@@ -689,7 +799,11 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     });
   }
 
-  static async #onAddChoiceOption(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onAddChoiceOption(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const groupId = target.dataset.groupId;
     const system = this.item.system as unknown as DescriptorSystemData | SpeciesSystemData | CharacterTypeSystemData;
@@ -697,72 +811,129 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const abilityChoice = this.item.type !== "descriptor" && choiceKind === "ability";
     const descriptorChoice = this.item.type === "species" && choiceKind === "descriptor";
     const group = abilityChoice
-      ? (system as SpeciesSystemData | CharacterTypeSystemData).abilityChoiceGroups.find((entry) => entry.id === groupId)
+      ? (system as SpeciesSystemData | CharacterTypeSystemData).abilityChoiceGroups.find(
+          (entry) => entry.id === groupId
+        )
       : descriptorChoice
         ? (system as SpeciesSystemData).descriptorChoiceGroups.find((entry) => entry.id === groupId)
         : system.choiceGroups.find((entry) => entry.id === groupId);
     if (!group) return;
     const sourceType = abilityChoice ? "ability" : descriptorChoice ? "descriptor" : "skill";
-    const sources = [...game.items].filter((item) => item.type === sourceType).sort((a, b) => a.name.localeCompare(b.name));
-    const data = await foundry.applications.api.DialogV2.input({
-      window: {title: game.i18n.localize(abilityChoice ? "MAGNUSARCHIVES.Species.AddAbilityOption" : descriptorChoice ? "MAGNUSARCHIVES.Species.AddDescriptorOption" : "MAGNUSARCHIVES.Packages.AddSkillOption")},
+    const sources = [...game.items]
+      .filter((item) => item.type === sourceType)
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const data = (await foundry.applications.api.DialogV2.input({
+      window: {
+        title: game.i18n.localize(
+          abilityChoice
+            ? "MAGNUSARCHIVES.Species.AddAbilityOption"
+            : descriptorChoice
+              ? "MAGNUSARCHIVES.Species.AddDescriptorOption"
+              : "MAGNUSARCHIVES.Packages.AddSkillOption"
+        )
+      },
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${abilityChoice || descriptorChoice ? "" : `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>`}${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}</select></label>${abilityChoice || descriptorChoice ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>`}</div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
-    const source = data.uuid === "custom" ? null : await fromUuid(String(data.uuid ?? "")) as Item | null;
+    const source = data.uuid === "custom" ? null : ((await fromUuid(String(data.uuid ?? ""))) as Item | null);
     if (abilityChoice) {
       if (!source) return;
-      const option: AbilityGrant = {id: crypto.randomUUID(), abilityUuid: source.uuid, snapshot: this.#snapshot(source)};
+      const option: AbilityGrant = {
+        id: crypto.randomUUID(),
+        abilityUuid: source.uuid,
+        snapshot: this.#snapshot(source)
+      };
       const groups = (system as SpeciesSystemData | CharacterTypeSystemData).abilityChoiceGroups;
-      await this.item.update({"system.abilityChoiceGroups": groups.map((entry) => entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry)});
+      await this.item.update({
+        "system.abilityChoiceGroups": groups.map((entry) =>
+          entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry
+        )
+      });
     } else if (descriptorChoice) {
       if (!source) return;
-      const option: DescriptorGrant = {id: crypto.randomUUID(), descriptorUuid: source.uuid, snapshot: this.#snapshot(source)};
+      const option: DescriptorGrant = {
+        id: crypto.randomUUID(),
+        descriptorUuid: source.uuid,
+        snapshot: this.#snapshot(source)
+      };
       const groups = (system as SpeciesSystemData).descriptorChoiceGroups;
-      await this.item.update({"system.descriptorChoiceGroups": groups.map((entry) => entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry)});
+      await this.item.update({
+        "system.descriptorChoiceGroups": groups.map((entry) =>
+          entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry
+        )
+      });
     } else {
       const option = this.#skillOption(source, String(data.customName ?? ""), String(data.notes ?? ""));
       if (!option) return;
-      await this.item.update({"system.choiceGroups": system.choiceGroups.map((entry) => entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry)});
+      await this.item.update({
+        "system.choiceGroups": system.choiceGroups.map((entry) =>
+          entry.id === groupId ? {...entry, options: [...entry.options, option]} : entry
+        )
+      });
     }
   }
 
-  static async #onEditSkillGrantNote(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onEditSkillGrantNote(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry || !("skillUuid" in entry)) return;
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Packages.EditSkillContextNote")},
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="3">${escapeHtml(String(entry.notes ?? ""))}</textarea></label></div>`,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
     await this.#replacePackageEntry(target, {...entry, notes: String(data.notes ?? "")});
   }
 
-  static async #onInspectPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onInspectPackageGrant(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry) return;
-    const uuid = "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
-    const source = uuid ? await fromUuid(uuid) as Item | null : null;
-    if (source) { await source.sheet?.render(true); return; }
+    const uuid =
+      "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
+    const source = uuid ? ((await fromUuid(uuid)) as Item | null) : null;
+    if (source) {
+      await source.sheet?.render(true);
+      return;
+    }
     await foundry.applications.api.DialogV2.confirm({
       window: {title: entry.snapshot?.name || ("customName" in entry ? entry.customName : "")},
       content: `<div class="magnusarchives magnusarchives-dialog package-snapshot"><p>${String(entry.snapshot?.system?.description ?? "")}</p></div>`,
-      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}, no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Close")}
     });
   }
 
-  static async #onRefreshPackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRefreshPackageGrant(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const entry = this.#packageEntry(target);
     if (!entry) return;
-    const uuid = "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
-    const source = uuid ? await fromUuid(uuid) as Item | null : null;
-    if (!source) { ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.SourceUnavailable")); return; }
+    const uuid =
+      "abilityUuid" in entry ? entry.abilityUuid : "skillUuid" in entry ? entry.skillUuid : entry.descriptorUuid;
+    const source = uuid ? ((await fromUuid(uuid)) as Item | null) : null;
+    if (!source) {
+      ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Packages.SourceUnavailable"));
+      return;
+    }
     await this.#replacePackageEntry(target, {...entry, snapshot: this.#snapshot(source)});
   }
 
-  static async #onRemovePackageGrant(this: MagnusArchivesItemSheet, _event: PointerEvent, target: HTMLElement): Promise<void> {
+  static async #onRemovePackageGrant(
+    this: MagnusArchivesItemSheet,
+    _event: PointerEvent,
+    target: HTMLElement
+  ): Promise<void> {
     const kind = target.dataset.grantKind;
     const id = target.dataset.grantId;
     if (!id) return;
@@ -775,14 +946,22 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     } else if (kind === "option") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as DescriptorSystemData).choiceGroups;
-      await this.item.update({"system.choiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group)});
+      await this.item.update({
+        "system.choiceGroups": groups.map((group) =>
+          group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group
+        )
+      });
     } else if (kind === "group") {
       const groups = (this.item.system as unknown as DescriptorSystemData).choiceGroups;
       await this.item.update({"system.choiceGroups": groups.filter((group) => group.id !== id)});
     } else if (kind === "abilityOption") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as SpeciesSystemData).abilityChoiceGroups;
-      await this.item.update({"system.abilityChoiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group)});
+      await this.item.update({
+        "system.abilityChoiceGroups": groups.map((group) =>
+          group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group
+        )
+      });
     } else if (kind === "abilityGroup") {
       const groups = (this.item.system as unknown as SpeciesSystemData).abilityChoiceGroups;
       await this.item.update({"system.abilityChoiceGroups": groups.filter((group) => group.id !== id)});
@@ -792,7 +971,11 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     } else if (kind === "descriptorOption") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as SpeciesSystemData).descriptorChoiceGroups;
-      await this.item.update({"system.descriptorChoiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group)});
+      await this.item.update({
+        "system.descriptorChoiceGroups": groups.map((group) =>
+          group.id === groupId ? {...group, options: group.options.filter((entry) => entry.id !== id)} : group
+        )
+      });
     } else if (kind === "descriptorGroup") {
       const groups = (this.item.system as unknown as SpeciesSystemData).descriptorChoiceGroups;
       await this.item.update({"system.descriptorChoiceGroups": groups.filter((group) => group.id !== id)});
@@ -836,26 +1019,23 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
         ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.NoWorldAbilities"));
         return;
       }
-      const data = await foundry.applications.api.DialogV2.input({
+      const data = (await foundry.applications.api.DialogV2.input({
         window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")},
         content: `<div class="magnusarchives-dialog-fields">
           <label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.Ability")}
-            <select name="abilityUuid">${abilities.map((ability) => (
-              `<option value="${escapeHtml(ability.uuid)}">${escapeHtml(ability.name)}</option>`
-            )).join("")}</select>
+            <select name="abilityUuid">${abilities
+              .map((ability) => `<option value="${escapeHtml(ability.uuid)}">${escapeHtml(ability.name)}</option>`)
+              .join("")}</select>
           </label>
           ${this.#tierSelectHtml()}
         </div>`,
         rejectClose: false,
         ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")}
-      }) as Record<string, unknown> | null;
+      })) as Record<string, unknown> | null;
       if (!data) return;
       const ability = await fromUuid(String(data.abilityUuid ?? ""));
       if (!ability) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AbilityUnavailable"));
-      const node = editor.addAbility(
-        ability as FocusEditorAbilityLike,
-        Number(data.tier ?? 1)
-      );
+      const node = editor.addAbility(ability as FocusEditorAbilityLike, Number(data.tier ?? 1));
       this.#focusEditorInteraction.select(node.id);
       await this.#rerender();
     } catch (error) {
@@ -1024,9 +1204,12 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       if (!node) throw new Error(`Focus node '${nodeId}' was not found.`);
       const confirmed = await foundry.applications.api.DialogV2.confirm({
         window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DeleteNode")},
-        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Focus.Editor.DeleteNodeConfirm", {
-          name: escapeHtml(node.abilitySnapshot.name || node.id)
-        })}</p></div>`,
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format(
+          "MAGNUSARCHIVES.Focus.Editor.DeleteNodeConfirm",
+          {
+            name: escapeHtml(node.abilitySnapshot.name || node.id)
+          }
+        )}</p></div>`,
         rejectClose: false,
         modal: true,
         yes: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete")},
@@ -1054,8 +1237,7 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
   }
 
   #focusDocument(): FocusDocumentLike {
-    const graph = this.#focusTreeEditor?.graph
-      ?? (this.item.system as unknown as FocusDocumentLike["system"]).graph;
+    const graph = this.#focusTreeEditor?.graph ?? (this.item.system as unknown as FocusDocumentLike["system"]).graph;
     return {
       id: this.item.id,
       uuid: this.item.uuid,
@@ -1070,12 +1252,12 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     if (ability.type !== "ability") {
       throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DropAbilityOnly"));
     }
-    const data = await foundry.applications.api.DialogV2.input({
+    const data = (await foundry.applications.api.DialogV2.input({
       window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ChooseTier")},
       content: `<div class="magnusarchives-dialog-fields">${this.#tierSelectHtml()}</div>`,
       rejectClose: false,
       ok: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility")}
-    }) as Record<string, unknown> | null;
+    })) as Record<string, unknown> | null;
     if (!data) return;
     const node = editor.addAbility(ability, Number(data.tier ?? 1));
     this.#focusEditorInteraction.select(node.id);
@@ -1164,7 +1346,11 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     if (this.item.type === "species") {
       const system = this.item.system as unknown as SpeciesSystemData;
       if (source.type === "ability") {
-        const grant: AbilityGrant = {id: crypto.randomUUID(), abilityUuid: source.uuid, snapshot: this.#snapshot(source)};
+        const grant: AbilityGrant = {
+          id: crypto.randomUUID(),
+          abilityUuid: source.uuid,
+          snapshot: this.#snapshot(source)
+        };
         await this.item.update({"system.abilityGrants": [...system.abilityGrants, grant]});
         return;
       }
@@ -1175,7 +1361,11 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
         return;
       }
       if (source.type === "descriptor") {
-        const grant: DescriptorGrant = {id: crypto.randomUUID(), descriptorUuid: source.uuid, snapshot: this.#snapshot(source)};
+        const grant: DescriptorGrant = {
+          id: crypto.randomUUID(),
+          descriptorUuid: source.uuid,
+          snapshot: this.#snapshot(source)
+        };
         await this.item.update({"system.descriptorGrants": [...system.descriptorGrants, grant]});
         return;
       }
@@ -1187,40 +1377,89 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const kind = target.dataset.grantKind;
     const id = target.dataset.grantId;
     if (!id) return null;
-    if (kind === "ability") return (this.item.system as unknown as {abilityGrants: AbilityGrant[]}).abilityGrants.find((entry) => entry.id === id) ?? null;
+    if (kind === "ability")
+      return (
+        (this.item.system as unknown as {abilityGrants: AbilityGrant[]}).abilityGrants.find(
+          (entry) => entry.id === id
+        ) ?? null
+      );
     const system = this.item.system as unknown as DescriptorSystemData;
     if (kind === "skill") return system.skillGrants.find((entry) => entry.id === id) ?? null;
-    if (kind === "option") return system.choiceGroups.find((group) => group.id === target.dataset.groupId)?.options.find((entry) => entry.id === id) ?? null;
-    if (kind === "abilityOption") return (this.item.system as unknown as SpeciesSystemData).abilityChoiceGroups.find((group) => group.id === target.dataset.groupId)?.options.find((entry) => entry.id === id) ?? null;
-    if (kind === "descriptor") return (this.item.system as unknown as SpeciesSystemData).descriptorGrants.find((entry) => entry.id === id) ?? null;
-    if (kind === "descriptorOption") return (this.item.system as unknown as SpeciesSystemData).descriptorChoiceGroups.find((group) => group.id === target.dataset.groupId)?.options.find((entry) => entry.id === id) ?? null;
+    if (kind === "option")
+      return (
+        system.choiceGroups
+          .find((group) => group.id === target.dataset.groupId)
+          ?.options.find((entry) => entry.id === id) ?? null
+      );
+    if (kind === "abilityOption")
+      return (
+        (this.item.system as unknown as SpeciesSystemData).abilityChoiceGroups
+          .find((group) => group.id === target.dataset.groupId)
+          ?.options.find((entry) => entry.id === id) ?? null
+      );
+    if (kind === "descriptor")
+      return (
+        (this.item.system as unknown as SpeciesSystemData).descriptorGrants.find((entry) => entry.id === id) ?? null
+      );
+    if (kind === "descriptorOption")
+      return (
+        (this.item.system as unknown as SpeciesSystemData).descriptorChoiceGroups
+          .find((group) => group.id === target.dataset.groupId)
+          ?.options.find((entry) => entry.id === id) ?? null
+      );
     return null;
   }
 
-  async #replacePackageEntry(target: HTMLElement, replacement: AbilityGrant | SkillGrant | SkillGrantOption | DescriptorGrant): Promise<void> {
+  async #replacePackageEntry(
+    target: HTMLElement,
+    replacement: AbilityGrant | SkillGrant | SkillGrantOption | DescriptorGrant
+  ): Promise<void> {
     const kind = target.dataset.grantKind;
     const id = target.dataset.grantId;
     if (kind === "ability") {
       const grants = (this.item.system as unknown as {abilityGrants: AbilityGrant[]}).abilityGrants;
-      await this.item.update({"system.abilityGrants": grants.map((entry) => entry.id === id ? replacement : entry)});
+      await this.item.update({"system.abilityGrants": grants.map((entry) => (entry.id === id ? replacement : entry))});
     } else if (kind === "skill") {
       const grants = (this.item.system as unknown as DescriptorSystemData).skillGrants;
-      await this.item.update({"system.skillGrants": grants.map((entry) => entry.id === id ? replacement : entry)});
+      await this.item.update({"system.skillGrants": grants.map((entry) => (entry.id === id ? replacement : entry))});
     } else if (kind === "option") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as DescriptorSystemData).choiceGroups;
-      await this.item.update({"system.choiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.map((entry) => entry.id === id ? replacement : entry)} : group)});
+      await this.item.update({
+        "system.choiceGroups": groups.map((group) =>
+          group.id === groupId
+            ? {...group, options: group.options.map((entry) => (entry.id === id ? replacement : entry))}
+            : group
+        )
+      });
     } else if (kind === "abilityOption") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as SpeciesSystemData).abilityChoiceGroups;
-      await this.item.update({"system.abilityChoiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.map((entry) => entry.id === id ? replacement : entry)} : group)});
+      await this.item.update({
+        "system.abilityChoiceGroups": groups.map((group) =>
+          group.id === groupId
+            ? {...group, options: group.options.map((entry) => (entry.id === id ? replacement : entry))}
+            : group
+        )
+      });
     } else if (kind === "descriptor") {
       const grants = (this.item.system as unknown as SpeciesSystemData).descriptorGrants;
-      await this.item.update({"system.descriptorGrants": grants.map((entry) => entry.id === id ? replacement : entry)});
+      await this.item.update({
+        "system.descriptorGrants": grants.map((entry) => (entry.id === id ? replacement : entry))
+      });
     } else if (kind === "descriptorOption") {
       const groupId = target.dataset.groupId;
       const groups = (this.item.system as unknown as SpeciesSystemData).descriptorChoiceGroups;
-      await this.item.update({"system.descriptorChoiceGroups": groups.map((group) => group.id === groupId ? {...group, options: group.options.map((entry) => entry.id === id ? replacement as DescriptorGrant : entry)} : group)});
+      await this.item.update({
+        "system.descriptorChoiceGroups": groups.map((group) =>
+          group.id === groupId
+            ? {
+                ...group,
+                options: group.options.map((entry) => (entry.id === id ? (replacement as DescriptorGrant) : entry))
+              }
+            : group
+        )
+      });
     }
   }
 
@@ -1256,21 +1495,40 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const typeInstance = isCharacterType
       ? (system.instance as CharacterTypeSystemData["instance"] | undefined)
       : undefined;
-    const usesRichDescription = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type);
-    const rawDescription = typeof this.item._source?.system?.description === "string"
-      ? this.item._source.system.description
-      : "";
+    const usesRichDescription = [
+      "ability",
+      "focus",
+      "genre",
+      "skill",
+      "weapon",
+      "armor",
+      "shield",
+      "equipment",
+      "cypher",
+      "artifact",
+      "characterType",
+      "descriptor",
+      "species"
+    ].includes(this.item.type);
+    const rawDescription =
+      typeof this.item._source?.system?.description === "string" ? this.item._source.system.description : "";
     const enrichedDescription = usesRichDescription
       ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(rawDescription, {
-        async: true,
-        relativeTo: this.item
-      })
+          async: true,
+          relativeTo: this.item
+        })
       : "";
     const enrichedBackgroundOptions = isCharacterType
-      ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), {async: true, relativeTo: this.item})
+      ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+          String(this.item._source.system.backgroundOptions ?? ""),
+          {async: true, relativeTo: this.item}
+        )
       : "";
     const enrichedEquipmentNotes = isCharacterType
-      ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), {async: true, relativeTo: this.item})
+      ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+          String(this.item._source.system.equipmentNotes ?? ""),
+          {async: true, relativeTo: this.item}
+        )
       : "";
     const rank = String(system.rank ?? "untrained") as SkillRank;
     const defaultPool = String(system.defaultPool ?? "choose");
@@ -1281,79 +1539,98 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
     const abilityVisibility = isAbility
       ? abilityMechanicsVisibility(system as unknown as Parameters<typeof abilityMechanicsVisibility>[0])
       : null;
-    const abilityMechanics = abilityVisibility ? {
-      ...abilityVisibility,
-      rollModifierLabel: game.i18n.localize(
-        abilityVisibility.rollModifierLabel === "task"
-          ? "MAGNUSARCHIVES.Ability.TaskModifier"
-          : abilityVisibility.rollModifierLabel === "defense"
-            ? "MAGNUSARCHIVES.Ability.DefenseModifier"
-            : "MAGNUSARCHIVES.Ability.RollModifier"
-      )
-    } : null;
+    const abilityMechanics = abilityVisibility
+      ? {
+          ...abilityVisibility,
+          rollModifierLabel: game.i18n.localize(
+            abilityVisibility.rollModifierLabel === "task"
+              ? "MAGNUSARCHIVES.Ability.TaskModifier"
+              : abilityVisibility.rollModifierLabel === "defense"
+                ? "MAGNUSARCHIVES.Ability.DefenseModifier"
+                : "MAGNUSARCHIVES.Ability.RollModifier"
+          )
+        }
+      : null;
     const genreAbilityMetadata = isAbility
-      ? ((this.item as unknown as {flags?: {magnusarchives?: {genreAbility?: {
-        catalog?: string;
-        genres?: string[];
-        progressionBand?: string;
-        minimumSuperheroRank?: number;
-      }}}}).flags?.magnusarchives?.genreAbility)
+      ? (
+          this.item as unknown as {
+            flags?: {
+              magnusarchives?: {
+                genreAbility?: {
+                  catalog?: string;
+                  genres?: string[];
+                  progressionBand?: string;
+                  minimumSuperheroRank?: number;
+                };
+              };
+            };
+          }
+        ).flags?.magnusarchives?.genreAbility
       : undefined;
-    const abilityGenreReview = genreAbilityMetadata ? {
-      catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${genreAbilityMetadata.catalog ?? "progression"}`),
-      genresLabel: (genreAbilityMetadata.genres ?? []).map((genre) => (
-        game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${genre}`)
-      )).join(" · "),
-      progressionBandLabel: genreAbilityMetadata.progressionBand === "origin"
-        ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin")
-        : game.i18n.localize(`MAGNUSARCHIVES.Genre.ProgressionBand.${genreAbilityMetadata.progressionBand ?? "mid-tier"}`),
-      minimumSuperheroRank: Number(genreAbilityMetadata.minimumSuperheroRank ?? 0)
-    } : null;
+    const abilityGenreReview = genreAbilityMetadata
+      ? {
+          catalogLabel: game.i18n.localize(
+            `MAGNUSARCHIVES.Genre.CatalogKind.${genreAbilityMetadata.catalog ?? "progression"}`
+          ),
+          genresLabel: (genreAbilityMetadata.genres ?? [])
+            .map((genre) => game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${genre}`))
+            .join(" · "),
+          progressionBandLabel:
+            genreAbilityMetadata.progressionBand === "origin"
+              ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin")
+              : game.i18n.localize(
+                  `MAGNUSARCHIVES.Genre.ProgressionBand.${genreAbilityMetadata.progressionBand ?? "mid-tier"}`
+                ),
+          minimumSuperheroRank: Number(genreAbilityMetadata.minimumSuperheroRank ?? 0)
+        }
+      : null;
     const genreCatalogEntries = isGenre
       ? (system as unknown as GenreSystemData).abilityCatalog.map((entry) => ({
-        ...entry,
-        catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${entry.catalog ?? "progression"}`),
-        progressionBandLabel: (entry.catalog ?? "progression") === "progression"
-          ? entry.minimumTier === 3
-            ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.mid-tier")
-            : entry.minimumTier === 6
-              ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.high-tier")
-              : ""
-          : "",
-        minimumSuperheroRank: Number(entry.minimumSuperheroRank ?? 0)
-      }))
+          ...entry,
+          catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${entry.catalog ?? "progression"}`),
+          progressionBandLabel:
+            (entry.catalog ?? "progression") === "progression"
+              ? entry.minimumTier === 3
+                ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.mid-tier")
+                : entry.minimumTier === 6
+                  ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.high-tier")
+                  : ""
+              : "",
+          minimumSuperheroRank: Number(entry.minimumSuperheroRank ?? 0)
+        }))
       : [];
-    const skillOptionalMechanics = isSkill && skillHasOptionalMechanics({
-      defaultPool,
-      category: String(system.category ?? "general"),
-      contexts: skillContexts as string[],
-      initiative: Boolean(system.initiative)
-    });
-    const grantedBy = system.grantedBy as {
-      kind?: string;
-      sourceUuid?: string;
-      instanceId?: string;
-      grantId?: string;
-      status?: string;
-    } | undefined;
-    const hasGrantProvenance = Boolean(
-      grantedBy?.sourceUuid || grantedBy?.instanceId || grantedBy?.grantId
-    );
+    const skillOptionalMechanics =
+      isSkill &&
+      skillHasOptionalMechanics({
+        defaultPool,
+        category: String(system.category ?? "general"),
+        contexts: skillContexts as string[],
+        initiative: Boolean(system.initiative)
+      });
+    const grantedBy = system.grantedBy as
+      | {
+          kind?: string;
+          sourceUuid?: string;
+          instanceId?: string;
+          grantId?: string;
+          status?: string;
+        }
+      | undefined;
+    const hasGrantProvenance = Boolean(grantedBy?.sourceUuid || grantedBy?.instanceId || grantedBy?.grantId);
     const focusDocument = isFocus ? this.#focusDocument() : null;
     const focusGraph = focusDocument?.system.graph;
-    const selectedFocusNode = focusGraph?.nodes.find((node) => (
-      node.id === this.#focusEditorInteraction.selectedNodeId
-    ));
-    const nodeNames = new Map(focusGraph?.nodes.map((node) => [
-      node.id,
-      node.abilitySnapshot.name || node.id
-    ]) ?? []);
+    const selectedFocusNode = focusGraph?.nodes.find((node) => node.id === this.#focusEditorInteraction.selectedNodeId);
+    const nodeNames = new Map(focusGraph?.nodes.map((node) => [node.id, node.abilitySnapshot.name || node.id]) ?? []);
     return {
       ...context,
       item: this.item,
       system: this.item.system,
       systemFields: documentSystemFields(this.item),
-      enriched: {description: enrichedDescription, backgroundOptions: enrichedBackgroundOptions, equipmentNotes: enrichedEquipmentNotes},
+      enriched: {
+        description: enrichedDescription,
+        backgroundOptions: enrichedBackgroundOptions,
+        equipmentNotes: enrichedEquipmentNotes
+      },
       usesRichDescription,
       isSkill,
       isAbility,
@@ -1369,27 +1646,72 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       typeCustomGenreSelected: isCharacterType && String(system.genre ?? "none") === "custom",
       typeSuperheroSelected,
       typeSuperheroAttached: typeSuperheroSelected && Boolean(typeInstance?.instanceId),
-      typeSuperheroicsPoolLabel: typeInstance?.selections?.superheroicsPool
-        && typeInstance.selections.superheroicsPool !== "none"
-        ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${typeInstance.selections.superheroicsPool[0]!.toUpperCase()}${typeInstance.selections.superheroicsPool.slice(1)}`)
-        : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
+      typeSuperheroicsPoolLabel:
+        typeInstance?.selections?.superheroicsPool && typeInstance.selections.superheroicsPool !== "none"
+          ? game.i18n.localize(
+              `MAGNUSARCHIVES.Pools.${typeInstance.selections.superheroicsPool[0]!.toUpperCase()}${typeInstance.selections.superheroicsPool.slice(1)}`
+            )
+          : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
       typeWeaponFamiliesValue: isCharacterType
-        ? normalizeWeaponFamilies((system as unknown as CharacterTypeSystemData).weaponFamilies).map(weaponFamilyLabel).join(", ")
+        ? normalizeWeaponFamilies((system as unknown as CharacterTypeSystemData).weaponFamilies)
+            .map(weaponFamilyLabel)
+            .join(", ")
         : "",
       speciesWeaponFamiliesValue: isSpecies
-        ? normalizeWeaponFamilies((system as unknown as SpeciesSystemData).weaponFamilies).map(weaponFamilyLabel).join(", ")
+        ? normalizeWeaponFamilies((system as unknown as SpeciesSystemData).weaponFamilies)
+            .map(weaponFamilyLabel)
+            .join(", ")
         : "",
       weaponFamilySuggestions: BUILT_IN_WEAPON_FAMILIES.map((family) => ({value: weaponFamilyLabel(family)})),
       isDescriptor,
       isSpecies,
-      isCompactRuleItem: isAbility || isSkill || isWeapon || isArmor || isShield || isEquipment || isCypher || isArtifact || isGenre || isCharacterType || isSpecies,
-      usesCleanItemHeader: isAbility || isSkill || isWeapon || isArmor || isShield || isEquipment || isCypher || isArtifact || isFocus || isGenre || isDescriptor || isCharacterType || isSpecies,
-      hideNormalItemFooter: isAbility || isSkill || isWeapon || isArmor || isShield || isEquipment || isCypher || isArtifact || isFocus || isGenre || isDescriptor || isCharacterType || isSpecies,
-      genreEffortCapOptions: isGenre ? ["core", "unlimited"].map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Genre.EffortCap.${value}`),
-        selected: (system.options as {totalEffortCapMode?: string} | undefined)?.totalEffortCapMode === value
-      })) : [],
+      isCompactRuleItem:
+        isAbility ||
+        isSkill ||
+        isWeapon ||
+        isArmor ||
+        isShield ||
+        isEquipment ||
+        isCypher ||
+        isArtifact ||
+        isGenre ||
+        isCharacterType ||
+        isSpecies,
+      usesCleanItemHeader:
+        isAbility ||
+        isSkill ||
+        isWeapon ||
+        isArmor ||
+        isShield ||
+        isEquipment ||
+        isCypher ||
+        isArtifact ||
+        isFocus ||
+        isGenre ||
+        isDescriptor ||
+        isCharacterType ||
+        isSpecies,
+      hideNormalItemFooter:
+        isAbility ||
+        isSkill ||
+        isWeapon ||
+        isArmor ||
+        isShield ||
+        isEquipment ||
+        isCypher ||
+        isArtifact ||
+        isFocus ||
+        isGenre ||
+        isDescriptor ||
+        isCharacterType ||
+        isSpecies,
+      genreEffortCapOptions: isGenre
+        ? ["core", "unlimited"].map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Genre.EffortCap.${value}`),
+            selected: (system.options as {totalEffortCapMode?: string} | undefined)?.totalEffortCapMode === value
+          }))
+        : [],
       genreMinimumTierMin: GENRE_MINIMUM_TIER_MIN,
       genreMinimumTierMax: GENRE_MINIMUM_TIER_MAX,
       genreCatalogEntries,
@@ -1399,7 +1721,10 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       hasGrantProvenance,
       packagePoolOptions: ["none", ...POOL_KEYS].map((value) => ({
         value,
-        label: value === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+        label:
+          value === "none"
+            ? game.i18n.localize("MAGNUSARCHIVES.Common.None")
+            : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
         selected: (system.edgeGrant as {pool?: string} | undefined)?.pool === value
       })),
       packageGenreOptions: ["none", "fantasy", "scienceFiction", "superhero", "custom"].map((value) => ({
@@ -1409,215 +1734,307 @@ export class MagnusArchivesItemSheet extends ItemSheetV2 {
       })),
       edgeModeOptions: ["none", "fixed", "choice"].map((value) => ({
         value,
-        label: game.i18n.localize(value === "none" ? "MAGNUSARCHIVES.Common.None" : value === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"),
+        label: game.i18n.localize(
+          value === "none"
+            ? "MAGNUSARCHIVES.Common.None"
+            : value === "fixed"
+              ? "MAGNUSARCHIVES.Packages.FixedPool"
+              : "MAGNUSARCHIVES.Packages.ChoicePool"
+        ),
         selected: (system.edgeGrant as {mode?: string} | undefined)?.mode === value
       })),
-      descriptorSkillGrants: isDescriptor ? (system.skillGrants as SkillGrant[]).map((grant) => ({
-        ...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
-      })) : [],
+      descriptorSkillGrants: isDescriptor
+        ? (system.skillGrants as SkillGrant[]).map((grant) => ({
+            ...grant,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
+          }))
+        : [],
       descriptorPoolBonusChoiceGroups: isDescriptor
         ? ((system.poolBonusChoiceGroups ?? []) as PoolBonusChoiceGroup[]).map((group) => ({
-          ...group,
-          poolsLabel: group.pools.map((pool) => game.i18n.localize(
-            `MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`
-          )).join(" · ")
-        }))
+            ...group,
+            poolsLabel: group.pools
+              .map((pool) => game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`))
+              .join(" · ")
+          }))
         : [],
-      descriptorChoiceGroups: isDescriptor ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
-        ...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
-      })) : [],
-      typeSkillGrants: isCharacterType ? (system.skillGrants as SkillGrant[]).map((grant) => ({
-        ...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
-      })) : [],
-      typeSkillChoiceGroups: isCharacterType ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
-        ...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
-      })) : [],
-      typeAbilityChoiceGroups: isCharacterType ? (system.abilityChoiceGroups as CharacterTypeSystemData["abilityChoiceGroups"]) : [],
-      speciesSkillGrants: isSpecies ? (system.skillGrants as SkillGrant[]).map((grant) => ({...grant, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)})) : [],
-      speciesSkillChoiceGroups: isSpecies ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({...group, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)})) : [],
-      speciesAbilityChoiceGroups: isSpecies ? (system.abilityChoiceGroups as SpeciesSystemData["abilityChoiceGroups"]) : [],
+      descriptorChoiceGroups: isDescriptor
+        ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
+            ...group,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
+          }))
+        : [],
+      typeSkillGrants: isCharacterType
+        ? (system.skillGrants as SkillGrant[]).map((grant) => ({
+            ...grant,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
+          }))
+        : [],
+      typeSkillChoiceGroups: isCharacterType
+        ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
+            ...group,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
+          }))
+        : [],
+      typeAbilityChoiceGroups: isCharacterType
+        ? (system.abilityChoiceGroups as CharacterTypeSystemData["abilityChoiceGroups"])
+        : [],
+      speciesSkillGrants: isSpecies
+        ? (system.skillGrants as SkillGrant[]).map((grant) => ({
+            ...grant,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${grant.rank}`)
+          }))
+        : [],
+      speciesSkillChoiceGroups: isSpecies
+        ? (system.choiceGroups as SkillChoiceGroup[]).map((group) => ({
+            ...group,
+            rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${group.rank}`)
+          }))
+        : [],
+      speciesAbilityChoiceGroups: isSpecies
+        ? (system.abilityChoiceGroups as SpeciesSystemData["abilityChoiceGroups"])
+        : [],
       speciesDescriptorChoiceGroups: isSpecies
         ? (system.descriptorChoiceGroups as SpeciesSystemData["descriptorChoiceGroups"]).map((group) => ({
-          ...group,
-          catalogMode: (group.sourceMode ?? "fixed") === "catalog",
-          catalogLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")
-        }))
+            ...group,
+            catalogMode: (group.sourceMode ?? "fixed") === "catalog",
+            catalogLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")
+          }))
         : [],
       canEditFocusTree: Boolean(isFocus && game.user.isGM && this.isEditable && !this.#focusTreeEditor),
       focusTreeEditing: Boolean(this.#focusTreeEditor),
-      focusEditor: this.#focusTreeEditor ? {
-        dirty: this.#focusTreeEditor.dirty,
-        tierOptions: [1, 2, 3, 4, 5, 6],
-        connecting: Boolean(this.#focusEditorInteraction.connectionSourceNodeId),
-        connectionSourceName: this.#focusEditorInteraction.connectionSourceNodeId
-          ? nodeNames.get(this.#focusEditorInteraction.connectionSourceNodeId)
-          : "",
-        selectedNode: selectedFocusNode ? {
-          ...selectedFocusNode,
-          canMoveLeft: true,
-          canMoveRight: true
-        } : null,
-        connections: focusGraph?.connections.map((connection) => ({
-          ...connection,
-          fromName: nodeNames.get(connection.from) ?? connection.from,
-          toName: nodeNames.get(connection.to) ?? connection.to
-        })) ?? []
-      } : null,
-      focusTrees: isFocus
-        ? [await game.magnusarchives.services.focusTrees.prepare(focusDocument!, this.#focusTreeEditor ? {
-          editor: {
-            selectedNodeId: this.#focusEditorInteraction.selectedNodeId,
-            connectionSourceNodeId: this.#focusEditorInteraction.connectionSourceNodeId
+      focusEditor: this.#focusTreeEditor
+        ? {
+            dirty: this.#focusTreeEditor.dirty,
+            tierOptions: [1, 2, 3, 4, 5, 6],
+            connecting: Boolean(this.#focusEditorInteraction.connectionSourceNodeId),
+            connectionSourceName: this.#focusEditorInteraction.connectionSourceNodeId
+              ? nodeNames.get(this.#focusEditorInteraction.connectionSourceNodeId)
+              : "",
+            selectedNode: selectedFocusNode
+              ? {
+                  ...selectedFocusNode,
+                  canMoveLeft: true,
+                  canMoveRight: true
+                }
+              : null,
+            connections:
+              focusGraph?.connections.map((connection) => ({
+                ...connection,
+                fromName: nodeNames.get(connection.from) ?? connection.from,
+                toName: nodeNames.get(connection.to) ?? connection.to
+              })) ?? []
           }
-        } : {})]
+        : null,
+      focusTrees: isFocus
+        ? [
+            await game.magnusarchives.services.focusTrees.prepare(
+              focusDocument!,
+              this.#focusTreeEditor
+                ? {
+                    editor: {
+                      selectedNodeId: this.#focusEditorInteraction.selectedNodeId,
+                      connectionSourceNodeId: this.#focusEditorInteraction.connectionSourceNodeId
+                    }
+                  }
+                : {}
+            )
+          ]
         : [],
       isHeavyWeapon: isWeapon && system.category === "heavy",
-      abilityActivationOptions: isAbility ? ABILITY_ACTIVATIONS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${value}`),
-        selected: system.activation === value
-      })) : [],
-      abilityAllowedPoolOptions: isAbility ? POOL_KEYS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
-        selected: abilityCostPools.includes(value)
-      })) : [],
-      abilityRollOptions: isAbility ? ABILITY_ROLL_TYPES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Roll.${value}`),
-        selected: system.roll === value
-      })) : [],
-      priceCategoryOptions: isEquipment ? PRICE_CATEGORIES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Price.${value}`),
-        selected: system.price === value
-      })) : [],
-      abilityDamageEffectOptions: isAbility ? CHARACTER_DAMAGE_EFFECTS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${value}`),
-        selected: system.damageEffect === value
-      })) : [],
-      abilityTargetOptions: isAbility ? ABILITY_TARGET_MODES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.TargetMode.${value}`),
-        selected: system.targetMode === value
-      })) : [],
-      cypherManifestationOptions: isCypher ? CYPHER_MANIFESTATIONS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${value}`),
-        selected: system.manifestation === value
-      })) : [],
-      cypherPowerOptions: isCypher ? CYPHER_POWERS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${value}`),
-        selected: system.power === value
-      })) : [],
+      abilityActivationOptions: isAbility
+        ? ABILITY_ACTIVATIONS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${value}`),
+            selected: system.activation === value
+          }))
+        : [],
+      abilityAllowedPoolOptions: isAbility
+        ? POOL_KEYS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+            selected: abilityCostPools.includes(value)
+          }))
+        : [],
+      abilityRollOptions: isAbility
+        ? ABILITY_ROLL_TYPES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Roll.${value}`),
+            selected: system.roll === value
+          }))
+        : [],
+      priceCategoryOptions: isEquipment
+        ? PRICE_CATEGORIES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Price.${value}`),
+            selected: system.price === value
+          }))
+        : [],
+      abilityDamageEffectOptions: isAbility
+        ? CHARACTER_DAMAGE_EFFECTS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${value}`),
+            selected: system.damageEffect === value
+          }))
+        : [],
+      abilityTargetOptions: isAbility
+        ? ABILITY_TARGET_MODES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Ability.TargetMode.${value}`),
+            selected: system.targetMode === value
+          }))
+        : [],
+      cypherManifestationOptions: isCypher
+        ? CYPHER_MANIFESTATIONS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${value}`),
+            selected: system.manifestation === value
+          }))
+        : [],
+      cypherPowerOptions: isCypher
+        ? CYPHER_POWERS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${value}`),
+            selected: system.power === value
+          }))
+        : [],
       cypherEffectiveLevel: isCypher ? cypherLevel(system) : 0,
       artifactLevelRollable: isArtifact ? artifactLevelIsRollable(system) : false,
-      skillRankOptions: isSkill ? SKILL_RANKS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
-        selected: value === rank
-      })) : [],
-      skillPoolOptions: isSkill ? [
-        {value: "choose", label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"), selected: defaultPool === "choose"},
-        ...POOL_KEYS.map((value: PoolKey) => ({
-          value,
-          label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
-          selected: value === defaultPool
-        }))
-      ] : [],
-      skillContextOptions: isSkill ? [
-        "attack",
-        "attack.weapon",
-        "attack.melee",
-        "attack.ranged",
-        "weapon.light",
-        "weapon.medium",
-        "weapon.heavy",
-        "defense",
-        "defense.block",
-        "defense.dodge",
-        "perception"
-      ].map((value) => ({
-        value,
-        label: game.i18n.localize(
-          value === "attack"
-            ? "MAGNUSARCHIVES.Combat.Context.AnyAttack"
-            : value === "defense"
-              ? "MAGNUSARCHIVES.Combat.Context.AnyDefense"
-              : `MAGNUSARCHIVES.Combat.Context.${value}`
-        ),
-        selected: skillContexts.includes(value)
-      })) : [],
-      weaponCategoryOptions: isWeapon ? WEAPON_CATEGORIES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${value}`),
-        selected: system.category === value
-      })) : [],
+      skillRankOptions: isSkill
+        ? SKILL_RANKS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
+            selected: value === rank
+          }))
+        : [],
+      skillPoolOptions: isSkill
+        ? [
+            {
+              value: "choose",
+              label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"),
+              selected: defaultPool === "choose"
+            },
+            ...POOL_KEYS.map((value: PoolKey) => ({
+              value,
+              label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+              selected: value === defaultPool
+            }))
+          ]
+        : [],
+      skillContextOptions: isSkill
+        ? [
+            "attack",
+            "attack.weapon",
+            "attack.melee",
+            "attack.ranged",
+            "weapon.light",
+            "weapon.medium",
+            "weapon.heavy",
+            "defense",
+            "defense.block",
+            "defense.dodge",
+            "perception"
+          ].map((value) => ({
+            value,
+            label: game.i18n.localize(
+              value === "attack"
+                ? "MAGNUSARCHIVES.Combat.Context.AnyAttack"
+                : value === "defense"
+                  ? "MAGNUSARCHIVES.Combat.Context.AnyDefense"
+                  : `MAGNUSARCHIVES.Combat.Context.${value}`
+            ),
+            selected: skillContexts.includes(value)
+          }))
+        : [],
+      weaponCategoryOptions: isWeapon
+        ? WEAPON_CATEGORIES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${value}`),
+            selected: system.category === value
+          }))
+        : [],
       weaponFamilyDisplay: isWeapon ? weaponFamilyLabel(system.family) : "",
-      weaponDefaultPoolOptions: isWeapon ? ["none", ...POOL_KEYS].map((value) => ({
-        value,
-        label: value === "none"
-          ? game.i18n.localize("MAGNUSARCHIVES.Common.None")
-          : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
-        selected: system.defaultPool === value
-      })) : [],
-      weaponAttackTypeOptions: isWeapon ? WEAPON_ATTACK_TYPES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${value}`),
-        selected: system.attackType === value
-      })) : [],
-      rangeOptions: isWeapon ? RANGE_CATEGORIES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${value}`),
-        selected: system.rangeCategory === value
-      })) : [],
-      weaponAttackModifierOptions: isWeapon ? [-2, -1, 0, 1, 2].map((value) => ({
-        value,
-        label: value > 0 ? `+${value}` : String(value),
-        selected: system.attackModifier === value
-      })) : [],
-      weaponSkillLevelOptions: isWeapon ? SKILL_RANKS.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
-        selected: system.skillLevel === value
-      })) : [],
-      combatResourcesExpanded: (isWeapon || isArmor || isShield)
-        && this.#openDisclosures.has("combat-resources"),
+      weaponDefaultPoolOptions: isWeapon
+        ? ["none", ...POOL_KEYS].map((value) => ({
+            value,
+            label:
+              value === "none"
+                ? game.i18n.localize("MAGNUSARCHIVES.Common.None")
+                : game.i18n.localize(`MAGNUSARCHIVES.Pools.${value[0]!.toUpperCase()}${value.slice(1)}`),
+            selected: system.defaultPool === value
+          }))
+        : [],
+      weaponAttackTypeOptions: isWeapon
+        ? WEAPON_ATTACK_TYPES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${value}`),
+            selected: system.attackType === value
+          }))
+        : [],
+      rangeOptions: isWeapon
+        ? RANGE_CATEGORIES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${value}`),
+            selected: system.rangeCategory === value
+          }))
+        : [],
+      weaponAttackModifierOptions: isWeapon
+        ? [-2, -1, 0, 1, 2].map((value) => ({
+            value,
+            label: value > 0 ? `+${value}` : String(value),
+            selected: system.attackModifier === value
+          }))
+        : [],
+      weaponSkillLevelOptions: isWeapon
+        ? SKILL_RANKS.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${value}`),
+            selected: system.skillLevel === value
+          }))
+        : [],
+      combatResourcesExpanded: (isWeapon || isArmor || isShield) && this.#openDisclosures.has("combat-resources"),
       advancedExpanded: this.#openDisclosures.has("advanced"),
       shieldWoundsExpanded: isShield && this.#openDisclosures.has("shield-wounds"),
-      combatDepletionSides: isWeapon || isArmor || isShield
-        ? depletionDieSides((system.depletion ?? {die: "d6"}) as {die: string})
-        : 0,
-      combatDepletionThreshold: isWeapon || isArmor || isShield
-        ? depletionThresholdLabel(Number((system.depletion as {threshold?: number} | undefined)?.threshold ?? 1))
-        : "",
-      depletionDieOptions: isWeapon || isArtifact ? DEPLETION_DICE.map((value) => ({
-        value,
-        label: `1 in 1${value}`,
-        selected: (system.depletion as {die?: string} | undefined)?.die === value
-      })) : [],
-      armorCategoryOptions: isArmor ? ARMOR_CATEGORIES.map((value) => ({
-        value,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${value}`),
-        selected: system.category === value
-      })) : [],
-      shieldWoundTracks: isShield ? headerWoundTracks({
-        minor: (system.wounds as ShieldItemLike["system"]["wounds"]).minor.length,
-        moderate: (system.wounds as ShieldItemLike["system"]["wounds"]).moderate.length,
-        major: (system.wounds as ShieldItemLike["system"]["wounds"]).major.length
-      }, (system.derived as ShieldItemLike["system"]["derived"]).capacities).map((track) => ({
-        ...track,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
-        pips: track.pips.map((pip) => ({
-          ...pip,
-          tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
-            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
-            count: pip.targetCount
-          })
-        }))
-      })) : []
+      combatDepletionSides:
+        isWeapon || isArmor || isShield ? depletionDieSides((system.depletion ?? {die: "d6"}) as {die: string}) : 0,
+      combatDepletionThreshold:
+        isWeapon || isArmor || isShield
+          ? depletionThresholdLabel(Number((system.depletion as {threshold?: number} | undefined)?.threshold ?? 1))
+          : "",
+      depletionDieOptions:
+        isWeapon || isArtifact
+          ? DEPLETION_DICE.map((value) => ({
+              value,
+              label: `1 in 1${value}`,
+              selected: (system.depletion as {die?: string} | undefined)?.die === value
+            }))
+          : [],
+      armorCategoryOptions: isArmor
+        ? ARMOR_CATEGORIES.map((value) => ({
+            value,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${value}`),
+            selected: system.category === value
+          }))
+        : [],
+      shieldWoundTracks: isShield
+        ? headerWoundTracks(
+            {
+              minor: (system.wounds as ShieldItemLike["system"]["wounds"]).minor.length,
+              moderate: (system.wounds as ShieldItemLike["system"]["wounds"]).moderate.length,
+              major: (system.wounds as ShieldItemLike["system"]["wounds"]).major.length
+            },
+            (system.derived as ShieldItemLike["system"]["derived"]).capacities
+          ).map((track) => ({
+            ...track,
+            label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
+            pips: track.pips.map((pip) => ({
+              ...pip,
+              tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
+                severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${track.severity}`),
+                count: pip.targetCount
+              })
+            }))
+          }))
+        : []
     };
   }
 }

@@ -1,5 +1,3 @@
-import {readFile} from "node:fs/promises";
-import path from "node:path";
 import {afterAll, beforeAll, describe, expect, it, vi} from "vitest";
 
 interface FieldOptions {
@@ -19,26 +17,32 @@ class MockBooleanField extends MockField {}
 class MockObjectField extends MockField {}
 
 class MockSchemaField extends MockField {
-  constructor(readonly schema: Record<string, MockField>, options: FieldOptions = {}) {
+  constructor(
+    readonly schema: Record<string, MockField>,
+    options: FieldOptions = {}
+  ) {
     super(options);
   }
 }
 
 class MockArrayField extends MockField {
-  constructor(readonly element: MockField, options: FieldOptions = {}) {
+  constructor(
+    readonly element: MockField,
+    options: FieldOptions = {}
+  ) {
     super(options);
   }
 }
 
 function initializeField(field: MockField, source: unknown): unknown {
   if (field instanceof MockSchemaField) {
-    const object = source && typeof source === "object" ? source as Record<string, unknown> : {};
-    return Object.fromEntries(Object.entries(field.schema).map(([key, child]) => (
-      [key, initializeField(child, object[key])]
-    )));
+    const object = source && typeof source === "object" ? (source as Record<string, unknown>) : {};
+    return Object.fromEntries(
+      Object.entries(field.schema).map(([key, child]) => [key, initializeField(child, object[key])])
+    );
   }
   if (field instanceof MockArrayField) {
-    const values = Array.isArray(source) ? source : field.options.initial ?? [];
+    const values = Array.isArray(source) ? source : (field.options.initial ?? []);
     return (values as unknown[]).map((value) => initializeField(field.element, value));
   }
   const value = source ?? field.options.initial;
@@ -67,25 +71,31 @@ describe("Item DataModel creation defaults", () => {
           defineSchema(): Record<string, MockField>;
         };
         const migrated = constructor.migrateData(source);
-        Object.assign(this, Object.fromEntries(
-          Object.entries(constructor.defineSchema()).map(([key, field]) => (
-            [key, initializeField(field, migrated[key])]
-          ))
-        ));
+        Object.assign(
+          this,
+          Object.fromEntries(
+            Object.entries(constructor.defineSchema()).map(([key, field]) => [
+              key,
+              initializeField(field, migrated[key])
+            ])
+          )
+        );
       }
     }
 
     vi.stubGlobal("foundry", {
       abstract: {TypeDataModel: MockTypeDataModel},
-      data: {fields: {
-        ArrayField: MockArrayField,
-        BooleanField: MockBooleanField,
-        HTMLField: MockHTMLField,
-        NumberField: MockNumberField,
-        ObjectField: MockObjectField,
-        SchemaField: MockSchemaField,
-        StringField: MockStringField
-      }}
+      data: {
+        fields: {
+          ArrayField: MockArrayField,
+          BooleanField: MockBooleanField,
+          HTMLField: MockHTMLField,
+          NumberField: MockNumberField,
+          ObjectField: MockObjectField,
+          SchemaField: MockSchemaField,
+          StringField: MockStringField
+        }
+      }
     });
   });
 
@@ -121,10 +131,8 @@ describe("Item DataModel creation defaults", () => {
 
   it("defaults archive presentation state safely and preserves partial updates", async () => {
     const {AbilityDataModel} = await import("../../src/data/items/ability");
-    expect(AbilityDataModel.migrateData({description: "Changed"}, {partial: true}))
-      .toEqual({description: "Changed"});
-    expect(AbilityDataModel.migrateData({archived: true}, {partial: true}))
-      .toEqual({archived: true});
+    expect(AbilityDataModel.migrateData({description: "Changed"}, {partial: true})).toEqual({description: "Changed"});
+    expect(AbilityDataModel.migrateData({archived: true}, {partial: true})).toEqual({archived: true});
   });
 
   it("preserves legacy Enabler activation and migrates legacy cost Pool data", async () => {
@@ -147,7 +155,15 @@ describe("Item DataModel creation defaults", () => {
     });
     expect(scalable.cost).toMatchObject({amount: 2, scalable: true, allowedPools: ["intellect"]});
     for (const activation of [
-      "action", "firstAction", "lastAction", "enabler", "reaction", "timed", "perpetual", "passive", "special"
+      "action",
+      "firstAction",
+      "lastAction",
+      "enabler",
+      "reaction",
+      "timed",
+      "perpetual",
+      "passive",
+      "special"
     ]) {
       const ability = new (AbilityDataModel as unknown as new (source: Record<string, unknown>) => any)({activation});
       expect(ability.activation).toBe(activation);
@@ -212,12 +228,9 @@ describe("Item DataModel creation defaults", () => {
 
   it("normalizes an explicitly changed blank Skill Pool without inventing it on partial updates", async () => {
     const {SkillDataModel} = await import("../../src/data/items/skill");
-    expect(SkillDataModel.migrateData({rank: "specialized"}, {partial: true}))
-      .toEqual({rank: "specialized"});
-    expect(SkillDataModel.migrateData({defaultPool: ""}, {partial: true}))
-      .toEqual({defaultPool: "choose"});
-    expect(SkillDataModel.migrateData({defaultPool: "might"}, {partial: true}))
-      .toEqual({defaultPool: "might"});
+    expect(SkillDataModel.migrateData({rank: "specialized"}, {partial: true})).toEqual({rank: "specialized"});
+    expect(SkillDataModel.migrateData({defaultPool: ""}, {partial: true})).toEqual({defaultPool: "choose"});
+    expect(SkillDataModel.migrateData({defaultPool: "might"}, {partial: true})).toEqual({defaultPool: "might"});
   });
 
   it("creates a fresh Weapon with neutral modifiers and disabled Depletion", async () => {
@@ -262,28 +275,22 @@ describe("Item DataModel creation defaults", () => {
     [" Knives ", "knives"],
     ["SWORDS", "swords"],
     ["Energy Blades", "energy-blades"]
-  ])(
-    "normalizes and round-trips the extensible Weapon family %s",
-    async (family, expected) => {
-      const {WeaponDataModel} = await import("../../src/data/items/weapon");
-      const migrated = WeaponDataModel.migrateData({family}, {partial: true});
-      const weapon = new (WeaponDataModel as unknown as new (source: Record<string, unknown>) => {
-        family: string;
-      })(migrated);
-      expect(weapon.family).toBe(expected);
-    }
-  );
+  ])("normalizes and round-trips the extensible Weapon family %s", async (family, expected) => {
+    const {WeaponDataModel} = await import("../../src/data/items/weapon");
+    const migrated = WeaponDataModel.migrateData({family}, {partial: true});
+    const weapon = new (WeaponDataModel as unknown as new (source: Record<string, unknown>) => {
+      family: string;
+    })(migrated);
+    expect(weapon.family).toBe(expected);
+  });
 
-  it.each(["none", "might", "speed", "intellect"])(
-    "round-trips Weapon default Pool %s",
-    async (defaultPool) => {
-      const {WeaponDataModel} = await import("../../src/data/items/weapon");
-      const weapon = new (WeaponDataModel as unknown as new (source?: Record<string, unknown>) => {
-        defaultPool: string;
-      })({defaultPool});
-      expect(weapon.defaultPool).toBe(defaultPool);
-    }
-  );
+  it.each(["none", "might", "speed", "intellect"])("round-trips Weapon default Pool %s", async (defaultPool) => {
+    const {WeaponDataModel} = await import("../../src/data/items/weapon");
+    const weapon = new (WeaponDataModel as unknown as new (source?: Record<string, unknown>) => {
+      defaultPool: string;
+    })({defaultPool});
+    expect(weapon.defaultPool).toBe(defaultPool);
+  });
 
   it("migrates legacy Weapon Pool data without polluting unrelated partial updates", async () => {
     const {WeaponDataModel} = await import("../../src/data/items/weapon");
@@ -291,8 +298,7 @@ describe("Item DataModel creation defaults", () => {
     const unrelatedPartial = WeaponDataModel.migrateData({bonusDamage: 2}, {partial: true});
     expect(unrelatedPartial).toMatchObject({bonusDamage: 2});
     expect(unrelatedPartial).not.toHaveProperty("defaultPool");
-    expect(WeaponDataModel.migrateData({defaultPool: "speed"}, {partial: true}))
-      .toMatchObject({defaultPool: "speed"});
+    expect(WeaponDataModel.migrateData({defaultPool: "speed"}, {partial: true})).toMatchObject({defaultPool: "speed"});
   });
 
   it("creates a fresh functional Shield with a 3/2/1 Wound Track", async () => {
@@ -348,16 +354,25 @@ describe("Item DataModel creation defaults", () => {
       power: "low",
       levelOverride: false
     });
-    const legacyManifest = new (CypherDataModel as unknown as new (source: Record<string, unknown>) => any)({manifest: true, level: 6});
+    const legacyManifest = new (CypherDataModel as unknown as new (source: Record<string, unknown>) => any)({
+      manifest: true,
+      level: 6
+    });
     expect(legacyManifest).toMatchObject({manifestation: "manifest", level: 6, levelOverride: true});
-    const legacyDefault = new (CypherDataModel as unknown as new (source: Record<string, unknown>) => any)({manifest: false, level: 1});
+    const legacyDefault = new (CypherDataModel as unknown as new (source: Record<string, unknown>) => any)({
+      manifest: false,
+      level: 1
+    });
     expect(legacyDefault.levelOverride).toBe(false);
   });
 
   it("supports fixed and rollable Artifact Levels plus a reversible Depleted state", async () => {
     const {ArtifactDataModel} = await import("../../src/data/items/artifact");
     const fixed = new (ArtifactDataModel as unknown as new (source?: Record<string, unknown>) => any)({level: 6});
-    const rollable = new (ArtifactDataModel as unknown as new (source?: Record<string, unknown>) => any)({level: "1d6+2", depleted: true});
+    const rollable = new (ArtifactDataModel as unknown as new (source?: Record<string, unknown>) => any)({
+      level: "1d6+2",
+      depleted: true
+    });
     expect(fixed).toMatchObject({level: "6", depleted: false});
     expect(fixed.depletion).toMatchObject({formula: "1d6"});
     expect(rollable).toMatchObject({level: "1d6+2", depleted: true});
@@ -366,17 +381,47 @@ describe("Item DataModel creation defaults", () => {
   it("keeps Inventory rich-description partial updates isolated from all mechanical data", async () => {
     const {EquipmentDataModel, CypherDataModel, ArtifactDataModel} = await import("../../src/data/items");
     for (const Model of [EquipmentDataModel, CypherDataModel, ArtifactDataModel]) {
-      expect(Model.migrateData({description: "<p>@UUID[Item.example]</p>"}, {partial: true}))
-        .toEqual({description: "<p>@UUID[Item.example]</p>"});
+      expect(Model.migrateData({description: "<p>@UUID[Item.example]</p>"}, {partial: true})).toEqual({
+        description: "<p>@UUID[Item.example]</p>"
+      });
     }
   });
 
   it("keeps Combat Item mechanics and Shield Wounds through Description-only updates", async () => {
     const {WeaponDataModel, ArmorDataModel, ShieldDataModel} = await import("../../src/data/items");
     const saved = [
-      {Model: WeaponDataModel, system: {description: "Old", category: "heavy", bonusDamage: 2, ammo: {enabled: true, value: 4, max: 6, perAttack: 1}, damageOverride: null}},
-      {Model: ArmorDataModel, system: {description: "Old", category: "medium", equipped: true, freelyUsed: false, depletion: {enabled: true, die: "d20", threshold: 3}, depleted: true}},
-      {Model: ShieldDataModel, system: {description: "Old", equipped: true, woundCapacities: {minor: 4, moderate: 3, major: 2}, wounds: {minor: [{id: "m1"}], moderate: [], major: []}, depletion: {enabled: true, die: "d10", threshold: 2}, depleted: true}}
+      {
+        Model: WeaponDataModel,
+        system: {
+          description: "Old",
+          category: "heavy",
+          bonusDamage: 2,
+          ammo: {enabled: true, value: 4, max: 6, perAttack: 1},
+          damageOverride: null
+        }
+      },
+      {
+        Model: ArmorDataModel,
+        system: {
+          description: "Old",
+          category: "medium",
+          equipped: true,
+          freelyUsed: false,
+          depletion: {enabled: true, die: "d20", threshold: 3},
+          depleted: true
+        }
+      },
+      {
+        Model: ShieldDataModel,
+        system: {
+          description: "Old",
+          equipped: true,
+          woundCapacities: {minor: 4, moderate: 3, major: 2},
+          wounds: {minor: [{id: "m1"}], moderate: [], major: []},
+          depletion: {enabled: true, die: "d10", threshold: 2},
+          depleted: true
+        }
+      }
     ];
     for (const {Model, system} of saved) {
       const before = structuredClone(system);
@@ -406,15 +451,16 @@ describe("Item DataModel creation defaults", () => {
       options: {totalEffortCapMode: "core"},
       legacyKey: ""
     });
-    expect(GenreDataModel.migrateData({description: "Changed"}, {partial: true}))
-      .toEqual({description: "Changed"});
+    expect(GenreDataModel.migrateData({description: "Changed"}, {partial: true})).toEqual({description: "Changed"});
 
     const legacyEntry = new (GenreDataModel as unknown as new (source: Record<string, unknown>) => any)({
-      abilityCatalog: [{
-        id: "entry-a",
-        abilityUuid: "Item.ability-a",
-        snapshot: {name: "Ability A", system: {description: "A"}}
-      }]
+      abilityCatalog: [
+        {
+          id: "entry-a",
+          abilityUuid: "Item.ability-a",
+          snapshot: {name: "Ability A", system: {description: "A"}}
+        }
+      ]
     });
     expect(legacyEntry.abilityCatalog[0]).toMatchObject({
       minimumTier: 1,
@@ -427,19 +473,22 @@ describe("Item DataModel creation defaults", () => {
     const {FocusDataModel} = await import("../../src/data/items/focus");
     const graph = {
       version: 2,
-      nodes: [{
-        id: "stone-bash",
-        abilityUuid: "Item.stone-bash",
-        abilitySnapshot: {name: "Stone Bash", description: "<p>Snapshot</p>"},
-        tier: 2,
-        position: {x: 0.35, y: null}
-      }, {
-        id: "stone-body",
-        abilityUuid: "Compendium.magnusarchives.abilities.Item.stone-body",
-        abilitySnapshot: {name: "Stone Body", description: "<p>Another snapshot</p>"},
-        tier: 3,
-        position: {x: 0.65, y: null}
-      }],
+      nodes: [
+        {
+          id: "stone-bash",
+          abilityUuid: "Item.stone-bash",
+          abilitySnapshot: {name: "Stone Bash", description: "<p>Snapshot</p>"},
+          tier: 2,
+          position: {x: 0.35, y: null}
+        },
+        {
+          id: "stone-body",
+          abilityUuid: "Compendium.magnusarchives.abilities.Item.stone-body",
+          abilitySnapshot: {name: "Stone Body", description: "<p>Another snapshot</p>"},
+          tier: 3,
+          position: {x: 0.65, y: null}
+        }
+      ],
       connections: [{id: "stone-path", from: "stone-bash", to: "stone-body"}]
     };
     const source: Record<string, unknown> = {description: "Old", slug: "stone", graph: structuredClone(graph)};
@@ -458,12 +507,15 @@ describe("Item DataModel creation defaults", () => {
 
   it("keeps partial Ability cost updates isolated while normalizing explicit Pool selections", async () => {
     const {AbilityDataModel} = await import("../../src/data/items/ability");
-    expect(AbilityDataModel.migrateData({cost: {ignoresEdge: true}}, {partial: true}))
-      .toEqual({cost: {ignoresEdge: true}});
-    expect(AbilityDataModel.migrateData({cost: {allowedPools: ["intellect", "might"]}}, {partial: true}))
-      .toEqual({cost: {allowedPools: ["might", "intellect"]}});
-    expect(AbilityDataModel.migrateData({cost: {allowedPools: []}}, {partial: true}))
-      .toEqual({cost: {allowedPools: []}});
+    expect(AbilityDataModel.migrateData({cost: {ignoresEdge: true}}, {partial: true})).toEqual({
+      cost: {ignoresEdge: true}
+    });
+    expect(AbilityDataModel.migrateData({cost: {allowedPools: ["intellect", "might"]}}, {partial: true})).toEqual({
+      cost: {allowedPools: ["might", "intellect"]}
+    });
+    expect(AbilityDataModel.migrateData({cost: {allowedPools: []}}, {partial: true})).toEqual({
+      cost: {allowedPools: []}
+    });
     const savedCost = {amount: 7, ignoresEdge: false, allowedPools: ["might", "intellect"]};
     const edgeUpdate = AbilityDataModel.migrateData({cost: {ignoresEdge: true}}, {partial: true});
     Object.assign(savedCost, edgeUpdate.cost);
@@ -483,11 +535,17 @@ describe("Item DataModel creation defaults", () => {
       weaponFamilies: [],
       armorUse: {light: false, medium: false, heavy: false},
       superhero: {rank: 0, powerShiftCount: 0, superheroics: {enabled: false, poolBonus: 0}},
-      abilityGrants: [], abilityChoiceGroups: [], skillGrants: [], choiceGroups: [], genre: "none"
+      abilityGrants: [],
+      abilityChoiceGroups: [],
+      skillGrants: [],
+      choiceGroups: [],
+      genre: "none"
     });
     expect(descriptor).toMatchObject({
       poolBonuses: {might: 0, speed: 0, intellect: 0},
-      poolBonusChoiceGroups: [], skillGrants: [], choiceGroups: [],
+      poolBonusChoiceGroups: [],
+      skillGrants: [],
+      choiceGroups: [],
       instance: {selections: {poolChoices: []}}
     });
     expect(species).toMatchObject({
@@ -498,7 +556,12 @@ describe("Item DataModel creation defaults", () => {
       weaponFamilies: [],
       armorUse: {light: false, medium: false, heavy: false},
       cypherLimitBonus: 0,
-      skillGrants: [], choiceGroups: [], abilityGrants: [], abilityChoiceGroups: [], descriptorGrants: [], descriptorChoiceGroups: []
+      skillGrants: [],
+      choiceGroups: [],
+      abilityGrants: [],
+      abilityChoiceGroups: [],
+      descriptorGrants: [],
+      descriptorChoiceGroups: []
     });
   });
 
@@ -506,38 +569,74 @@ describe("Item DataModel creation defaults", () => {
     const {SpeciesDataModel} = await import("../../src/data/items/species");
     const species = new (SpeciesDataModel as unknown as new (source?: Record<string, unknown>) => any)({
       weaponFamilies: [" Energy Blades ", "AXES", "energy-blades"],
-      skillGrants: [{
-        id: "forest-stealth", skillUuid: "Item.stealth", customName: "", rank: "trained",
-        notes: "Only while moving through forests.", snapshot: {name: "Stealth", system: {}}
-      }],
-      choiceGroups: [{
-        id: "terrain", choose: 1, rank: "trained", options: [{
-          id: "mountains", skillUuid: "Item.navigation", customName: "",
-          notes: "Underground or in mountains.", snapshot: {name: "Navigation", system: {}}
-        }]
-      }],
-      descriptorChoiceGroups: [{
-        id: "heritage", choose: 1, options: [{
-          id: "rugged", descriptorUuid: "Item.rugged", snapshot: {name: "Rugged", system: {}}
-        }]
-      }]
+      skillGrants: [
+        {
+          id: "forest-stealth",
+          skillUuid: "Item.stealth",
+          customName: "",
+          rank: "trained",
+          notes: "Only while moving through forests.",
+          snapshot: {name: "Stealth", system: {}}
+        }
+      ],
+      choiceGroups: [
+        {
+          id: "terrain",
+          choose: 1,
+          rank: "trained",
+          options: [
+            {
+              id: "mountains",
+              skillUuid: "Item.navigation",
+              customName: "",
+              notes: "Underground or in mountains.",
+              snapshot: {name: "Navigation", system: {}}
+            }
+          ]
+        }
+      ],
+      descriptorChoiceGroups: [
+        {
+          id: "heritage",
+          choose: 1,
+          options: [
+            {
+              id: "rugged",
+              descriptorUuid: "Item.rugged",
+              snapshot: {name: "Rugged", system: {}}
+            }
+          ]
+        }
+      ]
     });
     expect(species.weaponFamilies).toEqual(["energy-blades", "axes"]);
     expect(species.skillGrants[0].notes).toBe("Only while moving through forests.");
     expect(species.choiceGroups[0].options[0].notes).toBe("Underground or in mountains.");
     expect(species.descriptorChoiceGroups[0]).toMatchObject({
-      id: "heritage", choose: 1, sourceMode: "fixed", catalogItemType: "none"
+      id: "heritage",
+      choose: 1,
+      sourceMode: "fixed",
+      catalogItemType: "none"
     });
     const catalogSpecies = new (SpeciesDataModel as unknown as new (source?: Record<string, unknown>) => any)({
-      descriptorChoiceGroups: [{
-        id: "all-descriptors", choose: 1, sourceMode: "catalog", catalogItemType: "descriptor", options: []
-      }]
+      descriptorChoiceGroups: [
+        {
+          id: "all-descriptors",
+          choose: 1,
+          sourceMode: "catalog",
+          catalogItemType: "descriptor",
+          options: []
+        }
+      ]
     });
     expect(catalogSpecies.descriptorChoiceGroups[0]).toMatchObject({
-      sourceMode: "catalog", catalogItemType: "descriptor", options: []
+      sourceMode: "catalog",
+      catalogItemType: "descriptor",
+      options: []
     });
-    expect(SpeciesDataModel.migrateData({weaponFamilyUse: {axes: true, knives: false, swords: true}}, {partial: true}))
-      .toMatchObject({weaponFamilies: ["axes", "swords"]});
+    expect(
+      SpeciesDataModel.migrateData({weaponFamilyUse: {axes: true, knives: false, swords: true}}, {partial: true})
+    ).toMatchObject({weaponFamilies: ["axes", "swords"]});
   });
 
   it("stores Superhero Type metadata, Power Shift slots, and assignment-level notes", async () => {
@@ -545,12 +644,14 @@ describe("Item DataModel creation defaults", () => {
     const type = new (CharacterTypeDataModel as unknown as new (source: Record<string, unknown>) => any)({
       genre: "superhero",
       superhero: {rank: 4, powerShiftCount: 5, superheroics: {enabled: true, poolBonus: 6}},
-      abilityGrants: [{
-        id: "shared-ability",
-        abilityUuid: "Item.shared",
-        notes: "This Type applies the defensive option only.",
-        snapshot: {name: "Shared Ability", system: {tier: 1}}
-      }],
+      abilityGrants: [
+        {
+          id: "shared-ability",
+          abilityUuid: "Item.shared",
+          notes: "This Type applies the defensive option only.",
+          snapshot: {name: "Shared Ability", system: {tier: 1}}
+        }
+      ],
       instance: {selections: {superheroicsPool: "might", powerShifts: ["Strength", "Flight"]}}
     });
     expect(type.superhero).toEqual({
@@ -567,12 +668,22 @@ describe("Item DataModel creation defaults", () => {
 
   it("migrates closed beta.3 Type family flags into extensible normalized families", async () => {
     const {CharacterTypeDataModel} = await import("../../src/data/items/character-type");
-    expect(CharacterTypeDataModel.migrateData({
-      weaponFamilyUse: {axes: true, knives: false, swords: true}
-    }, {partial: true})).toMatchObject({weaponFamilies: ["axes", "swords"]});
-    expect(CharacterTypeDataModel.migrateData({
-      weaponFamilies: [" Energy Blades ", "AXES", "energy-blades"]
-    }, {partial: true})).toMatchObject({weaponFamilies: ["energy-blades", "axes"]});
+    expect(
+      CharacterTypeDataModel.migrateData(
+        {
+          weaponFamilyUse: {axes: true, knives: false, swords: true}
+        },
+        {partial: true}
+      )
+    ).toMatchObject({weaponFamilies: ["axes", "swords"]});
+    expect(
+      CharacterTypeDataModel.migrateData(
+        {
+          weaponFamilies: [" Energy Blades ", "AXES", "energy-blades"]
+        },
+        {partial: true}
+      )
+    ).toMatchObject({weaponFamilies: ["energy-blades", "axes"]});
   });
 
   it("normalizes Descriptor Pool bonus choice groups and persisted selections", async () => {
@@ -584,9 +695,7 @@ describe("Item DataModel creation defaults", () => {
     expect(descriptor.poolBonusChoiceGroups).toEqual([
       {id: "gloomy-pool", amount: 2, choose: 1, pools: ["might", "speed"]}
     ]);
-    expect(descriptor.instance.selections.poolChoices).toEqual([
-      {groupId: "gloomy-pool", pools: ["speed"]}
-    ]);
+    expect(descriptor.instance.selections.poolChoices).toEqual([{groupId: "gloomy-pool", pools: ["speed"]}]);
     expect(typeof descriptor.poolBonusChoiceGroups[0].amount).toBe("number");
     expect(typeof descriptor.poolBonusChoiceGroups[0].choose).toBe("number");
   });
@@ -650,24 +759,28 @@ describe("Item DataModel creation defaults", () => {
       graph: {version: number; nodes: Array<Record<string, unknown>>};
     })({
       graphVersion: 2,
-      nodes: [{
-        id: "stable-id",
-        title: "Snapshot Name",
-        tierRequired: 3,
-        abilitySourceUuid: "Item.ability",
-        position: {x: 42, y: 99}
-      }],
+      nodes: [
+        {
+          id: "stable-id",
+          title: "Snapshot Name",
+          tierRequired: 3,
+          abilitySourceUuid: "Item.ability",
+          position: {x: 42, y: 99}
+        }
+      ],
       connections: []
     });
     expect(focus.graph).toMatchObject({
       version: 2,
-      nodes: [{
-        id: "stable-id",
-        abilityUuid: "Item.ability",
-        abilitySnapshot: {name: "Snapshot Name"},
-        tier: 3,
-        position: {x: 42, y: 99}
-      }]
+      nodes: [
+        {
+          id: "stable-id",
+          abilityUuid: "Item.ability",
+          abilitySnapshot: {name: "Snapshot Name"},
+          tier: 3,
+          position: {x: 42, y: 99}
+        }
+      ]
     });
   });
 
@@ -680,15 +793,17 @@ describe("Item DataModel creation defaults", () => {
       {
         focusUuid: "legacy-focus",
         ownedNodeIds: ["node-a"],
-        acquisitions: [{
-          nodeId: "node-a",
-          mode: "legacy",
-          choiceId: "",
-          choiceSource: "none",
-          choiceGrantTier: 1,
-          choiceFocusUuid: "",
-          acquiredAt: 0
-        }],
+        acquisitions: [
+          {
+            nodeId: "node-a",
+            mode: "legacy",
+            choiceId: "",
+            choiceSource: "none",
+            choiceGrantTier: 1,
+            choiceFocusUuid: "",
+            acquiredAt: 0
+          }
+        ],
         provenance: "additional",
         initialChoicesGranted: false,
         attachedAt: 0
@@ -696,66 +811,15 @@ describe("Item DataModel creation defaults", () => {
     ]);
   });
 
-  it("accepts generated Focus and Ability documents through the current Item DataModels", async () => {
-    // @ts-expect-error Developer-only JavaScript module has no runtime-facing TypeScript declaration.
-    const {generateFocusImport} = await import("../../scripts/focus-importer.mjs");
-    const generated = generateFocusImport({
-      schemaVersion: 1,
-      source: {id: "data-model-test", title: "DataModel Test", version: "1", license: "test-only"},
-      abilities: [{
-        id: "model-ability",
-        name: "Model Ability",
-        tier: 2,
-        fullRulesDescription: "<p>Model-safe rules.</p>",
-        sourcePage: "1",
-        actionClassification: "action",
-        cost: {kind: "fixed", amount: 2, allowedPools: ["might", "intellect"], ignoresEdge: false},
-        repeatability: {canTakeMultipleTimes: false, maximumSelections: null},
-        prerequisiteAbilityId: null,
-        laterTierChanges: [],
-        automation: {activation: "action", roll: "attack", attackModifier: 1, damage: 4, range: "long", targetMode: "single"},
-        reviewStatus: "verified",
-        reviewNote: "",
-        reviewIssues: []
-      }],
-      foci: [{
-        id: "model-focus",
-        name: "Model Focus",
-        description: "<p>Model-safe Focus.</p>",
-        sourcePage: "2",
-        genreThemes: [],
-        gmIntrusionSuggestions: [],
-        additionalEquipment: "",
-        associatedAbilities: ["model-ability"],
-        graph: {
-          nodes: [{id: "model-node", abilityId: "model-ability", tier: 2, order: 0, reviewStatus: "verified", reviewNote: ""}],
-          edges: []
-        },
-        reviewStatus: "verified",
-        reviewNote: "",
-        reviewIssues: []
-      }]
-    });
-    const {AbilityDataModel} = await import("../../src/data/items/ability");
-    const {FocusDataModel} = await import("../../src/data/items/focus");
-    const abilitySource = generated.abilityDocuments[0].system as Record<string, unknown>;
-    const focusSource = generated.focusDocuments[0].system as Record<string, unknown>;
-    const importedAbility = new (AbilityDataModel as unknown as new (source: Record<string, unknown>) => any)(abilitySource);
-    const importedFocus = new (FocusDataModel as unknown as new (source: Record<string, unknown>) => any)(focusSource);
-    expect(importedAbility).toMatchObject({
-      tier: 2,
-      activation: "action",
-      cost: {amount: 2, scalable: false, allowedPools: ["might", "intellect"]},
-      roll: "attack"
-    });
-    expect(importedFocus.graph.nodes[0]).toMatchObject({id: "model-node", tier: 2});
-  });
-
   it("creates a fresh uninitialized Core Character with the V2 source defaults", async () => {
     const {CharacterDataModel} = await import("../../src/data/actors/character");
     const character = new (CharacterDataModel as unknown as new () => {
       tier: number;
-      stats: Record<string, unknown> & {might: Record<string, unknown>; speed: Record<string, unknown>; intellect: Record<string, unknown>};
+      stats: Record<string, unknown> & {
+        might: Record<string, unknown>;
+        speed: Record<string, unknown>;
+        intellect: Record<string, unknown>;
+      };
       cypherLimitBase: number;
       proficiencies: {weaponCategories: string[]; weaponFamilies: string[]; armorCategories: string[]};
       genre: {sourceUuid: string; instanceId: string; provenance: string; attachedAt: number};
@@ -775,7 +839,11 @@ describe("Item DataModel creation defaults", () => {
       intellect: {value: 8, baseMax: 8, baseEdge: 0}
     });
     expect(character.cypherLimitBase).toBe(2);
-    expect(character.proficiencies).toMatchObject({weaponCategories: ["light"], weaponFamilies: [], armorCategories: []});
+    expect(character.proficiencies).toMatchObject({
+      weaponCategories: ["light"],
+      weaponFamilies: [],
+      armorCategories: []
+    });
     expect(character.genre).toEqual({sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0});
     expect(character.advancement.guidanceCompletedTiers).toEqual([]);
     expect(character.creation).toMatchObject({coreInitialized: false, mode: "uninitialized"});
@@ -797,7 +865,8 @@ describe("Item DataModel creation defaults", () => {
     const {CharacterDataModel} = await import("../../src/data/actors/character");
     const {character: characterFixture} = await import("../helpers/core-fixtures");
     const actor = characterFixture();
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid =
+      "Compendium.magnusarchives.genres.Item.superhero";
     for (const pool of ["might", "speed", "intellect"] as const) {
       actor.system.derived.pools[pool].max = 0;
       actor.system.stats[pool].max = 0;
@@ -859,9 +928,10 @@ describe("Item DataModel creation defaults", () => {
       armorUse: {light: false, medium: false, heavy: false},
       cypherLimitBonus: 0
     };
-    const item = type === "focus"
-      ? {id: type, name: "Focus", type, system: {}}
-      : {id: type, name: type, type, system: packageSystem};
+    const item =
+      type === "focus"
+        ? {id: type, name: "Focus", type, system: {}}
+        : {id: type, name: type, type, system: packageSystem};
     const model = Object.assign(actor.system, {parent: {items: [item]}});
 
     expect(() => CharacterDataModel.prototype.prepareDerivedData.call(model)).not.toThrow();
@@ -882,10 +952,7 @@ describe("Item DataModel creation defaults", () => {
 
     expect(actor.system.stats.might).toMatchObject({value: 8, baseMax: before.baseMax});
     expect(actor.system.derived.pools.might.max).toBe(before.derivedMax);
-    expect(actor.updates).toEqual([
-      {"system.xp": 3},
-      {"system.stats.might.value": 8}
-    ]);
+    expect(actor.updates).toEqual([{"system.xp": 3}, {"system.stats.might.value": 8}]);
   });
 
   it("hydrates beta.2-style Character Pool sources without persisting a zero maximum", async () => {
@@ -919,10 +986,13 @@ describe("Item DataModel creation defaults", () => {
 
   it("does not create or reset creation during a partial Character DataModel migration", async () => {
     const {CharacterDataModel} = await import("../../src/data/actors/character");
-    const migrated = CharacterDataModel.migrateData({
-      xp: 12,
-      advancement: {purchases: []}
-    }, {partial: true});
+    const migrated = CharacterDataModel.migrateData(
+      {
+        xp: 12,
+        advancement: {purchases: []}
+      },
+      {partial: true}
+    );
     expect(migrated).toEqual({xp: 12, advancement: {purchases: []}});
     expect(migrated).not.toHaveProperty("creation");
     expect(migrated).not.toHaveProperty("genre");
@@ -935,79 +1005,6 @@ describe("Item DataModel creation defaults", () => {
     expect(constructors).toHaveLength(13);
     for (const [, Model] of constructors) {
       expect(() => new (Model as unknown as new () => object)()).not.toThrow();
-    }
-  });
-
-  it("round-trips every beta.3 candidate Type and Type Ability through the current DataModels", async () => {
-    const candidate = JSON.parse(await readFile(
-      path.resolve(import.meta.dirname, "../../content/types/candidate-pack.json"),
-      "utf8"
-    ));
-    const {AbilityDataModel, CharacterTypeDataModel} = await import("../../src/data/items");
-    for (const document of candidate.abilities) {
-      const model = new (AbilityDataModel as unknown as new (source: Record<string, unknown>) => any)(document.system);
-      expect(model).toMatchObject({
-        slug: document.system.slug,
-        tier: 1,
-        category: "type",
-        activation: document.system.activation,
-        cost: document.system.cost
-      });
-    }
-    for (const document of candidate.types) {
-      const model = new (CharacterTypeDataModel as unknown as new (source: Record<string, unknown>) => any)(document.system);
-      expect(model).toMatchObject({
-        slug: document.system.slug,
-        poolBonuses: document.system.poolBonuses,
-        weaponFamilies: Object.entries(document.system.weaponFamilyUse)
-          .filter(([, enabled]) => enabled)
-          .map(([family]) => family),
-        superhero: document.system.superhero
-      });
-      expect(model.abilityGrants).toHaveLength(document.system.abilityGrants.length);
-    }
-  });
-
-  it("round-trips every beta.3 candidate Genre Ability through the existing Ability DataModel", async () => {
-    const candidate = JSON.parse(await readFile(
-      path.resolve(import.meta.dirname, "../../content/genre-abilities/candidate-pack.json"),
-      "utf8"
-    ));
-    const {AbilityDataModel} = await import("../../src/data/items");
-    for (const document of candidate.abilities) {
-      const model = new (AbilityDataModel as unknown as new (source: Record<string, unknown>) => any)(document.system);
-      expect(model).toMatchObject({
-        slug: document.system.slug,
-        tier: document.system.tier,
-        category: document.system.category,
-        activation: document.system.activation,
-        cost: document.system.cost,
-        roll: document.system.roll,
-        damage: document.system.damage,
-        range: document.system.range
-      });
-      expect(model.ruleElements).toEqual([]);
-    }
-  });
-
-  it("round-trips every beta.3 candidate Species through the current Species DataModel", async () => {
-    const candidate = JSON.parse(await readFile(
-      path.resolve(import.meta.dirname, "../../content/species/candidate-pack.json"),
-      "utf8"
-    ));
-    const {SpeciesDataModel} = await import("../../src/data/items");
-    for (const document of candidate.species) {
-      const model = new (SpeciesDataModel as unknown as new (source: Record<string, unknown>) => any)(document.system);
-      expect(model).toMatchObject({
-        slug: document.system.slug,
-        poolBonuses: document.system.poolBonuses,
-        woundBonuses: document.system.woundBonuses,
-        weaponFamilies: document.system.weaponFamilies,
-        cypherLimitBonus: document.system.cypherLimitBonus
-      });
-      expect(model.skillGrants).toHaveLength(document.system.skillGrants.length);
-      expect(model.choiceGroups).toHaveLength(document.system.choiceGroups.length);
-      expect(model.descriptorChoiceGroups).toHaveLength(document.system.descriptorChoiceGroups.length);
     }
   });
 });

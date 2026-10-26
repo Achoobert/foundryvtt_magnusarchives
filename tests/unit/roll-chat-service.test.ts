@@ -4,11 +4,7 @@ import {prepareRoll, resolveRoll} from "../../src/rolls/roll-engine";
 import {coreNaturalEffects} from "../../src/rolls/roll-engine";
 import type {RollContext} from "../../src/rolls/roll-types";
 import {CORE_TOTAL_EFFORT_CAP} from "../../src/rules/core/effort-rules";
-import {
-  buildAuditRollCardData,
-  buildPublicRollCardData,
-  RollChatService
-} from "../../src/services/roll-chat-service";
+import {buildAuditRollCardData, buildPublicRollCardData, RollChatService} from "../../src/services/roll-chat-service";
 import type {RollCharacterDocumentLike} from "../../src/services/roll-service";
 
 function context(difficulty: RollContext["difficulty"]): RollContext {
@@ -50,29 +46,28 @@ describe("Roll Chat presentation", () => {
   it("renders contribution steps with centralized signed modifiers", () => {
     const signedContext = {
       ...context({mode: "known" as const, value: 5}),
-      contributions: [{
-        id: "ease",
-        label: "Ease Source",
-        direction: "ease" as const,
-        steps: 2,
-        source: "other" as const
-      }, {
-        id: "hinder",
-        label: "Hindrance Source",
-        direction: "hinder" as const,
-        steps: 3,
-        source: "other" as const
-      }]
+      contributions: [
+        {
+          id: "ease",
+          label: "Ease Source",
+          direction: "ease" as const,
+          steps: 2,
+          source: "other" as const
+        },
+        {
+          id: "hinder",
+          label: "Hindrance Source",
+          direction: "hinder" as const,
+          steps: 3,
+          source: "other" as const
+        }
+      ]
     };
     const result = resolveRoll(prepareRoll(signedContext), 12);
     const data = buildPublicRollCardData(result, "full", localize);
 
-    expect(data.breakdown).toContainEqual(
-      expect.objectContaining({label: "loc:Ease Source", modifier: "+2"})
-    );
-    expect(data.breakdown).toContainEqual(
-      expect.objectContaining({label: "loc:Hindrance Source", modifier: "-3"})
-    );
+    expect(data.breakdown).toContainEqual(expect.objectContaining({label: "loc:Ease Source", modifier: "+2"}));
+    expect(data.breakdown).toContainEqual(expect.objectContaining({label: "loc:Hindrance Source", modifier: "-3"}));
   });
 
   it("uses only BEATS DIFFICULTY for an unknown roll", () => {
@@ -96,13 +91,7 @@ describe("Roll Chat presentation", () => {
       beatsDifficulty: 6,
       showBeatsDifficulty: true
     });
-    for (const secretKey of [
-      "originalDifficulty",
-      "difficulty",
-      "finalDifficulty",
-      "targetNumber",
-      "success"
-    ]) {
+    for (const secretKey of ["originalDifficulty", "difficulty", "finalDifficulty", "targetNumber", "success"]) {
       expect(data).not.toHaveProperty(secretKey);
     }
   });
@@ -133,13 +122,15 @@ describe("Roll Chat presentation", () => {
   it("shows a hidden automatic success without fabricating a roll or leaking difficulty", () => {
     const automaticContext = {
       ...context({mode: "hidden" as const, value: 1}),
-      contributions: [{
-        id: "trained",
-        label: "trained",
-        direction: "ease" as const,
-        steps: 1,
-        source: "skill" as const
-      }]
+      contributions: [
+        {
+          id: "trained",
+          label: "trained",
+          direction: "ease" as const,
+          steps: 1,
+          source: "skill" as const
+        }
+      ]
     };
     const result = resolveRoll(prepareRoll(automaticContext), 20);
     const data = buildPublicRollCardData(result, "full", localize);
@@ -176,9 +167,11 @@ describe("Roll Chat presentation", () => {
       naturalRoll: 19,
       poolCost: 2
     });
-    expect(data.naturalEffects).toContainEqual(expect.objectContaining({
-      label: "loc:MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
-    }));
+    expect(data.naturalEffects).toContainEqual(
+      expect.objectContaining({
+        label: "loc:MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
+      })
+    );
   });
 
   it("puts the complete hidden resolution only in the GM audit payload", () => {
@@ -242,21 +235,25 @@ describe("Roll Chat presentation", () => {
     const messages: Record<string, unknown>[] = [];
     vi.stubGlobal("game", {i18n: {localize}});
     vi.stubGlobal("foundry", {
-      applications: {handlebars: {renderTemplate: vi.fn(async (_path: string, data: Record<string, unknown>) => JSON.stringify(data))}}
+      applications: {
+        handlebars: {
+          renderTemplate: vi.fn(async (_path: string, data: Record<string, unknown>) => JSON.stringify(data))
+        }
+      }
     });
     vi.stubGlobal("ChatMessage", {
-      create: vi.fn(async (message: Record<string, unknown>) => { messages.push(message); return {}; }),
+      create: vi.fn(async (message: Record<string, unknown>) => {
+        messages.push(message);
+        return {};
+      }),
       getSpeaker: () => ({actor: "actor-1"}),
       getWhisperRecipients: () => [{id: "gm-1"}]
     });
     vi.stubGlobal("Hooks", {callAll: vi.fn()});
 
-    await new RollChatService().publish(
-      {id: "actor-1", name: "Ada"} as RollCharacterDocumentLike,
-      {result},
-      "full",
-      {showGmAudit: true}
-    );
+    await new RollChatService().publish({id: "actor-1", name: "Ada"} as RollCharacterDocumentLike, {result}, "full", {
+      showGmAudit: true
+    });
 
     expect(messages).toHaveLength(2);
     const auditMessage = messages[1]!;

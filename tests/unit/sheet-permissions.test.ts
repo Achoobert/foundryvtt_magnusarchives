@@ -22,22 +22,21 @@ describe("ApplicationV2 sheet mutation permissions", () => {
     const template = readFileSync("templates/actor/npc-sheet.hbs", "utf8");
     const source = readFileSync("src/applications/sheets/npc-sheet.ts", "utf8");
     for (const field of ["system.level", "system.health.value", "system.health.baseMax"]) {
-      expect(template).toMatch(new RegExp(`name="${field.replaceAll(".", "\\.")}"[^>]*\\{\\{#unless editable\\}\\}disabled`));
+      expect(template).toMatch(
+        new RegExp(`name="${field.replaceAll(".", "\\.")}"[^>]*\\{\\{#unless editable\\}\\}disabled`)
+      );
     }
-    expect(template).toContain('disabled=(not editable)');
-    expect(source).toContain("guardEditableActions({");
+    expect(template).toContain("disabled=(not editable)");
+    expect(source).toMatch(/guardEditableActions\(\s*\{/);
     expect(source).toContain("requestDefense: NpcSheet.#onRequestDefense");
     expect(source).toContain("createModification: NpcSheet.#onCreateModification");
     expect(source).toContain("enforceReadOnlySheetPresentation(this.element, this.isEditable");
   });
 
   it("uses the same read-only presentation and guarded action boundary for Character and Item sheets", () => {
-    for (const path of [
-      "src/applications/sheets/character-sheet.ts",
-      "src/applications/sheets/item-sheet.ts"
-    ]) {
+    for (const path of ["src/applications/sheets/character-sheet.ts", "src/applications/sheets/item-sheet.ts"]) {
       const source = readFileSync(path, "utf8");
-      expect(source).toContain("guardEditableActions({");
+      expect(source).toMatch(/guardEditableActions\(\s*\{/);
       expect(source).toContain("enforceReadOnlySheetPresentation(this.element, this.isEditable");
     }
     const character = readFileSync("src/applications/sheets/character-sheet.ts", "utf8");

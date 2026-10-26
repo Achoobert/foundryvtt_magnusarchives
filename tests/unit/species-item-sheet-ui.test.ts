@@ -5,10 +5,7 @@ const template = readFileSync("templates/item/item-sheet.hbs", "utf8");
 const styles = readFileSync("styles/components/_item-rule-sheet.scss", "utf8");
 const sheet = readFileSync("src/applications/sheets/item-sheet.ts", "utf8");
 
-const speciesSection = template.slice(
-  template.indexOf("{{#if isSpecies}}"),
-  template.indexOf("{{#if isFocus}}")
-);
+const speciesSection = template.slice(template.indexOf("{{#if isSpecies}}"), template.indexOf("{{#if isFocus}}"));
 
 describe("Species Item Sheet beta.3 foundation", () => {
   it("uses the responsive Type-sheet layout without an obsolete fixed-width dependency", () => {
@@ -24,12 +21,24 @@ describe("Species Item Sheet beta.3 foundation", () => {
 
   it("keeps every existing Species benefit field in compact responsive groups", () => {
     for (const path of [
-      "system.poolBonuses.might", "system.poolBonuses.speed", "system.poolBonuses.intellect",
-      "system.woundBonuses.minor", "system.woundBonuses.moderate", "system.woundBonuses.major",
-      "system.cypherLimitBonus", "system.edgeGrant.mode", "system.edgeGrant.pool", "system.edgeGrant.amount",
-      "system.weaponUse.light", "system.weaponUse.medium", "system.weaponUse.heavy",
-      "system.armorUse.light", "system.armorUse.medium", "system.armorUse.heavy"
-    ]) expect(speciesSection).toContain(`name="${path}"`);
+      "system.poolBonuses.might",
+      "system.poolBonuses.speed",
+      "system.poolBonuses.intellect",
+      "system.woundBonuses.minor",
+      "system.woundBonuses.moderate",
+      "system.woundBonuses.major",
+      "system.cypherLimitBonus",
+      "system.edgeGrant.mode",
+      "system.edgeGrant.pool",
+      "system.edgeGrant.amount",
+      "system.weaponUse.light",
+      "system.weaponUse.medium",
+      "system.weaponUse.heavy",
+      "system.armorUse.light",
+      "system.armorUse.medium",
+      "system.armorUse.heavy"
+    ])
+      expect(speciesSection).toContain(`name="${path}"`);
     expect(speciesSection).toContain("type-bonus-grid species-bonus-grid");
     expect(speciesSection).toContain("type-edge-grant species-edge-grant");
     expect(speciesSection).not.toContain("<h2>");
@@ -75,8 +84,14 @@ describe("Species Item Sheet beta.3 foundation", () => {
 
   it("retains all package authoring action contracts", () => {
     for (const action of [
-      "addPackageGrant", "addChoiceGroup", "addChoiceOption", "editSkillGrantNote",
-      "inspectPackageGrant", "refreshPackageGrant", "removePackageGrant"
-    ]) expect(speciesSection).toContain(`data-action="${action}"`);
+      "addPackageGrant",
+      "addChoiceGroup",
+      "addChoiceOption",
+      "editSkillGrantNote",
+      "inspectPackageGrant",
+      "refreshPackageGrant",
+      "removePackageGrant"
+    ])
+      expect(speciesSection).toContain(`data-action="${action}"`);
   });
 });

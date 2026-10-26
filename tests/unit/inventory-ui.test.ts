@@ -28,7 +28,7 @@ describe("Inventory UI V1", () => {
     expect(template).toContain('name="system.cypherLimitBase"');
     expect(template).toContain('value="{{system.cypherLimitBase}}"');
     expect(template).toContain('{{#if editable}}<input name="system.cypherLimitBase"');
-    expect(template).toContain('{{else}}<strong>{{system.cypherLimitBase}}</strong>');
+    expect(template).toContain("{{else}}<strong>{{system.cypherLimitBase}}</strong>");
     expect(source).not.toContain("data-cypher-limit");
   });
 
@@ -70,7 +70,9 @@ describe("Inventory UI V1", () => {
   it("displays and rolls existing Artifact Depletion through the existing service", () => {
     expect(template).toContain('class="inventory-artifact-identity"');
     expect(template).toContain('>({{localize "MAGNUSARCHIVES.Inventory.Level"}} {{item.level}})');
-    expect(template).toContain('>({{localize "MAGNUSARCHIVES.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>');
+    expect(template).toContain(
+      '>({{localize "MAGNUSARCHIVES.Inventory.Level"}} <strong>{{item.level}}</strong>)</span>'
+    );
     expect(template).toContain("item.depletionLabel");
     expect(template).toContain('data-action="rollInventoryDepletion"');
     expect(source).toContain("await rollItemDepletion(item as unknown as DepletionItemLike)");
@@ -89,7 +91,9 @@ describe("Inventory UI V1", () => {
     expect(template).toContain("{{#if item.depleted}}is-depleted{{/if}}");
     expect(styles).toContain("&.is-depleted");
     expect(template).toContain('class="inventory-depleted-label combat-depleted-state"');
-    expect(styles).toMatch(/\.inventory-depleted-label[\s\S]*&\.combat-depleted-state[\s\S]*var\(--magnusarchives-danger\)/);
+    expect(styles).toMatch(
+      /\.inventory-depleted-label[\s\S]*&\.combat-depleted-state[\s\S]*var\(--magnusarchives-danger\)/
+    );
     for (const rank of ["low", "medium", "advanced", "high", "ultra"]) {
       expect(styles).toContain(`&.is-${rank}`);
     }

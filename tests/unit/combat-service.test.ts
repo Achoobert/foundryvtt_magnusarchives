@@ -20,7 +20,10 @@ const policy: RollPolicyRequest = {
   enabledRuleModuleIds: []
 };
 
-function weapon(category: "light" | "medium" | "heavy", overrides: Partial<WeaponItemLike["system"]> = {}): WeaponItemLike {
+function weapon(
+  category: "light" | "medium" | "heavy",
+  overrides: Partial<WeaponItemLike["system"]> = {}
+): WeaponItemLike {
   let item!: WeaponItemLike;
   const update = vi.fn(async (changes: Record<string, unknown>): Promise<unknown> => {
     if (typeof changes["system.ammo.value"] === "number") {
@@ -54,7 +57,11 @@ function weapon(category: "light" | "medium" | "heavy", overrides: Partial<Weapo
   return item;
 }
 
-function npc(level = 4, armorBase = 0, modifications: readonly NpcModificationData[] = []): NpcTargetLike & {updates: Record<string, unknown>[]} {
+function npc(
+  level = 4,
+  armorBase = 0,
+  modifications: readonly NpcModificationData[] = []
+): NpcTargetLike & {updates: Record<string, unknown>[]} {
   return {
     id: `npc-${level}`,
     name: `Level ${level} NPC`,
@@ -125,10 +132,7 @@ function setup(
   };
 }
 
-function setWeaponFamiliarity(
-  actor: CombatCharacterLike,
-  categories: readonly ("light" | "medium" | "heavy")[]
-): void {
+function setWeaponFamiliarity(actor: CombatCharacterLike, categories: readonly ("light" | "medium" | "heavy")[]): void {
   actor.system.proficiencies.weaponCategories.splice(0, Infinity, ...categories);
   actor.system.derived.packages.weaponCategories.splice(0, Infinity, ...categories);
 }
@@ -141,9 +145,14 @@ describe("CombatService weapon attacks", () => {
       setWeaponFamiliarity(actor, []);
       actor.system.derived.packages.weaponFamilies = [family];
       expect(combat.weaponFreelyUsed(actor, weapon("heavy", {family}))).toBe(true);
-      expect(combat.weaponFamiliarityContribution(actor, weapon("heavy", {
-        family: family === "axes" ? "knives" : "axes"
-      }))).not.toBeNull();
+      expect(
+        combat.weaponFamiliarityContribution(
+          actor,
+          weapon("heavy", {
+            family: family === "axes" ? "knives" : "axes"
+          })
+        )
+      ).not.toBeNull();
     }
   );
 
@@ -163,13 +172,14 @@ describe("CombatService weapon attacks", () => {
     expect(combat.weaponFreelyUsed(actor, weapon("heavy", {family: "firearms"}))).toBe(true);
   });
 
-  it.each([["light", 2], ["medium", 4], ["heavy", 6]] as const)(
-    "uses Core %s weapon damage %i",
-    (category, damage) => {
-      const {combat} = setup();
-      expect(combat.weaponBaseDamage(weapon(category))).toBe(damage);
-    }
-  );
+  it.each([
+    ["light", 2],
+    ["medium", 4],
+    ["heavy", 6]
+  ] as const)("uses Core %s weapon damage %i", (category, damage) => {
+    const {combat} = setup();
+    expect(combat.weaponBaseDamage(weapon(category))).toBe(damage);
+  });
 
   it.each(["might", "speed", "intellect"] as const)(
     "uses configured Weapon default Pool %s when no explicit Pool is supplied",
@@ -184,26 +194,27 @@ describe("CombatService weapon attacks", () => {
     const {actor, combat} = setup();
     const configured = weapon("medium", {attackType: "melee", defaultPool: "speed"});
     expect(combat.buildWeaponAttackPlan(actor, configured).requests[0]?.pool).toBe("speed");
-    expect(combat.buildWeaponAttackPlan(actor, configured, {pool: "intellect"}).requests[0]?.pool)
-      .toBe("intellect");
-    expect(combat.buildWeaponAttackPlan(actor, weapon("medium", {
-      attackType: "ranged",
-      defaultPool: "none"
-    })).requests[0]?.pool).toBe("speed");
+    expect(combat.buildWeaponAttackPlan(actor, configured, {pool: "intellect"}).requests[0]?.pool).toBe("intellect");
+    expect(
+      combat.buildWeaponAttackPlan(
+        actor,
+        weapon("medium", {
+          attackType: "ranged",
+          defaultPool: "none"
+        })
+      ).requests[0]?.pool
+    ).toBe("speed");
   });
 
-  it.each(["light", "medium", "heavy"] as const)(
-    "does not hinder a familiar %s Weapon",
-    (category) => {
-      const {actor, combat} = setup();
-      setWeaponFamiliarity(actor, [category]);
-      const plan = combat.buildWeaponAttackPlan(actor, weapon(category));
-      expect(plan.freelyUsed).toBe(true);
-      expect(plan.requests[0]?.contributions?.filter(
-        (entry) => entry.id === `weapon.weapon-${category}.unfamiliar`
-      )).toHaveLength(0);
-    }
-  );
+  it.each(["light", "medium", "heavy"] as const)("does not hinder a familiar %s Weapon", (category) => {
+    const {actor, combat} = setup();
+    setWeaponFamiliarity(actor, [category]);
+    const plan = combat.buildWeaponAttackPlan(actor, weapon(category));
+    expect(plan.freelyUsed).toBe(true);
+    expect(
+      plan.requests[0]?.contributions?.filter((entry) => entry.id === `weapon.weapon-${category}.unfamiliar`)
+    ).toHaveLength(0);
+  });
 
   it("routes contextual manual Skill steps through the Weapon request", () => {
     const {actor, combat} = setup();
@@ -224,10 +235,15 @@ describe("CombatService weapon attacks", () => {
     const {actor, combat} = setup();
     actor.system.stats.effortBase = 1;
     actor.system.derived.effort.max = 1;
-    const [outcome] = await combat.executeWeaponAttack(actor, weapon("medium"), {
-      damageEffort: 1,
-      freeDamageEffort: 2
-    }, policy);
+    const [outcome] = await combat.executeWeaponAttack(
+      actor,
+      weapon("medium"),
+      {
+        damageEffort: 1,
+        freeDamageEffort: 2
+      },
+      policy
+    );
     expect(outcome).toMatchObject({categoryDamage: 4, effortDamage: 9, grossDamage: 13});
     expect(outcome?.execution.result.prepared).toMatchObject({
       paidEffortApplied: 1,
@@ -239,21 +255,20 @@ describe("CombatService weapon attacks", () => {
     expect(actor.system.stats.might.value).toBe(17);
   });
 
-  it.each(["light", "medium", "heavy"] as const)(
-    "hinders an unfamiliar %s Weapon by exactly one step",
-    (category) => {
-      const {actor, combat} = setup();
-      setWeaponFamiliarity(actor, []);
-      const plan = combat.buildWeaponAttackPlan(actor, weapon(category, {freelyUsed: true}));
-      expect(plan.freelyUsed).toBe(false);
-      expect(plan.requests[0]?.contributions).toContainEqual(expect.objectContaining({
+  it.each(["light", "medium", "heavy"] as const)("hinders an unfamiliar %s Weapon by exactly one step", (category) => {
+    const {actor, combat} = setup();
+    setWeaponFamiliarity(actor, []);
+    const plan = combat.buildWeaponAttackPlan(actor, weapon(category, {freelyUsed: true}));
+    expect(plan.freelyUsed).toBe(false);
+    expect(plan.requests[0]?.contributions).toContainEqual(
+      expect.objectContaining({
         id: `weapon.weapon-${category}.unfamiliar`,
         label: `MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.${category}`,
         direction: "hinder",
         steps: 1
-      }));
-    }
-  );
+      })
+    );
+  });
 
   it("uses current effective Character familiarity for every subsequent attack", () => {
     const {actor, combat} = setup();
@@ -266,7 +281,9 @@ describe("CombatService weapon attacks", () => {
   it("reads Armor familiarity from effective Character categories rather than the legacy Item flag", () => {
     const {actor, combat} = setup();
     const armor = {
-      id: "armor-heavy", name: "Plate", type: "armor",
+      id: "armor-heavy",
+      name: "Plate",
+      type: "armor",
       system: {category: "heavy", equipped: false, freelyUsed: true, description: ""}
     } as const;
     actor.system.derived.packages.armorCategories.splice(0, Infinity);
@@ -280,9 +297,8 @@ describe("CombatService weapon attacks", () => {
     setWeaponFamiliarity(actor, []);
     const manual = combat.buildWeaponAttackPlan(actor, weapon("heavy"));
     const targeted = combat.buildWeaponAttackPlan(actor, weapon("heavy"), {targets: [npc()]});
-    const unfamiliar = (plan: typeof manual) => plan.requests[0]?.contributions?.filter(
-      (entry) => entry.id === "weapon.weapon-heavy.unfamiliar"
-    );
+    const unfamiliar = (plan: typeof manual) =>
+      plan.requests[0]?.contributions?.filter((entry) => entry.id === "weapon.weapon-heavy.unfamiliar");
     expect(unfamiliar(manual)).toEqual(unfamiliar(targeted));
     expect(unfamiliar(manual)).toHaveLength(1);
   });
@@ -293,40 +309,49 @@ describe("CombatService weapon attacks", () => {
     const duplicate = combat.weaponFamiliarityContribution(actor, weapon("medium"))!;
     const plan = combat.buildWeaponAttackPlan(actor, weapon("medium"), {
       otherHindrance: 1,
-      contributions: [duplicate, {
-        id: "test.attack-hindrance",
-        label: "Test attack Hindrance",
-        direction: "hinder",
-        steps: 1,
-        source: "other",
-        sourceId: "test"
-      }]
+      contributions: [
+        duplicate,
+        {
+          id: "test.attack-hindrance",
+          label: "Test attack Hindrance",
+          direction: "hinder",
+          steps: 1,
+          source: "other",
+          sourceId: "test"
+        }
+      ]
     });
-    expect(plan.requests[0]?.contributions?.filter(
-      (entry) => entry.id === "weapon.weapon-medium.unfamiliar"
-    )).toHaveLength(1);
-    expect(plan.requests[0]?.contributions).toContainEqual(expect.objectContaining({
-      id: "test.attack-hindrance"
-    }));
+    expect(
+      plan.requests[0]?.contributions?.filter((entry) => entry.id === "weapon.weapon-medium.unfamiliar")
+    ).toHaveLength(1);
+    expect(plan.requests[0]?.contributions).toContainEqual(
+      expect.objectContaining({
+        id: "test.attack-hindrance"
+      })
+    );
   });
 
   it.each([-2, -1, 0, 1, 2] as const)(
     "adds Weapon Attack Modifier %i through the contribution pipeline",
     (modifier) => {
       const {actor, combat} = setup();
-      const plan = combat.buildWeaponAttackPlan(actor, weapon("medium", {
-        freelyUsed: true,
-        attackModifier: modifier
-      }));
+      const plan = combat.buildWeaponAttackPlan(
+        actor,
+        weapon("medium", {
+          freelyUsed: true,
+          attackModifier: modifier
+        })
+      );
       const contribution = plan.requests[0]?.contributions?.find(
         (entry) => entry.id === "weapon.weapon-medium.attack-modifier"
       );
       if (modifier === 0) expect(contribution).toBeUndefined();
-      else expect(contribution).toMatchObject({
-        direction: modifier > 0 ? "ease" : "hinder",
-        steps: Math.abs(modifier),
-        sourceId: "weapon-medium"
-      });
+      else
+        expect(contribution).toMatchObject({
+          direction: modifier > 0 ? "ease" : "hinder",
+          steps: Math.abs(modifier),
+          sourceId: "weapon-medium"
+        });
     }
   );
 
@@ -358,25 +383,29 @@ describe("CombatService weapon attacks", () => {
     const plan = combat.buildWeaponAttackPlan(actor, weapon("medium", {freelyUsed: true}), {
       extremeRange: true
     });
-    expect(plan.requests[0]?.contributions).toContainEqual(expect.objectContaining({
-      id: "weapon.weapon-medium.extreme-range",
-      direction: "hinder",
-      steps: 1
-    }));
+    expect(plan.requests[0]?.contributions).toContainEqual(
+      expect.objectContaining({
+        id: "weapon.weapon-medium.extreme-range",
+        direction: "hinder",
+        steps: 1
+      })
+    );
   });
 
   it("uses hidden NPC Level and structured defense modifications", () => {
     const {actor, combat} = setup();
-    const target = npc(4, 0, [{
-      id: "speed-defense",
-      label: "Speed Defense as Level 6",
-      contexts: ["defense.speed"],
-      mode: "levelOverride",
-      value: 6,
-      visibility: "gm",
-      predicate: {},
-      description: ""
-    }]);
+    const target = npc(4, 0, [
+      {
+        id: "speed-defense",
+        label: "Speed Defense as Level 6",
+        contexts: ["defense.speed"],
+        mode: "levelOverride",
+        value: 6,
+        visibility: "gm",
+        predicate: {},
+        description: ""
+      }
+    ]);
     const plan = combat.buildWeaponAttackPlan(actor, weapon("medium", {freelyUsed: true}), {targets: [target]});
     expect(plan.requests[0]?.difficulty).toEqual({mode: "hidden", value: 6});
     expect(plan.requests[0]?.target).toMatchObject({actorId: target.id, type: "npc"});
@@ -384,12 +413,17 @@ describe("CombatService weapon attacks", () => {
 
   it("combines Skill, Assets, Effort, and shared multi-target resolution without double charging", async () => {
     const {actor, combat, roller} = setup(15);
-    const outcomes = await combat.executeWeaponAttack(actor, weapon("medium", {freelyUsed: true}), {
-      targets: [npc(3), npc(6)],
-      skill: skill("trained"),
-      assets: 1,
-      paidEffort: 1
-    }, policy);
+    const outcomes = await combat.executeWeaponAttack(
+      actor,
+      weapon("medium", {freelyUsed: true}),
+      {
+        targets: [npc(3), npc(6)],
+        skill: skill("trained"),
+        assets: 1,
+        paidEffort: 1
+      },
+      policy
+    );
 
     expect(outcomes).toHaveLength(2);
     expect(outcomes.map((outcome) => outcome.execution.result.success)).toEqual([true, true]);
@@ -444,43 +478,69 @@ describe("CombatService weapon attacks", () => {
     expect(item.update).not.toHaveBeenCalled();
   });
 
-  it.each([[17, 1], [18, 2]] as const)("adds natural %i weapon damage", async (natural, bonus) => {
+  it.each([
+    [17, 1],
+    [18, 2]
+  ] as const)("adds natural %i weapon damage", async (natural, bonus) => {
     const {actor, combat} = setup(natural);
-    const [outcome] = await combat.executeWeaponAttack(actor, weapon("medium", {freelyUsed: true}), {
-      targets: [npc(2)]
-    }, policy);
+    const [outcome] = await combat.executeWeaponAttack(
+      actor,
+      weapon("medium", {freelyUsed: true}),
+      {
+        targets: [npc(2)]
+      },
+      policy
+    );
     expect(outcome?.grossDamage).toBe(4 + bonus);
   });
 
-  it.each([[19, 3], [20, 4]] as const)("resolves natural %i damage/effect choice", async (natural, bonus) => {
+  it.each([
+    [19, 3],
+    [20, 4]
+  ] as const)("resolves natural %i damage/effect choice", async (natural, bonus) => {
     const {actor, combat} = setup(natural);
-    const outcomes = await combat.executeWeaponAttack(actor, weapon("medium", {freelyUsed: true}), {
-      targets: [npc(2)]
-    }, policy);
+    const outcomes = await combat.executeWeaponAttack(
+      actor,
+      weapon("medium", {freelyUsed: true}),
+      {
+        targets: [npc(2)]
+      },
+      policy
+    );
     expect(combat.chooseAttackOutcomes(outcomes, "damage")[0]?.grossDamage).toBe(4 + bonus);
     expect(combat.chooseAttackOutcomes(outcomes, "effect")[0]?.grossDamage).toBe(4);
   });
 
   it("adds +3 damage per damage Effort and charges combined Effort once", async () => {
     const {actor, combat} = setup(12);
-    const [outcome] = await combat.executeWeaponAttack(actor, weapon("medium", {freelyUsed: true}), {
-      targets: [npc(2)],
-      paidEffort: 1,
-      damageEffort: 1
-    }, policy);
+    const [outcome] = await combat.executeWeaponAttack(
+      actor,
+      weapon("medium", {freelyUsed: true}),
+      {
+        targets: [npc(2)],
+        paidEffort: 1,
+        damageEffort: 1
+      },
+      policy
+    );
     expect(outcome?.grossDamage).toBe(7);
     expect(actor.system.stats.might.value).toBe(15);
   });
 
   it("combines category, Weapon bonus, Damage Effort, and natural damage", async () => {
     const {actor, combat} = setup(17);
-    const [outcome] = await combat.executeWeaponAttack(actor, weapon("heavy", {
-      freelyUsed: true,
-      bonusDamage: 2
-    }), {
-      targets: [npc(2)],
-      damageEffort: 1
-    }, policy);
+    const [outcome] = await combat.executeWeaponAttack(
+      actor,
+      weapon("heavy", {
+        freelyUsed: true,
+        bonusDamage: 2
+      }),
+      {
+        targets: [npc(2)],
+        damageEffort: 1
+      },
+      policy
+    );
 
     expect(outcome).toMatchObject({
       categoryDamage: 6,
@@ -529,37 +589,44 @@ describe("CombatService defense and damage", () => {
 
   it("routes contextual manual Skill steps through Defense requests", () => {
     const {actor, combat} = setup();
-    expect(combat.buildDefenseRequest(actor, "dodge", {
-      difficulty: {mode: "unknown"},
-      skillSteps: 2
-    })).toMatchObject({skillSteps: 2});
+    expect(
+      combat.buildDefenseRequest(actor, "dodge", {
+        difficulty: {mode: "unknown"},
+        skillSteps: 2
+      })
+    ).toMatchObject({skillSteps: 2});
   });
 
-  it.each([["light", 1], ["medium", 2], ["heavy", 3]] as const)(
-    "uses existing %s Armor contributions for manual Dodge and Block",
-    (category, steps) => {
-      const {actor, combat} = setup();
-      actor.system.derived.combat.armor = {
-        itemId: `armor-${category}`,
-        category,
-        freelyUsed: true,
-        blockEase: steps,
-        dodgeHindrance: steps,
-        speedTaskHindrance: 0,
-        blockContributions: [{id: `armor.${category}.block`, sourceId: `armor-${category}`, sourceType: "item", label: "", value: steps}],
-        dodgeContributions: [{id: `armor.${category}.dodge`, sourceId: `armor-${category}`, sourceType: "item", label: "", value: steps}],
-        speedTaskContributions: []
-      };
-      expect(combat.buildDefenseRequest(actor, "dodge", {difficulty: {mode: "unknown"}})).toMatchObject({
-        pool: "speed",
-        contributions: [expect.objectContaining({direction: "hinder", steps})]
-      });
-      expect(combat.buildDefenseRequest(actor, "block", {difficulty: {mode: "unknown"}})).toMatchObject({
-        pool: "might",
-        contributions: [expect.objectContaining({direction: "ease", steps})]
-      });
-    }
-  );
+  it.each([
+    ["light", 1],
+    ["medium", 2],
+    ["heavy", 3]
+  ] as const)("uses existing %s Armor contributions for manual Dodge and Block", (category, steps) => {
+    const {actor, combat} = setup();
+    actor.system.derived.combat.armor = {
+      itemId: `armor-${category}`,
+      category,
+      freelyUsed: true,
+      blockEase: steps,
+      dodgeHindrance: steps,
+      speedTaskHindrance: 0,
+      blockContributions: [
+        {id: `armor.${category}.block`, sourceId: `armor-${category}`, sourceType: "item", label: "", value: steps}
+      ],
+      dodgeContributions: [
+        {id: `armor.${category}.dodge`, sourceId: `armor-${category}`, sourceType: "item", label: "", value: steps}
+      ],
+      speedTaskContributions: []
+    };
+    expect(combat.buildDefenseRequest(actor, "dodge", {difficulty: {mode: "unknown"}})).toMatchObject({
+      pool: "speed",
+      contributions: [expect.objectContaining({direction: "hinder", steps})]
+    });
+    expect(combat.buildDefenseRequest(actor, "block", {difficulty: {mode: "unknown"}})).toMatchObject({
+      pool: "might",
+      contributions: [expect.objectContaining({direction: "ease", steps})]
+    });
+  });
 
   it("does not apply unfamiliar Armor Speed-task Hindrance twice to Dodge", () => {
     const {actor, combat} = setup();
@@ -571,8 +638,12 @@ describe("CombatService defense and damage", () => {
       dodgeHindrance: 2,
       speedTaskHindrance: 2,
       blockContributions: [],
-      dodgeContributions: [{id: "armor.medium.dodge", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}],
-      speedTaskContributions: [{id: "armor.medium.speed", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}]
+      dodgeContributions: [
+        {id: "armor.medium.dodge", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}
+      ],
+      speedTaskContributions: [
+        {id: "armor.medium.speed", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}
+      ]
     };
     const request = combat.buildDefenseRequest(actor, "dodge", {difficulty: {mode: "known", value: 4}});
     const rules = new RuleRegistry();
@@ -661,10 +732,7 @@ describe("CombatService defense and damage", () => {
       "Scene.scene.Token.token-a",
       "Scene.scene.Token.token-b"
     ]);
-    expect(plan.targetResolutions.map((entry) => entry?.targetIdentity.tokenId)).toEqual([
-      "token-a",
-      "token-b"
-    ]);
+    expect(plan.targetResolutions.map((entry) => entry?.targetIdentity.tokenId)).toEqual(["token-a", "token-b"]);
   });
 
   it("gives a Character Stress rather than Pool damage", async () => {

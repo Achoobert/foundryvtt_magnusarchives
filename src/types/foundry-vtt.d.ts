@@ -17,27 +17,16 @@ declare class Actor {
   items: Iterable<Item> & {get(id: string): Item | undefined};
   sheet?: {render(force?: boolean): Promise<unknown> | unknown};
   testUserPermission(user: {id: string}, level: number): boolean;
-  toggleStatusEffect(
-    statusId: string,
-    options?: {active?: boolean; overlay?: boolean}
-  ): Promise<unknown>;
+  toggleStatusEffect(statusId: string, options?: {active?: boolean; overlay?: boolean}): Promise<unknown>;
   update(changes: Record<string, unknown>, options?: Record<string, unknown>): Promise<unknown>;
   updateSource(changes: Record<string, unknown>, options?: Record<string, unknown>): Record<string, unknown>;
-  _preCreate(
-    data: Record<string, unknown>,
-    options: Record<string, unknown>,
-    user: unknown
-  ): Promise<unknown>;
+  _preCreate(data: Record<string, unknown>, options: Record<string, unknown>, user: unknown): Promise<unknown>;
   createEmbeddedDocuments(
     type: string,
     data: Record<string, unknown>[],
     operation?: Record<string, unknown>
   ): Promise<unknown[]>;
-  deleteEmbeddedDocuments(
-    type: string,
-    ids: string[],
-    operation?: Record<string, unknown>
-  ): Promise<unknown[]>;
+  deleteEmbeddedDocuments(type: string, ids: string[], operation?: Record<string, unknown>): Promise<unknown[]>;
   reset(): void;
 }
 
@@ -108,10 +97,7 @@ interface TokenLike {
 declare class TypeDataModelBase {
   parent: Actor | Item;
   static defineSchema(): Record<string, unknown>;
-  static migrateData(
-    source: Record<string, unknown>,
-    options?: {readonly partial?: boolean}
-  ): Record<string, unknown>;
+  static migrateData(source: Record<string, unknown>, options?: {readonly partial?: boolean}): Record<string, unknown>;
   prepareBaseData(): void;
   prepareDerivedData(): void;
 }
@@ -186,10 +172,7 @@ declare const foundry: {
     ux: {
       TextEditor: {
         implementation: {
-          enrichHTML(
-            content: string,
-            options?: {async?: boolean; relativeTo?: Actor | Item}
-          ): Promise<string>;
+          enrichHTML(content: string, options?: {async?: boolean; relativeTo?: Actor | Item}): Promise<string>;
           create(
             options: {
               target: HTMLElement;

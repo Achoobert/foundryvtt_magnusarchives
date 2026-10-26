@@ -2,9 +2,17 @@ import type {WoundSeverity} from "../../constants/system";
 import type {ShieldItemLike} from "../../services/shield-service";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 export async function promptEditShieldWound(
@@ -14,7 +22,7 @@ export async function promptEditShieldWound(
 ): Promise<void> {
   const wound = shield.system.wounds[severity].find((entry) => entry.id === woundId);
   if (!wound) throw new Error(`Shield Wound '${woundId}' was not found.`);
-  const data = await foundry.applications.api.DialogV2.input({
+  const data = (await foundry.applications.api.DialogV2.input({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Wounds.EditTitle")},
     content: `<div class="magnusarchives-dialog-fields">
       <label>${game.i18n.localize("MAGNUSARCHIVES.Wounds.Label")}<input name="label" type="text" value="${escapeHtml(wound.label)}"></label>
@@ -22,7 +30,7 @@ export async function promptEditShieldWound(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-  }) as Record<string, unknown> | null;
+  })) as Record<string, unknown> | null;
   if (!data) return;
   await game.magnusarchives.services.shields.edit(shield, severity, woundId, {
     label: String(data.label ?? ""),

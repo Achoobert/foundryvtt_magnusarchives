@@ -37,32 +37,35 @@ export function isInventoryItemType(value: unknown): value is InventoryItemType 
 
 export function inventoryItemPresentation(item: InventoryItemSource): InventoryItemPresentation | null {
   if (!isInventoryItemType(item.type)) return null;
-  const depletionSource = item.system.depletion && typeof item.system.depletion === "object"
-    ? item.system.depletion as Record<string, unknown>
-    : null;
+  const depletionSource =
+    item.system.depletion && typeof item.system.depletion === "object"
+      ? (item.system.depletion as Record<string, unknown>)
+      : null;
   return {
     id: item.id,
     name: item.name,
     type: item.type,
-    level: item.type === "cypher"
-      ? cypherLevel(item.system)
-      : item.type === "artifact" ? artifactLevelFormula(item.system) : null,
+    level:
+      item.type === "cypher"
+        ? cypherLevel(item.system)
+        : item.type === "artifact"
+          ? artifactLevelFormula(item.system)
+          : null,
     levelRollable: item.type === "artifact" && artifactLevelIsRollable(item.system),
     power: item.type === "cypher" ? normalizeCypherPower(item.system.power) : null,
     quantity: item.type === "equipment" ? wholeNumber(item.system.quantity, 1) : null,
-    equipped: item.type === "equipment" && typeof item.system.equipped === "boolean"
-      ? item.system.equipped
-      : null,
+    equipped: item.type === "equipment" && typeof item.system.equipped === "boolean" ? item.system.equipped : null,
     description: typeof item.system.description === "string" ? item.system.description.trim() : "",
     depleted: item.type === "artifact" && item.system.depleted === true,
     usable: item.type !== "artifact" || artifactUsable(item.system),
-    depletion: item.type === "artifact" && depletionSource
-      ? {
-        enabled: Boolean(depletionSource.enabled),
-        formula: String(depletionSource.formula || `1${String(depletionSource.die ?? "d6")}`),
-        threshold: wholeNumber(depletionSource.threshold, 1)
-      }
-      : null
+    depletion:
+      item.type === "artifact" && depletionSource
+        ? {
+            enabled: Boolean(depletionSource.enabled),
+            formula: String(depletionSource.formula || `1${String(depletionSource.die ?? "d6")}`),
+            threshold: wholeNumber(depletionSource.threshold, 1)
+          }
+        : null
   };
 }
 

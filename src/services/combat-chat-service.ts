@@ -28,35 +28,51 @@ export class CombatChatService {
     const successful = outcome.execution.result.success === true;
     const damageCanBePresented = outcome.execution.result.success !== false;
     const combat: RollChatCombatPresentation = {
-      ...(damageCanBePresented ? {
-        damage: outcome.grossDamage,
-        damageBreakdown: [
-          {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: outcome.categoryDamage},
-          ...(outcome.weaponBonusDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.WeaponBonus",
-            value: outcome.weaponBonusDamage,
-            additive: true
-          }]),
-          ...(outcome.effortDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort",
-            value: outcome.effortDamage,
-            additive: true
-          }]),
-          ...(outcome.naturalDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
-            value: outcome.naturalDamage,
-            additive: true
-          }])
-        ]
-      } : {}),
-      ...(successful && outcome.target ? {
-        action: {
-          kind: "npcDamage",
-          ...actionTargetIdentity(combatTargetIdentity(outcome.target)),
-          requestedDamage: outcome.grossDamage,
-          applied: false
-        }
-      } : {})
+      ...(damageCanBePresented
+        ? {
+            damage: outcome.grossDamage,
+            damageBreakdown: [
+              {label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: outcome.categoryDamage},
+              ...(outcome.weaponBonusDamage === 0
+                ? []
+                : [
+                    {
+                      label: "MAGNUSARCHIVES.Combat.DamageBreakdown.WeaponBonus",
+                      value: outcome.weaponBonusDamage,
+                      additive: true
+                    }
+                  ]),
+              ...(outcome.effortDamage === 0
+                ? []
+                : [
+                    {
+                      label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort",
+                      value: outcome.effortDamage,
+                      additive: true
+                    }
+                  ]),
+              ...(outcome.naturalDamage === 0
+                ? []
+                : [
+                    {
+                      label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
+                      value: outcome.naturalDamage,
+                      additive: true
+                    }
+                  ])
+            ]
+          }
+        : {}),
+      ...(successful && outcome.target
+        ? {
+            action: {
+              kind: "npcDamage",
+              ...actionTargetIdentity(combatTargetIdentity(outcome.target)),
+              requestedDamage: outcome.grossDamage,
+              applied: false
+            }
+          }
+        : {})
     };
     await this.#rollChat.publish(actor, outcome.execution, visibility, {combat, showGmAudit});
   }
@@ -67,38 +83,42 @@ export class CombatChatService {
     resolution: DefenseWoundResolution,
     source: NpcTargetLike | null,
     visibility: DifficultyVisibility,
-    showGmAudit = false,
+    showGmAudit = false
   ): Promise<void> {
     const targetIdentity = actionTargetIdentity(targetIdentityFromDocument(actor));
     const sourceData = source ? {sourceActorId: source.id, sourceName: source.name} : {};
     const combat: RollChatCombatPresentation = {
-      ...(resolution.recipient === "character" ? {
-        damageEffect: resolution.effect,
-        stressAmount: resolution.stressAmount,
-        action: {
-          kind: "characterDamage" as const,
-          ...targetIdentity,
-          effect: resolution.effect,
-          stressAmount: resolution.stressAmount,
-          ...sourceData,
-          applied: false
-        }
-      } : {}),
-      ...(resolution.recipient === "shield" ? {
-        shieldTransfer: {
-          shieldName: resolution.shieldName,
-          severity: resolution.severity
-        },
-        action: {
-          kind: "shieldWound" as const,
-          ...targetIdentity,
-          shieldId: resolution.shieldId,
-          shieldName: resolution.shieldName,
-          severity: resolution.severity,
-          ...sourceData,
-          applied: false
-        }
-      } : {})
+      ...(resolution.recipient === "character"
+        ? {
+            damageEffect: resolution.effect,
+            stressAmount: resolution.stressAmount,
+            action: {
+              kind: "characterDamage" as const,
+              ...targetIdentity,
+              effect: resolution.effect,
+              stressAmount: resolution.stressAmount,
+              ...sourceData,
+              applied: false
+            }
+          }
+        : {}),
+      ...(resolution.recipient === "shield"
+        ? {
+            shieldTransfer: {
+              shieldName: resolution.shieldName,
+              severity: resolution.severity
+            },
+            action: {
+              kind: "shieldWound" as const,
+              ...targetIdentity,
+              shieldId: resolution.shieldId,
+              shieldName: resolution.shieldName,
+              severity: resolution.severity,
+              ...sourceData,
+              applied: false
+            }
+          }
+        : {})
     };
     await this.#rollChat.publish(actor, execution, visibility, {combat, showGmAudit});
   }

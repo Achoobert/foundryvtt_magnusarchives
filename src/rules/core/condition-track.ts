@@ -1,8 +1,4 @@
-import {
-  DAMAGE_TRACK_STEPS,
-  STRESS_POINTS_PER_LEVEL,
-  type DamageTrackStep
-} from "../../constants/system";
+import {DAMAGE_TRACK_STEPS, STRESS_POINTS_PER_LEVEL, type DamageTrackStep} from "../../constants/system";
 
 /**
  * The Magnus Archives condition rules: Stress and the damage track (p12, p132).
@@ -13,9 +9,7 @@ import {
  */
 
 /** Steps available to a Character who does not have the extra "hurt" step. */
-export const BASE_DAMAGE_TRACK_STEPS: readonly DamageTrackStep[] = DAMAGE_TRACK_STEPS.filter(
-  (step) => step !== "hurt"
-);
+export const BASE_DAMAGE_TRACK_STEPS: readonly DamageTrackStep[] = DAMAGE_TRACK_STEPS.filter((step) => step !== "hurt");
 
 export function damageTrackSteps(hurtAvailable: boolean): readonly DamageTrackStep[] {
   return hurtAvailable ? DAMAGE_TRACK_STEPS : BASE_DAMAGE_TRACK_STEPS;
@@ -36,20 +30,13 @@ export function stressAfterRest(points: number, hours: number): number {
   return Math.max(0, Math.max(0, points) - Math.max(0, Math.floor(hours)) * STRESS_POINTS_PER_LEVEL);
 }
 
-export function normalizeDamageTrackStep(
-  step: unknown,
-  hurtAvailable: boolean
-): DamageTrackStep {
+export function normalizeDamageTrackStep(step: unknown, hurtAvailable: boolean): DamageTrackStep {
   const available = damageTrackSteps(hurtAvailable);
   return available.includes(step as DamageTrackStep) ? (step as DamageTrackStep) : "hale";
 }
 
 /** Moves `steps` places down the track, clamped at dead. */
-export function advanceDamageTrack(
-  step: DamageTrackStep,
-  hurtAvailable: boolean,
-  steps = 1
-): DamageTrackStep {
+export function advanceDamageTrack(step: DamageTrackStep, hurtAvailable: boolean, steps = 1): DamageTrackStep {
   const available = damageTrackSteps(hurtAvailable);
   const current = available.indexOf(normalizeDamageTrackStep(step, hurtAvailable));
   const next = Math.min(available.length - 1, current + Math.max(0, steps));
@@ -57,11 +44,7 @@ export function advanceDamageTrack(
 }
 
 /** Moves `steps` places back up the track, clamped at hale. */
-export function healDamageTrack(
-  step: DamageTrackStep,
-  hurtAvailable: boolean,
-  steps = 1
-): DamageTrackStep {
+export function healDamageTrack(step: DamageTrackStep, hurtAvailable: boolean, steps = 1): DamageTrackStep {
   const available = damageTrackSteps(hurtAvailable);
   const current = available.indexOf(normalizeDamageTrackStep(step, hurtAvailable));
   const next = Math.max(0, current - Math.max(0, steps));

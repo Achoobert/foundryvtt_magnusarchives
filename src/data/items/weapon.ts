@@ -115,20 +115,23 @@ export class WeaponDataModel extends ItemDataModelBase {
       migrated.family = normalizeWeaponFamily(migrated.family);
     }
     const includesDefaultPool = Object.hasOwn(migrated, "defaultPool");
-    if ((!options.partial || includesDefaultPool)
-      && migrated.defaultPool !== "none"
-      && !POOL_KEYS.includes(migrated.defaultPool as PoolKey)) {
+    if (
+      (!options.partial || includesDefaultPool) &&
+      migrated.defaultPool !== "none" &&
+      !POOL_KEYS.includes(migrated.defaultPool as PoolKey)
+    ) {
       migrated.defaultPool = "none";
     }
     const category = WEAPON_CATEGORIES.includes(migrated.category as WeaponCategory)
-      ? migrated.category as WeaponCategory
+      ? (migrated.category as WeaponCategory)
       : "medium";
     const coreDamage: Readonly<Record<WeaponCategory, number>> = {light: 2, medium: 4, heavy: 6};
-    const legacyDamage = typeof migrated.damageOverride === "number"
-      ? migrated.damageOverride
-      : typeof migrated.damage === "number"
-        ? migrated.damage
-        : null;
+    const legacyDamage =
+      typeof migrated.damageOverride === "number"
+        ? migrated.damageOverride
+        : typeof migrated.damage === "number"
+          ? migrated.damage
+          : null;
     if (migrated.bonusDamage === undefined && legacyDamage !== null) {
       migrated.bonusDamage = Math.max(0, legacyDamage - coreDamage[category]);
     }

@@ -1,23 +1,38 @@
 @keyframes magnusarchives-chat-card-entrance {
   0% {
     border-color: var(--magnusarchives-chat-accent, var(--magnusarchives-accent));
-    box-shadow: 0 0 0.65rem color-mix(in srgb, var(--magnusarchives-chat-accent, var(--magnusarchives-accent)) 45%, transparent);
+    box-shadow: 0 0 0.65rem
+      color-mix(in srgb, var(--magnusarchives-chat-accent, var(--magnusarchives-accent)) 45%, transparent);
   }
 
   100% {
-    border-color: color-mix(in srgb, var(--magnusarchives-chat-accent, var(--magnusarchives-accent)) 52%, var(--magnusarchives-border));
+    border-color: color-mix(
+      in srgb,
+      var(--magnusarchives-chat-accent, var(--magnusarchives-accent)) 52%,
+      var(--magnusarchives-border)
+    );
     box-shadow: var(--magnusarchives-shadow);
   }
 }
 
 @keyframes magnusarchives-chat-exceptional-entrance {
-  0% { opacity: 0.45; }
-  55% { opacity: 1; }
-  100% { opacity: 0.72; }
+  0% {
+    opacity: 0.45;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.72;
+  }
 }
 
 .magnusarchives-chat-card {
-  --magnusarchives-chat-accent: color-mix(in srgb, var(--magnusarchives-accent) 58%, var(--magnusarchives-text-primary));
+  --magnusarchives-chat-accent: color-mix(
+    in srgb,
+    var(--magnusarchives-accent) 58%,
+    var(--magnusarchives-text-primary)
+  );
   --magnusarchives-chat-tint: var(--magnusarchives-surface-secondary);
 
   position: relative;
@@ -95,7 +110,9 @@
       outline: 1px solid color-mix(in srgb, var(--magnusarchives-chat-accent) 55%, transparent);
     }
 
-    &:disabled { opacity: 0.55; }
+    &:disabled {
+      opacity: 0.55;
+    }
   }
 
   .magnusarchives-combat-action,
@@ -117,13 +134,19 @@
     border-bottom-color: var(--magnusarchives-border);
   }
 
-  .message-content { overflow: visible; }
+  .message-content {
+    overflow: visible;
+  }
 }
 
 // RollTable#toMessage uses Foundry's native table-result template. Theme that
 // native structure in-place instead of replacing or intercepting its workflow.
 .chat-message:has(.table-draw) {
-  --magnusarchives-chat-accent: color-mix(in srgb, var(--magnusarchives-accent) 58%, var(--magnusarchives-text-primary));
+  --magnusarchives-chat-accent: color-mix(
+    in srgb,
+    var(--magnusarchives-accent) 58%,
+    var(--magnusarchives-text-primary)
+  );
 
   color: var(--magnusarchives-text-primary);
   background: var(--magnusarchives-surface-primary);
@@ -158,8 +181,12 @@
       border-top: 0;
       border-bottom: 1px solid var(--magnusarchives-border);
 
-      > :first-child { margin-top: 0; }
-      > :last-child { margin-bottom: 0; }
+      > :first-child {
+        margin-top: 0;
+      }
+      > :last-child {
+        margin-bottom: 0;
+      }
     }
 
     .dice-roll {
@@ -267,17 +294,29 @@
     font-size: 0.76rem;
     line-height: 1.25;
 
-    strong { color: var(--magnusarchives-text-primary); }
+    strong {
+      color: var(--magnusarchives-text-primary);
+    }
   }
 
   .skill-rank {
     font-weight: 700;
 
-    &.rank-expert { color: var(--magnusarchives-rank-expert); }
-    &.rank-specialized { color: var(--magnusarchives-rank-specialized); }
-    &.rank-trained { color: var(--magnusarchives-rank-trained); }
-    &.rank-untrained { color: var(--magnusarchives-rank-untrained); }
-    &.rank-inability { color: var(--magnusarchives-rank-inability); }
+    &.rank-expert {
+      color: var(--magnusarchives-rank-expert);
+    }
+    &.rank-specialized {
+      color: var(--magnusarchives-rank-specialized);
+    }
+    &.rank-trained {
+      color: var(--magnusarchives-rank-trained);
+    }
+    &.rank-untrained {
+      color: var(--magnusarchives-rank-untrained);
+    }
+    &.rank-inability {
+      color: var(--magnusarchives-rank-inability);
+    }
   }
 
   .roll-card-result {
@@ -311,9 +350,15 @@
     text-align: center;
     text-transform: uppercase;
 
-    &.success { color: var(--magnusarchives-success); }
-    &.failure { color: var(--magnusarchives-danger); }
-    &.neutral { color: var(--magnusarchives-text-muted); }
+    &.success {
+      color: var(--magnusarchives-success);
+    }
+    &.failure {
+      color: var(--magnusarchives-danger);
+    }
+    &.neutral {
+      color: var(--magnusarchives-text-muted);
+    }
   }
 
   .roll-card-raw {
@@ -338,7 +383,9 @@
     }
   }
 
-  .roll-card-raw span { color: var(--magnusarchives-text-primary); }
+  .roll-card-raw span {
+    color: var(--magnusarchives-text-primary);
+  }
 
   .roll-card-exceptional {
     margin-block: 0.5rem;
@@ -359,7 +406,9 @@
   .roll-card-natural-effect {
     color: color-mix(in srgb, var(--magnusarchives-chat-accent) 72%, var(--magnusarchives-text-primary));
   }
-  .roll-card-intrusion { color: var(--magnusarchives-danger); }
+  .roll-card-intrusion {
+    color: var(--magnusarchives-danger);
+  }
 
   .roll-card-disclosure {
     margin-top: 0.48rem;
@@ -379,8 +428,12 @@
       list-style: none;
       text-transform: uppercase;
 
-      &::-webkit-details-marker { display: none; }
-      &::before { content: "›"; }
+      &::-webkit-details-marker {
+        display: none;
+      }
+      &::before {
+        content: "›";
+      }
 
       &:hover,
       &:focus-visible {
@@ -388,7 +441,9 @@
       }
     }
 
-    &[open] > summary::before { content: "⌄"; }
+    &[open] > summary::before {
+      content: "⌄";
+    }
   }
 
   .natural-effect-details {
@@ -411,7 +466,9 @@
       color: var(--magnusarchives-text-primary);
       font-size: 0.74rem;
 
-      small { color: var(--magnusarchives-text-muted); }
+      small {
+        color: var(--magnusarchives-text-muted);
+      }
     }
   }
 
@@ -457,7 +514,9 @@
     }
 
     dt,
-    dd { margin: 0; }
+    dd {
+      margin: 0;
+    }
 
     dd {
       color: var(--magnusarchives-text-primary);
@@ -468,13 +527,19 @@
   }
 
   .roll-card-detail-totals {
-    dt { font-weight: 700; }
-    dd { font-weight: 800; }
+    dt {
+      font-weight: 700;
+    }
+    dd {
+      font-weight: 800;
+    }
   }
 
   .roll-card-damage-total {
     dt,
-    dd { color: var(--magnusarchives-text-primary); }
+    dd {
+      color: var(--magnusarchives-text-primary);
+    }
   }
 
   .combat-result {
@@ -535,7 +600,9 @@
 
 .magnusarchives-item-card {
   .item-card-properties {
-    dt { color: var(--magnusarchives-text-muted); }
+    dt {
+      color: var(--magnusarchives-text-muted);
+    }
 
     dd {
       color: var(--magnusarchives-text-primary);
@@ -549,9 +616,16 @@
     overflow-wrap: anywhere;
     border-top: 1px solid var(--magnusarchives-border);
 
-    > :first-child { margin-top: 0; }
-    > :last-child { margin-bottom: 0; }
-    img, table { max-width: 100%; }
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+    img,
+    table {
+      max-width: 100%;
+    }
   }
 
   .item-card-depleted {
@@ -567,13 +641,17 @@
     padding: 0.25rem 0.45rem;
   }
 
-  &.is-depleted { border-color: var(--magnusarchives-danger); }
+  &.is-depleted {
+    border-color: var(--magnusarchives-danger);
+  }
 }
 
 .magnusarchives-defense-request-card {
   border-color: var(--magnusarchives-chat-accent);
 
-  h3 { margin-top: 0; }
+  h3 {
+    margin-top: 0;
+  }
 
   .defense-request-actions {
     display: flex;
@@ -583,10 +661,19 @@
 }
 
 .magnusarchives-depletion-card {
-  h3 { margin: 0 0 0.45rem; color: var(--magnusarchives-chat-accent); }
-  p { margin: 0.3rem 0; }
-  .failure { color: var(--magnusarchives-danger); }
-  .success { color: var(--magnusarchives-success); }
+  h3 {
+    margin: 0 0 0.45rem;
+    color: var(--magnusarchives-chat-accent);
+  }
+  p {
+    margin: 0.3rem 0;
+  }
+  .failure {
+    color: var(--magnusarchives-danger);
+  }
+  .success {
+    color: var(--magnusarchives-success);
+  }
 }
 
 .intrusion-card {
@@ -614,7 +701,9 @@
     }
   }
 
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 
   .intrusion-card-character {
     color: color-mix(in srgb, var(--magnusarchives-chat-accent) 72%, var(--magnusarchives-text-primary));
@@ -780,7 +869,9 @@
     }
 
     .roll-card-detail-list,
-    dl { gap-inline: 0.4rem; }
+    dl {
+      gap-inline: 0.4rem;
+    }
   }
 }
 

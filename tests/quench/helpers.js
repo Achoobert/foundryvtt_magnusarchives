@@ -1,4 +1,4 @@
-export const SYSTEM_ID = 'magnusarchives';
+export const SYSTEM_ID = "magnusarchives";
 
 /** Fail loudly rather than silently passing against the wrong system. */
 export function requireSystemActive() {
@@ -29,10 +29,10 @@ export function createdDocsTracker(context) {
       return doc;
     },
     async createActor(data) {
-      return this.track(await Actor.create({name: 'Quench Actor', type: 'character', ...data}));
+      return this.track(await Actor.create({name: "Quench Actor", type: "character", ...data}));
     },
     async createItem(data) {
-      return this.track(await Item.create({name: 'Quench Item', type: 'equipment', ...data}));
+      return this.track(await Item.create({name: "Quench Item", type: "equipment", ...data}));
     }
   };
 }

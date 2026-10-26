@@ -1,13 +1,5 @@
-import {
-  FocusGraphValidationError,
-  validateFocusGraph
-} from "./focus-graph-validator";
-import type {
-  FocusConnection,
-  FocusGraph,
-  FocusGraphDiagnostic,
-  FocusNode
-} from "./focus-types";
+import {FocusGraphValidationError, validateFocusGraph} from "./focus-graph-validator";
+import type {FocusConnection, FocusGraph, FocusGraphDiagnostic, FocusNode} from "./focus-types";
 
 export type FocusTreeEditorErrorCode =
   | "not-ability"
@@ -102,8 +94,10 @@ export class FocusTreeEditorInteractionState {
 }
 
 function defaultIdFactory(): string {
-  return globalThis.crypto?.randomUUID?.().replaceAll("-", "")
-    ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
+  return (
+    globalThis.crypto?.randomUUID?.().replaceAll("-", "") ??
+    `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`
+  );
 }
 
 /** Explicit cloning keeps Foundry DataModel proxies out of the editor working copy. */
@@ -115,9 +109,7 @@ export function cloneFocusGraph(graph: FocusGraph): FocusGraph {
       abilityUuid: node.abilityUuid,
       abilitySnapshot: {
         name: node.abilitySnapshot.name,
-        ...(node.abilitySnapshot.description !== undefined
-          ? {description: node.abilitySnapshot.description}
-          : {})
+        ...(node.abilitySnapshot.description !== undefined ? {description: node.abilitySnapshot.description} : {})
       },
       tier: node.tier,
       position: {x: node.position.x, y: node.position.y}
@@ -214,19 +206,25 @@ export class FocusTreeEditorSession {
     const ordered = sortedTierNodes(this.#working, node.tier);
     const currentIndex = ordered.findIndex((entry) => entry.id === nodeId);
     const targetIndex = direction === "left" ? currentIndex - 1 : currentIndex + 1;
-    if (targetIndex < 0 || targetIndex >= ordered.length) return cloneFocusGraph({
-      version: this.#working.version,
-      nodes: [node],
-      connections: []
-    }).nodes[0]!;
+    if (targetIndex < 0 || targetIndex >= ordered.length)
+      return cloneFocusGraph({
+        version: this.#working.version,
+        nodes: [node],
+        connections: []
+      }).nodes[0]!;
 
     const neighbor = ordered[targetIndex]!;
     const beyond = ordered[direction === "left" ? targetIndex - 1 : targetIndex + 1];
     const neighborX = neighbor.position.x ?? targetIndex;
     const beyondX = beyond?.position.x;
-    const x = direction === "left"
-      ? beyondX === undefined || beyondX === null ? neighborX - 1 : (beyondX + neighborX) / 2
-      : beyondX === undefined || beyondX === null ? neighborX + 1 : (neighborX + beyondX) / 2;
+    const x =
+      direction === "left"
+        ? beyondX === undefined || beyondX === null
+          ? neighborX - 1
+          : (beyondX + neighborX) / 2
+        : beyondX === undefined || beyondX === null
+          ? neighborX + 1
+          : (neighborX + beyondX) / 2;
     return this.#replaceNode(nodeId, (entry) => ({
       ...entry,
       position: {...entry.position, x}
@@ -235,9 +233,7 @@ export class FocusTreeEditorSession {
 
   deleteNode(nodeId: string): {readonly node: FocusNode; readonly removedConnections: number} {
     const node = this.#node(nodeId);
-    const connections = this.#working.connections.filter((entry) => (
-      entry.from !== nodeId && entry.to !== nodeId
-    ));
+    const connections = this.#working.connections.filter((entry) => entry.from !== nodeId && entry.to !== nodeId);
     const removedConnections = this.#working.connections.length - connections.length;
     this.#working = {
       ...this.#working,
@@ -255,16 +251,10 @@ export class FocusTreeEditorSession {
       throw new FocusTreeEditorError("self-connection", "A Focus node cannot connect to itself.");
     }
     if (this.#working.connections.some((entry) => entry.from === from && entry.to === to)) {
-      throw new FocusTreeEditorError(
-        "duplicate-connection",
-        `Focus connection '${from}' -> '${to}' already exists.`
-      );
+      throw new FocusTreeEditorError("duplicate-connection", `Focus connection '${from}' -> '${to}' already exists.`);
     }
     const connection: FocusConnection = {
-      id: this.#uniqueId(
-        "connection",
-        new Set(this.#working.connections.map((entry) => entry.id))
-      ),
+      id: this.#uniqueId("connection", new Set(this.#working.connections.map((entry) => entry.id))),
       from,
       to
     };
@@ -279,10 +269,7 @@ export class FocusTreeEditorSession {
   deleteConnection(connectionId: string): FocusConnection {
     const connection = this.#working.connections.find((entry) => entry.id === connectionId);
     if (!connection) {
-      throw new FocusTreeEditorError(
-        "connection-not-found",
-        `Focus connection '${connectionId}' was not found.`
-      );
+      throw new FocusTreeEditorError("connection-not-found", `Focus connection '${connectionId}' was not found.`);
     }
     this.#working = {
       ...this.#working,
@@ -346,7 +333,7 @@ export class FocusTreeEditorSession {
     const updated = replacement(original);
     this.#working = {
       ...this.#working,
-      nodes: this.#working.nodes.map((entry) => entry.id === nodeId ? updated : entry)
+      nodes: this.#working.nodes.map((entry) => (entry.id === nodeId ? updated : entry))
     };
     this.#dirty = true;
     return cloneFocusGraph({version: this.#working.version, nodes: [updated], connections: []}).nodes[0]!;
@@ -354,13 +341,12 @@ export class FocusTreeEditorSession {
 
   #uniqueId(prefix: string, existing: ReadonlySet<string>): string {
     for (let attempt = 0; attempt < 100; attempt += 1) {
-      const suffix = this.#idFactory().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24);
+      const suffix = this.#idFactory()
+        .replace(/[^a-zA-Z0-9_-]/g, "")
+        .slice(0, 24);
       const candidate = `${prefix}-${suffix}`;
       if (suffix && !existing.has(candidate)) return candidate;
     }
-    throw new FocusTreeEditorError(
-      "unique-id-unavailable",
-      `Unable to generate a unique ${prefix} ID.`
-    );
+    throw new FocusTreeEditorError("unique-id-unavailable", `Unable to generate a unique ${prefix} ID.`);
   }
 }

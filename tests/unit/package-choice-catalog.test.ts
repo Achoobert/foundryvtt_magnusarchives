@@ -1,5 +1,3 @@
-import {readFile} from "node:fs/promises";
-import path from "node:path";
 import {describe, expect, it, vi} from "vitest";
 import {
   discoverAvailableDescriptors,
@@ -8,12 +6,9 @@ import {
   type DescriptorCatalogDocumentLike
 } from "../../src/packages/package-choice-catalog";
 import type {DescriptorChoiceGroup} from "../../src/packages/package-types";
+import {loadYmlPack} from "../helpers/yml-packs";
 
-const projectRoot = path.resolve(import.meta.dirname, "../..");
-const coreSource = JSON.parse(await readFile(
-  path.join(projectRoot, "content/core-items/reviewed-packs.json"),
-  "utf8"
-));
+const descriptorDocuments = loadYmlPack("descriptors");
 
 function descriptor(uuid: string, name: string): DescriptorCatalogDocumentLike {
   return {
@@ -37,11 +32,11 @@ function catalogGroup(): DescriptorChoiceGroup {
 
 // The catalog grows and shrinks with the pack, so the count is read from the
 // content rather than pinned, and only the relationships are asserted.
-const DESCRIPTOR_COUNT = coreSource.packs.descriptors.documents.length;
+const DESCRIPTOR_COUNT = descriptorDocuments.length;
 
 describe("dynamic package choice catalogs", () => {
   it("resolves every current public Descriptor without changing the catalog rule", () => {
-    const publicDescriptors = coreSource.packs.descriptors.documents.map((document: any) => ({
+    const publicDescriptors = descriptorDocuments.map((document: any) => ({
       ...document,
       uuid: `Compendium.${PUBLIC_DESCRIPTOR_PACK_ID}.Item.${document._id}`
     }));
@@ -57,15 +52,21 @@ describe("dynamic package choice catalogs", () => {
 
   it("grows and shrinks from the system Descriptor catalog with supported World content without modifying the package", () => {
     const sourceGroup = catalogGroup();
-    const publicDescriptors = coreSource.packs.descriptors.documents.map((document: any) => ({
+    const publicDescriptors = descriptorDocuments.map((document: any) => ({
       ...document,
       uuid: `Compendium.${PUBLIC_DESCRIPTOR_PACK_ID}.Item.${document._id}`
     }));
     const customDescriptor = descriptor("Item.world-custom", "World Custom");
 
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(DESCRIPTOR_COUNT);
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], [...publicDescriptors, customDescriptor])[0]?.options).toHaveLength(DESCRIPTOR_COUNT + 1);
-    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(DESCRIPTOR_COUNT);
+    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(
+      DESCRIPTOR_COUNT
+    );
+    expect(
+      resolveDescriptorChoiceCatalogs([sourceGroup], [...publicDescriptors, customDescriptor])[0]?.options
+    ).toHaveLength(DESCRIPTOR_COUNT + 1);
+    expect(resolveDescriptorChoiceCatalogs([sourceGroup], publicDescriptors)[0]?.options).toHaveLength(
+      DESCRIPTOR_COUNT
+    );
     expect(sourceGroup.options).toEqual([]);
   });
 
@@ -79,7 +80,11 @@ describe("dynamic package choice catalogs", () => {
       packs: {
         get(id: string) {
           requestedPack = id;
-          return {async getDocuments() { return [publicDescriptor]; }};
+          return {
+            async getDocuments() {
+              return [publicDescriptor];
+            }
+          };
         }
       }
     });

@@ -8,18 +8,16 @@ function field(data: DialogData, key: string): string {
 }
 
 function escape(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+  return value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-async function promptModification(
-  existing?: NpcModificationData
-): Promise<NpcModificationData | null> {
-  const data = await foundry.applications.api.DialogV2.input({
-    window: {title: game.i18n.localize(existing ? "MAGNUSARCHIVES.Combat.Modification.Edit" : "MAGNUSARCHIVES.Combat.Modification.Create")},
+async function promptModification(existing?: NpcModificationData): Promise<NpcModificationData | null> {
+  const data = (await foundry.applications.api.DialogV2.input({
+    window: {
+      title: game.i18n.localize(
+        existing ? "MAGNUSARCHIVES.Combat.Modification.Edit" : "MAGNUSARCHIVES.Combat.Modification.Create"
+      )
+    },
     content: `<div class="magnusarchives-dialog-fields">
       <label>${game.i18n.localize("MAGNUSARCHIVES.Common.Name")} <input name="label" type="text" value="${escape(existing?.label ?? "")}"></label>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Combat.Modification.Contexts")} <input name="contexts" type="text" value="${escape(existing?.contexts.join(", ") ?? "defense.speed")}"></label>
@@ -37,7 +35,7 @@ async function promptModification(
     </div>`,
     rejectClose: false,
     ok: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save")}
-  }) as DialogData | null;
+  })) as DialogData | null;
   if (!data) return null;
   const predicate = JSON.parse(field(data, "predicate") || "{}") as unknown;
   if (!predicate || typeof predicate !== "object" || Array.isArray(predicate)) {
@@ -47,7 +45,10 @@ async function promptModification(
   return {
     id: existing?.id ?? defaultIdFactory(),
     label: field(data, "label"),
-    contexts: field(data, "contexts").split(",").map((entry) => entry.trim()).filter(Boolean),
+    contexts: field(data, "contexts")
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean),
     mode,
     value: Number(field(data, "value")),
     visibility: field(data, "visibility") === "public" ? "public" : "gm",
@@ -73,9 +74,7 @@ export async function editNpcModification(actor: NpcTargetLike, id: string): Pro
     const modification = await promptModification(existing);
     if (!modification) return;
     await actor.update({
-      "system.modifications": actor.system.modifications.map((entry) => (
-        entry.id === id ? modification : entry
-      ))
+      "system.modifications": actor.system.modifications.map((entry) => (entry.id === id ? modification : entry))
     });
   } catch (error) {
     ui.notifications.error(error instanceof Error ? error.message : String(error));

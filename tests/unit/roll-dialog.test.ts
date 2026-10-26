@@ -87,7 +87,8 @@ describe("All-in-One Roll Dialog view model", () => {
       isOwner: true,
       ownership: {player: 3}
     });
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid =
+      "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     vi.stubGlobal("fromUuidSync", () => ({
       _id: "superhero",
@@ -110,7 +111,8 @@ describe("All-in-One Roll Dialog view model", () => {
       isOwner: true,
       ownership: {player: 3}
     });
-    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid = "Compendium.magnusarchives.genres.Item.superhero";
+    (actor.system as {genre: {sourceUuid: string}}).genre.sourceUuid =
+      "Compendium.magnusarchives.genres.Item.superhero";
     actor.system.derived.packages.totalEffortCapMode = "unlimited";
     vi.stubGlobal("fromUuidSync", () => ({
       _id: "superhero",
@@ -142,9 +144,7 @@ describe("All-in-One Roll Dialog view model", () => {
     expect(actor.system.stats.speed.value).toBe(7);
     expect(actor.system.stats.speed.baseMax).toBe(before.baseMax);
     expect(actor.system.derived.pools.speed.max).toBe(before.derivedMax);
-    expect((actor as unknown as {updates: unknown[]}).updates).toEqual([
-      {"system.stats.speed.value": 7}
-    ]);
+    expect((actor as unknown as {updates: unknown[]}).updates).toEqual([{"system.stats.speed.value": 7}]);
   });
 
   it.each(["might", "speed", "intellect"] as const)("keeps a generic %s Task request authoritative", (pool) => {
@@ -158,46 +158,75 @@ describe("All-in-One Roll Dialog view model", () => {
       situationalDirection: "hinder",
       situationalSteps: "2"
     });
-    expect(result).toMatchObject({pool, difficulty: {mode: "known", value: 4}, skillSteps: 1, assets: 1, paidEffort: 1, otherEase: 0, otherHindrance: 2});
+    expect(result).toMatchObject({
+      pool,
+      difficulty: {mode: "known", value: 4},
+      skillSteps: 1,
+      assets: 1,
+      paidEffort: 1,
+      otherEase: 0,
+      otherHindrance: 2
+    });
   });
 
   it("normalizes universal manual Ease and Hindrance without changing engine storage", () => {
-    expect(situationalModifier({situationalDirection: "ease", situationalSteps: "2"})).toEqual({otherEase: 2, otherHindrance: 0});
-    expect(situationalModifier({situationalDirection: "hinder", situationalSteps: "3"})).toEqual({otherEase: 0, otherHindrance: 3});
+    expect(situationalModifier({situationalDirection: "ease", situationalSteps: "2"})).toEqual({
+      otherEase: 2,
+      otherHindrance: 0
+    });
+    expect(situationalModifier({situationalDirection: "hinder", situationalSteps: "3"})).toEqual({
+      otherEase: 0,
+      otherHindrance: 3
+    });
   });
 
   it("updates Assets, task Effort, Free Effort and manual modifiers from PreparedRoll", () => {
     const actor = character({effortBase: 4});
     const {rolls} = services();
-    const prepared = rolls.preview(actor, request({assets: 1, paidEffort: 2, freeEffort: 1, otherEase: 1, otherHindrance: 2}), policy);
+    const prepared = rolls.preview(
+      actor,
+      request({assets: 1, paidEffort: 2, freeEffort: 1, otherEase: 1, otherHindrance: 2}),
+      policy
+    );
     const view = buildRollDialogPreview(prepared, actor, localize);
 
-    expect(view.modifiers).toEqual(expect.arrayContaining([
-      expect.objectContaining({id: "core.assets", modifier: "+1"}),
-      expect.objectContaining({id: "core.effort.paid", modifier: "+2"}),
-      expect.objectContaining({id: "core.effort.free", modifier: "+1"}),
-      expect.objectContaining({id: "manual.other-ease", modifier: "+1"}),
-      expect.objectContaining({id: "manual.other-hindrance", modifier: "-2"})
-    ]));
+    expect(view.modifiers).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({id: "core.assets", modifier: "+1"}),
+        expect.objectContaining({id: "core.effort.paid", modifier: "+2"}),
+        expect.objectContaining({id: "core.effort.free", modifier: "+1"}),
+        expect.objectContaining({id: "manual.other-ease", modifier: "+1"}),
+        expect.objectContaining({id: "manual.other-hindrance", modifier: "-2"})
+      ])
+    );
     expect(view.netModifier).toBe("+3");
   });
 
   it("renders automatic Ease and Hindrance separately with signed provenance", () => {
     const actor = character();
     const {rolls} = services();
-    const prepared = rolls.preview(actor, request({contributions: [{
-      id: "ability.reflexes",
-      label: "Ability: Combat Reflexes",
-      direction: "ease",
-      steps: 1,
-      source: "rule-module"
-    }, {
-      id: "armor.heavy.dodge",
-      label: "Heavy Armor",
-      direction: "hinder",
-      steps: 3,
-      source: "other"
-    }]}), policy);
+    const prepared = rolls.preview(
+      actor,
+      request({
+        contributions: [
+          {
+            id: "ability.reflexes",
+            label: "Ability: Combat Reflexes",
+            direction: "ease",
+            steps: 1,
+            source: "rule-module"
+          },
+          {
+            id: "armor.heavy.dodge",
+            label: "Heavy Armor",
+            direction: "hinder",
+            steps: 3,
+            source: "other"
+          }
+        ]
+      }),
+      policy
+    );
     const view = buildRollDialogPreview(prepared, actor, localize);
 
     expect(view.automaticModifiers).toEqual([
@@ -212,27 +241,49 @@ describe("All-in-One Roll Dialog view model", () => {
     const actor = character();
     const {rolls} = services();
     const known = buildRollDialogPreview(rolls.preview(actor, request(), policy), actor, localize);
-    const unknown = buildRollDialogPreview(rolls.preview(actor, request({difficulty: {mode: "unknown"}}), policy), actor, localize);
+    const unknown = buildRollDialogPreview(
+      rolls.preview(actor, request({difficulty: {mode: "unknown"}}), policy),
+      actor,
+      localize
+    );
     expect(known).toMatchObject({baseDifficulty: 5, finalDifficulty: 5, targetNumber: 15});
-    expect(unknown).toMatchObject({difficultyMode: "unknown", baseDifficulty: null, finalDifficulty: null, targetNumber: null});
+    expect(unknown).toMatchObject({
+      difficultyMode: "unknown",
+      baseDifficulty: null,
+      finalDifficulty: null,
+      targetNumber: null
+    });
   });
 
   it("never places hidden difficulty or private NPC modifiers in the player view model", () => {
     const actor = character();
     const {rolls} = services();
-    const prepared = rolls.preview(actor, request({
-      difficulty: {mode: "hidden", value: 7},
-      contributions: [{
-        id: "npc-modification.secret-defense",
-        label: "Secret Defense Modifier",
-        direction: "hinder",
-        steps: 2,
-        source: "other"
-      }]
-    }), policy);
+    const prepared = rolls.preview(
+      actor,
+      request({
+        difficulty: {mode: "hidden", value: 7},
+        contributions: [
+          {
+            id: "npc-modification.secret-defense",
+            label: "Secret Defense Modifier",
+            direction: "hinder",
+            steps: 2,
+            source: "other"
+          }
+        ]
+      }),
+      policy
+    );
     const view = buildRollDialogPreview(prepared, actor, localize);
 
-    expect(view).toMatchObject({difficultyMode: "hidden", baseDifficulty: null, finalDifficulty: null, targetNumber: null, netModifier: null, hiddenModifierCount: 1});
+    expect(view).toMatchObject({
+      difficultyMode: "hidden",
+      baseDifficulty: null,
+      finalDifficulty: null,
+      targetNumber: null,
+      netModifier: null,
+      hiddenModifierCount: 1
+    });
     expect(JSON.stringify(view)).not.toContain("Secret Defense Modifier");
   });
 
@@ -241,10 +292,12 @@ describe("All-in-One Roll Dialog view model", () => {
     const {rolls, combat} = services();
     const weaponRequest = combat.buildWeaponAttackPlan(actor, weapon()).requests[0]!;
     const weaponView = buildRollDialogPreview(rolls.preview(actor, weaponRequest, policy), actor, localize);
-    expect(weaponView.automaticModifiers).toContainEqual(expect.objectContaining({
-      label: "MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.heavy",
-      modifier: "-1"
-    }));
+    expect(weaponView.automaticModifiers).toContainEqual(
+      expect.objectContaining({
+        label: "MAGNUSARCHIVES.Combat.Weapon.Unfamiliar.heavy",
+        modifier: "-1"
+      })
+    );
 
     actor.system.derived.combat.armor = {
       itemId: "armor-medium",
@@ -255,13 +308,17 @@ describe("All-in-One Roll Dialog view model", () => {
       speedTaskHindrance: 2,
       blockContributions: [],
       dodgeContributions: [],
-      speedTaskContributions: [{id: "armor.medium.speed", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}]
+      speedTaskContributions: [
+        {id: "armor.medium.speed", sourceId: "armor-medium", sourceType: "item", label: "", value: 2}
+      ]
     };
     const armorView = buildRollDialogPreview(rolls.preview(actor, request({pool: "speed"}), policy), actor, localize);
-    expect(armorView.automaticModifiers).toContainEqual(expect.objectContaining({
-      label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium",
-      modifier: "-2"
-    }));
+    expect(armorView.automaticModifiers).toContainEqual(
+      expect.objectContaining({
+        label: "MAGNUSARCHIVES.Combat.Armor.Unfamiliar.medium",
+        modifier: "-2"
+      })
+    );
   });
 
   it("shows Dodge Armor once and Block Armor as Ease", () => {
@@ -275,11 +332,21 @@ describe("All-in-One Roll Dialog view model", () => {
       speedTaskHindrance: 3,
       blockContributions: [{id: "armor.heavy.block", sourceId: "armor-heavy", sourceType: "item", label: "", value: 3}],
       dodgeContributions: [{id: "armor.heavy.dodge", sourceId: "armor-heavy", sourceType: "item", label: "", value: 3}],
-      speedTaskContributions: [{id: "armor.heavy.speed", sourceId: "armor-heavy", sourceType: "item", label: "", value: 3}]
+      speedTaskContributions: [
+        {id: "armor.heavy.speed", sourceId: "armor-heavy", sourceType: "item", label: "", value: 3}
+      ]
     };
     const {rolls, combat} = services();
-    const dodge = rolls.preview(actor, combat.buildDefenseRequest(actor, "dodge", {difficulty: {mode: "known", value: 5}}), policy);
-    const block = rolls.preview(actor, combat.buildDefenseRequest(actor, "block", {difficulty: {mode: "known", value: 5}}), policy);
+    const dodge = rolls.preview(
+      actor,
+      combat.buildDefenseRequest(actor, "dodge", {difficulty: {mode: "known", value: 5}}),
+      policy
+    );
+    const block = rolls.preview(
+      actor,
+      combat.buildDefenseRequest(actor, "block", {difficulty: {mode: "known", value: 5}}),
+      policy
+    );
     expect(dodge.totalHindrance).toBe(3);
     expect(buildRollDialogPreview(dodge, actor, localize).automaticModifiers).toEqual([
       expect.objectContaining({modifier: "-3"})
@@ -304,10 +371,14 @@ describe("All-in-One Roll Dialog view model", () => {
   it("reports applied, free, and paid Effort from PreparedRoll against the Core cap", () => {
     const actor = character({effortBase: 1});
     const {rolls} = services();
-    const prepared = rolls.preview(actor, request({
-      paidEffort: 1,
-      freeEffort: 2
-    }), policy);
+    const prepared = rolls.preview(
+      actor,
+      request({
+        paidEffort: 1,
+        freeEffort: 2
+      }),
+      policy
+    );
     const view = buildRollDialogPreview(prepared, actor, localize);
     expect(view).toMatchObject({
       effortUsed: 1,
@@ -324,7 +395,11 @@ describe("All-in-One Roll Dialog view model", () => {
     const actor = character({effortBase: 1});
     const rules = new RuleRegistry();
     registerCoreRuleModule(rules);
-    const rolls = new RollService(rules, async () => ({naturalRoll: 12}), () => "unlimited");
+    const rolls = new RollService(
+      rules,
+      async () => ({naturalRoll: 12}),
+      () => "unlimited"
+    );
     const prepared = rolls.preview(actor, request({paidEffort: 1, freeEffort: 7}), policy);
     expect(buildRollDialogPreview(prepared, actor, localize)).toMatchObject({
       paidEffortApplied: 1,

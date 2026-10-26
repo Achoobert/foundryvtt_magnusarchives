@@ -17,9 +17,7 @@ interface GenreIndexPackCollectionLike {
 }
 
 /** Ensure future Compendium indexes include the Genre option needed by synchronous Actor preparation. */
-export function registerGenreCompendiumIndexFields(
-  fields: string[] = CONFIG.Item.compendiumIndexFields
-): void {
+export function registerGenreCompendiumIndexFields(fields: string[] = CONFIG.Item.compendiumIndexFields): void {
   for (const field of GENRE_COMPENDIUM_INDEX_FIELDS) {
     if (!fields.includes(field)) fields.push(field);
   }
@@ -28,9 +26,7 @@ export function registerGenreCompendiumIndexFields(
 /** Extract the Compendium collection ID from a canonical Foundry document UUID. */
 export function genreCompendiumPackId(uuid: string): string | null {
   const parts = uuid.split(".");
-  return parts.length >= 5 && parts[0] === "Compendium" && parts[3] === "Item"
-    ? `${parts[1]}.${parts[2]}`
-    : null;
+  return parts.length >= 5 && parts[0] === "Compendium" && parts[3] === "Item" ? `${parts[1]}.${parts[2]}` : null;
 }
 
 /**
@@ -42,9 +38,9 @@ export async function prepareCharacterGenreCompendiumIndexes(
   packs: GenreIndexPackCollectionLike = game.packs,
   warn: (message: string, error: unknown) => void = (message, error) => console.warn(message, error)
 ): Promise<void> {
-  const affected = [...actors].filter((actor) => (
-    actor.type === "character" && genreCompendiumPackId(actor.system.genre.sourceUuid) !== null
-  ));
+  const affected = [...actors].filter(
+    (actor) => actor.type === "character" && genreCompendiumPackId(actor.system.genre.sourceUuid) !== null
+  );
   const packIds = new Set(affected.map((actor) => genreCompendiumPackId(actor.system.genre.sourceUuid)!));
   for (const packId of packIds) {
     try {

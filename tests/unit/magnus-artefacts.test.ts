@@ -1,11 +1,8 @@
-import {readFile} from "node:fs/promises";
-import path from "node:path";
 import {describe, expect, it} from "vitest";
+import {loadYmlPack} from "../helpers/yml-packs";
 import {artifactLevelIsRollable} from "../../src/artifacts/artifact-rules";
 
-const projectRoot = path.resolve(import.meta.dirname, "../..");
-const source = JSON.parse(await readFile(path.join(projectRoot, "content/core-items/reviewed-packs.json"), "utf8"));
-const documents = source.packs.artefacts.documents as Array<Record<string, any>>;
+const documents = loadYmlPack("artefacts") as Array<Record<string, any>>;
 const folders = documents.filter((document) => document._key.startsWith("!folders!"));
 const items = documents.filter((document) => document._key.startsWith("!items!"));
 

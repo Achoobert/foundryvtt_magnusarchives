@@ -1,9 +1,19 @@
 import {defaultIdFactory, type IdFactory} from "../rules/core/core-types";
 
 export const POWER_SHIFT_CATEGORIES = [
-  "Accuracy", "Strength", "Dexterity", "Resilience", "Intelligence",
-  "Single Attack", "Power", "Flight", "Healing", "Increased Range",
-  "Prodigy", "Savant", "Custom"
+  "Accuracy",
+  "Strength",
+  "Dexterity",
+  "Resilience",
+  "Intelligence",
+  "Single Attack",
+  "Power",
+  "Flight",
+  "Healing",
+  "Increased Range",
+  "Prodigy",
+  "Savant",
+  "Custom"
 ] as const;
 
 export interface PowerShiftAllocation {
@@ -58,19 +68,25 @@ export function normalizePowerShiftAllocations(values: unknown): PowerShiftAlloc
 
 /** Conservatively expose unreleased beta.3 free-text Type slots as one-shift Custom allocations. */
 export function legacyTypePowerShiftAllocations(types: readonly PowerShiftTypeLike[]): PowerShiftAllocation[] {
-  return types.filter((item) => item.type === "characterType").flatMap((item) => {
-    const instanceId = item.system.instance?.instanceId || item.id;
-    return (item.system.instance?.selections?.powerShifts ?? []).flatMap((value, index) => {
-      const specification = String(value ?? "").trim();
-      return specification ? [{
-        id: `legacy-${instanceId}-${index}`,
-        category: "Custom",
-        shifts: 1,
-        specification,
-        description: ""
-      }] : [];
+  return types
+    .filter((item) => item.type === "characterType")
+    .flatMap((item) => {
+      const instanceId = item.system.instance?.instanceId || item.id;
+      return (item.system.instance?.selections?.powerShifts ?? []).flatMap((value, index) => {
+        const specification = String(value ?? "").trim();
+        return specification
+          ? [
+              {
+                id: `legacy-${instanceId}-${index}`,
+                category: "Custom",
+                shifts: 1,
+                specification,
+                description: ""
+              }
+            ]
+          : [];
+      });
     });
-  });
 }
 
 export function effectivePowerShiftAllocations(
@@ -82,13 +98,18 @@ export function effectivePowerShiftAllocations(
 }
 
 export function availablePowerShifts(types: readonly PowerShiftTypeLike[]): number {
-  return types.filter((item) => item.type === "characterType").reduce((total, item) => {
-    const count = Number(item.system.superhero?.powerShiftCount ?? 0);
-    return total + (Number.isInteger(count) && count > 0 ? count : 0);
-  }, 0);
+  return types
+    .filter((item) => item.type === "characterType")
+    .reduce((total, item) => {
+      const count = Number(item.system.superhero?.powerShiftCount ?? 0);
+      return total + (Number.isInteger(count) && count > 0 ? count : 0);
+    }, 0);
 }
 
-export function powerShiftSummary(allocations: readonly PowerShiftAllocation[], available: number): {
+export function powerShiftSummary(
+  allocations: readonly PowerShiftAllocation[],
+  available: number
+): {
   allocated: number;
   available: number;
   overBudget: boolean;
@@ -118,7 +139,7 @@ export function savePowerShiftAllocation(
   if (!allocation) throw new Error("A Power Shift requires a category and a positive whole-number value.");
   const index = allocations.findIndex((entry) => entry.id === id);
   if (index < 0) return [...allocations, allocation];
-  return allocations.map((entry, entryIndex) => entryIndex === index ? allocation : entry);
+  return allocations.map((entry, entryIndex) => (entryIndex === index ? allocation : entry));
 }
 
 export function deletePowerShiftAllocation(

@@ -14,10 +14,7 @@ const typeSection = template.slice(
 describe("Type Item Sheet pre-release presentation", () => {
   it("keeps the Type content in a non-elastic normal-flow layout", () => {
     expect(typeSection).toContain('class="type-item-layout"');
-    const layoutRule = styles.slice(
-      styles.indexOf(".type-item-layout"),
-      styles.indexOf(".type-description")
-    );
+    const layoutRule = styles.slice(styles.indexOf(".type-item-layout"), styles.indexOf(".type-description"));
     expect(layoutRule).toContain("display: grid");
     expect(layoutRule).toContain("flex: 0 0 auto");
     expect(layoutRule).toContain("align-self: flex-start");
@@ -33,8 +30,8 @@ describe("Type Item Sheet pre-release presentation", () => {
       "MAGNUSARCHIVES.Species.AbilityChoices",
       "MAGNUSARCHIVES.Packages.FixedSkills",
       "MAGNUSARCHIVES.Packages.ChoiceGroups",
-      "name=\"system.backgroundOptions\"",
-      "name=\"system.equipmentNotes\"",
+      'name="system.backgroundOptions"',
+      'name="system.equipmentNotes"',
       "type-technical-area"
     ];
     let previous = -1;
@@ -91,8 +88,8 @@ describe("Type Item Sheet pre-release presentation", () => {
     expect(typeSection).toContain("data-package-weapon-families");
     expect(typeSection).toContain("magnusarchives-type-weapon-family-suggestions");
     expect(typeSection).not.toContain('name="system.weaponFamilyUse.');
-    expect(sheet).toContain('#bindWeaponFamilies(): void');
-    expect(sheet).toContain('normalizeWeaponFamilies(input.value)');
+    expect(sheet).toContain("#bindWeaponFamilies(): void");
+    expect(sheet).toContain("normalizeWeaponFamilies(input.value)");
     expect(sheet).toContain('this.item.update({"system.weaponFamilies"');
     expect(sheet).toContain("BUILT_IN_WEAPON_FAMILIES.map");
     expect(language).toContain('"MAGNUSARCHIVES.Packages.WeaponFamilyPlaceholder"');
@@ -125,6 +122,7 @@ describe("Type Item Sheet pre-release presentation", () => {
       "inspectPackageGrant",
       "refreshPackageGrant",
       "removePackageGrant"
-    ]) expect(typeSection).toContain(`data-action="${action}"`);
+    ])
+      expect(typeSection).toContain(`data-action="${action}"`);
   });
 });

@@ -9,7 +9,7 @@ const itemStyles = readFileSync("styles/components/_item-rule-sheet.scss", "utf8
 
 const genreSection = itemTemplate.slice(
   itemTemplate.indexOf("{{#if isGenre}}"),
-  itemTemplate.indexOf("{{#unless isFocus}}"),
+  itemTemplate.indexOf("{{#unless isFocus}}")
 );
 
 describe("Genre UI", () => {

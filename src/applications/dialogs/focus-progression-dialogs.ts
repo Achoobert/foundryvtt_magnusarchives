@@ -1,12 +1,10 @@
 import type {FocusDocumentLike} from "../../focus/focus-types";
-import {
-  FocusAcquisitionError,
-  type FocusCharacterLike
-} from "../../services/focus-acquisition-service";
+import {FocusAcquisitionError, type FocusCharacterLike} from "../../services/focus-acquisition-service";
 
 function nodeNames(focus: FocusDocumentLike, nodeIds: readonly string[]): string {
-  return nodeIds.map((nodeId) => focus.system.graph.nodes.find((node) => node.id === nodeId)
-    ?.abilitySnapshot.name || nodeId).join(", ");
+  return nodeIds
+    .map((nodeId) => focus.system.graph.nodes.find((node) => node.id === nodeId)?.abilitySnapshot.name || nodeId)
+    .join(", ");
 }
 
 async function deleteAbilityChoice(
@@ -17,12 +15,14 @@ async function deleteAbilityChoice(
   if (!game.magnusarchives.services.focusAcquisition.hasEmbeddedAbility(actor, focus.uuid, nodeId)) {
     return false;
   }
-  return Boolean(await foundry.applications.api.DialogV2.confirm({
-    window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeleteTitle")},
-    content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeletePrompt")}</p></div>`,
-    yes: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeleteAbility")},
-    no: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoKeepAbility")}
-  }));
+  return Boolean(
+    await foundry.applications.api.DialogV2.confirm({
+      window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeleteTitle")},
+      content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeletePrompt")}</p></div>`,
+      yes: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoDeleteAbility")},
+      no: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.UndoKeepAbility")}
+    })
+  );
 }
 
 export async function promptUndoFocusAcquisition(
@@ -42,43 +42,53 @@ export async function promptUndoFocusAcquisition(
   if (!confirmed) return;
   const deleteAbility = await deleteAbilityChoice(actor, focus, nodeId);
   try {
-    const result = await game.magnusarchives.services.focusAcquisition.undo(
-      actor,
-      focus,
-      nodeId,
-      {deleteAbility, force}
+    const result = await game.magnusarchives.services.focusAcquisition.undo(actor, focus, nodeId, {
+      deleteAbility,
+      force
+    });
+    ui.notifications.info(
+      game.i18n.localize(
+        result.choiceRestored ? "MAGNUSARCHIVES.Focus.UndoChoiceRestored" : "MAGNUSARCHIVES.Focus.UndoCompleted"
+      )
     );
-    ui.notifications.info(game.i18n.localize(result.choiceRestored
-      ? "MAGNUSARCHIVES.Focus.UndoChoiceRestored"
-      : "MAGNUSARCHIVES.Focus.UndoCompleted"));
     if (result.invalidOwnedNodeIds.length > 0) {
-      ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
-        nodes: nodeNames(focus, result.invalidOwnedNodeIds)
-      }));
+      ui.notifications.warn(
+        game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
+          nodes: nodeNames(focus, result.invalidOwnedNodeIds)
+        })
+      );
     }
   } catch (error) {
     if (error instanceof FocusAcquisitionError && error.code === "undo-dependent-nodes") {
       if (!game.user.isGM) {
-        ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Focus.Errors.UndoDependencies", {
-          nodes: nodeNames(focus, error.dependentNodeIds)
-        }));
+        ui.notifications.error(
+          game.i18n.format("MAGNUSARCHIVES.Focus.Errors.UndoDependencies", {
+            nodes: nodeNames(focus, error.dependentNodeIds)
+          })
+        );
         return;
       }
       const forceConfirmed = await foundry.applications.api.DialogV2.confirm({
         window: {title: game.i18n.localize("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndo")},
-        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndoWarning", {
-          nodes: nodeNames(focus, error.dependentNodeIds)
-        })}</p></div>`,
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format(
+          "MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndoWarning",
+          {
+            nodes: nodeNames(focus, error.dependentNodeIds)
+          }
+        )}</p></div>`,
         yes: {label: game.i18n.localize("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndo")},
         no: {label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel")}
       });
       if (forceConfirmed) {
-        const result = await game.magnusarchives.services.focusAcquisition.undo(
-          actor, focus, nodeId, {deleteAbility, force: true}
+        const result = await game.magnusarchives.services.focusAcquisition.undo(actor, focus, nodeId, {
+          deleteAbility,
+          force: true
+        });
+        ui.notifications.warn(
+          game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
+            nodes: nodeNames(focus, result.invalidOwnedNodeIds)
+          })
         );
-        ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
-          nodes: nodeNames(focus, result.invalidOwnedNodeIds)
-        }));
       }
       return;
     }

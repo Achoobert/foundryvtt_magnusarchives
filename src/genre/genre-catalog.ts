@@ -5,7 +5,10 @@ export const GENRE_MINIMUM_TIER_MIN = 1;
 export const GENRE_MINIMUM_TIER_MAX = 6;
 
 export class GenreCatalogError extends Error {
-  constructor(readonly code: "entry-missing" | "invalid-minimum-tier", message: string) {
+  constructor(
+    readonly code: "entry-missing" | "invalid-minimum-tier",
+    message: string
+  ) {
     super(message);
     this.name = "GenreCatalogError";
   }
@@ -13,11 +16,7 @@ export class GenreCatalogError extends Error {
 
 export function normalizeGenreMinimumTier(value: unknown): number {
   const tier = Number(value);
-  if (
-    !Number.isInteger(tier)
-    || tier < GENRE_MINIMUM_TIER_MIN
-    || tier > GENRE_MINIMUM_TIER_MAX
-  ) {
+  if (!Number.isInteger(tier) || tier < GENRE_MINIMUM_TIER_MIN || tier > GENRE_MINIMUM_TIER_MAX) {
     throw new GenreCatalogError(
       "invalid-minimum-tier",
       `Genre Ability Minimum Tier must be an integer from ${GENRE_MINIMUM_TIER_MIN} to ${GENRE_MINIMUM_TIER_MAX}.`

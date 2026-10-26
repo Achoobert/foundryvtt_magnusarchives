@@ -123,7 +123,6 @@
           display: none !important;
         }
       }
-
     }
   }
 
@@ -161,14 +160,16 @@
       min-height: 12rem;
     }
   }
-
 }
 
 // Rulebook prose uses semantic headings to preserve its source structure. In
 // compact document sheets those headings are subsections, not page titles.
 // Keep the scale local to Item prose and embedded Item details so headings in
 // journals and unrelated Foundry applications retain their native hierarchy.
-.magnusarchives .magnusarchives-sheet.magnusarchives-item .magnusarchives-rich-description :is(.editor-content, .ProseMirror),
+.magnusarchives
+  .magnusarchives-sheet.magnusarchives-item
+  .magnusarchives-rich-description
+  :is(.editor-content, .ProseMirror),
 .magnusarchives .magnusarchives-sheet.magnusarchives-character :is(.ability-description, .compact-inventory-details) {
   h1,
   h2,

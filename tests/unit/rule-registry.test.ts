@@ -63,14 +63,14 @@ describe("RuleRegistry", () => {
       assetLimit: 3
     }));
 
-    expect(registry.resolveDifficultyPolicy(
-      {difficultyCeiling: 10, assetLimit: 2},
-      ["example.power-shifts"]
-    )).toEqual({difficultyCeiling: 15, assetLimit: 3});
-    expect(registry.resolveDifficultyPolicy(
-      {difficultyCeiling: 10, assetLimit: 2},
-      []
-    )).toEqual({difficultyCeiling: 10, assetLimit: 2});
+    expect(registry.resolveDifficultyPolicy({difficultyCeiling: 10, assetLimit: 2}, ["example.power-shifts"])).toEqual({
+      difficultyCeiling: 15,
+      assetLimit: 3
+    });
+    expect(registry.resolveDifficultyPolicy({difficultyCeiling: 10, assetLimit: 2}, [])).toEqual({
+      difficultyCeiling: 10,
+      assetLimit: 2
+    });
   });
 
   it("lets active Rule Modules enrich RollContext before preparation", () => {

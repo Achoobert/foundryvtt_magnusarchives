@@ -12,11 +12,12 @@ export function parseWoundCountActionData(
   const rawCount = dataset.count;
   const count = rawCount === undefined || rawCount.trim() === "" ? Number.NaN : Number(rawCount);
   if (
-    (track !== "character" && track !== "shield")
-    || !WOUND_SEVERITIES.includes(severity as WoundSeverity)
-    || !Number.isInteger(count)
-    || count < 0
-  ) throw new Error("Invalid Wound count action data.");
+    (track !== "character" && track !== "shield") ||
+    !WOUND_SEVERITIES.includes(severity as WoundSeverity) ||
+    !Number.isInteger(count) ||
+    count < 0
+  )
+    throw new Error("Invalid Wound count action data.");
   if (track === "shield") {
     const shieldId = dataset.shieldId?.trim();
     if (!shieldId) throw new Error("Invalid Wound count action data.");

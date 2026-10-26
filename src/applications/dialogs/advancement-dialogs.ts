@@ -1,23 +1,24 @@
-import type {
-  AdvancementRequest,
-  CoreAdvancementKind,
-  OtherAdvancementKind
-} from "../../advancement/advancement-types";
+import type {AdvancementRequest, CoreAdvancementKind, OtherAdvancementKind} from "../../advancement/advancement-types";
 import {OTHER_ADVANCEMENT_KINDS} from "../../advancement/advancement-types";
 import {currentEnabledRuleModuleIds} from "../../config/settings";
 import type {PoolKey} from "../../rules/core/core-types";
-import {
-  AdvancementError,
-  type AdvancementCharacterLike
-} from "../../services/advancement-service";
+import {AdvancementError, type AdvancementCharacterLike} from "../../services/advancement-service";
 import {effectiveTier} from "../../rules/core/character-overrides";
 
 type DialogData = Record<string, unknown>;
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  })[character]!);
+  return value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[character]!
+  );
 }
 
 const ERROR_KEYS: Record<AdvancementError["code"], string> = {
@@ -47,9 +48,12 @@ function number(data: DialogData, name: string): number {
 }
 
 function poolOptions(): string {
-  return (["might", "speed", "intellect"] as const).map((pool) => (
-    `<option value="${pool}">${game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</option>`
-  )).join("");
+  return (["might", "speed", "intellect"] as const)
+    .map(
+      (pool) =>
+        `<option value="${pool}">${game.i18n.localize(`MAGNUSARCHIVES.Pools.${pool[0]!.toUpperCase()}${pool.slice(1)}`)}</option>`
+    )
+    .join("");
 }
 
 async function input(title: string, content: string): Promise<DialogData | null> {
@@ -76,30 +80,48 @@ async function requestFor(
 ): Promise<AdvancementRequest | null> {
   const title = game.i18n.localize(`MAGNUSARCHIVES.Advancement.Option.${kind}`);
   if (kind === "increaseCapabilities") {
-    const data = await input(title, `
+    const data = await input(
+      title,
+      `
       <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.CapabilitiesPrompt")}</p>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}<input name="might" type="number" min="0" max="4" value="0"></label>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}<input name="speed" type="number" min="0" max="4" value="0"></label>
-      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`);
-    return data ? {kind, allocation: {
-      might: number(data, "might"), speed: number(data, "speed"), intellect: number(data, "intellect")
-    }} : null;
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`
+    );
+    return data
+      ? {
+          kind,
+          allocation: {
+            might: number(data, "might"),
+            speed: number(data, "speed"),
+            intellect: number(data, "intellect")
+          }
+        }
+      : null;
   }
   if (kind === "moveTowardPerfection") {
-    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChoosePool")}<select name="pool">${poolOptions()}</select></label>`);
+    const data = await input(
+      title,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChoosePool")}<select name="pool">${poolOptions()}</select></label>`
+    );
     return data ? {kind, pool: value(data, "pool") as PoolKey} : null;
   }
   if (kind === "skillTraining") {
-    const modeData = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillMode")}<select name="mode">
+    const modeData = await input(
+      title,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillMode")}<select name="mode">
       <option value="learn">${game.i18n.localize("MAGNUSARCHIVES.Advancement.LearnNewSkill")}</option>
       <option value="improve">${game.i18n.localize("MAGNUSARCHIVES.Advancement.ImproveExistingSkill")}</option>
-    </select></label>`);
+    </select></label>`
+    );
     if (!modeData) return null;
     if (value(modeData, "mode") === "learn") {
       const sources = [...game.items]
         .filter((item) => item.type === "skill")
         .sort((left, right) => left.name.localeCompare(right.name));
-      const data = await input(title, `
+      const data = await input(
+        title,
+        `
         <label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillSource")}<select name="sourceUuid">
           <option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Advancement.CustomSkill")}</option>
           ${sources.map((item) => `<option value="${escapeHtml(item.uuid)}">${escapeHtml(item.name)}</option>`).join("")}
@@ -109,39 +131,49 @@ async function requestFor(
           <option value="general">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.general")}</option>
           <option value="attack">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.attack")}</option>
           <option value="defense">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.defense")}</option>
-        </select></label>`);
+        </select></label>`
+      );
       if (!data) return null;
       const sourceUuid = value(data, "sourceUuid");
       return sourceUuid === "custom"
         ? {
-          kind,
-          mode: "learn",
-          customName: value(data, "customName"),
-          customCategory: value(data, "customCategory") as "general" | "attack" | "defense"
-        }
+            kind,
+            mode: "learn",
+            customName: value(data, "customName"),
+            customCategory: value(data, "customCategory") as "general" | "attack" | "defense"
+          }
         : {kind, mode: "learn", sourceUuid};
     }
-    const options = game.magnusarchives.services.advancement.skillTrainingOptions(
-      actor,
-      currentEnabledRuleModuleIds()
-    );
+    const options = game.magnusarchives.services.advancement.skillTrainingOptions(actor, currentEnabledRuleModuleIds());
     const eligible = options.filter((entry) => entry.eligible);
     if (eligible.length === 0) {
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Advancement.NoEligibleSkills"));
       return null;
     }
-    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChooseSkill")}<select name="skillId">${eligible.map((entry) => (
-      `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.currentRank}`)} → ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.nextRank}`)}</option>`
-    )).join("")}</select></label>`);
+    const data = await input(
+      title,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChooseSkill")}<select name="skillId">${eligible
+        .map(
+          (entry) =>
+            `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.currentRank}`)} → ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${entry.nextRank}`)}</option>`
+        )
+        .join("")}</select></label>`
+    );
     return data ? {kind, mode: "improve", skillId: value(data, "skillId")} : null;
   }
   if (kind === "other") {
-    const availableKinds = OTHER_ADVANCEMENT_KINDS.filter((entry) => (
-      entry !== "genre" || effectiveTier(actor.system) >= 3
-    ));
-    const data = await input(title, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.OtherType")}<select name="otherKind">${availableKinds.map((entry) => (
-      `<option value="${entry}">${game.i18n.localize(`MAGNUSARCHIVES.Advancement.Other.${entry}`)}</option>`
-    )).join("")}</select></label>`);
+    const availableKinds = OTHER_ADVANCEMENT_KINDS.filter(
+      (entry) => entry !== "genre" || effectiveTier(actor.system) >= 3
+    );
+    const data = await input(
+      title,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.OtherType")}<select name="otherKind">${availableKinds
+        .map(
+          (entry) =>
+            `<option value="${entry}">${game.i18n.localize(`MAGNUSARCHIVES.Advancement.Other.${entry}`)}</option>`
+        )
+        .join("")}</select></label>`
+    );
     return data ? {kind, otherKind: value(data, "otherKind") as OtherAdvancementKind} : null;
   }
   return {kind};
@@ -154,21 +186,14 @@ export async function promptPurchaseAdvancement(
   const request = await requestFor(actor, kind);
   if (!request) return;
   try {
-    await game.magnusarchives.services.advancement.purchase(
-      actor,
-      request,
-      currentEnabledRuleModuleIds()
-    );
+    await game.magnusarchives.services.advancement.purchase(actor, request, currentEnabledRuleModuleIds());
     ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.PurchasedNotice"));
   } catch (error) {
     notifyError(error);
   }
 }
 
-export async function promptUndoAdvancement(
-  actor: AdvancementCharacterLike,
-  purchaseId: string
-): Promise<boolean> {
+export async function promptUndoAdvancement(actor: AdvancementCharacterLike, purchaseId: string): Promise<boolean> {
   const confirmed = await foundry.applications.api.DialogV2.wait({
     window: {title: game.i18n.localize("MAGNUSARCHIVES.Advancement.Undo.Title")},
     content: `<div class="magnusarchives magnusarchives-dialog advancement-undo-dialog">
@@ -208,10 +233,7 @@ export async function promptUndoAdvancement(
 
 export async function promptAdvanceTier(actor: AdvancementCharacterLike): Promise<void> {
   try {
-    const result = await game.magnusarchives.services.advancement.advanceTier(
-      actor,
-      currentEnabledRuleModuleIds()
-    );
+    const result = await game.magnusarchives.services.advancement.advanceTier(actor, currentEnabledRuleModuleIds());
     ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.TierAdvancedNotice", {tier: result.tier}));
   } catch (error) {
     notifyError(error);

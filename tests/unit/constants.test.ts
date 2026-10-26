@@ -16,13 +16,7 @@ describe("system constants", () => {
   });
 
   it("uses the validated Cypher V2 skill ranks", () => {
-    expect(SKILL_RANKS).toEqual([
-      "inability",
-      "untrained",
-      "trained",
-      "specialized",
-      "expert"
-    ]);
+    expect(SKILL_RANKS).toEqual(["inability", "untrained", "trained", "specialized", "expert"]);
     expect(SKILL_RANKS).not.toContain("practiced");
   });
 

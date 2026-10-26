@@ -17,12 +17,16 @@ describe("world settings", () => {
     vi.stubGlobal("game", {settings: {register}});
     registerSettings(new ThemeRegistry());
 
-    expect(register).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.showGmRollAudit, expect.objectContaining({
-      scope: "world",
-      config: true,
-      type: Boolean,
-      default: false
-    }));
+    expect(register).toHaveBeenCalledWith(
+      "magnusarchives",
+      SETTING_KEYS.showGmRollAudit,
+      expect.objectContaining({
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
+      })
+    );
   });
 
   it("enables GM roll audits only for an explicit true setting", () => {
@@ -38,13 +42,17 @@ describe("world settings", () => {
     vi.stubGlobal("game", {settings: {register}});
     registerSettings(new ThemeRegistry());
 
-    expect(register).toHaveBeenCalledWith("magnusarchives", SETTING_KEYS.horrorIntrusionRange, expect.objectContaining({
-      scope: "world",
-      config: false,
-      type: Number,
-      default: 1,
-      range: {min: 1, max: 20, step: 1}
-    }));
+    expect(register).toHaveBeenCalledWith(
+      "magnusarchives",
+      SETTING_KEYS.horrorIntrusionRange,
+      expect.objectContaining({
+        scope: "world",
+        config: false,
+        type: Number,
+        default: 1,
+        range: {min: 1, max: 20, step: 1}
+      })
+    );
   });
 
   it("persists the canonical Horror range for a GM and reads it back", async () => {

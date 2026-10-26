@@ -10,19 +10,10 @@ import {
   type PendingFocusChoice,
   type PendingGenreChoice
 } from "../advancement/advancement-types";
-import {
-  ARMOR_CATEGORIES,
-  SKILL_RANKS,
-  WEAPON_CATEGORIES,
-  type SkillRank
-} from "../constants/system";
+import {ARMOR_CATEGORIES, SKILL_RANKS, WEAPON_CATEGORIES, type SkillRank} from "../constants/system";
 import type {PoolKey} from "../rules/core/core-types";
 import type {RuleRegistry} from "../rules/rule-registry";
-import {
-  characterProgressionDelta,
-  effectiveTier,
-  resolveNumericOverride
-} from "../rules/core/character-overrides";
+import {characterProgressionDelta, effectiveTier, resolveNumericOverride} from "../rules/core/character-overrides";
 
 export type AdvancementErrorCode =
   | "not-character"
@@ -42,7 +33,10 @@ export type AdvancementErrorCode =
   | "purchase-not-current";
 
 export class AdvancementError extends Error {
-  constructor(readonly code: AdvancementErrorCode, message: string) {
+  constructor(
+    readonly code: AdvancementErrorCode,
+    message: string
+  ) {
     super(message);
     this.name = "AdvancementError";
   }
@@ -164,16 +158,18 @@ export interface TierAdvancementResult {
 
 type IdFactory = () => string;
 
-const defaultIdFactory: IdFactory = () => globalThis.crypto?.randomUUID?.()
-  ?? `adv-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+const defaultIdFactory: IdFactory = () =>
+  globalThis.crypto?.randomUUID?.() ?? `adv-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 function isCombatSkill(skill: AdvancementSkillLike): boolean {
-  return skill.system.category === "attack"
-    || skill.system.category === "defense"
-    || skill.system.contexts.some((context) => (
-      context === "attack" || context.startsWith("attack.")
-      || context === "defense" || context.startsWith("defense.")
-    ));
+  return (
+    skill.system.category === "attack" ||
+    skill.system.category === "defense" ||
+    skill.system.contexts.some(
+      (context) =>
+        context === "attack" || context.startsWith("attack.") || context === "defense" || context.startsWith("defense.")
+    )
+  );
 }
 
 function nextTrainingRank(rank: SkillRank): SkillRank | null {
@@ -221,9 +217,7 @@ export class AdvancementService {
       canAdvanceTier: purchases.length === policy.purchasesPerTier,
       options: CORE_ADVANCEMENT_KINDS.map((kind) => {
         const purchased = purchases.some((record) => record.kind === kind);
-        const benefitAvailable = kind === "extraEffort"
-          ? this.#effectiveEffort(actor) < policy.effortMaximum
-          : true;
+        const benefitAvailable = kind === "extraEffort" ? this.#effectiveEffort(actor) < policy.effortMaximum : true;
         return {kind, purchased, available: !complete && !purchased && benefitAvailable};
       }),
       other: {
@@ -261,8 +255,9 @@ export class AdvancementService {
     return this.#exclusive(actor, async () => {
       this.#assertCharacter(actor);
       await actor.update({
-        "system.advancement.guidanceCompletedTiers": (actor.system.advancement.guidanceCompletedTiers ?? [])
-          .filter((tier) => tier !== effectiveTier(actor.system))
+        "system.advancement.guidanceCompletedTiers": (actor.system.advancement.guidanceCompletedTiers ?? []).filter(
+          (tier) => tier !== effectiveTier(actor.system)
+        )
       });
     });
   }
@@ -276,11 +271,12 @@ export class AdvancementService {
       .filter((item) => item.type === "skill" && SKILL_RANKS.includes(item.system.rank))
       .map((skill): SkillTrainingOption => {
         const nextRank = nextTrainingRank(skill.system.rank);
-        const minimumTier = nextRank === "trained"
-          ? policy.attackDefenseTrainingTier
-          : nextRank === "specialized"
-            ? policy.attackDefenseSpecializationTier
-            : 0;
+        const minimumTier =
+          nextRank === "trained"
+            ? policy.attackDefenseTrainingTier
+            : nextRank === "specialized"
+              ? policy.attackDefenseSpecializationTier
+              : 0;
         const tierBlocked = Boolean(nextRank && isCombatSkill(skill) && effectiveTier(actor.system) < minimumTier);
         return {
           id: skill.id,
@@ -316,22 +312,14 @@ export class AdvancementService {
    * Reopens an Advancement slot without attempting to reverse any benefit or payment.
    * Only the exact, uniquely identified current-cycle purchase record is removed.
    */
-  async undoPurchase(
-    actor: AdvancementCharacterLike,
-    purchaseId: string
-  ): Promise<AdvancementPurchaseRecord> {
+  async undoPurchase(actor: AdvancementCharacterLike, purchaseId: string): Promise<AdvancementPurchaseRecord> {
     return this.#exclusive(actor, async () => {
       this.#assertCharacter(actor);
       const normalizedId = typeof purchaseId === "string" ? purchaseId.trim() : "";
       const purchases = actor.system.advancement.purchases;
-      const matches = normalizedId
-        ? purchases.filter((record) => record.id === normalizedId)
-        : [];
+      const matches = normalizedId ? purchases.filter((record) => record.id === normalizedId) : [];
       if (matches.length !== 1) {
-        throw new AdvancementError(
-          "purchase-not-found",
-          "That current-cycle Advancement purchase is unavailable."
-        );
+        throw new AdvancementError("purchase-not-found", "That current-cycle Advancement purchase is unavailable.");
       }
       const record = matches[0]!;
       if (record.tier !== effectiveTier(actor.system)) {
@@ -365,25 +353,23 @@ export class AdvancementService {
         grantTier: tier,
         focusUuid: ""
       };
-      const genreChoice = policy.genreChoiceForTier(tier) ? {
-        id: this.#idFactory(),
-        source: "newTier" as const,
-        grantTier: tier
-      } : null;
+      const genreChoice = policy.genreChoiceForTier(tier)
+        ? {
+            id: this.#idFactory(),
+            source: "newTier" as const,
+            grantTier: tier
+          }
+        : null;
       await actor.update({
         [tierProgression.path]: tier,
         "system.advancement.cycle": actor.system.advancement.cycle + 1,
         "system.advancement.purchases": [],
-        "system.advancement.pendingFocusChoices": [
-          ...actor.system.advancement.pendingFocusChoices,
-          focusChoice
-        ],
-        ...(genreChoice ? {
-          "system.advancement.pendingGenreChoices": [
-            ...actor.system.advancement.pendingGenreChoices,
-            genreChoice
-          ]
-        } : {})
+        "system.advancement.pendingFocusChoices": [...actor.system.advancement.pendingFocusChoices, focusChoice],
+        ...(genreChoice
+          ? {
+              "system.advancement.pendingGenreChoices": [...actor.system.advancement.pendingGenreChoices, genreChoice]
+            }
+          : {})
       });
       return {tier, focusChoice, genreChoice};
     });
@@ -420,8 +406,10 @@ export class AdvancementService {
     let skillRank: SkillRank | undefined;
     if (request.kind === "increaseCapabilities") {
       const values = Object.values(request.allocation);
-      if (values.some((value) => !Number.isInteger(value) || value < 0)
-        || values.reduce((sum, value) => sum + value, 0) !== policy.capabilityPoints) {
+      if (
+        values.some((value) => !Number.isInteger(value) || value < 0) ||
+        values.reduce((sum, value) => sum + value, 0) !== policy.capabilityPoints
+      ) {
         throw new AdvancementError("invalid-allocation", "Pool allocation must distribute exactly four points.");
       }
       for (const pool of ["might", "speed", "intellect"] as const) {
@@ -432,13 +420,8 @@ export class AdvancementService {
           amount
         );
         changes[maximum.path] = maximum.value;
-        const effectiveMaximum = maximum.overrideActive
-          ? maximum.value
-          : actor.system.derived.pools[pool].max + amount;
-        changes[`system.stats.${pool}.value`] = Math.min(
-          actor.system.stats[pool].value + amount,
-          effectiveMaximum
-        );
+        const effectiveMaximum = maximum.overrideActive ? maximum.value : actor.system.derived.pools[pool].max + amount;
+        changes[`system.stats.${pool}.value`] = Math.min(actor.system.stats[pool].value + amount, effectiveMaximum);
       }
     } else if (request.kind === "moveTowardPerfection") {
       const edge = characterProgressionDelta(
@@ -455,8 +438,9 @@ export class AdvancementService {
       changes[effort.path] = effort.value;
     } else if (request.kind === "skillTraining") {
       if (request.mode === "improve") {
-        const option = this.skillTrainingOptions(actor, enabledRuleModuleIds)
-          .find((entry) => entry.id === request.skillId);
+        const option = this.skillTrainingOptions(actor, enabledRuleModuleIds).find(
+          (entry) => entry.id === request.skillId
+        );
         const skill = [...actor.items].find((item) => item.id === request.skillId && item.type === "skill");
         if (!option || !skill) throw new AdvancementError("skill-not-found", "Skill Item not found.");
         if (option.reason === "maximum" || !option.nextRank) {
@@ -470,7 +454,7 @@ export class AdvancementService {
       } else {
         const data = await this.#newSkillData(actor, request, policy);
         const created = await actor.createEmbeddedDocuments("Item", [data]);
-        createdSkill = created[0] as AdvancementSkillLike | undefined ?? null;
+        createdSkill = (created[0] as AdvancementSkillLike | undefined) ?? null;
         if (!createdSkill) throw new Error("Foundry did not create the learned Skill Item.");
         skillRank = "trained";
       }
@@ -513,18 +497,27 @@ export class AdvancementService {
     }
     const name = source?.name.trim() || request.customName?.trim() || "";
     if (!name) throw new AdvancementError("skill-not-found", "A new custom Skill requires a name.");
-    const duplicate = [...actor.items].some((item) => item.type === "skill" && (
-      item.name.trim().toLocaleLowerCase() === name.toLocaleLowerCase()
-      || Boolean(source?.uuid && item.system.acquisition?.grantedByUuid === source.uuid)
-    ));
+    const duplicate = [...actor.items].some(
+      (item) =>
+        item.type === "skill" &&
+        (item.name.trim().toLocaleLowerCase() === name.toLocaleLowerCase() ||
+          Boolean(source?.uuid && item.system.acquisition?.grantedByUuid === source.uuid))
+    );
     if (duplicate) {
       throw new AdvancementError("duplicate-skill", "This Character already owns that Skill.");
     }
     const category = source?.system.category ?? request.customCategory ?? "general";
     const contexts = source?.system.contexts ?? (category === "general" ? [] : [category]);
-    const combat = category === "attack" || category === "defense"
-      || contexts.some((context) => context === "attack" || context.startsWith("attack.")
-        || context === "defense" || context.startsWith("defense."));
+    const combat =
+      category === "attack" ||
+      category === "defense" ||
+      contexts.some(
+        (context) =>
+          context === "attack" ||
+          context.startsWith("attack.") ||
+          context === "defense" ||
+          context.startsWith("defense.")
+      );
     if (combat && effectiveTier(actor.system) < policy.attackDefenseTrainingTier) {
       throw new AdvancementError("skill-tier", "Attack and defense training is not available at this Tier.");
     }
@@ -561,10 +554,7 @@ export class AdvancementService {
         grantTier: effectiveTier(actor.system),
         focusUuid: ""
       };
-      changes["system.advancement.pendingFocusChoices"] = [
-        ...actor.system.advancement.pendingFocusChoices,
-        choice
-      ];
+      changes["system.advancement.pendingFocusChoices"] = [...actor.system.advancement.pendingFocusChoices, choice];
     } else if (kind === "armor") {
       changes["system.proficiencies.armorCategories"] = unique([
         ...actor.system.proficiencies.armorCategories,
@@ -584,10 +574,7 @@ export class AdvancementService {
         source: "otherAdvancement",
         grantTier: effectiveTier(actor.system)
       };
-      changes["system.advancement.pendingGenreChoices"] = [
-        ...actor.system.advancement.pendingGenreChoices,
-        choice
-      ];
+      changes["system.advancement.pendingGenreChoices"] = [...actor.system.advancement.pendingGenreChoices, choice];
     }
   }
 
@@ -598,8 +585,10 @@ export class AdvancementService {
   }
 
   #effectiveEffort(actor: AdvancementCharacterLike): number {
-    return actor.system.derived.effort?.max
-      ?? resolveNumericOverride(actor.system.stats.effortBase, actor.system.overrides?.effort);
+    return (
+      actor.system.derived.effort?.max ??
+      resolveNumericOverride(actor.system.stats.effortBase, actor.system.overrides?.effort)
+    );
   }
 
   #key(actor: AdvancementCharacterLike): string {

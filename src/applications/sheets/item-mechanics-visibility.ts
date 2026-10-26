@@ -27,9 +27,7 @@ export interface AbilityMechanicsVisibility {
   readonly hasConditionalFields: boolean;
 }
 
-export function abilityMechanicsVisibility(
-  system: AbilityMechanicsSource
-): AbilityMechanicsVisibility {
+export function abilityMechanicsVisibility(system: AbilityMechanicsSource): AbilityMechanicsVisibility {
   const attack = system.roll === "attack";
   const task = system.roll === "task";
   const defense = system.roll === "defense";
@@ -41,9 +39,7 @@ export function abilityMechanicsVisibility(
   const showTargetMode = attack || system.targetMode !== "none";
 
   return {
-    showIgnoresEdge: (
-      system.cost.amount > 0 && Boolean(system.cost.allowedPools?.length)
-    ) || system.cost.ignoresEdge,
+    showIgnoresEdge: (system.cost.amount > 0 && Boolean(system.cost.allowedPools?.length)) || system.cost.ignoresEdge,
     showRollModifier,
     rollModifierLabel: task ? "task" : defense ? "defense" : "general",
     showAttackModifier,
@@ -51,12 +47,8 @@ export function abilityMechanicsVisibility(
     showDamageEffect,
     showRange,
     showTargetMode,
-    hasConditionalFields: showRollModifier
-      || showAttackModifier
-      || showDamage
-      || showDamageEffect
-      || showRange
-      || showTargetMode
+    hasConditionalFields:
+      showRollModifier || showAttackModifier || showDamage || showDamageEffect || showRange || showTargetMode
   };
 }
 
@@ -68,8 +60,7 @@ export interface SkillMechanicsSource {
 }
 
 export function skillHasOptionalMechanics(system: SkillMechanicsSource): boolean {
-  return system.defaultPool !== "choose"
-    || system.category !== "general"
-    || system.contexts.length > 0
-    || system.initiative;
+  return (
+    system.defaultPool !== "choose" || system.category !== "general" || system.contexts.length > 0 || system.initiative
+  );
 }

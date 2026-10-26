@@ -56,12 +56,7 @@ export class RestService {
     return REST_HOURS[type] * STRESS_POINTS_PER_LEVEL;
   }
 
-  rest(
-    current: WoundCollection,
-    type: RestType,
-    options: RestOptions = {},
-    currentStress = 0
-  ): RestResult {
+  rest(current: WoundCollection, type: RestType, options: RestOptions = {}, currentStress = 0): RestResult {
     const wounds = cloneWounds(current);
     const removed: WoundRecordData[] = [];
     let choice = "";
@@ -80,9 +75,8 @@ export class RestService {
         if (wound) removed.push(wound);
       }
     } else if (type === "10-hours") {
-      const exchange = options.removeMinorsInsteadOfOneModerate === true
-        && wounds.minor.length > 0
-        && wounds.moderate.length > 0;
+      const exchange =
+        options.removeMinorsInsteadOfOneModerate === true && wounds.minor.length > 0 && wounds.moderate.length > 0;
       choice = exchange ? "remove-minors-instead-of-one-moderate" : "remove-all-moderate";
       if (exchange) {
         removed.push(...wounds.minor);
@@ -126,11 +120,7 @@ export class RestService {
     };
   }
 
-  async apply(
-    actor: CharacterDocumentLike,
-    type: RestType,
-    options: RestOptions = {}
-  ): Promise<RestResult> {
+  async apply(actor: CharacterDocumentLike, type: RestType, options: RestOptions = {}): Promise<RestResult> {
     const {result, historyEntry} = this.prepare(actor, type, options);
     await actor.update({
       "system.wounds": result.wounds,

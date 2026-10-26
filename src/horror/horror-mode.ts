@@ -2,29 +2,21 @@ export const HORROR_INTRUSION_RANGE_MIN = 1;
 export const HORROR_INTRUSION_RANGE_MAX = 20;
 export const HORROR_INTRUSION_RANGE_DEFAULT = 1;
 
-export type HorrorRangeBand =
-  | "neutral"
-  | "low"
-  | "elevated"
-  | "severe"
-  | "extreme"
-  | "catastrophic"
-  | "maximum";
+export type HorrorRangeBand = "neutral" | "low" | "elevated" | "severe" | "extreme" | "catastrophic" | "maximum";
 
 /** Normalize persisted or externally supplied state without producing an invalid roll rule. */
 export function normalizeHorrorIntrusionRange(value: unknown): number {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return HORROR_INTRUSION_RANGE_DEFAULT;
-  return Math.min(
-    HORROR_INTRUSION_RANGE_MAX,
-    Math.max(HORROR_INTRUSION_RANGE_MIN, Math.trunc(numeric))
-  );
+  return Math.min(HORROR_INTRUSION_RANGE_MAX, Math.max(HORROR_INTRUSION_RANGE_MIN, Math.trunc(numeric)));
 }
 
 export function isValidHorrorIntrusionRange(value: unknown): value is number {
-  return Number.isInteger(value)
-    && Number(value) >= HORROR_INTRUSION_RANGE_MIN
-    && Number(value) <= HORROR_INTRUSION_RANGE_MAX;
+  return (
+    Number.isInteger(value) &&
+    Number(value) >= HORROR_INTRUSION_RANGE_MIN &&
+    Number(value) <= HORROR_INTRUSION_RANGE_MAX
+  );
 }
 
 export function horrorRangeBand(value: unknown): HorrorRangeBand {
@@ -40,6 +32,5 @@ export function horrorRangeBand(value: unknown): HorrorRangeBand {
 
 export function horrorRangeFillPercentage(value: unknown): number {
   const range = normalizeHorrorIntrusionRange(value);
-  return ((range - HORROR_INTRUSION_RANGE_MIN)
-    / (HORROR_INTRUSION_RANGE_MAX - HORROR_INTRUSION_RANGE_MIN)) * 100;
+  return ((range - HORROR_INTRUSION_RANGE_MIN) / (HORROR_INTRUSION_RANGE_MAX - HORROR_INTRUSION_RANGE_MIN)) * 100;
 }

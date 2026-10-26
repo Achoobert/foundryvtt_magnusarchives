@@ -30,25 +30,17 @@ export const SYSTEM_UI_ASSETS = {
 } as const;
 
 export function actorDefaultIcon(type: string): string | null {
-  return type in ACTOR_DEFAULT_ICONS
-    ? ACTOR_DEFAULT_ICONS[type as ActorType]
-    : null;
+  return type in ACTOR_DEFAULT_ICONS ? ACTOR_DEFAULT_ICONS[type as ActorType] : null;
 }
 
 export function itemDefaultIcon(type: string): string | null {
-  return type in ITEM_DEFAULT_ICONS
-    ? ITEM_DEFAULT_ICONS[type as ItemType]
-    : null;
+  return type in ITEM_DEFAULT_ICONS ? ITEM_DEFAULT_ICONS[type as ItemType] : null;
 }
 
 export function hasExplicitPrototypeActorLink(data: Record<string, unknown>): boolean {
   if ("prototypeToken.actorLink" in data) return true;
   const prototypeToken = data.prototypeToken;
-  return Boolean(
-    prototypeToken
-    && typeof prototypeToken === "object"
-    && "actorLink" in prototypeToken
-  );
+  return Boolean(prototypeToken && typeof prototypeToken === "object" && "actorLink" in prototypeToken);
 }
 
 export function shouldDefaultPrototypeActorLink(type: string, data: Record<string, unknown>): boolean {

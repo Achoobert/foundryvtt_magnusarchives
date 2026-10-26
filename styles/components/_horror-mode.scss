@@ -10,12 +10,20 @@
   }
 
   &[data-horror-band="elevated"] {
-    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-color-warning) 76%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-color: color-mix(
+      in srgb,
+      var(--magnusarchives-color-warning) 76%,
+      var(--magnusarchives-text-primary)
+    );
     --magnusarchives-horror-glow: 26%;
   }
 
   &[data-horror-band="severe"] {
-    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-color-warning) 64%, var(--magnusarchives-danger));
+    --magnusarchives-horror-color: color-mix(
+      in srgb,
+      var(--magnusarchives-color-warning) 64%,
+      var(--magnusarchives-danger)
+    );
     --magnusarchives-horror-glow: 34%;
   }
 
@@ -25,12 +33,20 @@
   }
 
   &[data-horror-band="catastrophic"] {
-    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-danger) 86%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-color: color-mix(
+      in srgb,
+      var(--magnusarchives-danger) 86%,
+      var(--magnusarchives-text-primary)
+    );
     --magnusarchives-horror-glow: 57%;
   }
 
   &[data-horror-band="maximum"] {
-    --magnusarchives-horror-color: color-mix(in srgb, var(--magnusarchives-danger) 72%, var(--magnusarchives-text-primary));
+    --magnusarchives-horror-color: color-mix(
+      in srgb,
+      var(--magnusarchives-danger) 72%,
+      var(--magnusarchives-text-primary)
+    );
     --magnusarchives-horror-glow: 72%;
   }
 
@@ -69,11 +85,8 @@
       );
       border: 1px solid color-mix(in srgb, var(--magnusarchives-border) 72%, transparent);
       border-radius: 999px;
-      box-shadow: 0 0 0.42rem color-mix(
-        in srgb,
-        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
-        transparent
-      );
+      box-shadow: 0 0 0.42rem
+        color-mix(in srgb, var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow), transparent);
     }
 
     &::-webkit-slider-thumb {
@@ -84,11 +97,8 @@
       background: var(--magnusarchives-surface-primary);
       border: 2px solid var(--magnusarchives-horror-color);
       border-radius: 50%;
-      box-shadow: 0 0 0.38rem color-mix(
-        in srgb,
-        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
-        transparent
-      );
+      box-shadow: 0 0 0.38rem
+        color-mix(in srgb, var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow), transparent);
     }
 
     &::-moz-range-track {
@@ -102,11 +112,8 @@
       height: 0.32rem;
       background: var(--magnusarchives-horror-color);
       border-radius: 999px;
-      box-shadow: 0 0 0.42rem color-mix(
-        in srgb,
-        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
-        transparent
-      );
+      box-shadow: 0 0 0.42rem
+        color-mix(in srgb, var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow), transparent);
     }
 
     &::-moz-range-thumb {
@@ -115,11 +122,8 @@
       background: var(--magnusarchives-surface-primary);
       border: 2px solid var(--magnusarchives-horror-color);
       border-radius: 50%;
-      box-shadow: 0 0 0.38rem color-mix(
-        in srgb,
-        var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow),
-        transparent
-      );
+      box-shadow: 0 0 0.38rem
+        color-mix(in srgb, var(--magnusarchives-horror-color) var(--magnusarchives-horror-glow), transparent);
     }
 
     &:focus-visible {

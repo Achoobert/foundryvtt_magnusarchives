@@ -20,23 +20,42 @@ export class SpeciesDataModel extends ItemDataModelBase {
       poolBonuses: new fields.SchemaField({might: integerField(), speed: integerField(), intellect: integerField()}),
       woundBonuses: new fields.SchemaField({minor: integerField(), moderate: integerField(), major: integerField()}),
       edgeGrant: new fields.SchemaField({
-        mode: new fields.StringField({required: true, nullable: false, initial: "none", choices: [...EDGE_GRANT_MODES]}),
-        pool: new fields.StringField({required: true, nullable: false, initial: "none", choices: ["none", "might", "speed", "intellect"]}),
+        mode: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "none",
+          choices: [...EDGE_GRANT_MODES]
+        }),
+        pool: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "none",
+          choices: ["none", "might", "speed", "intellect"]
+        }),
         amount: integerField(1)
       }),
       weaponUse: categoryFlagsField(),
-      weaponFamilies: new fields.ArrayField(
-        new fields.StringField({required: true, nullable: false, blank: false}),
-        {required: true, nullable: false, initial: []}
-      ),
+      weaponFamilies: new fields.ArrayField(new fields.StringField({required: true, nullable: false, blank: false}), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       armorUse: categoryFlagsField(),
       cypherLimitBonus: integerField(),
       skillGrants: new fields.ArrayField(skillGrantField(), {required: true, nullable: false, initial: []}),
       choiceGroups: new fields.ArrayField(skillChoiceGroupField(), {required: true, nullable: false, initial: []}),
       abilityGrants: new fields.ArrayField(abilityGrantField(), {required: true, nullable: false, initial: []}),
-      abilityChoiceGroups: new fields.ArrayField(abilityChoiceGroupField(), {required: true, nullable: false, initial: []}),
+      abilityChoiceGroups: new fields.ArrayField(abilityChoiceGroupField(), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       descriptorGrants: new fields.ArrayField(descriptorGrantField(), {required: true, nullable: false, initial: []}),
-      descriptorChoiceGroups: new fields.ArrayField(descriptorChoiceGroupField(), {required: true, nullable: false, initial: []}),
+      descriptorChoiceGroups: new fields.ArrayField(descriptorChoiceGroupField(), {
+        required: true,
+        nullable: false,
+        initial: []
+      }),
       instance: packageInstanceField()
     };
   }

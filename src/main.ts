@@ -51,19 +51,14 @@ Hooks.once("init", async () => {
   Hooks.callAll("magnusarchives.registerRules", rules);
   Hooks.callAll("magnusarchives.registerThemes", themes);
   registerSettings(themes);
-  await foundry.applications.handlebars.loadTemplates([
-    "systems/magnusarchives/templates/focus/focus-tree.hbs"
-  ]);
+  await foundry.applications.handlebars.loadTemplates(["systems/magnusarchives/templates/focus/focus-tree.hbs"]);
 });
 
 Hooks.once("ready", async () => {
   initializeBlankCanvasBackground();
   const selectedTheme = String(game.settings.get(SYSTEM_ID, SETTING_KEYS.theme));
   game.magnusarchives.themes.apply(game.magnusarchives.themes.has(selectedTheme) ? selectedTheme : "core");
-  initializeGMIntrusionController(
-    game.magnusarchives.services.intrusions,
-    game.magnusarchives.services.intrusionChat
-  );
+  initializeGMIntrusionController(game.magnusarchives.services.intrusions, game.magnusarchives.services.intrusionChat);
   initializePlayerIntrusionController(
     game.magnusarchives.services.playerIntrusions,
     game.magnusarchives.services.playerIntrusionChat

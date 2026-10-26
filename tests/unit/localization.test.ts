@@ -33,9 +33,7 @@ describe("English localization catalog", () => {
       languages: Array<{lang: string; name: string; path: string}>;
     };
 
-    expect(manifest.languages).toEqual([
-      {lang: "en", name: "English", path: "lang/en.json"}
-    ]);
+    expect(manifest.languages).toEqual([{lang: "en", name: "English", path: "lang/en.json"}]);
     expect(existsSync(catalogPath)).toBe(true);
   });
 
@@ -73,11 +71,11 @@ describe("English localization catalog", () => {
       ...SKILL_RANKS.map((rank) => `MAGNUSARCHIVES.Skill.Ranks.${rank}`),
       ...CYPHER_MANIFESTATIONS.map((value) => `MAGNUSARCHIVES.Cypher.Manifestation.${value}`),
       ...CYPHER_POWERS.map((value) => `MAGNUSARCHIVES.Cypher.Power.${value}`),
-      ...["applied", "available", "unresolved", "inapplicable"]
-        .map((status) => `MAGNUSARCHIVES.Roll.NaturalEffects.Status.${status}`),
+      ...["applied", "available", "unresolved", "inapplicable"].map(
+        (status) => `MAGNUSARCHIVES.Roll.NaturalEffects.Status.${status}`
+      ),
       ...["targeted", "group", "free"].map((mode) => `MAGNUSARCHIVES.Intrusion.Mode.${mode}`),
-      ...["owned", "available", "locked", "future"]
-        .map((state) => `MAGNUSARCHIVES.Focus.State.${state}`)
+      ...["owned", "available", "locked", "future"].map((state) => `MAGNUSARCHIVES.Focus.State.${state}`)
     ];
 
     expect(dynamicKeys.filter((key) => !(key in translations))).toEqual([]);

@@ -14,16 +14,14 @@ export function chatCardActorImage(actor: ChatCardActorLike | null | undefined):
   return typeof actorImage === "string" ? actorImage.trim() : "";
 }
 
-export function chatCardActorImageData(
-  actor: ChatCardActorLike | null | undefined
-): {readonly actorImage?: string; readonly chatCardStyle?: string} {
+export function chatCardActorImageData(actor: ChatCardActorLike | null | undefined): {
+  readonly actorImage?: string;
+  readonly chatCardStyle?: string;
+} {
   const actorImage = chatCardActorImage(actor);
-  const system = actor?.system && typeof actor.system === "object"
-    ? actor.system as Record<string, unknown>
-    : null;
-  const appearance = system?.appearance && typeof system.appearance === "object"
-    ? system.appearance as Record<string, unknown>
-    : null;
+  const system = actor?.system && typeof actor.system === "object" ? (actor.system as Record<string, unknown>) : null;
+  const appearance =
+    system?.appearance && typeof system.appearance === "object" ? (system.appearance as Record<string, unknown>) : null;
   const color = typeof appearance?.color === "string" ? appearance.color : "";
   const accent = safeCharacterAccent(color);
   const tint = safeCharacterTint(color);
