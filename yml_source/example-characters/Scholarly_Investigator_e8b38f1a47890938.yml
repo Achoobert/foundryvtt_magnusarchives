@@ -28,16 +28,16 @@ system:
     effortBase: 1
     might:
       value: 10
-      baseMax: 10
+      baseMax: 8
       baseEdge: 0
     speed:
       value: 10
-      baseMax: 10
+      baseMax: 9
       baseEdge: 1
     intellect:
       value: 14
-      baseMax: 14
-      baseEdge: 1
+      baseMax: 13
+      baseEdge: 0
   stress:
     value: 0
     supernatural: 0

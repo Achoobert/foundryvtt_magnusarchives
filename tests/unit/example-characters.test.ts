@@ -35,12 +35,22 @@ describe("Example Characters compendium", () => {
   it("builds the sample sheet's Character with its printed Pools and Edge (p379)", () => {
     expect(investigator.type).toBe("character");
     expect(investigator.system.tier).toBe(1);
+    // Stored stats are the base before the Investigator type adds its Pool
+    // bonuses and Intellect Edge, so base + type gives the printed 10 / 10 / 14.
     expect(investigator.system.stats).toMatchObject({
       effortBase: 1,
-      might: {baseMax: 10, baseEdge: 0},
-      speed: {baseMax: 10, baseEdge: 1},
-      intellect: {baseMax: 14, baseEdge: 1}
+      might: {baseMax: 8, baseEdge: 0},
+      speed: {baseMax: 9, baseEdge: 1},
+      intellect: {baseMax: 13, baseEdge: 0}
     });
+    const type = item("Investigator").system;
+    const printed = {might: [10, 0], speed: [10, 1], intellect: [14, 1]} as const;
+    for (const [pool, [max, edge]] of Object.entries(printed)) {
+      const stat = investigator.system.stats[pool];
+      expect(stat.baseMax + type.poolBonuses[pool], `${pool} Pool`).toBe(max);
+      expect(stat.baseEdge + (type.edgeGrant.pool === pool ? type.edgeGrant.amount : 0), `${pool} Edge`).toBe(edge);
+      expect(stat.value, `${pool} current`).toBe(max);
+    }
     expect(investigator.system.cypherLimitBase).toBe(2);
     expect(investigator.system.damageTrack).toEqual({step: "hale", hurtAvailable: false});
     expect(investigator.system.stress).toEqual({value: 0, supernatural: 0});

@@ -440,11 +440,28 @@
   }
 
   .character-hud-lower {
-    display: grid;
-    grid-template-columns: 5.5rem minmax(0, 1fr) 5.5rem;
+    display: flex;
     gap: 0.35rem;
+    align-items: stretch;
     min-width: 0;
-    align-items: start;
+    max-height: 200px;
+
+    > .character-hud-card {
+      min-height: 0;
+      overflow: hidden auto;
+    }
+
+    > .character-hud-damage-track {
+      flex: 1.4 1 13rem;
+    }
+
+    > .character-hud-stress {
+      flex: 1 1 11rem;
+    }
+
+    > .character-hud-recovery {
+      flex: 0 1 8.5rem;
+    }
   }
 
   .character-hud-damage-track,
@@ -469,10 +486,15 @@
 
     > li {
       display: grid;
-      grid-template-columns: 5.5rem minmax(0, 1fr);
+      grid-template-columns: 5rem minmax(0, 1fr);
       gap: 0.3rem;
       align-items: start;
       min-width: 0;
+    }
+
+    // Only the current step's notes are shown; the rest live in each step's tooltip.
+    > li:not(:has(.is-current)) .character-hud-damage-step-notes {
+      display: none;
     }
   }
 
@@ -527,19 +549,33 @@
     align-items: center;
   }
 
+  .character-hud-stress {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+
+    > .character-hud-card-heading {
+      grid-column: span 2;
+    }
+  }
+
   .character-hud-stress-values {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.25rem;
     min-width: 0;
   }
 
-  .character-hud-stress-supernatural {
-    height: auto;
-    min-height: 2.55rem;
+  .character-hud-stress-supernatural small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-    small {
-      white-space: normal;
-    }
+  .character-hud-stress .character-hud-pips {
+    justify-content: flex-start;
+  }
+
+  .character-hud-stress-actions {
+    justify-content: flex-end;
   }
 
   .character-hud-wounds {

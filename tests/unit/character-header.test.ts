@@ -294,9 +294,11 @@ describe("Character Header HUD V1.1", () => {
   });
 
   it("keeps Recovery, the damage track, and Stress in one compact bottom HUD row", () => {
-    expect(styles).toContain("grid-template-columns: 5.5rem minmax(0, 1fr) 5.5rem");
     expect(styles).toContain("padding-block: 0.25rem");
     const lowerStart = styles.indexOf(".character-hud-lower");
+    const lowerBlock = styles.slice(lowerStart, styles.indexOf(".character-hud-damage-track,", lowerStart));
+    expect(lowerBlock).toContain("display: flex");
+    expect(lowerBlock).toContain("max-height: 200px");
     const woundsStart = styles.indexOf(".character-hud-wounds", lowerStart);
     expect(styles.slice(lowerStart, woundsStart)).not.toContain("grid-column: 1 / -1");
 

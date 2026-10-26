@@ -1,4 +1,4 @@
-import {cp, mkdir} from "node:fs/promises";
+import {cp, mkdir, rm} from "node:fs/promises";
 import {existsSync} from "node:fs";
 import path from "node:path";
 import {DATA_DIR, ROOT} from "./lib/fvtt-config.mjs";
@@ -23,6 +23,9 @@ for (const entry of ENTRIES_TO_SYNC) {
     console.warn(`Skipping ${entry} (not present).`);
     continue;
   }
+  // A LevelDB pack is a whole directory. Copying over an old one leaves its
+  // stale .ldb and MANIFEST files behind, so replace packs/ outright.
+  if (entry === "packs") await rm(path.join(TARGET, entry), {recursive: true, force: true});
   await cp(source, path.join(TARGET, entry), {recursive: true, force: true});
 }
 
