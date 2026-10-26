@@ -64,9 +64,15 @@ $requiredGeneratedPacks = @(
   "packs/descriptors",
   "packs/skills",
   "packs/weapons-and-armors",
+  "packs/types",
+  "packs/type-abilities",
+  "packs/foci",
+  "packs/focus-abilities",
   "packs/equipment",
   "packs/cyphers",
-  "packs/cypher-tables"
+  "packs/cypher-tables",
+  "packs/artefacts",
+  "packs/npcs"
 )
 
 foreach ($relativePath in $requiredGeneratedPacks) {

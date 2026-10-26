@@ -67,6 +67,9 @@ function validateCypher(cypher, index, errors) {
   if (cypher.levelOverride) {
     if (!Number.isInteger(cypher.level) || cypher.level < 1) errors.push(`${location}.level must be an integer of at least 1 when overridden.`);
   } else if (cypher.level !== null) errors.push(`${location}.level must be null unless levelOverride is true.`);
+  // Magnus cyphers roll their level ("1d6 + 2"); a fixed level also sets levelOverride.
+  requireString(cypher.levelFormula, `${location}.levelFormula`, errors);
+  if (typeof cypher.instant !== "boolean") errors.push(`${location}.instant must be boolean.`);
   requireString(cypher.form, `${location}.form`, errors, {allowBlank: true});
   requireString(cypher.description, `${location}.description`, errors);
   requireString(cypher.sourcePage, `${location}.sourcePage`, errors);
@@ -190,7 +193,7 @@ function baseSystem(catalog, record) {
     source: {uuid: "", book: catalog.source.title, page: record.sourcePage, license: catalog.source.license},
     automation: {mode: "descriptive", duration: {enabled: false, trigger: "recovery"}, rollDefaults: {}},
     ruleElements: [],
-    tags: [record.category, ...(record.nonstandard ? ["nonstandard"] : [])],
+    tags: [record.category, ...(record.instant ? ["instant"] : []), ...(record.nonstandard ? ["nonstandard"] : [])],
     grantedBy: emptyProvenance()
   };
 }
@@ -223,6 +226,8 @@ function generatedCypherDocument(catalog, record) {
         cypherImport: {
           sourceId: record.id,
           sourceOrder: record.sourceOrder,
+          levelFormula: record.levelFormula,
+          instant: record.instant,
           category: record.category,
           sourcePower: record.power,
           nonstandard: record.nonstandard,
@@ -269,7 +274,7 @@ function generatedRollTableDocument(catalog, table, sort, cyphersById) {
     _id: id,
     name: table.name,
     img: "systems/magnusarchives/assets/icons/magnuscypher.webp",
-    description: `<p>${catalog.source.title} (${catalog.source.version}), p. ${table.sourcePage}.</p>`,
+    description: `<p>${catalog.source.title} (${catalog.source.version}), p${table.sourcePage}.</p>`,
     results: table.results.map((result, index) => generatedTableResult(table, result, index, cyphersById)),
     replacement: true,
     displayRoll: true,

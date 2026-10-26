@@ -23,8 +23,7 @@ https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/
 
 > [!WARNING]
 > ## EARLY BETA
-> **Expect bugs, rough edges and changes.** Character types, foci and the Entities are not in the
-> compendiums yet — see [What is not here yet](#what-is-not-here-yet).
+> **Expect bugs, rough edges and changes.**
 
 > [!NOTE]
 > ## FORKS & THANKS
@@ -77,22 +76,29 @@ so the core health model here is different from its upstream:
 
 - **Descriptors** (`descriptors`) — the 27 descriptors from chapter 2
 - **Skills** (`skills`) — the 47 skills from the skill list, plus the three defense tasks
+- **Types** (`types`) and **Type Abilities** (`type-abilities`) — Investigator, Protector,
+  Elocutionist and Occultist, with every tier's ability options (chapter 3)
+- **Foci** (`foci`) and **Focus Abilities** (`focus-abilities`) — the 18 foci of chapter 4, and a
+  "Serves as an Avatar" focus per Entity (p89-96)
 - **Weapons & Armor** (`weapons-and-armors`) — the weapons from the price tables, and body armor
 - **Equipment** (`equipment`) — the rest of the price tables, by price category
-- **Cyphers** (`cyphers`) and **Cypher Tables** (`cypher-tables`) — carried over from Cypher V2
+- **Cyphers** (`cyphers`) and **Cypher Tables** (`cypher-tables`) — the Magnus cyphers and the d00
+  Cypher Table (chapter 6)
+- **Artefacts & Books** (`artefacts`) — chapter 13
+- **NPCs & Monsters** (`npcs`) — chapter 12, foldered by Entity, plus the animals and people of p195
+- **Example Characters** (`example-characters`) — the sample character sheet (p379-380)
 
-## What is not here yet
+### Known gaps
 
-These are the next pieces of content, in order:
+- A type's Edge can only target one Pool, so the Investigator's and Protector's second Edge, the
+  Occultist's Might of 7, and type cypher limits are set by hand. Each type's description has a
+  "Sheet notes" line.
+- Avatar foci put Sense Avatar and Sense Supernatural Activity at Tier 1 so the tree can unlock the
+  Entity powers; the GM attaches an Avatar focus only from Tier 4.
 
-1. **Character types** — Investigator, Protector, Elocutionist, Occultist (chapter 3)
-2. **Foci** (chapter 4) and **becoming an Avatar** (p89)
-3. **Magnus cyphers** (chapter 6), replacing the Cypher V2 catalogue
-4. **NPCs and monsters** (FREE PREVIEW p15, chapter 12) and **artefacts** (chapter 13)
-
-The `types`, `type-abilities`, `foci`, `focus-abilities`, `species`, `genres` and `genre-abilities`
-content and importers are still in the repository, but those packs are not built or shipped: their
-Cypher content references skills that are not in the Magnus skill list.
+The CRD `types`, `foci`, `species`, `genres` and `genre-abilities` content and importers are still in
+the repository but are not built or shipped. Do not run `import:types` or `import:foci`: they write
+the same pack folders as the Magnus content.
 
 ## Development
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/SebsokK/magnusarchives/main/content/cyphers/catalog.schema.json",
-  "title": "Cypher V2 canonical Cypher and RollTable catalog",
+  "title": "Magnus Archives canonical Cypher and RollTable catalog",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "source", "reviewIssues", "cyphers", "tables"],
@@ -42,7 +42,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "id", "name", "category", "manifestation", "power", "level", "levelOverride", "form",
+        "id", "name", "category", "manifestation", "power", "level", "levelOverride", "levelFormula", "instant", "form",
         "description", "sourcePage", "sourceOrder", "nonstandard", "reviewStatus", "reviewNote"
       ],
       "properties": {
@@ -53,6 +53,8 @@
         "power": {"oneOf": [{"type": "null"}, {"enum": ["low", "medium", "advanced", "high", "ultra"]}]},
         "level": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
         "levelOverride": {"type": "boolean"},
+        "levelFormula": {"$ref": "#/$defs/nonBlankString"},
+        "instant": {"type": "boolean"},
         "form": {"type": "string"},
         "description": {"$ref": "#/$defs/nonBlankString"},
         "sourcePage": {"$ref": "#/$defs/nonBlankString"},

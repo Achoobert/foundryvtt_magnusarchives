@@ -19,15 +19,38 @@ describe("Cypher compendium importer", () => {
     const second = importer.generateCypherImport(catalog);
 
     expect(first).toEqual(second);
-    expect(first.cypherDocuments).toHaveLength(201);
-    expect(first.tableDocuments).toHaveLength(12);
+    // 52 cyphers on the d00 Cypher Table (p107), plus the two sub-tables rolled by
+    // Learn From The Web (p109) and Librarian's Pupil (p110).
+    expect(first.cypherDocuments).toHaveLength(52);
+    expect(first.tableDocuments).toHaveLength(3);
     expect(first.cypherDocuments.every((document: any) => document._id.length === 16)).toBe(true);
     expect(first.tableDocuments.every((document: any) => document._id.length === 16)).toBe(true);
 
     const categoryCounts = first.report.summary;
-    expect(categoryCounts.standard).toBe(86);
-    expect(categoryCounts.manifest).toEqual({low: 36, medium: 38, advanced: 19, high: 4, ultra: 9});
-    expect(categoryCounts.powerBoost).toBe(9);
+    // Magnus cyphers are all subtle: luck and inspiration, not objects.
+    expect(categoryCounts.standard).toBe(52);
+    expect(categoryCounts.manifest).toEqual({low: 0, medium: 0, advanced: 0, high: 0, ultra: 0});
+    expect(categoryCounts.powerBoost).toBe(0);
+  });
+
+  it("keeps each cypher's level formula and instant flag", async () => {
+    const generated = importer.generateCypherImport(await sourceCatalog());
+    const byName = new Map(generated.cypherDocuments.map((document: any) => [document.name, document]));
+
+    const binary: any = byName.get("Binary");
+    expect(binary.flags.magnusarchives.cypherImport).toMatchObject({levelFormula: "1d6 + 2", instant: true});
+    expect(binary.system.tags).toContain("instant");
+    expect(binary.system.levelOverride).toBe(false);
+    expect(binary.system.description).toContain("1d6 + 2");
+
+    const bigPicture: any = byName.get("Big Picture");
+    expect(bigPicture.system.tags).not.toContain("instant");
+
+    // A fixed printed level is the cypher's level outright.
+    const cheatingDeath: any = byName.get("Cheating Death");
+    expect(cheatingDeath.system.levelOverride).toBe(true);
+    expect(cheatingDeath.system.level).toBe(10);
+    expect(generated.cypherDocuments.filter((document: any) => document.system.tags.includes("instant"))).toHaveLength(20);
   });
 
   it("generates unique Foundry document IDs and LevelDB keys", async () => {
@@ -44,24 +67,15 @@ describe("Cypher compendium importer", () => {
 
   it("maps catalog entries to the existing descriptive Cypher DataModel without automation", async () => {
     const generated = importer.generateCypherImport(await sourceCatalog());
-    const standard = generated.cypherDocuments.find((document: any) => document.system.category === "standard");
-    const manifest = generated.cypherDocuments.find((document: any) => document.system.category === "manifest");
-    const powerBoost = generated.cypherDocuments.find((document: any) => document.system.category === "power-boost");
-
-    for (const document of [standard, manifest, powerBoost]) {
-      expect(document).toBeDefined();
+    for (const document of generated.cypherDocuments) {
       expect(document.type).toBe("cypher");
       expect(document.system.automation.mode).toBe("descriptive");
       expect(document.system.ruleElements).toEqual([]);
       expect(document.effects).toEqual([]);
-      expect(document.system.levelOverride).toBe(false);
-      expect(document.system.level).toBe(1);
+      expect(document.system.manifestation).toBe("subtle");
       expect(document.system.uses).toBe(1);
+      if (!document.system.levelOverride) expect(document.system.level).toBe(1);
     }
-    expect(standard.system.manifestation).toBe("subtle");
-    expect(manifest.system.manifestation).toBe("manifest");
-    expect(importer.CYPHER_POWERS).toContain(manifest.system.power);
-    expect(powerBoost.system.tags).toContain("power-boost");
   });
 
   it("resolves every RollTable document result to a generated Cypher or RollTable", async () => {
@@ -75,7 +89,7 @@ describe("Cypher compendium importer", () => {
         if (result.documentCollection === "magnusarchives.cypher-tables") expect(tableIds.has(result.documentId)).toBe(true);
       }
     }
-    expect(importer.cypherCompendiumUuid("amazing-effort")).toMatch(/^Compendium\.magnusarchives\.cyphers\.Item\.[a-f0-9]{16}$/);
+    expect(importer.cypherCompendiumUuid("another-twist")).toMatch(/^Compendium\.magnusarchives\.cyphers\.Item\.[a-f0-9]{16}$/);
     expect(importer.cypherTableCompendiumUuid("random-cyphers")).toMatch(/^Compendium\.magnusarchives\.cypher-tables\.RollTable\.[a-f0-9]{16}$/);
   });
 

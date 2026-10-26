@@ -3,8 +3,8 @@
   "title": "The Magnus Archives",
   "description": "An unofficial Foundry VTT v14 system for The Magnus Archives Roleplaying Game, with Stress, the damage track and the book's price categories.",
   "version": "0.1.0-beta.5",
-  "manifest": "https://raw.githubusercontent.com/Achoobert/foundryvtt_magnusarchives/main/system.json",
-  "download": "https://github.com/Achoobert/foundryvtt_magnusarchives/releases/download/v0.1.0-beta.5/magnusarchives.zip",
+  "manifest": "https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/system.json",
+  "download": "https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/magnusarchives.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14.360"
@@ -46,6 +46,34 @@
       "system": "magnusarchives"
     },
     {
+      "name": "types",
+      "label": "Types",
+      "path": "packs/types",
+      "type": "Item",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "type-abilities",
+      "label": "Type Abilities",
+      "path": "packs/type-abilities",
+      "type": "Item",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "foci",
+      "label": "Foci",
+      "path": "packs/foci",
+      "type": "Item",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "focus-abilities",
+      "label": "Focus Abilities",
+      "path": "packs/focus-abilities",
+      "type": "Item",
+      "system": "magnusarchives"
+    },
+    {
       "name": "weapons-and-armors",
       "label": "Weapons & Armor",
       "path": "packs/weapons-and-armors",
@@ -71,6 +99,20 @@
       "label": "Cypher Tables",
       "path": "packs/cypher-tables",
       "type": "RollTable",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "artefacts",
+      "label": "Artefacts & Books",
+      "path": "packs/artefacts",
+      "type": "Item",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "npcs",
+      "label": "NPCs & Monsters",
+      "path": "packs/npcs",
+      "type": "Actor",
       "system": "magnusarchives"
     },
     {

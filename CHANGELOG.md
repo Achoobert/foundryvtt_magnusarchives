@@ -17,11 +17,21 @@ The system is now **The Magnus Archives** (`magnusarchives`), forked from Cypher
 - The six price categories for Equipment (p98), plus a free-text price note.
 - `rapidFire` and `explosive` flags on Weapons (p100, p103-104).
 - An **Equipment** compendium built from the price tables (p102-104).
+- **Types** and **Type Abilities** compendiums: Investigator, Protector, Elocutionist and Occultist
+  (chapter 3), with every tier's ability options. Supernatural abilities are tagged `supernatural`.
+- **Foci** and **Focus Abilities** compendiums: the 18 foci of chapter 4 as Focus trees, plus a
+  "Serves as an Avatar" focus for each Entity that has Avatars (p89-96).
+- **Artefacts & Books** compendium: the 26 artefacts and 25 books of chapter 13.
+- **NPCs & Monsters** Actor compendium: the monsters of chapter 12, foldered by Entity, plus the
+  animals and people from p195 (FREE PREVIEW p15). Built by `pnpm import:npcs`.
 - A local development loop ported from blades68: `pnpm watch`, `dev:sync`, `dev:world`, `dev:seed`,
   `test:quench:sync`, and a Cypress + Quench suite under `tests/`.
 
 ### Changed
 
+- The **Cyphers** and **Cypher Tables** compendiums now hold the 52 Magnus cyphers and the d00
+  Cypher Table (chapter 6) instead of the Cypher V2 catalogue. Catalog entries gain `levelFormula`
+  and `instant`.
 - Attacks on a PC now inflict Stress or a serious injury rather than a Wound severity. NPCs and
   Abilities declare `damage.effect` (`stress` or `seriousInjury`) with a `stressAmount`.
 - A successful defense roll avoids the attack entirely; there is no Block severity reduction.

@@ -11,7 +11,15 @@ export const REVIEWED_CORE_PACKS = Object.freeze({
     itemTypes: Object.freeze(["weapon", "armor", "shield"])
   }),
   // The Magnus price tables list ordinary gear separately from weapons (p102).
-  equipment: Object.freeze({label: "Equipment", itemTypes: Object.freeze(["equipment"])})
+  equipment: Object.freeze({label: "Equipment", itemTypes: Object.freeze(["equipment"])}),
+  // Chapter 3: the four Magnus types, and the abilities they choose from by tier.
+  types: Object.freeze({label: "Types", itemTypes: Object.freeze(["characterType"])}),
+  "type-abilities": Object.freeze({label: "Type Abilities", itemTypes: Object.freeze(["ability"])}),
+  // Chapter 4: the foci, their tier abilities, and becoming an Avatar (p89).
+  foci: Object.freeze({label: "Foci", itemTypes: Object.freeze(["focus"])}),
+  "focus-abilities": Object.freeze({label: "Focus Abilities", itemTypes: Object.freeze(["ability"])}),
+  // Chapter 13: artefacts and books.
+  artefacts: Object.freeze({label: "Artefacts & Books", itemTypes: Object.freeze(["artifact"])})
 });
 
 const FOUNDRY_ID_PATTERN = /^[A-Za-z0-9]{16}$/;

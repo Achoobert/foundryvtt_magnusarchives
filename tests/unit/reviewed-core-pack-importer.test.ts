@@ -35,7 +35,15 @@ describe("reviewed core compendium promotion", () => {
           folders: 2,
           itemTypes: {armor: 1, weapon: 21}
         },
-        equipment: {documents: 56, items: 56, folders: 0, itemTypes: {equipment: 56}}
+        equipment: {documents: 56, items: 56, folders: 0, itemTypes: {equipment: 56}},
+        // Chapter 3: four types, their abilities in a Folder per type and tier.
+        types: {documents: 4, items: 4, folders: 0, itemTypes: {characterType: 4}},
+        "type-abilities": {documents: 214, items: 186, folders: 28, itemTypes: {ability: 186}},
+        // Chapter 4: 18 foci plus 14 Avatar foci (p89-96).
+        foci: {documents: 33, items: 32, folders: 1, itemTypes: {focus: 32}},
+        "focus-abilities": {documents: 231, items: 212, folders: 19, itemTypes: {ability: 212}},
+        // Chapter 13: 26 artefacts and 25 books.
+        artefacts: {documents: 53, items: 51, folders: 2, itemTypes: {artifact: 51}}
       },
       referenceRewrites: {"descriptors->skills": 140}
     });
@@ -79,7 +87,7 @@ describe("reviewed core compendium promotion", () => {
     const manifest = JSON.parse(await readFile(path.join(projectRoot, "system.json"), "utf8"));
     const packageJson = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8"));
     const releaseScript = await readFile(path.join(projectRoot, "scripts/package-release.ps1"), "utf8");
-    for (const packId of ["descriptors", "skills", "weapons-and-armors", "equipment"]) {
+    for (const packId of ["descriptors", "skills", "weapons-and-armors", "equipment", "types", "type-abilities", "foci", "focus-abilities", "artefacts"]) {
       expect(manifest.packs).toContainEqual(expect.objectContaining({name: packId, path: `packs/${packId}`, type: "Item", system: "magnusarchives"}));
       expect(releaseScript).toContain(`"packs/${packId}"`);
     }
