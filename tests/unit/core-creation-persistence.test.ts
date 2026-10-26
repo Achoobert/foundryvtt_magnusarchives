@@ -149,12 +149,11 @@ describe("Core Creation persistence across partial Actor updates", () => {
 
   it("preserves completed initialization through Character, Advancement, Focus, Skill, Wound, and Recovery updates", async () => {
     const actor = new PersistentCharacter();
-    await new CharacterInitializationService(undefined, () => 10).setup(actor as never, {
-      pools: {might: 2, speed: 2, intellect: 2},
-      skills: [
-        {customName: "Climbing", rank: "trained"},
-        {customName: "History", rank: "trained"}
-      ]
+    await actor.createEmbeddedDocuments("Item", [
+      {name: "Climbing", type: "skill", system: {rank: "trained", category: "general", contexts: []}}
+    ]);
+    await new CharacterInitializationService(() => 10).setup(actor as never, {
+      pools: {might: 2, speed: 2, intellect: 2}
     });
     expectCreation(actor, "completed");
 
@@ -207,7 +206,7 @@ describe("Core Creation persistence across partial Actor updates", () => {
 
   it("preserves the skipped state through later partial updates", async () => {
     const actor = new PersistentCharacter();
-    await new CharacterInitializationService(undefined, () => 60)
+    await new CharacterInitializationService(() => 60)
       .markInitialized(actor as never, "skipped");
     expectCreation(actor, "skipped");
 

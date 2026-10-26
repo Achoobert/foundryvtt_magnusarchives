@@ -22,16 +22,22 @@ describe("Character Focus association UI", () => {
     expect(template).toContain('data-focus-uuid="{{tree.focusUuid}}"');
   });
 
-  it("exposes Core Setup without requiring a Type, Descriptor, or Focus", () => {
+  it("exposes Core Setup as Descriptor, Type, Focus, Pools, then Character Arc", () => {
     const template = readFileSync(resolve(root, "templates/actor/character-sheet.hbs"), "utf8");
     expect(template).toContain('data-action="beginCoreSetup"');
     expect(template).toContain('data-action="skipCoreSetup"');
     expect(template).toContain('data-action="markCoreInitialized"');
+    expect(template).toContain('data-action="chooseArc"');
     const dialog = readFileSync(resolve(root, "src/applications/dialogs/character-setup-dialog.ts"), "utf8");
-    expect(dialog).not.toMatch(/descriptor|characterType|species|focus/i);
+    const flow = dialog.slice(dialog.indexOf("export async function promptCoreCharacterSetup"));
+    const order = ["descriptorStep(", "typeStep(", "focusStep(", "poolStep(", "promptArcSelection("]
+      .map((step) => flow.indexOf(step));
+    expect(order.every((index) => index > 0)).toBe(true);
+    expect([...order].sort((left, right) => left - right)).toEqual(order);
+    expect(dialog).not.toMatch(/StartingSkill|OptionalThird/);
     expect(dialog).toContain("data-core-points-remaining");
     expect(dialog).toContain('submit.disabled = !valid || remaining !== 0');
-    expect(dialog).toContain('actor.sheet?.render({force: true})');
+    expect(dialog).toContain('target.sheet?.render({force: true})');
   });
 
   it("keeps GM progression repair controls internal and removes Edit Progression from normal UI", () => {

@@ -43,7 +43,7 @@
         "focusProgress": [
           {
             "focusUuid": "{{itemId:Explores Dark Places}}",
-            "ownedNodeIds": ["operate-in-the-dark", "superb-explorer"],
+            "ownedNodeIds": ["t1-superb-explorer"],
             "provenance": "creation",
             "initialChoicesGranted": true,
             "attachedAt": 0
@@ -58,123 +58,13 @@
       },
       "items": [
         {"ref": {"pack": "descriptors", "name": "Scholarly"}},
+        {"ref": {"pack": "types", "name": "Investigator"}},
+        {"ref": {"pack": "foci", "name": "Explores Dark Places"}},
+        {"ref": {"pack": "type-abilities", "name": "Careful Observation"}},
+        {"ref": {"pack": "type-abilities", "name": "Operate in the Dark"}},
         {
-          "inline": {
-            "name": "Investigator",
-            "type": "characterType",
-            "img": "systems/magnusarchives/assets/icons/magnustype.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p>Investigators dig into what other people would rather leave alone: archives, crime scenes, cold cases and the gaps between them.</p><p>Placeholder Type Item carrying only what the sample sheet records. The full Investigator Type, with its tier-by-tier ability list, arrives with the chapter 3 content pack.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "weaponUse": {"light": true, "medium": true, "heavy": false},
-              "armorUse": {"light": false, "medium": false, "heavy": false}
-            }
-          }
-        },
-        {
-          "inline": {
-            "name": "Explores Dark Places",
-            "type": "focus",
-            "img": "systems/magnusarchives/assets/icons/magnusfocus.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p>You go where the lights do not reach, and you come back with something written down.</p><p>Carries only the two tier-1 abilities the sample sheet shows. The full tiered Focus graph arrives with the chapter 4 content pack.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "graph": {
-                "version": 1,
-                "nodes": [
-                  {
-                    "id": "operate-in-the-dark",
-                    "tier": 1,
-                    "abilitySnapshot": {"name": "Operate in the Dark"},
-                    "position": {"x": 0, "y": 0}
-                  },
-                  {
-                    "id": "superb-explorer",
-                    "tier": 1,
-                    "abilitySnapshot": {"name": "Superb Explorer"},
-                    "position": {"x": 200, "y": 0}
-                  }
-                ],
-                "connections": []
-              }
-            }
-          }
-        },
-        {
-          "inline": {
-            "name": "Careful Observation",
-            "type": "ability",
-            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p>Spend a minute studying your surroundings. Succeed at a difficulty 4 perception task and you pick out an inanimate detail within immediate distance that bears on your current investigation: the colour of mud on a pair of boots, a thread caught on a coat hook, dust disturbed on one shelf. If there is nothing of the sort there, you learn that too. Two or more such details still take only one roll: the first comes at difficulty 4, the second at 5, the third at 6, and so on.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "tier": 1,
-              "activation": "action",
-              "pool": "intellect",
-              "cost": {"amount": 1, "scalable": false, "ignoresEdge": false, "allowedPools": ["intellect"]},
-              "roll": "task"
-            }
-          }
-        },
-        {
-          "inline": {
-            "name": "Operate in the Dark",
-            "type": "ability",
-            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p>For the next hour your other senses cover for your eyes. Blinded or simply in the dark, you operate without hindrance. Action to initiate.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "tier": 1,
-              "activation": "action",
-              "pool": "intellect",
-              "cost": {"amount": 1, "scalable": false, "ignoresEdge": false, "allowedPools": ["intellect"]},
-              "roll": "none",
-              "sourceFocusUuid": "{{itemId:Explores Dark Places}}",
-              "sourceNodeId": "operate-in-the-dark"
-            }
-          }
-        },
-        {
-          "inline": {
-            "name": "Superb Explorer",
-            "type": "ability",
-            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p>You are trained in perception, endurance and gymnastics tasks. Enabler. (Already recorded under Skills.)</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "tier": 1,
-              "activation": "enabler",
-              "pool": "none",
-              "roll": "none",
-              "sourceFocusUuid": "{{itemId:Explores Dark Places}}",
-              "sourceNodeId": "superb-explorer"
-            }
-          }
+          "ref": {"pack": "focus-abilities", "name": "Superb Explorer"},
+          "system": {"sourceFocusUuid": "{{itemId:Explores Dark Places}}", "sourceNodeId": "t1-superb-explorer"}
         },
 
         {"ref": {"pack": "skills", "name": "History"}, "system": {"rank": "trained"}},
@@ -192,48 +82,8 @@
           "system": {"skillLevel": "trained", "equipped": true}
         },
 
-        {
-          "inline": {
-            "name": "Curiosity",
-            "type": "cypher",
-            "img": "systems/magnusarchives/assets/icons/magnuscypher.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p><strong>Level:</strong> 1d6 + 2</p><p>You dwell on something done well, and for one hour your Intellect Edge rises by 1, or by 2 if this cypher is level 5 or higher.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "level": 1,
-              "levelOverride": false,
-              "manifestation": "subtle",
-              "identified": true,
-              "uses": 1
-            }
-          }
-        },
-        {
-          "inline": {
-            "name": "Strange Music",
-            "type": "cypher",
-            "img": "systems/magnusarchives/assets/icons/magnuscypher.webp",
-            "system": {
-              "schemaVersion": 1,
-              "description": "<p><strong>Level:</strong> 1d6</p><p>You take a moment to settle yourself, and lose Stress equal to this cypher's level.</p>",
-              "source": {
-                "book": "The Magnus Archives Roleplaying Game",
-                "page": "379",
-                "license": "original"
-              },
-              "level": 1,
-              "levelOverride": false,
-              "manifestation": "subtle",
-              "identified": true,
-              "uses": 1
-            }
-          }
-        },
+        {"ref": {"pack": "cyphers", "name": "Curiosity"}},
+        {"ref": {"pack": "cyphers", "name": "Strange Music"}},
 
         {"ref": {"pack": "equipment", "name": "Everyday clothing"}, "system": {"equipped": true}},
         {"ref": {"pack": "equipment", "name": "Wallet"}},

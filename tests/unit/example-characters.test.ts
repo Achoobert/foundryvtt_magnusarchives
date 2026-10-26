@@ -10,16 +10,22 @@ const {
   EXAMPLE_CHARACTER_PACK_ID,
   EXAMPLE_CHARACTER_PACK_LABEL,
   validateExampleCharacterDocuments,
-  validateExampleCharacterSource
+  validateExampleCharacterSource,
+  withCypherPack
 } = importer;
+// @ts-expect-error Developer-only JavaScript module has no runtime-facing TypeScript declaration.
+const cypherImporter = await import("../../scripts/cypher-importer.mjs");
 
 const projectRoot = path.resolve(import.meta.dirname, "../..");
 const source = validateExampleCharacterSource(JSON.parse(
   await readFile(path.join(projectRoot, "content/example-characters/characters.json"), "utf8")
 ));
-const corePackSource = JSON.parse(
+const {cypherDocuments} = cypherImporter.generateCypherImport(JSON.parse(
+  await readFile(path.join(projectRoot, "content/cyphers/catalog.json"), "utf8")
+));
+const corePackSource = withCypherPack(JSON.parse(
   await readFile(path.join(projectRoot, "content/core-items/reviewed-packs.json"), "utf8")
-);
+), cypherDocuments);
 const manifest = JSON.parse(await readFile(path.join(projectRoot, "system.json"), "utf8"));
 const packageJson = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8"));
 
@@ -68,6 +74,12 @@ describe("Example Characters compendium", () => {
       .toMatch(/^Compendium\.magnusarchives\.descriptors\.Item\.[A-Za-z0-9]{16}$/);
     expect(item("Laptop")._stats.compendiumSource)
       .toMatch(/^Compendium\.magnusarchives\.equipment\.Item\.[A-Za-z0-9]{16}$/);
+    expect(item("Investigator")._stats.compendiumSource)
+      .toMatch(/^Compendium\.magnusarchives\.types\.Item\.[A-Za-z0-9]{16}$/);
+    expect(item("Explores Dark Places")._stats.compendiumSource)
+      .toMatch(/^Compendium\.magnusarchives\.foci\.Item\.[A-Za-z0-9]{16}$/);
+    expect(item("Curiosity")._stats.compendiumSource)
+      .toMatch(/^Compendium\.magnusarchives\.cyphers\.Item\.[A-Za-z0-9]{16}$/);
     // Inline Items have no upstream document to point at.
     expect(item("Replica hieroglyph stamp set")._stats.compendiumSource).toBeNull();
   });
@@ -90,23 +102,24 @@ describe("Example Characters compendium", () => {
     // The Header reads system.focusProgress, not merely an owned Focus Item.
     expect(investigator.system.focusProgress).toEqual([{
       focusUuid: focus._id,
-      ownedNodeIds: ["operate-in-the-dark", "superb-explorer"],
+      ownedNodeIds: ["t1-superb-explorer"],
       provenance: "creation",
       initialChoicesGranted: true,
       attachedAt: 0
     }]);
-    expect(focus.system.graph.nodes.map((node: any) => node.id))
-      .toEqual(["operate-in-the-dark", "superb-explorer"]);
+    // The full chapter 4 tree, not a placeholder: owning only its tier-1 node.
+    expect(focus.system.graph.nodes.map((node: any) => node.id)).toContain("t1-superb-explorer");
+    expect(focus.system.graph.nodes.length).toBeGreaterThan(1);
   });
 
   it("ties the Focus-granted Abilities back to their nodes", () => {
     const focusId = item("Explores Dark Places")._id;
-    expect(item("Operate in the Dark").system)
-      .toMatchObject({sourceFocusUuid: focusId, sourceNodeId: "operate-in-the-dark"});
     expect(item("Superb Explorer").system)
-      .toMatchObject({sourceFocusUuid: focusId, sourceNodeId: "superb-explorer"});
-    // Careful Observation comes from the Type, so it stays unattributed.
-    expect(item("Careful Observation").system.sourceFocusUuid).toBeUndefined();
+      .toMatchObject({sourceFocusUuid: focusId, sourceNodeId: "t1-superb-explorer"});
+    // Careful Observation and Operate in the Dark are Investigator choices (p29-30),
+    // so they stay unattributed to the Focus.
+    expect(item("Careful Observation").system.sourceFocusUuid).toBe("");
+    expect(item("Operate in the Dark").system.sourceFocusUuid).toBe("");
   });
 
   it("leaves no unresolved {{itemId:...}} tokens", () => {

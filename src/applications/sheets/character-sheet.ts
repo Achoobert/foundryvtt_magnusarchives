@@ -74,7 +74,9 @@ import {
 } from "../dialogs/focus-association-dialogs";
 import type {FocusAssociationCharacterLike} from "../../services/focus-association-service";
 import {
+  arcDetailsHtml,
   markCoreInitialized,
+  promptChooseArc,
   promptCoreCharacterSetup
 } from "../dialogs/character-setup-dialog";
 import type {InitializationCharacterLike} from "../../services/character-initialization-service";
@@ -233,13 +235,40 @@ const CHARACTER_MUTATING_ACTIONS = new Set([
   "acquireFocusNode", "gmAcquireFocusNode", "purchaseAdvancement", "undoAdvancement", "advanceTier",
   "completeProgressionGuidance", "resetProgressionGuidance", "addFocus", "removeFocus",
   "toggleGmProgressionEdit", "undoFocusAcquisition", "gmMarkFocusOwned", "gmRemoveFocusOwned",
-  "beginCoreSetup", "skipCoreSetup", "markCoreInitialized", "restoreFocusAbility",
+  "beginCoreSetup", "skipCoreSetup", "markCoreInitialized", "chooseArc", "restoreFocusAbility",
   "addType", "addDescriptor", "addSpecies", "addGenre", "removeGenre", "acquireGenreAbility",
   "browseGenreAbilities", "removePackage", "createAbility", "useAbility", "payAbilityCost",
   "toggleAbilityArchived", "deleteAbility", "addPowerShift", "editPowerShift", "deletePowerShift",
   "sendItemToChat", "createInventoryItem", "deleteInventoryItem", "rollInventoryDepletion", "rollArtifactLevel",
   "playerIntrusion"
 ]);
+
+const ARC_STAGES = ["none", "opening", "steps", "climax", "resolution", "complete"] as const;
+
+function characterArcContext(arc: CharacterDocumentLike["system"]["arc"]): {
+  readonly chosen: boolean;
+  readonly name: string;
+  readonly details: string;
+  readonly stage: string;
+  readonly stepsCompleted: number;
+  readonly notes: string;
+  readonly stages: readonly {value: string; label: string; selected: boolean}[];
+} {
+  const stage = arc?.stage ?? "none";
+  return {
+    chosen: Boolean(arc?.name),
+    name: arc?.name ?? "",
+    details: arc?.key ? arcDetailsHtml(arc.key) : "",
+    stage,
+    stepsCompleted: arc?.stepsCompleted ?? 0,
+    notes: arc?.notes ?? "",
+    stages: ARC_STAGES.map((value) => ({
+      value,
+      label: game.i18n.localize(`MAGNUSARCHIVES.Arc.StageName.${value}`),
+      selected: value === stage
+    }))
+  };
+}
 
 export class CharacterSheet extends ActorSheetV2 {
   readonly #focusTreeConnections = new FocusTreeConnectionController();
@@ -320,6 +349,7 @@ export class CharacterSheet extends ActorSheetV2 {
       beginCoreSetup: CharacterSheet.#onBeginCoreSetup,
       skipCoreSetup: CharacterSheet.#onSkipCoreSetup,
       markCoreInitialized: CharacterSheet.#onMarkCoreInitialized,
+      chooseArc: CharacterSheet.#onChooseArc,
       restoreFocusAbility: CharacterSheet.#onRestoreFocusAbility,
       addType: CharacterSheet.#onAddType,
       addDescriptor: CharacterSheet.#onAddDescriptor,
@@ -1500,6 +1530,10 @@ export class CharacterSheet extends ActorSheetV2 {
     await promptCoreCharacterSetup(this.actor as unknown as InitializationCharacterLike);
   }
 
+  static async #onChooseArc(this: CharacterSheet): Promise<void> {
+    await promptChooseArc(this.actor as unknown as InitializationCharacterLike);
+  }
+
   static async #onSkipCoreSetup(this: CharacterSheet): Promise<void> {
     if (!game.user.isGM) return;
     await markCoreInitialized(this.actor as unknown as InitializationCharacterLike, "skipped");
@@ -1891,7 +1925,8 @@ export class CharacterSheet extends ActorSheetV2 {
       ...(speciesItems[0] ? {species: {id: speciesItems[0].id, name: speciesItems[0].name}} : {}),
       ...(typeItems[0] ? {type: {id: typeItems[0].id, name: typeItems[0].name}} : {}),
       ...(primaryFocus ? {focus: {uuid: primaryFocus.uuid, name: primaryFocus.name}} : {}),
-      hideFocus: coreSystem.presentation.hideFocusInSentence
+      hideFocus: coreSystem.presentation.hideFocusInSentence,
+      descriptorLabel: coreSystem.identity?.descriptorLabel ?? ""
     });
     const identity = {
       ...identitySource,
@@ -2157,6 +2192,7 @@ export class CharacterSheet extends ActorSheetV2 {
       systemFields: documentSystemFields(this.actor),
       editable: this.isEditable,
       enriched: {notes: enrichedNotes},
+      arc: characterArcContext(coreSystem.arc),
       familiarities,
       powerShifts,
       characterOverrides,

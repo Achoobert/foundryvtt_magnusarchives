@@ -493,6 +493,31 @@
 
   <div class="tab {{tabs.notes.cssClass}} character-notes-tab" data-group="primary" data-tab="notes">
     <section class="character-notes-layout">
+      <section class="character-arc">
+        <header class="character-arc-header">
+          <h3>{{localize "MAGNUSARCHIVES.Arc.Label"}}{{#if arc.chosen}}: {{arc.name}}{{/if}}</h3>
+          {{#if editable}}<button type="button" data-action="chooseArc">{{localize "MAGNUSARCHIVES.Arc.Change"}}</button>{{/if}}
+        </header>
+        {{#if arc.chosen}}
+          <div class="character-arc-details">{{{arc.details}}}</div>
+          <div class="character-arc-progress">
+            <label>{{localize "MAGNUSARCHIVES.Arc.Stage"}}
+              <select name="system.arc.stage" {{#unless editable}}disabled{{/unless}}>
+                {{#each arc.stages as |stage|}}<option value="{{stage.value}}" {{#if stage.selected}}selected{{/if}}>{{stage.label}}</option>{{/each}}
+              </select>
+            </label>
+            <label>{{localize "MAGNUSARCHIVES.Arc.StepsCompleted"}}
+              <input name="system.arc.stepsCompleted" type="number" data-dtype="Number" min="0" step="1" value="{{arc.stepsCompleted}}" {{#unless editable}}disabled{{/unless}}>
+            </label>
+          </div>
+          <label class="character-arc-notes">{{localize "MAGNUSARCHIVES.Arc.Notes"}}
+            <textarea name="system.arc.notes" rows="3" {{#unless editable}}disabled{{/unless}}>{{arc.notes}}</textarea>
+          </label>
+          <p class="hint">{{localize "MAGNUSARCHIVES.Arc.XpHint"}}</p>
+        {{else}}
+          <p class="hint">{{localize "MAGNUSARCHIVES.Arc.None"}}</p>
+        {{/if}}
+      </section>
       <div class="stacked-field magnusarchives-rich-description character-notes-editor">
         {{formInput systemFields.notes name="system.notes" value=source.system.notes enriched=enriched.notes elementType="prose-mirror" toggled=true disabled=(not editable) documentUUID=actor.uuid}}
       </div>

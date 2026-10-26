@@ -139,6 +139,8 @@ export interface CharacterHeaderIdentityInput {
   readonly type?: HeaderIdentityReference;
   readonly focus?: HeaderIdentityReference;
   readonly hideFocus?: boolean;
+  /** Custom word shown in place of the primary Descriptor's name, such as "Pretentious". */
+  readonly descriptorLabel?: string;
 }
 
 export function characterHeaderIdentity(input: CharacterHeaderIdentityInput = {}): {
@@ -151,7 +153,13 @@ export function characterHeaderIdentity(input: CharacterHeaderIdentityInput = {}
   readonly sentence: string;
 } {
   const orderedDescriptors = orderedHeaderDescriptors(input.descriptors);
-  const descriptorSlots = orderedDescriptors.map((descriptor) => identitySlot("descriptor", descriptor));
+  const label = input.descriptorLabel?.trim() ?? "";
+  const descriptorSlots = orderedDescriptors.map((descriptor) => {
+    const slot = identitySlot("descriptor", descriptor);
+    return label && descriptor.role === "primary"
+      ? {...slot, displayName: label.toLocaleUpperCase("en-US")}
+      : slot;
+  });
   if (!orderedDescriptors.some((descriptor) => descriptor.role === "primary")) {
     descriptorSlots.unshift(identitySlot("descriptor"));
   }

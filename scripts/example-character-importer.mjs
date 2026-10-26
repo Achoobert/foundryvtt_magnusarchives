@@ -53,6 +53,14 @@ function mergeSystem(base, overrides) {
   return merged;
 }
 
+/**
+ * Cyphers are generated from content/cyphers/catalog.json rather than stored in
+ * the reviewed core source, so add them as a `cyphers` pack for `ref` lookups.
+ */
+export function withCypherPack(corePackSource, cypherDocuments) {
+  return {...corePackSource, packs: {...corePackSource?.packs, cyphers: {documents: cypherDocuments}}};
+}
+
 /** Index the reviewed core Items by pack and name so `ref` entries can reuse them. */
 export function indexCorePackItems(corePackSource) {
   const index = new Map();
@@ -281,6 +289,7 @@ export function defaultExampleCharacterPaths(
     projectRoot,
     source: path.join(projectRoot, "content", "example-characters", "characters.json"),
     corePackSource: path.join(projectRoot, "content", "core-items", "reviewed-packs.json"),
+    cypherCatalog: path.join(projectRoot, "content", "cyphers", "catalog.json"),
     generatedRoot: path.join(projectRoot, ".generated", "example-character-import")
   };
 }

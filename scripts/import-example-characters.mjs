@@ -7,12 +7,15 @@ import {
   defaultExampleCharacterPaths,
   readExampleCharacterSource,
   validateExampleCharacterDocuments,
+  withCypherPack,
   writeExampleCharacterDocuments
 } from "./example-character-importer.mjs";
+import {generateCypherImport, readCypherImportSource} from "./cypher-importer.mjs";
 
 const paths = defaultExampleCharacterPaths();
 const source = await readExampleCharacterSource(paths.source);
-const corePackSource = JSON.parse(await readFile(paths.corePackSource, "utf8"));
+const {cypherDocuments} = generateCypherImport(await readCypherImportSource(paths.cypherCatalog));
+const corePackSource = withCypherPack(JSON.parse(await readFile(paths.corePackSource, "utf8")), cypherDocuments);
 
 const documents = validateExampleCharacterDocuments(
   buildExampleCharacterDocuments(source, corePackSource)

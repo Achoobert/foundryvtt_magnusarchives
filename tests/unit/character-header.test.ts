@@ -38,6 +38,27 @@ describe("Character Header HUD V1.1", () => {
     expect(empty.focus).toMatchObject({missing: true, accepts: "focus"});
   });
 
+  it("shows a custom Descriptor word in place of the primary Descriptor name", () => {
+    const identity = characterHeaderIdentity({
+      descriptors: [
+        {id: "fastidious", name: "Fastidious", role: "primary"},
+        {id: "bold", name: "Bold", role: "additional"}
+      ],
+      type: {id: "elocutionist", name: "Elocutionist"},
+      focus: {uuid: "Item.leads", name: "Leads"},
+      descriptorLabel: " Pretentious "
+    });
+    expect(identity.sentence).toBe("I AM A PRETENTIOUS AND BOLD ELOCUTIONIST WHO LEADS");
+    expect(identity.descriptors[0]).toMatchObject({id: "fastidious", name: "Fastidious", displayName: "PRETENTIOUS"});
+
+    expect(characterHeaderIdentity({
+      descriptors: [{id: "bold", name: "Bold", role: "primary"}],
+      type: {id: "occultist", name: "Occultist"},
+      descriptorLabel: "Eerie"
+    }).article).toBe("AN");
+    expect(characterHeaderIdentity({descriptorLabel: "Eerie"}).descriptors[0]).toMatchObject({missing: true});
+  });
+
   it("orders and deduplicates Descriptor instances before Species, Type, and Focus", () => {
     const descriptors = [
       {id: "rugged", instanceId: "rugged-instance", name: "Rugged", role: "speciesGranted" as const, attachedAt: 30},

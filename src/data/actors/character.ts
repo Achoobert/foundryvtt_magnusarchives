@@ -364,6 +364,21 @@ export class CharacterDataModel extends ActorDataModelBase {
         }),
         initializedAt: integerField()
       }),
+      identity: new fields.SchemaField({
+        descriptorLabel: new fields.StringField({required: true, nullable: false, initial: ""})
+      }),
+      arc: new fields.SchemaField({
+        key: new fields.StringField({required: true, nullable: false, initial: ""}),
+        name: new fields.StringField({required: true, nullable: false, initial: ""}),
+        stage: new fields.StringField({
+          required: true,
+          nullable: false,
+          initial: "none",
+          choices: ["none", "opening", "steps", "climax", "resolution", "complete"]
+        }),
+        stepsCompleted: integerField(),
+        notes: new fields.HTMLField({required: true, nullable: false, initial: ""})
+      }),
       proficiencies: new fields.SchemaField({
         weaponCategories: stringArrayField(["light"]),
         weaponFamilies: stringArrayField(),

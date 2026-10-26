@@ -18,28 +18,14 @@ function setPath(target: Record<string, unknown>, path: string, value: unknown):
 
 class TestCharacter implements InitializationCharacterLike {
   readonly type = "character";
-  readonly items: Array<{name: string; type: string; system: Record<string, unknown>; delete(): Promise<void>}> = [];
   readonly updates: Record<string, unknown>[] = [];
   failUpdate = false;
   system = {
     creation: {coreInitialized: false, mode: "uninitialized" as const, initializedAt: 0},
+    identity: {descriptorLabel: ""},
+    arc: {key: "", name: "", stage: "none", stepsCompleted: 0, notes: ""},
     marker: "preserve"
   };
-
-  async createEmbeddedDocuments(_type: string, data: Record<string, unknown>[]): Promise<unknown[]> {
-    return data.map((entry) => {
-      const item = {
-        name: String(entry.name),
-        type: String(entry.type),
-        system: entry.system as Record<string, unknown>,
-        delete: async (): Promise<void> => {
-          this.items.splice(this.items.indexOf(item), 1);
-        }
-      };
-      this.items.push(item);
-      return item;
-    });
-  }
 
   async update(changes: Record<string, unknown>): Promise<unknown> {
     if (this.failUpdate) throw new Error("Injected failure");
@@ -51,18 +37,12 @@ class TestCharacter implements InitializationCharacterLike {
   }
 }
 
-const twoSkills: CoreCharacterSetupRequest = {
-  pools: {might: 2, speed: 4, intellect: 0},
-  skills: [
-    {customName: "Climbing", rank: "trained"},
-    {customName: "History", rank: "trained"}
-  ]
-};
+const request: CoreCharacterSetupRequest = {pools: {might: 2, speed: 4, intellect: 0}};
 
 describe("CharacterInitializationService", () => {
   it("finalizes base 8 Pools plus exactly six points and all Core defaults", async () => {
     const actor = new TestCharacter();
-    await new CharacterInitializationService(undefined, () => 1234).setup(actor, twoSkills);
+    await new CharacterInitializationService(() => 1234).setup(actor, request);
     expect(actor.updates[0]).toMatchObject({
       "system.tier": 1,
       "system.stats.might.value": 10,
@@ -78,76 +58,56 @@ describe("CharacterInitializationService", () => {
       "system.proficiencies.armorCategories": [],
       "system.creation": {coreInitialized: true, mode: "completed", initializedAt: 1234}
     });
-    expect(actor.items.map((item) => [item.name, item.system.rank])).toEqual([
-      ["Climbing", "trained"], ["History", "trained"]
-    ]);
   });
 
-  it("blocks an invalid allocation before creating Items", async () => {
+  it("blocks an invalid allocation before updating the Actor", async () => {
     const actor = new TestCharacter();
     await expect(new CharacterInitializationService().setup(actor, {
-      ...twoSkills, pools: {might: 2, speed: 2, intellect: 1}
+      pools: {might: 2, speed: 2, intellect: 1}
     })).rejects.toMatchObject({code: "invalid-pools"});
-    expect(actor.items).toEqual([]);
+    await expect(new CharacterInitializationService().setup(actor, {
+      pools: {might: 7, speed: -1, intellect: 0}
+    })).rejects.toMatchObject({code: "invalid-pools"});
     expect(actor.updates).toEqual([]);
   });
 
-  it("supports the optional third trained Skill plus a different Inability", async () => {
+  it("stores the custom Descriptor word, trimmed", async () => {
     const actor = new TestCharacter();
+    await new CharacterInitializationService().setup(actor, {...request, descriptorLabel: "  Pretentious  "});
+    expect(actor.system.identity.descriptorLabel).toBe("Pretentious");
+  });
+
+  it("stores the chosen Character Arc and resets its progress", async () => {
+    const actor = new TestCharacter();
+    actor.system.arc.stage = "climax";
+    actor.system.arc.stepsCompleted = 3;
     await new CharacterInitializationService().setup(actor, {
-      pools: {might: 6, speed: 0, intellect: 0},
-      skills: [
-        {customName: "One", rank: "trained"},
-        {customName: "Two", rank: "trained"},
-        {customName: "Three", rank: "trained"},
-        {customName: "Four", rank: "inability"}
-      ]
+      ...request,
+      arc: {key: "solve-a-mystery", name: "Solve a Mystery"}
     });
-    expect(actor.items.map((item) => item.system.rank)).toEqual([
-      "trained", "trained", "trained", "inability"
-    ]);
+    expect(actor.system.arc).toMatchObject({
+      key: "solve-a-mystery", name: "Solve a Mystery", stage: "none", stepsCompleted: 0
+    });
   });
 
-  it("rejects duplicate selected or pre-existing Skills", async () => {
+  it("leaves the arc untouched when none is chosen", async () => {
     const actor = new TestCharacter();
-    await expect(new CharacterInitializationService().setup(actor, {
-      ...twoSkills,
-      skills: [{customName: "History", rank: "trained"}, {customName: " history ", rank: "trained"}]
-    })).rejects.toMatchObject({code: "duplicate-skill"});
-    actor.items.push({name: "Climbing", type: "skill", system: {}, async delete() {}});
-    await expect(new CharacterInitializationService().setup(actor, twoSkills))
-      .rejects.toMatchObject({code: "duplicate-skill"});
-  });
-
-  it("copies a world Skill source while forcing the requested starting rank", async () => {
-    const actor = new TestCharacter();
-    const source = {
-      uuid: "Item.stealth", name: "Stealth", type: "skill",
-      system: {rank: "expert", category: "general", contexts: [], acquisition: {}}
-    };
-    const service = new CharacterInitializationService(async (uuid) => uuid === source.uuid ? source : null);
-    await service.setup(actor, {
-      pools: {might: 0, speed: 0, intellect: 6},
-      skills: [{sourceUuid: source.uuid, rank: "trained"}, {customName: "Lore", rank: "trained"}]
-    });
-    expect(actor.items[0]).toMatchObject({
-      name: "Stealth",
-      system: {rank: "trained", acquisition: {grantedByUuid: "Item.stealth"}}
-    });
+    await new CharacterInitializationService().setup(actor, request);
+    expect(Object.keys(actor.updates[0]!).some((key) => key.startsWith("system.arc"))).toBe(false);
   });
 
   it("is idempotent and never overwrites an initialized Character", async () => {
     const actor = new TestCharacter();
     const service = new CharacterInitializationService();
-    await service.setup(actor, twoSkills);
-    const snapshot = structuredClone({system: actor.system, itemNames: actor.items.map((item) => item.name)});
-    await expect(service.setup(actor, twoSkills)).rejects.toMatchObject({code: "already-initialized"});
-    expect({system: actor.system, itemNames: actor.items.map((item) => item.name)}).toEqual(snapshot);
+    await service.setup(actor, request);
+    const snapshot = structuredClone(actor.system);
+    await expect(service.setup(actor, request)).rejects.toMatchObject({code: "already-initialized"});
+    expect(actor.system).toEqual(snapshot);
   });
 
   it("keeps coreInitialized after close/reopen and a serialized reload", async () => {
     const actor = new TestCharacter();
-    await new CharacterInitializationService(undefined, () => 5678).setup(actor, twoSkills);
+    await new CharacterInitializationService(() => 5678).setup(actor, request);
 
     const reopenedCreation = actor.system.creation;
     const reloadedSystem = structuredClone(actor.system);
@@ -156,20 +116,19 @@ describe("CharacterInitializationService", () => {
     expect(reloadedSystem.creation).toEqual({coreInitialized: true, mode: "completed", initializedAt: 5678});
   });
 
-  it("rolls back created Skills if final Actor update fails", async () => {
+  it("does not mark the Character initialized if the Actor update fails", async () => {
     const actor = new TestCharacter();
     actor.failUpdate = true;
-    await expect(new CharacterInitializationService().setup(actor, twoSkills)).rejects.toThrow();
-    expect(actor.items).toEqual([]);
+    await expect(new CharacterInitializationService().setup(actor, request)).rejects.toThrow();
+    expect(actor.system.creation.coreInitialized).toBe(false);
   });
 
   it.each(["skipped", "manual"] as const)("supports GM %s initialization without resetting data", async (mode) => {
     const actor = new TestCharacter();
-    await new CharacterInitializationService(undefined, () => 99).markInitialized(actor, mode);
+    await new CharacterInitializationService(() => 99).markInitialized(actor, mode);
     expect(actor.system).toMatchObject({
       marker: "preserve",
       creation: {coreInitialized: true, mode, initializedAt: 99}
     });
-    expect(actor.items).toEqual([]);
   });
 });

@@ -731,10 +731,52 @@
 
 .magnusarchives-sheet.magnusarchives-character .character-notes-layout {
   display: flex;
+  flex-direction: column;
+  gap: var(--magnusarchives-space-compact);
   min-height: 100%;
 
   .character-notes-editor {
     flex: 1 1 auto;
+  }
+
+  .character-arc {
+    display: grid;
+    gap: var(--magnusarchives-space-tight);
+    padding: var(--magnusarchives-space-compact);
+    background: var(--magnusarchives-color-surface);
+  }
+
+  .character-arc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--magnusarchives-space-compact);
+
+    h3 {
+      margin: 0;
+    }
+
+    button {
+      flex: 0 0 auto;
+      width: auto;
+    }
+  }
+
+  .character-arc-details {
+    p,
+    ul {
+      margin: 0;
+    }
+  }
+
+  .character-arc-progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--magnusarchives-space-compact);
+  }
+
+  .character-arc-notes {
+    display: grid;
   }
 }
 

@@ -228,6 +228,16 @@ export interface CharacterCoreSystemData {
     mode: "uninitialized" | "completed" | "skipped" | "manual";
     initializedAt: number;
   };
+  identity?: {
+    descriptorLabel: string;
+  };
+  arc?: {
+    key: string;
+    name: string;
+    stage: "none" | "opening" | "steps" | "climax" | "resolution" | "complete";
+    stepsCompleted: number;
+    notes: string;
+  };
   advancement: CharacterAdvancementData;
   proficiencies: {
     weaponCategories: string[];
