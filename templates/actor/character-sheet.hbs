@@ -53,6 +53,7 @@
       <section class="character-hud-core-stats character-hud-stat-stack" aria-label="{{localize 'MAGNUSARCHIVES.Hud.CoreStats'}}">
         <span class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.Tier"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="tier">{{header.stats.tier}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.tier}}</strong>{{/if}}</span>
         <span class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.Effort"}}</small>{{#if editable}}<button type="button" class="character-hud-stat-value magnusarchives-primary-action" data-action="editCharacterOverride" data-override-key="effort">{{header.stats.effort}}</button>{{else}}<strong class="character-hud-stat-value">{{header.stats.effort}}</strong>{{/if}}</span>
+        <label class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.XP"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.xp" type="number" data-dtype="Number" value="{{header.stats.xp}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.xp}}</strong>{{/if}}</label>
       </section>
     </div>
 
@@ -74,6 +75,7 @@
     </section>
 
     <div class="character-hud-lower">
+
       <article class="character-hud-card character-hud-damage-track {{#if header.damageTrack.dead}}is-dead{{/if}}">
         <div class="character-hud-card-heading">
           <strong class="character-hud-card-title">{{localize "MAGNUSARCHIVES.DamageTrack.Label"}}</strong>
@@ -92,6 +94,11 @@
               {{else}}
                 <span class="character-hud-damage-step {{#if entry.current}}is-current{{/if}} {{#if entry.reached}}is-reached{{/if}}" role="radio" aria-checked="{{entry.current}}" title="{{entry.hint}}">{{entry.label}}</span>
               {{/if}}
+              {{#if entry.notes.length}}
+                <ul class="character-hud-damage-step-notes">
+                  {{#each entry.notes as |note|}}<li>{{note}}</li>{{/each}}
+                </ul>
+              {{/if}}
             </li>
           {{/each}}
         </ol>
@@ -108,7 +115,7 @@
             <small>{{localize "MAGNUSARCHIVES.Stress.Points"}}</small>
             {{#if header.stress.canEdit}}<input class="character-hud-stat-value" name="system.stress.value" type="number" data-dtype="Number" value="{{header.stress.value}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stress.value}}</strong>{{/if}}
           </label>
-          <span class="character-hud-stat-box">
+          <span class="character-hud-stat-box character-hud-stress-level">
             <small>{{localize "MAGNUSARCHIVES.Stress.Level"}}</small>
             <strong class="character-hud-stat-value">{{header.stress.level}}</strong>
           </span>
@@ -116,6 +123,10 @@
         <span class="character-hud-pips" aria-label="{{localize 'MAGNUSARCHIVES.Stress.TowardNextLevel'}}">
           {{#each header.stress.pips as |pip|}}<i class="character-hud-pip is-stress {{#if pip.filled}}is-filled{{/if}}"></i>{{/each}}
         </span>
+        <label class="character-hud-stat-box character-hud-stress-supernatural" title="{{localize 'MAGNUSARCHIVES.Stress.SupernaturalHint'}}">
+          <small>{{localize "MAGNUSARCHIVES.Stress.Supernatural"}}</small>
+          {{#if header.stress.canEdit}}<input class="character-hud-stat-value" name="system.stress.supernatural" type="number" data-dtype="Number" value="{{header.stress.supernatural}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stress.supernatural}}</strong>{{/if}}
+        </label>
         {{#if header.stress.canEdit}}
           <div class="character-hud-stress-actions">
             <button type="button" class="magnusarchives-icon-action" data-action="adjustStress" data-delta="-1" title="{{localize 'MAGNUSARCHIVES.Stress.Relieve'}}" aria-label="{{localize 'MAGNUSARCHIVES.Stress.Relieve'}}"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
@@ -123,7 +134,6 @@
           </div>
         {{/if}}
       </article>
-
       <article class="character-hud-card character-hud-recovery">
         <div class="character-hud-card-heading character-hud-recovery-heading">
           <strong class="character-hud-card-title">{{localize "MAGNUSARCHIVES.Character.Recovery"}}</strong>
@@ -135,10 +145,6 @@
         </div>
       </article>
 
-      <section class="character-hud-currency character-hud-stat-stack" aria-label="{{localize 'MAGNUSARCHIVES.Hud.Currency'}}">
-          <label class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Hud.ResourcePointsShort"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.resourcePoints" type="number" data-dtype="Number" value="{{header.stats.resourcePoints}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.resourcePoints}}</strong>{{/if}}</label>
-          <label class="character-hud-stat-box"><small>{{localize "MAGNUSARCHIVES.Character.XP"}}</small>{{#if editable}}<input class="character-hud-stat-value" name="system.xp" type="number" data-dtype="Number" value="{{header.stats.xp}}" min="0" step="1" inputmode="numeric">{{else}}<strong class="character-hud-stat-value">{{header.stats.xp}}</strong>{{/if}}</label>
-      </section>
     </div>
   </header>
 
@@ -532,7 +538,7 @@
             <ul class="advancement-purchases">
               {{#each advancement.purchases as |purchase|}}
                 <li>
-                  <span>{{localize purchase.label}} · {{purchase.xpCost}} XP · +{{purchase.resourcePointsGranted}} {{localize "MAGNUSARCHIVES.Character.ResourcePoints"}}</span>
+                  <span>{{localize purchase.label}} · {{purchase.xpCost}} XP</span>
                   {{#if ../editable}}<button type="button" class="magnusarchives-icon-action advancement-undo-action" data-action="undoAdvancement" data-purchase-id="{{purchase.id}}" title="{{localize 'MAGNUSARCHIVES.Advancement.Undo.Action'}}" aria-label="{{localize 'MAGNUSARCHIVES.Advancement.Undo.Action'}}: {{localize purchase.label}}"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i></button>{{/if}}
                 </li>
               {{/each}}

@@ -202,10 +202,24 @@ export interface HeaderDamageTrackStep {
   step: DamageTrackStep;
   label: string;
   hintLabel: string;
+  /** The penalty bullets the printed sheet prints beside the step (p381). */
+  noteLabels: readonly string[];
   current: boolean;
   /** Steps at or before the current one, so the track reads like a filled bar. */
   reached: boolean;
 }
+
+/**
+ * The printed sheet only spells out penalties beside Hurt, Impaired and
+ * Debilitated; Hale and Dead carry none.
+ */
+const DAMAGE_TRACK_NOTE_COUNT: Readonly<Record<DamageTrackStep, number>> = {
+  hale: 0,
+  hurt: 1,
+  impaired: 3,
+  debilitated: 2,
+  dead: 0
+};
 
 /**
  * The damage track as the printed sheet shows it (p381): one box per step, with
@@ -222,6 +236,10 @@ export function headerDamageTrack(
     step: entry,
     label: `MAGNUSARCHIVES.DamageTrack.${entry}`,
     hintLabel: `MAGNUSARCHIVES.DamageTrack.Hint.${entry}`,
+    noteLabels: Array.from(
+      {length: DAMAGE_TRACK_NOTE_COUNT[entry]},
+      (_unused, note) => `MAGNUSARCHIVES.DamageTrack.Note.${entry}.${note + 1}`
+    ),
     current: entry === current,
     reached: index <= currentIndex
   }));
@@ -231,17 +249,20 @@ export interface HeaderStress {
   value: number;
   level: number;
   toNextLevel: number;
+  /** Stress Levels from supernatural sources, boxed separately on the sheet. */
+  supernatural: number;
   /** One pip per point within the current partial level. */
   pips: readonly HeaderPip[];
 }
 
-export function headerStress(value: number): HeaderStress {
+export function headerStress(value: number, supernatural = 0): HeaderStress {
   const safeValue = Math.max(0, Math.trunc(value));
   const level = stressLevel(safeValue);
   return {
     value: safeValue,
     level,
     toNextLevel: stressToNextLevel(safeValue),
+    supernatural: Math.max(0, Math.trunc(supernatural)),
     pips: headerPips(safeValue - level * STRESS_POINTS_PER_LEVEL, STRESS_POINTS_PER_LEVEL)
   };
 }

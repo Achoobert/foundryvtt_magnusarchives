@@ -56,6 +56,7 @@ export function character(options: {
   xp?: number;
   stress?: number;
   damageTrackStep?: DamageTrackStep;
+  supernaturalStress?: number;
   hurtAvailable?: boolean;
 } = {}): FakeCharacter {
   const stats = pools(options.poolValues);
@@ -72,7 +73,6 @@ export function character(options: {
     tier: options.tier ?? 1,
     overrides: emptyCharacterOverrides(),
     xp: options.xp ?? 0,
-    resourcePoints: 0,
     cypherLimitBase: 2,
     focusProgress: [],
     genre: {sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0},
@@ -88,7 +88,7 @@ export function character(options: {
     },
     proficiencies: {weaponCategories: [], weaponFamilies: [], armorCategories: [], freelyUse: []},
     stats: Object.assign(stats, {effortBase: options.effortBase ?? 1}),
-    stress: {value: options.stress ?? 0},
+    stress: {value: options.stress ?? 0, supernatural: options.supernaturalStress ?? 0},
     damageTrack: {
       step: options.damageTrackStep ?? "hale",
       hurtAvailable: options.hurtAvailable ?? false

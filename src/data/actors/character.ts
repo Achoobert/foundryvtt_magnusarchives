@@ -55,7 +55,6 @@ function advancementPurchaseField(): unknown {
     }),
     tier: integerField(1, 1),
     xpCost: integerField(),
-    resourcePointsGranted: integerField(),
     timestamp: integerField()
   });
 }
@@ -204,7 +203,6 @@ export class CharacterDataModel extends ActorDataModelBase {
         })
       }),
       xp: integerField(),
-      resourcePoints: integerField(),
       stats: new fields.SchemaField({
         effortBase: integerField(1),
         might: statPoolField(8),
@@ -246,7 +244,8 @@ export class CharacterDataModel extends ActorDataModelBase {
         major: new fields.ArrayField(woundRecordField(), {required: true, nullable: false, initial: []})
       }),
       stress: new fields.SchemaField({
-        value: integerField(0, 0)
+        value: integerField(0, 0),
+        supernatural: integerField(0, 0)
       }),
       damageTrack: new fields.SchemaField({
         step: new fields.StringField({

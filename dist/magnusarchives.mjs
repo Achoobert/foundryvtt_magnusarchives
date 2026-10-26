@@ -1,4 +1,4 @@
-const U = "magnusarchives", Ur = "0.1.0";
+const G = "magnusarchives", Gr = "0.1.0";
 const te = [
   "inability",
   "untrained",
@@ -23,10 +23,10 @@ const Mn = [
   "perpetual",
   "passive",
   "special"
-], Ia = ["none", "might", "speed", "intellect", "choose"], Ws = ["none", "task", "attack", "defense"], _s = ["none", "single", "multiple"], Ge = ["one-action", "10-minutes", "1-hour", "10-hours"], Hr = ["normal", "nonRest"], $r = ["10-minutes", "1-hour", "10-hours"];
+], Ia = ["none", "might", "speed", "intellect", "choose"], Ws = ["none", "task", "attack", "defense"], _s = ["none", "single", "multiple"], Ue = ["one-action", "10-minutes", "1-hour", "10-hours"], Hr = ["normal", "nonRest"], $r = ["10-minutes", "1-hour", "10-hours"];
 function Vr(n, e, t) {
   return Object.freeze({
-    version: Ur,
+    version: Gr,
     rules: n,
     services: e,
     themes: t
@@ -38,7 +38,7 @@ const Dr = qt.filter(
 function Qt(n) {
   return n ? qt : Dr;
 }
-function Gi(n) {
+function Ui(n) {
   return Math.floor(Math.max(0, n) / 3);
 }
 function Ks(n) {
@@ -100,7 +100,7 @@ function Ct(n = !1) {
   return { oneAction: n, tenMinutes: n, oneHour: n, tenHours: n };
 }
 function Qs(n) {
-  return Ge.filter((e) => !n[Zt[e]]);
+  return Ue.filter((e) => !n[Zt[e]]);
 }
 let Ra = 0;
 const je = () => {
@@ -179,7 +179,7 @@ function di(n, e, t) {
 function B(n) {
   return n.derived?.tier?.value ?? ht(n.tier, n.overrides?.tier);
 }
-function Gn(n, e) {
+function Un(n, e) {
   if (e === "tier") return {
     key: e,
     path: bt(e),
@@ -224,13 +224,13 @@ function Br(n, e = Ct(!1)) {
   for (const a of n) {
     if (!a || typeof a != "object") continue;
     const s = a, o = typeof s.id == "string" ? s.id.trim() : "", r = String(s.type ?? "");
-    !o || t.has(o) || !Ge.includes(r) || (t.add(o), i.push({ id: o, type: r, used: s.used === !0 }));
+    !o || t.has(o) || !Ue.includes(r) || (t.add(o), i.push({ id: o, type: r, used: s.used === !0 }));
   }
   return i.length > 0 ? i : ot(e);
 }
 function Et(n) {
   const e = Ct(!1);
-  for (const t of Ge) {
+  for (const t of Ue) {
     const i = n.filter((a) => a.type === t);
     e[Zt[t]] = i.length > 0 && i.every((a) => a.used);
   }
@@ -247,7 +247,7 @@ function Na(n, e, t) {
 }
 function Lr(n) {
   const e = Ct(!1);
-  for (const t of Ge)
+  for (const t of Ue)
     e[Zt[t]] = n.some((i) => i.type === t && i.used);
   return ot(e);
 }
@@ -277,10 +277,10 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
   descriptorNames: [],
   speciesNames: [],
   characterSentence: ""
-}, l = 2, u = 1, c = qr(), p = 0, h = [], m = jr) {
-  const S = {};
+}, l = 2, u = 1, c = qr(), p = 0, y = [], m = jr) {
+  const f = {};
   for (const N of k) {
-    const y = [
+    const S = [
       be(
         `pool.${N}.max.base`,
         `system.stats.${N}.baseMax`,
@@ -298,17 +298,17 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
         n[N].baseEdge
       ),
       ...i.poolEdge?.[N] ?? []
-    ], We = Ae(y), li = Ae(Y);
-    S[N] = {
+    ], We = Ae(S), li = Ae(Y);
+    f[N] = {
       calculatedMax: We,
       calculatedEdge: li,
       max: ht(We, c.stats?.[N]?.max),
       edge: ht(li, c.stats?.[N]?.edge),
-      maxContributions: y,
+      maxContributions: S,
       edgeContributions: Y
     };
   }
-  const f = [
+  const g = [
     be(
       "effort.max.base",
       "system.stats.effortBase",
@@ -317,7 +317,7 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
       n.effortBase ?? 0
     ),
     ...i.effortMax ?? []
-  ], A = Math.max(0, Ae(f)), v = [
+  ], A = Math.max(0, Ae(g)), v = [
     be(
       "recovery.bonus.base",
       "system.recovery.bonus",
@@ -329,9 +329,9 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
   ], E = Ae(v), H = [
     be("cypher-limit.base", "system.cypherLimitBase", "base", "Base Cypher Limit", l),
     ...i.cypherLimit ?? []
-  ], R = {}, G = {}, z = {};
+  ], R = {}, U = {}, z = {};
   for (const N of fe) {
-    const y = [
+    const S = [
       be(
         `wound.${N}.capacity.core`,
         "magnusarchives.core",
@@ -340,8 +340,8 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
         3
       ),
       ...i.woundCapacity?.[N] ?? []
-    ], Y = Math.max(1, Ae(y)), We = c.wounds?.[N] ?? 0;
-    G[N] = Y, R[N] = We === 0 ? y : [...y, be(
+    ], Y = Math.max(1, Ae(S)), We = c.wounds?.[N] ?? 0;
+    U[N] = Y, R[N] = We === 0 ? S : [...S, be(
       `wound.${N}.capacity.manual`,
       `system.overrides.wounds.${N}`,
       "base",
@@ -369,7 +369,7 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
         1
       )
     );
-  const M = Math.max(0, m.stressPoints), V = Gi(M);
+  const M = Math.max(0, m.stressPoints), V = Ui(M);
   V > 0 && K.push(
     be(
       "stress.level.hindrance",
@@ -379,11 +379,11 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
       V
     )
   ), K.push(...i.hindrance ?? []);
-  const ie = [...a].filter((N) => N.type === "armor" && N.system.equipped).some((N) => N.system.grantsHurtStep !== !1), W = m.hurtAvailable || ie || (i.hurtStep?.length ?? 0) > 0, Ue = vt(m.damageTrackStep, W), q = xr(Ue), J = [...a].filter((N) => N.type === "armor" && N.system.equipped).filter((N) => Be.includes(N.system.category)).sort((N, y) => Ji[y.system.category] - Ji[N.system.category] || N.id.localeCompare(y.id))[0], ke = J?.system.category ?? "none", ye = J ? Ji[J.system.category] : 0, Ce = J ? s.armorCategories.includes(J.system.category) : !0, re = (N, y, Y) => J && Y > 0 ? [be(
+  const ie = [...a].filter((N) => N.type === "armor" && N.system.equipped).some((N) => N.system.grantsHurtStep !== !1), W = m.hurtAvailable || ie || (i.hurtStep?.length ?? 0) > 0, Ge = vt(m.damageTrackStep, W), q = xr(Ge), J = [...a].filter((N) => N.type === "armor" && N.system.equipped).filter((N) => Be.includes(N.system.category)).sort((N, S) => Ji[S.system.category] - Ji[N.system.category] || N.id.localeCompare(S.id))[0], ke = J?.system.category ?? "none", ye = J ? Ji[J.system.category] : 0, Ce = J ? s.armorCategories.includes(J.system.category) : !0, re = (N, S, Y) => J && Y > 0 ? [be(
     `armor.${J.id}.${N}`,
     J.id,
     "item",
-    y,
+    S,
     Y
   )] : [], Q = re("block", "Armor: Block", ye), Se = re("dodge", "Armor: Dodge", ye), me = re(
     "speed-task",
@@ -395,11 +395,11 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
       calculated: u,
       value: ht(u, c.tier)
     },
-    pools: S,
+    pools: f,
     effort: {
       calculatedMax: A,
       max: Math.max(0, ht(A, c.effort)),
-      contributions: f
+      contributions: g
     },
     stress: {
       value: M,
@@ -408,7 +408,7 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
       hindrance: V
     },
     damageTrack: {
-      step: Ue,
+      step: Ge,
       hurtAvailable: W,
       steps: [...Qt(W)],
       effortSurcharge: q.effortSurcharge,
@@ -419,7 +419,7 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
     },
     totalHindrance: Ae(K),
     wounds: {
-      calculatedCapacities: G,
+      calculatedCapacities: U,
       capacities: z,
       capacityContributions: R,
       hindrance: Ae(K),
@@ -433,7 +433,7 @@ function Wr(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
       manualModifier: p,
       bonus: E + p,
       bonusContributions: v,
-      availableTypes: h.length > 0 ? [...new Set(Ot(h).map((N) => N.type))] : Qs(t)
+      availableTypes: y.length > 0 ? [...new Set(Ot(y).map((N) => N.type))] : Qs(t)
     },
     cypherLimit: { max: Math.max(0, Ae(H)), contributions: H },
     combat: {
@@ -461,7 +461,7 @@ const {
   HTMLField: Zs,
   NumberField: It,
   ObjectField: _r,
-  SchemaField: Gt,
+  SchemaField: Ut,
   StringField: ge
 } = foundry.data.fields, d = {
   ArrayField: Xn,
@@ -469,7 +469,7 @@ const {
   HTMLField: Zs,
   NumberField: It,
   ObjectField: _r,
-  SchemaField: Gt,
+  SchemaField: Ut,
   StringField: ge
 };
 function w(n = 0, e = 0) {
@@ -482,7 +482,7 @@ function Z(n = []) {
   );
 }
 function Qi(n = 10) {
-  return new Gt({
+  return new Ut({
     value: w(n),
     baseMax: w(n, 1),
     baseEdge: w(0, -20),
@@ -505,7 +505,7 @@ function Qi(n = 10) {
   });
 }
 function wt() {
-  return new Gt({
+  return new Ut({
     id: new ge({ required: !0, nullable: !1, blank: !1 }),
     label: new ge({ required: !0, nullable: !1, initial: "" }),
     description: new Zs({ required: !0, nullable: !1, initial: "" }),
@@ -514,7 +514,7 @@ function wt() {
   });
 }
 function Kr() {
-  return new Gt({
+  return new Ut({
     id: new ge({ required: !0, nullable: !1, blank: !1 }),
     sourceId: new ge({ required: !0, nullable: !1, blank: !1 }),
     sourceType: new ge({
@@ -535,7 +535,7 @@ function pe() {
   });
 }
 function Xr() {
-  return new Gt({
+  return new Ut({
     enabled: new Pi({ required: !0, nullable: !1, initial: !1 }),
     trigger: new ge({
       required: !0,
@@ -552,7 +552,7 @@ function Xr() {
   });
 }
 function xi(n = "") {
-  return new Gt({
+  return new Ut({
     enabled: new Pi({ required: !0, nullable: !1, initial: !1 }),
     die: new ge({
       required: !0,
@@ -602,7 +602,6 @@ const Yn = [
   capabilityPoints: 4,
   effortMaximum: 6,
   recoveryBonus: 2,
-  resourcePointsForTier: (n) => n >= 5 ? 3 : n >= 3 ? 2 : 1,
   genreChoiceForTier: (n) => n >= 3 && n % 3 === 0,
   attackDefenseTrainingTier: 2,
   attackDefenseSpecializationTier: 4
@@ -671,7 +670,7 @@ function Zr(n) {
     });
   });
 }
-function Ga(n, e) {
+function Ua(n, e) {
   const t = oo(n);
   return t.length > 0 ? t : Zr(e);
 }
@@ -706,7 +705,7 @@ function nl(n, e) {
 function mi(n, e) {
   return Number.isInteger(n) && Number(n) >= e ? Number(n) : null;
 }
-function Ua(n, e = !1) {
+function Ga(n, e = !1) {
   const t = {}, i = n.stats && typeof n.stats == "object" ? n.stats : {}, a = (s) => {
     const o = i[s] && typeof i[s] == "object" ? i[s] : {}, r = {};
     return (!e || F(o, "max")) && (r.max = mi(o.max, 1)), (!e || F(o, "edge")) && (r.edge = mi(o.edge, -20)), r;
@@ -754,7 +753,7 @@ function ka(n, e) {
 }
 function ol(n, e = {}) {
   const t = e.partial === !0;
-  if (t ? n.overrides && typeof n.overrides == "object" && (n.overrides = Ua(n.overrides, !0)) : n.overrides = Ua(
+  if (t ? n.overrides && typeof n.overrides == "object" && (n.overrides = Ga(n.overrides, !0)) : n.overrides = Ga(
     n.overrides && typeof n.overrides == "object" ? n.overrides : {}
   ), !t && (!n.genre || typeof n.genre != "object") && (n.genre = { sourceUuid: "", instanceId: "", provenance: "manual", attachedAt: 0 }), t ? n.appearance && typeof n.appearance == "object" && (n.appearance = ka(n.appearance, !0)) : n.appearance = ka(
     n.appearance && typeof n.appearance == "object" ? n.appearance : {},
@@ -831,61 +830,61 @@ function rl(n, e, t = []) {
   return [i, a].filter(Boolean).join(" ");
 }
 function ll(n, e = [], t = [], i = [], a = []) {
-  const s = {}, o = {}, r = {}, l = new Set(e.filter((f) => Oe.includes(f))), u = new Set(oe(a)), c = new Set(t.filter((f) => Be.includes(f))), p = [], h = [], m = [], S = [];
-  for (const f of n) {
-    if (f.type === "characterType" || f.type === "species") {
-      const E = f.system;
-      if (f.type === "characterType")
-        p.push(f.name);
+  const s = {}, o = {}, r = {}, l = new Set(e.filter((g) => Oe.includes(g))), u = new Set(oe(a)), c = new Set(t.filter((g) => Be.includes(g))), p = [], y = [], m = [], f = [];
+  for (const g of n) {
+    if (g.type === "characterType" || g.type === "species") {
+      const E = g.system;
+      if (g.type === "characterType")
+        p.push(g.name);
       else {
-        m.push(f.name);
+        m.push(g.name);
         const R = _e(E.cypherLimitBonus);
-        R && S.push(ut(f, "cypher-limit", R));
+        R && f.push(ut(g, "cypher-limit", R));
       }
       for (const R of oe([
         ...E.weaponFamilies ?? [],
         ...qi(E.weaponFamilyUse)
       ])) u.add(R);
       for (const R of ["minor", "moderate", "major"]) {
-        const G = _e(E.woundBonuses[R]);
-        G && (r[R] ??= []).push(ut(f, `wound.${R}`, G));
+        const U = _e(E.woundBonuses[R]);
+        U && (r[R] ??= []).push(ut(g, `wound.${R}`, U));
       }
       const H = E.edgeGrant.mode === "choice" ? E.instance.selections.edgePool : E.edgeGrant.pool;
       if (H !== "none" && k.includes(H)) {
         const R = _e(E.edgeGrant.amount);
-        R && (o[H] ??= []).push(ut(f, `edge.${H}`, R));
+        R && (o[H] ??= []).push(ut(g, `edge.${H}`, R));
       }
       for (const R of Oe) E.weaponUse[R] && l.add(R);
       for (const R of Be) E.armorUse[R] && c.add(R);
     } else
-      h.push(f.name);
-    const A = f.system.poolBonuses;
+      y.push(g.name);
+    const A = g.system.poolBonuses;
     for (const E of k) {
       const H = _e(A[E]);
-      H && (s[E] ??= []).push(ut(f, `pool.${E}`, H));
+      H && (s[E] ??= []).push(ut(g, `pool.${E}`, H));
     }
-    for (const E of ro(f))
+    for (const E of ro(g))
       (s[E.pool] ??= []).push(ut(
-        f,
+        g,
         `pool-choice.${E.groupId}.${E.pool}`,
         E.amount
       ));
-    const v = lo(f);
+    const v = lo(g);
     v && (s[v.pool] ??= []).push(ut(
-      f,
+      g,
       `superheroics.${v.pool}`,
       v.amount
     ));
   }
   return {
-    extensions: { poolMax: s, poolEdge: o, woundCapacity: r, cypherLimit: S },
+    extensions: { poolMax: s, poolEdge: o, woundCapacity: r, cypherLimit: f },
     weaponCategories: [...l],
     weaponFamilies: [...u],
     armorCategories: [...c],
     typeNames: p,
-    descriptorNames: h,
+    descriptorNames: y,
     speciesNames: m,
-    characterSentence: rl(h, p, i)
+    characterSentence: rl(y, p, i)
   };
 }
 function Zi(n) {
@@ -987,7 +986,6 @@ function Al() {
     }),
     tier: w(1, 1),
     xpCost: w(),
-    resourcePointsGranted: w(),
     timestamp: w()
   });
 }
@@ -1036,7 +1034,7 @@ function Cl() {
       initial: "normal",
       choices: [...Hr]
     }),
-    type: new d.StringField({ required: !0, nullable: !1, choices: [...Ge] }),
+    type: new d.StringField({ required: !0, nullable: !1, choices: [...Ue] }),
     rolled: new d.BooleanField({ required: !0, nullable: !1, initial: !0 }),
     dieResult: w(),
     tier: w(1, 1),
@@ -1051,7 +1049,7 @@ function Cl() {
 function El() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
-    type: new d.StringField({ required: !0, nullable: !1, choices: [...Ge] }),
+    type: new d.StringField({ required: !0, nullable: !1, choices: [...Ue] }),
     used: new d.BooleanField({ required: !0, nullable: !1, initial: !1 })
   });
 }
@@ -1104,7 +1102,6 @@ class Rl extends eo {
         })
       }),
       xp: w(),
-      resourcePoints: w(),
       stats: new d.SchemaField({
         effortBase: w(1),
         might: Qi(8),
@@ -1146,7 +1143,8 @@ class Rl extends eo {
         major: new d.ArrayField(wt(), { required: !0, nullable: !1, initial: [] })
       }),
       stress: new d.SchemaField({
-        value: w(0, 0)
+        value: w(0, 0),
+        supernatural: w(0, 0)
       }),
       damageTrack: new d.SchemaField({
         step: new d.StringField({
@@ -1340,7 +1338,7 @@ class Rl extends eo {
             bonus: w(),
             bonusContributions: pe(),
             availableTypes: new d.ArrayField(
-              new d.StringField({ required: !0, nullable: !1, choices: [...Ge] }),
+              new d.StringField({ required: !0, nullable: !1, choices: [...Ue] }),
               { required: !0, nullable: !1, initial: [] }
             )
           }),
@@ -1526,8 +1524,8 @@ class Nl extends eo {
     super.prepareDerivedData(), this.health.max = this.health.baseMax, this.dead = this.health.value <= 0;
   }
 }
-const Ml = ["none", "fantasy", "scienceFiction", "superhero", "custom"], Gl = ["primary", "additional", "speciesGranted", "custom"], Ao = ["none", "fixed", "choice"], Ul = ["type", "descriptor", "focus", "genre", "species", "other"], kl = ["active", "retained"], Hl = ["fixed", "catalog"], $l = ["none", "descriptor"];
-function Ut() {
+const Ml = ["none", "fantasy", "scienceFiction", "superhero", "custom"], Ul = ["primary", "additional", "speciesGranted", "custom"], Ao = ["none", "fixed", "choice"], Gl = ["type", "descriptor", "focus", "genre", "species", "other"], kl = ["active", "retained"], Hl = ["fixed", "catalog"], $l = ["none", "descriptor"];
+function Gt() {
   return new d.SchemaField({
     name: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     img: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1536,7 +1534,7 @@ function Ut() {
 }
 function bo() {
   return new d.SchemaField({
-    kind: new d.StringField({ required: !0, nullable: !1, initial: "other", choices: [...Ul] }),
+    kind: new d.StringField({ required: !0, nullable: !1, initial: "other", choices: [...Gl] }),
     sourceUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     instanceId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     grantId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
@@ -1560,7 +1558,7 @@ function wo() {
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     itemUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     customName: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    snapshot: Ut()
+    snapshot: Gt()
   });
 }
 function tn() {
@@ -1582,7 +1580,7 @@ function Qn() {
   return new d.SchemaField({
     sourceUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     instanceId: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    role: new d.StringField({ required: !0, nullable: !1, initial: "primary", choices: [...Gl] }),
+    role: new d.StringField({ required: !0, nullable: !1, initial: "primary", choices: [...Ul] }),
     attachedAt: w(),
     selections: new d.SchemaField({
       edgePool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
@@ -1616,7 +1614,7 @@ function Zn() {
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     abilityUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     notes: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    snapshot: Ut(),
+    snapshot: Gt(),
     alternatives: new d.ArrayField(wo(), { required: !0, nullable: !1, initial: [] })
   });
 }
@@ -1626,7 +1624,7 @@ function Fl() {
     skillUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     customName: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     notes: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
-    snapshot: Ut()
+    snapshot: Gt()
   });
 }
 function ea() {
@@ -1636,7 +1634,7 @@ function ea() {
     customName: new d.StringField({ required: !0, nullable: !1, initial: "" }),
     notes: new d.HTMLField({ required: !0, nullable: !1, initial: "" }),
     rank: new d.StringField({ required: !0, nullable: !1, initial: "trained", choices: [...te] }),
-    snapshot: Ut(),
+    snapshot: Gt(),
     alternatives: new d.ArrayField(wo(), { required: !0, nullable: !1, initial: [] })
   });
 }
@@ -1659,7 +1657,7 @@ function Co() {
   return new d.SchemaField({
     id: new d.StringField({ required: !0, nullable: !1, blank: !1 }),
     descriptorUuid: new d.StringField({ required: !0, nullable: !1, initial: "" }),
-    snapshot: Ut()
+    snapshot: Gt()
   });
 }
 function Tl() {
@@ -1681,7 +1679,7 @@ function Tl() {
     options: new d.ArrayField(Co(), { required: !0, nullable: !1, initial: [] })
   });
 }
-function Ui() {
+function Gi() {
   return new d.SchemaField({
     light: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
     medium: new d.BooleanField({ required: !0, nullable: !1, initial: !1 }),
@@ -1723,11 +1721,11 @@ class ue extends foundry.abstract.TypeDataModel {
   }
 }
 const zl = [...k];
-function Un(n, e = "none") {
+function Gn(n, e = "none") {
   return Array.isArray(n) ? k.filter((t) => n.includes(t)) : e === "choose" || e === "any" ? [...k] : k.includes(e) ? [e] : [];
 }
 function Ke(n) {
-  return Un(n.system.cost.allowedPools, n.system.pool);
+  return Gn(n.system.cost.allowedPools, n.system.pool);
 }
 function Pl(n, e, t) {
   const i = k.filter((a) => n.includes(a));
@@ -1817,7 +1815,7 @@ class xl extends ue {
       const s = Object.hasOwn(a, "allowedPools"), o = Object.hasOwn(i, "pool") || Object.hasOwn(a, "pool");
       return (s || o) && (i.cost = {
         ...a,
-        allowedPools: Un(
+        allowedPools: Gn(
           s ? a.allowedPools : void 0,
           i.pool ?? a.pool
         )
@@ -1831,7 +1829,7 @@ class xl extends ue {
       amount: Number(a.amount ?? 0),
       scalable: !!(a.scalable ?? !1),
       ignoresEdge: !!(a.ignoresEdge ?? !1),
-      allowedPools: Un(
+      allowedPools: Gn(
         a.allowedPools,
         i.pool ?? a.pool
       )
@@ -1931,12 +1929,12 @@ class Ll extends ue {
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: w(1)
       }),
-      weaponUse: Ui(),
+      weaponUse: Gi(),
       weaponFamilies: new d.ArrayField(
         new d.StringField({ required: !0, nullable: !1, blank: !1 }),
         { required: !0, nullable: !1, initial: [] }
       ),
-      armorUse: Ui(),
+      armorUse: Gi(),
       superhero: new d.SchemaField({
         rank: new d.NumberField({ required: !0, nullable: !1, integer: !0, min: 0, max: 5, initial: 0 }),
         powerShiftCount: new d.NumberField({ required: !0, nullable: !1, integer: !0, min: 0, max: 10, initial: 0 }),
@@ -2169,7 +2167,7 @@ function ec() {
       max: 5,
       initial: 0
     }),
-    snapshot: Ut()
+    snapshot: Gt()
   });
 }
 class tc extends ue {
@@ -2238,12 +2236,12 @@ class nc extends ue {
         pool: new d.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
         amount: w(1)
       }),
-      weaponUse: Ui(),
+      weaponUse: Gi(),
       weaponFamilies: new d.ArrayField(
         new d.StringField({ required: !0, nullable: !1, blank: !1 }),
         { required: !0, nullable: !1, initial: [] }
       ),
-      armorUse: Ui(),
+      armorUse: Gi(),
       cypherLimitBonus: w(),
       skillGrants: new d.ArrayField(ea(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new d.ArrayField(ta(), { required: !0, nullable: !1, initial: [] }),
@@ -2384,7 +2382,7 @@ function sc() {
   }), CONFIG.Actor.trackableAttributes = {
     character: {
       bar: ["stats.might", "stats.speed", "stats.intellect"],
-      value: ["xp", "resourcePoints"]
+      value: ["xp"]
     },
     npc: {
       bar: ["health"],
@@ -2393,26 +2391,26 @@ function sc() {
   };
 }
 const X = "systems/magnusarchives/assets", Ha = {
-  character: `${X}/icons/magnuspc.png`,
-  npc: `${X}/icons/magnusnpc.png`
+  character: `${X}/icons/magnuspc.webp`,
+  npc: `${X}/icons/magnusnpc.webp`
 }, $a = {
-  ability: `${X}/icons/magnusability.png`,
-  armor: `${X}/icons/magnusarmor.png`,
-  artifact: `${X}/icons/magnusartefact.png`,
-  cypher: `${X}/icons/magnuscypher.png`,
-  descriptor: `${X}/icons/magnusdescriptor.png`,
-  equipment: `${X}/icons/magnusequipment.png`,
-  focus: `${X}/icons/magnusfocus.png`,
-  genre: `${X}/icons/magnusgenre.png`,
-  shield: `${X}/icons/magnusshield.png`,
-  skill: `${X}/icons/magnusskill.png`,
-  species: `${X}/icons/magnusspecies.png`,
-  characterType: `${X}/icons/magnustype.png`,
-  weapon: `${X}/icons/magnusweapons.png`
+  ability: `${X}/icons/magnusability.webp`,
+  armor: `${X}/icons/magnusarmor.webp`,
+  artifact: `${X}/icons/magnusartefact.webp`,
+  cypher: `${X}/icons/magnuscypher.webp`,
+  descriptor: `${X}/icons/magnusdescriptor.webp`,
+  equipment: `${X}/icons/magnusequipment.webp`,
+  focus: `${X}/icons/magnusfocus.webp`,
+  genre: `${X}/icons/magnusgenre.webp`,
+  shield: `${X}/icons/magnusshield.webp`,
+  skill: `${X}/icons/magnusskill.webp`,
+  species: `${X}/icons/magnusspecies.webp`,
+  characterType: `${X}/icons/magnustype.webp`,
+  weapon: `${X}/icons/magnusweapons.webp`
 }, na = {
-  gamePaused: `${X}/ui/magnusgamepaused.png`,
-  lobby: `${X}/magnuslobby.png`,
-  turnMarker: `${X}/ui/magnusturnmarker.png`
+  gamePaused: `${X}/ui/magnusgamepaused.webp`,
+  lobby: `${X}/magnuslobby.webp`,
+  turnMarker: `${X}/ui/magnusturnmarker.webp`
 };
 function oc(n) {
   return n in Ha ? Ha[n] : null;
@@ -2514,7 +2512,7 @@ const O = {
   pendingIntrusionXP: "gmIntrusions"
 };
 function hc(n) {
-  game.settings.register(U, O.difficultyVisibility, {
+  game.settings.register(G, O.difficultyVisibility, {
     name: "MAGNUSARCHIVES.Settings.DifficultyVisibility.Name",
     hint: "MAGNUSARCHIVES.Settings.DifficultyVisibility.Hint",
     scope: "world",
@@ -2527,14 +2525,14 @@ function hc(n) {
       rollOnly: "MAGNUSARCHIVES.Settings.DifficultyVisibility.RollOnly"
     },
     default: "full"
-  }), game.settings.register(U, O.showGmRollAudit, {
+  }), game.settings.register(G, O.showGmRollAudit, {
     name: "MAGNUSARCHIVES.Settings.ShowGmRollAudit.Name",
     hint: "MAGNUSARCHIVES.Settings.ShowGmRollAudit.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register(U, O.defaultDifficultyCeiling, {
+  }), game.settings.register(G, O.defaultDifficultyCeiling, {
     name: "MAGNUSARCHIVES.Settings.DifficultyCeiling.Name",
     hint: "MAGNUSARCHIVES.Settings.DifficultyCeiling.Hint",
     scope: "world",
@@ -2542,31 +2540,31 @@ function hc(n) {
     type: Number,
     default: 10,
     range: { min: 0, max: 15, step: 1 }
-  }), game.settings.register(U, O.interfaceHiddenDifficulty, {
+  }), game.settings.register(G, O.interfaceHiddenDifficulty, {
     name: "MAGNUSARCHIVES.Settings.HiddenDifficulty.Name",
     hint: "MAGNUSARCHIVES.Settings.HiddenDifficulty.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !0
-  }), game.settings.register(U, O.enabledRuleModules, {
+  }), game.settings.register(G, O.enabledRuleModules, {
     scope: "world",
     config: !1,
     type: Array,
     default: []
-  }), game.settings.register(U, O.debugRules, {
+  }), game.settings.register(G, O.debugRules, {
     name: "MAGNUSARCHIVES.Settings.DebugRules.Name",
     hint: "MAGNUSARCHIVES.Settings.DebugRules.Hint",
     scope: "world",
     config: !0,
     type: Boolean,
     default: !1
-  }), game.settings.register(U, O.worldSchemaVersion, {
+  }), game.settings.register(G, O.worldSchemaVersion, {
     scope: "world",
     config: !1,
     type: Number,
     default: 1
-  }), game.settings.register(U, O.theme, {
+  }), game.settings.register(G, O.theme, {
     name: "MAGNUSARCHIVES.Settings.Theme.Name",
     hint: "MAGNUSARCHIVES.Settings.Theme.Hint",
     scope: "world",
@@ -2575,7 +2573,7 @@ function hc(n) {
     choices: n.choices(),
     default: "core",
     onChange: (e) => n.apply(e)
-  }), game.settings.register(U, O.horrorIntrusionRange, {
+  }), game.settings.register(G, O.horrorIntrusionRange, {
     name: "MAGNUSARCHIVES.Horror.SettingName",
     hint: "MAGNUSARCHIVES.Horror.SettingHint",
     scope: "world",
@@ -2591,7 +2589,7 @@ function hc(n) {
       "magnusarchivesHorrorIntrusionRangeChanged",
       kt(e)
     )
-  }), game.settings.register(U, O.pendingIntrusionXP, {
+  }), game.settings.register(G, O.pendingIntrusionXP, {
     scope: "world",
     config: !1,
     type: Array,
@@ -2604,7 +2602,7 @@ function xe() {
   return {
     base: {
       difficultyCeiling: Number(
-        game.settings.get(U, O.defaultDifficultyCeiling)
+        game.settings.get(G, O.defaultDifficultyCeiling)
       ),
       assetLimit: 0
     },
@@ -2612,29 +2610,29 @@ function xe() {
   };
 }
 function st() {
-  const n = game.settings.get(U, O.enabledRuleModules);
+  const n = game.settings.get(G, O.enabledRuleModules);
   return Array.isArray(n) ? n.filter((e) => typeof e == "string") : [];
 }
 function Oi() {
-  const n = game.settings.get(U, O.difficultyVisibility);
+  const n = game.settings.get(G, O.difficultyVisibility);
   return n === "resultOnly" || n === "rollOnly" ? n : "full";
 }
 function Mo() {
-  return game.settings.get(U, O.interfaceHiddenDifficulty) === !0;
+  return game.settings.get(G, O.interfaceHiddenDifficulty) === !0;
 }
 function Bi() {
-  return game.settings.get(U, O.showGmRollAudit) === !0;
+  return game.settings.get(G, O.showGmRollAudit) === !0;
 }
 function kn() {
   return typeof game > "u" ? aa : kt(
-    game.settings.get(U, O.horrorIntrusionRange)
+    game.settings.get(G, O.horrorIntrusionRange)
   );
 }
 async function yc(n) {
   if (!game.user.isGM) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.GMOnly"));
   if (!gc(n))
     throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.InvalidRange"));
-  return await game.settings.set(U, O.horrorIntrusionRange, n), n;
+  return await game.settings.set(G, O.horrorIntrusionRange, n), n;
 }
 const sa = {
   tag: "form",
@@ -2666,7 +2664,7 @@ function la(n, e, t) {
       t.has(i.dataset.action ?? "") && (i.setAttribute("aria-disabled", "true"), i instanceof HTMLButtonElement ? i.disabled = !0 : (i.removeAttribute("tabindex"), i.setAttribute("inert", "")));
   }
 }
-const Sc = Object.freeze({ minor: 2, moderate: 5 }), Go = 10;
+const Sc = Object.freeze({ minor: 2, moderate: 5 }), Uo = 10;
 class Ac {
   #e;
   constructor(e) {
@@ -2718,7 +2716,7 @@ class Ac {
         failure: "major-not-rallyable"
       };
     const o = s ?? this.costFor(i);
-    if (!Number.isInteger(o) || o < 0 || o > Go)
+    if (!Number.isInteger(o) || o < 0 || o > Uo)
       return {
         success: !1,
         severity: i,
@@ -2770,11 +2768,11 @@ class Ac {
     }), s;
   }
 }
-function Uo(n) {
+function Go(n) {
   return n === "one-action" ? ["normal", "lastAction", "nonRest"] : ["normal", "nonRest"];
 }
 function bc(n, e) {
-  if (!Uo(n).includes(e))
+  if (!Go(n).includes(e))
     throw new Error(`Recovery mode '${e}' is not available for '${n}'.`);
   return e === "nonRest" ? { kind: "nonRest", lastAction: !1 } : { kind: "normal", lastAction: e === "lastAction" };
 }
@@ -2940,7 +2938,7 @@ async function Da(n, e, t) {
       return;
     }
   }
-  const r = Uo(s), l = await foundry.applications.api.DialogV2.input({
+  const r = Go(s), l = await foundry.applications.api.DialogV2.input({
     window: { title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${s}`)}` },
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
       <header class="magnusarchives-dialog-heading">
@@ -2979,7 +2977,7 @@ async function Da(n, e, t) {
             <option value="remove-minors">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveMinors")}</option>
           </select>
         </label>` : s === "10-hours" ? `<label><input name="exchange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.ExchangeMinor")}</label>
-          <label><input name="majorSuccess" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.MajorTaskSuccess")}</label>` : s === "10-minutes" ? `<p>${game.i18n.localize("MAGNUSARCHIVES.Recovery.TenMinuteBenefit")}</p>` : "", h = await ca(
+          <label><input name="majorSuccess" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Rest.MajorTaskSuccess")}</label>` : s === "10-minutes" ? `<p>${game.i18n.localize("MAGNUSARCHIVES.Recovery.TenMinuteBenefit")}</p>` : "", y = await ca(
         `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${c.total}`,
         `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog magnusarchives-recovery-allocation-dialog">
         <section class="magnusarchives-dialog-section">
@@ -2996,23 +2994,23 @@ async function Da(n, e, t) {
       </div>`,
         game.i18n.localize("MAGNUSARCHIVES.Recovery.Recover")
       );
-      if (!h) return;
+      if (!y) return;
       const m = await game.magnusarchives.services.recovery.completeNormal(
         n,
         c,
         {
-          might: Bt(h, "might"),
-          speed: Bt(h, "speed"),
-          intellect: Bt(h, "intellect")
+          might: Bt(y, "might"),
+          speed: Bt(y, "speed"),
+          intellect: Bt(y, "intellect")
         },
         {
-          oneHourChoice: qe(h, "oneHourChoice"),
-          removeMinorsInsteadOfOneModerate: Va(h, "exchange"),
-          majorTaskSucceeded: Va(h, "majorSuccess")
+          oneHourChoice: qe(y, "oneHourChoice"),
+          removeMinorsInsteadOfOneModerate: Va(y, "exchange"),
+          majorTaskSucceeded: Va(y, "majorSuccess")
         }
-      ), S = c.total - m.recovery.unspent, f = m.rest?.result.removed.length ?? 0;
+      ), f = c.total - m.recovery.unspent, g = m.rest?.result.removed.length ?? 0;
       ui.notifications.info(
-        `${game.i18n.localize("MAGNUSARCHIVES.Recovery.Restored")}: ${S}; ${game.i18n.localize("MAGNUSARCHIVES.Rest.Removed")}: ${f}`
+        `${game.i18n.localize("MAGNUSARCHIVES.Recovery.Restored")}: ${f}; ${game.i18n.localize("MAGNUSARCHIVES.Rest.Removed")}: ${g}`
       );
     } catch (u) {
       Xe(u);
@@ -3056,7 +3054,7 @@ function Rc(n, e, t = 2, i = 5, a = null) {
         <label class="magnusarchives-dialog-toggle"><input type="radio" name="severity" value="moderate" data-default-cost="${i}"><span>${o}</span></label>
       </div>
       <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Rally.Cost")}
-        <input name="cost" type="number" min="0" max="${Go}" step="1" value="${t}">
+        <input name="cost" type="number" min="0" max="${Uo}" step="1" value="${t}">
       </label>
     </section>
     <section class="magnusarchives-dialog-section" aria-label="${game.i18n.localize("MAGNUSARCHIVES.Roll.Summary")}">
@@ -3071,8 +3069,8 @@ function Nc(n, e) {
   const t = n.querySelector('input[name="cost"]'), i = [...n.querySelectorAll('input[name="severity"]')], a = n.querySelector("[data-rally-cost]"), s = n.querySelector("[data-rally-after]"), o = n.querySelector("[data-rally-heading]"), r = n.querySelector("[data-rally-error]"), l = n.querySelector('button[data-action="ok"]');
   if (!t) return;
   const u = () => {
-    const c = Number(t.value), p = i.find((m) => m.checked)?.value, h = p ? game.magnusarchives.services.rally.preview(e, p, c) : null;
-    a && (a.textContent = Number.isInteger(c) ? String(c) : "—"), s && (s.textContent = h?.success ? String(h.mightValue) : "—"), r && (r.hidden = h?.success === !0, r.textContent = game.i18n.localize(h?.failure === "insufficient-might" ? "MAGNUSARCHIVES.Rally.InsufficientMight" : h?.failure === "invalid-cost" ? "MAGNUSARCHIVES.Rally.InvalidCost" : "MAGNUSARCHIVES.Rally.NoWound")), l && (l.disabled = h?.success !== !0);
+    const c = Number(t.value), p = i.find((m) => m.checked)?.value, y = p ? game.magnusarchives.services.rally.preview(e, p, c) : null;
+    a && (a.textContent = Number.isInteger(c) ? String(c) : "—"), s && (s.textContent = y?.success ? String(y.mightValue) : "—"), r && (r.hidden = y?.success === !0, r.textContent = game.i18n.localize(y?.failure === "insufficient-might" ? "MAGNUSARCHIVES.Rally.InsufficientMight" : y?.failure === "invalid-cost" ? "MAGNUSARCHIVES.Rally.InvalidCost" : "MAGNUSARCHIVES.Rally.NoWound")), l && (l.disabled = y?.success !== !0);
   };
   for (const c of i) c.addEventListener("change", () => {
     c.checked && (t.value = String(Number(c.dataset.defaultCost ?? 0)), o && (o.textContent = c.nextElementSibling?.textContent ?? c.value), u());
@@ -3080,7 +3078,7 @@ function Nc(n, e) {
   t.addEventListener("input", u), u();
 }
 async function Mc(n, e) {
-  const t = Gn(n.system, e), i = await foundry.applications.api.DialogV2.input({
+  const t = Un(n.system, e), i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("MAGNUSARCHIVES.Overrides.Edit") },
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-override-dialog">
       <section class="magnusarchives-dialog-section">
@@ -3119,7 +3117,7 @@ function Ii(n, e) {
 function ko(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-function Gc(n, e) {
+function Uc(n, e) {
   for (const t of fe) {
     if (!Number.isInteger(e[t])) throw new Error(`${t} modifier must be a whole number.`);
     if (n[t] + e[t] < 1)
@@ -3127,7 +3125,7 @@ function Gc(n, e) {
   }
   return { ...e };
 }
-async function Uc(n) {
+async function Gc(n) {
   const e = n.system.derived.wounds.calculatedCapacities, t = n.system.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundsEdit") },
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-wound-override-dialog">
@@ -3146,7 +3144,7 @@ async function Uc(n) {
   });
   if (i)
     try {
-      const a = Gc(e, {
+      const a = Uc(e, {
         minor: Ii(i.minor, "Minor"),
         moderate: Ii(i.moderate, "Moderate"),
         major: Ii(i.major, "Major")
@@ -3157,7 +3155,7 @@ async function Uc(n) {
     }
 }
 function kc(n) {
-  return Ge.map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${e}`)}</option>`).join("");
+  return Ue.map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${e}`)}</option>`).join("");
 }
 function Ho(n) {
   return `<div class="recovery-override-slot" data-recovery-slot-id="${Fa(n.id)}">
@@ -3212,7 +3210,7 @@ function Vc(n, e) {
   if (t.length === 0 || new Set(t).size !== t.length) throw new Error("Recovery track must contain unique slots.");
   const i = new Map(e.map((o) => [o.id, o])), a = t.map((o) => {
     const r = String(n[`slotType__${o}`] ?? "");
-    if (!Ge.includes(r)) throw new Error(`Invalid Recovery type '${r}'.`);
+    if (!Ue.includes(r)) throw new Error(`Invalid Recovery type '${r}'.`);
     return { id: o, type: r, used: i.get(o)?.used ?? !1 };
   }), s = Ii(n.rollModifier, "Recovery roll modifier");
   if (s < -20 || s > 20) throw new Error("Recovery roll modifier must be between -20 and 20.");
@@ -3340,7 +3338,7 @@ class qc {
     );
   }
 }
-const Vt = "system." + U;
+const Vt = "system." + G;
 function Xt() {
   return [...game.users];
 }
@@ -3393,7 +3391,7 @@ class Lc {
   initialize() {
     game.socket.on(Vt, (e) => {
       this.#d(e).catch((t) => {
-        console.error(U + " | GM Intrusion socket error", t), game.user.isGM && ui.notifications.error(t instanceof Error ? t.message : String(t));
+        console.error(G + " | GM Intrusion socket error", t), game.user.isGM && ui.notifications.error(t instanceof Error ? t.message : String(t));
       });
     }), Hooks.on("renderChatMessageHTML", (e, t) => {
       this.#r(e, t);
@@ -3494,7 +3492,7 @@ class Lc {
     Hooks.callAll("magnusarchivesGMIntrusionCreated", s);
   }
   #r(e, t) {
-    const i = e.getFlag(U, "gmIntrusion");
+    const i = e.getFlag(G, "gmIntrusion");
     if (!an(i)) return;
     const a = this.#u().find((r) => r.intrusionId === i.intrusionId), s = a ? $e(a.sourceActorId) : null, o = i.status === "pending" && (game.user.isGM || !!(a && s && this.#s(s, a)));
     for (const r of t.querySelectorAll("[data-action='assignSharedIntrusionXp']")) {
@@ -3522,7 +3520,7 @@ class Lc {
     }
     let s = e.responderUserId ? Xt().find((l) => l.id === e.responderUserId) ?? null : null;
     (!s || !Dt(i, !1).some((l) => l.id === s?.id)) && (s = on(Dt(i, !1)), s && (e = { ...e, responderUserId: s.id }, await this.#f(e)));
-    const o = a.getFlag(U, "gmIntrusion");
+    const o = a.getFlag(G, "gmIntrusion");
     if (!an(o) || o.status !== "pending") return;
     const r = fi(pi(), i.id);
     (t || !Bc(o.recipients, r)) && await this.#t.update(a, { ...o, recipients: r }, i);
@@ -3538,19 +3536,19 @@ class Lc {
       const u = $e(t);
       if (o = game.messages.get(l.messageId) ?? null, !r || !u || !o)
         throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.CharacterMissing"));
-      const c = o.getFlag(U, "gmIntrusion");
+      const c = o.getFlag(G, "gmIntrusion");
       if (!an(c) || c.intrusionId !== e || c.status !== "pending")
         throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.AlreadyResolved"));
       s = c;
-      const p = $o().find((f) => f.id === i);
-      if (!(p?.isGM === !0 || !!(p && p.id === l.responderUserId && Dt(r, !0).some((f) => f.id === p.id)))) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
-      const S = fi(pi(), r.id).find((f) => f.actorId === u.id);
-      if (!S) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"));
+      const p = $o().find((g) => g.id === i);
+      if (!(p?.isGM === !0 || !!(p && p.id === l.responderUserId && Dt(r, !0).some((g) => g.id === p.id)))) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
+      const f = fi(pi(), r.id).find((g) => g.actorId === u.id);
+      if (!f) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"));
       await this.#t.update(o, { ...c, status: "resolving" }, r), await this.#e.distributeSecondXp(r, u, l.amount), a = !0, await this.#p(e), await this.#t.update(o, {
         ...c,
         status: "resolved",
         recipients: [],
-        resolvedRecipient: S
+        resolvedRecipient: f
       }, r), Hooks.callAll("magnusarchivesGMIntrusionXPDistributed", e, r, u);
     } catch (l) {
       throw !a && s && o && r && await this.#t.update(o, s, r), l;
@@ -3588,7 +3586,7 @@ class Lc {
     }
   }
   #u() {
-    const e = game.settings.get(U, O.pendingIntrusionXP);
+    const e = game.settings.get(G, O.pendingIntrusionXP);
     return Array.isArray(e) ? e.filter(Ta).map((t) => ({
       intrusionId: t.intrusionId,
       messageId: t.messageId,
@@ -3604,17 +3602,17 @@ class Lc {
   }
   async #f(e) {
     const t = this.#u(), i = t.findIndex((a) => a.intrusionId === e.intrusionId);
-    i < 0 ? t.push(e) : t[i] = e, await game.settings.set(U, O.pendingIntrusionXP, t);
+    i < 0 ? t.push(e) : t[i] = e, await game.settings.set(G, O.pendingIntrusionXP, t);
   }
   async #p(e) {
     await game.settings.set(
-      U,
+      G,
       O.pendingIntrusionXP,
       this.#u().filter((t) => t.intrusionId !== e)
     );
   }
   async #h() {
-    const e = game.settings.get(U, O.pendingIntrusionXP), t = [];
+    const e = game.settings.get(G, O.pendingIntrusionXP), t = [];
     for (const i of Array.isArray(e) ? e : []) {
       if (Ta(i)) {
         $e(i.sourceActorId) && game.messages.get(i.messageId) && t.push({
@@ -3628,7 +3626,7 @@ class Lc {
       }
       if (!Oc(i)) continue;
       const a = $e(i.sourceActorId), s = [...game.messages].find(
-        (u) => u.getFlag(U, "gmIntrusionId") === i.intrusionId
+        (u) => u.getFlag(G, "gmIntrusionId") === i.intrusionId
       );
       if (!a || !s) continue;
       const o = i.responderUserId ? Xt().find((u) => u.id === i.responderUserId) : on(Dt(a, !1)), r = this.#e.policy(xe().enabledRuleModuleIds ?? []), l = {
@@ -3650,7 +3648,7 @@ class Lc {
         ...o ? { responderUserId: o.id } : {}
       });
     }
-    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set(U, O.pendingIntrusionXP, t);
+    (!Array.isArray(e) || JSON.stringify(e) !== JSON.stringify(t)) && await game.settings.set(G, O.pendingIntrusionXP, t);
   }
   #m() {
     return game.user.isGM && sn()?.id === game.user.id;
@@ -3909,11 +3907,11 @@ function Yc(n, e, t) {
   ];
   Ye(n, "cost", r.join(""));
   const l = ["might", "speed", "intellect"].map((u) => {
-    const c = e.pool === u ? e.poolAfter : null, p = e.pool === u ? e.poolValue : null, h = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}`], m = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}Max`], S = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}Edge`];
+    const c = e.pool === u ? e.poolAfter : null, p = e.pool === u ? e.poolValue : null, y = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}`], m = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}Max`], f = n.dataset[`pool${u[0].toUpperCase()}${u.slice(1)}Edge`];
     return `<div class="roll-summary-pool${e.pool === u ? " is-selected" : ""}">
       <span>${ct(ma(u, ua))}</span>
-      <strong>${p === null ? h : `${p} → ${c}`} / ${m}</strong>
-      <small>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")} ${S}</small>
+      <strong>${p === null ? y : `${p} → ${c}`} / ${m}</strong>
+      <small>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")} ${f}</small>
     </div>`;
   }).join("");
   Ye(n, "character", `${l}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${e.effortUsed} / ${e.effortMaximum}</strong></div>`), Tt(n, "error", e.poolValue < e.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : "");
@@ -4045,7 +4043,7 @@ async function ed(n, e) {
       ri(p.element, {
         actor: n,
         policyRequest: t,
-        buildRequest: (h) => La(e, h, i)
+        buildRequest: (y) => La(e, y, i)
       });
     }
   });
@@ -4179,11 +4177,11 @@ async function nd(n, e) {
       extremeRange: se(A, "extremeRange") === "true" || A.extremeRange === !0 || A.extremeRange === "on",
       enabledRuleModuleIds: i
     };
-  }, h = (A) => {
+  }, y = (A) => {
     const v = game.magnusarchives.services.combat.buildWeaponAttackPlan(n, e, p(A)).requests[0];
     if (!v) throw new Error("Weapon attack preview did not produce a roll request.");
     return v;
-  }, m = game.magnusarchives.services.combat.weaponBaseDamage(e, s), S = `
+  }, m = game.magnusarchives.services.combat.weaponBaseDamage(e, s), f = `
     ${l}
     <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}<select name="pool">${Vo(u)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillId">${zo(n, c)}</select></label>
@@ -4193,17 +4191,17 @@ async function nd(n, e) {
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
     ${ai()}
-    ${e.system.attackType === "ranged" ? `<label class="roll-dialog-checkbox"><input name="extremeRange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</label>` : ""}`, f = await foundry.applications.api.DialogV2.input({
+    ${e.system.attackType === "ranged" ? `<label class="roll-dialog-checkbox"><input name="extremeRange" type="checkbox"> ${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</label>` : ""}`, g = await foundry.applications.api.DialogV2.input({
     window: { title: `${game.i18n.localize("MAGNUSARCHIVES.Combat.Attack")}: ${e.name}`, resizable: !0 },
     position: { width: 800 },
-    content: oi({ identity: e.name, settings: S, attackSummary: " " }),
+    content: oi({ identity: e.name, settings: f, attackSummary: " " }),
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Attack") },
     render: (A, v) => {
       ri(v.element, {
         actor: n,
         policyRequest: t,
-        buildRequest: h,
+        buildRequest: y,
         attackSummary: (E, H) => [
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${m}</strong></div>`,
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${H.context.damageEffort ?? 0}</strong></div>`,
@@ -4216,12 +4214,12 @@ async function nd(n, e) {
       });
     }
   });
-  if (f)
+  if (g)
     try {
       let A = await game.magnusarchives.services.combat.executeWeaponAttack(
         n,
         e,
-        p(f),
+        p(g),
         t
       );
       const v = await qo(A);
@@ -4257,9 +4255,9 @@ async function Vn(n, e, t) {
     e,
     a
   )[0], l = id(n, e), u = (m) => {
-    const S = Po(n, se(m, "skillId"));
+    const f = Po(n, se(m, "skillId"));
     return {
-      ...S ? { skill: S } : {},
+      ...f ? { skill: f } : {},
       skillSteps: xo(m),
       assets: j(m, "assets"),
       paidEffort: j(m, "paidEffort"),
@@ -4282,7 +4280,7 @@ async function Vn(n, e, t) {
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.Assets")}<select name="assets">${he(s.assetLimit)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.EffortToEase")}<select name="paidEffort">${he(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
-    ${ai()}`, h = await foundry.applications.api.DialogV2.input({
+    ${ai()}`, y = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize(`MAGNUSARCHIVES.Combat.Defense.${e}`), resizable: !0 },
     position: { width: 800 },
     content: oi({
@@ -4291,15 +4289,15 @@ async function Vn(n, e, t) {
     }),
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Roll.Roll") },
-    render: (m, S) => {
-      ri(S.element, { actor: n, policyRequest: i, buildRequest: c });
+    render: (m, f) => {
+      ri(f.element, { actor: n, policyRequest: i, buildRequest: c });
     }
   });
-  if (!h) return !1;
+  if (!y) return !1;
   try {
-    const m = c(h), S = await game.magnusarchives.services.rolls.execute(n, m, i), A = (t ? await game.magnusarchives.services.combat.resolveDefenseDamage(
+    const m = c(y), f = await game.magnusarchives.services.rolls.execute(n, m, i), A = (t ? await game.magnusarchives.services.combat.resolveDefenseDamage(
       n,
-      S.result,
+      f.result,
       e,
       t.effect,
       t.stressAmount,
@@ -4308,12 +4306,12 @@ async function Vn(n, e, t) {
     ) : null) ?? { recipient: "none" };
     return await game.magnusarchives.services.combatChat.publishDefense(
       n,
-      S,
+      f,
       A,
       t?.source ?? null,
       Oi(),
       Bi()
-    ), await ti().requestFreeFromNaturalResult(n, S.result), !0;
+    ), await ti().requestFreeFromNaturalResult(n, f.result), !0;
   } catch (m) {
     return ui.notifications.error(m instanceof Error ? m.message : String(m)), !1;
   }
@@ -4640,7 +4638,7 @@ class fa {
         message: `Owned node '${c.abilitySnapshot.name || c.id}' is no longer connected to an owned Tier 1 path.`
       });
     const u = e.nodes.map((c) => {
-      const p = [...new Set((o.get(c.id) ?? []).filter((h) => r.has(h)))].sort((h, m) => h.localeCompare(m));
+      const p = [...new Set((o.get(c.id) ?? []).filter((y) => r.has(y)))].sort((y, m) => y.localeCompare(m));
       return s.has(c.id) ? {
         node: c,
         state: "owned",
@@ -4807,7 +4805,7 @@ class yd {
       if (!(A instanceof Rt)) throw A;
     }
     const c = e.system.advancement.pendingFocusChoices.find((A) => A.focusUuid === "" || A.focusUuid === t.uuid || A.focusUuid === t.id), p = s && !a && u?.state === "available" && !!c;
-    let h = !1, m = !1, S = null;
+    let y = !1, m = !1, f = null;
     if (!this.#d(e, t.uuid, i)) {
       const A = await this.#o(t, r);
       if (!this.#d(e, t.uuid, i)) {
@@ -4827,7 +4825,7 @@ class yd {
             );
           m = !0;
         } else
-          S = await this.#f(e, t, i, A), h = !!S;
+          f = await this.#f(e, t, i, A), y = !!f;
       }
     }
     if (!this.#p(e, t).ownedNodeIds.includes(i)) {
@@ -4851,10 +4849,10 @@ class yd {
           } : {}
         });
       } catch (v) {
-        throw S?.delete && await S.delete(), v;
+        throw f?.delete && await f.delete(), v;
       }
     }
-    return { status: "acquired", abilityCreated: h };
+    return { status: "acquired", abilityCreated: y };
   }
   async #l(e, t, i) {
     this.#m(e);
@@ -4886,37 +4884,37 @@ class yd {
     const s = this.#p(e, t);
     if (!s.ownedNodeIds.includes(i))
       throw new ce("undo-not-owned", `Focus node '${i}' is not owned.`);
-    const o = s.ownedNodeIds.filter((f) => f !== i), r = new Set(this.#s(
+    const o = s.ownedNodeIds.filter((g) => g !== i), r = new Set(this.#s(
       t,
       B(e.system),
       s.ownedNodeIds
-    )), l = this.#s(t, B(e.system), o), u = l.filter((f) => !r.has(f));
+    )), l = this.#s(t, B(e.system), o), u = l.filter((g) => !r.has(g));
     if (u.length > 0 && !a.force)
       throw new ce(
         "undo-dependent-nodes",
         `Undo would invalidate acquired descendant nodes: ${u.join(", ")}.`,
         u
       );
-    const c = (s.acquisitions ?? []).find((f) => f.nodeId === i), p = c && c.choiceSource !== "none" && c.choiceId ? {
+    const c = (s.acquisitions ?? []).find((g) => g.nodeId === i), p = c && c.choiceSource !== "none" && c.choiceId ? {
       id: c.choiceId,
       source: c.choiceSource,
       grantTier: c.choiceGrantTier,
       focusUuid: c.choiceFocusUuid
-    } : null, h = e.system.focusProgress.map((f) => gi(f, t) ? {
-      ...f,
+    } : null, y = e.system.focusProgress.map((g) => gi(g, t) ? {
+      ...g,
       ownedNodeIds: o,
-      acquisitions: (f.acquisitions ?? []).filter((A) => A.nodeId !== i)
-    } : { ...f, ownedNodeIds: [...f.ownedNodeIds], acquisitions: [...f.acquisitions ?? []] }), m = p && !e.system.advancement.pendingFocusChoices.some((f) => f.id === p.id) ? [...e.system.advancement.pendingFocusChoices, p] : [...e.system.advancement.pendingFocusChoices];
+      acquisitions: (g.acquisitions ?? []).filter((A) => A.nodeId !== i)
+    } : { ...g, ownedNodeIds: [...g.ownedNodeIds], acquisitions: [...g.acquisitions ?? []] }), m = p && !e.system.advancement.pendingFocusChoices.some((g) => g.id === p.id) ? [...e.system.advancement.pendingFocusChoices, p] : [...e.system.advancement.pendingFocusChoices];
     await e.update({
-      "system.focusProgress": h,
+      "system.focusProgress": y,
       "system.advancement.pendingFocusChoices": m
     });
-    let S = !1;
+    let f = !1;
     if (a.deleteAbility) {
-      const f = this.#d(e, t.uuid, i);
-      f?.delete && (await f.delete(), S = !0);
+      const g = this.#d(e, t.uuid, i);
+      g?.delete && (await g.delete(), f = !0);
     }
-    return { choiceRestored: p, abilityDeleted: S, invalidOwnedNodeIds: l };
+    return { choiceRestored: p, abilityDeleted: f, invalidOwnedNodeIds: l };
   }
   #s(e, t, i) {
     try {
@@ -5255,26 +5253,23 @@ class vd {
     const r = a ? 0 : s.xpCost;
     if (e.system.xp < r)
       throw new _("insufficient-xp", "This Character does not have enough XP.");
-    const l = B(e.system), u = s.resourcePointsForTier(l);
-    if (!Number.isInteger(u) || u < 0)
-      throw new Error("Advancement policy Resource Points must be a non-negative integer.");
-    const c = {};
-    let p = null, h = null, m;
+    const l = B(e.system), u = {};
+    let c = null, p = null, y;
     if (t.kind === "increaseCapabilities") {
       const f = Object.values(t.allocation);
-      if (f.some((A) => !Number.isInteger(A) || A < 0) || f.reduce((A, v) => A + v, 0) !== s.capabilityPoints)
+      if (f.some((g) => !Number.isInteger(g) || g < 0) || f.reduce((g, A) => g + A, 0) !== s.capabilityPoints)
         throw new _("invalid-allocation", "Pool allocation must distribute exactly four points.");
-      for (const A of ["might", "speed", "intellect"]) {
-        const v = t.allocation[A], E = di(
+      for (const g of ["might", "speed", "intellect"]) {
+        const A = t.allocation[g], v = di(
           e.system,
-          `${A}Max`,
-          v
+          `${g}Max`,
+          A
         );
-        c[E.path] = E.value;
-        const H = E.overrideActive ? E.value : e.system.derived.pools[A].max + v;
-        c[`system.stats.${A}.value`] = Math.min(
-          e.system.stats[A].value + v,
-          H
+        u[v.path] = v.value;
+        const E = v.overrideActive ? v.value : e.system.derived.pools[g].max + A;
+        u[`system.stats.${g}.value`] = Math.min(
+          e.system.stats[g].value + A,
+          E
         );
       }
     } else if (t.kind === "moveTowardPerfection") {
@@ -5283,48 +5278,46 @@ class vd {
         `${t.pool}Edge`,
         1
       );
-      c[f.path] = f.value;
+      u[f.path] = f.value;
     } else if (t.kind === "extraEffort") {
       if (this.#o(e) >= s.effortMaximum)
         throw new _("effort-maximum", "Core Effort is already at its maximum.");
       const f = di(e.system, "effort", 1);
-      c[f.path] = f.value;
+      u[f.path] = f.value;
     } else if (t.kind === "skillTraining")
       if (t.mode === "improve") {
-        const f = this.skillTrainingOptions(e, i).find((v) => v.id === t.skillId), A = [...e.items].find((v) => v.id === t.skillId && v.type === "skill");
-        if (!f || !A) throw new _("skill-not-found", "Skill Item not found.");
+        const f = this.skillTrainingOptions(e, i).find((A) => A.id === t.skillId), g = [...e.items].find((A) => A.id === t.skillId && A.type === "skill");
+        if (!f || !g) throw new _("skill-not-found", "Skill Item not found.");
         if (f.reason === "maximum" || !f.nextRank)
           throw new _("skill-maximum", "This Skill cannot be improved by Core Advancement.");
         if (f.reason === "tier")
           throw new _("skill-tier", "Attack and defense training is not available at this Tier.");
-        p = { skill: A, rank: A.system.rank }, m = f.nextRank;
+        c = { skill: g, rank: g.system.rank }, y = f.nextRank;
       } else {
         const f = await this.#r(e, t, s);
-        if (h = (await e.createEmbeddedDocuments("Item", [f]))[0] ?? null, !h) throw new Error("Foundry did not create the learned Skill Item.");
-        m = "trained";
+        if (p = (await e.createEmbeddedDocuments("Item", [f]))[0] ?? null, !p) throw new Error("Foundry did not create the learned Skill Item.");
+        y = "trained";
       }
     else
-      this.#s(e, t.otherKind, s, c);
-    const S = {
+      this.#s(e, t.otherKind, s, u);
+    const m = {
       id: this.#t(),
       kind: t.kind,
       otherKind: t.kind === "other" ? t.otherKind : "none",
       tier: l,
       xpCost: r,
-      resourcePointsGranted: u,
       timestamp: this.#i()
     };
-    Object.assign(c, {
+    Object.assign(u, {
       "system.xp": e.system.xp - r,
-      "system.resourcePoints": e.system.resourcePoints + u,
-      "system.advancement.purchases": [...o, S]
-    }), p && m && await p.skill.update({ "system.rank": m });
+      "system.advancement.purchases": [...o, m]
+    }), c && y && await c.skill.update({ "system.rank": y });
     try {
-      await e.update(c);
+      await e.update(u);
     } catch (f) {
-      throw p && await p.skill.update({ "system.rank": p.rank }), h?.delete && await h.delete(), f;
+      throw c && await c.skill.update({ "system.rank": c.rank }), p?.delete && await p.delete(), f;
     }
-    return { ...m ? { skillRank: m } : {}, record: S, resourcePointsGranted: u };
+    return { ...y ? { skillRank: y } : {}, record: m };
   }
   async #r(e, t, i) {
     const a = t.sourceUuid ? await this.#n(t.sourceUuid) : null;
@@ -5523,14 +5516,11 @@ async function Rd(n, e) {
   const t = await Id(n, e);
   if (t)
     try {
-      const i = await game.magnusarchives.services.advancement.purchase(
+      await game.magnusarchives.services.advancement.purchase(
         n,
         t,
         st()
-      );
-      ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.PurchasedNotice", {
-        resourcePoints: i.resourcePointsGranted
-      }));
+      ), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.PurchasedNotice"));
     } catch (i) {
       ga(i);
     }
@@ -5585,12 +5575,12 @@ class Te extends Error {
   }
   code;
 }
-const Gd = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-class Ud {
+const Ud = () => globalThis.crypto?.randomUUID?.() ?? `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+class Gd {
   #e;
   #t;
   #i = /* @__PURE__ */ new Map();
-  constructor(e = Gd, t = Date.now) {
+  constructor(e = Ud, t = Date.now) {
     this.#e = e, this.#t = t;
   }
   async attach(e, t, i) {
@@ -5764,7 +5754,7 @@ class $d {
   async setup(e, t) {
     this.#n(e);
     const i = Object.values(t.pools);
-    if (i.some((p) => !Number.isInteger(p) || p < 0) || i.reduce((p, h) => p + h, 0) !== 6)
+    if (i.some((p) => !Number.isInteger(p) || p < 0) || i.reduce((p, y) => p + y, 0) !== 6)
       throw new de("invalid-pools", "Core Setup must distribute exactly six Pool points.");
     const a = t.skills.filter((p) => p.rank === "trained"), s = t.skills.filter((p) => p.rank === "inability");
     if (!(a.length === 2 && s.length === 0 || a.length === 3 && s.length === 1))
@@ -5774,10 +5764,10 @@ class $d {
       );
     const r = await Promise.all(t.skills.map((p) => this.#i(p))), l = new Set([...e.items].filter((p) => p.type === "skill").map((p) => Ja(p.name))), u = /* @__PURE__ */ new Set();
     for (const p of r) {
-      const h = Ja(String(p.name));
-      if (!h || l.has(h) || u.has(h))
+      const y = Ja(String(p.name));
+      if (!y || l.has(y) || u.has(y))
         throw new de("duplicate-skill", "Starting Skills must all be different.");
-      u.add(h);
+      u.add(y);
     }
     const c = await e.createEmbeddedDocuments("Item", r);
     try {
@@ -5807,7 +5797,7 @@ class $d {
           "Foundry did not expose the persisted Core initialization state after update."
         );
     } catch (p) {
-      throw await Promise.allSettled(c.map((h) => h.delete?.())), p;
+      throw await Promise.allSettled(c.map((y) => y.delete?.())), p;
     }
   }
   async markInitialized(e, t) {
@@ -6117,7 +6107,7 @@ async function Ht(n) {
     if (c === "suppress" && n.allowSuppress) return { action: "suppress" };
     if (c === "gmOverride" && n.allowGmOverride && game.user.isGM) return { action: "gmOverride" };
     if (c.startsWith("suggestion:")) {
-      const p = n.suggestions.find((h) => h.id === c.slice(11));
+      const p = n.suggestions.find((y) => y.id === c.slice(11));
       if (p) return { action: "replace", replacement: p, selectionKind: "suggested" };
     }
     if (c === "world") {
@@ -6125,8 +6115,8 @@ async function Ht(n) {
       if (p) return p;
     }
     if (c === "uuid") {
-      const p = String(u.documentUuid ?? "").trim(), h = await is(n, p, p.startsWith("Compendium.") ? "compendium" : "world");
-      if (h) return h;
+      const p = String(u.documentUuid ?? "").trim(), y = await is(n, p, p.startsWith("Compendium.") ? "compendium" : "world");
+      if (y) return y;
     }
     if (c === "custom" && n.type === "skill" && n.allowCustom) {
       const p = String(u.customName ?? "").trim();
@@ -6268,8 +6258,8 @@ class Od {
           throw new x("duplicate-grant", "A Genre acquisition must use an Ability from its Genre catalog.");
         p = !0;
       }
-      const h = c ? void 0 : (await e.createEmbeddedDocuments("Item", [u]))[0];
-      return { entry: o, abilityCreated: !!h, conflictOverridden: p };
+      const y = c ? void 0 : (await e.createEmbeddedDocuments("Item", [u]))[0];
+      return { entry: o, abilityCreated: !!y, conflictOverridden: p };
     });
   }
   async undoManual(e, t, i) {
@@ -6314,16 +6304,16 @@ class Od {
           throw new x("duplicate-grant", "A Genre choice must grant an Ability from its Genre catalog.");
         p = !0;
       }
-      let h;
-      c || (h = (await e.createEmbeddedDocuments("Item", [u]))[0]);
+      let y;
+      c || (y = (await e.createEmbeddedDocuments("Item", [u]))[0]);
       try {
         await e.update({
           "system.advancement.pendingGenreChoices": e.system.advancement.pendingGenreChoices.filter((m) => m.id !== r.id)
         });
       } catch (m) {
-        throw await h?.delete?.(), m;
+        throw await y?.delete?.(), m;
       }
-      return { entry: l, abilityCreated: !!h, conflictOverridden: p };
+      return { entry: l, abilityCreated: !!y, conflictOverridden: p };
     });
   }
   async #l(e, t, i) {
@@ -6352,13 +6342,13 @@ class Od {
   #s(e, t, i, a) {
     const o = a.system.grantedBy, r = Ne("ability", String(a.name), o.contentUuid), l = Li(e.items, r);
     if (!l) return null;
-    const u = l.system.grantedBy ?? {}, c = Ne("ability", l.name, String(u.contentUuid ?? "")), p = (h, m, S) => ({
+    const u = l.system.grantedBy ?? {}, c = Ne("ability", l.name, String(u.contentUuid ?? "")), p = (y, m, f) => ({
       id: m,
-      name: h.name,
+      name: y.name,
       type: "ability",
       rank: "",
-      contentUuid: S.contentUuid,
-      contentKey: S.contentKey
+      contentUuid: f.contentUuid,
+      contentKey: f.contentKey
     });
     return {
       id: `${t.uuid}:${i.id}`,
@@ -6566,19 +6556,19 @@ async function Wi(n) {
     buttons: o,
     close: () => null,
     render: t ? void 0 : (l, u) => {
-      const c = [...u.element.querySelectorAll("button[data-package-choice-option]")], p = u.element.querySelector('button[data-action="confirm-package-choice"]'), h = u.element.querySelector("[data-package-choice-count]"), m = () => {
-        for (const S of c) {
-          const f = a.includes(S.dataset.optionId ?? "");
-          S.classList.toggle("is-selected", f), S.setAttribute("aria-pressed", String(f));
+      const c = [...u.element.querySelectorAll("button[data-package-choice-option]")], p = u.element.querySelector('button[data-action="confirm-package-choice"]'), y = u.element.querySelector("[data-package-choice-count]"), m = () => {
+        for (const f of c) {
+          const g = a.includes(f.dataset.optionId ?? "");
+          f.classList.toggle("is-selected", g), f.setAttribute("aria-pressed", String(g));
         }
-        p && (p.disabled = a.length !== n.choose), h && (h.textContent = game.i18n.format("MAGNUSARCHIVES.Packages.SelectionCount", {
+        p && (p.disabled = a.length !== n.choose), y && (y.textContent = game.i18n.format("MAGNUSARCHIVES.Packages.SelectionCount", {
           selected: a.length,
           required: n.choose
         }));
       };
-      for (const S of c)
-        S.addEventListener("click", () => {
-          a = Wd(a, S.dataset.optionId ?? "", n.choose), m();
+      for (const f of c)
+        f.addEventListener("click", () => {
+          a = Wd(a, f.dataset.optionId ?? "", n.choose), m();
         });
       m();
     }
@@ -6724,10 +6714,10 @@ async function as(n, e) {
       }), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Packages.TypeAttached"));
       const p = n;
       if (!p.system.genre.sourceUuid) {
-        const h = [...game.items].filter((S) => S.type === "genre"), m = await Xo(
+        const y = [...game.items].filter((f) => f.type === "genre"), m = await Xo(
           o,
-          h,
-          async (S) => await fromUuid(S)
+          y,
+          async (f) => await fromUuid(f)
         );
         m && await foundry.applications.api.DialogV2.confirm({
           window: { title: game.i18n.localize("MAGNUSARCHIVES.Genre.TypeSuggestion") },
@@ -6815,7 +6805,7 @@ async function it(n, e, t) {
 async function os(n, e) {
   const t = e ?? await ha("species");
   if (!t) return;
-  const i = _i(n).find((f) => f.type === "species");
+  const i = _i(n).find((g) => g.type === "species");
   let a, s;
   if (i && (!await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("MAGNUSARCHIVES.Species.Replace") },
@@ -6838,16 +6828,16 @@ async function os(n, e) {
     game.i18n.localize("MAGNUSARCHIVES.Species.DescriptorChoice")
   );
   if (p === null) return;
-  const h = c.flatMap((f) => f.options.filter((A) => p[f.id]?.includes(A.id)).map((A) => ({ ...A, id: `${f.id}:${A.id}` }))), m = {}, S = {};
-  for (const f of [...o.descriptorGrants ?? [], ...h]) {
-    const A = f.descriptorUuid ? await fromUuid(f.descriptorUuid) : null, v = A?.system ?? f.snapshot.system, E = await Jo(
-      f.snapshot.name || A?.name || t.name,
+  const y = c.flatMap((g) => g.options.filter((A) => p[g.id]?.includes(A.id)).map((A) => ({ ...A, id: `${g.id}:${A.id}` }))), m = {}, f = {};
+  for (const g of [...o.descriptorGrants ?? [], ...y]) {
+    const A = g.descriptorUuid ? await fromUuid(g.descriptorUuid) : null, v = A?.system ?? g.snapshot.system, E = await Jo(
+      g.snapshot.name || A?.name || t.name,
       v.poolBonusChoiceGroups ?? []
     );
     if (E === null) return;
-    const H = await it(f.snapshot.name || A?.name || t.name, v.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+    const H = await it(g.snapshot.name || A?.name || t.name, v.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
     if (H === null) return;
-    m[f.id] = H, S[f.id] = E;
+    m[g.id] = H, f[g.id] = E;
   }
   try {
     await game.magnusarchives.services.characterPackages.attachSpecies(n, t, {
@@ -6857,13 +6847,13 @@ async function os(n, e) {
       descriptorChoices: p,
       resolvedDescriptorChoiceGroups: c,
       descriptorSkillChoices: m,
-      descriptorPoolChoices: S,
+      descriptorPoolChoices: f,
       conflictResolver: Ht,
       ...a ? { replaceItemId: a } : {},
       ...s ? { replaceGrantedItemsMode: s } : {}
     }), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Species.Attached"));
-  } catch (f) {
-    f instanceof Le || Ki(f);
+  } catch (g) {
+    g instanceof Le || Ki(g);
   }
 }
 async function nu(n, e) {
@@ -6920,17 +6910,17 @@ function ls(n) {
 }
 async function lu(n, e) {
   if (!game.magnusarchives.services.abilities.canUse(e)) return;
-  const t = xe(), i = t.enabledRuleModuleIds ?? [], a = game.magnusarchives.rules.resolveDifficultyPolicy(t.base, i), s = e.system.targetMode === "none" ? [] : au(), o = s.filter((f) => f.type === "npc"), r = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Combat.Targets")}</strong><span>${s.length ? s.map((f) => f.name).join(", ") : game.i18n.localize("MAGNUSARCHIVES.Common.None")}</span></div>`;
+  const t = xe(), i = t.enabledRuleModuleIds ?? [], a = game.magnusarchives.rules.resolveDifficultyPolicy(t.base, i), s = e.system.targetMode === "none" ? [] : au(), o = s.filter((g) => g.type === "npc"), r = e.system.roll !== "none", l = e.system.targetMode === "none" ? "" : `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Combat.Targets")}</strong><span>${s.length ? s.map((g) => g.name).join(", ") : game.i18n.localize("MAGNUSARCHIVES.Common.None")}</span></div>`;
   if (!r) {
-    const f = await foundry.applications.api.DialogV2.input({
+    const g = await foundry.applications.api.DialogV2.input({
       window: { title: `${game.i18n.localize("MAGNUSARCHIVES.Ability.Use")}: ${e.name}` },
       content: `<div class="magnusarchives magnusarchives-dialog-fields"><p><strong>${e.name}</strong></p>${l}${rs(e, !1)}</div>`,
       rejectClose: !1,
       ok: { label: game.i18n.localize("MAGNUSARCHIVES.Ability.Use") }
     });
-    if (!f) return;
+    if (!g) return;
     try {
-      const A = ls(f), v = await game.magnusarchives.services.abilities.executeNoRoll(n, e, {
+      const A = ls(g), v = await game.magnusarchives.services.abilities.executeNoRoll(n, e, {
         ...A ? { pool: A } : {},
         targets: s,
         enabledRuleModuleIds: i
@@ -6941,27 +6931,27 @@ async function lu(n, e) {
     }
     return;
   }
-  const u = o.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Roll.Difficulty")}</strong><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")}</span></div>` : si(a.difficultyCeiling, !0), c = (f) => {
-    const A = ou(n, f), v = ls(f);
+  const u = o.length > 0 ? `<div class="roll-dialog-context"><strong>${game.i18n.localize("MAGNUSARCHIVES.Roll.Difficulty")}</strong><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")}</span></div>` : si(a.difficultyCeiling, !0), c = (g) => {
+    const A = ou(n, g), v = ls(g);
     return {
       ...v ? { pool: v } : {},
       targets: s,
-      difficulty: ii(f),
+      difficulty: ii(g),
       ...A ? { skill: A } : {},
-      skillSteps: ru(f),
-      assets: j(f, "assets"),
-      paidEffort: j(f, "paidEffort"),
-      damageEffort: j(f, "damageEffort"),
-      freeDamageEffort: j(f, "freeDamageEffort"),
-      freeEffort: j(f, "freeEffort"),
-      ...ni(f),
+      skillSteps: ru(g),
+      assets: j(g, "assets"),
+      paidEffort: j(g, "paidEffort"),
+      damageEffort: j(g, "damageEffort"),
+      freeDamageEffort: j(g, "freeDamageEffort"),
+      freeEffort: j(g, "freeEffort"),
+      ...ni(g),
       enabledRuleModuleIds: i
     };
-  }, p = (f) => {
-    const A = game.magnusarchives.services.abilities.buildRollPlan(n, e, c(f)).requests[0];
+  }, p = (g) => {
+    const A = game.magnusarchives.services.abilities.buildRollPlan(n, e, c(g)).requests[0];
     if (!A) throw new Error("Ability preview did not produce a roll request.");
     return A;
-  }, h = `
+  }, y = `
     ${l}
     ${u}
     ${rs(e, !0)}
@@ -6971,17 +6961,17 @@ async function lu(n, e) {
     ${e.system.roll === "attack" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamageEffort")}<select name="damageEffort">${he(n.system.derived.effort.max)}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}<input name="freeDamageEffort" type="number" value="0" min="0" step="1"></label>` : ""}
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeEffort")}<input name="freeEffort" type="number" value="0" min="0" step="1"></label>
-    ${ai()}`, m = game.magnusarchives.services.combat.policy(i), S = await foundry.applications.api.DialogV2.input({
+    ${ai()}`, m = game.magnusarchives.services.combat.policy(i), f = await foundry.applications.api.DialogV2.input({
     window: { title: `${game.i18n.localize("MAGNUSARCHIVES.Ability.Use")}: ${e.name}`, resizable: !0 },
     position: { width: 800 },
     content: oi({
       identity: e.name,
-      settings: h,
+      settings: y,
       ...e.system.roll === "attack" ? { attackSummary: " " } : {}
     }),
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Roll.Roll") },
-    render: (f, A) => {
+    render: (g, A) => {
       ri(A.element, {
         actor: n,
         policyRequest: t,
@@ -7000,29 +6990,29 @@ async function lu(n, e) {
       });
     }
   });
-  if (S)
+  if (f)
     try {
-      let f = await game.magnusarchives.services.abilities.executeRoll(
+      let g = await game.magnusarchives.services.abilities.executeRoll(
         n,
         e,
-        c(S),
+        c(f),
         t
       );
       if (e.system.roll === "attack") {
-        const v = await qo(f);
-        v && (f = game.magnusarchives.services.abilities.chooseAttackOutcomes(f, v));
+        const v = await qo(g);
+        v && (g = game.magnusarchives.services.abilities.chooseAttackOutcomes(g, v));
       }
-      for (const v of f)
+      for (const v of g)
         await game.magnusarchives.services.abilityChat.publishRoll(
           n,
           v,
           Oi(),
           Bi()
         );
-      const A = f[0];
+      const A = g[0];
       A && await ti().requestFreeFromNaturalResult(n, A.execution.result);
-    } catch (f) {
-      ui.notifications.error(f instanceof Error ? f.message : String(f));
+    } catch (g) {
+      ui.notifications.error(g instanceof Error ? g.message : String(g));
     }
 }
 function cu(n) {
@@ -7137,26 +7127,38 @@ function Ri(n, e) {
     pips: Zo(n[t], e[t])
   }));
 }
-function yu(n, e) {
+const yu = {
+  hale: 0,
+  hurt: 1,
+  impaired: 3,
+  debilitated: 2,
+  dead: 0
+};
+function Su(n, e) {
   const t = Qt(e), i = vt(n, e), a = t.indexOf(i);
   return t.map((s, o) => ({
     step: s,
     label: `MAGNUSARCHIVES.DamageTrack.${s}`,
     hintLabel: `MAGNUSARCHIVES.DamageTrack.Hint.${s}`,
+    noteLabels: Array.from(
+      { length: yu[s] },
+      (r, l) => `MAGNUSARCHIVES.DamageTrack.Note.${s}.${l + 1}`
+    ),
     current: s === i,
     reached: o <= a
   }));
 }
-function Su(n) {
-  const e = Math.max(0, Math.trunc(n)), t = Gi(e);
+function Au(n, e = 0) {
+  const t = Math.max(0, Math.trunc(n)), i = Ui(t);
   return {
-    value: e,
-    level: t,
-    toNextLevel: Ks(e),
-    pips: Zo(e - t * 3, 3)
+    value: t,
+    level: i,
+    toNextLevel: Ks(t),
+    supernatural: Math.max(0, Math.trunc(e)),
+    pips: Zo(t - i * 3, 3)
   };
 }
-function Au(n) {
+function bu(n) {
   return (Array.isArray(n) ? n : ot(n)).map((t) => {
     const i = t.used;
     return { id: t.id, type: t.type, used: i, available: !i, shortLabel: pu[t.type] };
@@ -7166,20 +7168,20 @@ function er(n, e) {
   const t = Number.isFinite(e) ? Math.max(0, e) : 0, i = Number.isFinite(n) ? Math.max(0, Math.min(t, n)) : 0, a = t > 0 ? i / t : 0;
   return { current: i, max: t, ratio: a, percent: a * 100 };
 }
-const bu = ["name", "rank"], ds = {
+const wu = ["name", "rank"], ds = {
   expert: 0,
   specialized: 1,
   trained: 2,
   untrained: 3,
   inability: 4
 };
-function wu(n) {
-  return bu.includes(n);
+function vu(n) {
+  return wu.includes(n);
 }
-function vu(n, e) {
+function Cu(n, e) {
   return [...n].sort((t, i) => (e === "rank" ? ds[t.rank] - ds[i.rank] : 0) || t.name.localeCompare(i.name, "en-US"));
 }
-function Cu(n) {
+function Eu(n) {
   const e = n.system.grantedBy;
   return !e || e.status === "retained" ? !0 : !e.sourceUuid && !e.instanceId && !e.grantId;
 }
@@ -7194,14 +7196,14 @@ function us(n) {
       payable: t > 0 && e.length > 0
     },
     description: n.system.description.trim(),
-    canDelete: Cu(n)
+    canDelete: Eu(n)
   };
 }
-function Eu(n) {
+function Iu(n) {
   const e = new Intl.Collator("en-US", { sensitivity: "base", numeric: !0 });
   return n.map((t, i) => ({ ability: t, index: i })).sort((t, i) => +(t.ability.system.archived === !0) - +(i.ability.system.archived === !0) || e.compare(t.ability.name, i.ability.name) || t.index - i.index).map(({ ability: t }) => t);
 }
-class Iu {
+class Ru {
   #e = /* @__PURE__ */ new Set();
   isExpanded(e) {
     return this.#e.has(e);
@@ -7245,7 +7247,7 @@ function ms(n, e) {
 function Ni(n) {
   return xn.includes(n);
 }
-function Ru(n) {
+function Nu(n) {
   if (!Ni(n.type)) return null;
   const e = n.system.depletion && typeof n.system.depletion == "object" ? n.system.depletion : null;
   return {
@@ -7294,13 +7296,13 @@ function qn(n) {
   }
   return { track: e, severity: t, count: a };
 }
-async function Nu(n, e) {
+async function Mu(n, e) {
   const t = rt(e);
   if (!t) throw new Error("Weapon family must not be blank.");
   const i = oe([...n.system.proficiencies.weaponFamilies, t]);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
-async function Mu(n, e) {
+async function Uu(n, e) {
   const t = rt(e), i = oe(n.system.proficiencies.weaponFamilies).filter((a) => a !== t);
   return await n.update({ "system.proficiencies.weaponFamilies": i }), i;
 }
@@ -7314,20 +7316,20 @@ async function Gu(n) {
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add") }
   });
-  e && await Nu(n, e.family);
+  e && await Mu(n, e.family);
 }
-function Uu(n) {
+function ku(n) {
   const e = n.family, t = n.category;
   if (e !== "weapon" && e !== "armor") throw new Error("Invalid familiarity action data.");
   if (!t || !(e === "weapon" ? Oe : Be).includes(t)) throw new Error("Invalid familiarity action data.");
   return { family: e, category: t };
 }
-function ku(n, e) {
+function Hu(n, e) {
   const t = /* @__PURE__ */ new Set([...Oe, ...Be]), i = new Set(n.filter((a) => t.has(a)));
   return i.has(e) ? i.delete(e) : i.add(e), [...i];
 }
-async function Hu(n, e, t) {
-  const i = e === "weapon" ? "weaponCategories" : "armorCategories", a = ku(n.system.proficiencies[i], t);
+async function $u(n, e, t) {
+  const i = e === "weapon" ? "weaponCategories" : "armorCategories", a = Hu(n.system.proficiencies[i], t);
   return await n.update({ [`system.proficiencies.${i}`]: a }), a;
 }
 function bi(n) {
@@ -7339,7 +7341,7 @@ function bi(n) {
     "'": "&#039;"
   })[e]);
 }
-function $u(n) {
+function Vu(n) {
   const e = n ?? { category: "Accuracy", shifts: 1, specification: "", description: "" };
   return `<div class="magnusarchives magnusarchives-dialog magnusarchives-power-shift-dialog">
     <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.PowerShifts.Category")}
@@ -7360,7 +7362,7 @@ function $u(n) {
 async function fs(n, e, t) {
   const i = await foundry.applications.api.DialogV2.input({
     window: { title: game.i18n.localize(t ? "MAGNUSARCHIVES.PowerShifts.Edit" : "MAGNUSARCHIVES.PowerShifts.Add") },
-    content: $u(t),
+    content: Vu(t),
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Save") }
   });
@@ -7374,10 +7376,10 @@ async function fs(n, e, t) {
   });
   await n.update({ "system.powerShifts": a });
 }
-async function Vu(n, e, t) {
+async function Du(n, e, t) {
   await n.update({ "system.powerShifts": nl(e, t) });
 }
-const wi = "system." + U;
+const wi = "system." + G;
 function nr() {
   return [...game.users];
 }
@@ -7387,13 +7389,13 @@ function gs() {
 function hs(n, e) {
   return e.isGM || n.testUserPermission(e, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
-function Du(n) {
+function Fu(n) {
   return [...game.messages].some((e) => {
-    const t = e.getFlag(U, "playerIntrusion");
+    const t = e.getFlag(G, "playerIntrusion");
     return !!(t && typeof t == "object" && t.requestId === n);
   });
 }
-class Fu {
+class Tu {
   #e;
   #t;
   #i = /* @__PURE__ */ new Set();
@@ -7432,7 +7434,7 @@ class Fu {
     }
   }
   async #a(e, t, i) {
-    if (!(this.#n.has(e) || Du(e))) {
+    if (!(this.#n.has(e) || Fu(e))) {
       this.#n.add(e);
       try {
         const s = await fromUuid(t);
@@ -7478,20 +7480,20 @@ class Fu {
   }
 }
 let Wt = null;
-function Tu(n, e) {
-  return Wt = new Fu(n, e), Wt.initialize(), Wt;
+function zu(n, e) {
+  return Wt = new Tu(n, e), Wt.initialize(), Wt;
 }
-function zu() {
+function Pu() {
   if (!Wt) throw new Error("Player Intrusion controller is not ready.");
   return Wt;
 }
 const gn = "is-quick-roll-pulse";
-function Pu(n) {
+function xu(n) {
   n.classList.remove(gn), n.offsetWidth, n.classList.add(gn), n.addEventListener("animationend", () => {
     n.classList.remove(gn);
   }, { once: !0 });
 }
-const xu = foundry.applications.api.HandlebarsApplicationMixin(
+const qu = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 );
 function ys(n) {
@@ -7505,7 +7507,7 @@ function P(n) {
   if (!e) throw new Error("Missing Item ID.");
   return e;
 }
-function qu(n) {
+function Ou(n) {
   return game.i18n.localize(`MAGNUSARCHIVES.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
 function hn(n) {
@@ -7516,7 +7518,7 @@ function Qe(n) {
   if (!e || !t) throw new Error("Missing Focus node action data.");
   return { focusUuid: e, nodeId: t };
 }
-const Ou = {
+const Bu = {
   "not-character": "MAGNUSARCHIVES.Focus.Errors.NotCharacter",
   "node-not-found": "MAGNUSARCHIVES.Focus.Errors.NodeNotFound",
   "progress-missing": "MAGNUSARCHIVES.Focus.Errors.ProgressMissing",
@@ -7619,13 +7621,13 @@ const Ss = /* @__PURE__ */ new Set([
   "rollArtifactLevel",
   "playerIntrusion"
 ]);
-class C extends xu {
+class C extends qu {
   #e = new Lo();
   #t = new jo();
   #i = null;
   #n = !1;
   #a = "name";
-  #l = new Iu();
+  #l = new Ru();
   #r = new ps();
   #s = new ps();
   #c = null;
@@ -7654,9 +7656,9 @@ class C extends xu {
       rally: C.#he,
       editCharacterOverride: C.#M,
       clearCharacterOverride: C.#y,
-      editWoundCapacityOverride: C.#G,
+      editWoundCapacityOverride: C.#U,
       resetWoundCapacityOverride: C.#Se,
-      editRecoveryOverride: C.#U,
+      editRecoveryOverride: C.#G,
       resetRecoveryOverride: C.#b,
       rollPool: C.#k,
       inspectHeaderFocus: C.#C,
@@ -7674,8 +7676,8 @@ class C extends xu {
       toggleCombatDetails: C.#Re,
       rollCombatDepletion: C.#Ne,
       reloadWeapon: C.#Me,
-      toggleShieldEquipped: C.#Ge,
-      toggleArmorEquipped: C.#Ue,
+      toggleShieldEquipped: C.#Ue,
+      toggleArmorEquipped: C.#Ge,
       editCombatItem: C.#ke,
       deleteCombatItem: C.#He,
       block: C.#$e,
@@ -8003,21 +8005,21 @@ class C extends xu {
       game.user,
       CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
     )) return;
-    const { family: i, category: a } = Uu(t.dataset);
-    await Hu(this.actor, i, a), await this.render({ force: !0 });
+    const { family: i, category: a } = ku(t.dataset);
+    await $u(this.actor, i, a), await this.render({ force: !0 });
   }
   static async #se() {
     await Gu(this.actor), await this.render({ force: !0 });
   }
   static async #oe(e, t) {
-    e.preventDefault(), e.stopPropagation(), await Mu(
+    e.preventDefault(), e.stopPropagation(), await Uu(
       this.actor,
       t.dataset.weaponFamily
     ), await this.render({ force: !0 });
   }
   static #I(e) {
     const t = e.actor.system, i = [...e.actor.items].filter((a) => a.type === "characterType");
-    return Ga(t.powerShifts ?? [], i);
+    return Ua(t.powerShifts ?? [], i);
   }
   static async #re() {
     await fs(
@@ -8031,7 +8033,7 @@ class C extends xu {
   }
   static async #ce(e, t) {
     const i = t.dataset.powerShiftId;
-    i && await Vu(
+    i && await Du(
       this.actor,
       C.#I(this),
       i
@@ -8053,7 +8055,7 @@ class C extends xu {
   }
   static async #fe(e, t) {
     const i = t.dataset.recoveryType, a = t.dataset.recoverySlotId;
-    !i || !Ge.includes(i) || await Da(this.actor, i, a);
+    !i || !Ue.includes(i) || await Da(this.actor, i, a);
   }
   static async #ge() {
     if (!game.user.isGM || !await foundry.applications.api.DialogV2.confirm({
@@ -8074,7 +8076,7 @@ class C extends xu {
   static async #ye(e, t) {
     e.preventDefault(), e.stopPropagation(), t instanceof HTMLButtonElement && (t.disabled = !0);
     try {
-      await zu().activate(
+      await Pu().activate(
         this.actor
       );
     } catch (i) {
@@ -8092,19 +8094,19 @@ class C extends xu {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
     if (!i || !Yi.includes(i)) return;
-    const a = Gn(
+    const a = Un(
       this.actor.system,
       i
     );
     await this.actor.update({ [a.path]: null });
   }
-  static async #G(e) {
-    e.preventDefault(), e.stopPropagation(), await Uc(this.actor);
+  static async #U(e) {
+    e.preventDefault(), e.stopPropagation(), await Gc(this.actor);
   }
   static async #Se(e) {
     e.preventDefault(), e.stopPropagation(), await Fc(this.actor);
   }
-  static async #U(e) {
+  static async #G(e) {
     e.preventDefault(), e.stopPropagation(), await Dc(this.actor);
   }
   static async #b(e) {
@@ -8140,13 +8142,13 @@ class C extends xu {
   }
   static #E(e, t) {
     const i = t.dataset.sortMode;
-    !wu(i) || i === this.#a || (this.#a = i, this.render({ force: !0 }));
+    !vu(i) || i === this.#a || (this.#a = i, this.render({ force: !0 }));
   }
   static async #R(e, t) {
     e.stopPropagation();
     const i = this.actor.items.get(P(t));
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
-    Pu(t);
+    xu(t);
     try {
       const a = st(), s = game.magnusarchives.services.skills.buildQuickRollRequest(
         i,
@@ -8238,7 +8240,7 @@ class C extends xu {
     if (!i || i.type !== "weapon") throw new Error("Weapon Item not found.");
     await game.magnusarchives.services.weapons.reload(i);
   }
-  static async #Ge(e, t) {
+  static async #Ue(e, t) {
     if (e.preventDefault(), e.stopPropagation(), !this.isEditable) return;
     const i = this.actor.items.get(P(t));
     if (!i || i.type !== "shield") throw new Error("Shield Item not found.");
@@ -8248,7 +8250,7 @@ class C extends xu {
       !i.system.equipped
     );
   }
-  static async #Ue(e, t) {
+  static async #Ge(e, t) {
     if (e.preventDefault(), e.stopPropagation(), !this.isEditable) return;
     const i = this.actor.items.get(P(t));
     if (!i || i.type !== "armor") throw new Error("Armor Item not found.");
@@ -8417,7 +8419,7 @@ class C extends xu {
   static #be(e) {
     if (!(e instanceof Le)) {
       if (e instanceof ce) {
-        ui.notifications.error(game.i18n.localize(Ou[e.code]));
+        ui.notifications.error(game.i18n.localize(Bu[e.code]));
         return;
       }
       console.error(e), ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Focus.Errors.Unexpected"));
@@ -8425,8 +8427,8 @@ class C extends xu {
   }
   async _prepareContext(e) {
     this.element?.isConnected && (this.#o = od(this.element), this.#d = this.#o.activeTab);
-    const t = await super._prepareContext(e), i = vu([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
-      const b = g, D = game.magnusarchives.services.skills.configuredPool(b);
+    const t = await super._prepareContext(e), i = Cu([...this.actor.items].filter((h) => h.type === "skill").map((h) => {
+      const b = h, D = game.magnusarchives.services.skills.configuredPool(b);
       return {
         id: b.id,
         name: b.name,
@@ -8434,13 +8436,13 @@ class C extends xu {
         rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${b.system.rank}`),
         poolLabel: D ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${D[0].toUpperCase()}${D.slice(1)}`) : game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")
       };
-    }), this.#a), a = Eu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
-    this.#l.retain(a.map((g) => g.id));
-    const s = await Promise.all(a.map(async (g, b) => {
-      const D = g, T = us(g), le = this.#l.isExpanded(g.id), He = Eo(
+    }), this.#a), a = Iu([...this.actor.items].filter((h) => h.type === "ability").map((h) => h));
+    this.#l.retain(a.map((h) => h.id));
+    const s = await Promise.all(a.map(async (h, b) => {
+      const D = h, T = us(h), le = this.#l.isExpanded(h.id), He = Eo(
         T.cost.amount,
         T.cost.pools,
-        qu,
+        Ou,
         {
           pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
           middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
@@ -8452,8 +8454,8 @@ class C extends xu {
         { async: !0, relativeTo: D }
       ) : "";
       return {
-        id: g.id,
-        name: g.name,
+        id: h.id,
+        name: h.name,
         archived: T.archived,
         startsArchivedGroup: T.archived && (b === 0 || a[b - 1].system.archived !== !0),
         canPay: this.isEditable && T.cost.payable,
@@ -8463,12 +8465,12 @@ class C extends xu {
         enrichedDescription: dt,
         hasDescription: !!T.description
       };
-    })), o = this.actor, r = [...this.actor.items].filter((g) => g.type === "weapon" || g.type === "shield" || g.type === "armor");
-    r.filter((g) => g.type === "shield" && !!g.system.equipped).length > 1 && this.isEditable && await game.magnusarchives.services.shields.normalizeEquipped(
+    })), o = this.actor, r = [...this.actor.items].filter((h) => h.type === "weapon" || h.type === "shield" || h.type === "armor");
+    r.filter((h) => h.type === "shield" && !!h.system.equipped).length > 1 && this.isEditable && await game.magnusarchives.services.shields.normalizeEquipped(
       o
-    ), this.#s.retain(r.map((g) => g.id));
-    const u = async (g, b) => b ? foundry.applications.ux.TextEditor.implementation.enrichHTML(b, { async: !0, relativeTo: g }) : "", c = (await Promise.all(r.filter((g) => g.type === "weapon").map(async (g) => {
-      const b = g, D = b.system.description.trim();
+    ), this.#s.retain(r.map((h) => h.id));
+    const u = async (h, b) => b ? foundry.applications.ux.TextEditor.implementation.enrichHTML(b, { async: !0, relativeTo: h }) : "", c = (await Promise.all(r.filter((h) => h.type === "weapon").map(async (h) => {
+      const b = h, D = b.system.description.trim();
       return {
         id: b.id,
         name: b.name,
@@ -8485,10 +8487,10 @@ class C extends xu {
         freelyUsed: game.magnusarchives.services.combat.weaponFreelyUsed(o, b),
         expanded: this.#s.isExpanded(b.id),
         hasDescription: !!D,
-        enrichedDescription: await u(g, D)
+        enrichedDescription: await u(h, D)
       };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), p = (await Promise.all(r.filter((g) => g.type === "armor").map(async (g) => {
-      const b = g, D = b.system.description.trim(), T = b.system.depletion;
+    }))).sort((h, b) => h.name.localeCompare(b.name)), p = (await Promise.all(r.filter((h) => h.type === "armor").map(async (h) => {
+      const b = h, D = b.system.description.trim(), T = b.system.depletion;
       return {
         id: b.id,
         name: b.name,
@@ -8500,10 +8502,10 @@ class C extends xu {
         depleted: !!b.system.depleted,
         expanded: this.#s.isExpanded(b.id),
         hasDescription: !!D,
-        enrichedDescription: await u(g, D)
+        enrichedDescription: await u(h, D)
       };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), h = (await Promise.all(r.filter((g) => g.type === "shield").map(async (g) => {
-      const b = g, D = b.system.description.trim(), T = b.system.depletion, le = Ri({
+    }))).sort((h, b) => h.name.localeCompare(b.name)), y = (await Promise.all(r.filter((h) => h.type === "shield").map(async (h) => {
+      const b = h, D = b.system.description.trim(), T = b.system.depletion, le = Ri({
         minor: b.system.wounds.minor.length,
         moderate: b.system.wounds.moderate.length,
         major: b.system.wounds.major.length
@@ -8527,37 +8529,37 @@ class C extends xu {
         depleted: !!b.system.depleted,
         expanded: this.#s.isExpanded(b.id),
         hasDescription: !!D,
-        enrichedDescription: await u(g, D)
+        enrichedDescription: await u(h, D)
       };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), m = h.filter((g) => g.equipped).length > 1, S = this.actor.system, f = [], A = [], v = [];
-    for (const g of S.focusProgress ?? []) {
-      const b = await Ve(this.actor, g.focusUuid);
+    }))).sort((h, b) => h.name.localeCompare(b.name)), m = y.filter((h) => h.equipped).length > 1, f = this.actor.system, g = [], A = [], v = [];
+    for (const h of f.focusProgress ?? []) {
+      const b = await Ve(this.actor, h.focusUuid);
       if (!b || b.type !== "focus") {
-        A.push(g.focusUuid);
+        A.push(h.focusUuid);
         continue;
       }
       v.push({
-        uuid: g.focusUuid,
+        uuid: h.focusUuid,
         name: b.name,
-        provenance: g.provenance ?? "additional"
+        provenance: h.provenance ?? "additional"
       });
       const D = await game.magnusarchives.services.focusTrees.prepare(b, {
         characterTier: B(this.actor.system),
-        progress: g,
+        progress: h,
         editable: this.isEditable,
         missingOwnedNodeIds: game.magnusarchives.services.focusAcquisition.missingOwnedNodeIds(
           this.actor,
           b,
-          g
+          h
         ),
         gmOverrideAllowed: game.user.isGM,
         gmProgressionEdit: this.#n
       });
-      f.push({
+      g.push({
         ...D,
-        provenance: g.provenance ?? "additional",
-        provenanceLabel: `MAGNUSARCHIVES.Focus.Association.${g.provenance === "creation" ? "Creation" : "Additional"}`,
-        ownedCount: g.ownedNodeIds.length
+        provenance: h.provenance ?? "additional",
+        provenanceLabel: `MAGNUSARCHIVES.Focus.Association.${h.provenance === "creation" ? "Creation" : "Additional"}`,
+        ownedCount: h.ownedNodeIds.length
       });
     }
     const E = game.magnusarchives.services.advancement.view(
@@ -8566,45 +8568,45 @@ class C extends xu {
     ), H = game.magnusarchives.services.advancement.progressionGuidance(
       this.actor,
       st()
-    ), R = [...this.actor.items].filter((g) => g.type === "characterType"), G = R.map((g) => ({ id: g.id, name: g.name })), z = [...this.actor.items].filter((g) => g.type === "species").map((g) => ({ id: g.id, name: g.name })), K = [...this.actor.items].filter((g) => g.type === "descriptor").map((g) => {
-      const b = g.system.instance, D = b?.role ?? "custom";
+    ), R = [...this.actor.items].filter((h) => h.type === "characterType"), U = R.map((h) => ({ id: h.id, name: h.name })), z = [...this.actor.items].filter((h) => h.type === "species").map((h) => ({ id: h.id, name: h.name })), K = [...this.actor.items].filter((h) => h.type === "descriptor").map((h) => {
+      const b = h.system.instance, D = b?.role ?? "custom";
       return {
-        id: g.id,
-        name: g.name,
+        id: h.id,
+        name: h.name,
         role: D,
-        instanceId: b?.instanceId ?? g.id,
+        instanceId: b?.instanceId ?? h.id,
         attachedAt: b?.attachedAt ?? 0,
         roleLabel: game.i18n.localize(`MAGNUSARCHIVES.Packages.Role.${D}`)
       };
-    }), M = new Map([...this.actor.items].filter((g) => g.type === "characterType" || g.type === "descriptor" || g.type === "species").map((g) => [g.system.instance?.instanceId ?? "", g.name])), V = [...this.actor.items].filter((g) => {
-      const b = g.system.grantedBy;
+    }), M = new Map([...this.actor.items].filter((h) => h.type === "characterType" || h.type === "descriptor" || h.type === "species").map((h) => [h.system.instance?.instanceId ?? "", h.name])), V = [...this.actor.items].filter((h) => {
+      const b = h.system.grantedBy;
       return b?.instanceId && (b.kind === "type" || b.kind === "descriptor" || b.kind === "species");
-    }).map((g) => {
-      const b = g.system.grantedBy;
+    }).map((h) => {
+      const b = h.system.grantedBy;
       return {
-        id: g.id,
-        name: g.name,
-        type: g.type,
+        id: h.id,
+        name: h.name,
+        type: h.type,
         sourceName: M.get(b.instanceId) ?? game.i18n.localize("MAGNUSARCHIVES.Packages.Retained"),
         grantId: b.grantId,
         status: b.status,
         replacementLabel: b.replacement?.active ? `${b.replacement.originalName} → ${b.replacement.replacementName}` : ""
       };
-    }), I = this.actor.system, ie = Ga(
+    }), I = this.actor.system, ie = Ua(
       I.powerShifts ?? [],
       R
     ), W = tl(
       ie,
       el(R)
-    ), Ue = {
+    ), Ge = {
       enabled: I.presentation.powerShiftsEnabled,
       allocated: W.allocated,
       available: W.available,
       overBudget: W.overBudget,
-      legacy: (I.powerShifts ?? []).length === 0 && ie.some((g) => g.id.startsWith("legacy-")),
-      entries: ie.map((g) => ({
-        ...g,
-        categoryWarning: W.categoryWarnings.has(g.category.trim().toLocaleLowerCase("en-US"))
+      legacy: (I.powerShifts ?? []).length === 0 && ie.some((h) => h.id.startsWith("legacy-")),
+      entries: ie.map((h) => ({
+        ...h,
+        categoryWarning: W.categoryWarnings.has(h.category.trim().toLocaleLowerCase("en-US"))
       }))
     }, q = await game.magnusarchives.services.genres.active(
       this.actor
@@ -8628,14 +8630,14 @@ class C extends xu {
       provenance: I.genre.provenance,
       totalEffortCapMode: "core",
       totalEffortCapLabel: game.i18n.localize("MAGNUSARCHIVES.Genre.EffortCap.core")
-    }, ke = [...this.actor.items].filter((g) => xn.includes(g.type)).sort((g, b) => g.name.localeCompare(b.name, "en-US"));
-    this.#r.retain(ke.map((g) => g.id));
-    const ye = (await Promise.all(ke.map(async (g) => {
-      const b = Ru(g);
+    }, ke = [...this.actor.items].filter((h) => xn.includes(h.type)).sort((h, b) => h.name.localeCompare(b.name, "en-US"));
+    this.#r.retain(ke.map((h) => h.id));
+    const ye = (await Promise.all(ke.map(async (h) => {
+      const b = Nu(h);
       if (!b) return null;
-      const D = this.#r.isExpanded(g.id), T = b.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      const D = this.#r.isExpanded(h.id), T = b.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         b.description,
-        { async: !0, relativeTo: g }
+        { async: !0, relativeTo: h }
       ) : "";
       return {
         ...b,
@@ -8647,22 +8649,22 @@ class C extends xu {
         canRollLevel: b.levelRollable && b.usable,
         canRollDepletion: !!(b.depletion?.enabled && b.usable)
       };
-    }))).filter((g) => g !== null), Ce = {
+    }))).filter((h) => h !== null), Ce = {
       cypherLimit: I.derived.cypherLimit.max,
-      equipment: ye.filter((g) => g.type === "equipment"),
-      cyphers: ye.filter((g) => g.type === "cypher"),
-      artifacts: ye.filter((g) => g.type === "artifact")
-    }, re = v.find((g) => g.provenance === "creation") ?? v[0], Q = hu({
+      equipment: ye.filter((h) => h.type === "equipment"),
+      cyphers: ye.filter((h) => h.type === "cypher"),
+      artifacts: ye.filter((h) => h.type === "artifact")
+    }, re = v.find((h) => h.provenance === "creation") ?? v[0], Q = hu({
       descriptors: K,
       ...z[0] ? { species: { id: z[0].id, name: z[0].name } } : {},
-      ...G[0] ? { type: { id: G[0].id, name: G[0].name } } : {},
+      ...U[0] ? { type: { id: U[0].id, name: U[0].name } } : {},
       ...re ? { focus: { uuid: re.uuid, name: re.name } } : {},
       hideFocus: I.presentation.hideFocusInSentence
     }), Se = {
       ...Q,
-      descriptors: Q.descriptors.map((g) => ({
-        ...g,
-        displayName: g.missing ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Descriptor") : g.displayName
+      descriptors: Q.descriptors.map((h) => ({
+        ...h,
+        displayName: h.missing ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Descriptor") : h.displayName
       })),
       type: {
         ...Q.type,
@@ -8676,48 +8678,48 @@ class C extends xu {
       minor: I.wounds.minor.length,
       moderate: I.wounds.moderate.length,
       major: I.wounds.major.length
-    }, I.derived.wounds.capacities).map((g) => ({
-      ...g,
-      shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${g.severity}`),
-      pips: g.pips.map((b) => ({
+    }, I.derived.wounds.capacities).map((h) => ({
+      ...h,
+      shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${h.severity}`),
+      pips: h.pips.map((b) => ({
         ...b,
         tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
-          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${g.severity}`),
+          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${h.severity}`),
           count: b.targetCount
         })
       })),
       tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.CharacterWoundTooltip", {
-        severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${g.severity}`),
-        count: g.count,
-        capacity: g.capacity
+        severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${h.severity}`),
+        count: h.count,
+        capacity: h.capacity
       })
-    })), N = h.filter((g) => g.equipped), y = N.find((g) => !g.broken) ?? N[0], Y = y ? {
-      ...y,
+    })), N = y.filter((h) => h.equipped), S = N.find((h) => !h.broken) ?? N[0], Y = S ? {
+      ...S,
       tracks: Ri({
-        minor: y.minor,
-        moderate: y.moderate,
-        major: y.major
-      }, y.capacities).map((g) => ({
-        ...g,
-        itemId: y.id,
-        shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${g.severity}`),
-        pips: g.pips.map((b) => ({
+        minor: S.minor,
+        moderate: S.moderate,
+        major: S.major
+      }, S.capacities).map((h) => ({
+        ...h,
+        itemId: S.id,
+        shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${h.severity}`),
+        pips: h.pips.map((b) => ({
           ...b,
           tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetShieldWoundCount", {
-            shield: y.name,
-            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${g.severity}`),
+            shield: S.name,
+            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${h.severity}`),
             count: b.targetCount
           })
         })),
         tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.ShieldWoundTooltip", {
-          shield: y.name,
-          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${g.severity}`),
-          count: g.count,
-          capacity: g.capacity
+          shield: S.name,
+          severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${h.severity}`),
+          count: h.count,
+          capacity: h.capacity
         })
       }))
-    } : null, We = me.map((g, b) => ({
-      character: g,
+    } : null, We = me.map((h, b) => ({
+      character: h,
       shield: Y?.tracks[b] ?? null
     })), li = {
       appearance: Sl(I.appearance, this.actor.img),
@@ -8725,8 +8727,7 @@ class C extends xu {
       stats: {
         tier: I.derived.tier.value,
         effort: I.derived.effort.max,
-        xp: I.xp,
-        resourcePoints: I.resourcePoints
+        xp: I.xp
       },
       playerIntrusion: {
         visible: this.isEditable,
@@ -8735,15 +8736,15 @@ class C extends xu {
         ),
         tooltip: game.i18n.localize(I.xp >= 1 ? "MAGNUSARCHIVES.Intrusion.Player.Tooltip" : "MAGNUSARCHIVES.Intrusion.Player.RequiresTooltip")
       },
-      pools: k.map((g) => ({
-        key: g,
-        isMight: g === "might",
-        canRally: g === "might" && game.magnusarchives.services.rally.canApply(this.actor),
-        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${g[0].toUpperCase()}${g.slice(1)}`),
-        value: I.stats[g].value,
-        max: I.derived.pools[g].max,
-        edge: I.derived.pools[g].edge,
-        gauge: er(I.stats[g].value, I.derived.pools[g].max)
+      pools: k.map((h) => ({
+        key: h,
+        isMight: h === "might",
+        canRally: h === "might" && game.magnusarchives.services.rally.canApply(this.actor),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${h[0].toUpperCase()}${h.slice(1)}`),
+        value: I.stats[h].value,
+        max: I.derived.pools[h].max,
+        edge: I.derived.pools[h].edge,
+        gauge: er(I.stats[h].value, I.derived.pools[h].max)
       })),
       wounds: {
         tracks: me,
@@ -8753,7 +8754,7 @@ class C extends xu {
         dead: I.derived.wounds.dead
       },
       stress: {
-        ...Su(I.stress.value),
+        ...Au(I.stress.value, I.stress.supernatural),
         hindranceModifier: ve("hinder", I.derived.stress.level),
         canEdit: this.isEditable
       },
@@ -8761,35 +8762,36 @@ class C extends xu {
         hurtAvailable: I.derived.damageTrack.hurtAvailable,
         dead: I.derived.damageTrack.dead,
         canEdit: this.isEditable,
-        steps: yu(
+        steps: Su(
           I.damageTrack.step,
           I.derived.damageTrack.hurtAvailable
-        ).map((g) => ({
-          ...g,
-          label: game.i18n.localize(g.label),
-          hint: game.i18n.localize(g.hintLabel)
+        ).map((h) => ({
+          ...h,
+          label: game.i18n.localize(h.label),
+          hint: game.i18n.localize(h.hintLabel),
+          notes: h.noteLabels.map((b) => game.i18n.localize(b))
         }))
       },
-      recoveries: Au(I.recovery.slots).map((g) => ({
-        ...g,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Recovery.${g.type}`)
+      recoveries: bu(I.recovery.slots).map((h) => ({
+        ...h,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Recovery.${h.type}`)
       })),
       recoveryFormulaLabel: I.derived.recovery.formula,
       canResetRecoveries: game.user.isGM,
       shield: Y
-    }, wr = (g, b) => [
+    }, wr = (h, b) => [
       ...this.actor.items
-    ].filter((D) => D.type !== "characterType" && D.type !== "species" ? !1 : D.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[b] === !0).map((D) => D.name), va = (g, b, D, T) => b.map((le) => {
-      const He = wr(g, le), dt = D.includes(le), ci = He.length > 0, Mr = T.includes(le), Gr = dt && ci ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityManualAndGranted", { sources: He.join(", ") }) : dt ? game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual") : ci ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", { sources: He.join(", ") }) : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityAbsent");
+    ].filter((D) => D.type !== "characterType" && D.type !== "species" ? !1 : D.system[h === "weapon" ? "weaponUse" : "armorUse"]?.[b] === !0).map((D) => D.name), va = (h, b, D, T) => b.map((le) => {
+      const He = wr(h, le), dt = D.includes(le), ci = He.length > 0, Mr = T.includes(le), Ur = dt && ci ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityManualAndGranted", { sources: He.join(", ") }) : dt ? game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual") : ci ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", { sources: He.join(", ") }) : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityAbsent");
       return {
-        family: g,
+        family: h,
         category: le,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.${g === "weapon" ? "Weapon" : "Armor"}.Category.${le}`),
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.${h === "weapon" ? "Weapon" : "Armor"}.Category.${le}`),
         manual: dt,
         packageGranted: ci,
         effective: Mr,
         canToggle: this.isEditable && (dt || !ci),
-        sourceHint: Gr
+        sourceHint: Ur
       };
     }), vr = {
       weapons: va(
@@ -8807,17 +8809,17 @@ class C extends xu {
       weaponFamilies: oe([
         ...I.proficiencies.weaponFamilies,
         ...I.derived.packages.weaponFamilies ?? []
-      ]).map((g) => {
+      ]).map((h) => {
         const b = [...this.actor.items].filter((T) => T.type === "characterType").filter((T) => {
           const le = T.system;
           return oe([
             ...le.weaponFamilies ?? [],
             ...qi(le.weaponFamilyUse)
-          ]).includes(g);
-        }).map((T) => T.name), D = I.proficiencies.weaponFamilies.includes(g);
+          ]).includes(h);
+        }).map((T) => T.name), D = I.proficiencies.weaponFamilies.includes(h);
         return {
-          id: g,
-          label: yt(g),
+          id: h,
+          label: yt(h),
           manual: D,
           packageGranted: b.length > 0,
           canRemove: this.isEditable && D,
@@ -8833,11 +8835,11 @@ class C extends xu {
       speedEdge: "MAGNUSARCHIVES.Overrides.SpeedEdge",
       intellectMax: "MAGNUSARCHIVES.Overrides.IntellectMax",
       intellectEdge: "MAGNUSARCHIVES.Overrides.IntellectEdge"
-    }, Er = Yi.map((g) => {
-      const b = Gn(I, g);
-      return { ...b, label: game.i18n.localize(Cr[g]), hasOverride: b.override !== null };
+    }, Er = Yi.map((h) => {
+      const b = Un(I, h);
+      return { ...b, label: game.i18n.localize(Cr[h]), hasOverride: b.override !== null };
     }), $t = I.overrides.wounds ?? { minor: 0, moderate: 0, major: 0 }, Ir = {
-      hasOverride: Object.values($t).some((g) => g !== 0),
+      hasOverride: Object.values($t).some((h) => h !== 0),
       calculated: I.derived.wounds.calculatedCapacities,
       modifiers: $t,
       modifierLabels: {
@@ -8867,7 +8869,7 @@ class C extends xu {
       editable: this.isEditable,
       enriched: { notes: Nr },
       familiarities: vr,
-      powerShifts: Ue,
+      powerShifts: Ge,
       characterOverrides: Er,
       woundOverride: Ir,
       recoveryOverride: Rr,
@@ -8884,16 +8886,16 @@ class C extends xu {
       inventory: Ce,
       weaponItems: c,
       armorItems: p,
-      shieldItems: h,
+      shieldItems: y,
       multipleShieldsEquipped: m,
-      focusTrees: f,
+      focusTrees: g,
       missingFoci: A,
       advancement: {
         ...E,
-        options: E.options.map((g) => ({
-          ...g,
-          label: `MAGNUSARCHIVES.Advancement.Option.${g.kind}`,
-          shortLabel: `MAGNUSARCHIVES.Advancement.Short.${g.kind}`,
+        options: E.options.map((h) => ({
+          ...h,
+          label: `MAGNUSARCHIVES.Advancement.Option.${h.kind}`,
+          shortLabel: `MAGNUSARCHIVES.Advancement.Short.${h.kind}`,
           xpCost: E.policy.xpCost
         })),
         other: {
@@ -8902,9 +8904,9 @@ class C extends xu {
           shortLabel: "MAGNUSARCHIVES.Advancement.Short.other",
           xpCost: E.policy.xpCost
         },
-        purchases: S.advancement.purchases.map((g) => ({
-          ...g,
-          label: g.kind === "other" ? `MAGNUSARCHIVES.Advancement.Other.${g.otherKind}` : `MAGNUSARCHIVES.Advancement.Option.${g.kind}`
+        purchases: f.advancement.purchases.map((h) => ({
+          ...h,
+          label: h.kind === "other" ? `MAGNUSARCHIVES.Advancement.Other.${h.otherKind}` : `MAGNUSARCHIVES.Advancement.Option.${h.kind}`
         })),
         guidance: {
           ...H,
@@ -8914,18 +8916,18 @@ class C extends xu {
       },
       isGM: game.user.isGM,
       gmProgressionEdit: game.user.isGM && this.#n,
-      typeItems: G,
+      typeItems: U,
       speciesItems: z,
       descriptorItems: K,
-      primaryDescriptorItems: K.filter((g) => g.role === "primary"),
-      additionalDescriptorItems: K.filter((g) => g.role === "additional" || g.role === "custom"),
-      speciesDescriptorItems: K.filter((g) => g.role === "speciesGranted"),
+      primaryDescriptorItems: K.filter((h) => h.role === "primary"),
+      additionalDescriptorItems: K.filter((h) => h.role === "additional" || h.role === "custom"),
+      speciesDescriptorItems: K.filter((h) => h.role === "speciesGranted"),
       packageGrantedItems: V,
       coreCreation: this.actor.system.creation,
       activeArmorCategoryLabel: game.i18n.localize(
         `MAGNUSARCHIVES.Combat.Armor.Category.${o.system.derived.combat.armor.category}`
       ),
-      recoveryAvailableLabels: this.actor.system.derived.recovery.availableTypes.map((g) => game.i18n.localize(`MAGNUSARCHIVES.Recovery.${g}`)).join(", "),
+      recoveryAvailableLabels: this.actor.system.derived.recovery.availableTypes.map((h) => game.i18n.localize(`MAGNUSARCHIVES.Recovery.${h}`)).join(", "),
       phase: "0.1.0"
     };
   }
@@ -8936,7 +8938,7 @@ class we extends Error {
   }
   code;
 }
-class Bu {
+class Lu {
   #e = null;
   #t = null;
   get selectedNodeId() {
@@ -8971,7 +8973,7 @@ class Bu {
     this.#e = null, this.#t = null;
   }
 }
-function Lu() {
+function ju() {
   return globalThis.crypto?.randomUUID?.().replaceAll("-", "") ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
 }
 function De(n) {
@@ -9013,12 +9015,12 @@ function vs(n, e) {
     return a - s || t.id.localeCompare(i.id);
   });
 }
-class ju {
+class Wu {
   #e;
   #t;
   #i;
   #n = !1;
-  constructor(e, t = Lu) {
+  constructor(e, t = ju) {
     this.#e = t, this.#t = De(e), this.#i = De(e);
   }
   get graph() {
@@ -9045,16 +9047,16 @@ class ju {
     return ws(t), this.#l(e, (i) => ({ ...i, tier: t }));
   }
   moveNode(e, t) {
-    const i = this.#a(e), a = vs(this.#i, i.tier), s = a.findIndex((h) => h.id === e), o = t === "left" ? s - 1 : s + 1;
+    const i = this.#a(e), a = vs(this.#i, i.tier), s = a.findIndex((y) => y.id === e), o = t === "left" ? s - 1 : s + 1;
     if (o < 0 || o >= a.length) return De({
       version: this.#i.version,
       nodes: [i],
       connections: []
     }).nodes[0];
     const r = a[o], l = a[t === "left" ? o - 1 : o + 1], u = r.position.x ?? o, c = l?.position.x, p = t === "left" ? c == null ? u - 1 : (c + u) / 2 : c == null ? u + 1 : (u + c) / 2;
-    return this.#l(e, (h) => ({
-      ...h,
-      position: { ...h.position, x: p }
+    return this.#l(e, (y) => ({
+      ...y,
+      position: { ...y.position, x: p }
     }));
   }
   deleteNode(e) {
@@ -9148,7 +9150,7 @@ class ju {
     );
   }
 }
-function Wu(n) {
+function _u(n) {
   const e = n.querySelector(".magnusarchives-sheet.magnusarchives-item"), t = n.querySelector(".window-content"), i = [...n.querySelectorAll(
     ".magnusarchives-focus-tree-section[data-focus-uuid]"
   )].map((a) => {
@@ -9165,7 +9167,7 @@ function Wu(n) {
     trees: i
   };
 }
-function _u(n, e) {
+function Ku(n, e) {
   const t = n.querySelector(".magnusarchives-sheet.magnusarchives-item");
   t && (t.scrollTop = e.vertical);
   const i = n.querySelector(".window-content");
@@ -9178,7 +9180,7 @@ function _u(n, e) {
     r && (r.scrollLeft = s.left, r.scrollTop = s.top);
   }
 }
-class Ku extends Error {
+class Xu extends Error {
   constructor(e) {
     super("Only one Shield may be equipped at a time."), this.shieldIds = e, this.name = "MultipleEquippedShieldsError";
   }
@@ -9205,7 +9207,7 @@ class sr {
   }
   equipped(e) {
     const t = this.shields(e).filter((i) => i.system.equipped);
-    if (t.length > 1) throw new Ku(t.map((i) => i.id));
+    if (t.length > 1) throw new Xu(t.map((i) => i.id));
     return t[0] ?? null;
   }
   async normalizeEquipped(e) {
@@ -9289,7 +9291,7 @@ function Cs(n) {
     "'": "&#039;"
   })[e]);
 }
-async function Xu(n, e, t) {
+async function Yu(n, e, t) {
   const i = n.system.wounds[e].find((s) => s.id === t);
   if (!i) throw new Error(`Shield Wound '${t}' was not found.`);
   const a = await foundry.applications.api.DialogV2.input({
@@ -9306,7 +9308,7 @@ async function Xu(n, e, t) {
     description: String(a.description ?? "")
   });
 }
-async function Yu(n, e, t) {
+async function Ju(n, e, t) {
   await foundry.applications.api.DialogV2.confirm({
     window: { title: game.i18n.localize("MAGNUSARCHIVES.Wounds.DeleteTitle") },
     content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Wounds.DeleteConfirm")}</p></div>`,
@@ -9316,7 +9318,7 @@ async function Yu(n, e, t) {
     no: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel") }
   }) && await game.magnusarchives.services.shields.delete(n, e, t);
 }
-function Ju(n) {
+function Qu(n) {
   const e = n.roll === "attack", t = n.roll === "task", i = n.roll === "defense", a = t || i || n.rollModifier !== 0, s = e || n.attackModifier !== 0, o = e || n.damage !== 0, r = e || n.damageEffect !== "none", l = e || n.range.trim() !== "", u = e || n.targetMode !== "none";
   return {
     showIgnoresEdge: n.cost.amount > 0 && !!n.cost.allowedPools?.length || n.cost.ignoresEdge,
@@ -9330,10 +9332,10 @@ function Ju(n) {
     hasConditionalFields: a || s || o || r || l || u
   };
 }
-function Qu(n) {
+function Zu(n) {
   return n.defaultPool !== "choose" || n.category !== "general" || n.contexts.length > 0 || n.initiative;
 }
-function Zu(n) {
+function em(n) {
   const e = n.querySelector("[data-item-sheet-scroll]"), t = n.querySelector("[data-item-focus-key]:focus"), i = t?.dataset.itemFocusKey;
   if (!t || !i) return { scrollTop: e?.scrollTop ?? 0 };
   let a = null, s = null, o = null;
@@ -9351,7 +9353,7 @@ function Zu(n) {
     }
   };
 }
-function em(n, e) {
+function tm(n, e) {
   const t = n.querySelector("[data-item-sheet-scroll]");
   if (t && (t.scrollTop = e.scrollTop), !e.focusedInput) return;
   const i = [...n.querySelectorAll("[data-item-focus-key]")].find((r) => r.dataset.itemFocusKey === e.focusedInput?.key);
@@ -9376,7 +9378,7 @@ function Ie(n) {
 function ne(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-const tm = foundry.applications.api.HandlebarsApplicationMixin(
+const im = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ItemSheetV2
 ), Es = /* @__PURE__ */ new Set([
   "rollDepletion",
@@ -9411,9 +9413,9 @@ const tm = foundry.applications.api.HandlebarsApplicationMixin(
   "refreshGenreAbility",
   "removeGenreAbility"
 ]);
-class $ extends tm {
+class $ extends im {
   #e = new Lo();
-  #t = new Bu();
+  #t = new Lu();
   #i = new jo();
   #n = null;
   #a = null;
@@ -9450,11 +9452,11 @@ class $ extends tm {
   }
   static async #w(e, t) {
     const i = $.#m(t);
-    await Xu(this.item, i.severity, i.woundId);
+    await Yu(this.item, i.severity, i.woundId);
   }
   static async #V(e, t) {
     const i = $.#m(t);
-    await Yu(this.item, i.severity, i.woundId);
+    await Ju(this.item, i.severity, i.woundId);
   }
   static async #D() {
     !this.isEditable || this.item.type !== "weapon" || (await game.magnusarchives.services.weapons.reload(this.item), await this.render({ force: !0 }));
@@ -9505,7 +9507,7 @@ class $ extends tm {
     main: { template: "systems/magnusarchives/templates/item/item-sheet.hbs" }
   };
   async _onRender(e, t) {
-    if (await super._onRender(e, t), la(this.element, this.isEditable, Es), this.#o?.abort(), this.#o = null, this.#c && (_u(this.element, this.#c), this.#c = null), this.#A && (em(this.element, this.#A), this.#A = null), this.#t.connectionSourceNodeId) {
+    if (await super._onRender(e, t), la(this.element, this.isEditable, Es), this.#o?.abort(), this.#o = null, this.#c && (Ku(this.element, this.#c), this.#c = null), this.#A && (tm(this.element, this.#A), this.#A = null), this.#t.connectionSourceNodeId) {
       const i = new AbortController();
       this.#o = i, this.element.addEventListener("keydown", (a) => {
         a.key === "Escape" && (a.preventDefault(), a.stopPropagation(), this.#t.cancelConnection(), this.#g());
@@ -9809,25 +9811,25 @@ class $ extends tm {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const i = t.dataset.groupId, a = this.item.system, s = t.dataset.choiceKind ?? "skill", o = this.item.type !== "descriptor" && s === "ability", r = this.item.type === "species" && s === "descriptor";
     if (!(o ? a.abilityChoiceGroups.find((m) => m.id === i) : r ? a.descriptorChoiceGroups.find((m) => m.id === i) : a.choiceGroups.find((m) => m.id === i))) return;
-    const u = o ? "ability" : r ? "descriptor" : "skill", c = [...game.items].filter((m) => m.type === u).sort((m, S) => m.name.localeCompare(S.name)), p = await foundry.applications.api.DialogV2.input({
+    const u = o ? "ability" : r ? "descriptor" : "skill", c = [...game.items].filter((m) => m.type === u).sort((m, f) => m.name.localeCompare(f.name)), p = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize(o ? "MAGNUSARCHIVES.Species.AddAbilityOption" : r ? "MAGNUSARCHIVES.Species.AddDescriptorOption" : "MAGNUSARCHIVES.Packages.AddSkillOption") },
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${o || r ? "" : `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>`}${c.map((m) => `<option value="${Ie(m.uuid)}">${Ie(m.name)}</option>`).join("")}</select></label>${o || r ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>`}</div>`,
       ok: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add") }
     });
     if (!p) return;
-    const h = p.uuid === "custom" ? null : await fromUuid(String(p.uuid ?? ""));
+    const y = p.uuid === "custom" ? null : await fromUuid(String(p.uuid ?? ""));
     if (o) {
-      if (!h) return;
-      const m = { id: crypto.randomUUID(), abilityUuid: h.uuid, snapshot: this.#b(h) }, S = a.abilityChoiceGroups;
-      await this.item.update({ "system.abilityChoiceGroups": S.map((f) => f.id === i ? { ...f, options: [...f.options, m] } : f) });
+      if (!y) return;
+      const m = { id: crypto.randomUUID(), abilityUuid: y.uuid, snapshot: this.#b(y) }, f = a.abilityChoiceGroups;
+      await this.item.update({ "system.abilityChoiceGroups": f.map((g) => g.id === i ? { ...g, options: [...g.options, m] } : g) });
     } else if (r) {
-      if (!h) return;
-      const m = { id: crypto.randomUUID(), descriptorUuid: h.uuid, snapshot: this.#b(h) }, S = a.descriptorChoiceGroups;
-      await this.item.update({ "system.descriptorChoiceGroups": S.map((f) => f.id === i ? { ...f, options: [...f.options, m] } : f) });
+      if (!y) return;
+      const m = { id: crypto.randomUUID(), descriptorUuid: y.uuid, snapshot: this.#b(y) }, f = a.descriptorChoiceGroups;
+      await this.item.update({ "system.descriptorChoiceGroups": f.map((g) => g.id === i ? { ...g, options: [...g.options, m] } : g) });
     } else {
-      const m = this.#C(h, String(p.customName ?? ""), String(p.notes ?? ""));
+      const m = this.#C(y, String(p.customName ?? ""), String(p.notes ?? ""));
       if (!m) return;
-      await this.item.update({ "system.choiceGroups": a.choiceGroups.map((S) => S.id === i ? { ...S, options: [...S.options, m] } : S) });
+      await this.item.update({ "system.choiceGroups": a.choiceGroups.map((f) => f.id === i ? { ...f, options: [...f.options, m] } : f) });
     }
   }
   static async #Z(e, t) {
@@ -9904,11 +9906,11 @@ class $ extends tm {
   static async #ae(e, t) {
     const i = t.dataset.nodeId;
     if (!i) throw new Error("Missing Focus node ID.");
-    await Bo(this.#G(), i);
+    await Bo(this.#U(), i);
   }
   static async #se() {
     try {
-      this.#M(), this.#s = new ju(
+      this.#M(), this.#s = new Wu(
         this.item.system.graph
       ), this.#t.reset(), await this.#g();
     } catch (e) {
@@ -9928,7 +9930,7 @@ class $ extends tm {
           <label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.Ability")}
             <select name="abilityUuid">${t.map((o) => `<option value="${Ie(o.uuid)}">${Ie(o.name)}</option>`).join("")}</select>
           </label>
-          ${this.#U()}
+          ${this.#G()}
         </div>`,
         rejectClose: !1,
         ok: { label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility") }
@@ -10058,7 +10060,7 @@ class $ extends tm {
     if (this.#M(), !this.#s) throw new Error("Focus Tree editing is not active.");
     return this.#s;
   }
-  #G() {
+  #U() {
     const e = this.#s?.graph ?? this.item.system.graph;
     return {
       id: this.item.id,
@@ -10074,7 +10076,7 @@ class $ extends tm {
       throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DropAbilityOnly"));
     const i = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.ChooseTier") },
-      content: `<div class="magnusarchives-dialog-fields">${this.#U()}</div>`,
+      content: `<div class="magnusarchives-dialog-fields">${this.#G()}</div>`,
       rejectClose: !1,
       ok: { label: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AddAbility") }
     });
@@ -10082,7 +10084,7 @@ class $ extends tm {
     const a = t.addAbility(e, Number(i.tier ?? 1));
     this.#t.select(a.id), await this.#g();
   }
-  #U() {
+  #G() {
     return `<label>${game.i18n.localize("MAGNUSARCHIVES.Focus.Tier")}
       <select name="tier">${[1, 2, 3, 4, 5, 6].map((e) => `<option value="${e}">${e}</option>`).join("")}</select>
     </label>`;
@@ -10202,43 +10204,43 @@ class $ extends tm {
     return t;
   }
   async #g() {
-    this.#c = Wu(this.element), await this.render({ force: !0 });
+    this.#c = _u(this.element), await this.render({ force: !0 });
   }
   async _prepareContext(e) {
-    this.element?.isConnected && (this.#A = Zu(this.element));
-    const t = await super._prepareContext(e), i = this.item.system, a = this.item.type === "skill", s = this.item.type === "ability", o = this.item.type === "weapon", r = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", c = this.item.type === "cypher", p = this.item.type === "artifact", h = this.item.type === "focus", m = this.item.type === "genre", S = this.item.type === "characterType", f = this.item.type === "descriptor", A = this.item.type === "species", v = S && String(i.genre ?? "none") === "superhero", E = S ? i.instance : void 0, H = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type), R = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", G = H ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(R, {
+    this.element?.isConnected && (this.#A = em(this.element));
+    const t = await super._prepareContext(e), i = this.item.system, a = this.item.type === "skill", s = this.item.type === "ability", o = this.item.type === "weapon", r = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", c = this.item.type === "cypher", p = this.item.type === "artifact", y = this.item.type === "focus", m = this.item.type === "genre", f = this.item.type === "characterType", g = this.item.type === "descriptor", A = this.item.type === "species", v = f && String(i.genre ?? "none") === "superhero", E = f ? i.instance : void 0, H = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type), R = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", U = H ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(R, {
       async: !0,
       relativeTo: this.item
-    }) : "", z = S ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", K = S ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", M = String(i.rank ?? "untrained"), V = String(i.defaultPool ?? "choose"), I = Array.isArray(i.contexts) ? i.contexts : [], ie = s ? Ke(this.item) : [], W = s ? Ju(i) : null, Ue = W ? {
+    }) : "", z = f ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", K = f ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", M = String(i.rank ?? "untrained"), V = String(i.defaultPool ?? "choose"), I = Array.isArray(i.contexts) ? i.contexts : [], ie = s ? Ke(this.item) : [], W = s ? Qu(i) : null, Ge = W ? {
       ...W,
       rollModifierLabel: game.i18n.localize(
         W.rollModifierLabel === "task" ? "MAGNUSARCHIVES.Ability.TaskModifier" : W.rollModifierLabel === "defense" ? "MAGNUSARCHIVES.Ability.DefenseModifier" : "MAGNUSARCHIVES.Ability.RollModifier"
       )
     } : null, q = s ? this.item.flags?.magnusarchives?.genreAbility : void 0, J = q ? {
       catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${q.catalog ?? "progression"}`),
-      genresLabel: (q.genres ?? []).map((y) => game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${y}`)).join(" · "),
+      genresLabel: (q.genres ?? []).map((S) => game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${S}`)).join(" · "),
       progressionBandLabel: q.progressionBand === "origin" ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin") : game.i18n.localize(`MAGNUSARCHIVES.Genre.ProgressionBand.${q.progressionBand ?? "mid-tier"}`),
       minimumSuperheroRank: Number(q.minimumSuperheroRank ?? 0)
-    } : null, ke = m ? i.abilityCatalog.map((y) => ({
-      ...y,
-      catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${y.catalog ?? "progression"}`),
-      progressionBandLabel: (y.catalog ?? "progression") === "progression" ? y.minimumTier === 3 ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.mid-tier") : y.minimumTier === 6 ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.high-tier") : "" : "",
-      minimumSuperheroRank: Number(y.minimumSuperheroRank ?? 0)
-    })) : [], ye = a && Qu({
+    } : null, ke = m ? i.abilityCatalog.map((S) => ({
+      ...S,
+      catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${S.catalog ?? "progression"}`),
+      progressionBandLabel: (S.catalog ?? "progression") === "progression" ? S.minimumTier === 3 ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.mid-tier") : S.minimumTier === 6 ? game.i18n.localize("MAGNUSARCHIVES.Genre.ProgressionBand.high-tier") : "" : "",
+      minimumSuperheroRank: Number(S.minimumSuperheroRank ?? 0)
+    })) : [], ye = a && Zu({
       defaultPool: V,
       category: String(i.category ?? "general"),
       contexts: I,
       initiative: !!i.initiative
-    }), Ce = i.grantedBy, re = !!(Ce?.sourceUuid || Ce?.instanceId || Ce?.grantId), Q = h ? this.#G() : null, Se = Q?.system.graph, me = Se?.nodes.find((y) => y.id === this.#t.selectedNodeId), N = new Map(Se?.nodes.map((y) => [
-      y.id,
-      y.abilitySnapshot.name || y.id
+    }), Ce = i.grantedBy, re = !!(Ce?.sourceUuid || Ce?.instanceId || Ce?.grantId), Q = y ? this.#U() : null, Se = Q?.system.graph, me = Se?.nodes.find((S) => S.id === this.#t.selectedNodeId), N = new Map(Se?.nodes.map((S) => [
+      S.id,
+      S.abilitySnapshot.name || S.id
     ]) ?? []);
     return {
       ...t,
       item: this.item,
       system: this.item.system,
       systemFields: oa(this.item),
-      enriched: { description: G, backgroundOptions: z, equipmentNotes: K },
+      enriched: { description: U, backgroundOptions: z, equipmentNotes: K },
       usesRichDescription: H,
       isSkill: a,
       isAbility: s,
@@ -10248,80 +10250,80 @@ class $ extends tm {
       isEquipment: u,
       isCypher: c,
       isArtifact: p,
-      isFocus: h,
+      isFocus: y,
       isGenre: m,
-      isCharacterType: S,
-      typeCustomGenreSelected: S && String(i.genre ?? "none") === "custom",
+      isCharacterType: f,
+      typeCustomGenreSelected: f && String(i.genre ?? "none") === "custom",
       typeSuperheroSelected: v,
       typeSuperheroAttached: v && !!E?.instanceId,
       typeSuperheroicsPoolLabel: E?.selections?.superheroicsPool && E.selections.superheroicsPool !== "none" ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${E.selections.superheroicsPool[0].toUpperCase()}${E.selections.superheroicsPool.slice(1)}`) : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
-      typeWeaponFamiliesValue: S ? oe(i.weaponFamilies).map(yt).join(", ") : "",
+      typeWeaponFamiliesValue: f ? oe(i.weaponFamilies).map(yt).join(", ") : "",
       speciesWeaponFamiliesValue: A ? oe(i.weaponFamilies).map(yt).join(", ") : "",
-      weaponFamilySuggestions: ao.map((y) => ({ value: yt(y) })),
-      isDescriptor: f,
+      weaponFamilySuggestions: ao.map((S) => ({ value: yt(S) })),
+      isDescriptor: g,
       isSpecies: A,
-      isCompactRuleItem: s || a || o || r || l || u || c || p || m || S || A,
-      usesCleanItemHeader: s || a || o || r || l || u || c || p || h || m || f || S || A,
-      hideNormalItemFooter: s || a || o || r || l || u || c || p || h || m || f || S || A,
-      genreEffortCapOptions: m ? ["core", "unlimited"].map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Genre.EffortCap.${y}`),
-        selected: i.options?.totalEffortCapMode === y
+      isCompactRuleItem: s || a || o || r || l || u || c || p || m || f || A,
+      usesCleanItemHeader: s || a || o || r || l || u || c || p || y || m || g || f || A,
+      hideNormalItemFooter: s || a || o || r || l || u || c || p || y || m || g || f || A,
+      genreEffortCapOptions: m ? ["core", "unlimited"].map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Genre.EffortCap.${S}`),
+        selected: i.options?.totalEffortCapMode === S
       })) : [],
       genreMinimumTierMin: at,
       genreMinimumTierMax: Kt,
       genreCatalogEntries: ke,
-      abilityMechanics: Ue,
+      abilityMechanics: Ge,
       abilityGenreReview: J,
       skillOptionalMechanics: ye,
       hasGrantProvenance: re,
-      packagePoolOptions: ["none", ...k].map((y) => ({
-        value: y,
-        label: y === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${y[0].toUpperCase()}${y.slice(1)}`),
-        selected: i.edgeGrant?.pool === y
+      packagePoolOptions: ["none", ...k].map((S) => ({
+        value: S,
+        label: S === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${S[0].toUpperCase()}${S.slice(1)}`),
+        selected: i.edgeGrant?.pool === S
       })),
-      packageGenreOptions: ["none", "fantasy", "scienceFiction", "superhero", "custom"].map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${y}`),
-        selected: i.genre === y
+      packageGenreOptions: ["none", "fantasy", "scienceFiction", "superhero", "custom"].map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${S}`),
+        selected: i.genre === S
       })),
-      edgeModeOptions: ["none", "fixed", "choice"].map((y) => ({
-        value: y,
-        label: game.i18n.localize(y === "none" ? "MAGNUSARCHIVES.Common.None" : y === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"),
-        selected: i.edgeGrant?.mode === y
+      edgeModeOptions: ["none", "fixed", "choice"].map((S) => ({
+        value: S,
+        label: game.i18n.localize(S === "none" ? "MAGNUSARCHIVES.Common.None" : S === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"),
+        selected: i.edgeGrant?.mode === S
       })),
-      descriptorSkillGrants: f ? i.skillGrants.map((y) => ({
-        ...y,
-        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`)
+      descriptorSkillGrants: g ? i.skillGrants.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
       })) : [],
-      descriptorPoolBonusChoiceGroups: f ? (i.poolBonusChoiceGroups ?? []).map((y) => ({
-        ...y,
-        poolsLabel: y.pools.map((Y) => game.i18n.localize(
+      descriptorPoolBonusChoiceGroups: g ? (i.poolBonusChoiceGroups ?? []).map((S) => ({
+        ...S,
+        poolsLabel: S.pools.map((Y) => game.i18n.localize(
           `MAGNUSARCHIVES.Pools.${Y[0].toUpperCase()}${Y.slice(1)}`
         )).join(" · ")
       })) : [],
-      descriptorChoiceGroups: f ? i.choiceGroups.map((y) => ({
-        ...y,
-        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`)
+      descriptorChoiceGroups: g ? i.choiceGroups.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
       })) : [],
-      typeSkillGrants: S ? i.skillGrants.map((y) => ({
-        ...y,
-        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`)
+      typeSkillGrants: f ? i.skillGrants.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
       })) : [],
-      typeSkillChoiceGroups: S ? i.choiceGroups.map((y) => ({
-        ...y,
-        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`)
+      typeSkillChoiceGroups: f ? i.choiceGroups.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
       })) : [],
-      typeAbilityChoiceGroups: S ? i.abilityChoiceGroups : [],
-      speciesSkillGrants: A ? i.skillGrants.map((y) => ({ ...y, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`) })) : [],
-      speciesSkillChoiceGroups: A ? i.choiceGroups.map((y) => ({ ...y, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y.rank}`) })) : [],
+      typeAbilityChoiceGroups: f ? i.abilityChoiceGroups : [],
+      speciesSkillGrants: A ? i.skillGrants.map((S) => ({ ...S, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`) })) : [],
+      speciesSkillChoiceGroups: A ? i.choiceGroups.map((S) => ({ ...S, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`) })) : [],
       speciesAbilityChoiceGroups: A ? i.abilityChoiceGroups : [],
-      speciesDescriptorChoiceGroups: A ? i.descriptorChoiceGroups.map((y) => ({
-        ...y,
-        catalogMode: (y.sourceMode ?? "fixed") === "catalog",
+      speciesDescriptorChoiceGroups: A ? i.descriptorChoiceGroups.map((S) => ({
+        ...S,
+        catalogMode: (S.sourceMode ?? "fixed") === "catalog",
         catalogLabel: game.i18n.localize("MAGNUSARCHIVES.Packages.AllAvailableDescriptors")
       })) : [],
-      canEditFocusTree: !!(h && game.user.isGM && this.isEditable && !this.#s),
+      canEditFocusTree: !!(y && game.user.isGM && this.isEditable && !this.#s),
       focusTreeEditing: !!this.#s,
       focusEditor: this.#s ? {
         dirty: this.#s.dirty,
@@ -10333,72 +10335,72 @@ class $ extends tm {
           canMoveLeft: !0,
           canMoveRight: !0
         } : null,
-        connections: Se?.connections.map((y) => ({
-          ...y,
-          fromName: N.get(y.from) ?? y.from,
-          toName: N.get(y.to) ?? y.to
+        connections: Se?.connections.map((S) => ({
+          ...S,
+          fromName: N.get(S.from) ?? S.from,
+          toName: N.get(S.to) ?? S.to
         })) ?? []
       } : null,
-      focusTrees: h ? [await game.magnusarchives.services.focusTrees.prepare(Q, this.#s ? {
+      focusTrees: y ? [await game.magnusarchives.services.focusTrees.prepare(Q, this.#s ? {
         editor: {
           selectedNodeId: this.#t.selectedNodeId,
           connectionSourceNodeId: this.#t.connectionSourceNodeId
         }
       } : {})] : [],
       isHeavyWeapon: o && i.category === "heavy",
-      abilityActivationOptions: s ? js.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${y}`),
-        selected: i.activation === y
+      abilityActivationOptions: s ? js.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Activation.${S}`),
+        selected: i.activation === S
       })) : [],
-      abilityAllowedPoolOptions: s ? k.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${y[0].toUpperCase()}${y.slice(1)}`),
-        selected: ie.includes(y)
+      abilityAllowedPoolOptions: s ? k.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${S[0].toUpperCase()}${S.slice(1)}`),
+        selected: ie.includes(S)
       })) : [],
-      abilityRollOptions: s ? Ws.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Roll.${y}`),
-        selected: i.roll === y
+      abilityRollOptions: s ? Ws.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.Roll.${S}`),
+        selected: i.roll === S
       })) : [],
-      priceCategoryOptions: u ? Mn.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Price.${y}`),
-        selected: i.price === y
+      priceCategoryOptions: u ? Mn.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Price.${S}`),
+        selected: i.price === S
       })) : [],
-      abilityDamageEffectOptions: s ? zi.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${y}`),
-        selected: i.damageEffect === y
+      abilityDamageEffectOptions: s ? zi.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${S}`),
+        selected: i.damageEffect === S
       })) : [],
-      abilityTargetOptions: s ? _s.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.TargetMode.${y}`),
-        selected: i.targetMode === y
+      abilityTargetOptions: s ? _s.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Ability.TargetMode.${S}`),
+        selected: i.targetMode === S
       })) : [],
-      cypherManifestationOptions: c ? Wn.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${y}`),
-        selected: i.manifestation === y
+      cypherManifestationOptions: c ? Wn.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${S}`),
+        selected: i.manifestation === S
       })) : [],
-      cypherPowerOptions: c ? _n.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${y}`),
-        selected: i.power === y
+      cypherPowerOptions: c ? _n.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${S}`),
+        selected: i.power === S
       })) : [],
       cypherEffectiveLevel: c ? Aa(i) : 0,
       artifactLevelRollable: p ? Vi(i) : !1,
-      skillRankOptions: a ? te.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y}`),
-        selected: y === M
+      skillRankOptions: a ? te.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S}`),
+        selected: S === M
       })) : [],
       skillPoolOptions: a ? [
         { value: "choose", label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"), selected: V === "choose" },
-        ...k.map((y) => ({
-          value: y,
-          label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${y[0].toUpperCase()}${y.slice(1)}`),
-          selected: y === V
+        ...k.map((S) => ({
+          value: S,
+          label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${S[0].toUpperCase()}${S.slice(1)}`),
+          selected: S === V
         }))
       ] : [],
       skillContextOptions: a ? [
@@ -10413,70 +10415,70 @@ class $ extends tm {
         "defense.block",
         "defense.dodge",
         "perception"
-      ].map((y) => ({
-        value: y,
+      ].map((S) => ({
+        value: S,
         label: game.i18n.localize(
-          y === "attack" ? "MAGNUSARCHIVES.Combat.Context.AnyAttack" : y === "defense" ? "MAGNUSARCHIVES.Combat.Context.AnyDefense" : `MAGNUSARCHIVES.Combat.Context.${y}`
+          S === "attack" ? "MAGNUSARCHIVES.Combat.Context.AnyAttack" : S === "defense" ? "MAGNUSARCHIVES.Combat.Context.AnyDefense" : `MAGNUSARCHIVES.Combat.Context.${S}`
         ),
-        selected: I.includes(y)
+        selected: I.includes(S)
       })) : [],
-      weaponCategoryOptions: o ? Oe.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${y}`),
-        selected: i.category === y
+      weaponCategoryOptions: o ? Oe.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${S}`),
+        selected: i.category === S
       })) : [],
       weaponFamilyDisplay: o ? yt(i.family) : "",
-      weaponDefaultPoolOptions: o ? ["none", ...k].map((y) => ({
-        value: y,
-        label: y === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${y[0].toUpperCase()}${y.slice(1)}`),
-        selected: i.defaultPool === y
+      weaponDefaultPoolOptions: o ? ["none", ...k].map((S) => ({
+        value: S,
+        label: S === "none" ? game.i18n.localize("MAGNUSARCHIVES.Common.None") : game.i18n.localize(`MAGNUSARCHIVES.Pools.${S[0].toUpperCase()}${S.slice(1)}`),
+        selected: i.defaultPool === S
       })) : [],
-      weaponAttackTypeOptions: o ? Bs.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${y}`),
-        selected: i.attackType === y
+      weaponAttackTypeOptions: o ? Bs.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${S}`),
+        selected: i.attackType === S
       })) : [],
-      rangeOptions: o ? Nn.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${y}`),
-        selected: i.rangeCategory === y
+      rangeOptions: o ? Nn.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${S}`),
+        selected: i.rangeCategory === S
       })) : [],
-      weaponAttackModifierOptions: o ? [-2, -1, 0, 1, 2].map((y) => ({
-        value: y,
-        label: y > 0 ? `+${y}` : String(y),
-        selected: i.attackModifier === y
+      weaponAttackModifierOptions: o ? [-2, -1, 0, 1, 2].map((S) => ({
+        value: S,
+        label: S > 0 ? `+${S}` : String(S),
+        selected: i.attackModifier === S
       })) : [],
-      weaponSkillLevelOptions: o ? te.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${y}`),
-        selected: i.skillLevel === y
+      weaponSkillLevelOptions: o ? te.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S}`),
+        selected: i.skillLevel === S
       })) : [],
       combatResourcesExpanded: (o || r || l) && this.#d.has("combat-resources"),
       advancedExpanded: this.#d.has("advanced"),
       shieldWoundsExpanded: l && this.#d.has("shield-wounds"),
       combatDepletionSides: o || r || l ? Jt(i.depletion ?? { die: "d6" }) : 0,
       combatDepletionThreshold: o || r || l ? Oo(Number(i.depletion?.threshold ?? 1)) : "",
-      depletionDieOptions: o || p ? kr.map((y) => ({
-        value: y,
-        label: `1 in 1${y}`,
-        selected: i.depletion?.die === y
+      depletionDieOptions: o || p ? kr.map((S) => ({
+        value: S,
+        label: `1 in 1${S}`,
+        selected: i.depletion?.die === S
       })) : [],
-      armorCategoryOptions: r ? Be.map((y) => ({
-        value: y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${y}`),
-        selected: i.category === y
+      armorCategoryOptions: r ? Be.map((S) => ({
+        value: S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${S}`),
+        selected: i.category === S
       })) : [],
       shieldWoundTracks: l ? Ri({
         minor: i.wounds.minor.length,
         moderate: i.wounds.moderate.length,
         major: i.wounds.major.length
-      }, i.derived.capacities).map((y) => ({
-        ...y,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${y.severity}`),
-        pips: y.pips.map((Y) => ({
+      }, i.derived.capacities).map((S) => ({
+        ...S,
+        label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${S.severity}`),
+        pips: S.pips.map((Y) => ({
           ...Y,
           tooltip: game.i18n.format("MAGNUSARCHIVES.Hud.SetWoundCount", {
-            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${y.severity}`),
+            severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${S.severity}`),
             count: Y.targetCount
           })
         }))
@@ -10527,7 +10529,7 @@ async function or(n) {
     description: Ze(e, "description")
   };
 }
-async function im(n) {
+async function nm(n) {
   try {
     const e = await or();
     if (!e) return;
@@ -10536,7 +10538,7 @@ async function im(n) {
     ui.notifications.error(e instanceof Error ? e.message : String(e));
   }
 }
-async function nm(n, e) {
+async function am(n, e) {
   try {
     const t = n.system.modifications.find((a) => a.id === e);
     if (!t) throw new Error(`NPC modification '${e}' was not found.`);
@@ -10549,7 +10551,7 @@ async function nm(n, e) {
     ui.notifications.error(t instanceof Error ? t.message : String(t));
   }
 }
-async function am(n, e) {
+async function sm(n, e) {
   const t = n.system.modifications.find((a) => a.id === e);
   if (!t) throw new Error(`NPC modification '${e}' was not found.`);
   await foundry.applications.api.DialogV2.confirm({
@@ -10561,15 +10563,15 @@ async function am(n, e) {
     "system.modifications": n.system.modifications.filter((a) => a.id !== e)
   });
 }
-function sm(n) {
+function om(n) {
   const e = typeof n == "number" ? n : typeof n == "string" && n.trim() !== "" ? Number(n) : Number.NaN;
   return Number.isInteger(e) && e >= 0 ? e * 3 : null;
 }
-function om(n, e) {
+function rm(n, e) {
   const t = er(n, e), i = t.ratio > 0.5 ? "healthy" : t.ratio > 0.25 ? "intermediate" : "low";
   return { ...t, state: i };
 }
-const rm = foundry.applications.api.HandlebarsApplicationMixin(
+const lm = foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 ), Is = /* @__PURE__ */ new Set([
   "requestDefense",
@@ -10577,7 +10579,7 @@ const rm = foundry.applications.api.HandlebarsApplicationMixin(
   "editModification",
   "deleteModification"
 ]);
-class At extends rm {
+class At extends lm {
   static DEFAULT_OPTIONS = {
     ...sa,
     classes: ["magnusarchives", "sheet", "actor", "npc-sheet"],
@@ -10597,17 +10599,17 @@ class At extends rm {
     await ad(this.actor);
   }
   static async #t() {
-    await im(this.actor);
+    await nm(this.actor);
   }
   static async #i(e, t) {
     const i = t.dataset.modificationId;
     if (!i) throw new Error("Missing NPC modification ID.");
-    await nm(this.actor, i);
+    await am(this.actor, i);
   }
   static async #n(e, t) {
     const i = t.dataset.modificationId;
     if (!i) throw new Error("Missing NPC modification ID.");
-    await am(this.actor, i);
+    await sm(this.actor, i);
   }
   async _onRender(e, t) {
     await super._onRender(e, t), la(this.element, this.isEditable, Is);
@@ -10628,8 +10630,8 @@ class At extends rm {
       editable: this.isEditable,
       isGM: game.user.isGM,
       enriched: { notes: o },
-      targetNumber: sm(i.level) ?? "—",
-      healthGauge: om(
+      targetNumber: om(i.level) ?? "—",
+      healthGauge: rm(
         i.health.value,
         i.health.max ?? i.health.baseMax
       ),
@@ -10647,17 +10649,17 @@ class At extends rm {
     };
   }
 }
-function lm() {
+function cm() {
   const { DocumentSheetConfig: n } = foundry.applications.apps;
-  n.registerSheet(foundry.documents.Actor, U, C, {
+  n.registerSheet(foundry.documents.Actor, G, C, {
     types: ["character"],
     makeDefault: !0,
     label: "MAGNUSARCHIVES.Sheets.Character"
-  }), n.registerSheet(foundry.documents.Actor, U, At, {
+  }), n.registerSheet(foundry.documents.Actor, G, At, {
     types: ["npc"],
     makeDefault: !0,
     label: "MAGNUSARCHIVES.Sheets.Npc"
-  }), n.registerSheet(foundry.documents.Item, U, $, {
+  }), n.registerSheet(foundry.documents.Item, G, $, {
     makeDefault: !0,
     label: "MAGNUSARCHIVES.Sheets.Item"
   });
@@ -10670,7 +10672,7 @@ function ee(n, e, t = 0) {
 function rr(n, e, t) {
   return Math.min(t, Math.max(e, n));
 }
-function cm(n, e = 0) {
+function dm(n, e = 0) {
   const t = ee(n, "Paid Effort");
   if (t === 0) return 0;
   const i = Math.max(0, Math.trunc(e));
@@ -10690,64 +10692,64 @@ function lr(n) {
   if (ee(n, "Natural d20 result", 1), n > 20) throw new Error("Natural d20 result cannot exceed 20.");
   return [1, 17, 18, 19, 20].includes(n) ? [`natural-${n}`] : [];
 }
-function dm(n) {
+function um(n) {
   return lr(n), Math.floor(n / 3);
 }
 function yn(n, e, t, i, a) {
   return { id: n, label: e, direction: t, steps: i, source: a };
 }
-function um(n) {
+function mm(n) {
   const e = ee(n.limits.difficultyCeiling, "Difficulty ceiling"), t = ee(n.limits.assetLimit, "Asset limit"), i = ee(n.limits.paidEffortMaximum, "Maximum Effort"), a = ee(n.assets, "Assets"), s = ee(n.paidEffort, "Paid Effort"), o = ee(n.damageEffort ?? 0, "Damage Effort"), r = ee(n.freeDamageEffort ?? 0, "Free Damage Effort"), l = ee(n.freeEffort, "Free Effort"), u = n.limits.totalEffortMaximum === null ? null : ee(n.limits.totalEffortMaximum, "Maximum total Effort");
   if (ee(n.poolValue, "Pool value"), a > t) throw new Error(`Assets cannot exceed the current limit of ${t}.`);
-  const c = o + r, p = s + c + l, h = s + o, m = l + r;
+  const c = o + r, p = s + c + l, y = s + o, m = l + r;
   if (u !== null && p > u)
     throw new Error(`Maximum total Effort: ${u}.`);
-  if (h > i)
+  if (y > i)
     throw new Error(`Paid Effort cannot exceed the Character maximum of ${i}.`);
-  const S = [];
-  a > 0 && S.push(yn(
+  const f = [];
+  a > 0 && f.push(yn(
     "core.assets",
     "MAGNUSARCHIVES.Roll.Breakdown.Assets",
     "ease",
     a,
     "asset"
-  )), s > 0 && S.push(yn(
+  )), s > 0 && f.push(yn(
     "core.effort.paid",
     "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort",
     "ease",
     s,
     "effort"
-  )), l > 0 && S.push(yn(
+  )), l > 0 && f.push(yn(
     "core.effort.free",
     "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort",
     "ease",
     l,
     "free-effort"
   ));
-  for (const G of n.contributions)
-    ee(G.steps, `Steps for '${G.id}'`), G.steps > 0 && S.push({ ...G });
-  const f = S.filter((G) => G.direction === "ease").reduce((G, z) => G + z.steps, 0), A = S.filter((G) => G.direction === "hinder").reduce((G, z) => G + z.steps, 0), v = f - A, E = On(
+  for (const U of n.contributions)
+    ee(U.steps, `Steps for '${U.id}'`), U.steps > 0 && f.push({ ...U });
+  const g = f.filter((U) => U.direction === "ease").reduce((U, z) => U + z.steps, 0), A = f.filter((U) => U.direction === "hinder").reduce((U, z) => U + z.steps, 0), v = g - A, E = On(
     n.actionCost ?? 0,
-    cm(h, n.effortSurcharge ?? 0),
+    dm(y, n.effortSurcharge ?? 0),
     n.edge,
     n.actionCostIgnoresEdge ?? !1
   );
   let H = null, R = null;
   if (n.difficulty.mode !== "unknown") {
-    const G = ee(n.difficulty.value, "Difficulty");
-    if (G > e)
+    const U = ee(n.difficulty.value, "Difficulty");
+    if (U > e)
       throw new Error(`Difficulty cannot exceed the current ceiling of ${e}.`);
-    H = rr(G - v, 0, e), R = H * 3;
+    H = rr(U - v, 0, e), R = H * 3;
   }
   return {
     context: n,
-    breakdown: S,
-    totalEase: f,
+    breakdown: f,
+    totalEase: g,
     totalHindrance: A,
     netSteps: v,
     damageEffortApplied: c,
     totalEffortApplied: p,
-    paidEffortApplied: h,
+    paidEffortApplied: y,
     freeEffortApplied: m,
     totalEffortMaximum: u,
     ...E,
@@ -10755,9 +10757,9 @@ function um(n) {
     targetNumber: R
   };
 }
-function mm(n, e) {
+function pm(n, e) {
   if (n.finalDifficulty === 0) return cr(n);
-  const t = lr(e), i = n.targetNumber === null ? null : e >= n.targetNumber, a = dm(e), s = rr(
+  const t = lr(e), i = n.targetNumber === null ? null : e >= n.targetNumber, a = um(e), s = rr(
     a + n.netSteps,
     0,
     n.context.limits.difficultyCeiling
@@ -10794,7 +10796,7 @@ function cr(n) {
 function Sn(n) {
   return n === null ? "unresolved" : n ? "applied" : "inapplicable";
 }
-function pm(n, e = 1) {
+function fm(n, e = 1) {
   const t = n.naturalRoll;
   if (t === null) return [];
   const i = { sourceId: "magnusarchives.core", naturalRoll: t }, a = kt(e);
@@ -10919,37 +10921,37 @@ const et = {
     "focusBehaviors"
   ]
 };
-function fm(n) {
+function gm(n) {
   n.register(et), n.registerDifficultyPolicy(et.id, (e) => ({
     ...e,
     assetLimit: 2
-  })), n.registerSkillRankRule(et.id, ym), n.registerNaturalResultRule(et.id, (e, t) => [
+  })), n.registerSkillRankRule(et.id, Sm), n.registerNaturalResultRule(et.id, (e, t) => [
     ...t,
-    ...pm(e, e.prepared.context.horrorIntrusionRange)
+    ...fm(e, e.prepared.context.horrorIntrusionRange)
   ]), n.registerGMIntrusionPolicy(et.id, (e) => ({
     ...e,
     targetedXpToTarget: 1,
     targetedXpToShare: 1,
     groupXpPerTarget: 1,
     freeXp: 0
-  })), n.registerCombatPolicy(et.id, () => gm), n.registerAdvancementPolicy(et.id, () => no);
+  })), n.registerCombatPolicy(et.id, () => hm), n.registerAdvancementPolicy(et.id, () => no);
 }
-const gm = Object.freeze({
+const hm = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
   armorDefenseSteps: Object.freeze({ light: 1, medium: 2, heavy: 3 }),
   blockSeverityReduction: 1,
   damageEffortBonus: 3
-}), hm = Object.freeze({
+}), ym = Object.freeze({
   inability: -1,
   untrained: 0,
   trained: 1,
   specialized: 2,
   expert: 3
 });
-function ym(n, e) {
-  const t = hm[n];
+function Sm(n, e) {
+  const t = ym[n];
   return t === 0 ? null : {
     id: `core.skill.${e.id}.rank`,
     label: `MAGNUSARCHIVES.Skill.Ranks.${n}`,
@@ -10959,7 +10961,7 @@ function ym(n, e) {
     sourceId: e.id
   };
 }
-class Sm {
+class Am {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Map();
   #i = /* @__PURE__ */ new Map();
@@ -11134,7 +11136,7 @@ class Sm {
       throw new Error(`Rule module '${e}' does not declare '${t}'.`);
   }
 }
-async function Am() {
+async function bm() {
   const n = await new Roll("1d6").evaluate();
   return Number(n.total);
 }
@@ -11143,11 +11145,11 @@ function Ci(n, e, t, i) {
     throw new Error(`${i} must be an integer from ${e} to ${t}.`);
   return n;
 }
-class bm {
+class wm {
   #e;
   #t;
   #i;
-  constructor(e = Am, t = je, i = Date.now) {
+  constructor(e = bm, t = je, i = Date.now) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   calculateRoll(e, t, i, a = !1, s = 0, o = "") {
@@ -11253,7 +11255,7 @@ class bm {
     };
   }
 }
-const wm = {
+const vm = {
   beforeComplete(n) {
     Hooks.callAll("magnusarchives.preRecoveryWorkflow", n);
   },
@@ -11267,18 +11269,18 @@ const wm = {
     Hooks.callAll("magnusarchives.recoveryRefresh", n);
   }
 };
-function vm(n) {
+function Cm(n) {
   return n === "one-action" ? null : n;
 }
 function Rs(n, e) {
   const t = [n === "normal" ? "recovery" : "non-rest-recovery"];
   return e !== "one-action" && t.push("10-minute-or-longer"), (e === "1-hour" || e === "10-hours") && t.push("1-hour-or-longer"), e === "10-hours" && t.push("10-hour"), t;
 }
-class Cm {
+class Em {
   #e;
   #t;
   #i;
-  constructor(e, t, i = wm) {
+  constructor(e, t, i = vm) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async rollNormal(e, t, i = !1, a) {
@@ -11286,7 +11288,7 @@ class Cm {
   }
   async completeNormal(e, t, i, a = {}) {
     Pe(e);
-    const s = vm(t.type), o = s ? this.#t.prepare(e, s, a) : null, r = this.#e.prepareNormal(e, t, i), l = {
+    const s = Cm(t.type), o = s ? this.#t.prepare(e, s, a) : null, r = this.#e.prepareNormal(e, t, i), l = {
       kind: "normal",
       type: t.type,
       recovery: r,
@@ -11322,7 +11324,7 @@ const Ns = Object.freeze({
   "1-hour": 1,
   "10-hours": 10
 });
-class Em {
+class Im {
   #e;
   #t;
   constructor(e = je, t = Date.now) {
@@ -11434,7 +11436,7 @@ class dr {
   async #t(e, t) {
     const i = e.system.stress.value, a = Math.max(0, t);
     a !== i && await e.update({ "system.stress.value": a });
-    const s = Gi(i), o = Gi(a);
+    const s = Ui(i), o = Ui(a);
     return {
       previousValue: i,
       value: a,
@@ -11460,10 +11462,10 @@ function Pt(n, e) {
     throw new Error(`${e} must be a non-negative integer.`);
   return n;
 }
-function Im(n) {
+function Rm(n) {
   return Pt(n, "Pool damage overflow"), n === 0 ? null : n <= 4 ? "minor" : n <= 8 ? "moderate" : "major";
 }
-class Rm {
+class Nm {
   #e;
   constructor(e = je) {
     this.#e = e;
@@ -11521,7 +11523,7 @@ class Rm {
   setWoundCount(e, t, i, a, s = {}) {
     const o = Pt(i, "Wound count"), r = Pt(a, "Wound capacity");
     if (o > r) throw new Error("Wound count cannot exceed its capacity.");
-    const l = gt(e), u = l[t], c = u.length, p = o < c ? u.splice(o) : [], h = [];
+    const l = gt(e), u = l[t], c = u.length, p = o < c ? u.splice(o) : [], y = [];
     for (; u.length < o; ) {
       const m = {
         id: this.#e(),
@@ -11530,12 +11532,12 @@ class Rm {
         sourceUuid: s.sourceUuid ?? "magnusarchives.manual",
         treated: s.treated ?? !1
       };
-      u.push(m), h.push(m);
+      u.push(m), y.push(m);
     }
-    return { wounds: l, severity: t, previousCount: c, count: o, added: h, removed: p };
+    return { wounds: l, severity: t, previousCount: c, count: o, added: y, removed: p };
   }
   applyPoolDamage(e, t, i, a, s = Ms, o = {}) {
-    const r = Pt(i, "Pool value"), l = Pt(a, "Pool damage"), u = Math.min(r, l), c = r - u, p = l - u, h = Im(p), m = h ? this.applyWound(e, h, s, {
+    const r = Pt(i, "Pool value"), l = Pt(a, "Pool damage"), u = Math.min(r, l), c = r - u, p = l - u, y = Rm(p), m = y ? this.applyWound(e, y, s, {
       ...o,
       label: o.label ?? `${t} Pool overflow`
     }) : null;
@@ -11546,7 +11548,7 @@ class Rm {
       value: c,
       absorbed: u,
       overflow: p,
-      overflowSeverity: h,
+      overflowSeverity: y,
       wound: m
     };
   }
@@ -11598,7 +11600,7 @@ class Rm {
     return s.wound?.applied && (o["system.wounds"] = s.wound.wounds), await e.update(o), s;
   }
 }
-function Nm(n, e) {
+function Mm(n, e) {
   return n.naturalEffects.filter((t) => t.status !== "inapplicable").map((t) => ({
     kind: t.kind,
     label: e(t.label),
@@ -11607,7 +11609,7 @@ function Nm(n, e) {
     ...t.damageBonus === void 0 ? {} : { damageBonus: t.damageBonus }
   }));
 }
-function Mm(n, e) {
+function Um(n, e) {
   const t = n.naturalEffects.filter((l) => l.status !== "inapplicable");
   if (t.some((l) => l.kind === "gm-intrusion"))
     return { label: e("MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion") };
@@ -11630,7 +11632,7 @@ function Mm(n, e) {
   const r = t[0];
   return r ? { label: e(r.label) } : null;
 }
-function Gs(n, e, t) {
+function Us(n, e, t) {
   return `${ve(e, n)} ${t(e === "ease" ? n === 1 ? "MAGNUSARCHIVES.Roll.EaseStep" : "MAGNUSARCHIVES.Roll.EaseSteps" : n === 1 ? "MAGNUSARCHIVES.Roll.HindranceStep" : "MAGNUSARCHIVES.Roll.HindranceSteps")}`;
 }
 function Gm(n, e) {
@@ -11639,7 +11641,7 @@ function Gm(n, e) {
     value: ve(t.direction, t.steps)
   }));
 }
-function Um(n, e) {
+function km(n, e) {
   return n.breakdown.length === 0 && n.totalEase === 0 && n.totalHindrance === 0 ? [] : [{
     label: e("MAGNUSARCHIVES.Roll.TotalEase"),
     value: n.totalEase === 0 ? 0 : ve("ease", n.totalEase)
@@ -11648,7 +11650,7 @@ function Um(n, e) {
     value: n.totalHindrance === 0 ? 0 : ve("hinder", n.totalHindrance)
   }];
 }
-function km(n, e) {
+function Hm(n, e) {
   const t = n.prepared, i = t.context;
   return [
     ...i.paidEffort > 0 ? [{
@@ -11673,7 +11675,7 @@ function km(n, e) {
     }] : []
   ];
 }
-function Hm(n, e) {
+function $m(n, e) {
   const t = n.prepared, i = t.actionCostBeforeEdge > 0 || t.effortCostBeforeEdge > 0 || n.poolCostPaid > 0;
   return [
     ...t.actionCostBeforeEdge > 0 ? [{
@@ -11694,7 +11696,7 @@ function Hm(n, e) {
     }] : []
   ];
 }
-function $m(n, e) {
+function Vm(n, e) {
   const t = n.naturalEffects.find((i) => i.kind === "gm-intrusion" && i.status === "applied" && i.intrusionProvenance === "horror-mode" && i.horrorIntrusionRange !== void 0);
   return t?.horrorIntrusionRange === void 0 ? [] : [{
     label: e("MAGNUSARCHIVES.Horror.Title"),
@@ -11702,9 +11704,9 @@ function $m(n, e) {
   }];
 }
 function ur(n, e) {
-  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, a = Nm(n, e), s = a.filter((r) => !r.isIntrusion), o = [
-    ...t.totalEase > 0 ? [Gs(t.totalEase, "ease", e)] : [],
-    ...t.totalHindrance > 0 ? [Gs(t.totalHindrance, "hinder", e)] : []
+  const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, a = Mm(n, e), s = a.filter((r) => !r.isIntrusion), o = [
+    ...t.totalEase > 0 ? [Us(t.totalEase, "ease", e)] : [],
+    ...t.totalHindrance > 0 ? [Us(t.totalHindrance, "hinder", e)] : []
   ].join(" · ");
   return {
     actorName: t.context.actor.name,
@@ -11724,9 +11726,9 @@ function ur(n, e) {
       modifier: ve(r.direction, r.steps)
     })),
     modifierDetails: Gm(t, e),
-    modifierTotalDetails: Um(t, e),
-    effortDetails: km(n, e),
-    costDetails: Hm(n, e),
+    modifierTotalDetails: km(t, e),
+    effortDetails: Hm(n, e),
+    costDetails: $m(n, e),
     stepSummary: o,
     showStepSummary: o.length > 0,
     paidEffort: t.context.paidEffort,
@@ -11739,7 +11741,7 @@ function ur(n, e) {
     totalHindrance: t.totalHindrance,
     netSteps: t.netSteps,
     naturalEffects: a,
-    specialRoll: Mm(n, e),
+    specialRoll: Um(n, e),
     hasNaturalResult: n.naturalMarkers.length > 0,
     hasNaturalEffectDisclosure: s.length > 0,
     gmIntrusion: a.some((r) => r.isIntrusion),
@@ -11763,17 +11765,17 @@ function ur(n, e) {
     } : {}
   };
 }
-function Vm(n, e) {
+function Dm(n, e) {
   return n ? { outcome: e("MAGNUSARCHIVES.Roll.Success"), outcomeIcon: "✓", outcomeClass: "success" } : { outcome: e("MAGNUSARCHIVES.Roll.Failure"), outcomeIcon: "✕", outcomeClass: "failure" };
 }
 function Bn(n, e, t = !0) {
-  return n.automaticSuccess && t ? { outcome: e("MAGNUSARCHIVES.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : Vm(n.success === !0, e);
+  return n.automaticSuccess && t ? { outcome: e("MAGNUSARCHIVES.Roll.AutomaticSuccess"), outcomeIcon: "✓", outcomeClass: "success" } : Dm(n.success === !0, e);
 }
-function Dm(n, e, t = (i) => i) {
+function Fm(n, e, t = (i) => i) {
   const i = ur(n, t), a = n.beatsDifficulty === null ? {} : {
     beatsDifficulty: n.beatsDifficulty,
     showBeatsDifficulty: !0
-  }, s = $m(n, t), o = n.prepared.context.difficulty;
+  }, s = Vm(n, t), o = n.prepared.context.difficulty;
   if (o.mode === "unknown")
     return {
       ...i,
@@ -11811,7 +11813,7 @@ function Dm(n, e, t = (i) => i) {
     hasDetails: s.length > 0 || i.modifierDetails.length > 0 || i.modifierTotalDetails.length > 0 || i.effortDetails.length > 0 || i.costDetails.length > 0
   };
 }
-function Fm(n, e = (t) => t) {
+function Tm(n, e = (t) => t) {
   return n?.damage === void 0 ? { showFinalDamage: !1, damageDetails: [], damageTotalDetails: [] } : {
     showFinalDamage: !0,
     finalDamage: n.damage,
@@ -11824,7 +11826,7 @@ function Fm(n, e = (t) => t) {
     damageTotalDetails: [{ label: e("MAGNUSARCHIVES.Combat.FinalDamage"), value: n.damage }]
   };
 }
-function Tm(n, e = (t) => t) {
+function zm(n, e = (t) => t) {
   const t = n.prepared.context.difficulty;
   if (t.mode !== "hidden") throw new Error("Only hidden-difficulty rolls require an audit card.");
   return {
@@ -11835,9 +11837,9 @@ function Tm(n, e = (t) => t) {
     ...Bn(n, e)
   };
 }
-class zm {
+class Pm {
   async publish(e, t, i, a = {}) {
-    const s = (S) => game.i18n.localize(S), o = Dm(t.result, i, s), r = Fm(a.combat, s), l = {
+    const s = (f) => game.i18n.localize(f), o = Fm(t.result, i, s), r = Tm(a.combat, s), l = {
       ...o,
       ...r,
       hasDetails: o.hasDetails || r.damageDetails.length > 0 || r.damageTotalDetails.length > 0,
@@ -11865,9 +11867,9 @@ class zm {
       content: u
     };
     if (a.combat?.action && (c.flags = { magnusarchives: { combatAction: a.combat.action } }), t.chatRoll !== void 0 && (c.rolls = [t.chatRoll]), await ChatMessage.create(c), t.result.prepared.context.difficulty.mode !== "hidden") return;
-    const p = Tm(t.result, s);
+    const p = zm(t.result, s);
     if (Hooks.callAll("magnusarchivesHiddenRollAudit", p, e, t), a.showGmAudit !== !0) return;
-    const h = await foundry.applications.handlebars.renderTemplate(
+    const y = await foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/roll-audit-card.hbs",
       {
         ...p,
@@ -11876,19 +11878,19 @@ class zm {
       }
     ), m = {
       speaker: ChatMessage.getSpeaker({ actor: e }),
-      content: h,
-      whisper: ChatMessage.getWhisperRecipients("GM").map((S) => S.id),
+      content: y,
+      whisper: ChatMessage.getWhisperRecipients("GM").map((f) => f.id),
       blind: !0
     };
     await ChatMessage.create(m);
   }
 }
-const Pm = async () => {
+const xm = async () => {
   const n = await new Roll("1d20").evaluate();
   if (n.total === null) throw new Error("The d20 roll did not produce a total.");
   return { naturalRoll: n.total, chatRoll: n };
-}, xm = (n) => n.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core", qm = () => kn();
-function Us(n, e) {
+}, qm = (n) => n.system.derived.packages?.totalEffortCapMode === "unlimited" ? "unlimited" : "core", Om = () => kn();
+function Gs(n, e) {
   if (!Number.isInteger(n) || n < 0)
     throw new Error(`${e} must be a non-negative integer.`);
   return n;
@@ -11903,16 +11905,16 @@ function An(n, e, t, i) {
     source: i
   };
 }
-class Om {
+class Bm {
   #e;
   #t;
   #i;
   #n;
-  constructor(e, t = Pm, i = xm, a = qm) {
+  constructor(e, t = xm, i = qm, a = Om) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = a;
   }
   preview(e, t, i) {
-    L(e), Us(t.otherEase, "Other Ease"), Us(t.otherHindrance, "Other Hindrance");
+    L(e), Gs(t.otherEase, "Other Ease"), Gs(t.otherHindrance, "Other Hindrance");
     const a = [], s = An(
       "manual.skill",
       "MAGNUSARCHIVES.Roll.Breakdown.Skill",
@@ -11956,7 +11958,7 @@ class Om {
         });
     if (a.push(...t.contributions ?? []), t.pool === null && (t.paidEffort > 0 || (t.damageEffort ?? 0) > 0 || (t.actionCost ?? 0) > 0))
       throw new Error("A Pool-less roll cannot pay Effort or an action cost.");
-    const h = i.enabledRuleModuleIds ?? [], m = this.#e.resolveDifficultyPolicy(i.base, h), S = {
+    const y = i.enabledRuleModuleIds ?? [], m = this.#e.resolveDifficultyPolicy(i.base, y), f = {
       actor: { id: e.id, name: e.name },
       label: t.label ?? "MAGNUSARCHIVES.Roll.TestRoll",
       pool: t.pool,
@@ -11982,8 +11984,8 @@ class Om {
       ...t.target ? { target: t.target } : {},
       ...t.purpose ? { purpose: t.purpose } : {},
       ...t.origin ? { origin: t.origin } : {}
-    }, f = this.#e.enrichRollContext(S, h);
-    return um(f);
+    }, g = this.#e.enrichRollContext(f, y);
+    return mm(g);
   }
   async execute(e, t, i) {
     const [a] = await this.executeBatch(e, [t], i);
@@ -12002,30 +12004,30 @@ class Om {
       );
     s.poolCost > 0 && o !== null && await e.update({ [`system.stats.${o}.value`]: r - s.poolCost });
     const u = a.some((m) => m.finalDifficulty !== 0) ? await this.#t() : null, c = a.map((m) => {
-      const S = m.finalDifficulty === 0 ? cr(m) : mm(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
-        S,
+      const f = m.finalDifficulty === 0 ? cr(m) : pm(m, u.naturalRoll), g = this.#e.resolveNaturalEffects(
+        f,
         i.enabledRuleModuleIds ?? []
       );
-      return { ...S, naturalEffects: f };
+      return { ...f, naturalEffects: g };
     }), p = c.some((m) => m.naturalEffects.some(
-      (S) => S.status === "applied" && S.refundsPoolCost === !0
+      (f) => f.status === "applied" && f.refundsPoolCost === !0
     )) ? s.poolCost : 0;
     p > 0 && o !== null && await e.update({ [`system.stats.${o}.value`]: r });
-    let h = !1;
+    let y = !1;
     return c.map((m) => {
-      const S = {
+      const f = {
         ...m,
         poolCostPaid: s.poolCost - p,
         poolCostRefunded: p
       };
-      return u?.chatRoll === void 0 || m.automaticSuccess || h ? { result: S } : (h = !0, { result: S, chatRoll: u.chatRoll });
+      return u?.chatRoll === void 0 || m.automaticSuccess || y ? { result: f } : (y = !0, { result: f, chatRoll: u.chatRoll });
     });
   }
 }
-function Bm(n) {
+function Lm(n) {
   return k.includes(n);
 }
-class Lm {
+class jm {
   #e;
   constructor(e) {
     this.#e = e;
@@ -12033,7 +12035,7 @@ class Lm {
   configuredPool(e) {
     if (!Os.includes(e.system.defaultPool))
       throw new Error(`Unknown Skill default Pool '${e.system.defaultPool}'.`);
-    return Bm(e.system.defaultPool) ? e.system.defaultPool : null;
+    return Lm(e.system.defaultPool) ? e.system.defaultPool : null;
   }
   rankContribution(e, t = []) {
     if (e.type !== "skill") throw new Error("Skill contributions require a Skill Item.");
@@ -12104,27 +12106,27 @@ class Lm {
     };
   }
 }
-const jm = Object.freeze({
+const Wm = Object.freeze({
   targetedXpToTarget: 0,
   targetedXpToShare: 0,
   groupXpPerTarget: 0,
   freeXp: 0
 });
-function Wm(n) {
+function _m(n) {
   return {
     actorId: n.id,
     actorName: n.name,
     ...n.img ? { actorImage: n.img } : {}
   };
 }
-class _m {
+class Km {
   #e;
   #t;
   constructor(e, t = je) {
     this.#e = e, this.#t = t;
   }
   policy(e = []) {
-    return this.#e.resolveGMIntrusionPolicy(jm, e);
+    return this.#e.resolveGMIntrusionPolicy(Wm, e);
   }
   async createTargeted(e, t = []) {
     L(e);
@@ -12177,7 +12179,7 @@ class _m {
     return {
       id: this.#t(),
       mode: e,
-      targets: t.map(Wm),
+      targets: t.map(_m),
       targetXp: i,
       sharedXp: a,
       naturalRoll: s
@@ -12198,10 +12200,10 @@ function Mi(n, e, t) {
     throw new Error(`${e} must be an integer${t === void 0 ? "" : ` of at least ${t}`}.`);
   return n;
 }
-function Km(n, e) {
+function Xm(n, e) {
   return n.contexts.every((t) => e.tags.includes(t));
 }
-function Xm(n, e) {
+function Ym(n, e) {
   for (const [t, i] of Object.entries(n)) {
     if (t === "tagsAll") {
       if (!Array.isArray(i) || !i.every((s) => typeof s == "string" && e.tags.includes(s))) return !1;
@@ -12222,7 +12224,7 @@ function Xm(n, e) {
 function ks(n) {
   return n.contexts.length + Object.keys(n.predicate).length;
 }
-function Ym(n) {
+function Jm(n) {
   return Mi(n.value, `NPC modification '${n.id}'`, 0), {
     id: `npc-modification.${n.id}`,
     label: "MAGNUSARCHIVES.Combat.TargetModification",
@@ -12232,20 +12234,20 @@ function Ym(n) {
     sourceId: n.id
   };
 }
-class Jm {
+class Qm {
   #e;
   constructor(e) {
     this.#e = e;
   }
   resolve(e, t, i = []) {
     if (e.type !== "npc") throw new Error("Combat targets must be NPC Actors.");
-    const a = Mi(e.system.level, "NPC Level", 0), s = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Km(c, t) && Xm(c.predicate, t)), o = s.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => ks(p.modification) - ks(c.modification) || p.index - c.index)[0]?.modification;
+    const a = Mi(e.system.level, "NPC Level", 0), s = e.system.modifications.map((c, p) => ({ modification: c, index: p })).filter(({ modification: c }) => Xm(c, t) && Ym(c.predicate, t)), o = s.filter(({ modification: c }) => c.mode === "levelOverride").sort((c, p) => ks(p.modification) - ks(c.modification) || p.index - c.index)[0]?.modification;
     let r = o ? Mi(o.value, `NPC modification '${o.id}'`, 0) : a;
     const l = o ? [o.id] : [];
     for (const { modification: c } of s)
       c.mode === "levelDelta" && (r += Mi(c.value, `NPC modification '${c.id}'`), l.push(c.id));
     r = Math.max(0, r);
-    const u = s.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), Ym(c)));
+    const u = s.map(({ modification: c }) => c).filter((c) => c.mode === "ease" || c.mode === "hinder").map((c) => (l.push(c.id), Jm(c)));
     return this.#e.enrichTargetResolution({
       targetId: e.id,
       targetIdentity: Mt(e),
@@ -12260,13 +12262,13 @@ class Jm {
     return [...game.user.targets ?? []].map((e) => Do(e)).filter((e) => e !== null);
   }
 }
-class Qm {
+class Zm {
   async npcDamage() {
   }
   async characterWound() {
   }
 }
-async function Zm(n) {
+async function ep(n) {
   if (n.tokenId) {
     const e = canvas.tokens?.get(n.tokenId);
     if (e?.center) return { center: e.center };
@@ -12280,9 +12282,9 @@ async function Zm(n) {
     }
   return null;
 }
-class ep {
+class tp {
   async #e(e, t, i) {
-    const a = await Zm(e);
+    const a = await ep(e);
     a && await canvas.interface.createScrollingText(a.center, t, {
       anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,
       direction: CONST.TEXT_ANCHOR_POINTS.TOP,
@@ -12319,11 +12321,11 @@ class ep {
     await this.#e(e, s, a ? "#ff5c5c" : "#7dcfff");
   }
 }
-class tp {
+class ip {
   async syncNpcDead() {
   }
 }
-class ip {
+class np {
   async syncNpcDead(e, t) {
     const i = Hi(e);
     let a = null;
@@ -12338,16 +12340,16 @@ class ip {
     }));
   }
 }
-function np(n) {
+function ap(n) {
   if ("system.health.value" in n) return !0;
   const e = n.system;
   if (!e || typeof e != "object") return !1;
   const t = e.health;
   return !!(t && typeof t == "object" && "value" in t);
 }
-function ap(n) {
+function sp(n) {
   Hooks.on("updateActor", (e, t, i = {}) => {
-    if (i.magnusarchivesSkipDeadStatusSync === !0 || e.type !== "npc" || !np(t)) return;
+    if (i.magnusarchivesSkipDeadStatusSync === !0 || e.type !== "npc" || !ap(t)) return;
     const a = Number(e.system.health?.value);
     Number.isFinite(a) && n.syncNpcDead(e, a <= 0);
   });
@@ -12378,7 +12380,7 @@ class mr {
     await e.update({ "system.ammo.value": t.maximum }, { magnusarchivesWeaponReload: !0 });
   }
 }
-const sp = Object.freeze({
+const op = Object.freeze({
   weaponDamage: Object.freeze({ light: 2, medium: 4, heavy: 6 }),
   lightWeaponEase: 1,
   unfamiliarWeaponHindrance: 1,
@@ -12413,7 +12415,7 @@ function pr(n, e) {
     })
   };
 }
-class op {
+class rp {
   #e;
   #t;
   #i;
@@ -12424,11 +12426,11 @@ class op {
   #s;
   #c;
   #o;
-  constructor(e, t, i, a, s, o = new dr(), r = new Qm(), l = new tp(), u = new sr(s), c = new mr()) {
+  constructor(e, t, i, a, s, o = new dr(), r = new Zm(), l = new ip(), u = new sr(s), c = new mr()) {
     this.#e = e, this.#t = t, this.#i = i, this.#n = a, this.#a = s, this.#l = o, this.#r = r, this.#s = l, this.#c = u, this.#o = c;
   }
   policy(e = []) {
-    return this.#e.resolveCombatPolicy(sp, e);
+    return this.#e.resolveCombatPolicy(op, e);
   }
   weaponBaseDamage(e, t = this.policy()) {
     if (e.type !== "weapon") throw new Error("Weapon attacks require a Weapon Item.");
@@ -12487,7 +12489,7 @@ class op {
       pool: r,
       attackType: t.system.attackType,
       weaponCategory: t.system.category
-    }, u = i.targets ?? [], c = u.map((R) => this.#n.resolve(R, l, a)), p = u.length > 0 ? u : [null], h = c.length > 0 ? c : [null], m = [];
+    }, u = i.targets ?? [], c = u.map((R) => this.#n.resolve(R, l, a)), p = u.length > 0 ? u : [null], y = c.length > 0 ? c : [null], m = [];
     t.system.category === "light" && s.lightWeaponEase > 0 && m.push({
       id: `weapon.${t.id}.light`,
       label: "MAGNUSARCHIVES.Combat.Weapon.LightEase",
@@ -12496,8 +12498,8 @@ class op {
       source: "other",
       sourceId: t.id
     });
-    const S = this.weaponFamiliarityContribution(e, t, a);
-    if (S && m.push(S), i.extremeRange && m.push({
+    const f = this.weaponFamiliarityContribution(e, t, a);
+    if (f && m.push(f), i.extremeRange && m.push({
       id: `weapon.${t.id}.extreme-range`,
       label: "MAGNUSARCHIVES.Combat.Weapon.ExtremeRange",
       direction: "hinder",
@@ -12514,9 +12516,9 @@ class op {
       source: "other",
       sourceId: t.id
     });
-    const f = i.skill ? this.#i.rankContribution(i.skill, a) : null;
-    f && m.push(f);
-    const A = s.weaponDamage[t.system.category], v = t.system.bonusDamage, E = this.weaponBaseDamage(t, s), H = h.map((R, G) => ({
+    const g = i.skill ? this.#i.rankContribution(i.skill, a) : null;
+    g && m.push(g);
+    const A = s.weaponDamage[t.system.category], v = t.system.bonusDamage, E = this.weaponBaseDamage(t, s), H = y.map((R, U) => ({
       label: t.name,
       pool: r,
       difficulty: R ? { mode: "hidden", value: R.difficulty } : i.difficulty ?? { mode: "unknown" },
@@ -12547,10 +12549,10 @@ class op {
         attackType: t.system.attackType,
         baseDamage: E
       },
-      ...p[G] ? {
+      ...p[U] ? {
         target: {
-          ...Mt(p[G]),
-          name: p[G].name,
+          ...Mt(p[U]),
+          name: p[U].name,
           type: "npc"
         }
       } : {}
@@ -12563,7 +12565,7 @@ class op {
       freelyUsed: o,
       requests: H,
       targets: p,
-      targetResolutions: h,
+      targetResolutions: y,
       policy: s
     };
   }
@@ -12571,18 +12573,18 @@ class op {
     this.#o.assertCanAttack(t);
     const s = this.buildWeaponAttackPlan(e, t, i), o = await this.#t.executeBatch(e, s.requests, a), r = o.length > 0 ? await this.#d(t) : void 0;
     return o.map((l, u) => {
-      const c = l.result.prepared.damageEffortApplied * s.policy.damageEffortBonus, p = _t(l.result), h = s.baseDamage + c + p, m = s.targets[u] ?? null, S = m?.system.armorBase ?? 0;
+      const c = l.result.prepared.damageEffortApplied * s.policy.damageEffortBonus, p = _t(l.result), y = s.baseDamage + c + p, m = s.targets[u] ?? null, f = m?.system.armorBase ?? 0;
       return {
         target: m,
         targetResolution: s.targetResolutions[u] ?? null,
         execution: l,
-        grossDamage: h,
+        grossDamage: y,
         categoryDamage: s.categoryDamage,
         weaponBonusDamage: s.weaponBonusDamage,
         effortDamage: c,
         naturalDamage: p,
-        armor: S,
-        netDamage: Math.max(0, h - S),
+        armor: f,
+        netDamage: Math.max(0, y - f),
         ...u === 0 && r ? { weaponUse: r } : {}
       };
     });
@@ -12737,7 +12739,7 @@ function Di(n) {
     ...n.tokenUuid ? { targetTokenUuid: n.tokenUuid } : {}
   };
 }
-class rp {
+class lp {
   #e;
   #t;
   constructor(e, t) {
@@ -12851,14 +12853,14 @@ class rp {
     });
   }
 }
-const lp = async (n) => {
+const cp = async (n) => {
   const e = await new Roll(n).evaluate();
   if (e.total === null) throw new Error("The depletion roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class cp {
+class dp {
   #e;
-  constructor(e = lp) {
+  constructor(e = cp) {
     this.#e = e;
   }
   async roll(e) {
@@ -12885,7 +12887,7 @@ class cp {
     return u.depleted && i && e.update && await e.update({ "system.depleted": !0 }), u;
   }
 }
-class dp {
+class up {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/depletion-card.hbs",
@@ -12906,7 +12908,7 @@ class dp {
     t.chatRoll !== void 0 && (a.rolls = [t.chatRoll]), await ChatMessage.create(a);
   }
 }
-const $s = 124, up = 58, Vs = 108, mp = 10, pp = async (n) => {
+const $s = 124, mp = 58, Vs = 108, pp = 10, fp = async (n) => {
   if (!n) return null;
   try {
     const e = await fromUuid(n);
@@ -12921,8 +12923,8 @@ const $s = 124, up = 58, Vs = 108, mp = 10, pp = async (n) => {
   } catch {
     return null;
   }
-}, fp = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
-function gp(n) {
+}, gp = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
+function hp(n) {
   const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map();
   for (const i of n) {
     const a = t.get(i.tier) ?? [];
@@ -12937,15 +12939,15 @@ function gp(n) {
   }
   return e;
 }
-function hp(n, e = 120) {
+function yp(n, e = 120) {
   const t = n.replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/\s+/g, " ").trim();
   return t.length <= e ? t : `${t.slice(0, Math.max(0, e - 1)).trimEnd()}…`;
 }
-class yp {
+class Sp {
   #e;
   #t;
   #i;
-  constructor(e = new fa(), t = pp, i = fp) {
+  constructor(e = new fa(), t = fp, i = gp) {
     this.#e = e, this.#t = t, this.#i = i;
   }
   async prepare(e, t = {}) {
@@ -12956,18 +12958,18 @@ class yp {
     } catch (m) {
       if (!(m instanceof Rt)) throw m;
       if (t.progress) {
-        const S = new Set(a.ownedNodeIds);
+        const f = new Set(a.ownedNodeIds);
         o = {
           characterTier: i,
-          ownedNodeIds: [...S],
+          ownedNodeIds: [...f],
           diagnostics: m.diagnostics,
-          nodes: e.system.graph.nodes.map((f) => ({
-            node: f,
-            state: S.has(f.id) ? "owned" : f.tier > i ? "future" : "available",
-            reason: S.has(f.id) ? "owned" : f.tier > i ? "tier-too-low" : "tier-one-choice",
-            requiredTier: f.tier,
+          nodes: e.system.graph.nodes.map((g) => ({
+            node: g,
+            state: f.has(g.id) ? "owned" : g.tier > i ? "future" : "available",
+            reason: f.has(g.id) ? "owned" : g.tier > i ? "tier-too-low" : "tier-one-choice",
+            requiredTier: g.tier,
             reachableFrom: []
-          })).sort((f, A) => f.node.tier - A.node.tier || f.node.id.localeCompare(A.node.id))
+          })).sort((g, A) => g.node.tier - A.node.tier || g.node.id.localeCompare(A.node.id))
         };
       } else
         return {
@@ -12985,43 +12987,43 @@ class yp {
           invalid: !0
         };
     }
-    const r = gp(o.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...o.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
+    const r = hp(o.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...o.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
     for (const m of o.nodes)
       u.set(m.node.tier, (u.get(m.node.tier) ?? 0) + 1);
-    const c = Math.max(440, ...[...u.values()].map((m) => m * $s + (m + 1) * mp)), p = await Promise.all(o.nodes.map(async (m) => {
-      const S = await this.#t(m.node.abilityUuid), f = m.state === "owned" && s.has(m.node.id), A = S?.description ?? m.node.abilitySnapshot.description ?? "", v = o.diagnostics.some((z) => z.code === "invalid-owned-progression" && z.nodeId === m.node.id || z.severity === "error" && (!z.nodeId || z.nodeId === m.node.id)), E = m.state !== "owned" && m.node.tier > i, H = m.state !== "owned" && m.reason === "no-owned-prerequisite", R = m.state !== "owned" && (m.state !== "available" || v), G = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
+    const c = Math.max(440, ...[...u.values()].map((m) => m * $s + (m + 1) * pp)), p = await Promise.all(o.nodes.map(async (m) => {
+      const f = await this.#t(m.node.abilityUuid), g = m.state === "owned" && s.has(m.node.id), A = f?.description ?? m.node.abilitySnapshot.description ?? "", v = o.diagnostics.some((z) => z.code === "invalid-owned-progression" && z.nodeId === m.node.id || z.severity === "error" && (!z.nodeId || z.nodeId === m.node.id)), E = m.state !== "owned" && m.node.tier > i, H = m.state !== "owned" && m.reason === "no-owned-prerequisite", R = m.state !== "owned" && (m.state !== "available" || v), U = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
       return {
         id: m.node.id,
         abilityUuid: m.node.abilityUuid,
-        abilityName: S?.name || m.node.abilitySnapshot.name || m.node.id,
-        descriptionExcerpt: hp(A),
-        descriptionHtml: await this.#i(A, S?.relativeTo ?? e),
+        abilityName: f?.name || m.node.abilitySnapshot.name || m.node.id,
+        descriptionExcerpt: yp(A),
+        descriptionHtml: await this.#i(A, f?.relativeTo ?? e),
         tier: m.node.tier,
         state: m.state,
         stateLabel: `MAGNUSARCHIVES.Focus.State.${m.state}`,
         reason: m.reason,
         requiredTier: m.requiredTier,
         reachableFrom: m.reachableFrom,
-        missingAbility: !S,
-        missingOwnedAbility: f,
+        missingAbility: !f,
+        missingOwnedAbility: g,
         isOwned: m.state === "owned",
         advisoryUnavailable: R,
         tierLocked: E,
         prerequisiteLocked: H,
         invalidProgression: v,
         canAcquire: !!(t.editable && t.progress && !t.gmProgressionEdit && m.state !== "owned"),
-        canRestoreAbility: !!(t.editable && t.progress && f),
+        canRestoreAbility: !!(t.editable && t.progress && g),
         canUndoAcquisition: !!(t.editable && t.progress && m.state === "owned" && !t.gmProgressionEdit),
         canGmMarkOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state !== "owned"),
         canGmRemoveOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state === "owned"),
-        primaryAction: t.editor?.connectionSourceNodeId ? "completeFocusConnection" : t.editor ? "selectFocusEditorNode" : G,
+        primaryAction: t.editor?.connectionSourceNodeId ? "completeFocusConnection" : t.editor ? "selectFocusEditorNode" : U,
         selected: t.editor?.selectedNodeId === m.node.id,
         connectionSource: t.editor?.connectionSourceNodeId === m.node.id,
         xPercent: r.get(m.node.id) ?? 50,
         width: $s,
-        height: up
+        height: mp
       };
-    })), h = e.system.graph.connections.map(({ id: m, from: S, to: f }) => ({ id: m, from: S, to: f }));
+    })), y = e.system.graph.connections.map(({ id: m, from: f, to: g }) => ({ id: m, from: f, to: g }));
     return {
       focusUuid: e.uuid,
       focusName: e.name,
@@ -13031,13 +13033,13 @@ class yp {
       width: c,
       height: l * Vs,
       nodes: p,
-      connections: h,
-      tiers: Array.from({ length: l }, (m, S) => {
-        const f = S + 1;
+      connections: y,
+      tiers: Array.from({ length: l }, (m, f) => {
+        const g = f + 1;
         return {
-          tier: f,
-          top: S * Vs,
-          nodes: p.filter((A) => A.tier === f).sort((A, v) => A.xPercent - v.xPercent || A.id.localeCompare(v.id))
+          tier: g,
+          top: f * Vs,
+          nodes: p.filter((A) => A.tier === g).sort((A, v) => A.xPercent - v.xPercent || A.id.localeCompare(v.id))
         };
       }),
       diagnostics: o.diagnostics,
@@ -13054,7 +13056,7 @@ function Re(n) {
 function vn(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, img: n.img, type: e, system: nt(n.system) };
 }
-function Sp(n, e) {
+function Ap(n, e) {
   return !n?.name || !n.system || typeof n.system != "object" ? null : { name: n.name, ...n.img ? { img: n.img } : {}, type: e, system: nt(n.system) };
 }
 function Ds(n, e, t, i, a) {
@@ -13103,17 +13105,17 @@ function En(n, e) {
 function Fe(n) {
   return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
 }
-function Ap(n, e) {
+function bp(n, e) {
   return [...n.items].filter((t) => t.system.grantedBy?.instanceId === e);
 }
 function Ln(n, e) {
-  return Ap(n, e).flatMap((i) => {
+  return bp(n, e).flatMap((i) => {
     if (i.type !== "descriptor" && i.type !== "characterType" && i.type !== "species") return [i];
     const a = i.system.instance?.instanceId;
     return [i, ...a ? Ln(n, a) : []];
   });
 }
-class bp {
+class wp {
   #e;
   #t;
   #i;
@@ -13132,10 +13134,10 @@ class bp {
       throw new Error("This Superhero Type requires a Superheroics Pool choice.");
     if (l && !k.includes(l))
       throw new Error("Invalid Superheroics Pool choice.");
-    const u = Number.isInteger(s.superhero?.powerShiftCount) ? Math.max(0, Number(s.superhero?.powerShiftCount)) : 0, c = Array.from({ length: u }, (R, G) => String(i.powerShifts?.[G] ?? "").trim()), p = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), h = this.#p(s.abilityChoiceGroups ?? [], i.abilityChoices ?? {}), m = this.#t(), S = s.instance?.sourceUuid || t.uuid, f = (s.abilityChoiceGroups ?? []).flatMap((R) => R.options.filter((G) => h[R.id]?.includes(G.id)).map((G) => ({ ...G, id: `${R.id}:${G.id}` }))), A = [
-      ...await this.#l([...s.abilityGrants ?? [], ...f], "type", S, m),
-      ...await this.#r(s.skillGrants ?? [], "type", S, m),
-      ...await this.#s(s.choiceGroups ?? [], p, "type", S, m)
+    const u = Number.isInteger(s.superhero?.powerShiftCount) ? Math.max(0, Number(s.superhero?.powerShiftCount)) : 0, c = Array.from({ length: u }, (R, U) => String(i.powerShifts?.[U] ?? "").trim()), p = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), y = this.#p(s.abilityChoiceGroups ?? [], i.abilityChoices ?? {}), m = this.#t(), f = s.instance?.sourceUuid || t.uuid, g = (s.abilityChoiceGroups ?? []).flatMap((R) => R.options.filter((U) => y[R.id]?.includes(U.id)).map((U) => ({ ...U, id: `${R.id}:${U.id}` }))), A = [
+      ...await this.#l([...s.abilityGrants ?? [], ...g], "type", f, m),
+      ...await this.#r(s.skillGrants ?? [], "type", f, m),
+      ...await this.#s(s.choiceGroups ?? [], p, "type", f, m)
     ], { grants: v, skippedGrantIds: E } = await this.#o(
       e,
       A,
@@ -13145,7 +13147,7 @@ class bp {
     return H.system = {
       ...s,
       instance: {
-        sourceUuid: S,
+        sourceUuid: f,
         instanceId: m,
         role: "primary",
         attachedAt: this.#i(),
@@ -13154,8 +13156,8 @@ class bp {
           superheroicsPool: r ? l : "none",
           powerShifts: c,
           poolChoices: [],
-          skillChoices: Object.entries(p).map(([R, G]) => ({ groupId: R, optionIds: G })),
-          abilityChoices: Object.entries(h).map(([R, G]) => ({ groupId: R, optionIds: G })),
+          skillChoices: Object.entries(p).map(([R, U]) => ({ groupId: R, optionIds: U })),
+          abilityChoices: Object.entries(y).map(([R, U]) => ({ groupId: R, optionIds: U })),
           descriptorChoices: [],
           suppressedGrantIds: E
         },
@@ -13176,8 +13178,8 @@ class bp {
       u,
       t,
       i.conflictResolver
-    ), h = xt(t);
-    return h.system = {
+    ), y = xt(t);
+    return y.system = {
       ...a,
       instance: {
         sourceUuid: s,
@@ -13188,15 +13190,15 @@ class bp {
           edgePool: "none",
           superheroicsPool: "none",
           powerShifts: [],
-          poolChoices: Object.entries(r).map(([m, S]) => ({ groupId: m, pools: S })),
-          skillChoices: Object.entries(l).map(([m, S]) => ({ groupId: m, optionIds: S })),
+          poolChoices: Object.entries(r).map(([m, f]) => ({ groupId: m, pools: f })),
+          skillChoices: Object.entries(l).map(([m, f]) => ({ groupId: m, optionIds: f })),
           abilityChoices: [],
           descriptorChoices: [],
           suppressedGrantIds: p
         },
         parent: i.parent ?? Cn()
       }
-    }, i.parent && (h.system.grantedBy = i.parent), this.#n(e, h, c, void 0, "delete", p);
+    }, i.parent && (y.system.grantedBy = i.parent), this.#n(e, y, c, void 0, "delete", p);
   }
   async attachSpecies(e, t, i = {}) {
     this.#S(e, t, "species");
@@ -13214,29 +13216,29 @@ class bp {
     }), p = this.#h(
       c,
       i.descriptorChoices ?? {}
-    ), h = this.#t(), m = s.instance?.sourceUuid || t.uuid, S = (s.abilityChoiceGroups ?? []).flatMap((M) => M.options.filter((V) => l[M.id]?.includes(V.id)).map((V) => ({ ...V, id: `${M.id}:${V.id}` }))), f = c.flatMap((M) => M.options.filter((V) => p[M.id]?.includes(V.id)).map((V) => ({ ...V, id: `${M.id}:${V.id}` }))), A = [
-      ...await this.#l([...s.abilityGrants ?? [], ...S], "species", m, h),
-      ...await this.#r(s.skillGrants ?? [], "species", m, h),
-      ...await this.#s(s.choiceGroups ?? [], r, "species", m, h)
+    ), y = this.#t(), m = s.instance?.sourceUuid || t.uuid, f = (s.abilityChoiceGroups ?? []).flatMap((M) => M.options.filter((V) => l[M.id]?.includes(V.id)).map((V) => ({ ...V, id: `${M.id}:${V.id}` }))), g = c.flatMap((M) => M.options.filter((V) => p[M.id]?.includes(V.id)).map((V) => ({ ...V, id: `${M.id}:${V.id}` }))), A = [
+      ...await this.#l([...s.abilityGrants ?? [], ...f], "species", m, y),
+      ...await this.#r(s.skillGrants ?? [], "species", m, y),
+      ...await this.#s(s.choiceGroups ?? [], r, "species", m, y)
     ], v = await this.#o(
       e,
       A,
       t,
       i.conflictResolver
-    ), E = [...v.grants], H = [...v.skippedGrantIds], R = [...v.skippedGrantIds], G = new Set(Fe(e).filter((M) => M.type === "descriptor").map((M) => M.system.instance.sourceUuid || `snapshot:${M.name.trim().toLocaleLowerCase()}`)), z = [...s.descriptorGrants ?? [], ...f];
+    ), E = [...v.grants], H = [...v.skippedGrantIds], R = [...v.skippedGrantIds], U = new Set(Fe(e).filter((M) => M.type === "descriptor").map((M) => M.system.instance.sourceUuid || `snapshot:${M.name.trim().toLocaleLowerCase()}`)), z = [...s.descriptorGrants ?? [], ...g];
     if (!Re(z.map((M) => M.id)))
       throw new Error("Species Descriptor grant IDs must be unique.");
     for (const M of z) {
       const V = M.descriptorUuid ? await this.#e(M.descriptorUuid) : null;
       if (V && V.type !== "descriptor") throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
-      const I = V ? xt(V) : Sp(M.snapshot, "descriptor");
+      const I = V ? xt(V) : Ap(M.snapshot, "descriptor");
       if (!I) throw new Error(`Descriptor grant '${M.id}' has neither a source nor a usable snapshot.`);
-      const ie = nt(I.system), W = ie.instance?.sourceUuid || M.descriptorUuid, Ue = W || `snapshot:${String(I.name).trim().toLocaleLowerCase()}`;
-      if (G.has(Ue)) {
+      const ie = nt(I.system), W = ie.instance?.sourceUuid || M.descriptorUuid, Ge = W || `snapshot:${String(I.name).trim().toLocaleLowerCase()}`;
+      if (U.has(Ge)) {
         H.push(M.id), R.push(M.id);
         continue;
       }
-      G.add(Ue);
+      U.add(Ge);
       const q = this.#t(), J = this.#m(
         ie.poolBonusChoiceGroups ?? [],
         i.descriptorPoolChoices?.[M.id] ?? {}
@@ -13267,7 +13269,7 @@ class bp {
       }, Se = {
         kind: "species",
         sourceUuid: m,
-        instanceId: h,
+        instanceId: y,
         grantId: M.id,
         status: "active",
         ...Q,
@@ -13300,7 +13302,7 @@ class bp {
       ...s,
       instance: {
         sourceUuid: m,
-        instanceId: h,
+        instanceId: y,
         role: "primary",
         attachedAt: this.#i(),
         selections: {
@@ -13338,23 +13340,23 @@ class bp {
     };
   }
   async #n(e, t, i, a, s = "delete", o = []) {
-    const r = Object.fromEntries(k.map((h) => [h, e.system.derived.pools[h].max])), l = Zi(t), u = a ? Zi(a) : { might: 0, speed: 0, intellect: 0 }, c = await e.createEmbeddedDocuments("Item", [t, ...i]);
+    const r = Object.fromEntries(k.map((y) => [y, e.system.derived.pools[y].max])), l = Zi(t), u = a ? Zi(a) : { might: 0, speed: 0, intellect: 0 }, c = await e.createEmbeddedDocuments("Item", [t, ...i]);
     try {
       if (a) {
         const m = Ln(e, a.system.instance.instanceId);
-        s === "keep" && await Promise.all(m.map((S) => S.update({
+        s === "keep" && await Promise.all(m.map((f) => f.update({
           "system.grantedBy.status": "retained",
-          ...S.type === "descriptor" || S.type === "characterType" || S.type === "species" ? { "system.instance.parent.status": "retained" } : {}
+          ...f.type === "descriptor" || f.type === "characterType" || f.type === "species" ? { "system.instance.parent.status": "retained" } : {}
         }))), await e.deleteEmbeddedDocuments("Item", [
           a.id,
-          ...s === "delete" ? m.map((S) => S.id) : []
+          ...s === "delete" ? m.map((f) => f.id) : []
         ]);
       }
-      const h = Object.fromEntries(k.map((m) => [m, r[m] + l[m] - u[m]]));
-      await this.#a(e, r, h);
-    } catch (h) {
-      const m = c.map((S) => S.id).filter((S) => !!S);
-      throw m.length && await e.deleteEmbeddedDocuments("Item", m), h;
+      const y = Object.fromEntries(k.map((m) => [m, r[m] + l[m] - u[m]]));
+      await this.#a(e, r, y);
+    } catch (y) {
+      const m = c.map((f) => f.id).filter((f) => !!f);
+      throw m.length && await e.deleteEmbeddedDocuments("Item", m), y;
     }
     const p = t.system.instance.instanceId;
     return { packageItem: c[0], grantedItems: c.slice(1), instanceId: p, skippedGrantIds: o };
@@ -13394,10 +13396,10 @@ class bp {
     if (r && r.type !== "skill") throw new Error("A Skill grant references a non-Skill Item.");
     const l = r ? En(r, "skill") : vn(e.snapshot, "skill") ?? (e.customName ? { name: e.customName, type: "skill", system: {} } : null);
     if (!l) throw new Error(`Skill grant '${o}' has neither a source, custom name, nor usable snapshot.`);
-    const u = Ne("skill", String(l.name ?? e.customName), e.skillUuid), c = l.system, p = c.acquisition && typeof c.acquisition == "object" ? c.acquisition : {}, h = String(e.notes ?? "");
+    const u = Ne("skill", String(l.name ?? e.customName), e.skillUuid), c = l.system, p = c.acquisition && typeof c.acquisition == "object" ? c.acquisition : {}, y = String(e.notes ?? "");
     return l.system = {
       ...c,
-      ...h ? { acquisition: { ...p, notes: h } } : {},
+      ...y ? { acquisition: { ...p, notes: y } } : {},
       rank: t,
       grantedBy: Ds(i, a, s, o, u)
     }, l;
@@ -13406,13 +13408,13 @@ class bp {
     const o = [], r = [], l = [...e.items], u = s.filter((c) => c.type === "ability" || c.type === "skill");
     for (const c of t) {
       let p = c;
-      const h = p.type;
-      if (h !== "ability" && h !== "skill") {
+      const y = p.type;
+      if (y !== "ability" && y !== "skill") {
         o.push(p);
         continue;
       }
       for (; ; ) {
-        const m = p.system.grantedBy ?? {}, S = { type: h, contentUuid: m.contentUuid, contentKey: m.contentKey }, f = [...l, ...u, ...o], A = Li(f, S);
+        const m = p.system.grantedBy ?? {}, f = { type: y, contentUuid: m.contentUuid, contentKey: m.contentKey }, g = [...l, ...u, ...o], A = Li(g, f);
         if (!A) {
           o.push(p);
           break;
@@ -13423,14 +13425,14 @@ class bp {
         }
         const v = {
           id: `${m.instanceId}:${m.grantId}`,
-          type: h,
+          type: y,
           packageName: i.name,
           packageSourceUuid: i.uuid,
           grantId: m.grantId,
-          existing: this.#d(A, h),
-          proposed: this.#d(p, h),
-          suggestions: this.#A(e, i, h, m.grantId),
-          allowCustom: h === "skill",
+          existing: this.#d(A, y),
+          proposed: this.#d(p, y),
+          suggestions: this.#A(e, i, y, m.grantId),
+          allowCustom: y === "skill",
           allowSuppress: !0,
           allowGmOverride: !1,
           context: "package"
@@ -13470,11 +13472,11 @@ class bp {
       originalName: String(e.name ?? ""),
       originalContentUuid: l.contentUuid,
       originalContentKey: l.contentKey
-    }, c = Ne(a, String(o.name ?? t.name), t.itemUuid), p = o.system, h = r.acquisition && typeof r.acquisition == "object" ? r.acquisition : {}, m = p.acquisition && typeof p.acquisition == "object" ? p.acquisition : {};
+    }, c = Ne(a, String(o.name ?? t.name), t.itemUuid), p = o.system, y = r.acquisition && typeof r.acquisition == "object" ? r.acquisition : {}, m = p.acquisition && typeof p.acquisition == "object" ? p.acquisition : {};
     return o.system = {
       ...p,
       ...a === "skill" ? { rank: r.rank } : {},
-      ...a === "skill" && h.notes ? { acquisition: { ...m, notes: h.notes } } : {},
+      ...a === "skill" && y.notes ? { acquisition: { ...m, notes: y.notes } } : {},
       grantedBy: {
         ...l,
         contentUuid: c.contentUuid,
@@ -13493,41 +13495,41 @@ class bp {
     }, o;
   }
   #A(e, t, i, a) {
-    const s = [], o = (c, p, h) => {
+    const s = [], o = (c, p, y) => {
       const m = c.snapshot?.name || c.customName;
       m && s.push({
-        id: `${h}:${c.id}`,
+        id: `${y}:${c.id}`,
         type: i,
         name: m,
         itemUuid: c.itemUuid,
         snapshot: c.snapshot,
         reason: p,
-        reasonSourceUuid: h,
+        reasonSourceUuid: y,
         ...i === "skill" && !c.itemUuid ? { custom: !0 } : {}
       });
-    }, r = (c, p, h) => {
-      for (const m of c ?? []) o(m, p, h);
+    }, r = (c, p, y) => {
+      for (const m of c ?? []) o(m, p, y);
     }, l = (c, p = !1) => {
-      const h = c.system, m = "instance" in h ? h.instance?.selections : void 0;
+      const y = c.system, m = "instance" in y ? y.instance?.selections : void 0;
       if (i === "skill") {
-        for (const S of h.skillGrants ?? [])
-          c.uuid === t.uuid && S.id === a && r(S.alternatives, `${c.name} — declared alternative`, c.uuid);
-        for (const S of h.choiceGroups ?? []) {
-          const f = m?.skillChoices.find((v) => v.groupId === S.id)?.optionIds ?? [], A = a.startsWith(`${S.id}:`) ? a.slice(S.id.length + 1) : "";
+        for (const f of y.skillGrants ?? [])
+          c.uuid === t.uuid && f.id === a && r(f.alternatives, `${c.name} — declared alternative`, c.uuid);
+        for (const f of y.choiceGroups ?? []) {
+          const g = m?.skillChoices.find((v) => v.groupId === f.id)?.optionIds ?? [], A = a.startsWith(`${f.id}:`) ? a.slice(f.id.length + 1) : "";
           if (c.uuid === t.uuid && A)
-            for (const v of S.options) v.id !== A && o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${c.name} — Skill choice`, c.uuid);
+            for (const v of f.options) v.id !== A && o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${c.name} — Skill choice`, c.uuid);
           else if (!p)
-            for (const v of S.options) f.includes(v.id) || o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${c.name} — unused Skill choice`, c.uuid);
+            for (const v of f.options) g.includes(v.id) || o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${c.name} — unused Skill choice`, c.uuid);
         }
       } else {
-        for (const S of h.abilityGrants ?? [])
-          c.uuid === t.uuid && S.id === a && r(S.alternatives, `${c.name} — declared alternative`, c.uuid);
-        for (const S of h.abilityChoiceGroups ?? []) {
-          const f = m?.abilityChoices.find((v) => v.groupId === S.id)?.optionIds ?? [], A = a.startsWith(`${S.id}:`) ? a.slice(S.id.length + 1) : "";
+        for (const f of y.abilityGrants ?? [])
+          c.uuid === t.uuid && f.id === a && r(f.alternatives, `${c.name} — declared alternative`, c.uuid);
+        for (const f of y.abilityChoiceGroups ?? []) {
+          const g = m?.abilityChoices.find((v) => v.groupId === f.id)?.optionIds ?? [], A = a.startsWith(`${f.id}:`) ? a.slice(f.id.length + 1) : "";
           if (c.uuid === t.uuid && A)
-            for (const v of S.options) v.id !== A && o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${c.name} — Ability choice`, c.uuid);
+            for (const v of f.options) v.id !== A && o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${c.name} — Ability choice`, c.uuid);
           else if (!p)
-            for (const v of S.options) f.includes(v.id) || o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${c.name} — unused Ability choice`, c.uuid);
+            for (const v of f.options) g.includes(v.id) || o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${c.name} — unused Ability choice`, c.uuid);
         }
       }
     };
@@ -13535,8 +13537,8 @@ class bp {
     for (const c of Fe(e)) l(c);
     const u = /* @__PURE__ */ new Set();
     return s.filter((c) => {
-      const p = Ne(i, c.name, c.itemUuid), h = p.contentUuid || p.contentKey;
-      return u.has(h) || _o(e.items, p) ? !1 : (u.add(h), !0);
+      const p = Ne(i, c.name, c.itemUuid), y = p.contentUuid || p.contentKey;
+      return u.has(y) || _o(e.items, p) ? !1 : (u.add(y), !0);
     });
   }
   #f(e, t) {
@@ -13610,7 +13612,7 @@ function Fs(n, e, t) {
     sourceId: n.id
   };
 }
-function wp(n) {
+function vp(n) {
   return n.type === "npc" ? Mt(n) : {
     actorId: n.id,
     ...n.actorUuid ?? n.uuid ? { actorUuid: n.actorUuid ?? n.uuid } : {},
@@ -13618,7 +13620,7 @@ function wp(n) {
     ...n.tokenUuid ? { tokenUuid: n.tokenUuid } : {}
   };
 }
-class vp {
+class Cp {
   #e;
   #t;
   #i;
@@ -13695,14 +13697,14 @@ class vp {
       ...t.system.roll === "attack" ? ["attack", "attack.ability", "defense.speed"] : [],
       ...t.system.roll === "defense" ? ["defense"] : [],
       ...a === "speed" ? ["speed-task"] : []
-    ], u = { tags: l, pool: a }, c = r.map((f) => f?.type === "npc" ? this.#i.resolve(f, u, s) : null), p = [], h = Fs(t, t.system.rollModifier, "roll");
-    if (h && p.push(h), t.system.roll === "attack") {
-      const f = Fs(t, t.system.attackModifier, "attack");
-      f && p.push(f);
+    ], u = { tags: l, pool: a }, c = r.map((g) => g?.type === "npc" ? this.#i.resolve(g, u, s) : null), p = [], y = Fs(t, t.system.rollModifier, "roll");
+    if (y && p.push(y), t.system.roll === "attack") {
+      const g = Fs(t, t.system.attackModifier, "attack");
+      g && p.push(g);
     }
     const m = i.skill ? this.#t.rankContribution(i.skill, s) : null;
     m && p.push(m);
-    const S = r.map((f, A) => ({
+    const f = r.map((g, A) => ({
       label: t.name,
       pool: a,
       difficulty: c[A] ? { mode: "hidden", value: c[A].difficulty } : i.difficulty ?? { mode: "unknown" },
@@ -13733,15 +13735,15 @@ class vp {
         damageEffect: t.system.damageEffect,
         stressAmount: t.system.stressAmount
       },
-      ...f ? {
+      ...g ? {
         target: {
-          ...wp(f),
-          name: f.name,
-          type: f.type === "npc" ? "npc" : "character"
+          ...vp(g),
+          name: g.name,
+          type: g.type === "npc" ? "npc" : "character"
         }
       } : {}
     }));
-    return { ability: t, pool: a, requests: S, targets: r, targetResolutions: c, damage: t.system.damage };
+    return { ability: t, pool: a, requests: f, targets: r, targetResolutions: c, damage: t.system.damage };
   }
   async executeRoll(e, t, i, a) {
     const s = this.buildRollPlan(e, t, i), o = await this.#e.executeBatch(e, s.requests, a), r = this.#n.policy(i.enabledRuleModuleIds ?? []).damageEffortBonus;
@@ -13814,7 +13816,7 @@ function zs(n, e) {
     }
   } : {} : {};
 }
-class Cp {
+class Ep {
   #e;
   constructor(e) {
     this.#e = e;
@@ -13889,14 +13891,14 @@ class Cp {
     });
   }
 }
-const Ep = async (n) => {
+const Ip = async (n) => {
   const e = await new Roll(n).evaluate();
   if (e.total === null) throw new Error("The Artifact level roll did not produce a total.");
   return { total: e.total, chatRoll: e };
 };
-class Ip {
+class Rp {
   #e;
-  constructor(e = Ep) {
+  constructor(e = Ip) {
     this.#e = e;
   }
   canRollLevel(e) {
@@ -13915,14 +13917,14 @@ class Ip {
     };
   }
 }
-function Rp(n) {
+function Np(n) {
   return game.i18n.localize(`MAGNUSARCHIVES.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
 }
-function Np(n) {
+function Mp(n) {
   const e = n._source?.system?.description;
   return typeof e == "string" ? e : "";
 }
-function Mp(n) {
+function Up(n) {
   const e = n.system;
   if (n.type === "equipment")
     return [
@@ -13975,7 +13977,7 @@ function Mp(n) {
     ];
   }
   if (n.type === "ability") {
-    const t = n, i = Ke(t), a = Eo(t.system.cost.amount, i, Rp, {
+    const t = n, i = Ke(t), a = Eo(t.system.cost.amount, i, Np, {
       pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
       middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
       final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
@@ -13985,13 +13987,13 @@ function Mp(n) {
   return [];
 }
 function Gp(n) {
-  return Mp(n).filter(
+  return Up(n).filter(
     ({ label: e, value: t }) => e.trim().length > 0 && (typeof t == "number" || t.trim().length > 0)
   );
 }
-class Up {
+class kp {
   async publish(e) {
-    const t = e.system, i = Np(e), a = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
+    const t = e.system, i = Mp(e), a = i ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(i, {
       async: !0,
       relativeTo: e
     }) : "", s = t.depletion, o = await foundry.applications.handlebars.renderTemplate(
@@ -14030,7 +14032,7 @@ class Up {
     t.chatRoll !== void 0 && (a.rolls = [t.chatRoll]), await ChatMessage.create(a);
   }
 }
-class kp {
+class Hp {
   canUse(e) {
     return e.type === "character" && e.system.xp >= 1;
   }
@@ -14046,15 +14048,15 @@ class kp {
     };
   }
 }
-function Hp(n) {
+function $p(n) {
   return { actorName: n.actorName, xpSpent: n.xpSpent };
 }
-class $p {
+class Vp {
   async publish(e, t) {
     const i = await foundry.applications.handlebars.renderTemplate(
       "systems/magnusarchives/templates/chat/player-intrusion-card.hbs",
       {
-        ...Hp(e),
+        ...$p(e),
         ...Me(t)
       }
     );
@@ -14065,8 +14067,8 @@ class $p {
     });
   }
 }
-function Vp(n) {
-  const e = new dr(), t = new Rm(), i = new bm(), a = new Em(), s = new Om(n), o = new Lm(n), r = new Jm(n), l = new zm(), u = new ep(), c = new ip(), p = new sr(t), h = new cp(), m = new mr(), S = new fa(), f = new op(
+function Dp(n) {
+  const e = new dr(), t = new Nm(), i = new wm(), a = new Im(), s = new Bm(n), o = new jm(n), r = new Qm(n), l = new Pm(), u = new tp(), c = new np(), p = new sr(t), y = new dp(), m = new mr(), f = new fa(), g = new rp(
     n,
     s,
     o,
@@ -14081,38 +14083,38 @@ function Vp(n) {
   return Object.freeze({
     conditions: e,
     wounds: t,
-    recovery: new Cm(i, a),
+    recovery: new Em(i, a),
     rally: new Ac(t),
     rolls: s,
     rollChat: l,
     skills: o,
-    intrusions: new _m(n),
+    intrusions: new Km(n),
     intrusionChat: new qc(),
-    playerIntrusions: new kp(),
-    playerIntrusionChat: new $p(),
+    playerIntrusions: new Hp(),
+    playerIntrusionChat: new Vp(),
     targets: r,
-    combat: f,
-    combatChat: new rp(l, p),
-    abilities: new vp(s, o, r, f),
-    abilityChat: new Cp(l),
+    combat: g,
+    combatChat: new lp(l, p),
+    abilities: new Cp(s, o, r, g),
+    abilityChat: new Ep(l),
     shields: p,
-    artifacts: new Ip(),
-    itemChat: new Up(),
+    artifacts: new Rp(),
+    itemChat: new kp(),
     genres: new Od(),
     weapons: m,
-    depletion: h,
-    depletionChat: new dp(),
+    depletion: y,
+    depletionChat: new up(),
     combatStatuses: c,
-    focusEvaluator: S,
-    focusTrees: new yp(S),
-    focusAcquisition: new yd(S),
+    focusEvaluator: f,
+    focusTrees: new Sp(f),
+    focusAcquisition: new yd(f),
     advancement: new vd(n),
-    focusAssociations: new Ud(),
+    focusAssociations: new Gd(),
     characterInitialization: new $d(),
-    characterPackages: new bp()
+    characterPackages: new wp()
   });
 }
-const Dp = {
+const Fp = {
   id: "core",
   label: "MAGNUSARCHIVES.Themes.Core",
   sourceId: "magnusarchives.core",
@@ -14164,7 +14166,7 @@ const Dp = {
     "--magnusarchives-scrollbar-track": "color-mix(in srgb, var(--magnusarchives-color-bg) 70%, transparent)"
   }
 };
-class Fp {
+class Tp {
   #e = /* @__PURE__ */ new Map();
   #t = /* @__PURE__ */ new Set();
   register(e) {
@@ -14203,10 +14205,10 @@ class Fp {
 function Ps(n) {
   return n.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
-function Tp(n) {
+function zp(n) {
   return n === !0 || n === "true" || n === "on";
 }
-async function zp() {
+async function Pp() {
   if (!game.user.isGM) throw new Error("Only a GM can initiate a GM Intrusion.");
   const n = [...game.actors].filter((r) => r.type === "character").sort((r, l) => r.name.localeCompare(l.name));
   if (n.length === 0) {
@@ -14233,15 +14235,15 @@ async function zp() {
     rejectClose: !1,
     ok: { label: game.i18n.localize("MAGNUSARCHIVES.Intrusion.Create") },
     render: (r, l) => {
-      const u = l.element.querySelector('[name="mode"]'), c = l.element.querySelector('[data-intrusion-selection="single"]'), p = l.element.querySelector('[data-intrusion-selection="group"]'), h = () => {
+      const u = l.element.querySelector('[name="mode"]'), c = l.element.querySelector('[data-intrusion-selection="single"]'), p = l.element.querySelector('[data-intrusion-selection="group"]'), y = () => {
         const m = u?.value === "group";
         c && (c.hidden = m), p && (p.hidden = !m);
       };
-      u?.addEventListener("change", h), h();
+      u?.addEventListener("change", y), y();
     }
   });
   if (!a) return;
-  const s = a.mode === "group" || a.mode === "free" ? a.mode : "targeted", o = s === "group" ? n.filter((r) => Tp(a["group-" + r.id])).map((r) => r.id) : [String(a.targetActorId ?? "")];
+  const s = a.mode === "group" || a.mode === "free" ? a.mode : "targeted", o = s === "group" ? n.filter((r) => zp(a["group-" + r.id])).map((r) => r.id) : [String(a.targetActorId ?? "")];
   try {
     await ti().createManual({ mode: s, actorIds: o });
   } catch (r) {
@@ -14252,7 +14254,7 @@ function In(n, e, t) {
   const i = t > lt, a = n.querySelector("[data-horror-summary]"), s = n.querySelector("[data-horror-explanation]"), o = n.querySelector("[data-horror-value]");
   n.dataset.horrorBand = Ro(t), n.style.setProperty("--magnusarchives-horror-fill", `${No(t)}%`), e.value = String(t), e.setAttribute("aria-valuetext", i ? `1–${t}` : "Natural 1"), o && (o.value = String(t)), a && (a.textContent = i ? game.i18n.format("MAGNUSARCHIVES.Horror.RangeSummary", { range: t }) : game.i18n.localize("MAGNUSARCHIVES.Horror.NormalSummary")), s && (s.textContent = i ? game.i18n.format("MAGNUSARCHIVES.Horror.Explanation", { range: t }) : game.i18n.localize("MAGNUSARCHIVES.Horror.NormalExplanation"));
 }
-async function Pp() {
+async function xp() {
   if (!game.user.isGM) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.GMOnly"));
   const n = kn(), e = `<div class="magnusarchives magnusarchives-dialog magnusarchives-horror-dialog" data-horror-dialog data-horror-band="${Ro(n)}" style="--magnusarchives-horror-fill: ${No(n)}%">
     <header class="magnusarchives-dialog-heading">
@@ -14284,7 +14286,7 @@ async function Pp() {
     }
   });
 }
-function xp() {
+function qp() {
   Hooks.on("getSceneControlButtons", (n) => {
     const e = n.tokens;
     if (!e) return;
@@ -14297,7 +14299,7 @@ function xp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        zp();
+        Pp();
       }
     }, t.magnusarchivesHorrorMode = {
       name: "magnusarchivesHorrorMode",
@@ -14307,12 +14309,12 @@ function xp() {
       button: !0,
       visible: game.user.isGM,
       onChange: () => {
-        Pp();
+        xp();
       }
     };
   });
 }
-const fr = `system.${U}`;
+const fr = `system.${G}`;
 function Fi(n) {
   return game.user.isGM || n.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
 }
@@ -14335,7 +14337,7 @@ function hr(n) {
     ...n.targetTokenUuid ? { tokenUuid: n.targetTokenUuid } : {}
   };
 }
-function qp(n) {
+function Op(n) {
   return {
     actorId: n.sourceActorId,
     ...n.sourceActorUuid ? { actorUuid: n.sourceActorUuid } : {},
@@ -14344,18 +14346,18 @@ function qp(n) {
   };
 }
 function yr(n) {
-  const e = n.getFlag(U, "combatAction");
+  const e = n.getFlag(G, "combatAction");
   if (!e || typeof e != "object") return null;
   const t = e;
   return t.kind !== "npcDamage" && t.kind !== "characterDamage" && t.kind !== "shieldWound" || typeof t.targetActorId != "string" || typeof t.applied != "boolean" ? null : e;
 }
 function Sr(n) {
-  const e = n.getFlag(U, "defenseRequest");
+  const e = n.getFlag(G, "defenseRequest");
   if (!e || typeof e != "object") return null;
   const t = e;
   return t.kind !== "defenseRequest" || typeof t.sourceActorId != "string" || typeof t.targetActorId != "string" ? null : e;
 }
-async function Op(n, e) {
+async function Bp(n, e) {
   const t = yr(n);
   if (!t || t.applied) return;
   const i = gr(t), a = await $n(i);
@@ -14389,14 +14391,14 @@ async function Op(n, e) {
         r
       ), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Combat.WoundApplied"));
     }
-    await n.setFlag(U, "combatAction", { ...t, applied: !0 }), e.textContent = game.i18n.localize("MAGNUSARCHIVES.Combat.Applied");
+    await n.setFlag(G, "combatAction", { ...t, applied: !0 }), e.textContent = game.i18n.localize("MAGNUSARCHIVES.Combat.Applied");
   } catch (o) {
     e.disabled = !1, ui.notifications.error(o instanceof Error ? o.message : String(o));
   }
 }
-async function Bp(n, e, t, i) {
+async function Lp(n, e, t, i) {
   if (e.resolved || !e.allowedDefenses.includes(t)) return;
-  const a = hr(e), s = qp(e), o = await $n(a), r = await $n(s);
+  const a = hr(e), s = Op(e), o = await $n(a), r = await $n(s);
   if (!o || !r) {
     o || jn(a), r || jn(s);
     return;
@@ -14414,14 +14416,14 @@ async function Bp(n, e, t, i) {
     i.disabled = !1;
     return;
   }
-  game.socket.emit(fr, { type: "resolveDefenseRequest", messageId: n.id }), game.user.isGM && await n.setFlag(U, "defenseRequest", { ...e, resolved: !0 });
+  game.socket.emit(fr, { type: "resolveDefenseRequest", messageId: n.id }), game.user.isGM && await n.setFlag(G, "defenseRequest", { ...e, resolved: !0 });
 }
-function Lp(n, e) {
+function jp(n, e) {
   const t = yr(n), i = e.querySelector("[data-action='applyCombatOutcome']");
   if (i) {
     const r = t ? Hn(gr(t)) : null;
     !t || !r || !Fi(r) ? i.remove() : t.applied ? (i.disabled = !0, i.textContent = game.i18n.localize("MAGNUSARCHIVES.Combat.Applied")) : i.addEventListener("click", () => {
-      Op(n, i);
+      Bp(n, i);
     }, { once: !0 });
   }
   const a = Sr(n), s = [...e.querySelectorAll("[data-action='rollRequestedDefense']")];
@@ -14440,33 +14442,33 @@ function Lp(n, e) {
     r.addEventListener(
       "click",
       () => {
-        Bp(n, a, l, r);
+        Lp(n, a, l, r);
       },
       { once: !0 }
     );
   }
 }
-function jp() {
+function Wp() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
-    Lp(n, e);
+    jp(n, e);
   }), game.socket.on(fr, (n) => {
     if (!game.user.isGM || n.type !== "resolveDefenseRequest") return;
     const e = game.messages.get(n.messageId);
     if (!e) return;
     const t = Sr(e);
-    !t || t.resolved || e.setFlag(U, "defenseRequest", { ...t, resolved: !0 });
+    !t || t.resolved || e.setFlag(G, "defenseRequest", { ...t, resolved: !0 });
   });
 }
-function Wp(n) {
+function _p(n) {
   return n.actor ? n.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER) : game.user.isGM;
 }
-function _p() {
+function Kp() {
   Hooks.on("renderChatMessageHTML", (n, e) => {
     for (const t of e.querySelectorAll("[data-action='rollItemCardDepletion']"))
       t.addEventListener("click", async (i) => {
         i.preventDefault(), i.stopPropagation();
         const a = t.dataset.itemUuid, s = a ? await fromUuid(a) : null;
-        if (!s || s.type !== "artifact" || !Wp(s)) {
+        if (!s || s.type !== "artifact" || !_p(s)) {
           ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Inventory.NotAuthorized"));
           return;
         }
@@ -14474,7 +14476,7 @@ function _p() {
       });
   });
 }
-async function Kp() {
+async function Xp() {
   if (!game.user.isGM) return;
   const n = [...game.items].filter((e) => e.type === "genre");
   if (n.length)
@@ -14494,7 +14496,7 @@ async function Kp() {
         console.warn("magnusarchives | Could not migrate a legacy Type Genre suggestion", e.uuid, t);
       }
 }
-class Xp {
+class Yp {
   #e = /* @__PURE__ */ new Set();
   constructor(e = []) {
     for (const t of e) this.#e.add(t.id);
@@ -14504,8 +14506,8 @@ class Xp {
     return !i || this.#e.has(e.id) ? !1 : (this.#e.add(e.id), i.classList.add("magnusarchives-chat-card-enter"), !0);
   }
 }
-function Yp() {
-  const n = new Xp(game.messages);
+function Jp() {
+  const n = new Yp(game.messages);
   return Hooks.on("renderChatMessageHTML", (e, t) => {
     n.mark(e, t);
   }), n;
@@ -14514,40 +14516,40 @@ const Ti = "doneThisRound";
 function Ar(n, e) {
   return !!(e && (n.isGM || e.testUserPermission(n, "OWNER")));
 }
-function Jp(n, e) {
-  return e > 0 && n?.getFlag(U, Ti) === e;
+function Qp(n, e) {
+  return e > 0 && n?.getFlag(G, Ti) === e;
 }
-async function Qp(n, e, t) {
+async function Zp(n, e, t) {
   if (!n.started) return { ok: !1, reason: "not-started" };
   if (!n.turns.length) return { ok: !1, reason: "empty" };
   const i = n.combatant;
-  return n.turn === null || !i ? { ok: !1, reason: "no-current" } : i.id !== t ? { ok: !1, reason: "stale" } : Ar(e, i) ? (await i.setFlag(U, Ti, n.round), await n.nextTurn(), { ok: !0 }) : { ok: !1, reason: "not-authorized" };
+  return n.turn === null || !i ? { ok: !1, reason: "no-current" } : i.id !== t ? { ok: !1, reason: "stale" } : Ar(e, i) ? (await i.setFlag(G, Ti, n.round), await n.nextTurn(), { ok: !0 }) : { ok: !1, reason: "not-authorized" };
 }
-async function Zp(n) {
-  const e = Array.from(n.combatants).filter((t) => t.getFlag(U, Ti) !== void 0).map((t) => ({
+async function ef(n) {
+  const e = Array.from(n.combatants).filter((t) => t.getFlag(G, Ti) !== void 0).map((t) => ({
     _id: t.id,
-    [`flags.${U}.-=${Ti}`]: null
+    [`flags.${G}.-=${Ti}`]: null
   }));
   e.length && await n.updateEmbeddedDocuments("Combatant", e, { turnEvents: !1 });
 }
-function ef(n, e, t, i) {
+function tf(n, e, t, i) {
   if (!n.includes(e)) return [...n];
   const a = n.filter((o) => o !== e);
   if (!t) return [...a, e];
   const s = a.indexOf(t);
   return s < 0 ? [...n] : (a.splice(s + (i ? 1 : 0), 0, e), a);
 }
-function tf(n) {
+function nf(n) {
   return n.map((e, t) => ({
     _id: e,
     initiative: (n.length - t) * 10
   }));
 }
-const nf = foundry.applications.sidebar.tabs.CombatTracker, xs = "application/x-magnusarchives-combatant";
+const af = foundry.applications.sidebar.tabs.CombatTracker, xs = "application/x-magnusarchives-combatant";
 function Rn(n) {
   return n?.dataset.combatantId ?? null;
 }
-class wa extends nf {
+class wa extends af {
   static DEFAULT_OPTIONS = {
     classes: ["magnusarchives-combat-tracker"],
     actions: {
@@ -14574,7 +14576,7 @@ class wa extends nf {
     }
     t.setAttribute("disabled", "");
     try {
-      const s = await Qp(i, game.user, a);
+      const s = await Zp(i, game.user, a);
       s.ok || ui.notifications.warn(game.i18n.localize(`MAGNUSARCHIVES.CombatTracker.Errors.${s.reason}`));
     } finally {
       t.removeAttribute("disabled");
@@ -14585,7 +14587,7 @@ class wa extends nf {
     const i = this.viewed;
     for (const a of e.turns ?? []) {
       const s = i?.combatants.get(a.id);
-      a.doneThisRound = Jp(s, i?.round ?? 0), a.canEndTurn = !!(i?.started && a.active && !a.doneThisRound && Ar(game.user, s));
+      a.doneThisRound = Qp(s, i?.round ?? 0), a.canEndTurn = !!(i?.started && a.active && !a.doneThisRound && Ar(game.user, s));
     }
   }
   async _onRender(e, t) {
@@ -14615,15 +14617,15 @@ class wa extends nf {
     if (e.preventDefault(), !game.user.isGM || !e.dataTransfer) return;
     const t = this.viewed, i = e.dataTransfer.getData(xs) || e.dataTransfer.getData("text/plain");
     if (!t || !i || !t.combatants.get(i)) return;
-    const a = e.target?.closest(".combatant[data-combatant-id]") ?? null, s = Rn(a), o = a?.getBoundingClientRect(), r = !!(o && e.clientY > o.top + o.height / 2), l = t.turns.map((h) => h.id), u = ef(l, i, s, r);
-    if (u.every((h, m) => h === l[m])) {
+    const a = e.target?.closest(".combatant[data-combatant-id]") ?? null, s = Rn(a), o = a?.getBoundingClientRect(), r = !!(o && e.clientY > o.top + o.height / 2), l = t.turns.map((y) => y.id), u = tf(l, i, s, r);
+    if (u.every((y, m) => y === l[m])) {
       this.#a();
       return;
     }
     const c = t.combatant?.id, p = c ? u.indexOf(c) : void 0;
     await t.updateEmbeddedDocuments(
       "Combatant",
-      tf(u),
+      nf(u),
       {
         ...p === void 0 || p < 0 ? {} : { combatTurn: p },
         turnEvents: !1
@@ -14636,18 +14638,18 @@ class wa extends nf {
     });
   }
 }
-function af() {
+function sf() {
   CONFIG.ui.combat = wa;
 }
-function sf() {
+function of() {
   Hooks.on("updateCombat", (n, e) => {
-    !("round" in e) || !game.user.isActiveGM || Zp(n).catch((t) => {
+    !("round" in e) || !game.user.isActiveGM || ef(n).catch((t) => {
       console.error("magnusarchives | Failed to reset Combat Tracker DONE states", t);
     });
   });
 }
-const of = CONFIG.ui.pause;
-class rf extends of {
+const rf = CONFIG.ui.pause;
+class lf extends rf {
   static DEFAULT_OPTIONS = {
     classes: ["magnusarchives-game-pause"]
   };
@@ -14659,22 +14661,22 @@ class rf extends of {
     };
   }
 }
-function lf() {
-  CONFIG.ui.pause = rf;
-}
 function cf() {
+  CONFIG.ui.pause = lf;
+}
+function df() {
   CONFIG.Combat.fallbackTurnMarker = na.turnMarker;
 }
-const df = "--magnusarchives-blank-canvas-background-image";
-function uf(n) {
+const uf = "--magnusarchives-blank-canvas-background-image";
+function mf(n) {
   return `url("${n.replaceAll("\\", "\\\\").replaceAll('"', '\\"').replace(/[\n\r\f;]/g, "")}")`;
 }
-function mf(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
+function pf(n = document.body, e = (t) => foundry.utils.getRoute(t)) {
   const t = So(na.lobby, e);
-  n.style.setProperty(df, uf(t));
+  n.style.setProperty(uf, mf(t));
 }
 const br = ["system.options.totalEffortCapMode"];
-function pf(n = CONFIG.Item.compendiumIndexFields) {
+function ff(n = CONFIG.Item.compendiumIndexFields) {
   for (const e of br)
     n.includes(e) || n.push(e);
 }
@@ -14682,7 +14684,7 @@ function qs(n) {
   const e = n.split(".");
   return e.length >= 5 && e[0] === "Compendium" && e[3] === "Item" ? `${e[1]}.${e[2]}` : null;
 }
-async function ff(n = game.actors, e = game.packs, t = (i, a) => console.warn(i, a)) {
+async function gf(n = game.actors, e = game.packs, t = (i, a) => console.warn(i, a)) {
   const i = [...n].filter((s) => s.type === "character" && qs(s.system.genre.sourceUuid) !== null), a = new Set(i.map((s) => qs(s.system.genre.sourceUuid)));
   for (const s of a)
     try {
@@ -14693,23 +14695,23 @@ async function ff(n = game.actors, e = game.packs, t = (i, a) => console.warn(i,
   for (const s of i) s.reset();
 }
 Hooks.once("init", async () => {
-  console.info(`${U} | Initializing`);
-  const n = new Sm();
-  fm(n);
-  const e = new Fp();
-  e.register(Dp), pf(), game.magnusarchives = Vr(n, Vp(n), e), fc(), sc(), lm(), af(), lf(), cf(), xp(), Hooks.callAll("magnusarchives.registerRules", n), Hooks.callAll("magnusarchives.registerThemes", e), hc(e), await foundry.applications.handlebars.loadTemplates([
+  console.info(`${G} | Initializing`);
+  const n = new Am();
+  gm(n);
+  const e = new Tp();
+  e.register(Fp), ff(), game.magnusarchives = Vr(n, Dp(n), e), fc(), sc(), cm(), sf(), cf(), df(), qp(), Hooks.callAll("magnusarchives.registerRules", n), Hooks.callAll("magnusarchives.registerThemes", e), hc(e), await foundry.applications.handlebars.loadTemplates([
     "systems/magnusarchives/templates/focus/focus-tree.hbs"
   ]);
 });
 Hooks.once("ready", async () => {
-  mf();
-  const n = String(game.settings.get(U, O.theme));
+  pf();
+  const n = String(game.settings.get(G, O.theme));
   game.magnusarchives.themes.apply(game.magnusarchives.themes.has(n) ? n : "core"), jc(
     game.magnusarchives.services.intrusions,
     game.magnusarchives.services.intrusionChat
-  ), Tu(
+  ), zu(
     game.magnusarchives.services.playerIntrusions,
     game.magnusarchives.services.playerIntrusionChat
-  ), jp(), _p(), Yp(), ap(game.magnusarchives.services.combatStatuses), sf(), await ff(), await Kp(), console.info(`${U} | Ready`);
+  ), Wp(), Kp(), Jp(), sp(game.magnusarchives.services.combatStatuses), of(), await gf(), await Xp(), console.info(`${G} | Ready`);
 });
 //# sourceMappingURL=magnusarchives.mjs.map

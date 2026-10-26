@@ -21,7 +21,7 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-GENRE_ICON = "systems/magnusarchives/assets/icons/magnusgenre.png"
+GENRE_ICON = "systems/magnusarchives/assets/icons/magnusgenre.webp"
 
 GENRE_INVENTORY = [
     {

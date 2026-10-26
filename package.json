@@ -6,7 +6,7 @@
   "packageManager": "pnpm@11.19.0",
   "description": "A modern Foundry VTT v14 system for Cypher V2.",
   "scripts": {
-    "build": "vite build && pnpm import:core-packs && pnpm import:cyphers",
+    "build": "vite build && pnpm import:core-packs && pnpm import:cyphers && pnpm import:example-characters",
     "dev": "vite build --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -35,6 +35,7 @@
     "promote:genres": "node scripts/promote-reviewed-genres.mjs",
     "validate:genres": "node scripts/validate-reviewed-genres.mjs --packs-root packs",
     "import:cyphers": "node scripts/import-cyphers.mjs",
+    "import:example-characters": "node scripts/import-example-characters.mjs",
     "validate:type-candidates": "node scripts/type-candidate-validator.mjs",
     "validate:species-candidates": "node scripts/species-candidate-validator.mjs",
     "validate:genre-ability-candidates": "node scripts/genre-ability-candidate-validator.mjs",

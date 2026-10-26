@@ -48,7 +48,7 @@
       "name": "Barbarian",
       "type": "characterType",
       "_id": "d8e5ea0d7fe42730",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "barbarian",
@@ -131,7 +131,7 @@
             "notes": "",
             "snapshot": {
               "name": "Frenzy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "frenzy",
@@ -205,7 +205,7 @@
             "notes": "",
             "snapshot": {
               "name": "Wilderness Survival",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wilderness-survival",
@@ -277,7 +277,7 @@
             "notes": "",
             "snapshot": {
               "name": "Wounded Fury",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wounded-fury",
@@ -412,7 +412,7 @@
       "name": "Bard",
       "type": "characterType",
       "_id": "956ad92394d2c26a",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "bard",
@@ -495,7 +495,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Interlocuter",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-interlocuter",
@@ -567,7 +567,7 @@
             "notes": "",
             "snapshot": {
               "name": "Inspiring Performance",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-performance",
@@ -641,7 +641,7 @@
             "notes": "",
             "snapshot": {
               "name": "A Smile and a Word",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-smile-and-a-word",
@@ -776,7 +776,7 @@
       "name": "Cleric",
       "type": "characterType",
       "_id": "979634434151fd8f",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "cleric",
@@ -859,7 +859,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -931,7 +931,7 @@
             "notes": "",
             "snapshot": {
               "name": "Divine Radiance",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "divine-radiance",
@@ -1005,7 +1005,7 @@
             "notes": "",
             "snapshot": {
               "name": "Healing Hand",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "healing-hand",
@@ -1142,7 +1142,7 @@
       "name": "Druid",
       "type": "characterType",
       "_id": "86818b4db0bcced2",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "druid",
@@ -1225,7 +1225,7 @@
             "notes": "",
             "snapshot": {
               "name": "Beast Companion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "beast-companion",
@@ -1297,7 +1297,7 @@
             "notes": "",
             "snapshot": {
               "name": "Friend to Small Creatures",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "friend-to-small-creatures",
@@ -1371,7 +1371,7 @@
             "notes": "",
             "snapshot": {
               "name": "Seeds of Fury",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "seeds-of-fury",
@@ -1508,7 +1508,7 @@
       "name": "Fighter",
       "type": "characterType",
       "_id": "bf9a519441bc0bf4",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "fighter",
@@ -1591,7 +1591,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -1663,7 +1663,7 @@
             "notes": "",
             "snapshot": {
               "name": "Press Advantage",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "press-advantage",
@@ -1735,7 +1735,7 @@
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -1873,7 +1873,7 @@
       "name": "Mage",
       "type": "characterType",
       "_id": "09bb408115f8dd1c",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "mage",
@@ -1956,7 +1956,7 @@
             "notes": "",
             "snapshot": {
               "name": "Blast",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "blast",
@@ -2030,7 +2030,7 @@
             "notes": "",
             "snapshot": {
               "name": "Mage Armor",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mage-armor",
@@ -2104,7 +2104,7 @@
             "notes": "",
             "snapshot": {
               "name": "Prepare Spell",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepare-spell",
@@ -2239,7 +2239,7 @@
       "name": "Monk",
       "type": "characterType",
       "_id": "3f1cefc3603b2685",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "monk",
@@ -2322,7 +2322,7 @@
             "notes": "",
             "snapshot": {
               "name": "Flurry",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flurry",
@@ -2396,7 +2396,7 @@
             "notes": "",
             "snapshot": {
               "name": "Nimble",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "nimble",
@@ -2470,7 +2470,7 @@
             "notes": "",
             "snapshot": {
               "name": "No Need for Weapons",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "no-need-for-weapons",
@@ -2605,7 +2605,7 @@
       "name": "Necromancer",
       "type": "characterType",
       "_id": "c74ebb4ccc151dc3",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "necromancer",
@@ -2688,7 +2688,7 @@
             "notes": "",
             "snapshot": {
               "name": "Basic Necromancy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "basic-necromancy",
@@ -2762,7 +2762,7 @@
             "notes": "",
             "snapshot": {
               "name": "Drain Life",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "drain-life",
@@ -2836,7 +2836,7 @@
             "notes": "",
             "snapshot": {
               "name": "Tribulation",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tribulation",
@@ -2973,7 +2973,7 @@
       "name": "Paladin",
       "type": "characterType",
       "_id": "309b76be09a406a3",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "paladin",
@@ -3056,7 +3056,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -3128,7 +3128,7 @@
             "notes": "",
             "snapshot": {
               "name": "Holy Succor",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "holy-succor",
@@ -3202,7 +3202,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sacred Smite",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sacred-smite",
@@ -3339,7 +3339,7 @@
       "name": "Ranger",
       "type": "characterType",
       "_id": "c9e4b87f25ef51e9",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "ranger",
@@ -3422,7 +3422,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Tracker",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-tracker",
@@ -3494,7 +3494,7 @@
             "notes": "",
             "snapshot": {
               "name": "Find the Way",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "find-the-way",
@@ -3566,7 +3566,7 @@
             "notes": "",
             "snapshot": {
               "name": "Quarry",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "quarry",
@@ -3703,7 +3703,7 @@
       "name": "Rogue",
       "type": "characterType",
       "_id": "403e14a55239bf14",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "rogue",
@@ -3786,7 +3786,7 @@
             "notes": "",
             "snapshot": {
               "name": "Detect Traps",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "detect-traps",
@@ -3861,7 +3861,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Sneak",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-sneak",
@@ -3933,7 +3933,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -4070,7 +4070,7 @@
       "name": "Archer",
       "type": "characterType",
       "_id": "74b8398a1dd3e1a7",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "archer",
@@ -4153,7 +4153,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -4225,7 +4225,7 @@
             "notes": "",
             "snapshot": {
               "name": "Overwatch",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "overwatch",
@@ -4299,7 +4299,7 @@
             "notes": "",
             "snapshot": {
               "name": "Quick Draw",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "quick-draw",
@@ -4436,7 +4436,7 @@
       "name": "Axe Fighter",
       "type": "characterType",
       "_id": "58bf4a1fd5cfd18b",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "axe-fighter",
@@ -4519,7 +4519,7 @@
             "notes": "",
             "snapshot": {
               "name": "Axe Hook",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "axe-hook",
@@ -4593,7 +4593,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -4665,7 +4665,7 @@
             "notes": "",
             "snapshot": {
               "name": "Split Skull",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "split-skull",
@@ -4804,7 +4804,7 @@
       "name": "Knife Fighter",
       "type": "characterType",
       "_id": "b611587269518910",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "knife-fighter",
@@ -4887,7 +4887,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -4959,7 +4959,7 @@
             "notes": "",
             "snapshot": {
               "name": "Gut Ripper",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "gut-ripper",
@@ -5033,7 +5033,7 @@
             "notes": "",
             "snapshot": {
               "name": "Hindering Throw",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hindering-throw",
@@ -5172,7 +5172,7 @@
       "name": "Priest",
       "type": "characterType",
       "_id": "85e111b368eeb018",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "priest",
@@ -5255,7 +5255,7 @@
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -5327,7 +5327,7 @@
             "notes": "",
             "snapshot": {
               "name": "Idol",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "idol",
@@ -5401,7 +5401,7 @@
             "notes": "",
             "snapshot": {
               "name": "Retribution",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "retribution",
@@ -5538,7 +5538,7 @@
       "name": "Sorcerer",
       "type": "characterType",
       "_id": "36d72338784f3e51",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "sorcerer",
@@ -5621,7 +5621,7 @@
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -5693,7 +5693,7 @@
             "notes": "",
             "snapshot": {
               "name": "Open Inner Eye",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "open-inner-eye",
@@ -5831,7 +5831,7 @@
       "name": "Sword Fighter",
       "type": "characterType",
       "_id": "d99a04726064f7d1",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "sword-fighter",
@@ -5914,7 +5914,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -5986,7 +5986,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -6058,7 +6058,7 @@
             "notes": "",
             "snapshot": {
               "name": "Swing Through",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "swing-through",
@@ -6197,7 +6197,7 @@
       "name": "Thief",
       "type": "characterType",
       "_id": "6a8ce9d7b246ebcc",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "thief",
@@ -6280,7 +6280,7 @@
             "notes": "",
             "snapshot": {
               "name": "Detect Traps",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "detect-traps",
@@ -6355,7 +6355,7 @@
             "notes": "",
             "snapshot": {
               "name": "Ferocious When Cornered",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "ferocious-when-cornered",
@@ -6427,7 +6427,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -6564,7 +6564,7 @@
       "name": "Two-Weapon Fighter",
       "type": "characterType",
       "_id": "a9bfe438d7cd184e",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "two-weapon-fighter",
@@ -6647,7 +6647,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -6719,7 +6719,7 @@
             "notes": "",
             "snapshot": {
               "name": "Weapon Switch",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "weapon-switch",
@@ -6854,7 +6854,7 @@
       "name": "Witch",
       "type": "characterType",
       "_id": "cb9163432dcfc1a6",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "witch",
@@ -6937,7 +6937,7 @@
             "notes": "",
             "snapshot": {
               "name": "Brew Potion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "brew-potion",
@@ -7009,7 +7009,7 @@
             "notes": "",
             "snapshot": {
               "name": "Evil Eye",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "evil-eye",
@@ -7083,7 +7083,7 @@
             "notes": "",
             "snapshot": {
               "name": "Potion Cyphers",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "potion-cyphers",
@@ -7218,7 +7218,7 @@
       "name": "Burglar",
       "type": "characterType",
       "_id": "e437537fa61ee6ae",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "burglar",
@@ -7301,7 +7301,7 @@
             "notes": "",
             "snapshot": {
               "name": "Burgle",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "burgle",
@@ -7375,7 +7375,7 @@
             "notes": "",
             "snapshot": {
               "name": "Escape",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "escape",
@@ -7449,7 +7449,7 @@
             "notes": "",
             "snapshot": {
               "name": "Slip Into Shadow",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "slip-into-shadow",
@@ -7584,7 +7584,7 @@
       "name": "Noble Warrior",
       "type": "characterType",
       "_id": "aeb913b70109139e",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-warrior",
@@ -7667,7 +7667,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -7739,7 +7739,7 @@
             "notes": "",
             "snapshot": {
               "name": "Noble Defender",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-defender",
@@ -7814,7 +7814,7 @@
             "notes": "",
             "snapshot": {
               "name": "Noble Sacrifice",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-sacrifice",
@@ -7952,7 +7952,7 @@
       "name": "Swashbuckler",
       "type": "characterType",
       "_id": "bf28776079ef485c",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "swashbuckler",
@@ -8035,7 +8035,7 @@
             "notes": "",
             "snapshot": {
               "name": "Attack Flourish",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "attack-flourish",
@@ -8107,7 +8107,7 @@
             "notes": "",
             "snapshot": {
               "name": "Flamboyant Swordplay",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flamboyant-swordplay",
@@ -8181,7 +8181,7 @@
             "notes": "",
             "snapshot": {
               "name": "Romantic Flair",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "romantic-flair",
@@ -8318,7 +8318,7 @@
       "name": "Warrior",
       "type": "characterType",
       "_id": "bf753b73b1822d14",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "warrior",
@@ -8401,7 +8401,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -8473,7 +8473,7 @@
             "notes": "",
             "snapshot": {
               "name": "Despite My Wounds",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "despite-my-wounds",
@@ -8545,7 +8545,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -8680,7 +8680,7 @@
       "name": "Wizard",
       "type": "characterType",
       "_id": "88520602d9c1b483",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wizard",
@@ -8763,7 +8763,7 @@
             "notes": "",
             "snapshot": {
               "name": "Lightning Bolt",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lightning-bolt",
@@ -8837,7 +8837,7 @@
             "notes": "",
             "snapshot": {
               "name": "Prepare Spell",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepare-spell",
@@ -8909,7 +8909,7 @@
             "notes": "",
             "snapshot": {
               "name": "Wizard’s Cunning",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wizards-cunning",
@@ -9046,7 +9046,7 @@
       "name": "Diplomat",
       "type": "characterType",
       "_id": "de5d7748b80432d9",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "diplomat",
@@ -9129,7 +9129,7 @@
             "notes": "",
             "snapshot": {
               "name": "Connected",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "connected",
@@ -9203,7 +9203,7 @@
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -9277,7 +9277,7 @@
             "notes": "",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -9415,7 +9415,7 @@
       "name": "Engineer",
       "type": "characterType",
       "_id": "ac5c0ccdf311cba4",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "engineer",
@@ -9498,7 +9498,7 @@
             "notes": "",
             "snapshot": {
               "name": "Connected Knowledge",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "connected-knowledge",
@@ -9572,7 +9572,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Engineer",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-engineer",
@@ -9644,7 +9644,7 @@
             "notes": "",
             "snapshot": {
               "name": "Modify Device",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "modify-device",
@@ -9781,7 +9781,7 @@
       "name": "Medic",
       "type": "characterType",
       "_id": "f7f205e9fea64602",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "medic",
@@ -9864,7 +9864,7 @@
             "notes": "",
             "snapshot": {
               "name": "Bad Medicine",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "bad-medicine",
@@ -9939,7 +9939,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Doctor",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-doctor",
@@ -10011,7 +10011,7 @@
             "notes": "",
             "snapshot": {
               "name": "Prepared Medic",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "prepared-medic",
@@ -10148,7 +10148,7 @@
       "name": "Operative",
       "type": "characterType",
       "_id": "27f16676a6ce6162",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "operative",
@@ -10231,7 +10231,7 @@
             "notes": "",
             "snapshot": {
               "name": "Escape",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "escape",
@@ -10305,7 +10305,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -10379,7 +10379,7 @@
             "notes": "",
             "snapshot": {
               "name": "Spin Identity",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-identity",
@@ -10516,7 +10516,7 @@
       "name": "Pilot",
       "type": "characterType",
       "_id": "167b4e970c850cea",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "pilot",
@@ -10599,7 +10599,7 @@
             "notes": "",
             "snapshot": {
               "name": "Born to Pilot",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "born-to-pilot",
@@ -10673,7 +10673,7 @@
             "notes": "",
             "snapshot": {
               "name": "Expert Space Pilot",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-space-pilot",
@@ -10745,7 +10745,7 @@
             "notes": "",
             "snapshot": {
               "name": "Piloting Flourish",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "piloting-flourish",
@@ -10880,7 +10880,7 @@
       "name": "Soldier",
       "type": "characterType",
       "_id": "d382459623f124c8",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "soldier",
@@ -10963,7 +10963,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Enhancement",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-enhancement",
@@ -11038,7 +11038,7 @@
             "notes": "CRD Soldier guidance recommends genre-appropriate weapons, including laser pistols, rail guns, and specific spacecraft weapons.",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -11110,7 +11110,7 @@
             "notes": "",
             "snapshot": {
               "name": "Push Implant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-implant",
@@ -11245,7 +11245,7 @@
       "name": "Android",
       "type": "characterType",
       "_id": "0fb796162a585b84",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "android",
@@ -11328,7 +11328,7 @@
             "notes": "",
             "snapshot": {
               "name": "Built to Hack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "built-to-hack",
@@ -11402,7 +11402,7 @@
             "notes": "",
             "snapshot": {
               "name": "Flex Skill",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "flex-skill",
@@ -11474,7 +11474,7 @@
             "notes": "",
             "snapshot": {
               "name": "Machine Not Flesh",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-not-flesh",
@@ -11609,7 +11609,7 @@
       "name": "Noble",
       "type": "characterType",
       "_id": "13a3b390b6a49b88",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "noble",
@@ -11692,7 +11692,7 @@
             "notes": "",
             "snapshot": {
               "name": "Exorbitant Reach",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exorbitant-reach",
@@ -11764,7 +11764,7 @@
             "notes": "",
             "snapshot": {
               "name": "Noble Bearing",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "noble-bearing",
@@ -11838,7 +11838,7 @@
             "notes": "",
             "snapshot": {
               "name": "Retainer",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "retainer",
@@ -11973,7 +11973,7 @@
       "name": "Psion",
       "type": "characterType",
       "_id": "ba99b8aab41a77c2",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "psion",
@@ -12056,7 +12056,7 @@
             "notes": "",
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -12130,7 +12130,7 @@
             "notes": "",
             "snapshot": {
               "name": "Onslaught",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "onslaught",
@@ -12204,7 +12204,7 @@
             "notes": "",
             "snapshot": {
               "name": "Psychic Veil",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "psychic-veil",
@@ -12341,7 +12341,7 @@
       "name": "Scoundrel",
       "type": "characterType",
       "_id": "c1c71e1bdb2eee41",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "scoundrel",
@@ -12424,7 +12424,7 @@
             "notes": "",
             "snapshot": {
               "name": "Desperate Defense",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "desperate-defense",
@@ -12496,7 +12496,7 @@
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -12570,7 +12570,7 @@
             "notes": "",
             "snapshot": {
               "name": "Hand to Eye",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hand-to-eye",
@@ -12708,7 +12708,7 @@
       "name": "Starpilot",
       "type": "characterType",
       "_id": "6b727b34dd7395bc",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "starpilot",
@@ -12791,7 +12791,7 @@
             "notes": "",
             "snapshot": {
               "name": "Audacious Blast",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "audacious-blast",
@@ -12865,7 +12865,7 @@
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -12937,7 +12937,7 @@
             "notes": "",
             "snapshot": {
               "name": "Redline Maneuver",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "redline-maneuver",
@@ -13075,7 +13075,7 @@
       "name": "Tech",
       "type": "characterType",
       "_id": "68fa5f681f943d41",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "tech",
@@ -13158,7 +13158,7 @@
             "notes": "",
             "snapshot": {
               "name": "Always Tinkering",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-tinkering",
@@ -13230,7 +13230,7 @@
             "notes": "",
             "snapshot": {
               "name": "Craft Device",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "craft-device",
@@ -13304,7 +13304,7 @@
             "notes": "",
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -13439,7 +13439,7 @@
       "name": "Trader",
       "type": "characterType",
       "_id": "537386f76212a75b",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "trader",
@@ -13522,7 +13522,7 @@
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -13596,7 +13596,7 @@
             "notes": "",
             "snapshot": {
               "name": "A Smile and a Word",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-smile-and-a-word",
@@ -13668,7 +13668,7 @@
             "notes": "",
             "snapshot": {
               "name": "Smooth Operator",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "smooth-operator",
@@ -13805,7 +13805,7 @@
       "name": "Dealer",
       "type": "characterType",
       "_id": "2839c44379de4bbb",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "dealer",
@@ -13888,7 +13888,7 @@
             "notes": "",
             "snapshot": {
               "name": "Fast Talk",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fast-talk",
@@ -13962,7 +13962,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -14036,7 +14036,7 @@
             "notes": "",
             "snapshot": {
               "name": "When the Deal Bombs",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "when-the-deal-bombs",
@@ -14171,7 +14171,7 @@
       "name": "Heavy",
       "type": "characterType",
       "_id": "000c718b1835c21d",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "heavy",
@@ -14254,7 +14254,7 @@
             "notes": "",
             "snapshot": {
               "name": "Combat Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "combat-prowess",
@@ -14326,7 +14326,7 @@
             "notes": "",
             "snapshot": {
               "name": "Desperate Feat",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "desperate-feat",
@@ -14398,7 +14398,7 @@
             "notes": "CRD Heavy guidance recommends genre-appropriate weapons such as pistols and rifles.",
             "snapshot": {
               "name": "Expert Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "expert-combatant",
@@ -14533,7 +14533,7 @@
       "name": "Survivor",
       "type": "characterType",
       "_id": "d32463e0e5c9942c",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "survivor",
@@ -14616,7 +14616,7 @@
             "notes": "",
             "snapshot": {
               "name": "Despite My Wounds",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "despite-my-wounds",
@@ -14688,7 +14688,7 @@
             "notes": "",
             "snapshot": {
               "name": "Enhanced Scavenging",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-scavenging",
@@ -14762,7 +14762,7 @@
             "notes": "",
             "snapshot": {
               "name": "Get Out",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "get-out",
@@ -14897,7 +14897,7 @@
       "name": "Tender",
       "type": "characterType",
       "_id": "473ac68e0a34d37c",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "tender",
@@ -14980,7 +14980,7 @@
             "notes": "",
             "snapshot": {
               "name": "Foil Danger",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "foil-danger",
@@ -15054,7 +15054,7 @@
             "notes": "CRD Tender wording omits the Diplomat/Superhuman restriction that the suggested action occur on the ally's next turn and adds an introductory explanatory sentence.",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -15129,7 +15129,7 @@
             "notes": "",
             "snapshot": {
               "name": "Wasteland Healer",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wasteland-healer",
@@ -15266,7 +15266,7 @@
       "name": "Crimefighter",
       "type": "characterType",
       "_id": "de2cc24aa9304e72",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "crimefighter",
@@ -15349,7 +15349,7 @@
             "notes": "",
             "snapshot": {
               "name": "Always Tinkering",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-tinkering",
@@ -15421,7 +15421,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sleuthing",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sleuthing",
@@ -15495,7 +15495,7 @@
             "notes": "CRD Crimefighter wording permits any specific attack (examples include eye lasers, punches, or guns), rather than only a weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -15568,7 +15568,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -15703,7 +15703,7 @@
       "name": "Vigilante",
       "type": "characterType",
       "_id": "c52d7c84f3cf4d6c",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "vigilante",
@@ -15786,7 +15786,7 @@
             "notes": "",
             "snapshot": {
               "name": "Nimble",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "nimble",
@@ -15860,7 +15860,7 @@
             "notes": "",
             "snapshot": {
               "name": "Sneak Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "sneak-attack",
@@ -15934,7 +15934,7 @@
             "notes": "CRD Vigilante wording says specific weapon attack, then recommends unarmed attacks for this Type.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -16007,7 +16007,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -16142,7 +16142,7 @@
       "name": "Enhanced Hero",
       "type": "characterType",
       "_id": "308f39bc2a008e10",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-hero",
@@ -16225,7 +16225,7 @@
             "notes": "",
             "snapshot": {
               "name": "No Need for Weapons",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "no-need-for-weapons",
@@ -16297,7 +16297,7 @@
             "notes": "",
             "snapshot": {
               "name": "Press Advantage",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "press-advantage",
@@ -16369,7 +16369,7 @@
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -16444,7 +16444,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -16579,7 +16579,7 @@
       "name": "Powerstar",
       "type": "characterType",
       "_id": "d7fe8016fe198930",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "powerstar",
@@ -16662,7 +16662,7 @@
             "notes": "",
             "snapshot": {
               "name": "Enhanced Energy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-energy",
@@ -16735,7 +16735,7 @@
             "notes": "",
             "snapshot": {
               "name": "Power Prowess",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "power-prowess",
@@ -16807,7 +16807,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -16879,7 +16879,7 @@
             "notes": "",
             "snapshot": {
               "name": "Wider Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "wider-use",
@@ -17014,7 +17014,7 @@
       "name": "Superhuman",
       "type": "characterType",
       "_id": "c12c2be822350a49",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "superhuman",
@@ -17097,7 +17097,7 @@
             "notes": "",
             "snapshot": {
               "name": "Inspiring Suggestion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspiring-suggestion",
@@ -17172,7 +17172,7 @@
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -17244,7 +17244,7 @@
             "notes": "",
             "snapshot": {
               "name": "Successive Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "successive-attack",
@@ -17319,7 +17319,7 @@
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -17392,7 +17392,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -17527,7 +17527,7 @@
       "name": "Powerhouse",
       "type": "characterType",
       "_id": "6dbfa31960d11200",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "powerhouse",
@@ -17610,7 +17610,7 @@
             "notes": "",
             "snapshot": {
               "name": "Always Mighty",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "always-mighty",
@@ -17682,7 +17682,7 @@
             "notes": "CRD Powerhouse occurrence omits the Enabler classification printed in the otherwise identical Powerstar occurrence.",
             "snapshot": {
               "name": "Enhanced Energy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-energy",
@@ -17755,7 +17755,7 @@
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -17827,7 +17827,7 @@
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -17900,7 +17900,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -18035,7 +18035,7 @@
       "name": "Living God",
       "type": "characterType",
       "_id": "5333203fce3e36f5",
-      "img": "systems/magnusarchives/assets/icons/magnustype.png",
+      "img": "systems/magnusarchives/assets/icons/magnustype.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "living-god",
@@ -18118,7 +18118,7 @@
             "notes": "",
             "snapshot": {
               "name": "Hover",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hover",
@@ -18192,7 +18192,7 @@
             "notes": "",
             "snapshot": {
               "name": "Push on Through",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "push-on-through",
@@ -18264,7 +18264,7 @@
             "notes": "",
             "snapshot": {
               "name": "Second Focus",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "second-focus",
@@ -18336,7 +18336,7 @@
             "notes": "CRD wording limits the chosen training to a specific weapon attack.",
             "snapshot": {
               "name": "Super Combatant",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "super-combatant",
@@ -18409,7 +18409,7 @@
             "notes": "",
             "snapshot": {
               "name": "Superheroics",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superheroics",
@@ -18546,7 +18546,7 @@
       "name": "Frenzy",
       "type": "ability",
       "_id": "10e3d5d62bd518d2",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "frenzy",
@@ -18635,7 +18635,7 @@
       "name": "Wilderness Survival",
       "type": "ability",
       "_id": "17476016c01afbb6",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wilderness-survival",
@@ -18722,7 +18722,7 @@
       "name": "Wounded Fury",
       "type": "ability",
       "_id": "4797998eece54eba",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wounded-fury",
@@ -18809,7 +18809,7 @@
       "name": "Expert Interlocuter",
       "type": "ability",
       "_id": "5f9742f814524205",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-interlocuter",
@@ -18896,7 +18896,7 @@
       "name": "Inspiring Performance",
       "type": "ability",
       "_id": "37352a89b7a014a8",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "inspiring-performance",
@@ -18985,7 +18985,7 @@
       "name": "A Smile and a Word",
       "type": "ability",
       "_id": "6153cd2148c9a937",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "a-smile-and-a-word",
@@ -19072,7 +19072,7 @@
       "name": "Combat Prowess",
       "type": "ability",
       "_id": "fc3ef14247cee87d",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "combat-prowess",
@@ -19159,7 +19159,7 @@
       "name": "Divine Radiance",
       "type": "ability",
       "_id": "7d45abc79698313c",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "divine-radiance",
@@ -19248,7 +19248,7 @@
       "name": "Healing Hand",
       "type": "ability",
       "_id": "f879fa47429bda71",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "healing-hand",
@@ -19337,7 +19337,7 @@
       "name": "Beast Companion",
       "type": "ability",
       "_id": "870584440bc71b56",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "beast-companion",
@@ -19424,7 +19424,7 @@
       "name": "Friend to Small Creatures",
       "type": "ability",
       "_id": "3b3a4837f75af00c",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "friend-to-small-creatures",
@@ -19513,7 +19513,7 @@
       "name": "Seeds of Fury",
       "type": "ability",
       "_id": "a5afc00205f3989a",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "seeds-of-fury",
@@ -19602,7 +19602,7 @@
       "name": "Expert Combatant",
       "type": "ability",
       "_id": "c942b5a05dc50aa9",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-combatant",
@@ -19689,7 +19689,7 @@
       "name": "Press Advantage",
       "type": "ability",
       "_id": "f0e2658192a5a005",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "press-advantage",
@@ -19776,7 +19776,7 @@
       "name": "Successive Attack",
       "type": "ability",
       "_id": "89a5322c3c159134",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "successive-attack",
@@ -19866,7 +19866,7 @@
       "name": "Blast",
       "type": "ability",
       "_id": "80727a4079bde20b",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "blast",
@@ -19955,7 +19955,7 @@
       "name": "Mage Armor",
       "type": "ability",
       "_id": "bd398ed33213d1e3",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "mage-armor",
@@ -20044,7 +20044,7 @@
       "name": "Prepare Spell",
       "type": "ability",
       "_id": "cbc62f473329cda0",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "prepare-spell",
@@ -20131,7 +20131,7 @@
       "name": "Flurry",
       "type": "ability",
       "_id": "a92c67eaddf4a6b1",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "flurry",
@@ -20220,7 +20220,7 @@
       "name": "Nimble",
       "type": "ability",
       "_id": "285f82e5f996c542",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "nimble",
@@ -20309,7 +20309,7 @@
       "name": "No Need for Weapons",
       "type": "ability",
       "_id": "4d791e11017a1b00",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "no-need-for-weapons",
@@ -20396,7 +20396,7 @@
       "name": "Basic Necromancy",
       "type": "ability",
       "_id": "9b6962b889a32319",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "basic-necromancy",
@@ -20485,7 +20485,7 @@
       "name": "Drain Life",
       "type": "ability",
       "_id": "7d4dfe7612b41b83",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "drain-life",
@@ -20574,7 +20574,7 @@
       "name": "Tribulation",
       "type": "ability",
       "_id": "75500383dbaf1c92",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "tribulation",
@@ -20663,7 +20663,7 @@
       "name": "Holy Succor",
       "type": "ability",
       "_id": "8b7933a4596642bc",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "holy-succor",
@@ -20752,7 +20752,7 @@
       "name": "Sacred Smite",
       "type": "ability",
       "_id": "2cc13d56bf323369",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "sacred-smite",
@@ -20841,7 +20841,7 @@
       "name": "Expert Tracker",
       "type": "ability",
       "_id": "75b0f9eee36acc46",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-tracker",
@@ -20928,7 +20928,7 @@
       "name": "Find the Way",
       "type": "ability",
       "_id": "d10643fea15a7488",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "find-the-way",
@@ -21015,7 +21015,7 @@
       "name": "Quarry",
       "type": "ability",
       "_id": "603db56399e57ac8",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "quarry",
@@ -21104,7 +21104,7 @@
       "name": "Detect Traps",
       "type": "ability",
       "_id": "206ed1b1b27ad725",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "detect-traps",
@@ -21194,7 +21194,7 @@
       "name": "Expert Sneak",
       "type": "ability",
       "_id": "50227fc23d4b5ae6",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-sneak",
@@ -21281,7 +21281,7 @@
       "name": "Sneak Attack",
       "type": "ability",
       "_id": "2f7ea3530d029205",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "sneak-attack",
@@ -21370,7 +21370,7 @@
       "name": "Overwatch",
       "type": "ability",
       "_id": "a9fa658e010cdf50",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "overwatch",
@@ -21459,7 +21459,7 @@
       "name": "Quick Draw",
       "type": "ability",
       "_id": "0aaa6ae911ef19d7",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "quick-draw",
@@ -21548,7 +21548,7 @@
       "name": "Axe Hook",
       "type": "ability",
       "_id": "f4e8daf24e682c9d",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "axe-hook",
@@ -21637,7 +21637,7 @@
       "name": "Split Skull",
       "type": "ability",
       "_id": "0b88cec9b761dc17",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "split-skull",
@@ -21726,7 +21726,7 @@
       "name": "Gut Ripper",
       "type": "ability",
       "_id": "2dc209054abe86fa",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "gut-ripper",
@@ -21815,7 +21815,7 @@
       "name": "Hindering Throw",
       "type": "ability",
       "_id": "f28ab392f2d9b33c",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "hindering-throw",
@@ -21904,7 +21904,7 @@
       "name": "Cypher Use",
       "type": "ability",
       "_id": "82096c90e2189333",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "cypher-use",
@@ -21991,7 +21991,7 @@
       "name": "Idol",
       "type": "ability",
       "_id": "f64f38b1aa44281a",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "idol",
@@ -22080,7 +22080,7 @@
       "name": "Retribution",
       "type": "ability",
       "_id": "30541678e18fa823",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "retribution",
@@ -22169,7 +22169,7 @@
       "name": "Open Inner Eye",
       "type": "ability",
       "_id": "fba81347ba18e166",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "open-inner-eye",
@@ -22259,7 +22259,7 @@
       "name": "Swing Through",
       "type": "ability",
       "_id": "bd015f1a58ed25b8",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "swing-through",
@@ -22348,7 +22348,7 @@
       "name": "Ferocious When Cornered",
       "type": "ability",
       "_id": "6905f94b017b8dec",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "ferocious-when-cornered",
@@ -22435,7 +22435,7 @@
       "name": "Weapon Switch",
       "type": "ability",
       "_id": "fc38da25fae2f50e",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "weapon-switch",
@@ -22522,7 +22522,7 @@
       "name": "Brew Potion",
       "type": "ability",
       "_id": "02e6bf650833fd27",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "brew-potion",
@@ -22609,7 +22609,7 @@
       "name": "Evil Eye",
       "type": "ability",
       "_id": "87f25bb2cce11dfe",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "evil-eye",
@@ -22698,7 +22698,7 @@
       "name": "Potion Cyphers",
       "type": "ability",
       "_id": "ced558adecdf19fa",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "potion-cyphers",
@@ -22785,7 +22785,7 @@
       "name": "Burgle",
       "type": "ability",
       "_id": "716eebbb5c388326",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "burgle",
@@ -22874,7 +22874,7 @@
       "name": "Escape",
       "type": "ability",
       "_id": "4af32b4be4180dee",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "escape",
@@ -22963,7 +22963,7 @@
       "name": "Slip Into Shadow",
       "type": "ability",
       "_id": "02f4f64395c0a1f5",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "slip-into-shadow",
@@ -23050,7 +23050,7 @@
       "name": "Noble Defender",
       "type": "ability",
       "_id": "b078958f9a9d642a",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-defender",
@@ -23140,7 +23140,7 @@
       "name": "Noble Sacrifice",
       "type": "ability",
       "_id": "122b12f77541be06",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-sacrifice",
@@ -23230,7 +23230,7 @@
       "name": "Attack Flourish",
       "type": "ability",
       "_id": "58005ab2b2e7f660",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "attack-flourish",
@@ -23317,7 +23317,7 @@
       "name": "Flamboyant Swordplay",
       "type": "ability",
       "_id": "7d9473c46eff8736",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "flamboyant-swordplay",
@@ -23406,7 +23406,7 @@
       "name": "Romantic Flair",
       "type": "ability",
       "_id": "c05bdc2843797866",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "romantic-flair",
@@ -23495,7 +23495,7 @@
       "name": "Despite My Wounds",
       "type": "ability",
       "_id": "e1a0785eb2bcb439",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "despite-my-wounds",
@@ -23582,7 +23582,7 @@
       "name": "Lightning Bolt",
       "type": "ability",
       "_id": "209ac979cfbb76b5",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "lightning-bolt",
@@ -23671,7 +23671,7 @@
       "name": "Wizard’s Cunning",
       "type": "ability",
       "_id": "24d086d6b63e489f",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wizards-cunning",
@@ -23760,7 +23760,7 @@
       "name": "Connected",
       "type": "ability",
       "_id": "28687ef0ae707b03",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "connected",
@@ -23849,7 +23849,7 @@
       "name": "Fast Talk",
       "type": "ability",
       "_id": "39024e2e5b98d183",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "fast-talk",
@@ -23938,7 +23938,7 @@
       "name": "Inspiring Suggestion",
       "type": "ability",
       "_id": "17715e87a5f36c62",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "inspiring-suggestion",
@@ -24028,7 +24028,7 @@
       "name": "Connected Knowledge",
       "type": "ability",
       "_id": "a7729ea93ff2cb86",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "connected-knowledge",
@@ -24117,7 +24117,7 @@
       "name": "Expert Engineer",
       "type": "ability",
       "_id": "62b598bcc47996b9",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-engineer",
@@ -24204,7 +24204,7 @@
       "name": "Modify Device",
       "type": "ability",
       "_id": "9b3767a9bf09d8e7",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "modify-device",
@@ -24293,7 +24293,7 @@
       "name": "Bad Medicine",
       "type": "ability",
       "_id": "bac67cd10809d66b",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "bad-medicine",
@@ -24383,7 +24383,7 @@
       "name": "Expert Doctor",
       "type": "ability",
       "_id": "af353aa3c8d755e2",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-doctor",
@@ -24470,7 +24470,7 @@
       "name": "Prepared Medic",
       "type": "ability",
       "_id": "092d4796892ee391",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "prepared-medic",
@@ -24559,7 +24559,7 @@
       "name": "Spin Identity",
       "type": "ability",
       "_id": "fd471b0e8537ab6e",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "spin-identity",
@@ -24648,7 +24648,7 @@
       "name": "Born to Pilot",
       "type": "ability",
       "_id": "4adfcfc836af61c7",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "born-to-pilot",
@@ -24737,7 +24737,7 @@
       "name": "Expert Space Pilot",
       "type": "ability",
       "_id": "8e1e0d640cba5029",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "expert-space-pilot",
@@ -24824,7 +24824,7 @@
       "name": "Piloting Flourish",
       "type": "ability",
       "_id": "d735a059fd509e50",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "piloting-flourish",
@@ -24911,7 +24911,7 @@
       "name": "Combat Enhancement",
       "type": "ability",
       "_id": "d9621bd5f67a5b67",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "combat-enhancement",
@@ -25001,7 +25001,7 @@
       "name": "Push Implant",
       "type": "ability",
       "_id": "48011353a0f51d14",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "push-implant",
@@ -25088,7 +25088,7 @@
       "name": "Built to Hack",
       "type": "ability",
       "_id": "d0ca08b072a772b2",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "built-to-hack",
@@ -25177,7 +25177,7 @@
       "name": "Flex Skill",
       "type": "ability",
       "_id": "09303c8d52c51d2d",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "flex-skill",
@@ -25264,7 +25264,7 @@
       "name": "Machine Not Flesh",
       "type": "ability",
       "_id": "a461d63ed308dd09",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "machine-not-flesh",
@@ -25351,7 +25351,7 @@
       "name": "Exorbitant Reach",
       "type": "ability",
       "_id": "8ebf0d87f3dc03de",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "exorbitant-reach",
@@ -25438,7 +25438,7 @@
       "name": "Noble Bearing",
       "type": "ability",
       "_id": "3430c6863f19160d",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "noble-bearing",
@@ -25527,7 +25527,7 @@
       "name": "Retainer",
       "type": "ability",
       "_id": "97d226b7ac3e4b3e",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "retainer",
@@ -25614,7 +25614,7 @@
       "name": "Mind Reading",
       "type": "ability",
       "_id": "e0232d2e5de381ee",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "mind-reading",
@@ -25703,7 +25703,7 @@
       "name": "Onslaught",
       "type": "ability",
       "_id": "4b4b1f4da109cf1e",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "onslaught",
@@ -25792,7 +25792,7 @@
       "name": "Psychic Veil",
       "type": "ability",
       "_id": "6d05c4841adf13dc",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "psychic-veil",
@@ -25881,7 +25881,7 @@
       "name": "Desperate Defense",
       "type": "ability",
       "_id": "9ed172b46ad95328",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "desperate-defense",
@@ -25968,7 +25968,7 @@
       "name": "Hand to Eye",
       "type": "ability",
       "_id": "327612b082276daa",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "hand-to-eye",
@@ -26058,7 +26058,7 @@
       "name": "Audacious Blast",
       "type": "ability",
       "_id": "f480a772e14372b9",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "audacious-blast",
@@ -26147,7 +26147,7 @@
       "name": "Redline Maneuver",
       "type": "ability",
       "_id": "c2502b55f3dacaef",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "redline-maneuver",
@@ -26237,7 +26237,7 @@
       "name": "Always Tinkering",
       "type": "ability",
       "_id": "0e8b8ca3ee06a937",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "always-tinkering",
@@ -26324,7 +26324,7 @@
       "name": "Craft Device",
       "type": "ability",
       "_id": "e0070d35e5189b23",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "craft-device",
@@ -26413,7 +26413,7 @@
       "name": "Smooth Operator",
       "type": "ability",
       "_id": "2908a13733589883",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "smooth-operator",
@@ -26502,7 +26502,7 @@
       "name": "When the Deal Bombs",
       "type": "ability",
       "_id": "9773750fd61d6dec",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "when-the-deal-bombs",
@@ -26589,7 +26589,7 @@
       "name": "Desperate Feat",
       "type": "ability",
       "_id": "716e1cb2a968099a",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "desperate-feat",
@@ -26676,7 +26676,7 @@
       "name": "Enhanced Scavenging",
       "type": "ability",
       "_id": "913697a8917b3281",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-scavenging",
@@ -26765,7 +26765,7 @@
       "name": "Get Out",
       "type": "ability",
       "_id": "6df7913bcfcf7ad6",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "get-out",
@@ -26852,7 +26852,7 @@
       "name": "Foil Danger",
       "type": "ability",
       "_id": "3d3418d78875a040",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "foil-danger",
@@ -26941,7 +26941,7 @@
       "name": "Wasteland Healer",
       "type": "ability",
       "_id": "377a3186d6a44621",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wasteland-healer",
@@ -27030,7 +27030,7 @@
       "name": "Sleuthing",
       "type": "ability",
       "_id": "be1dd6bcd6128ec4",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "sleuthing",
@@ -27119,7 +27119,7 @@
       "name": "Super Combatant",
       "type": "ability",
       "_id": "fa7e87d0478622e4",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "super-combatant",
@@ -27207,7 +27207,7 @@
       "name": "Superheroics",
       "type": "ability",
       "_id": "14fe7b70be0e5125",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "superheroics",
@@ -27294,7 +27294,7 @@
       "name": "Enhanced Energy",
       "type": "ability",
       "_id": "2c61703f7d9293ee",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "enhanced-energy",
@@ -27382,7 +27382,7 @@
       "name": "Power Prowess",
       "type": "ability",
       "_id": "409ad5faecf18099",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "power-prowess",
@@ -27469,7 +27469,7 @@
       "name": "Wider Use",
       "type": "ability",
       "_id": "e7f9f4d434653437",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "wider-use",
@@ -27556,7 +27556,7 @@
       "name": "Push on Through",
       "type": "ability",
       "_id": "e04548ef823bdcbb",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "push-on-through",
@@ -27643,7 +27643,7 @@
       "name": "Always Mighty",
       "type": "ability",
       "_id": "3923bb81b9050282",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "always-mighty",
@@ -27730,7 +27730,7 @@
       "name": "Hover",
       "type": "ability",
       "_id": "404b131571e3098c",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "hover",
@@ -27819,7 +27819,7 @@
       "name": "Second Focus",
       "type": "ability",
       "_id": "7c3d59b7a280a36c",
-      "img": "systems/magnusarchives/assets/icons/magnusability.png",
+      "img": "systems/magnusarchives/assets/icons/magnusability.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "second-focus",

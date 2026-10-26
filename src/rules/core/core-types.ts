@@ -77,6 +77,11 @@ export type WoundCollection = Record<WoundSeverity, WoundRecordData[]>;
 export interface StressData {
   /** Raw Stress points. Three points make one Stress Level. */
   value: number;
+  /**
+   * Stress Levels the Character picked up from supernatural sources, which the
+   * printed sheet (p381) tracks in its own box because they recover differently.
+   */
+  supernatural: number;
 }
 
 export interface DamageTrackData {
@@ -214,7 +219,6 @@ export interface CharacterCoreSystemData {
   tier: number;
   overrides: CharacterOverrides;
   xp: number;
-  resourcePoints: number;
   cypherLimitBase: number;
   focusProgress: FocusProgress[];
   genre: GenreAssociationData;

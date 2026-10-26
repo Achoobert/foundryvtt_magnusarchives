@@ -86,8 +86,8 @@ describe("V1 presentation polish", () => {
   it("declares the Foundry v14 setup media asset", () => {
     expect(manifest.media).toContainEqual({
       type: "setup",
-      url: "systems/magnusarchives/assets/magnusmeta.jpg",
-      thumbnail: "systems/magnusarchives/assets/magnusmeta.jpg"
+      url: "systems/magnusarchives/assets/magnusmeta.webp",
+      thumbnail: "systems/magnusarchives/assets/magnusmeta.webp"
     });
   });
 });

@@ -18,6 +18,9 @@ const sheet = readFileSync(resolve(root, "src/applications/sheets/character-shee
 const styles = readFileSync(resolve(root, "styles/components/_character-header.scss"), "utf8");
 const recoveryDialog = readFileSync(resolve(root, "src/applications/dialogs/character-core-dialogs.ts"), "utf8");
 const taskDialog = readFileSync(resolve(root, "src/applications/dialogs/test-roll-dialog.ts"), "utf8");
+const headerSource = readFileSync(resolve(root, "src/applications/sheets/character-header.ts"), "utf8");
+const model = readFileSync(resolve(root, "src/data/actors/character.ts"), "utf8");
+const lang = JSON.parse(readFileSync(resolve(root, "lang/en.json"), "utf8"));
 
 describe("Character Header HUD V1.1", () => {
   it("builds the Descriptor / Type / Focus sentence and missing placeholders", () => {
@@ -135,7 +138,7 @@ describe("Character Header HUD V1.1", () => {
     expect(styles).not.toContain("var(--magnusarchives-character-accent) calc((1 - var(--magnusarchives-pool-gauge-ratio))");
   });
 
-  it("wires identity inspection, placeholder drops, whole-card Pool rolls, and direct XP/RP editing", () => {
+  it("wires identity inspection, placeholder drops, whole-card Pool rolls, and direct XP editing", () => {
     expect(template).toContain('data-action="inspectPackage"');
     expect(template).toContain('data-action="inspectHeaderFocus"');
     expect(template).toContain('data-hud-drop="descriptor"');
@@ -146,8 +149,9 @@ describe("Character Header HUD V1.1", () => {
     expect(template).toContain('data-action="rollPool"');
     expect(template).toContain('data-pool="{{pool.key}}"');
     expect(template).toContain('role="button" tabindex="0"');
-    expect(template).toContain('name="system.resourcePoints"');
     expect(template).toContain('name="system.xp"');
+    // Resource Points are a Cypher V2 concept with no Magnus equivalent.
+    expect(template).not.toContain('system.resourcePoints');
     expect(template).not.toContain('data-action="editHeaderStats"');
     expect(template).not.toContain('data-action="testRoll"');
     expect(sheet).toContain('event.target.closest("input, button, select, textarea, a")');
@@ -199,7 +203,7 @@ describe("Character Header HUD V1.1", () => {
     expect(template).toContain("MAGNUSARCHIVES.Stress.Label");
 
     expect(sheet).toContain("headerDamageTrack(");
-    expect(sheet).toContain("headerStress(coreSystem.stress.value)");
+    expect(sheet).toContain("headerStress(coreSystem.stress.value, coreSystem.stress.supernatural)");
     expect(sheet).toContain("coreSystem.derived.damageTrack.hurtAvailable");
     expect(sheet).toContain("services.conditions.applySeriousInjury(");
     expect(sheet).toContain("services.conditions.setDamageTrackStep(");
@@ -212,6 +216,33 @@ describe("Character Header HUD V1.1", () => {
     expect(styles).toContain("--magnusarchives-stress-pip");
     expect(styles).toContain("--magnusarchives-damage-track-reached");
     expect(styles).toContain(".character-hud-damage-track-steps");
+  });
+
+  it("prints the book's step penalties beside the damage track, as the sheet does (p381)", () => {
+    expect(template).toContain('class="character-hud-damage-step-notes"');
+    expect(template).toContain("{{#each entry.notes as |note|}}");
+    expect(sheet).toContain("notes: entry.noteLabels.map(");
+    expect(headerSource).toContain("DAMAGE_TRACK_NOTE_COUNT");
+    expect(headerSource).toContain("hale: 0");
+    expect(headerSource).toContain("impaired: 3");
+    expect(headerSource).toContain("debilitated: 2");
+    for (const key of [
+      "MAGNUSARCHIVES.DamageTrack.Note.hurt.1",
+      "MAGNUSARCHIVES.DamageTrack.Note.impaired.1",
+      "MAGNUSARCHIVES.DamageTrack.Note.impaired.3",
+      "MAGNUSARCHIVES.DamageTrack.Note.debilitated.2"
+    ]) expect(lang).toHaveProperty(key);
+    expect(styles).toContain(".character-hud-damage-step-notes");
+  });
+
+  it("boxes Stress Levels from supernatural sources separately", () => {
+    expect(template).toContain('name="system.stress.supernatural"');
+    expect(template).toContain("MAGNUSARCHIVES.Stress.Supernatural");
+    expect(lang).toHaveProperty(
+      "MAGNUSARCHIVES.Stress.SupernaturalHint",
+      "Stress Levels acquired from supernatural sources"
+    );
+    expect(model).toContain("supernatural: integerField(0, 0)");
   });
 
   it("exposes compact manual Weapon and Armor familiarity actions without a multi-select", () => {
@@ -234,8 +265,8 @@ describe("Character Header HUD V1.1", () => {
     expect(template).toContain('name="system.stats.{{pool.key}}.value" type="number" data-dtype="Number"');
   });
 
-  it("keeps Wounds, Recovery, and RP/XP in one compact bottom HUD row", () => {
-    expect(styles).toContain("grid-template-columns: minmax(0, 38fr) minmax(0, 50fr) var(--magnusarchives-hud-stat-stack-width)");
+  it("keeps Recovery, the damage track, and Stress in one compact bottom HUD row", () => {
+    expect(styles).toContain("grid-template-columns: 5.5rem minmax(0, 1fr) 5.5rem");
     expect(styles).toContain("padding-block: 0.25rem");
     const lowerStart = styles.indexOf(".character-hud-lower");
     const woundsStart = styles.indexOf(".character-hud-wounds", lowerStart);

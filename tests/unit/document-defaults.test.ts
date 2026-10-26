@@ -18,8 +18,8 @@ const itemDocumentSource = readFileSync("src/documents/item.ts", "utf8");
 describe("new document defaults", () => {
   it("maps every supported Actor type to its packaged default icon", () => {
     expect(ACTOR_DEFAULT_ICONS).toEqual({
-      character: "systems/magnusarchives/assets/icons/magnuspc.png",
-      npc: "systems/magnusarchives/assets/icons/magnusnpc.png"
+      character: "systems/magnusarchives/assets/icons/magnuspc.webp",
+      npc: "systems/magnusarchives/assets/icons/magnusnpc.webp"
     });
     for (const type of ACTOR_TYPES) {
       expect(actorDefaultIcon(type)).toBe(ACTOR_DEFAULT_ICONS[type]);
@@ -30,9 +30,9 @@ describe("new document defaults", () => {
 
   it("maps every actual Item type id to its packaged default icon", () => {
     expect(Object.keys(ITEM_DEFAULT_ICONS).sort()).toEqual([...ITEM_TYPES].sort());
-    expect(ITEM_DEFAULT_ICONS.characterType).toBe("systems/magnusarchives/assets/icons/magnustype.png");
-    expect(ITEM_DEFAULT_ICONS.artifact).toBe("systems/magnusarchives/assets/icons/magnusartefact.png");
-    expect(ITEM_DEFAULT_ICONS.weapon).toBe("systems/magnusarchives/assets/icons/magnusweapons.png");
+    expect(ITEM_DEFAULT_ICONS.characterType).toBe("systems/magnusarchives/assets/icons/magnustype.webp");
+    expect(ITEM_DEFAULT_ICONS.artifact).toBe("systems/magnusarchives/assets/icons/magnusartefact.webp");
+    expect(ITEM_DEFAULT_ICONS.weapon).toBe("systems/magnusarchives/assets/icons/magnusweapons.webp");
     for (const type of ITEM_TYPES) {
       expect(itemDefaultIcon(type)).toBe(ITEM_DEFAULT_ICONS[type]);
       expect(existsSync(ITEM_DEFAULT_ICONS[type].replace("systems/magnusarchives/", ""))).toBe(true);

@@ -20,7 +20,7 @@
           "name": "Bold",
           "type": "descriptor",
           "_id": "1ed916f797ee7a70",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -73,7 +73,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Initiative",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "speed",
                     "schemaVersion": 1,
@@ -186,7 +186,7 @@
           "name": "Brave",
           "type": "descriptor",
           "_id": "62eaca3f2e043cbd",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -239,7 +239,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Persuasion",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -352,7 +352,7 @@
           "name": "Caring",
           "type": "descriptor",
           "_id": "ae737c63b9cc9480",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -405,7 +405,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Healing",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -518,7 +518,7 @@
           "name": "Cautious",
           "type": "descriptor",
           "_id": "2ac4d3b5ec8ea250",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -571,7 +571,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Perception",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -684,7 +684,7 @@
           "name": "Cheerful",
           "type": "descriptor",
           "_id": "d83ba86102478248",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -737,7 +737,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Persuasion",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -850,7 +850,7 @@
           "name": "Cynical",
           "type": "descriptor",
           "_id": "d037f6a98cd1315f",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -903,7 +903,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Discerning motive",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1016,7 +1016,7 @@
           "name": "Enigmatic",
           "type": "descriptor",
           "_id": "fa106f8010c44bf4",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1069,7 +1069,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Stealth",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "speed",
                     "schemaVersion": 1,
@@ -1129,7 +1129,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Intellect defense",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1242,7 +1242,7 @@
           "name": "Fastidious",
           "type": "descriptor",
           "_id": "856a7211471f2bfc",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1295,7 +1295,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Forensics",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1408,7 +1408,7 @@
           "name": "Fearless",
           "type": "descriptor",
           "_id": "c22e2bf28bf313ac",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1461,7 +1461,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Intellect defense",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1574,7 +1574,7 @@
           "name": "Ferocious",
           "type": "descriptor",
           "_id": "7748493ac827bf24",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1627,7 +1627,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Tracking",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1740,7 +1740,7 @@
           "name": "Hopeful",
           "type": "descriptor",
           "_id": "c55234f7d60bc9a2",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1793,7 +1793,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Discerning motive",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -1906,7 +1906,7 @@
           "name": "Inquisitive",
           "type": "descriptor",
           "_id": "8d28d0451c24d2ce",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -1959,7 +1959,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Researching",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -2072,7 +2072,7 @@
           "name": "Intimidating",
           "type": "descriptor",
           "_id": "b3a216e01bd16ed4",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2125,7 +2125,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Intimidation",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -2238,7 +2238,7 @@
           "name": "Likeable",
           "type": "descriptor",
           "_id": "0158bd3a4d27214a",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2291,7 +2291,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Persuasion",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -2404,7 +2404,7 @@
           "name": "Muscular",
           "type": "descriptor",
           "_id": "126b5f38055272a8",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2457,7 +2457,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Endurance",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "might",
                     "schemaVersion": 1,
@@ -2570,7 +2570,7 @@
           "name": "Nervous",
           "type": "descriptor",
           "_id": "7a6faa6bf646e9d9",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2623,7 +2623,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Initiative",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "speed",
                     "schemaVersion": 1,
@@ -2736,7 +2736,7 @@
           "name": "No-Nonsense",
           "type": "descriptor",
           "_id": "03943fc08a67627c",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2789,7 +2789,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Researching",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -2902,7 +2902,7 @@
           "name": "Obsessive",
           "type": "descriptor",
           "_id": "2ecfffd866705a2d",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -2955,7 +2955,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Identifying",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -3068,7 +3068,7 @@
           "name": "Pretentious",
           "type": "descriptor",
           "_id": "0753a9a66d1097f4",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -3121,7 +3121,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Intellect defense",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -3234,7 +3234,7 @@
           "name": "Quick",
           "type": "descriptor",
           "_id": "28193387b1aac394",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -3339,7 +3339,7 @@
           "name": "Ruthless",
           "type": "descriptor",
           "_id": "1f01b4366e5c21d3",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -3392,7 +3392,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Deception",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -3505,7 +3505,7 @@
           "name": "Scholarly",
           "type": "descriptor",
           "_id": "7cb63f1eaa0a83c2",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -3563,7 +3563,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Astronomy",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3622,7 +3622,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Biology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3681,7 +3681,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Engineering",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3740,7 +3740,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Forensics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3799,7 +3799,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Geography",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3858,7 +3858,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Geology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3917,7 +3917,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "History",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -3976,7 +3976,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Mathematics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4035,7 +4035,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Medicine",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4094,7 +4094,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Occultism",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4153,7 +4153,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Philosophy",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4212,7 +4212,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Physics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4271,7 +4271,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Programming",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4330,7 +4330,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Psychology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4389,7 +4389,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Religion",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4455,7 +4455,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Astronomy",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4514,7 +4514,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Biology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4573,7 +4573,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Engineering",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4632,7 +4632,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Forensics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4691,7 +4691,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Geography",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4750,7 +4750,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Geology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4809,7 +4809,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "History",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4868,7 +4868,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Mathematics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4927,7 +4927,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Medicine",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -4986,7 +4986,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Occultism",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5045,7 +5045,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Philosophy",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5104,7 +5104,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Physics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5163,7 +5163,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Programming",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5222,7 +5222,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Psychology",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5281,7 +5281,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Religion",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -5395,7 +5395,7 @@
           "name": "Smart",
           "type": "descriptor",
           "_id": "f8338c9cd9514007",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -5500,7 +5500,7 @@
           "name": "Sturdy",
           "type": "descriptor",
           "_id": "ad8086ef2077c5d0",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -5605,7 +5605,7 @@
           "name": "Superstitious",
           "type": "descriptor",
           "_id": "4f9b242e1ff8c469",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -5658,7 +5658,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Occultism",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -5771,7 +5771,7 @@
           "name": "Suspicious",
           "type": "descriptor",
           "_id": "1615f462d0037078",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -5824,7 +5824,7 @@
                 "rank": "trained",
                 "snapshot": {
                   "name": "Discerning motive",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "intellect",
                     "schemaVersion": 1,
@@ -5937,7 +5937,7 @@
           "name": "Tech-Savvy",
           "type": "descriptor",
           "_id": "6c4fd2b2331f355b",
-          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusdescriptor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -5995,7 +5995,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Programming",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -6054,7 +6054,7 @@
                     "customName": "",
                     "snapshot": {
                       "name": "Electronics",
-                      "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                      "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                       "system": {
                         "defaultPool": "intellect",
                         "schemaVersion": 1,
@@ -6175,7 +6175,7 @@
           "name": "Astronomy",
           "type": "skill",
           "_id": "Ruyq1SdHHH0CAjbJ",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6250,7 +6250,7 @@
           "name": "Biology",
           "type": "skill",
           "_id": "4XrJq6pn1RcVrbo7",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6325,7 +6325,7 @@
           "name": "Carpentry",
           "type": "skill",
           "_id": "88db3dfeec3a747c",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6400,7 +6400,7 @@
           "name": "Cooking",
           "type": "skill",
           "_id": "69f84cff8c9624c8",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6475,7 +6475,7 @@
           "name": "Deception",
           "type": "skill",
           "_id": "9NS4fm5VOrlzRwHv",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6550,7 +6550,7 @@
           "name": "Discerning motive",
           "type": "skill",
           "_id": "952bfb5f1296eb5b",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6625,7 +6625,7 @@
           "name": "Disguise",
           "type": "skill",
           "_id": "DKVkoZOdJGkrllR7",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6700,7 +6700,7 @@
           "name": "Driving",
           "type": "skill",
           "_id": "w1Wo9OgdY10Yda1C",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -6775,7 +6775,7 @@
           "name": "Electrical repair",
           "type": "skill",
           "_id": "1f55f3693dec8893",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6850,7 +6850,7 @@
           "name": "Electronics",
           "type": "skill",
           "_id": "20c7b98c5ef86c52",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -6925,7 +6925,7 @@
           "name": "Endurance",
           "type": "skill",
           "_id": "4057b66c1d139a6d",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "might",
             "schemaVersion": 1,
@@ -7000,7 +7000,7 @@
           "name": "Engineering",
           "type": "skill",
           "_id": "6EAeFLoptNeoy8we",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7075,7 +7075,7 @@
           "name": "Equipment operation",
           "type": "skill",
           "_id": "1d451203e32684a0",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7150,7 +7150,7 @@
           "name": "Forensics",
           "type": "skill",
           "_id": "uzlopmNCJj8CpFlC",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7225,7 +7225,7 @@
           "name": "Geography",
           "type": "skill",
           "_id": "13b2bdb00bf6fbad",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7300,7 +7300,7 @@
           "name": "Geology",
           "type": "skill",
           "_id": "5WZgpOhdtyF5lfdj",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7375,7 +7375,7 @@
           "name": "Gunsmithing",
           "type": "skill",
           "_id": "20c86587d513fb17",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7450,7 +7450,7 @@
           "name": "Gymnastics",
           "type": "skill",
           "_id": "DbWx19J2Bkv12OpZ",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -7525,7 +7525,7 @@
           "name": "Healing",
           "type": "skill",
           "_id": "Y191mjA7nOu48LWp",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7600,7 +7600,7 @@
           "name": "History",
           "type": "skill",
           "_id": "WwKxO9b2ETF6e6vq",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7675,7 +7675,7 @@
           "name": "Identifying",
           "type": "skill",
           "_id": "Pcfq6GwGkU5Qi90s",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7750,7 +7750,7 @@
           "name": "Initiative",
           "type": "skill",
           "_id": "jUTYItXojqpYujYN",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -7825,7 +7825,7 @@
           "name": "Intimidation",
           "type": "skill",
           "_id": "TxjNz86eOB6UwTGb",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7900,7 +7900,7 @@
           "name": "Leatherworking",
           "type": "skill",
           "_id": "86899177a9a723a0",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -7975,7 +7975,7 @@
           "name": "Lockpicking",
           "type": "skill",
           "_id": "F1YvwItD8HbRP58l",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -8050,7 +8050,7 @@
           "name": "Mathematics",
           "type": "skill",
           "_id": "USk9iDmN7dNunH2I",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8125,7 +8125,7 @@
           "name": "Mechanics",
           "type": "skill",
           "_id": "ySH2x77NNfEDxQ9C",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8200,7 +8200,7 @@
           "name": "Medicine",
           "type": "skill",
           "_id": "1d4c6135d4221600",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8275,7 +8275,7 @@
           "name": "Metalworking",
           "type": "skill",
           "_id": "abdf530b44534caf",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8350,7 +8350,7 @@
           "name": "Occultism",
           "type": "skill",
           "_id": "8d7248fff87386d3",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8425,7 +8425,7 @@
           "name": "Perception",
           "type": "skill",
           "_id": "S9WFjHa5QI83AFQO",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8500,7 +8500,7 @@
           "name": "Performance",
           "type": "skill",
           "_id": "WPrgzmkLT8BNjGu5",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8575,7 +8575,7 @@
           "name": "Persuasion",
           "type": "skill",
           "_id": "c4b6b98d92624257",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8650,7 +8650,7 @@
           "name": "Philosophy",
           "type": "skill",
           "_id": "2IRvR3ZWIIEStnDV",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8725,7 +8725,7 @@
           "name": "Physics",
           "type": "skill",
           "_id": "D1LtZa629twcMtFe",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -8800,7 +8800,7 @@
           "name": "Pickpocketing",
           "type": "skill",
           "_id": "GDulVFNhinWhSqWb",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -8875,7 +8875,7 @@
           "name": "Piloting",
           "type": "skill",
           "_id": "xLW4F5zaUs0zeVQY",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -8950,7 +8950,7 @@
           "name": "Plumbing",
           "type": "skill",
           "_id": "f59da0daaa296273",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9025,7 +9025,7 @@
           "name": "Programming",
           "type": "skill",
           "_id": "dbd4639749e26c4b",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9100,7 +9100,7 @@
           "name": "Psychology",
           "type": "skill",
           "_id": "XBkEFJaxQvgGEaZD",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9175,7 +9175,7 @@
           "name": "Publishing",
           "type": "skill",
           "_id": "NF5GDnCuoMcI57ne",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9250,7 +9250,7 @@
           "name": "Religion",
           "type": "skill",
           "_id": "57a23c400d43de6e",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9325,7 +9325,7 @@
           "name": "Researching",
           "type": "skill",
           "_id": "1ed6a9dae4acd3cb",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9400,7 +9400,7 @@
           "name": "Riding",
           "type": "skill",
           "_id": "SN7uD3Lvfjb4AqSU",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -9475,7 +9475,7 @@
           "name": "Sewing",
           "type": "skill",
           "_id": "6261c756aed8946b",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9550,7 +9550,7 @@
           "name": "Stealth",
           "type": "skill",
           "_id": "ZxPyYpNcbki4VN3z",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -9625,7 +9625,7 @@
           "name": "Might defense",
           "type": "skill",
           "_id": "07cb84a0fc1b083c",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "might",
             "schemaVersion": 1,
@@ -9700,7 +9700,7 @@
           "name": "Speed defense",
           "type": "skill",
           "_id": "ce059fe6f2651325",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "speed",
             "schemaVersion": 1,
@@ -9775,7 +9775,7 @@
           "name": "Intellect defense",
           "type": "skill",
           "_id": "2253f39a79c36c71",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9850,7 +9850,7 @@
           "name": "Tracking",
           "type": "skill",
           "_id": "SbEfC3bQGCbTDvOM",
-          "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+          "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
           "system": {
             "defaultPool": "intellect",
             "schemaVersion": 1,
@@ -9976,7 +9976,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Unarmed strike",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10067,7 +10067,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Improvised weapon",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10158,7 +10158,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Knife",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10249,7 +10249,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Pepper spray",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -10340,7 +10340,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Baton/nightstick",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10431,7 +10431,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Hand axe",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10522,7 +10522,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Hunting knife",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10613,7 +10613,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Machete",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10704,7 +10704,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Slingshot",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -10795,7 +10795,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Bow",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -10886,7 +10886,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Extendable baton",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -10977,7 +10977,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Handgun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11068,7 +11068,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Pocket handgun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11159,7 +11159,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Rifle",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11250,7 +11250,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Shotgun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11341,7 +11341,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Sawed-off shotgun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11432,7 +11432,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Assault rifle",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11523,7 +11523,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Heavy rifle",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11614,7 +11614,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Katana",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "might",
             "damageOverride": null,
@@ -11705,7 +11705,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Large-caliber handgun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11796,7 +11796,7 @@
           "folder": "oWd3bfXoYcGopdSV",
           "name": "Submachine gun",
           "type": "weapon",
-          "img": "systems/magnusarchives/assets/icons/magnusweapons.png",
+          "img": "systems/magnusarchives/assets/icons/magnusweapons.webp",
           "system": {
             "defaultPool": "speed",
             "damageOverride": null,
@@ -11888,7 +11888,7 @@
           "name": "Body armor",
           "type": "armor",
           "_id": "15ca2f4e2b94ff00",
-          "img": "systems/magnusarchives/assets/icons/magnusarmor.png",
+          "img": "systems/magnusarchives/assets/icons/magnusarmor.webp",
           "system": {
             "schemaVersion": 1,
             "slug": "",
@@ -11973,7 +11973,7 @@
           "_id": "feb46bbaf0e05c99",
           "_key": "!items!feb46bbaf0e05c99",
           "sort": 100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12050,7 +12050,7 @@
           "_id": "54dfd8e2dabaa023",
           "_key": "!items!54dfd8e2dabaa023",
           "sort": 200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12127,7 +12127,7 @@
           "_id": "b6e8c49ff359d898",
           "_key": "!items!b6e8c49ff359d898",
           "sort": 300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12204,7 +12204,7 @@
           "_id": "b8279cd234608712",
           "_key": "!items!b8279cd234608712",
           "sort": 400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12281,7 +12281,7 @@
           "_id": "e8c2d899ea78a065",
           "_key": "!items!e8c2d899ea78a065",
           "sort": 500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12358,7 +12358,7 @@
           "_id": "b3a8a54faf9ad0eb",
           "_key": "!items!b3a8a54faf9ad0eb",
           "sort": 600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12435,7 +12435,7 @@
           "_id": "1baec02124233fb3",
           "_key": "!items!1baec02124233fb3",
           "sort": 700,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12512,7 +12512,7 @@
           "_id": "4e38522e1e067277",
           "_key": "!items!4e38522e1e067277",
           "sort": 800,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12589,7 +12589,7 @@
           "_id": "9f02a781f01e7fdf",
           "_key": "!items!9f02a781f01e7fdf",
           "sort": 900,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12666,7 +12666,7 @@
           "_id": "dc93bdceef610991",
           "_key": "!items!dc93bdceef610991",
           "sort": 1000,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12743,7 +12743,7 @@
           "_id": "e0f9d4b294fb83a8",
           "_key": "!items!e0f9d4b294fb83a8",
           "sort": 1100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12820,7 +12820,7 @@
           "_id": "341bca3563b807c8",
           "_key": "!items!341bca3563b807c8",
           "sort": 1200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12897,7 +12897,7 @@
           "_id": "f152b0851081bd4d",
           "_key": "!items!f152b0851081bd4d",
           "sort": 1300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -12974,7 +12974,7 @@
           "_id": "f83249672e1f6989",
           "_key": "!items!f83249672e1f6989",
           "sort": 1400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13051,7 +13051,7 @@
           "_id": "d75641d1519fea66",
           "_key": "!items!d75641d1519fea66",
           "sort": 1500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13128,7 +13128,7 @@
           "_id": "f753471107d8b198",
           "_key": "!items!f753471107d8b198",
           "sort": 1600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13205,7 +13205,7 @@
           "_id": "9fa8e81a78f43066",
           "_key": "!items!9fa8e81a78f43066",
           "sort": 1700,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13282,7 +13282,7 @@
           "_id": "b58ce42d9b17b26b",
           "_key": "!items!b58ce42d9b17b26b",
           "sort": 1800,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13359,7 +13359,7 @@
           "_id": "bd329910cb3e221b",
           "_key": "!items!bd329910cb3e221b",
           "sort": 1900,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13436,7 +13436,7 @@
           "_id": "9ee40711f9421972",
           "_key": "!items!9ee40711f9421972",
           "sort": 2000,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13513,7 +13513,7 @@
           "_id": "215616a9c166ab3f",
           "_key": "!items!215616a9c166ab3f",
           "sort": 2100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13590,7 +13590,7 @@
           "_id": "123368753748143e",
           "_key": "!items!123368753748143e",
           "sort": 2200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13667,7 +13667,7 @@
           "_id": "91aa2dd45fc3d0cd",
           "_key": "!items!91aa2dd45fc3d0cd",
           "sort": 2300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13744,7 +13744,7 @@
           "_id": "be2ad419d12ce4ec",
           "_key": "!items!be2ad419d12ce4ec",
           "sort": 2400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13821,7 +13821,7 @@
           "_id": "bc1718d9bc89362d",
           "_key": "!items!bc1718d9bc89362d",
           "sort": 2500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13898,7 +13898,7 @@
           "_id": "233443e29212843a",
           "_key": "!items!233443e29212843a",
           "sort": 2600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -13975,7 +13975,7 @@
           "_id": "4a05ca81e3c538d5",
           "_key": "!items!4a05ca81e3c538d5",
           "sort": 2700,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14052,7 +14052,7 @@
           "_id": "2e2d3beb8de5ce1f",
           "_key": "!items!2e2d3beb8de5ce1f",
           "sort": 2800,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14129,7 +14129,7 @@
           "_id": "bae57a1327c752f0",
           "_key": "!items!bae57a1327c752f0",
           "sort": 2900,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14206,7 +14206,7 @@
           "_id": "6fbcac1c83345584",
           "_key": "!items!6fbcac1c83345584",
           "sort": 3000,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14283,7 +14283,7 @@
           "_id": "6e0e735b2354001d",
           "_key": "!items!6e0e735b2354001d",
           "sort": 3100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14360,7 +14360,7 @@
           "_id": "1b0af2fdafe80553",
           "_key": "!items!1b0af2fdafe80553",
           "sort": 3200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14437,7 +14437,7 @@
           "_id": "4d5f6d9f2061519a",
           "_key": "!items!4d5f6d9f2061519a",
           "sort": 3300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14514,7 +14514,7 @@
           "_id": "f28e86c77cb3f004",
           "_key": "!items!f28e86c77cb3f004",
           "sort": 3400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14591,7 +14591,7 @@
           "_id": "69d58c081a8c1f44",
           "_key": "!items!69d58c081a8c1f44",
           "sort": 3500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14668,7 +14668,7 @@
           "_id": "f4defdb261d2a459",
           "_key": "!items!f4defdb261d2a459",
           "sort": 3600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14745,7 +14745,7 @@
           "_id": "e95854054ae17460",
           "_key": "!items!e95854054ae17460",
           "sort": 3700,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14822,7 +14822,7 @@
           "_id": "d186c4061ce122aa",
           "_key": "!items!d186c4061ce122aa",
           "sort": 3800,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14899,7 +14899,7 @@
           "_id": "09ad0ec715ff8956",
           "_key": "!items!09ad0ec715ff8956",
           "sort": 3900,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -14976,7 +14976,7 @@
           "_id": "7bdd0c8b61b65f51",
           "_key": "!items!7bdd0c8b61b65f51",
           "sort": 4000,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15053,7 +15053,7 @@
           "_id": "71b42de57ee3aab9",
           "_key": "!items!71b42de57ee3aab9",
           "sort": 4100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15130,7 +15130,7 @@
           "_id": "e8e2905993e3d94e",
           "_key": "!items!e8e2905993e3d94e",
           "sort": 4200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15207,7 +15207,7 @@
           "_id": "8b492cbf49dd3642",
           "_key": "!items!8b492cbf49dd3642",
           "sort": 4300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15284,7 +15284,7 @@
           "_id": "ef593078c4f67521",
           "_key": "!items!ef593078c4f67521",
           "sort": 4400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15361,7 +15361,7 @@
           "_id": "dc5597aba931ac4a",
           "_key": "!items!dc5597aba931ac4a",
           "sort": 4500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15438,7 +15438,7 @@
           "_id": "c7442130e3ea7eb2",
           "_key": "!items!c7442130e3ea7eb2",
           "sort": 4600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15515,7 +15515,7 @@
           "_id": "facfe5bc6823ac7d",
           "_key": "!items!facfe5bc6823ac7d",
           "sort": 4700,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15592,7 +15592,7 @@
           "_id": "e2c71847657bc9cf",
           "_key": "!items!e2c71847657bc9cf",
           "sort": 4800,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15669,7 +15669,7 @@
           "_id": "90746cb6875bf1d1",
           "_key": "!items!90746cb6875bf1d1",
           "sort": 4900,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15746,7 +15746,7 @@
           "_id": "d5953d25e2869c5b",
           "_key": "!items!d5953d25e2869c5b",
           "sort": 5000,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15823,7 +15823,7 @@
           "_id": "70bc5f9f569a75ba",
           "_key": "!items!70bc5f9f569a75ba",
           "sort": 5100,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15900,7 +15900,7 @@
           "_id": "0d762483fb357481",
           "_key": "!items!0d762483fb357481",
           "sort": 5200,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -15977,7 +15977,7 @@
           "_id": "83310b90b904c379",
           "_key": "!items!83310b90b904c379",
           "sort": 5300,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -16054,7 +16054,7 @@
           "_id": "22f6792a492640db",
           "_key": "!items!22f6792a492640db",
           "sort": 5400,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -16131,7 +16131,7 @@
           "_id": "865f3dfb390ca9f3",
           "_key": "!items!865f3dfb390ca9f3",
           "sort": 5500,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {
@@ -16208,7 +16208,7 @@
           "_id": "77172f3b8a38e28f",
           "_key": "!items!77172f3b8a38e28f",
           "sort": 5600,
-          "img": "systems/magnusarchives/assets/icons/magnusequipment.png",
+          "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
           "effects": [],
           "flags": {},
           "ownership": {

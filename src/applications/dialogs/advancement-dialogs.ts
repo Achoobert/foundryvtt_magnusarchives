@@ -154,14 +154,12 @@ export async function promptPurchaseAdvancement(
   const request = await requestFor(actor, kind);
   if (!request) return;
   try {
-    const result = await game.magnusarchives.services.advancement.purchase(
+    await game.magnusarchives.services.advancement.purchase(
       actor,
       request,
       currentEnabledRuleModuleIds()
     );
-    ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.PurchasedNotice", {
-      resourcePoints: result.resourcePointsGranted
-    }));
+    ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.PurchasedNotice"));
   } catch (error) {
     notifyError(error);
   }

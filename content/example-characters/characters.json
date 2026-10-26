@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "target": {"systemId": "magnusarchives"},
+  "pack": {
+    "id": "example-characters",
+    "label": "Example Characters",
+    "documentType": "Actor"
+  },
+  "source": {
+    "book": "The Magnus Archives Roleplaying Game",
+    "pages": "379-380",
+    "note": "Built from the filled-in sample character sheet. Ability, background and arc text is paraphrased rather than copied; Rusty Quill's IP is not covered by the Cypher Open License."
+  },
+  "actors": [
+    {
+      "id": "scholarly-investigator",
+      "name": "Scholarly Investigator",
+      "type": "character",
+      "img": "systems/magnusarchives/assets/icons/magnuspc.webp",
+      "system": {
+        "schemaVersion": 1,
+        "description": "<p>The sample starting Character from the printed sheet (p379): a Scholarly Investigator who Explores Dark Places. Tier 1, ready to play.</p>",
+        "notes": "<h2>Background</h2><p>Your mother was an Egyptologist who kept bringing home odd little finds from her digs. Her stories are the reason you went looking into the past yourself, and into the dark places where the past is still waiting.</p><h2>Connections</h2><p>Pick one other PC. They have been your companion on earlier investigations, and the pair of you work together well enough that you each gain an asset on any roll made while collaborating on the same noncombat task.</p><h2>Character Arc</h2><p><strong>Assist an Organization:</strong> your research lines up neatly with the group you belong to, which exists to document supernatural events.</p><h2>Equipment Notes</h2><p><strong>Provided by the organization:</strong> laptop, secure briefcase.</p><p><strong>Additional:</strong> a replica hieroglyph stamp set, a gift from your mother.</p>",
+        "gmNotes": "",
+        "tier": 1,
+        "xp": 0,
+        "cypherLimitBase": 2,
+        "stats": {
+          "effortBase": 1,
+          "might": {"value": 10, "baseMax": 10, "baseEdge": 0},
+          "speed": {"value": 10, "baseMax": 10, "baseEdge": 1},
+          "intellect": {"value": 14, "baseMax": 14, "baseEdge": 1}
+        },
+        "stress": {"value": 0, "supernatural": 0},
+        "damageTrack": {"step": "hale", "hurtAvailable": false},
+        "proficiencies": {
+          "weaponCategories": ["light", "medium"],
+          "weaponFamilies": [],
+          "armorCategories": [],
+          "freelyUse": []
+        },
+        "creation": {"coreInitialized": true, "mode": "manual", "initializedAt": 0},
+        "focusProgress": [
+          {
+            "focusUuid": "{{itemId:Explores Dark Places}}",
+            "ownedNodeIds": ["operate-in-the-dark", "superb-explorer"],
+            "provenance": "creation",
+            "initialChoicesGranted": true,
+            "attachedAt": 0
+          }
+        ],
+        "presentation": {"hideFocusInSentence": false, "powerShiftsEnabled": false},
+        "advancement": {
+          "cycle": 1,
+          "purchases": [],
+          "notes": "<p>Tier 1 advancement options: Increase Capabilities (+4 points across stat Pools), Move Toward Perfection (+1 Edge), Extra Effort (+1 Effort), Skill Training, or Other Options (p141).</p>"
+        }
+      },
+      "items": [
+        {"ref": {"pack": "descriptors", "name": "Scholarly"}},
+        {
+          "inline": {
+            "name": "Investigator",
+            "type": "characterType",
+            "img": "systems/magnusarchives/assets/icons/magnustype.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>Investigators dig into what other people would rather leave alone: archives, crime scenes, cold cases and the gaps between them.</p><p>Placeholder Type Item carrying only what the sample sheet records. The full Investigator Type, with its tier-by-tier ability list, arrives with the chapter 3 content pack.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "weaponUse": {"light": true, "medium": true, "heavy": false},
+              "armorUse": {"light": false, "medium": false, "heavy": false}
+            }
+          }
+        },
+        {
+          "inline": {
+            "name": "Explores Dark Places",
+            "type": "focus",
+            "img": "systems/magnusarchives/assets/icons/magnusfocus.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>You go where the lights do not reach, and you come back with something written down.</p><p>Carries only the two tier-1 abilities the sample sheet shows. The full tiered Focus graph arrives with the chapter 4 content pack.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "graph": {
+                "version": 1,
+                "nodes": [
+                  {
+                    "id": "operate-in-the-dark",
+                    "tier": 1,
+                    "abilitySnapshot": {"name": "Operate in the Dark"},
+                    "position": {"x": 0, "y": 0}
+                  },
+                  {
+                    "id": "superb-explorer",
+                    "tier": 1,
+                    "abilitySnapshot": {"name": "Superb Explorer"},
+                    "position": {"x": 200, "y": 0}
+                  }
+                ],
+                "connections": []
+              }
+            }
+          }
+        },
+        {
+          "inline": {
+            "name": "Careful Observation",
+            "type": "ability",
+            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>Spend a minute studying your surroundings. Succeed at a difficulty 4 perception task and you pick out an inanimate detail within immediate distance that bears on your current investigation: the colour of mud on a pair of boots, a thread caught on a coat hook, dust disturbed on one shelf. If there is nothing of the sort there, you learn that too. Two or more such details still take only one roll: the first comes at difficulty 4, the second at 5, the third at 6, and so on.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "tier": 1,
+              "activation": "action",
+              "pool": "intellect",
+              "cost": {"amount": 1, "scalable": false, "ignoresEdge": false, "allowedPools": ["intellect"]},
+              "roll": "task"
+            }
+          }
+        },
+        {
+          "inline": {
+            "name": "Operate in the Dark",
+            "type": "ability",
+            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>For the next hour your other senses cover for your eyes. Blinded or simply in the dark, you operate without hindrance. Action to initiate.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "tier": 1,
+              "activation": "action",
+              "pool": "intellect",
+              "cost": {"amount": 1, "scalable": false, "ignoresEdge": false, "allowedPools": ["intellect"]},
+              "roll": "none",
+              "sourceFocusUuid": "{{itemId:Explores Dark Places}}",
+              "sourceNodeId": "operate-in-the-dark"
+            }
+          }
+        },
+        {
+          "inline": {
+            "name": "Superb Explorer",
+            "type": "ability",
+            "img": "systems/magnusarchives/assets/icons/magnusability.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>You are trained in perception, endurance and gymnastics tasks. Enabler. (Already recorded under Skills.)</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "tier": 1,
+              "activation": "enabler",
+              "pool": "none",
+              "roll": "none",
+              "sourceFocusUuid": "{{itemId:Explores Dark Places}}",
+              "sourceNodeId": "superb-explorer"
+            }
+          }
+        },
+
+        {"ref": {"pack": "skills", "name": "History"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Psychology"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Researching"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Forensics"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Tracking"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Perception"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Endurance"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Gymnastics"}, "system": {"rank": "trained"}},
+        {"ref": {"pack": "skills", "name": "Discerning motive"}, "system": {"rank": "inability"}},
+
+        {
+          "ref": {"pack": "weapons-and-armors", "name": "Unarmed strike"},
+          "system": {"skillLevel": "trained", "equipped": true}
+        },
+
+        {
+          "inline": {
+            "name": "Curiosity",
+            "type": "cypher",
+            "img": "systems/magnusarchives/assets/icons/magnuscypher.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p><strong>Level:</strong> 1d6 + 2</p><p>You dwell on something done well, and for one hour your Intellect Edge rises by 1, or by 2 if this cypher is level 5 or higher.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "level": 1,
+              "levelOverride": false,
+              "manifestation": "subtle",
+              "identified": true,
+              "uses": 1
+            }
+          }
+        },
+        {
+          "inline": {
+            "name": "Strange Music",
+            "type": "cypher",
+            "img": "systems/magnusarchives/assets/icons/magnuscypher.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p><strong>Level:</strong> 1d6</p><p>You take a moment to settle yourself, and lose Stress equal to this cypher's level.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "379",
+                "license": "original"
+              },
+              "level": 1,
+              "levelOverride": false,
+              "manifestation": "subtle",
+              "identified": true,
+              "uses": 1
+            }
+          }
+        },
+
+        {"ref": {"pack": "equipment", "name": "Everyday clothing"}, "system": {"equipped": true}},
+        {"ref": {"pack": "equipment", "name": "Wallet"}},
+        {"ref": {"pack": "equipment", "name": "Smartphone"}},
+        {"ref": {"pack": "equipment", "name": "Multitool"}},
+        {"ref": {"pack": "equipment", "name": "Flashlight"}},
+        {"ref": {"pack": "equipment", "name": "Gloves"}},
+        {"ref": {"pack": "equipment", "name": "Journal and pen"}},
+        {"ref": {"pack": "equipment", "name": "Energy bars, handful"}},
+        {"ref": {"pack": "equipment", "name": "Duct tape roll"}},
+        {"ref": {"pack": "equipment", "name": "Case of light tools"}},
+        {"ref": {"pack": "equipment", "name": "Laptop"}},
+        {"ref": {"pack": "equipment", "name": "Secure briefcase"}},
+        {
+          "inline": {
+            "name": "Replica hieroglyph stamp set",
+            "type": "equipment",
+            "img": "systems/magnusarchives/assets/icons/magnusequipment.webp",
+            "system": {
+              "schemaVersion": 1,
+              "description": "<p>A gift from your mother, back from one of her digs.</p>",
+              "source": {
+                "book": "The Magnus Archives Roleplaying Game",
+                "page": "380",
+                "license": "original"
+              },
+              "level": 4,
+              "quantity": 1,
+              "price": "inexpensive"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

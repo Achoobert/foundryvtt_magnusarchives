@@ -58,7 +58,7 @@
       "name": "Dragonfolk",
       "type": "species",
       "_id": "f042637bbdd2b4c4",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "dragonfolk",
@@ -137,7 +137,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -257,7 +257,7 @@
       "name": "Dwarf",
       "type": "species",
       "_id": "0b6d6a0587878026",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "dwarf",
@@ -336,7 +336,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Navigation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -456,7 +456,7 @@
       "name": "Elf",
       "type": "species",
       "_id": "fe5c06084f9e873a",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "elf",
@@ -535,7 +535,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Stealth",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -655,7 +655,7 @@
       "name": "Gnome",
       "type": "species",
       "_id": "9fe135f4b849afc8",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "gnome",
@@ -734,7 +734,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Crafting",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -854,7 +854,7 @@
       "name": "Halfling",
       "type": "species",
       "_id": "d700d7ddae31b4b2",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "halfling",
@@ -933,7 +933,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Escaping",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1053,7 +1053,7 @@
       "name": "Hellborn",
       "type": "species",
       "_id": "3bc0398215332d18",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "hellborn",
@@ -1132,7 +1132,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Magic Lore",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1252,7 +1252,7 @@
       "name": "Human",
       "type": "species",
       "_id": "691ca370329e2fd4",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "human",
@@ -1397,7 +1397,7 @@
       "name": "Orc",
       "type": "species",
       "_id": "e9ac81135b1ab83a",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "orc",
@@ -1476,7 +1476,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1596,7 +1596,7 @@
       "name": "Aarak",
       "type": "species",
       "_id": "8ee3669fb6c8b3c0",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "aarak",
@@ -1732,7 +1732,7 @@
       "name": "Cyborg",
       "type": "species",
       "_id": "578a5bddc7402a45",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "cyborg",
@@ -1811,7 +1811,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Hacking",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -1931,7 +1931,7 @@
       "name": "Delph",
       "type": "species",
       "_id": "157e545cf2e57521",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "delph",
@@ -2067,7 +2067,7 @@
       "name": "D’nec",
       "type": "species",
       "_id": "dd8fffdbc46ab7b3",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "dnec",
@@ -2146,7 +2146,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Systems Operation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2266,7 +2266,7 @@
       "name": "Drakain",
       "type": "species",
       "_id": "95139a0ffdd3d121",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "drakain",
@@ -2345,7 +2345,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Intimidation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2465,7 +2465,7 @@
       "name": "Mutant",
       "type": "species",
       "_id": "e7f81f8b4adb5c60",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "mutant",
@@ -2601,7 +2601,7 @@
       "name": "Naron",
       "type": "species",
       "_id": "16774b1fa82dd1e6",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "naron",
@@ -2680,7 +2680,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Recognizing Motive",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -2748,7 +2748,7 @@
                 "notes": "",
                 "snapshot": {
                   "name": "Charm",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "choose",
                     "schemaVersion": 1,
@@ -2808,7 +2808,7 @@
                 "notes": "",
                 "snapshot": {
                   "name": "Deception",
-                  "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+                  "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
                   "system": {
                     "defaultPool": "choose",
                     "schemaVersion": 1,
@@ -2928,7 +2928,7 @@
       "name": "Prota",
       "type": "species",
       "_id": "3029daa6ca40d4bb",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "prota",
@@ -3007,7 +3007,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Charm",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3127,7 +3127,7 @@
       "name": "Rigellian",
       "type": "species",
       "_id": "26f846b76bb37583",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "rigellian",
@@ -3206,7 +3206,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Systems Operation",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3326,7 +3326,7 @@
       "name": "Stelan",
       "type": "species",
       "_id": "3b235fcd26c3a297",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "stelan",
@@ -3405,7 +3405,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Gathering information",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3525,7 +3525,7 @@
       "name": "Vendeer",
       "type": "species",
       "_id": "173f8bfcf6234f50",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "vendeer",
@@ -3604,7 +3604,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Perception",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,
@@ -3724,7 +3724,7 @@
       "name": "Zantari",
       "type": "species",
       "_id": "39042b8995c8359a",
-      "img": "systems/magnusarchives/assets/icons/magnusspecies.png",
+      "img": "systems/magnusarchives/assets/icons/magnusspecies.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "zantari",
@@ -3803,7 +3803,7 @@
             "rank": "trained",
             "snapshot": {
               "name": "Perception",
-              "img": "systems/magnusarchives/assets/icons/magnusskill.png",
+              "img": "systems/magnusarchives/assets/icons/magnusskill.webp",
               "system": {
                 "defaultPool": "choose",
                 "schemaVersion": 1,

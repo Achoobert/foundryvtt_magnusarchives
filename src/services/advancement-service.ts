@@ -94,7 +94,6 @@ export interface AdvancementCharacterLike {
       readonly stats: Record<PoolKey, {readonly max: number | null; readonly edge: number | null}>;
     };
     readonly xp: number;
-    readonly resourcePoints: number;
     readonly stats: {
       readonly effortBase: number;
       readonly might: {readonly value: number; readonly baseMax: number; readonly baseEdge: number};
@@ -154,7 +153,6 @@ export interface ProgressionGuidanceView {
 
 export interface AdvancementPurchaseResult {
   readonly record: AdvancementPurchaseRecord;
-  readonly resourcePointsGranted: number;
   readonly skillRank?: SkillRank;
 }
 
@@ -415,10 +413,6 @@ export class AdvancementService {
       throw new AdvancementError("insufficient-xp", "This Character does not have enough XP.");
     }
     const effectiveCharacterTier = effectiveTier(actor.system);
-    const resourcePointsGranted = policy.resourcePointsForTier(effectiveCharacterTier);
-    if (!Number.isInteger(resourcePointsGranted) || resourcePointsGranted < 0) {
-      throw new Error("Advancement policy Resource Points must be a non-negative integer.");
-    }
 
     const changes: Record<string, unknown> = {};
     let skillRollback: {skill: AdvancementSkillLike; rank: SkillRank} | null = null;
@@ -490,12 +484,10 @@ export class AdvancementService {
       otherKind: request.kind === "other" ? request.otherKind : "none",
       tier: effectiveCharacterTier,
       xpCost,
-      resourcePointsGranted,
       timestamp: this.#now()
     };
     Object.assign(changes, {
       "system.xp": actor.system.xp - xpCost,
-      "system.resourcePoints": actor.system.resourcePoints + resourcePointsGranted,
       "system.advancement.purchases": [...purchases, record]
     });
 
@@ -507,7 +499,7 @@ export class AdvancementService {
       if (createdSkill?.delete) await createdSkill.delete();
       throw error;
     }
-    return {...(skillRank ? {skillRank} : {}), record, resourcePointsGranted};
+    return {...(skillRank ? {skillRank} : {}), record};
   }
 
   async #newSkillData(

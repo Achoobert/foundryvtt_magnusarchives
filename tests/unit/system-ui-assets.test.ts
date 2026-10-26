@@ -12,9 +12,9 @@ const trackerSource = readFileSync("src/applications/combat-tracker.ts", "utf8")
 describe("system UI assets", () => {
   it("uses packaged root-relative system paths for pause and turn marker artwork", () => {
     expect(SYSTEM_UI_ASSETS).toEqual({
-      gamePaused: "systems/magnusarchives/assets/ui/magnusgamepaused.png",
-      lobby: "systems/magnusarchives/assets/magnuslobby.png",
-      turnMarker: "systems/magnusarchives/assets/ui/magnusturnmarker.png"
+      gamePaused: "systems/magnusarchives/assets/ui/magnusgamepaused.webp",
+      lobby: "systems/magnusarchives/assets/magnuslobby.webp",
+      turnMarker: "systems/magnusarchives/assets/ui/magnusturnmarker.webp"
     });
     for (const path of Object.values(SYSTEM_UI_ASSETS)) {
       expect(path).not.toContain("/dist/");

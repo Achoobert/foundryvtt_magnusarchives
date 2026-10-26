@@ -14,7 +14,7 @@ describe("Player Intrusion UI and authority", () => {
     expect(nameRow).toContain("fa-bolt");
     expect(nameRow).toContain("header.playerIntrusion.visible");
     expect(nameRow).toContain("header.playerIntrusion.canUse");
-    expect(template.slice(template.indexOf("character-hud-currency"), template.indexOf("</header>")))
+    expect(template.slice(template.indexOf("character-hud-lower"), template.indexOf("</header>")))
       .not.toContain("playerIntrusion");
     expect(sheet).toContain("services.playerIntrusions.canUse");
   });

@@ -202,7 +202,7 @@ function generatedCypherDocument(catalog, record) {
     _id: id,
     name: record.name,
     type: "cypher",
-    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.webp",
     system: {
       ...baseSystem(catalog, record),
       level: record.levelOverride ? record.level : 1,
@@ -239,7 +239,7 @@ function generatedTableResult(table, result, index, cyphersById) {
   const common = {
     _key: `!tables.results!${stableDocumentId("roll-table", table.id)}.${id}`,
     _id: id,
-    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.webp",
     range: [...result.range],
     weight: result.range[1] - result.range[0] + 1,
     drawn: false,
@@ -268,7 +268,7 @@ function generatedRollTableDocument(catalog, table, sort, cyphersById) {
     _key: `!tables!${id}`,
     _id: id,
     name: table.name,
-    img: "systems/magnusarchives/assets/icons/magnuscypher.png",
+    img: "systems/magnusarchives/assets/icons/magnuscypher.webp",
     description: `<p>${catalog.source.title} (${catalog.source.version}), p. ${table.sourcePage}.</p>`,
     results: table.results.map((result, index) => generatedTableResult(table, result, index, cyphersById)),
     replacement: true,

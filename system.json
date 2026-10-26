@@ -26,8 +26,8 @@
   "media": [
     {
       "type": "setup",
-      "url": "systems/magnusarchives/assets/magnusmeta.jpg",
-      "thumbnail": "systems/magnusarchives/assets/magnusmeta.jpg"
+      "url": "systems/magnusarchives/assets/magnusmeta.webp",
+      "thumbnail": "systems/magnusarchives/assets/magnusmeta.webp"
     }
   ],
   "packs": [
@@ -71,6 +71,13 @@
       "label": "Cypher Tables",
       "path": "packs/cypher-tables",
       "type": "RollTable",
+      "system": "magnusarchives"
+    },
+    {
+      "name": "example-characters",
+      "label": "Example Characters",
+      "path": "packs/example-characters",
+      "type": "Actor",
       "system": "magnusarchives"
     }
   ],

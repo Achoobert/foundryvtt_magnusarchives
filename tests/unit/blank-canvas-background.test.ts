@@ -16,7 +16,7 @@ const mainSource = readFileSync(resolve(root, "src/main.ts"), "utf8");
 
 describe("blank canvas lobby background", () => {
   it("uses the packaged lobby image without a dist-relative path", () => {
-    expect(SYSTEM_UI_ASSETS.lobby).toBe("systems/magnusarchives/assets/magnuslobby.png");
+    expect(SYSTEM_UI_ASSETS.lobby).toBe("systems/magnusarchives/assets/magnuslobby.webp");
     expect(SYSTEM_UI_ASSETS.lobby).not.toContain("/dist/");
     expect(existsSync(resolve(root, SYSTEM_UI_ASSETS.lobby.replace("systems/magnusarchives/", ""))))
       .toBe(true);

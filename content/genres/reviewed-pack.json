@@ -57,7 +57,7 @@
       "name": "The Real World",
       "type": "genre",
       "_id": "ed82d7be559e5bf8",
-      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "the-real-world",
@@ -109,7 +109,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Additional Skill (Tier 3)",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "additional-skill-tier-3",
@@ -185,7 +185,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Additional Skill (Tier 6)",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "additional-skill-tier-6",
@@ -283,7 +283,7 @@
       "name": "Fantasy",
       "type": "genre",
       "_id": "964ba40da91df8bc",
-      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "fantasy",
@@ -335,7 +335,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "A Bit of Magic",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-bit-of-magic",
@@ -412,7 +412,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -489,7 +489,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Danger Instinct",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "danger-instinct",
@@ -567,7 +567,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disappear Into Shadow",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disappear-into-shadow",
@@ -643,7 +643,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Discerning Mind",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "discerning-mind",
@@ -721,7 +721,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Elemental Protection",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "elemental-protection",
@@ -799,7 +799,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -876,7 +876,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -953,7 +953,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "From the Shadows",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "from-the-shadows",
@@ -1029,7 +1029,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fury",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fury",
@@ -1107,7 +1107,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Pry Open Defense",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "pry-open-defense",
@@ -1185,7 +1185,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Puncturing Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "puncturing-attack",
@@ -1261,7 +1261,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -1340,7 +1340,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Strategize",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "strategize",
@@ -1418,7 +1418,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Tough",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tough",
@@ -1494,7 +1494,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Winning Smile",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "winning-smile",
@@ -1572,7 +1572,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Assassin Strike",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "assassin-strike",
@@ -1650,7 +1650,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Concussive Force",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "concussive-force",
@@ -1728,7 +1728,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -1807,7 +1807,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisibility",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisibility",
@@ -1885,7 +1885,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Jump Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "jump-attack",
@@ -1963,7 +1963,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Magic Portal",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "magic-portal",
@@ -2041,7 +2041,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mask",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mask",
@@ -2119,7 +2119,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Resilience",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "resilience",
@@ -2195,7 +2195,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spellbreaker",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spellbreaker",
@@ -2273,7 +2273,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spin Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-attack",
@@ -2351,7 +2351,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Will of a Leader",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "will-of-a-leader",
@@ -2451,7 +2451,7 @@
       "name": "Science Fiction",
       "type": "genre",
       "_id": "ede94ba279072596",
-      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "science-fiction",
@@ -2503,7 +2503,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Black Thumb",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "black-thumb",
@@ -2579,7 +2579,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -2656,7 +2656,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disable Mechanism",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disable-mechanism",
@@ -2734,7 +2734,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -2811,7 +2811,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -2888,7 +2888,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Hands on the Wheel",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hands-on-the-wheel",
@@ -2966,7 +2966,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Health",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-health",
@@ -3042,7 +3042,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Machine Companion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-companion",
@@ -3118,7 +3118,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -3196,7 +3196,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -3275,7 +3275,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spray",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spray",
@@ -3353,7 +3353,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Arc Spray",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "arc-spray",
@@ -3431,7 +3431,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Improved Machine Companion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "improved-machine-companion",
@@ -3507,7 +3507,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -3586,7 +3586,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Knowledge Expert",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "knowledge-expert",
@@ -3662,7 +3662,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Lethal Capability",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lethal-capability",
@@ -3738,7 +3738,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Severe Machine Disruption",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "severe-machine-disruption",
@@ -3816,7 +3816,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Technology Expert",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "technology-expert",
@@ -3892,7 +3892,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Network",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-network",
@@ -3992,7 +3992,7 @@
       "name": "Superheroes",
       "type": "genre",
       "_id": "d130fc72b7866db1",
-      "img": "systems/magnusarchives/assets/icons/magnusgenre.png",
+      "img": "systems/magnusarchives/assets/icons/magnusgenre.webp",
       "system": {
         "schemaVersion": 1,
         "slug": "superheroes",
@@ -4044,7 +4044,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "A Bit of Magic",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "a-bit-of-magic",
@@ -4121,7 +4121,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "cypher-use",
@@ -4198,7 +4198,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Danger Instinct",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "danger-instinct",
@@ -4276,7 +4276,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disappear Into Shadow",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disappear-into-shadow",
@@ -4352,7 +4352,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Discerning Mind",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "discerning-mind",
@@ -4430,7 +4430,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Elemental Protection",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "elemental-protection",
@@ -4508,7 +4508,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Enhanced Stat",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "enhanced-stat",
@@ -4585,7 +4585,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Exceptional Follower",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "exceptional-follower",
@@ -4662,7 +4662,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "From the Shadows",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "from-the-shadows",
@@ -4738,7 +4738,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fury",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fury",
@@ -4816,7 +4816,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Pry Open Defense",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "pry-open-defense",
@@ -4894,7 +4894,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Puncturing Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "puncturing-attack",
@@ -4970,7 +4970,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Snipe",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "snipe",
@@ -5049,7 +5049,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Strategize",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "strategize",
@@ -5127,7 +5127,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Tough",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "tough",
@@ -5203,7 +5203,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Winning Smile",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "winning-smile",
@@ -5281,7 +5281,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Assassin Strike",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "assassin-strike",
@@ -5359,7 +5359,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Concussive Force",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "concussive-force",
@@ -5437,7 +5437,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Inspire Action",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "inspire-action",
@@ -5516,7 +5516,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisibility",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisibility",
@@ -5594,7 +5594,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Jump Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "jump-attack",
@@ -5672,7 +5672,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Magic Portal",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "magic-portal",
@@ -5750,7 +5750,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mask",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mask",
@@ -5828,7 +5828,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Resilience",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "resilience",
@@ -5904,7 +5904,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spellbreaker",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spellbreaker",
@@ -5982,7 +5982,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spin Attack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spin-attack",
@@ -6060,7 +6060,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Will of a Leader",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "will-of-a-leader",
@@ -6138,7 +6138,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Black Thumb",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "black-thumb",
@@ -6214,7 +6214,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Disable Mechanism",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "disable-mechanism",
@@ -6292,7 +6292,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Hands on the Wheel",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "hands-on-the-wheel",
@@ -6370,7 +6370,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Health",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-health",
@@ -6446,7 +6446,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Machine Companion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "machine-companion",
@@ -6522,7 +6522,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Mind Reading",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "mind-reading",
@@ -6600,7 +6600,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Spray",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "spray",
@@ -6678,7 +6678,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Arc Spray",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "arc-spray",
@@ -6756,7 +6756,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Improved Machine Companion",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "improved-machine-companion",
@@ -6832,7 +6832,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Knowledge Expert",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "knowledge-expert",
@@ -6908,7 +6908,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Lethal Capability",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "lethal-capability",
@@ -6984,7 +6984,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Severe Machine Disruption",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "severe-machine-disruption",
@@ -7062,7 +7062,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Technology Expert",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "technology-expert",
@@ -7138,7 +7138,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Network",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-network",
@@ -7216,7 +7216,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Adhesive Mobility",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "adhesive-mobility",
@@ -7291,7 +7291,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Amazing Invulnerability",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "amazing-invulnerability",
@@ -7366,7 +7366,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Amazing Tools",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "amazing-tools",
@@ -7443,7 +7443,7 @@
             "minimumSuperheroRank": 2,
             "snapshot": {
               "name": "Armored Body",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "armored-body",
@@ -7519,7 +7519,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Astonishing Teleport",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "astonishing-teleport",
@@ -7594,7 +7594,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Awesome Force Field",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "awesome-force-field",
@@ -7670,7 +7670,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Duplicate",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "duplicate",
@@ -7747,7 +7747,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Extraordinary Leap",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "extraordinary-leap",
@@ -7822,7 +7822,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fantastic Armament",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fantastic-armament",
@@ -7898,7 +7898,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Fantastic Vehicle",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "fantastic-vehicle",
@@ -7974,7 +7974,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Instinct",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-instinct",
@@ -8050,7 +8050,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Incredible Velocity",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "incredible-velocity",
@@ -8125,7 +8125,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Intangible",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "intangible",
@@ -8200,7 +8200,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Invisible Knack",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "invisible-knack",
@@ -8275,7 +8275,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Power Cypher Use",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "power-cypher-use",
@@ -8350,7 +8350,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Powerful Blast",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "powerful-blast",
@@ -8425,7 +8425,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Regenerative Healing",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "regenerative-healing",
@@ -8501,7 +8501,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Shrink",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "shrink",
@@ -8578,7 +8578,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Skill Exemplar",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "skill-exemplar",
@@ -8654,7 +8654,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Stretchy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "stretchy",
@@ -8729,7 +8729,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Superhero Versatility",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "superhero-versatility",
@@ -8804,7 +8804,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Team-Up Ally",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "team-up-ally",
@@ -8879,7 +8879,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Telepathic Prodigy",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "telepathic-prodigy",
@@ -8954,7 +8954,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Unbelievable Transformation",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "unbelievable-transformation",
@@ -9029,7 +9029,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Uncanny Flight",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "uncanny-flight",
@@ -9104,7 +9104,7 @@
             "minimumSuperheroRank": 0,
             "snapshot": {
               "name": "Unyielding Shield",
-              "img": "systems/magnusarchives/assets/icons/magnusability.png",
+              "img": "systems/magnusarchives/assets/icons/magnusability.webp",
               "system": {
                 "schemaVersion": 1,
                 "slug": "unyielding-shield",

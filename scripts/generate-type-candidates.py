@@ -22,8 +22,8 @@ SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
 ABILITY_PREFIX = "Compendium.magnusarchives.type-abilities.Item."
-TYPE_ICON = "systems/magnusarchives/assets/icons/magnustype.png"
-ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.png"
+TYPE_ICON = "systems/magnusarchives/assets/icons/magnustype.webp"
+ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.webp"
 TYPE_NAMES = [
     "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Mage", "Monk",
     "Necromancer", "Paladin", "Ranger", "Rogue", "Archer", "Axe Fighter",

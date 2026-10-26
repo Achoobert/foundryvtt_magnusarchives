@@ -62,8 +62,7 @@ describe('Character sheet', {testIsolation: false}, () => {
     for (let i = 0; i < 3; i += 1) {
       cy.get('.magnusarchives-character [data-action="adjustStress"][data-delta="1"]').click();
     }
-    cy.get('.magnusarchives-character .character-hud-stress .character-hud-stat-value')
-      .last()
+    cy.get('.magnusarchives-character .character-hud-stress-level .character-hud-stat-value')
       .should('contain.text', '1');
   });
 });

@@ -36,7 +36,6 @@ export interface AdvancementPurchaseRecord {
   readonly otherKind: OtherAdvancementKind | "none";
   readonly tier: number;
   readonly xpCost: number;
-  readonly resourcePointsGranted: number;
   readonly timestamp: number;
 }
 
@@ -71,7 +70,6 @@ export interface AdvancementPolicy {
   readonly capabilityPoints: number;
   readonly effortMaximum: number;
   readonly recoveryBonus: number;
-  readonly resourcePointsForTier: (tier: number) => number;
   readonly genreChoiceForTier: (tier: number) => boolean;
   readonly attackDefenseTrainingTier: number;
   readonly attackDefenseSpecializationTier: number;
@@ -97,7 +95,6 @@ export const CORE_ADVANCEMENT_POLICY: AdvancementPolicy = Object.freeze({
   capabilityPoints: 4,
   effortMaximum: 6,
   recoveryBonus: 2,
-  resourcePointsForTier: (tier: number) => tier >= 5 ? 3 : tier >= 3 ? 2 : 1,
   genreChoiceForTier: (tier: number) => tier >= 3 && tier % 3 === 0,
   attackDefenseTrainingTier: 2,
   attackDefenseSpecializationTier: 4

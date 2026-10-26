@@ -3,30 +3,30 @@ import type {ActorType, ItemType} from "../constants/system";
 const SYSTEM_ASSET_ROOT = "systems/magnusarchives/assets";
 
 export const ACTOR_DEFAULT_ICONS: Readonly<Record<ActorType, string>> = {
-  character: `${SYSTEM_ASSET_ROOT}/icons/magnuspc.png`,
-  npc: `${SYSTEM_ASSET_ROOT}/icons/magnusnpc.png`
+  character: `${SYSTEM_ASSET_ROOT}/icons/magnuspc.webp`,
+  npc: `${SYSTEM_ASSET_ROOT}/icons/magnusnpc.webp`
 };
 
 export const ITEM_DEFAULT_ICONS: Readonly<Record<ItemType, string>> = {
-  ability: `${SYSTEM_ASSET_ROOT}/icons/magnusability.png`,
-  armor: `${SYSTEM_ASSET_ROOT}/icons/magnusarmor.png`,
-  artifact: `${SYSTEM_ASSET_ROOT}/icons/magnusartefact.png`,
-  cypher: `${SYSTEM_ASSET_ROOT}/icons/magnuscypher.png`,
-  descriptor: `${SYSTEM_ASSET_ROOT}/icons/magnusdescriptor.png`,
-  equipment: `${SYSTEM_ASSET_ROOT}/icons/magnusequipment.png`,
-  focus: `${SYSTEM_ASSET_ROOT}/icons/magnusfocus.png`,
-  genre: `${SYSTEM_ASSET_ROOT}/icons/magnusgenre.png`,
-  shield: `${SYSTEM_ASSET_ROOT}/icons/magnusshield.png`,
-  skill: `${SYSTEM_ASSET_ROOT}/icons/magnusskill.png`,
-  species: `${SYSTEM_ASSET_ROOT}/icons/magnusspecies.png`,
-  characterType: `${SYSTEM_ASSET_ROOT}/icons/magnustype.png`,
-  weapon: `${SYSTEM_ASSET_ROOT}/icons/magnusweapons.png`
+  ability: `${SYSTEM_ASSET_ROOT}/icons/magnusability.webp`,
+  armor: `${SYSTEM_ASSET_ROOT}/icons/magnusarmor.webp`,
+  artifact: `${SYSTEM_ASSET_ROOT}/icons/magnusartefact.webp`,
+  cypher: `${SYSTEM_ASSET_ROOT}/icons/magnuscypher.webp`,
+  descriptor: `${SYSTEM_ASSET_ROOT}/icons/magnusdescriptor.webp`,
+  equipment: `${SYSTEM_ASSET_ROOT}/icons/magnusequipment.webp`,
+  focus: `${SYSTEM_ASSET_ROOT}/icons/magnusfocus.webp`,
+  genre: `${SYSTEM_ASSET_ROOT}/icons/magnusgenre.webp`,
+  shield: `${SYSTEM_ASSET_ROOT}/icons/magnusshield.webp`,
+  skill: `${SYSTEM_ASSET_ROOT}/icons/magnusskill.webp`,
+  species: `${SYSTEM_ASSET_ROOT}/icons/magnusspecies.webp`,
+  characterType: `${SYSTEM_ASSET_ROOT}/icons/magnustype.webp`,
+  weapon: `${SYSTEM_ASSET_ROOT}/icons/magnusweapons.webp`
 };
 
 export const SYSTEM_UI_ASSETS = {
-  gamePaused: `${SYSTEM_ASSET_ROOT}/ui/magnusgamepaused.png`,
-  lobby: `${SYSTEM_ASSET_ROOT}/magnuslobby.png`,
-  turnMarker: `${SYSTEM_ASSET_ROOT}/ui/magnusturnmarker.png`
+  gamePaused: `${SYSTEM_ASSET_ROOT}/ui/magnusgamepaused.webp`,
+  lobby: `${SYSTEM_ASSET_ROOT}/magnuslobby.webp`,
+  turnMarker: `${SYSTEM_ASSET_ROOT}/ui/magnusturnmarker.webp`
 } as const;
 
 export function actorDefaultIcon(type: string): string | null {

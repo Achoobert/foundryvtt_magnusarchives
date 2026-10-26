@@ -211,7 +211,7 @@ describe("Core Creation persistence across partial Actor updates", () => {
       .markInitialized(actor as never, "skipped");
     expectCreation(actor, "skipped");
 
-    await actor.update({"system.tier": 2, "system.resourcePoints": 4});
+    await actor.update({"system.tier": 2, "system.xp": 4});
     expectCreation(actor, "skipped");
     await new WoundService(() => "wound").apply(actor as never, "minor");
     expectCreation(actor, "skipped");

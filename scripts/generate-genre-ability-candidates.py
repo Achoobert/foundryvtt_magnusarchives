@@ -20,7 +20,7 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.png"
+ABILITY_ICON = "systems/magnusarchives/assets/icons/magnusability.webp"
 ABILITY_PREFIX = "Compendium.magnusarchives.genre-abilities.Item."
 
 REAL_WORLD_MID = ["Additional Skill (Tier 3)"]

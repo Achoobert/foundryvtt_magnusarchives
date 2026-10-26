@@ -121,8 +121,7 @@ describe("RuleRegistry", () => {
     });
     registry.registerAdvancementPolicy("example.advancement", (policy) => ({
       ...policy,
-      effortMaximum: 9,
-      resourcePointsForTier: () => 5
+      effortMaximum: 9
     }));
     const base = {
       xpCost: 4,
@@ -130,7 +129,6 @@ describe("RuleRegistry", () => {
       capabilityPoints: 4,
       effortMaximum: 6,
       recoveryBonus: 2,
-      resourcePointsForTier: () => 1,
       genreChoiceForTier: () => false,
       attackDefenseTrainingTier: 2,
       attackDefenseSpecializationTier: 4
@@ -138,6 +136,5 @@ describe("RuleRegistry", () => {
     expect(registry.resolveAdvancementPolicy(base, []).effortMaximum).toBe(6);
     const extended = registry.resolveAdvancementPolicy(base, ["example.advancement"]);
     expect(extended.effortMaximum).toBe(9);
-    expect(extended.resourcePointsForTier(1)).toBe(5);
   });
 });

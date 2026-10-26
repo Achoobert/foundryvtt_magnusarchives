@@ -82,7 +82,6 @@ class TestCharacter implements AdvancementCharacterLike {
         }
       },
       xp: options.xp ?? 40,
-      resourcePoints: 0,
       stats: {
         effortBase: options.effort ?? 1,
         might: {value: 8, baseMax: 10, baseEdge: 0},
@@ -170,8 +169,8 @@ describe("AdvancementService", () => {
   it("spends 4 XP, marks the slot, grants Resource Points, and applies the benefit atomically", async () => {
     const actor = new TestCharacter({xp: 8});
     const result = await makeService().purchase(actor, {kind: "extraEffort"});
-    expect(actor.system).toMatchObject({xp: 4, resourcePoints: 1, stats: {effortBase: 2}});
-    expect(result.record).toMatchObject({kind: "extraEffort", xpCost: 4, resourcePointsGranted: 1});
+    expect(actor.system).toMatchObject({xp: 4, stats: {effortBase: 2}});
+    expect(result.record).toMatchObject({kind: "extraEffort", xpCost: 4});
     expect(actor.updates).toHaveLength(1);
   });
 
@@ -375,14 +374,6 @@ describe("AdvancementService", () => {
       .rejects.toMatchObject({code: "cycle-complete"});
   });
 
-  it.each([[1, 1], [2, 1], [3, 2], [4, 2], [5, 3], [8, 3]])(
-    "uses Resource Point threshold at Tier %i",
-    async (tier, expected) => {
-      const result = await makeService().purchase(new TestCharacter({tier}), {kind: "extraEffort"});
-      expect(result.resourcePointsGranted).toBe(expected);
-    }
-  );
-
   it("applies the Recovery, Focus, armor, and weapon Other benefits", async () => {
     const recovery = new TestCharacter();
     await makeService().purchase(recovery, {kind: "other", otherKind: "recovery"});
@@ -435,7 +426,7 @@ describe("AdvancementService", () => {
     const actor = new TestCharacter({tier: newTier - 1});
     (actor.system.advancement as unknown as {purchases: unknown[]}).purchases = Array.from({length: 4}, (_, index) => ({
       id: `p-${index}`, kind: "extraEffort", otherKind: "none", tier: newTier - 1,
-      xpCost: 4, resourcePointsGranted: 1, timestamp: 0
+      xpCost: 4, timestamp: 0
     }));
     expect((await makeService().advanceTier(actor)).genreChoice)
       .toMatchObject({source: "newTier", grantTier: newTier});
@@ -497,7 +488,6 @@ describe("AdvancementService", () => {
 
       expect(actor.system.advancement.purchases).toEqual([]);
       expect(actor.system.xp).toBe(4);
-      expect(actor.system.resourcePoints).toBe(1);
       expect(actor.system.stats.effortBase).toBe(2);
       expect(actor.items).toEqual(beforeItems);
       expect(actor.updates.at(-1)).toEqual({"system.advancement.purchases": []});
@@ -548,7 +538,6 @@ describe("AdvancementService", () => {
         rank: "trained", category: "general", contexts: [], acquisition: {grantedByUuid: ""}
       });
       const actor = new TestCharacter({tier: 3, skills: [skill]});
-      (actor.system as unknown as {resourcePoints: number}).resourcePoints = 7;
       (actor.system.recovery as {bonus: number}).bonus = 2;
       (actor.system.proficiencies.weaponCategories as string[]).push("light", "medium", "heavy");
       (actor.system.proficiencies.armorCategories as string[]).push("light", "medium", "heavy");
@@ -560,7 +549,7 @@ describe("AdvancementService", () => {
       });
       (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push({
         id: "legacy-current-id", kind: "other", otherKind: "focus", tier: 3,
-        xpCost: 4, resourcePointsGranted: 1, timestamp: 1
+        xpCost: 4, timestamp: 1
       });
       const service = makeService();
 
@@ -568,7 +557,6 @@ describe("AdvancementService", () => {
 
       expect(actor.items).toEqual([skill]);
       expect(skill.system.rank).toBe("trained");
-      expect(actor.system.resourcePoints).toBe(7);
       expect(actor.system.recovery.bonus).toBe(2);
       expect(actor.system.proficiencies.weaponCategories).toEqual(["light", "medium", "heavy"]);
       expect(actor.system.proficiencies.armorCategories).toEqual(["light", "medium", "heavy"]);
@@ -617,7 +605,7 @@ describe("AdvancementService", () => {
       const actor = new TestCharacter({tier: 2});
       const current = {
         id: "current", kind: "extraEffort" as const, otherKind: "none" as const, tier: 2,
-        xpCost: 4, resourcePointsGranted: 1, timestamp: 1
+        xpCost: 4, timestamp: 1
       };
       (actor.system.advancement.purchases as AdvancementPurchaseRecord[]).push(current);
       const service = makeService();

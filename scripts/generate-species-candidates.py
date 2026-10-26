@@ -20,8 +20,8 @@ from docx import Document
 SCHEMA_VERSION = 1
 BOOK = "Cypher Reference Document (2026)"
 LICENSE = "2026 Cypher Open License"
-SPECIES_ICON = "systems/magnusarchives/assets/icons/magnusspecies.png"
-SKILL_ICON = "systems/magnusarchives/assets/icons/magnusskill.png"
+SPECIES_ICON = "systems/magnusarchives/assets/icons/magnusspecies.webp"
+SKILL_ICON = "systems/magnusarchives/assets/icons/magnusskill.webp"
 SKILL_PREFIX = "Compendium.magnusarchives.skills.Item."
 
 FANTASY_NAMES = [

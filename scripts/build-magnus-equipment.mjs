@@ -45,7 +45,7 @@ const weapons = MAGNUS_WEAPONS.map((weapon, index) => {
     _id: documentId,
     _key: `!items!${documentId}`,
     sort: (index + 1) * 100,
-    img: `${ICONS}/magnusweapons.png`,
+    img: `${ICONS}/magnusweapons.webp`,
     system: {
       ...structuredClone(weaponTemplate.system),
       slug: "",
@@ -72,7 +72,7 @@ const armors = MAGNUS_ARMOR.map((armor, index) => {
     _id: documentId,
     _key: `!items!${documentId}`,
     sort: (index + 1) * 100,
-    img: `${ICONS}/magnusarmor.png`,
+    img: `${ICONS}/magnusarmor.webp`,
     system: {
       ...structuredClone(armorTemplate.system),
       slug: "",
@@ -105,7 +105,7 @@ const equipment = MAGNUS_EQUIPMENT.map((item, index) => {
     _id: documentId,
     _key: `!items!${documentId}`,
     sort: (index + 1) * 100,
-    img: `${ICONS}/magnusequipment.png`,
+    img: `${ICONS}/magnusequipment.webp`,
     effects: [],
     flags: {},
     ownership: {default: 0},

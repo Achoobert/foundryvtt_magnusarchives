@@ -1,4 +1,4 @@
-![The Magnus Archives for Foundry VTT](assets/magnusreadme.png)
+![The Magnus Archives for Foundry VTT](assets/magnusreadme.webp)
 
 # The Magnus Archives for Foundry VTT
 

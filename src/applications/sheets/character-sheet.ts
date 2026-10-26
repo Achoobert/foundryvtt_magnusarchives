@@ -1972,8 +1972,7 @@ export class CharacterSheet extends ActorSheetV2 {
       stats: {
         tier: coreSystem.derived.tier.value,
         effort: coreSystem.derived.effort.max,
-        xp: coreSystem.xp,
-        resourcePoints: coreSystem.resourcePoints
+        xp: coreSystem.xp
       },
       playerIntrusion: {
         visible: this.isEditable,
@@ -2003,7 +2002,7 @@ export class CharacterSheet extends ActorSheetV2 {
         dead: coreSystem.derived.wounds.dead
       },
       stress: {
-        ...headerStress(coreSystem.stress.value),
+        ...headerStress(coreSystem.stress.value, coreSystem.stress.supernatural),
         hindranceModifier: formatStepModifier("hinder", coreSystem.derived.stress.level),
         canEdit: this.isEditable
       },
@@ -2017,7 +2016,8 @@ export class CharacterSheet extends ActorSheetV2 {
         ).map((entry) => ({
           ...entry,
           label: game.i18n.localize(entry.label),
-          hint: game.i18n.localize(entry.hintLabel)
+          hint: game.i18n.localize(entry.hintLabel),
+          notes: entry.noteLabels.map((note) => game.i18n.localize(note))
         }))
       },
       recoveries: headerRecoveries(coreSystem.recovery.slots).map((recovery) => ({

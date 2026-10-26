@@ -14,7 +14,7 @@ describe("Character Sheet GM Intrusion isolation", () => {
     expect(template).not.toMatch(/GM Intrusion|gmIntrusion/);
     expect(template).toContain('data-action="playerIntrusion"');
     expect(template.indexOf('data-action="playerIntrusion"')).toBeLessThan(template.indexOf("character-hud-sentence"));
-    expect(template.slice(template.indexOf("character-hud-currency"), template.indexOf("</header>")))
+    expect(template.slice(template.indexOf("character-hud-lower"), template.indexOf("</header>")))
       .not.toContain("playerIntrusion");
     expect(sheetStyles).not.toMatch(/intrusion-list|intrusion-actions/);
   });

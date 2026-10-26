@@ -41,7 +41,7 @@ export function registerDataModels(): void {
   CONFIG.Actor.trackableAttributes = {
     character: {
       bar: ["stats.might", "stats.speed", "stats.intellect"],
-      value: ["xp", "resourcePoints"]
+      value: ["xp"]
     },
     npc: {
       bar: ["health"],
