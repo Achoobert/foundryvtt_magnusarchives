@@ -1,0 +1,130 @@
+# Builds a rolling "latest" GitHub Release on every push to the default
+# branch. The packaged system.json is the repo file with a single field
+# changed: version, whose trailing number continues from the previously
+# released artifact. The repo file is not committed back.
+#
+# This complements release.yml (which packages a specific tagged prerelease).
+# This workflow instead gives players a stable "Install System" URL that
+# always points at the newest build off the default branch:
+#   https://github.com/<repo>/releases/latest/download/system.json
+
+name: Build Rolling Latest Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: release-latest
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Compiles dist/ and the generated compendium packs.
+      - name: Build
+        run: pnpm build
+
+      # A manifest/download URL pointing at some other repo means Foundry
+      # checks for updates against a repo this workflow never publishes to,
+      # so installs silently stay on an old build. Fail loudly instead.
+      - name: Verify Manifest URLs Point At This Repo
+        run: |
+          expected="https://github.com/${{ github.repository }}/releases/latest/download"
+          for field in manifest download; do
+            url=$(jq -r ".$field" system.json)
+            case "$url" in
+              "$expected"/*) ;;
+              *) echo "system.json .$field is '$url', expected '$expected/...'"; exit 1 ;;
+            esac
+          done
+
+      # The previously published "latest" artifact is the only source for the
+      # build number. The repo version owns everything up to its trailing
+      # number (e.g. "0.1.0-beta." in "0.1.0-beta.5"); the workflow owns that
+      # trailing number. Same prefix as the last release -> bump it by one
+      # (never below the repo's number). New prefix in the repo -> start from
+      # the repo version as written.
+      - name: Compute Next Version
+        id: bump_version
+        run: |
+          repo_version=$(jq -r '.version' system.json)
+          if [[ ! "$repo_version" =~ ^(.*[^0-9])?([0-9]+)$ ]]; then
+            echo "system.json .version '$repo_version' does not end in a number"; exit 1
+          fi
+          repo_prefix="${BASH_REMATCH[1]}"
+          repo_n="${BASH_REMATCH[2]}"
+
+          released_version=$(curl -fsSL \
+            "https://github.com/${{ github.repository }}/releases/latest/download/system.json" \
+            | jq -r '.version // empty' || true)
+
+          next="$repo_version"
+          if [[ "$released_version" =~ ^(.*[^0-9])?([0-9]+)$ ]] && [ "${BASH_REMATCH[1]}" = "$repo_prefix" ]; then
+            n=$((10#${BASH_REMATCH[2]} + 1))
+            [ "$n" -lt "$((10#$repo_n))" ] && n=$((10#$repo_n))
+            next="${repo_prefix}${n}"
+          fi
+
+          echo "Released version: ${released_version:-none}; repo: ${repo_version}; next: ${next}"
+          echo "released=${released_version}" >> "$GITHUB_OUTPUT"
+          echo "next=${next}" >> "$GITHUB_OUTPUT"
+
+      # Stamp version onto the working-tree system.json *before* zip so both
+      # the standalone artifact and the copy inside magnusarchives.zip match.
+      # Manifest/download and all other fields stay as committed.
+      # Archive contents mirror scripts/package-release.ps1.
+      - name: Update system.json and Create System Archive
+        run: |
+          jq --arg version "${{ steps.bump_version.outputs.next }}" \
+             '.version = $version' \
+             system.json > system.json.tmp
+          mv system.json.tmp system.json
+
+          for pack in $(jq -r '.packs[].path' system.json); do
+            [ -d "$pack" ] || { echo "Pack missing after build: $pack"; exit 1; }
+          done
+
+          # Unlike the PowerShell script, `zip` only warns on a missing path,
+          # so check them up front.
+          paths="system.json dist templates lang assets packs fixtures README.md LICENSE.md legal"
+          for p in $paths; do
+            [ -e "$p" ] || { echo "Required runtime content is missing: $p"; exit 1; }
+          done
+          zip --recurse-paths ./magnusarchives.zip $paths
+
+          unzip -p ./magnusarchives.zip system.json | jq -e --arg version "${{ steps.bump_version.outputs.next }}" \
+            '.version == $version'
+
+      - name: Update Rolling "latest" Release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          replacesArtifacts: true
+          makeLatest: true
+          tag: latest
+          commit: ${{ github.sha }}
+          name: "Latest (${{ steps.bump_version.outputs.next }})"
+          body: "Automated rolling build from ${{ github.repository }}@${{ github.sha }}."
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./system.json, ./magnusarchives.zip"

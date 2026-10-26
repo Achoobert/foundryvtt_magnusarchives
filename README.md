@@ -2,6 +2,19 @@
 
 # The Magnus Archives for Foundry VTT
 
+<p align="center">
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Achoobert/foundryvtt_magnusarchives"> <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Achoobert/foundryvtt_magnusarchives"> <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/Achoobert/foundryvtt_magnusarchives/total" /> <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/Achoobert/foundryvtt_magnusarchives?label=latest%20release" />
+</p>
+<p align="center">
+<img alt="GitHub" src="https://img.shields.io/github/license/Achoobert/foundryvtt_magnusarchives"> <a href="https://github.com/Achoobert/foundryvtt_magnusarchives/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/Achoobert/foundryvtt_magnusarchives"></a> <a href="https://github.com/Achoobert/foundryvtt_magnusarchives/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/Achoobert/foundryvtt_magnusarchives"></a> <a href="https://github.com/Achoobert/foundryvtt_magnusarchives/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/Achoobert/foundryvtt_magnusarchives"></a>
+</p>
+
+Install in Foundry (Game Systems → Install System → Manifest URL):
+
+```console
+https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/system.json
+```
+
 > [!IMPORTANT]
 > ## AI-ASSISTED PROJECT
 > **This system was developed extensively with AI assistance, including ChatGPT and Codex.**
@@ -136,7 +149,7 @@ Data/systems/magnusarchives
 Then run the build and restart Foundry. For normal installation and updates, use the manifest:
 
 ```text
-https://raw.githubusercontent.com/Achoobert/foundryvtt_magnusarchives/main/system.json
+https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/system.json
 ```
 
 ## Content and licensing
