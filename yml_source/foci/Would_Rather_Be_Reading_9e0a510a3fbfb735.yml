@@ -1,0 +1,246 @@
+_id: 9e0a510a3fbfb735
+name: Would Rather Be Reading
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: would-rather-be-reading
+  description: >-
+    <p>People have always asked why you read so much, and whether you'd rather
+    read about life than live it. Yes, you think. Books are your friends,
+    fiction for escape and nonfiction for knowledge, and nothing matters more
+    than learning. You always have something to read on
+    you.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC understands that you need time and
+    space alone to read.</p></li><li><p>Another PC gave you a book that became a
+    favourite.</p></li><li><p>Another PC reminds you of the hero of a favourite
+    book, and you can't help liking them.</p></li><li><p>Another PC borrowed a
+    book, never returned it, and has no good story about what
+    happened.</p></li></ol><p><strong>Additional Equipment:</strong> A couple of
+    books on topics of your choice.</p><p><strong>Minor Effect
+    Suggestion:</strong> Something you've read eases your next
+    action.</p><p><strong>Major Effect Suggestion:</strong> A book trips up the
+    foe somehow (they slip on it, or are too startled to act) and they're
+    stunned, losing their next turn.</p><p><strong>GM Intrusions:</strong> Books
+    burn, get wet or go missing. Devices break or run out of power. Glasses
+    break.</p><p><strong>Abilities by tier:</strong></p><ul><li><p><strong>Tier
+    1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c]{Knowledge
+    Is Power}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.25aadd2b7bbc1519]{Greater
+    Enhanced Intellect}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.3b007db624281429]{Applying
+    Your Knowledge} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.40884ccaca03be03]{Flex
+    Skill}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c]{Knowledge
+    Is Power},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f7e36afa5a769fb0]{Knowing
+    the Unknown}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.25aadd2b7bbc1519]{Greater
+    Enhanced Intellect}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c9ca1a9f3778d1bb]{Tower
+    of Intellect} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c9849969a1265c22]{Credible
+    Hypothesis}. Either way, you also gain
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c]{Knowledge
+    Is Power}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 88-89
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-knowledge-is-power
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c
+        abilitySnapshot:
+          name: Knowledge Is Power
+          description: >-
+            Pick two noncombat skills you aren't trained in. You become trained
+            in both.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-greater-enhanced-intellect
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.25aadd2b7bbc1519
+        abilitySnapshot:
+          name: Greater Enhanced Intellect
+          description: Gain 6 points to your Intellect Pool.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-applying-your-knowledge
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.3b007db624281429
+        abilitySnapshot:
+          name: Applying Your Knowledge
+          description: >-
+            When you help another character with an action you're untrained in,
+            you count as trained, so they gain two assets instead of one.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-flex-skill
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.40884ccaca03be03
+        abilitySnapshot:
+          name: Flex Skill
+          description: >-
+            At the start of each day, pick one task (not an attack or defense)
+            to concentrate on. You're trained in it for the rest of the day.
+            This can't raise a skill you're already trained in to specialized.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-knowledge-is-power
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c
+        abilitySnapshot:
+          name: Knowledge Is Power
+          description: >-
+            Pick two noncombat skills you aren't trained in. You become trained
+            in both.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-knowing-the-unknown
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f7e36afa5a769fb0
+        abilitySnapshot:
+          name: Knowing the Unknown
+          description: >-
+            Using resources suited to your character, ask the GM one question
+            and get a general answer. The GM sets the level by how obscure it
+            is: findable elsewhere is level 1, obscure knowledge of the past is
+            level 7. Knowledge of the future is impossible.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t5-greater-enhanced-intellect
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.25aadd2b7bbc1519
+        abilitySnapshot:
+          name: Greater Enhanced Intellect
+          description: Gain 6 points to your Intellect Pool.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-tower-of-intellect
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c9ca1a9f3778d1bb
+        abilitySnapshot:
+          name: Tower of Intellect
+          description: >-
+            You're trained in Intellect defense tasks, or specialized if you're
+            already trained.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-credible-hypothesis
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c9849969a1265c22
+        abilitySnapshot:
+          name: Credible Hypothesis
+          description: >-
+            You examine an area. With a successful difficulty 3 Intellect-based
+            roll you learn precise, useful details about its past, if there are
+            any. You can ask the GM up to four questions about the immediate
+            area, each needing its own roll.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+      - id: t6-knowledge-is-power
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.91e71c4f90c99c4c
+        abilitySnapshot:
+          name: Knowledge Is Power
+          description: >-
+            Pick two noncombat skills you aren't trained in. You become trained
+            in both.
+        tier: 6
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-6a4180312f882f4b
+        from: t1-knowledge-is-power
+        to: t2-greater-enhanced-intellect
+      - id: connection-1aa609ae0bdfb2cf
+        from: t2-greater-enhanced-intellect
+        to: t3-applying-your-knowledge
+      - id: connection-7dcf1972999a6e6d
+        from: t2-greater-enhanced-intellect
+        to: t3-flex-skill
+      - id: connection-d81d6b75d2cb0ef5
+        from: t3-applying-your-knowledge
+        to: t4-knowledge-is-power
+      - id: connection-cdf9e99b63dc9ac4
+        from: t3-applying-your-knowledge
+        to: t4-knowing-the-unknown
+      - id: connection-e99e6a11ec0564d7
+        from: t3-flex-skill
+        to: t4-knowledge-is-power
+      - id: connection-bc514e0d460b5e71
+        from: t3-flex-skill
+        to: t4-knowing-the-unknown
+      - id: connection-866d2f1d84e7c86c
+        from: t4-knowledge-is-power
+        to: t5-greater-enhanced-intellect
+      - id: connection-2a4418b5e96795a9
+        from: t4-knowing-the-unknown
+        to: t5-greater-enhanced-intellect
+      - id: connection-08f9c5adb2a60e28
+        from: t5-greater-enhanced-intellect
+        to: t6-tower-of-intellect
+      - id: connection-e1b16c88041cada5
+        from: t5-greater-enhanced-intellect
+        to: t6-credible-hypothesis
+      - id: connection-30ec96b964ae7b0e
+        from: t5-greater-enhanced-intellect
+        to: t6-knowledge-is-power
+effects: []
+folder: null
+sort: 1800
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!9e0a510a3fbfb735'

@@ -1,0 +1,79 @@
+folder: 23a662247bd5b3ec
+name: Dark star
+type: artifact
+_id: 12c14b0159e5dc37
+sort: 700
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: dark-star
+  description: >-
+    <p><strong>Level:</strong> 7</p><p><strong>Related Entity:</strong> The
+    Dark</p><p><strong>Stress:</strong> 3 on acquiring the dark star and
+    understanding how to use it; 3 with each use.</p><p>A sphere of inky
+    darkness, normally kept inside a structure or container. Anyone who looks at
+    it must succeed on an Intellect defense roll or be consumed by its negative
+    radiance. Having pledged oneself to The Dark eases this defense by four
+    steps.</p><p>A survivor of its gaze can use it to cause an apparent solar
+    eclipse over an area 25 miles (40 km) across for one minute. This takes a
+    one-minute ritual and a difficulty 7 Intellect task, eased by one or more
+    steps by helpers who have also looked on it and
+    survived.</p><p><strong>Fear:</strong> Someone misjudges the edge of the
+    dark star and, on a failed Speed defense roll, falls in, taking a serious
+    injury each round until they escape its grasp.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '255'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-dark
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '7'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!12c14b0159e5dc37'

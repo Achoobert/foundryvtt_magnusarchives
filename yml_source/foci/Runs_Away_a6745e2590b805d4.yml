@@ -1,0 +1,255 @@
+_id: a6745e2590b805d4
+name: Runs Away
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: runs-away
+  description: >-
+    <p>Running isn't always your answer, but it's your first instinct, and it
+    has saved you more than once. Caution is an art form to you. Once you've
+    judged a threat from somewhere safe, you'll deal with it. You're no coward;
+    you just choose when to engage. You wear comfortable, neutral clothes you
+    can run and hide in.</p><p><strong>Connection:</strong> Choose one of the
+    following with your group.</p><ol><li><p>While fleeing a threat, you left
+    another PC to fend for themselves. They barely survived. Their player
+    decides whether they resent or forgive you.</p></li><li><p>Another PC
+    recently put you in danger, by accident or not. You're fine now, but wary of
+    them.</p></li><li><p>Another PC seems even more nervous than you about
+    something. You'd like to teach them your measured approach to
+    fear.</p></li><li><p>Another PC doubts your caution is thoughtful and laughs
+    when you explain it. They may have called you a
+    coward.</p></li></ol><p><strong>Additional Equipment:</strong> A pair of
+    running shoes that fit perfectly.</p><p><strong>Minor Effect
+    Suggestion:</strong> You can attempt a stealth task any time before the end
+    of next round.</p><p><strong>Major Effect Suggestion:</strong> You take an
+    extra action, used only to move a short distance, attempt a stealth action,
+    or move an immediate distance and attempt a stealth action.</p><p><strong>GM
+    Intrusions:</strong> Quick movements lead to dropped items, slips on uneven
+    ground or wrong turns.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.339b928115fd9611]{Go
+    Defensive}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b52540ae74938277]{Enhanced
+    Speed},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.01d880cc253a6bea]{Quick
+    to Flee}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.cb8d5012171a2016]{Incredible
+    Running Speed} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ada9fb67a51f974d]{Greater
+    Enhanced Speed}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.0b5dfb12c738e3a0]{Increasing
+    Determination},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.aac86d412cc547f3]{Quick
+    Wits}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.59fb968f1bfbb416]{Go to
+    Ground}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6b1007abbc0cba5f]{Burst
+    of Escape} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4844f30e2d8765f8]{Skill
+    With Defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 81-82
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-go-defensive
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.339b928115fd9611
+        abilitySnapshot:
+          name: Go Defensive
+          description: >-
+            In combat, you can enter a state of heightened alertness whenever
+            you like. While in it you can't use Intellect points, but you gain
+            +1 to your Speed Edge and two assets on Speed defense tasks. It
+            lasts until you choose to end it, you attack a foe, or no combat is
+            going on within range of your senses. After it ends, you can't use
+            it again until you've made a recovery roll.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-enhanced-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b52540ae74938277
+        abilitySnapshot:
+          name: Enhanced Speed
+          description: Gain 3 points to your Speed Pool.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-quick-to-flee
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.01d880cc253a6bea
+        abilitySnapshot:
+          name: Quick to Flee
+          description: You're trained in stealth and gymnastics.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-incredible-running-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.cb8d5012171a2016
+        abilitySnapshot:
+          name: Incredible Running Speed
+          description: >-
+            You can move up to a long distance as part of another action. As an
+            action, you can move up to 200 feet (60 m), or up to 500 feet (150
+            m) with a successful difficulty 4 Speed-based roll.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-greater-enhanced-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ada9fb67a51f974d
+        abilitySnapshot:
+          name: Greater Enhanced Speed
+          description: Gain 6 points to your Speed Pool.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-increasing-determination
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.0b5dfb12c738e3a0
+        abilitySnapshot:
+          name: Increasing Determination
+          description: >-
+            If you fail a noncombat physical task (forcing a door, climbing a
+            cliff) and retry it, you don't need to apply a level of Effort to
+            retry, but the retry is still eased. A second failure gives no
+            special benefit.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-quick-wits
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.aac86d412cc547f3
+        abilitySnapshot:
+          name: Quick Wits
+          description: >-
+            When a task would normally cost points from your Intellect Pool, you
+            can pay with Speed points instead.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t5-go-to-ground
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.59fb968f1bfbb416
+        abilitySnapshot:
+          name: Go to Ground
+          description: >-
+            You move up to a long distance and try to hide, gaining an asset on
+            the stealth task to vanish from everyone who knew you were there.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-burst-of-escape
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6b1007abbc0cba5f
+        abilitySnapshot:
+          name: Burst of Escape
+          description: >-
+            You take two separate actions this round, as long as one of them is
+            hiding or moving in a direction that isn't toward a foe.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4844f30e2d8765f8
+        abilitySnapshot:
+          name: Skill With Defense
+          description: >-
+            Pick one defense task you aren't trained in: Might defense, Speed
+            defense or Intellect defense. You become trained in it.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-1189d62e8ed29f42
+        from: t1-go-defensive
+        to: t2-enhanced-speed
+      - id: connection-f8e0bf5ae6657476
+        from: t1-go-defensive
+        to: t2-quick-to-flee
+      - id: connection-0a85fa0f7eeea483
+        from: t2-enhanced-speed
+        to: t3-incredible-running-speed
+      - id: connection-ecd5b0cddb16105a
+        from: t2-enhanced-speed
+        to: t3-greater-enhanced-speed
+      - id: connection-7dd6caa997a46fe5
+        from: t2-quick-to-flee
+        to: t3-incredible-running-speed
+      - id: connection-bae888a4f2c9abc5
+        from: t2-quick-to-flee
+        to: t3-greater-enhanced-speed
+      - id: connection-a28307b6101db806
+        from: t3-incredible-running-speed
+        to: t4-increasing-determination
+      - id: connection-27e03040bb7ac008
+        from: t3-incredible-running-speed
+        to: t4-quick-wits
+      - id: connection-6c28b140672eb2fa
+        from: t3-greater-enhanced-speed
+        to: t4-increasing-determination
+      - id: connection-83ac841ab5d5b584
+        from: t3-greater-enhanced-speed
+        to: t4-quick-wits
+      - id: connection-4ea9e6d2d2d2778d
+        from: t4-increasing-determination
+        to: t5-go-to-ground
+      - id: connection-68f384923059cdca
+        from: t4-quick-wits
+        to: t5-go-to-ground
+      - id: connection-d7bce482caae4ed5
+        from: t5-go-to-ground
+        to: t6-burst-of-escape
+      - id: connection-def0467b38180035
+        from: t5-go-to-ground
+        to: t6-skill-with-defense
+effects: []
+folder: null
+sort: 1400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!a6745e2590b805d4'

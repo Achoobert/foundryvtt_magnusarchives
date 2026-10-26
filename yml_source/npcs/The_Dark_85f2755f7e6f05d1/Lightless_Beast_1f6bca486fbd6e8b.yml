@@ -1,0 +1,109 @@
+_id: 1f6bca486fbd6e8b
+name: Lightless Beast
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Fear of the dark made flesh. They creep closer to their prey at bedtime,
+    stopping if the target hides under the blankets or turns on a light, then
+    weeks later try to drag them into The Dark, leaving only a foul dark
+    stain.</p>
+  notes: >-
+    <p>Fear of the dark made flesh. They creep closer to their prey at bedtime,
+    stopping if the target hides under the blankets or turns on a light, then
+    weeks later try to drag them into The Dark, leaving only a foul dark
+    stain.</p><p><strong>Level:</strong> 4 (12)</p><p><strong>Related
+    Entity:</strong> The Dark</p><p><strong>Stress on first realizing its
+    horror:</strong> 2 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 15</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong> Short.
+    Immediate when phasing through floors, walls and the
+    like.</p><p><strong>Modifications:</strong> Speed defense as level 4 (hard
+    to see in dim light or darkness); Perception as level
+    8</p><h3>Combat</h3><p>It attacks with whipping tendrils.</p><p><strong>Dark
+    Comfort:</strong> It regains 2 health each round unless in bright light,
+    which it flees.</p><p><strong>Drown in the Dark:</strong> A target it
+    damages must succeed on a Might defense task or gain 2 Stress, then keep
+    making Might defense tasks each round until one succeeds, taking another
+    level of Stress for each failure. Three failures before a success paralyze
+    them for about a minute, and an undistracted beast can drag a paralyzed
+    target into the ground, water or a wall, into The
+    Dark.</p><h3>Interaction</h3><p>Lightless beasts are sapient and may whisper
+    crisp threats, such as that the blanket won't help.</p><h3>Use</h3><p>A lone
+    character who doesn't give in to fear may beat one, but even a prepared
+    group would find The Still and Lightless Beast almost impossible without
+    special preparation.</p><h3>Notes</h3><p>Lightless beasts are lesser shadows
+    of The Still and Lightless Beast, which usually appears when called by The
+    Taker of Light (p239).</p><p><em>The Magnus Archives Roleplaying Game,
+    p224.</em></p>
+  gmNotes: ''
+  level: 4
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 4
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: Immediate when phasing through floors, walls and the like.
+  modifications:
+    - id: 66964ae8ee827e7a
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 4
+      visibility: gm
+      predicate: {}
+      description: <p>hard to see in dim light or darkness</p>
+    - id: c86e122d0fe926ad
+      label: Perception
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>The beast grabs the character's flashlight and destroys it.</p>
+items: []
+effects: []
+folder: 85f2755f7e6f05d1
+sort: 2500
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '224'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Lightless Beast
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!1f6bca486fbd6e8b'

@@ -1,0 +1,75 @@
+folder: ff93b054f72e6264
+name: Dead Animals
+type: artifact
+_id: c90265df54de6536
+sort: 3100
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: dead-animals
+  description: >-
+    <p><strong>Level:</strong> 3</p><p><strong>Related Entity:</strong> The
+    Flesh</p><p><strong>Stress:</strong> 3 on realizing the book materializes
+    bones.</p><p>An unremarkable book of Sanskrit poems about dead animals. If
+    passed through a shadow before being opened, a handful of slightly warped
+    small-animal bones falls out. This can be repeated; after a few times in one
+    encounter, Horror Mode begins, or if already active its range increases by 1
+    until the encounter ends.</p><p><strong>Fear:</strong> A nearby animal a
+    character noticed is gone, leaving only a small pile of fur, feathers or
+    scales.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '271'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '3'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!c90265df54de6536'

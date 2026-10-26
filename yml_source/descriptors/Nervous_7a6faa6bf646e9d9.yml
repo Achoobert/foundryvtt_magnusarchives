@@ -1,0 +1,154 @@
+name: Nervous
+type: descriptor
+_id: 7a6faa6bf646e9d9
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>The world is full of unsettling things and you are not imagining it. The
+    unease keeps you on your toes.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Jumpy:</strong> +2 to your
+    Speed Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.jUTYItXojqpYujYN]{Initiative}.</p></li><li><p><strong>High-Strung:</strong>
+    You gain an asset to your initiative tasks if you use your first action in
+    an encounter to move a short distance away from whatever threatens
+    you.</p></li><li><p><strong>Suggested Second Skill:</strong> Instead of an
+    extra skill, you may take the High-Strung
+    characteristic.</p></li><li><p><strong>Suggested Inability:</strong> You'll
+    never convincingly make ultimatums. You have an inability in
+    @UUID[Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb]{Intimidation}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '24'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 2
+    intellect: 0
+  skillGrants:
+    - id: f05ec894-0f02-48c0-8605-e0b69dfc70e6
+      skillUuid: Compendium.magnusarchives.skills.Item.jUTYItXojqpYujYN
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Initiative
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: speed
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>Your reactions are honed, easing your initiative tasks in
+            combat.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: combat
+          contexts: []
+          initiative: true
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 1600
+_key: '!items!7a6faa6bf646e9d9'

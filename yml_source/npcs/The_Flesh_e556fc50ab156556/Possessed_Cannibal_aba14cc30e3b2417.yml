@@ -1,0 +1,102 @@
+_id: aba14cc30e3b2417
+name: Possessed Cannibal
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>People who kill and eat others without knowing it. They live normal lives
+    broken by visions and nightmares that hide their atrocities from their own
+    minds.</p>
+  notes: >-
+    <p>People who kill and eat others without knowing it. They live normal lives
+    broken by visions and nightmares that hide their atrocities from their own
+    minds.</p><p><strong>Level:</strong> 4 (12)</p><p><strong>Related
+    Entity:</strong> The Flesh and The Spiral</p><p><strong>Health:</strong>
+    12</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Persuasion and initiative as
+    level 6</p><h3>Combat</h3><p>When the possession takes over, they use
+    improvised weapons such as fire pokers, cast-iron pots and kitchen
+    knives.</p><p><strong>Completely Normal:</strong> Not knowing what they are,
+    they can honestly offer friendship, then ambush, easing their first attack
+    by two steps.</p><p><strong>Not Alone:</strong> Groups of them may converge
+    on a party, bar, service or other gathering, making them far more
+    dangerous.</p><p><strong>Realization:</strong> Made to see what they have
+    done, by paranormal means or expert persuasion, most collapse in shock and
+    are no longer a threat.</p><p><strong>Contagious Cannibalism:</strong> One
+    made to understand their guilt and then killed or exorcised passes the
+    condition to the person responsible if that person fails an Intellect
+    defense roll. The afflicted must make an Intellect defense roll every few
+    days or have a "hallucination" in which they obey cannibalistic
+    commands.</p><h3>Interaction</h3><p>Between hunts they seem normal, if
+    troubled by recent "concentration issues." Told what they are, they hear
+    only bells or other deafening noise.</p><h3>Use</h3><p>One is little danger,
+    except that a character may end up possessed. A character who realizes this
+    might seek help from another Entity's agents or a
+    dabbler.</p><h3>Notes</h3><p>Sample names: Edwin Burroughs, Bethany
+    O'Connor, David Fabray, Erica Babcock, Luke MacBride, Jill Tamayo, Mark
+    Wagner.</p><p><em>The Magnus Archives Roleplaying Game, p234.</em></p>
+  gmNotes: ''
+  level: 4
+  health:
+    value: 12
+    baseMax: 12
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 4
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 277565f9eb8be35d
+      label: Persuasion and initiative
+      contexts:
+        - persuasion
+      mode: levelOverride
+      value: 6
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character finds a hidden corpse with its face eaten away and gains 2
+    Stress on a failed Intellect defense roll.</p>
+items: []
+effects: []
+folder: e556fc50ab156556
+sort: 3600
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '234'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Possessed Cannibal
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!aba14cc30e3b2417'

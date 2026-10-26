@@ -5,20 +5,13 @@ import {DATA_DIR, ROOT} from "./lib/fvtt-config.mjs";
 import {SYSTEM_ID} from "./lib/system-manifest.mjs";
 
 // Everything Foundry needs to serve the system. `dist/` holds the Vite bundle,
-// `packs/` holds the LevelDB compendiums produced by the import:* scripts.
-const ENTRIES_TO_SYNC = [
-  "system.json",
-  "dist",
-  "templates",
-  "lang",
-  "assets",
-  "packs"
-];
+// `packs/` holds the LevelDB compendiums compiled from yml_source/ by packs:build.
+const ENTRIES_TO_SYNC = ["system.json", "dist", "templates", "lang", "assets", "packs"];
 
 const TARGET = path.join(DATA_DIR, "systems", SYSTEM_ID);
 
 if (!existsSync(path.join(ROOT, "dist"))) {
-  console.error("No dist/ directory. Run `pnpm build` (or `pnpm dev`) first.");
+  console.error("No dist/ directory. Run `pnpm build` (or `pnpm watch`) first.");
   process.exit(1);
 }
 

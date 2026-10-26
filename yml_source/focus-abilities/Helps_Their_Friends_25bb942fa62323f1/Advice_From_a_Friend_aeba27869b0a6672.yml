@@ -1,0 +1,82 @@
+name: Advice From a Friend
+type: ability
+_id: aeba27869b0a6672
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: helps-their-friends-advice-from-a-friend
+  description: >-
+    <p><strong>Cost:</strong> 1 Intellect point.</p><p>You know your friends'
+    strengths and how to motivate them. When you suggest something about an
+    ally's next action, they are trained in that action for one
+    round.</p><p>Action.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 66-67
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - helps-their-friends
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 1
+  category: focus
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 1
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 25bb942fa62323f1
+sort: 4600
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!aeba27869b0a6672'

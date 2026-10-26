@@ -1,0 +1,80 @@
+folder: ff93b054f72e6264
+name: 'Infinity Above: A Book of Astronomy'
+type: artifact
+_id: 26d7bed92880b1e8
+sort: 3700
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: infinity-above-a-book-of-astronomy
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Vast</p><p><strong>Stress:</strong> 3 on realizing most of the book shows
+    strange constellations; 1 each time a reader gains the ability to see in the
+    dark.</p><p>A modern coffee-table book of color-corrected telescope
+    photographs. After the first few, the constellations match nothing on Earth
+    and carry names like Corpse King and Fang in the Night.</p><p>A reader who
+    realizes this (or anyone who flips through a handful of pages) can see in
+    the dark for a day and can always see the stars overhead, even indoors or
+    underground, day or night. Meanwhile the strange constellations are
+    reflected in their eyes.</p><p><strong>Fear:</strong> A reader who still
+    owns the book is whisked up into what seems like open space but is a
+    breathable layer of The Vast. They make an Intellect defense roll each
+    round: three successes before three failures returns them; three failures
+    first leaves them spinning there forever, or until rescued.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '275'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-vast
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!26d7bed92880b1e8'

@@ -1,11 +1,5 @@
 const U = "magnusarchives", Pr = "0.1.0";
-const ie = [
-  "inability",
-  "untrained",
-  "trained",
-  "specialized",
-  "expert"
-], Os = ["choose", "might", "speed", "intellect"], Le = ["light", "medium", "heavy"], Bs = ["melee", "ranged"], Gn = ["immediate", "short", "long", "very-long", "specified"], je = ["light", "medium", "heavy"], Ls = ["block", "blockWithShield", "dodge"], xr = ["d6", "d10", "d20"], Kn = ["subtle", "manifest"], Xn = ["low", "medium", "advanced", "high", "ultra"], ge = ["minor", "moderate", "major"], Bt = ["hale", "hurt", "impaired", "debilitated", "dead"], xi = ["none", "stress", "seriousInjury"];
+const ie = ["inability", "untrained", "trained", "specialized", "expert"], Os = ["choose", "might", "speed", "intellect"], Le = ["light", "medium", "heavy"], Bs = ["melee", "ranged"], Gn = ["immediate", "short", "long", "very-long", "specified"], je = ["light", "medium", "heavy"], Ls = ["block", "blockWithShield", "dodge"], xr = ["d6", "d10", "d20"], Kn = ["subtle", "manifest"], Xn = ["low", "medium", "advanced", "high", "ultra"], ge = ["minor", "moderate", "major"], Bt = ["hale", "hurt", "impaired", "debilitated", "dead"], xi = ["none", "stress", "seriousInjury"];
 const Un = [
   "inexpensive",
   "moderate",
@@ -32,9 +26,7 @@ function Br(n, e, t) {
     themes: t
   });
 }
-const Lr = Bt.filter(
-  (n) => n !== "hurt"
-);
+const Lr = Bt.filter((n) => n !== "hurt");
 function ti(n) {
   return n ? Bt : Lr;
 }
@@ -180,22 +172,24 @@ function L(n) {
   return n.derived?.tier?.value ?? St(n.tier, n.overrides?.tier);
 }
 function kn(n, e) {
-  if (e === "tier") return {
-    key: e,
-    path: vt(e),
-    calculated: n.derived.tier.calculated,
-    override: n.overrides?.tier ?? null,
-    effective: n.derived.tier.value,
-    minimum: 1
-  };
-  if (e === "effort") return {
-    key: e,
-    path: vt(e),
-    calculated: n.derived.effort.calculatedMax,
-    override: n.overrides?.effort ?? null,
-    effective: n.derived.effort.max,
-    minimum: 0
-  };
+  if (e === "tier")
+    return {
+      key: e,
+      path: vt(e),
+      calculated: n.derived.tier.calculated,
+      override: n.overrides?.tier ?? null,
+      effective: n.derived.tier.value,
+      minimum: 1
+    };
+  if (e === "effort")
+    return {
+      key: e,
+      path: vt(e),
+      calculated: n.derived.effort.calculatedMax,
+      override: n.overrides?.effort ?? null,
+      effective: n.derived.effort.max,
+      minimum: 0
+    };
   const t = Yn(e), i = e.endsWith("Max") ? "max" : "edge", a = n.derived.pools[t];
   return {
     key: e,
@@ -309,22 +303,10 @@ function tl(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
     };
   }
   const f = [
-    we(
-      "effort.max.base",
-      "system.stats.effortBase",
-      "base",
-      "Base Effort",
-      n.effortBase ?? 0
-    ),
+    we("effort.max.base", "system.stats.effortBase", "base", "Base Effort", n.effortBase ?? 0),
     ...i.effortMax ?? []
   ], A = Math.max(0, be(f)), v = [
-    we(
-      "recovery.bonus.base",
-      "system.recovery.bonus",
-      "base",
-      "Permanent Recovery bonus",
-      o
-    ),
+    we("recovery.bonus.base", "system.recovery.bonus", "base", "Permanent Recovery bonus", o),
     ...i.recoveryBonus ?? []
   ], E = be(v), H = [
     we("cypher-limit.base", "system.cypherLimitBase", "base", "Base Cypher Limit", l),
@@ -332,60 +314,35 @@ function tl(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
   ], R = {}, G = {}, P = {};
   for (const N of ge) {
     const S = [
-      we(
-        `wound.${N}.capacity.core`,
-        "magnusarchives.core",
-        "core",
-        `${N} Wound capacity`,
-        3
-      ),
+      we(`wound.${N}.capacity.core`, "magnusarchives.core", "core", `${N} Wound capacity`, 3),
       ...i.woundCapacity?.[N] ?? []
     ], J = Math.max(1, be(S)), Ke = d.wounds?.[N] ?? 0;
-    G[N] = J, R[N] = Ke === 0 ? S : [...S, we(
-      `wound.${N}.capacity.manual`,
-      `system.overrides.wounds.${N}`,
-      "base",
-      `Manual ${N} Wound capacity modifier`,
-      Ke
-    )], P[N] = Math.max(1, J + Ke);
+    G[N] = J, R[N] = Ke === 0 ? S : [
+      ...S,
+      we(
+        `wound.${N}.capacity.manual`,
+        `system.overrides.wounds.${N}`,
+        "base",
+        `Manual ${N} Wound capacity modifier`,
+        Ke
+      )
+    ], P[N] = Math.max(1, J + Ke);
   }
   const X = [];
   e.moderate.length >= P.moderate && X.push(
-    we(
-      "wound.moderate.full.hindrance",
-      "magnusarchives.core",
-      "core",
-      "Moderate Wounds full",
-      1
-    )
+    we("wound.moderate.full.hindrance", "magnusarchives.core", "core", "Moderate Wounds full", 1)
   );
   for (const N of e.major)
     X.push(
-      we(
-        `wound.major.${N.id}.hindrance`,
-        N.id,
-        "wound",
-        N.label || "Major Wound",
-        1
-      )
+      we(`wound.major.${N.id}.hindrance`, N.id, "wound", N.label || "Major Wound", 1)
     );
   const M = Math.max(0, m.stressPoints), D = ki(M);
   D > 0 && X.push(
-    we(
-      "stress.level.hindrance",
-      "magnusarchives.core",
-      "stress",
-      `Stress Level ${D}`,
-      D
-    )
+    we("stress.level.hindrance", "magnusarchives.core", "stress", `Stress Level ${D}`, D)
   ), X.push(...i.hindrance ?? []);
-  const ne = [...a].filter((N) => N.type === "armor" && N.system.equipped).some((N) => N.system.grantsHurtStep !== !1), _ = m.hurtAvailable || ne || (i.hurtStep?.length ?? 0) > 0, He = Et(m.damageTrackStep, _), O = Xr(He), Q = [...a].filter((N) => N.type === "armor" && N.system.equipped).filter((N) => je.includes(N.system.category)).sort((N, S) => en[S.system.category] - en[N.system.category] || N.id.localeCompare(S.id))[0], $e = Q?.system.category ?? "none", Se = Q ? en[Q.system.category] : 0, Ie = Q ? s.armorCategories.includes(Q.system.category) : !0, ce = (N, S, J) => Q && J > 0 ? [we(
-    `armor.${Q.id}.${N}`,
-    Q.id,
-    "item",
-    S,
-    J
-  )] : [], Z = ce("block", "Armor: Block", Se), Ae = ce("dodge", "Armor: Dodge", Se), pe = ce(
+  const ne = [...a].filter((N) => N.type === "armor" && N.system.equipped).some((N) => N.system.grantsHurtStep !== !1), _ = m.hurtAvailable || ne || (i.hurtStep?.length ?? 0) > 0, He = Et(m.damageTrackStep, _), O = Xr(He), Q = [...a].filter((N) => N.type === "armor" && N.system.equipped).filter((N) => je.includes(N.system.category)).sort(
+    (N, S) => en[S.system.category] - en[N.system.category] || N.id.localeCompare(S.id)
+  )[0], $e = Q?.system.category ?? "none", Se = Q ? en[Q.system.category] : 0, Ie = Q ? s.armorCategories.includes(Q.system.category) : !0, ce = (N, S, J) => Q && J > 0 ? [we(`armor.${Q.id}.${N}`, Q.id, "item", S, J)] : [], Z = ce("block", "Armor: Block", Se), Ae = ce("dodge", "Armor: Dodge", Se), pe = ce(
     "speed-task",
     "Armor: Speed task",
     Math.max(Q?.system.speedTaskHindrance ?? 0, Ie ? 0 : Se)
@@ -455,15 +412,7 @@ function tl(n, e, t, i = {}, a = [], s = { armorCategories: [], freelyUse: [] },
 function Ha(n) {
   return n === 0 ? "1d6 + Tier" : `1d6 + Tier ${n > 0 ? "+" : "-"} ${Math.abs(n)}`;
 }
-const {
-  ArrayField: Jn,
-  BooleanField: qi,
-  HTMLField: Zs,
-  NumberField: Nt,
-  ObjectField: il,
-  SchemaField: kt,
-  StringField: he
-} = foundry.data.fields, c = {
+const { ArrayField: Jn, BooleanField: qi, HTMLField: Zs, NumberField: Nt, ObjectField: il, SchemaField: kt, StringField: he } = foundry.data.fields, c = {
   ArrayField: Jn,
   BooleanField: qi,
   HTMLField: Zs,
@@ -476,10 +425,11 @@ function w(n = 0, e = 0) {
   return new Nt({ required: !0, nullable: !1, integer: !0, min: e, initial: n });
 }
 function ee(n = []) {
-  return new Jn(
-    new he({ required: !0, nullable: !1, blank: !1 }),
-    { required: !0, nullable: !1, initial: [...n] }
-  );
+  return new Jn(new he({ required: !0, nullable: !1, blank: !1 }), {
+    required: !0,
+    nullable: !1,
+    initial: [...n]
+  });
 }
 function tn(n = 10) {
   return new kt({
@@ -541,13 +491,7 @@ function al() {
       required: !0,
       nullable: !1,
       initial: "recovery",
-      choices: [
-        "recovery",
-        "10-minute-or-longer",
-        "1-hour-or-longer",
-        "10-hour",
-        "non-rest-recovery"
-      ]
+      choices: ["recovery", "10-minute-or-longer", "1-hour-or-longer", "10-hour", "non-rest-recovery"]
     })
   });
 }
@@ -585,18 +529,7 @@ const Qn = [
   "moveTowardPerfection",
   "extraEffort",
   "skillTraining"
-], to = [
-  "recovery",
-  "focus",
-  "armor",
-  "weapons",
-  "genre"
-], sl = [...Qn, "other"], io = [
-  "characterCreation",
-  "additionalFocus",
-  "otherAdvancement",
-  "newTier"
-], ol = ["otherAdvancement", "newTier"], no = Object.freeze({
+], to = ["recovery", "focus", "armor", "weapons", "genre"], sl = [...Qn, "other"], io = ["characterCreation", "additionalFocus", "otherAdvancement", "newTier"], ol = ["otherAdvancement", "newTier"], no = Object.freeze({
   xpCost: 4,
   purchasesPerTier: 4,
   capabilityPoints: 4,
@@ -618,7 +551,9 @@ function At(n) {
   return ct(n).split("-").filter(Boolean).map((e) => `${e[0]?.toLocaleUpperCase("en-US") ?? ""}${e.slice(1)}`).join(" ");
 }
 function Bi(n) {
-  return !n || typeof n != "object" || Array.isArray(n) ? [] : le(Object.entries(n).filter(([, e]) => e === !0).map(([e]) => e));
+  return !n || typeof n != "object" || Array.isArray(n) ? [] : le(
+    Object.entries(n).filter(([, e]) => e === !0).map(([e]) => e)
+  );
 }
 const rl = [
   "Accuracy",
@@ -660,13 +595,15 @@ function ll(n) {
     const t = e.system.instance?.instanceId || e.id;
     return (e.system.instance?.selections?.powerShifts ?? []).flatMap((i, a) => {
       const s = String(i ?? "").trim();
-      return s ? [{
-        id: `legacy-${t}-${a}`,
-        category: "Custom",
-        shifts: 1,
-        specification: s,
-        description: ""
-      }] : [];
+      return s ? [
+        {
+          id: `legacy-${t}-${a}`,
+          category: "Custom",
+          shifts: 1,
+          specification: s,
+          description: ""
+        }
+      ] : [];
     });
   });
 }
@@ -729,7 +666,11 @@ function T(n, e) {
 }
 function pl(n, e) {
   const t = { ...n };
-  return (!e || T(n, "cycle")) && (t.cycle = Number.isInteger(n.cycle) ? n.cycle : 1), (!e || T(n, "purchases")) && (t.purchases = Array.isArray(n.purchases) ? n.purchases : []), (!e || T(n, "initializedFocusUuids")) && (t.initializedFocusUuids = Array.isArray(n.initializedFocusUuids) ? n.initializedFocusUuids : []), (!e || T(n, "pendingFocusChoices")) && (t.pendingFocusChoices = Array.isArray(n.pendingFocusChoices) ? n.pendingFocusChoices : []), (!e || T(n, "pendingGenreChoices")) && (t.pendingGenreChoices = Array.isArray(n.pendingGenreChoices) ? n.pendingGenreChoices : []), (!e || T(n, "guidanceCompletedTiers")) && (t.guidanceCompletedTiers = Array.isArray(n.guidanceCompletedTiers) ? [...new Set(n.guidanceCompletedTiers.filter((i) => Number.isInteger(i) && Number(i) >= 1).map(Number))].sort((i, a) => i - a) : []), (!e || T(n, "notes")) && (t.notes = typeof n.notes == "string" ? n.notes : ""), t;
+  return (!e || T(n, "cycle")) && (t.cycle = Number.isInteger(n.cycle) ? n.cycle : 1), (!e || T(n, "purchases")) && (t.purchases = Array.isArray(n.purchases) ? n.purchases : []), (!e || T(n, "initializedFocusUuids")) && (t.initializedFocusUuids = Array.isArray(n.initializedFocusUuids) ? n.initializedFocusUuids : []), (!e || T(n, "pendingFocusChoices")) && (t.pendingFocusChoices = Array.isArray(n.pendingFocusChoices) ? n.pendingFocusChoices : []), (!e || T(n, "pendingGenreChoices")) && (t.pendingGenreChoices = Array.isArray(n.pendingGenreChoices) ? n.pendingGenreChoices : []), (!e || T(n, "guidanceCompletedTiers")) && (t.guidanceCompletedTiers = Array.isArray(n.guidanceCompletedTiers) ? [
+    ...new Set(
+      n.guidanceCompletedTiers.filter((i) => Number.isInteger(i) && Number(i) >= 1).map(Number)
+    )
+  ].sort((i, a) => i - a) : []), (!e || T(n, "notes")) && (t.notes = typeof n.notes == "string" ? n.notes : ""), t;
 }
 function fl(n, e) {
   const t = { ...n };
@@ -778,7 +719,9 @@ function gl(n, e = {}) {
     };
   })), n.advancement && typeof n.advancement == "object" && (n.advancement = pl(n.advancement, t)), !t || n.recovery && typeof n.recovery == "object") {
     const i = n.recovery && typeof n.recovery == "object" ? n.recovery : {}, a = i.used && typeof i.used == "object" ? { ...It(!1), ...i.used } : It(!1), s = { ...i };
-    (!t || T(i, "bonus")) && (s.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || T(i, "slots")) && (s.slots = Qr(i.slots, a), s.used = Rt(s.slots)), (!t || T(i, "customized")) && (s.customized = i.customized === !0), (!t || T(i, "rollModifier")) && (s.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || T(i, "history")) && (s.history = Array.isArray(i.history) ? i.history.map((o) => o && typeof o == "object" ? { slotId: "", ...o } : o) : []), n.recovery = s;
+    (!t || T(i, "bonus")) && (s.bonus = Number.isInteger(i.bonus) ? i.bonus : 0), (!t || T(i, "slots")) && (s.slots = Qr(i.slots, a), s.used = Rt(s.slots)), (!t || T(i, "customized")) && (s.customized = i.customized === !0), (!t || T(i, "rollModifier")) && (s.rollModifier = Number.isInteger(i.rollModifier) ? Number(i.rollModifier) : 0), (!t || T(i, "history")) && (s.history = Array.isArray(i.history) ? i.history.map(
+      (o) => o && typeof o == "object" ? { slotId: "", ...o } : o
+    ) : []), n.recovery = s;
   }
   if (t) {
     if (n.presentation && typeof n.presentation == "object") {
@@ -830,7 +773,11 @@ function hl(n, e, t = []) {
   return [i, a].filter(Boolean).join(" ");
 }
 function yl(n, e = [], t = [], i = [], a = []) {
-  const s = {}, o = {}, r = {}, l = new Set(e.filter((f) => Le.includes(f))), u = new Set(le(a)), d = new Set(t.filter((f) => je.includes(f))), p = [], y = [], m = [], h = [];
+  const s = {}, o = {}, r = {}, l = new Set(
+    e.filter((f) => Le.includes(f))
+  ), u = new Set(le(a)), d = new Set(
+    t.filter((f) => je.includes(f))
+  ), p = [], y = [], m = [], h = [];
   for (const f of n) {
     if (f.type === "characterType" || f.type === "species") {
       const E = f.system;
@@ -844,7 +791,8 @@ function yl(n, e = [], t = [], i = [], a = []) {
       for (const R of le([
         ...E.weaponFamilies ?? [],
         ...Bi(E.weaponFamilyUse)
-      ])) u.add(R);
+      ]))
+        u.add(R);
       for (const R of ["minor", "moderate", "major"]) {
         const G = Xe(E.woundBonuses[R]);
         G && (r[R] ??= []).push(pt(f, `wound.${R}`, G));
@@ -864,17 +812,13 @@ function yl(n, e = [], t = [], i = [], a = []) {
       H && (s[E] ??= []).push(pt(f, `pool.${E}`, H));
     }
     for (const E of ro(f))
-      (s[E.pool] ??= []).push(pt(
-        f,
-        `pool-choice.${E.groupId}.${E.pool}`,
-        E.amount
-      ));
+      (s[E.pool] ??= []).push(
+        pt(f, `pool-choice.${E.groupId}.${E.pool}`, E.amount)
+      );
     const v = lo(f);
-    v && (s[v.pool] ??= []).push(pt(
-      f,
-      `superheroics.${v.pool}`,
-      v.amount
-    ));
+    v && (s[v.pool] ??= []).push(
+      pt(f, `superheroics.${v.pool}`, v.amount)
+    );
   }
   return {
     extensions: { poolMax: s, poolEdge: o, woundCapacity: r, cypherLimit: h },
@@ -888,7 +832,9 @@ function yl(n, e = [], t = [], i = [], a = []) {
   };
 }
 function nn(n) {
-  const e = n.system, t = Object.fromEntries(k.map((a) => [a, Xe(e.poolBonuses[a])]));
+  const e = n.system, t = Object.fromEntries(
+    k.map((a) => [a, Xe(e.poolBonuses[a])])
+  );
   for (const a of ro(n)) t[a.pool] += a.amount;
   const i = lo(n);
   return i && (t[i.pool] += i.amount), t;
@@ -923,7 +869,9 @@ function po(n) {
   };
 }
 function fo({ r: n, g: e, b: t }) {
-  return `#${[n, e, t].map((i) => Math.max(0, Math.min(255, Math.round(i))).toString(16).padStart(2, "0")).join("")}`;
+  return `#${[n, e, t].map(
+    (i) => Math.max(0, Math.min(255, Math.round(i))).toString(16).padStart(2, "0")
+  ).join("")}`;
 }
 function go(n, e, t) {
   const i = 1 - t;
@@ -1221,13 +1169,16 @@ class Dl extends eo {
         hideFocusInSentence: new c.BooleanField({ required: !0, nullable: !1, initial: !1 }),
         powerShiftsEnabled: new c.BooleanField({ required: !0, nullable: !1, initial: !1 })
       }),
-      powerShifts: new c.ArrayField(new c.SchemaField({
-        id: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        category: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        shifts: w(1, 1),
-        specification: new c.StringField({ required: !0, nullable: !1, initial: "" }),
-        description: new c.StringField({ required: !0, nullable: !1, initial: "" })
-      }), { required: !0, nullable: !1, initial: [] }),
+      powerShifts: new c.ArrayField(
+        new c.SchemaField({
+          id: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
+          category: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
+          shifts: w(1, 1),
+          specification: new c.StringField({ required: !0, nullable: !1, initial: "" }),
+          description: new c.StringField({ required: !0, nullable: !1, initial: "" })
+        }),
+        { required: !0, nullable: !1, initial: [] }
+      ),
       advancement: new c.SchemaField({
         cycle: w(1, 1),
         purchases: new c.ArrayField(Ml(), {
@@ -1408,7 +1359,9 @@ class Dl extends eo {
       type: l.type,
       system: l.system
     })), i = this.proficiencies, a = yl(
-      e.filter((l) => l.type === "characterType" || l.type === "descriptor" || l.type === "species"),
+      e.filter(
+        (l) => l.type === "characterType" || l.type === "descriptor" || l.type === "species"
+      ),
       i.weaponCategories,
       i.armorCategories,
       [],
@@ -1506,10 +1459,11 @@ class Fl extends eo {
         new c.SchemaField({
           id: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
           label: new c.StringField({ required: !0, nullable: !1, initial: "" }),
-          contexts: new c.ArrayField(
-            new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-            { required: !0, nullable: !1, initial: [] }
-          ),
+          contexts: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+            required: !0,
+            nullable: !1,
+            initial: []
+          }),
           mode: new c.StringField({
             required: !0,
             nullable: !1,
@@ -1564,7 +1518,12 @@ function bo() {
       replacementName: new c.StringField({ required: !0, nullable: !1, initial: "" }),
       replacementContentUuid: new c.StringField({ required: !0, nullable: !1, initial: "" }),
       replacementContentKey: new c.StringField({ required: !0, nullable: !1, initial: "" }),
-      selectionKind: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "suggested", "world", "compendium", "custom"] })
+      selectionKind: new c.StringField({
+        required: !0,
+        nullable: !1,
+        initial: "none",
+        choices: ["none", "suggested", "world", "compendium", "custom"]
+      })
     })
   });
 }
@@ -1579,7 +1538,11 @@ function wo() {
 function sn() {
   return new c.SchemaField({
     groupId: new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-    optionIds: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), { required: !0, nullable: !1, initial: [] })
+    optionIds: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+      required: !0,
+      nullable: !1,
+      initial: []
+    })
   });
 }
 function Bl() {
@@ -1598,17 +1561,31 @@ function ea() {
     role: new c.StringField({ required: !0, nullable: !1, initial: "primary", choices: [...zl] }),
     attachedAt: w(),
     selections: new c.SchemaField({
-      edgePool: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
-      superheroicsPool: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", ...k] }),
-      powerShifts: new c.ArrayField(
-        new c.StringField({ required: !0, nullable: !1, initial: "" }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
+      edgePool: new c.StringField({
+        required: !0,
+        nullable: !1,
+        initial: "none",
+        choices: ["none", "might", "speed", "intellect"]
+      }),
+      superheroicsPool: new c.StringField({
+        required: !0,
+        nullable: !1,
+        initial: "none",
+        choices: ["none", ...k]
+      }),
+      powerShifts: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, initial: "" }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       poolChoices: new c.ArrayField(Bl(), { required: !0, nullable: !1, initial: [] }),
       skillChoices: new c.ArrayField(sn(), { required: !0, nullable: !1, initial: [] }),
       abilityChoices: new c.ArrayField(sn(), { required: !0, nullable: !1, initial: [] }),
       descriptorChoices: new c.ArrayField(sn(), { required: !0, nullable: !1, initial: [] }),
-      suppressedGrantIds: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), { required: !0, nullable: !1, initial: [] })
+      suppressedGrantIds: new c.ArrayField(
+        new c.StringField({ required: !0, nullable: !1, blank: !1 }),
+        { required: !0, nullable: !1, initial: [] }
+      )
     }),
     parent: bo()
   });
@@ -1723,14 +1700,16 @@ class me extends foundry.abstract.TypeDataModel {
         duration: al(),
         rollDefaults: new c.ObjectField({ required: !0, nullable: !1, initial: {} })
       }),
-      ruleElements: new c.ArrayField(
-        new c.ObjectField({ required: !0, nullable: !1 }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
-      tags: new c.ArrayField(
-        new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
+      ruleElements: new c.ArrayField(new c.ObjectField({ required: !0, nullable: !1 }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
+      tags: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       grantedBy: bo()
     };
   }
@@ -1844,10 +1823,7 @@ class Xl extends me {
       amount: Number(a.amount ?? 0),
       scalable: !!(a.scalable ?? !1),
       ignoresEdge: !!(a.ignoresEdge ?? !1),
-      allowedPools: Hn(
-        a.allowedPools,
-        i.pool ?? a.pool
-      )
+      allowedPools: Hn(a.allowedPools, i.pool ?? a.pool)
     }, i.roll === void 0 && (i.roll = "none"), i.targetMode === void 0 && (i.targetMode = "none"), i;
   }
 }
@@ -1873,14 +1849,17 @@ class Yl extends me {
         moderate: new c.ArrayField(Ct(), { required: !0, nullable: !1, initial: [] }),
         major: new c.ArrayField(Ct(), { required: !0, nullable: !1, initial: [] })
       }),
-      derived: new c.SchemaField({
-        capacities: new c.SchemaField({
-          minor: w(nt.minor),
-          moderate: w(nt.moderate),
-          major: w(nt.major)
-        }),
-        broken: new c.BooleanField({ required: !0, nullable: !1, initial: !1 })
-      }, { required: !0, nullable: !1, persisted: !1 })
+      derived: new c.SchemaField(
+        {
+          capacities: new c.SchemaField({
+            minor: w(nt.minor),
+            moderate: w(nt.moderate),
+            major: w(nt.major)
+          }),
+          broken: new c.BooleanField({ required: !0, nullable: !1, initial: !1 })
+        },
+        { required: !0, nullable: !1, persisted: !1 }
+      )
     };
   }
   prepareDerivedData() {
@@ -1940,26 +1919,48 @@ class Zl extends me {
       poolBonuses: new c.SchemaField({ might: w(), speed: w(), intellect: w() }),
       woundBonuses: new c.SchemaField({ minor: w(), moderate: w(), major: w() }),
       edgeGrant: new c.SchemaField({
-        mode: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: [...Ao] }),
-        pool: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
+        mode: new c.StringField({
+          required: !0,
+          nullable: !1,
+          initial: "none",
+          choices: [...Ao]
+        }),
+        pool: new c.StringField({
+          required: !0,
+          nullable: !1,
+          initial: "none",
+          choices: ["none", "might", "speed", "intellect"]
+        }),
         amount: w(1)
       }),
       weaponUse: Hi(),
-      weaponFamilies: new c.ArrayField(
-        new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
+      weaponFamilies: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       armorUse: Hi(),
       superhero: new c.SchemaField({
         rank: new c.NumberField({ required: !0, nullable: !1, integer: !0, min: 0, max: 5, initial: 0 }),
-        powerShiftCount: new c.NumberField({ required: !0, nullable: !1, integer: !0, min: 0, max: 10, initial: 0 }),
+        powerShiftCount: new c.NumberField({
+          required: !0,
+          nullable: !1,
+          integer: !0,
+          min: 0,
+          max: 10,
+          initial: 0
+        }),
         superheroics: new c.SchemaField({
           enabled: new c.BooleanField({ required: !0, nullable: !1, initial: !1 }),
           poolBonus: w()
         })
       }),
       abilityGrants: new c.ArrayField(ta(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new c.ArrayField(vo(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new c.ArrayField(vo(), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       skillGrants: new c.ArrayField(ia(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new c.ArrayField(na(), { required: !0, nullable: !1, initial: [] }),
       genre: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: [...Tl] }),
@@ -2017,7 +2018,11 @@ class tc extends me {
     return {
       ...super.defineSchema(),
       poolBonuses: new c.SchemaField({ might: w(), speed: w(), intellect: w() }),
-      poolBonusChoiceGroups: new c.ArrayField(Ll(), { required: !0, nullable: !1, initial: [] }),
+      poolBonusChoiceGroups: new c.ArrayField(Ll(), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       skillGrants: new c.ArrayField(ia(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new c.ArrayField(na(), { required: !0, nullable: !1, initial: [] }),
       instance: ea()
@@ -2223,10 +2228,11 @@ class uc extends me {
         choices: [...Os]
       }),
       category: new c.StringField({ required: !0, nullable: !1, initial: "general" }),
-      contexts: new c.ArrayField(
-        new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
+      contexts: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       initiative: new c.BooleanField({ required: !0, nullable: !1, initial: !1 }),
       acquisition: new c.SchemaField({
         minimumTier: w(1, 1),
@@ -2247,23 +2253,42 @@ class mc extends me {
       poolBonuses: new c.SchemaField({ might: w(), speed: w(), intellect: w() }),
       woundBonuses: new c.SchemaField({ minor: w(), moderate: w(), major: w() }),
       edgeGrant: new c.SchemaField({
-        mode: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: [...Ao] }),
-        pool: new c.StringField({ required: !0, nullable: !1, initial: "none", choices: ["none", "might", "speed", "intellect"] }),
+        mode: new c.StringField({
+          required: !0,
+          nullable: !1,
+          initial: "none",
+          choices: [...Ao]
+        }),
+        pool: new c.StringField({
+          required: !0,
+          nullable: !1,
+          initial: "none",
+          choices: ["none", "might", "speed", "intellect"]
+        }),
         amount: w(1)
       }),
       weaponUse: Hi(),
-      weaponFamilies: new c.ArrayField(
-        new c.StringField({ required: !0, nullable: !1, blank: !1 }),
-        { required: !0, nullable: !1, initial: [] }
-      ),
+      weaponFamilies: new c.ArrayField(new c.StringField({ required: !0, nullable: !1, blank: !1 }), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       armorUse: Hi(),
       cypherLimitBonus: w(),
       skillGrants: new c.ArrayField(ia(), { required: !0, nullable: !1, initial: [] }),
       choiceGroups: new c.ArrayField(na(), { required: !0, nullable: !1, initial: [] }),
       abilityGrants: new c.ArrayField(ta(), { required: !0, nullable: !1, initial: [] }),
-      abilityChoiceGroups: new c.ArrayField(vo(), { required: !0, nullable: !1, initial: [] }),
+      abilityChoiceGroups: new c.ArrayField(vo(), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       descriptorGrants: new c.ArrayField(Co(), { required: !0, nullable: !1, initial: [] }),
-      descriptorChoiceGroups: new c.ArrayField(Wl(), { required: !0, nullable: !1, initial: [] }),
+      descriptorChoiceGroups: new c.ArrayField(Wl(), {
+        required: !0,
+        nullable: !1,
+        initial: []
+      }),
       instance: ea()
     };
   }
@@ -2456,7 +2481,9 @@ class Ac extends Actor {
    */
 }
 function bc(n) {
-  return Object.keys(n).some((e) => e === "system.poolBonuses" || e.startsWith("system.poolBonuses.") || e === "system.poolBonusChoiceGroups" || e.startsWith("system.poolBonusChoiceGroups.") || e === "system.instance.selections.poolChoices" || e.startsWith("system.instance.selections.poolChoices.") || e === "system.instance.selections.superheroicsPool" || e === "system.superhero.superheroics.poolBonus" || e === "system" && typeof n.system == "object" && n.system !== null && ("poolBonuses" in n.system || "poolBonusChoiceGroups" in n.system || "superhero" in n.system || "instance" in n.system && typeof n.system.instance == "object" && n.system.instance !== null && "selections" in n.system.instance && typeof n.system.instance.selections == "object" && n.system.instance.selections !== null && ("poolChoices" in n.system.instance.selections || "superheroicsPool" in n.system.instance.selections)));
+  return Object.keys(n).some(
+    (e) => e === "system.poolBonuses" || e.startsWith("system.poolBonuses.") || e === "system.poolBonusChoiceGroups" || e.startsWith("system.poolBonusChoiceGroups.") || e === "system.instance.selections.poolChoices" || e.startsWith("system.instance.selections.poolChoices.") || e === "system.instance.selections.superheroicsPool" || e === "system.superhero.superheroics.poolBonus" || e === "system" && typeof n.system == "object" && n.system !== null && ("poolBonuses" in n.system || "poolBonusChoiceGroups" in n.system || "superhero" in n.system || "instance" in n.system && typeof n.system.instance == "object" && n.system.instance !== null && "selections" in n.system.instance && typeof n.system.instance.selections == "object" && n.system.instance.selections !== null && ("poolChoices" in n.system.instance.selections || "superheroicsPool" in n.system.instance.selections))
+  );
 }
 function wc(n) {
   if (n["system.equipped"] === !0) return !0;
@@ -2469,19 +2496,14 @@ class vc extends Item {
     return t ? { img: t } : super.getDefaultArtwork(e);
   }
   async update(e, t = {}) {
-    const i = this.actor?.type === "character" ? this.actor : null, a = i && (this.type === "characterType" || this.type === "descriptor" || this.type === "species") && bc(e), s = a ? Object.fromEntries(k.map((l) => [
-      l,
-      Number(i.system.derived.pools[l].max)
-    ])) : null, o = a ? Object.fromEntries(k.map((l) => [
-      l,
-      Number(i.system.stats[l].value)
-    ])) : null, r = await super.update(e, t);
+    const i = this.actor?.type === "character" ? this.actor : null, a = i && (this.type === "characterType" || this.type === "descriptor" || this.type === "species") && bc(e), s = a ? Object.fromEntries(
+      k.map((l) => [l, Number(i.system.derived.pools[l].max)])
+    ) : null, o = a ? Object.fromEntries(
+      k.map((l) => [l, Number(i.system.stats[l].value)])
+    ) : null, r = await super.update(e, t);
     if (i && (this.type === "shield" || this.type === "armor") && wc(e) && t.magnusarchivesCombatEquipmentSync !== !0 && t.magnusarchivesShieldEquipmentSync !== !0)
       for (const l of i.items)
-        l.id === this.id || l.type !== this.type || l.system.equipped && await l.update(
-          { "system.equipped": !1 },
-          { magnusarchivesCombatEquipmentSync: !0 }
-        );
+        l.id === this.id || l.type !== this.type || l.system.equipped && await l.update({ "system.equipped": !1 }, { magnusarchivesCombatEquipmentSync: !0 });
     if (i && s && o) {
       const l = {};
       for (const u of k) {
@@ -2499,10 +2521,7 @@ function Cc() {
 const dt = 1, ni = 20, oa = 1;
 function $t(n) {
   const e = Number(n);
-  return Number.isFinite(e) ? Math.min(
-    ni,
-    Math.max(dt, Math.trunc(e))
-  ) : oa;
+  return Number.isFinite(e) ? Math.min(ni, Math.max(dt, Math.trunc(e))) : oa;
 }
 function Ec(n) {
   return Number.isInteger(n) && Number(n) >= dt && Number(n) <= ni;
@@ -2600,10 +2619,7 @@ function Ic(n) {
       max: ni,
       step: 1
     },
-    onChange: (e) => Hooks.callAll(
-      "magnusarchivesHorrorIntrusionRangeChanged",
-      $t(e)
-    )
+    onChange: (e) => Hooks.callAll("magnusarchivesHorrorIntrusionRangeChanged", $t(e))
   }), game.settings.register(U, B.pendingIntrusionXP, {
     scope: "world",
     config: !1,
@@ -2616,9 +2632,7 @@ function Oe() {
   const n = rt();
   return {
     base: {
-      difficultyCeiling: Number(
-        game.settings.get(U, B.defaultDifficultyCeiling)
-      ),
+      difficultyCeiling: Number(game.settings.get(U, B.defaultDifficultyCeiling)),
       assetLimit: 0
     },
     enabledRuleModuleIds: n
@@ -2639,9 +2653,7 @@ function ji() {
   return game.settings.get(U, B.showGmRollAudit) === !0;
 }
 function $n() {
-  return typeof game > "u" ? oa : $t(
-    game.settings.get(U, B.horrorIntrusionRange)
-  );
+  return typeof game > "u" ? oa : $t(game.settings.get(U, B.horrorIntrusionRange));
 }
 async function Rc(n) {
   if (!game.user.isGM) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Horror.Errors.GMOnly"));
@@ -2660,19 +2672,22 @@ function la(n) {
   return n.system.schema.fields;
 }
 function ca(n, e) {
-  return Object.fromEntries(Object.entries(n).map(([t, i]) => [
-    t,
-    e.has(t) ? function(...s) {
-      if (this.isEditable)
-        return i.apply(this, s);
-    } : i
-  ]));
+  return Object.fromEntries(
+    Object.entries(n).map(([t, i]) => [
+      t,
+      e.has(t) ? function(...s) {
+        if (this.isEditable)
+          return i.apply(this, s);
+      } : i
+    ])
+  );
 }
 function da(n, e, t) {
   if (!e) {
     for (const i of n.querySelectorAll(
       "input[name], select[name], textarea[name]"
-    )) i.disabled = !0;
+    ))
+      i.disabled = !0;
     for (const i of n.querySelectorAll("[data-edit]"))
       i.removeAttribute("data-edit");
     for (const i of n.querySelectorAll("[data-action]"))
@@ -2711,13 +2726,7 @@ class Mc {
         failure: "no-wound"
       };
     }
-    return this.rally(
-      e.system.wounds,
-      e.system.stats.might.value,
-      t,
-      void 0,
-      i
-    );
+    return this.rally(e.system.wounds, e.system.stats.might.value, t, void 0, i);
   }
   rally(e, t, i, a, s) {
     if (i === "major")
@@ -2770,13 +2779,7 @@ class Mc {
   }
   async apply(e, t, i, a) {
     qe(e);
-    const s = this.rally(
-      e.system.wounds,
-      e.system.stats.might.value,
-      t,
-      i,
-      a
-    );
+    const s = this.rally(e.system.wounds, e.system.stats.might.value, t, i, a);
     return s.success && await e.update({
       "system.stats.might.value": s.mightValue,
       "system.wounds": s.wounds
@@ -2814,13 +2817,16 @@ async function ua(n, e, t = game.i18n.localize("MAGNUSARCHIVES.Actions.Apply")) 
   });
 }
 function $i(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 async function Uc(n, e, t) {
   const i = n.system.wounds[e].find((s) => s.id === t);
@@ -2954,7 +2960,9 @@ async function Pa(n, e, t) {
     }
   }
   const r = Uo(s), l = await foundry.applications.api.DialogV2.input({
-    window: { title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${s}`)}` },
+    window: {
+      title: `${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")} — ${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${s}`)}`
+    },
     content: `<div class="magnusarchives magnusarchives-dialog magnusarchives-recovery-dialog">
       <header class="magnusarchives-dialog-heading">
         <span>${game.i18n.localize("MAGNUSARCHIVES.Actions.Recovery")}</span>
@@ -2981,12 +2989,7 @@ async function Pa(n, e, t) {
         await game.magnusarchives.services.recovery.completeNonRest(n, s, o), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Recovery.NonRestCompleted"));
         return;
       }
-      const d = await game.magnusarchives.services.recovery.rollNormal(
-        n,
-        s,
-        u.lastAction,
-        o
-      ), p = s === "1-hour" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Rest.OneHourChoice")}
+      const d = await game.magnusarchives.services.recovery.rollNormal(n, s, u.lastAction, o), p = s === "1-hour" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Rest.OneHourChoice")}
           <select name="oneHourChoice">
             <option value="remove-moderate">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveModerate")}</option>
             <option value="remove-minors">${game.i18n.localize("MAGNUSARCHIVES.Rest.RemoveMinors")}</option>
@@ -3085,11 +3088,14 @@ function Fc(n, e) {
   if (!t) return;
   const u = () => {
     const d = Number(t.value), p = i.find((m) => m.checked)?.value, y = p ? game.magnusarchives.services.rally.preview(e, p, d) : null;
-    a && (a.textContent = Number.isInteger(d) ? String(d) : "—"), s && (s.textContent = y?.success ? String(y.mightValue) : "—"), r && (r.hidden = y?.success === !0, r.textContent = game.i18n.localize(y?.failure === "insufficient-might" ? "MAGNUSARCHIVES.Rally.InsufficientMight" : y?.failure === "invalid-cost" ? "MAGNUSARCHIVES.Rally.InvalidCost" : "MAGNUSARCHIVES.Rally.NoWound")), l && (l.disabled = y?.success !== !0);
+    a && (a.textContent = Number.isInteger(d) ? String(d) : "—"), s && (s.textContent = y?.success ? String(y.mightValue) : "—"), r && (r.hidden = y?.success === !0, r.textContent = game.i18n.localize(
+      y?.failure === "insufficient-might" ? "MAGNUSARCHIVES.Rally.InsufficientMight" : y?.failure === "invalid-cost" ? "MAGNUSARCHIVES.Rally.InvalidCost" : "MAGNUSARCHIVES.Rally.NoWound"
+    )), l && (l.disabled = y?.success !== !0);
   };
-  for (const d of i) d.addEventListener("change", () => {
-    d.checked && (t.value = String(Number(d.dataset.defaultCost ?? 0)), o && (o.textContent = d.nextElementSibling?.textContent ?? d.value), u());
-  });
+  for (const d of i)
+    d.addEventListener("change", () => {
+      d.checked && (t.value = String(Number(d.dataset.defaultCost ?? 0)), o && (o.textContent = d.nextElementSibling?.textContent ?? d.value), u());
+    });
   t.addEventListener("input", u), u();
 }
 async function Tc(n, e) {
@@ -3116,13 +3122,16 @@ async function Tc(n, e) {
   await n.update({ [t.path]: a });
 }
 function xa(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function Ri(n, e) {
   const t = Number(n);
@@ -3147,10 +3156,12 @@ async function Pc(n) {
       <section class="magnusarchives-dialog-section">
         <span class="magnusarchives-dialog-section-heading">${game.i18n.localize("MAGNUSARCHIVES.Overrides.WoundModifiers")}</span>
         <div class="magnusarchives-dialog-field-grid">
-          ${ge.map((a) => `<label class="magnusarchives-dialog-field">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${a}`)}
+          ${ge.map(
+      (a) => `<label class="magnusarchives-dialog-field">${game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${a}`)}
             <input name="${a}" type="number" step="1" value="${t[a]}">
             <small>${game.i18n.localize("MAGNUSARCHIVES.Overrides.Calculated")}: ${e[a]}</small>
-          </label>`).join("")}
+          </label>`
+    ).join("")}
         </div>
       </section>
     </div>`,
@@ -3170,7 +3181,9 @@ async function Pc(n) {
     }
 }
 function xc(n) {
-  return ke.map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${e}`)}</option>`).join("");
+  return ke.map(
+    (e) => `<option value="${e}"${e === n ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Recovery.${e}`)}</option>`
+  ).join("");
 }
 function Ho(n) {
   return `<div class="recovery-override-slot" data-recovery-slot-id="${xa(n.id)}">
@@ -3222,7 +3235,8 @@ function Oc(n) {
 }
 function Bc(n, e) {
   const t = String(n.slotOrder ?? "").split(",").filter(Boolean);
-  if (t.length === 0 || new Set(t).size !== t.length) throw new Error("Recovery track must contain unique slots.");
+  if (t.length === 0 || new Set(t).size !== t.length)
+    throw new Error("Recovery track must contain unique slots.");
   const i = new Map(e.map((o) => [o.id, o])), a = t.map((o) => {
     const r = String(n[`slotType__${o}`] ?? "");
     if (!ke.includes(r)) throw new Error(`Invalid Recovery type '${r}'.`);
@@ -3332,9 +3346,7 @@ class Yc {
   async publish(e, t, i = []) {
     const a = Kc(e, i), s = await this.render(a, t);
     return await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker(
-        t ? { actor: t } : void 0
-      ),
+      speaker: ChatMessage.getSpeaker(t ? { actor: t } : void 0),
       content: s,
       flags: { magnusarchives: { gmIntrusion: a } }
     });
@@ -3378,8 +3390,12 @@ function cn(n) {
   return e.find((t) => t.active) ?? e[0] ?? null;
 }
 function yi(n, e) {
-  const t = new Set(Jt().filter((a) => !a.isGM).map((a) => a.character?.id).filter((a) => typeof a == "string" && a.length > 0));
-  return [...new Map(n.filter((a) => a.type === "character").map((a) => [a.id, a])).values()].filter((a) => a.id !== e).filter((a) => t.has(a.id)).map((a) => ({ actorId: a.id, actorName: a.name, actorImage: a.img ?? "" })).sort((a, s) => a.actorName.localeCompare(s.actorName));
+  const t = new Set(
+    Jt().filter((a) => !a.isGM).map((a) => a.character?.id).filter((a) => typeof a == "string" && a.length > 0)
+  );
+  return [...new Map(
+    n.filter((a) => a.type === "character").map((a) => [a.id, a])
+  ).values()].filter((a) => a.id !== e).filter((a) => t.has(a.id)).map((a) => ({ actorId: a.id, actorName: a.name, actorImage: a.img ?? "" })).sort((a, s) => a.actorName.localeCompare(s.actorName));
 }
 function qa(n) {
   if (!n || typeof n != "object") return !1;
@@ -3559,12 +3575,16 @@ class Zc {
       if (!(p?.isGM === !0 || !!(p && p.id === l.responderUserId && Tt(r, !0).some((f) => f.id === p.id)))) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.NotAuthorized"));
       const h = yi(hi(), r.id).find((f) => f.actorId === u.id);
       if (!h) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"));
-      await this.#t.update(o, { ...d, status: "resolving" }, r), await this.#e.distributeSecondXp(r, u, l.amount), a = !0, await this.#p(e), await this.#t.update(o, {
-        ...d,
-        status: "resolved",
-        recipients: [],
-        resolvedRecipient: h
-      }, r), Hooks.callAll("magnusarchivesGMIntrusionXPDistributed", e, r, u);
+      await this.#t.update(o, { ...d, status: "resolving" }, r), await this.#e.distributeSecondXp(r, u, l.amount), a = !0, await this.#p(e), await this.#t.update(
+        o,
+        {
+          ...d,
+          status: "resolved",
+          recipients: [],
+          resolvedRecipient: h
+        },
+        r
+      ), Hooks.callAll("magnusarchivesGMIntrusionXPDistributed", e, r, u);
     } catch (l) {
       throw !a && s && o && r && await this.#t.update(o, s, r), l;
     } finally {
@@ -3576,7 +3596,9 @@ class Zc {
       if (e.recipientUserId !== game.user.id) return;
       const t = this.#n.get(e.requestId);
       if (!t) return;
-      clearTimeout(t.timeout), this.#n.delete(e.requestId), e.success ? t.resolve() : t.reject(new Error(e.error ?? game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable")));
+      clearTimeout(t.timeout), this.#n.delete(e.requestId), e.success ? t.resolve() : t.reject(
+        new Error(e.error ?? game.i18n.localize("MAGNUSARCHIVES.Intrusion.Errors.RecipientUnavailable"))
+      );
       return;
     }
     if (this.#m()) {
@@ -3778,10 +3800,15 @@ function oi(n) {
   return re(n, "situationalDirection") === "hinder" ? { otherEase: 0, otherHindrance: e } : { otherEase: e, otherHindrance: 0 };
 }
 function ye(n, e = 0) {
-  return Array.from({ length: n + 1 }, (t, i) => `<option value="${i}"${i === e ? " selected" : ""}>${i}</option>`).join("");
+  return Array.from(
+    { length: n + 1 },
+    (t, i) => `<option value="${i}"${i === e ? " selected" : ""}>${i}</option>`
+  ).join("");
 }
 function Vo(n) {
-  return ["might", "speed", "intellect"].map((e) => `<option value="${e}"${e === n ? " selected" : ""}>${ut(fa(e, pa))}</option>`).join("");
+  return ["might", "speed", "intellect"].map(
+    (e) => `<option value="${e}"${e === n ? " selected" : ""}>${ut(fa(e, pa))}</option>`
+  ).join("");
 }
 const ad = Object.freeze({
   inability: -1,
@@ -3871,11 +3898,7 @@ function oe(n, e, t = "") {
   return `<div class="roll-summary-row ${t}"><span>${ut(n)}</span><strong>${ut(e)}</strong></div>`;
 }
 function Wa(n) {
-  return n.length === 0 ? `<p class="roll-summary-empty">${game.i18n.localize("MAGNUSARCHIVES.Common.None")}</p>` : n.map((e) => oe(
-    e.label,
-    e.modifier,
-    e.direction === "ease" ? "is-ease" : "is-hindrance"
-  )).join("");
+  return n.length === 0 ? `<p class="roll-summary-empty">${game.i18n.localize("MAGNUSARCHIVES.Common.None")}</p>` : n.map((e) => oe(e.label, e.modifier, e.direction === "ease" ? "is-ease" : "is-hindrance")).join("");
 }
 function Qe(n, e, t) {
   const i = n.querySelector(`[data-roll-summary="${e}"]`);
@@ -3890,19 +3913,29 @@ function sd(n, e, t) {
   const i = n.querySelector('[data-roll-summary-section="automatic"]');
   i && (i.hidden = e.automaticModifiers.length === 0), Qe(n, "automatic", Wa(e.automaticModifiers));
   const a = n.querySelector('[data-roll-summary-section="effort"]');
-  a && (a.hidden = e.totalEffortApplied === 0), Qe(n, "effort", [
-    oe(
-      game.i18n.localize("MAGNUSARCHIVES.Roll.PaidAppliedEffort"),
-      `${e.paidEffortApplied} / ${e.effortMaximum}`
-    ),
-    oe(game.i18n.localize("MAGNUSARCHIVES.Roll.FreeAppliedEffort"), String(e.freeEffortApplied)),
-    oe(
-      game.i18n.localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
-      e.totalEffortMaximum === null ? `${e.totalEffortApplied} / ${game.i18n.localize("MAGNUSARCHIVES.Genre.Unlimited")}` : `${e.totalEffortApplied} / ${e.totalEffortMaximum}`,
-      e.totalEffortMaximum !== null && e.totalEffortApplied === e.totalEffortMaximum ? "is-total" : ""
-    )
-  ].join(""));
-  const s = e.difficultyMode === "hidden" ? oe(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")) : e.difficultyMode === "unknown" ? oe(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), game.i18n.localize("MAGNUSARCHIVES.Roll.NotProvided")) : [
+  a && (a.hidden = e.totalEffortApplied === 0), Qe(
+    n,
+    "effort",
+    [
+      oe(
+        game.i18n.localize("MAGNUSARCHIVES.Roll.PaidAppliedEffort"),
+        `${e.paidEffortApplied} / ${e.effortMaximum}`
+      ),
+      oe(game.i18n.localize("MAGNUSARCHIVES.Roll.FreeAppliedEffort"), String(e.freeEffortApplied)),
+      oe(
+        game.i18n.localize("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
+        e.totalEffortMaximum === null ? `${e.totalEffortApplied} / ${game.i18n.localize("MAGNUSARCHIVES.Genre.Unlimited")}` : `${e.totalEffortApplied} / ${e.totalEffortMaximum}`,
+        e.totalEffortMaximum !== null && e.totalEffortApplied === e.totalEffortMaximum ? "is-total" : ""
+      )
+    ].join("")
+  );
+  const s = e.difficultyMode === "hidden" ? oe(
+    game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"),
+    game.i18n.localize("MAGNUSARCHIVES.Roll.HiddenValue")
+  ) : e.difficultyMode === "unknown" ? oe(
+    game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"),
+    game.i18n.localize("MAGNUSARCHIVES.Roll.NotProvided")
+  ) : [
     oe(game.i18n.localize("MAGNUSARCHIVES.Roll.BaseDifficulty"), String(e.baseDifficulty)),
     oe(
       game.i18n.localize("MAGNUSARCHIVES.Roll.FinalDifficulty"),
@@ -3929,7 +3962,15 @@ function sd(n, e, t) {
       <small>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")} ${h}</small>
     </div>`;
   }).join("");
-  Qe(n, "character", `${l}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${e.effortUsed} / ${e.effortMaximum}</strong></div>`), Pt(n, "error", e.poolValue < e.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : "");
+  Qe(
+    n,
+    "character",
+    `${l}<div class="roll-summary-effort"><span>${game.i18n.localize("MAGNUSARCHIVES.Character.Effort")}</span><strong>${e.effortUsed} / ${e.effortMaximum}</strong></div>`
+  ), Pt(
+    n,
+    "error",
+    e.poolValue < e.totalCost ? game.i18n.localize("MAGNUSARCHIVES.Roll.InsufficientPool") : ""
+  );
 }
 function di(n, e) {
   for (const i of ["might", "speed", "intellect"]) {
@@ -4006,11 +4047,7 @@ async function rd(n, e = "might") {
   });
   if (s)
     try {
-      const o = await game.magnusarchives.services.rolls.execute(
-        n,
-        _a(s),
-        t
-      );
+      const o = await game.magnusarchives.services.rolls.execute(n, _a(s), t);
       await ma(n, o);
     } catch (o) {
       od(o);
@@ -4041,7 +4078,9 @@ async function cd(n, e) {
     ${s === "choose" ? `<option value="" selected disabled>${game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")}</option>` : ""}
     <option value="might"${dn(s, "might")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}</option>
     <option value="speed"${dn(s, "speed")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}</option>
-    <option value="intellect"${dn(s, "intellect")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}</option>`, r = ie.map((d) => `<option value="${d}"${d === e.system.rank ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${d}`)} · ${bt(d) === 0 ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified") : bt(d) > 0 ? `+${bt(d)}` : bt(d)}</option>`).join(""), l = `
+    <option value="intellect"${dn(s, "intellect")}>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}</option>`, r = ie.map(
+    (d) => `<option value="${d}"${d === e.system.rank ? " selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${d}`)} · ${bt(d) === 0 ? game.i18n.localize("MAGNUSARCHIVES.Roll.Unmodified") : bt(d) > 0 ? `+${bt(d)}` : bt(d)}</option>`
+  ).join(""), l = `
     ${li(a.difficultyCeiling, Mo())}
     <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Pool")}<select name="pool">${o}</select></label>
     <label>${game.i18n.localize("MAGNUSARCHIVES.Roll.SkillLevel")}<select name="skillRank">${r}</select></label>
@@ -4137,7 +4176,9 @@ function zo(n, e = "manual:0") {
   return [
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ManualSkillLevel")}">${ga(t, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Skill.Title")}">`,
-    ...To(n).map((i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${i.system.rank}`)}</option>`),
+    ...To(n).map(
+      (i) => `<option value="${i.id}"${i.id === e ? " selected" : ""}>${i.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${i.system.rank}`)}</option>`
+    ),
     "</optgroup>"
   ].join("");
 }
@@ -4220,11 +4261,17 @@ async function md(n, e) {
         attackSummary: (E, H) => [
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${m}</strong></div>`,
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${H.context.damageEffort ?? 0}</strong></div>`,
-          ...(H.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${H.context.freeDamageEffort}</strong></div>`] : [],
+          ...(H.context.freeDamageEffort ?? 0) > 0 ? [
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${H.context.freeDamageEffort}</strong></div>`
+          ] : [],
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${H.damageEffortApplied}</strong></div>`,
           `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${s.damageEffortBonus}</strong></div>`,
-          ...e.system.rangeCategory !== "immediate" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${e.system.rangeCategory}`)}</strong></div>`] : [],
-          ...re(E, "extremeRange") === "true" || E.extremeRange === !0 ? [`<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`] : []
+          ...e.system.rangeCategory !== "immediate" ? [
+            `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${e.system.rangeCategory}`)}</strong></div>`
+          ] : [],
+          ...re(E, "extremeRange") === "true" || E.extremeRange === !0 ? [
+            `<div class="roll-summary-row is-hindrance"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.ExtremeRange")}</span><strong>-1</strong></div>`
+          ] : []
         ].join("")
       });
     }
@@ -4238,11 +4285,7 @@ async function md(n, e) {
         t
       );
       const v = await qo(A);
-      v && (A = game.magnusarchives.services.combat.chooseAttackOutcomes(
-        A,
-        v,
-        i
-      ));
+      v && (A = game.magnusarchives.services.combat.chooseAttackOutcomes(A, v, i));
       for (const H of A)
         await game.magnusarchives.services.combatChat.publishWeaponAttack(
           n,
@@ -4265,11 +4308,7 @@ async function Fn(n, e, t) {
     } catch (m) {
       return ui.notifications.error(m instanceof Error ? m.message : String(m)), !1;
     }
-  const i = Oe(), a = i.enabledRuleModuleIds ?? [], s = game.magnusarchives.rules.resolveDifficultyPolicy(i.base, a), o = t ? `<div class="roll-dialog-context"><strong>${t.source.name} → ${n.name}</strong><small>${game.i18n.localize("MAGNUSARCHIVES.Combat.HiddenTargetDifficulty")}</small></div>` : li(s.difficultyCeiling, !0), r = game.magnusarchives.services.combat.applicableDefenseSkills(
-    n,
-    e,
-    a
-  )[0], l = ud(n, e), u = (m) => {
+  const i = Oe(), a = i.enabledRuleModuleIds ?? [], s = game.magnusarchives.rules.resolveDifficultyPolicy(i.base, a), o = t ? `<div class="roll-dialog-context"><strong>${t.source.name} → ${n.name}</strong><small>${game.i18n.localize("MAGNUSARCHIVES.Combat.HiddenTargetDifficulty")}</small></div>` : li(s.difficultyCeiling, !0), r = game.magnusarchives.services.combat.applicableDefenseSkills(n, e, a)[0], l = ud(n, e), u = (m) => {
     const h = Po(n, re(m, "skillId"));
     return {
       ...h ? { skill: h } : {},
@@ -4333,7 +4372,9 @@ async function Fn(n, e, t) {
 }
 async function pd(n) {
   if (!game.user.isGM) return;
-  const e = [...game.user.targets ?? []].map((i) => Fo(i)).filter((i) => i !== null).map((i) => i);
+  const e = [...game.user.targets ?? []].map((i) => Fo(i)).filter(
+    (i) => i !== null
+  ).map((i) => i);
   if (e.length === 0) {
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.NoCharacterTargets"));
     return;
@@ -4380,18 +4421,15 @@ function Oo(n) {
   return n === 1 ? "1" : `1-${n}`;
 }
 function gd(n) {
-  const e = [...n.querySelectorAll(
-    ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
-  )], t = e.find((a) => a.classList.contains("active")), i = [...n.querySelectorAll(
-    "details[data-persistent-disclosure]"
-  )];
+  const e = [
+    ...n.querySelectorAll(".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]")
+  ], t = e.find((a) => a.classList.contains("active")), i = [...n.querySelectorAll("details[data-persistent-disclosure]")];
   return {
     activeTab: t?.dataset.tab ?? "skills",
     tabScroll: Object.fromEntries(e.map((a) => [a.dataset.tab ?? "", a.scrollTop])),
-    disclosures: Object.fromEntries(i.map((a) => [
-      a.dataset.persistentDisclosure ?? "",
-      a.open
-    ]))
+    disclosures: Object.fromEntries(
+      i.map((a) => [a.dataset.persistentDisclosure ?? "", a.open])
+    )
   };
 }
 function hd(n, e) {
@@ -4399,21 +4437,22 @@ function hd(n, e) {
     ".magnusarchives-sheet.magnusarchives-character > .tab[data-tab]"
   ))
     t.scrollTop = e.tabScroll[t.dataset.tab ?? ""] ?? 0;
-  for (const t of n.querySelectorAll(
-    "details[data-persistent-disclosure]"
-  )) {
+  for (const t of n.querySelectorAll("details[data-persistent-disclosure]")) {
     const i = t.dataset.persistentDisclosure ?? "";
     Object.hasOwn(e.disclosures, i) && (t.open = e.disclosures[i] ?? !1);
   }
 }
 function yd(n) {
-  return n.replace(/[&<>'"]/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "'": "&#39;",
-    '"': "&quot;"
-  })[e]);
+  return n.replace(
+    /[&<>'"]/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;"
+    })[e]
+  );
 }
 async function Bo(n, e) {
   const t = n.system.graph.nodes.find((o) => o.id === e);
@@ -4451,12 +4490,13 @@ function Sd(n, e) {
     x: e.left + e.width / 2,
     y: e.top + e.height / 2
   }, a = i.x - t.x, s = i.y - t.y;
-  if (a === 0 && s === 0) return {
-    x1: t.x,
-    y1: t.y,
-    x2: i.x,
-    y2: i.y
-  };
+  if (a === 0 && s === 0)
+    return {
+      x1: t.x,
+      y1: t.y,
+      x2: i.x,
+      y2: i.y
+    };
   const o = (u) => Math.min(
     a === 0 ? Number.POSITIVE_INFINITY : u.width / 2 / Math.abs(a),
     s === 0 ? Number.POSITIVE_INFINITY : u.height / 2 / Math.abs(s)
@@ -4500,7 +4540,8 @@ class Lo {
         this.#e.observe(t);
         for (const i of t.querySelectorAll(
           ".focus-tree-scroll, .focus-tree-canvas, .focus-tree-node"
-        )) this.#e.observe(i);
+        ))
+          this.#e.observe(i);
       }
       this.scheduleRefresh();
     }
@@ -4601,15 +4642,50 @@ function Tn(n) {
       e.push({ severity: "error", code: "blank-node-id", message: "Focus node IDs cannot be blank." });
       continue;
     }
-    t.has(s.id) && e.push({ severity: "error", code: "duplicate-node-id", nodeId: s.id, message: `Duplicate Focus node ID '${s.id}'.` }), t.add(s.id), (!Number.isInteger(s.tier) || s.tier < 1 || s.tier > 6) && e.push({ severity: "error", code: "invalid-tier", nodeId: s.id, message: `Focus node '${s.id}' must use a Tier from 1 to 6.` });
+    t.has(s.id) && e.push({
+      severity: "error",
+      code: "duplicate-node-id",
+      nodeId: s.id,
+      message: `Duplicate Focus node ID '${s.id}'.`
+    }), t.add(s.id), (!Number.isInteger(s.tier) || s.tier < 1 || s.tier > 6) && e.push({
+      severity: "error",
+      code: "invalid-tier",
+      nodeId: s.id,
+      message: `Focus node '${s.id}' must use a Tier from 1 to 6.`
+    });
     for (const [o, r] of Object.entries(s.position ?? {}))
-      r !== null && !Number.isFinite(r) && e.push({ severity: "error", code: "invalid-position", nodeId: s.id, message: `Focus node '${s.id}' has an invalid ${o} position.` });
+      r !== null && !Number.isFinite(r) && e.push({
+        severity: "error",
+        code: "invalid-position",
+        nodeId: s.id,
+        message: `Focus node '${s.id}' has an invalid ${o} position.`
+      });
   }
   const i = /* @__PURE__ */ new Set(), a = /* @__PURE__ */ new Set();
   for (const s of n.connections) {
-    (!s.id.trim() || i.has(s.id)) && e.push({ severity: "error", code: "duplicate-connection-id", connectionId: s.id, message: `Duplicate or blank Focus connection ID '${s.id}'.` }), i.add(s.id);
+    (!s.id.trim() || i.has(s.id)) && e.push({
+      severity: "error",
+      code: "duplicate-connection-id",
+      connectionId: s.id,
+      message: `Duplicate or blank Focus connection ID '${s.id}'.`
+    }), i.add(s.id);
     const o = `${s.from}\0${s.to}`;
-    a.has(o) && e.push({ severity: "error", code: "duplicate-connection", connectionId: s.id, message: `Duplicate Focus connection '${s.from}' -> '${s.to}'.` }), a.add(o), (!t.has(s.from) || !t.has(s.to)) && e.push({ severity: "error", code: "missing-connection-node", connectionId: s.id, message: `Focus connection '${s.id}' references a missing node.` }), s.from === s.to && e.push({ severity: "error", code: "self-connection", connectionId: s.id, message: `Focus connection '${s.id}' cannot target itself.` });
+    a.has(o) && e.push({
+      severity: "error",
+      code: "duplicate-connection",
+      connectionId: s.id,
+      message: `Duplicate Focus connection '${s.from}' -> '${s.to}'.`
+    }), a.add(o), (!t.has(s.from) || !t.has(s.to)) && e.push({
+      severity: "error",
+      code: "missing-connection-node",
+      connectionId: s.id,
+      message: `Focus connection '${s.id}' references a missing node.`
+    }), s.from === s.to && e.push({
+      severity: "error",
+      code: "self-connection",
+      connectionId: s.id,
+      message: `Focus connection '${s.id}' cannot target itself.`
+    });
   }
   return !e.some((s) => s.severity === "error") && wd(n, t) && e.push({
     severity: "warning",
@@ -4638,7 +4714,9 @@ class ha {
     for (const d of e.nodes) o.set(d.id, []);
     for (const d of e.connections)
       o.get(d.to).push(d.from);
-    const r = new Set(e.nodes.filter((d) => d.tier === 1 && s.has(d.id)).map((d) => d.id));
+    const r = new Set(
+      e.nodes.filter((d) => d.tier === 1 && s.has(d.id)).map((d) => d.id)
+    );
     let l = !0;
     for (; l; ) {
       l = !1;
@@ -4653,7 +4731,9 @@ class ha {
         message: `Owned node '${d.abilitySnapshot.name || d.id}' is no longer connected to an owned Tier 1 path.`
       });
     const u = e.nodes.map((d) => {
-      const p = [...new Set((o.get(d.id) ?? []).filter((y) => r.has(y)))].sort((y, m) => y.localeCompare(m));
+      const p = [...new Set((o.get(d.id) ?? []).filter((y) => r.has(y)))].sort(
+        (y, m) => y.localeCompare(m)
+      );
       return s.has(d.id) ? {
         node: d,
         state: "owned",
@@ -4782,14 +4862,24 @@ class Rd {
   }
   missingOwnedNodeIds(e, t, i) {
     const a = [...e.items];
-    return new Set(i.ownedNodeIds.filter((s) => !a.some((o) => Qa(o, t.uuid, s))));
+    return new Set(
+      i.ownedNodeIds.filter(
+        (s) => !a.some((o) => Qa(o, t.uuid, s))
+      )
+    );
   }
   async acquire(e, t, i, a) {
-    return this.#w(this.#S(e), () => this.#a(e, t, i, !1, !0, a));
+    return this.#w(
+      this.#S(e),
+      () => this.#a(e, t, i, !1, !0, a)
+    );
   }
   /** Character-facing permissive acquisition. Pending choices remain untouched. */
   async acquireManual(e, t, i, a) {
-    return this.#w(this.#S(e), () => this.#a(e, t, i, !1, !1, a));
+    return this.#w(
+      this.#S(e),
+      () => this.#a(e, t, i, !1, !1, a)
+    );
   }
   /** Explicit GM-only sheet action; callers must enforce GM authorization. */
   async acquireWithGmOverride(e, t, i) {
@@ -4819,7 +4909,9 @@ class Rd {
     } catch (A) {
       if (!(A instanceof Mt)) throw A;
     }
-    const d = e.system.advancement.pendingFocusChoices.find((A) => A.focusUuid === "" || A.focusUuid === t.uuid || A.focusUuid === t.id), p = s && !a && u?.state === "available" && !!d;
+    const d = e.system.advancement.pendingFocusChoices.find(
+      (A) => A.focusUuid === "" || A.focusUuid === t.uuid || A.focusUuid === t.id
+    ), p = s && !a && u?.state === "available" && !!d;
     let y = !1, m = !1, h = null;
     if (!this.#d(e, t.uuid, i)) {
       const A = await this.#o(t, r);
@@ -4844,23 +4936,27 @@ class Rd {
       }
     }
     if (!this.#p(e, t).ownedNodeIds.includes(i)) {
-      const A = e.system.focusProgress.map((v) => Si(v, t) ? {
-        ...v,
-        ownedNodeIds: [...v.ownedNodeIds, i],
-        acquisitions: [
-          ...v.acquisitions ?? [],
-          this.#u(
-            i,
-            a || m ? "gmOverride" : p ? "choice" : "manualOverride",
-            p ? d : null
-          )
-        ]
-      } : { ...v, ownedNodeIds: [...v.ownedNodeIds], acquisitions: [...v.acquisitions ?? []] });
+      const A = e.system.focusProgress.map(
+        (v) => Si(v, t) ? {
+          ...v,
+          ownedNodeIds: [...v.ownedNodeIds, i],
+          acquisitions: [
+            ...v.acquisitions ?? [],
+            this.#u(
+              i,
+              a || m ? "gmOverride" : p ? "choice" : "manualOverride",
+              p ? d : null
+            )
+          ]
+        } : { ...v, ownedNodeIds: [...v.ownedNodeIds], acquisitions: [...v.acquisitions ?? []] }
+      );
       try {
         await e.update({
           "system.focusProgress": A,
           ...p && !m && d ? {
-            "system.advancement.pendingFocusChoices": e.system.advancement.pendingFocusChoices.filter((v) => v.id !== d.id)
+            "system.advancement.pendingFocusChoices": e.system.advancement.pendingFocusChoices.filter(
+              (v) => v.id !== d.id
+            )
           } : {}
         });
       } catch (v) {
@@ -4879,14 +4975,13 @@ class Rd {
       const l = await this.#o(t, a);
       this.#d(e, t.uuid, i) || (o = await this.#f(e, t, i, l));
     }
-    const r = e.system.focusProgress.map((l) => Si(l, t) ? {
-      ...l,
-      ownedNodeIds: [...l.ownedNodeIds, i],
-      acquisitions: [
-        ...l.acquisitions ?? [],
-        this.#u(i, "gmManual", null)
-      ]
-    } : { ...l, ownedNodeIds: [...l.ownedNodeIds], acquisitions: [...l.acquisitions ?? []] });
+    const r = e.system.focusProgress.map(
+      (l) => Si(l, t) ? {
+        ...l,
+        ownedNodeIds: [...l.ownedNodeIds, i],
+        acquisitions: [...l.acquisitions ?? [], this.#u(i, "gmManual", null)]
+      } : { ...l, ownedNodeIds: [...l.ownedNodeIds], acquisitions: [...l.acquisitions ?? []] }
+    );
     try {
       await e.update({ "system.focusProgress": r });
     } catch (l) {
@@ -4899,11 +4994,7 @@ class Rd {
     const s = this.#p(e, t);
     if (!s.ownedNodeIds.includes(i))
       throw new ue("undo-not-owned", `Focus node '${i}' is not owned.`);
-    const o = s.ownedNodeIds.filter((f) => f !== i), r = new Set(this.#s(
-      t,
-      L(e.system),
-      s.ownedNodeIds
-    )), l = this.#s(t, L(e.system), o), u = l.filter((f) => !r.has(f));
+    const o = s.ownedNodeIds.filter((f) => f !== i), r = new Set(this.#s(t, L(e.system), s.ownedNodeIds)), l = this.#s(t, L(e.system), o), u = l.filter((f) => !r.has(f));
     if (u.length > 0 && !a.force)
       throw new ue(
         "undo-dependent-nodes",
@@ -4915,11 +5006,13 @@ class Rd {
       source: d.choiceSource,
       grantTier: d.choiceGrantTier,
       focusUuid: d.choiceFocusUuid
-    } : null, y = e.system.focusProgress.map((f) => Si(f, t) ? {
-      ...f,
-      ownedNodeIds: o,
-      acquisitions: (f.acquisitions ?? []).filter((A) => A.nodeId !== i)
-    } : { ...f, ownedNodeIds: [...f.ownedNodeIds], acquisitions: [...f.acquisitions ?? []] }), m = p && !e.system.advancement.pendingFocusChoices.some((f) => f.id === p.id) ? [...e.system.advancement.pendingFocusChoices, p] : [...e.system.advancement.pendingFocusChoices];
+    } : null, y = e.system.focusProgress.map(
+      (f) => Si(f, t) ? {
+        ...f,
+        ownedNodeIds: o,
+        acquisitions: (f.acquisitions ?? []).filter((A) => A.nodeId !== i)
+      } : { ...f, ownedNodeIds: [...f.ownedNodeIds], acquisitions: [...f.acquisitions ?? []] }
+    ), m = p && !e.system.advancement.pendingFocusChoices.some((f) => f.id === p.id) ? [...e.system.advancement.pendingFocusChoices, p] : [...e.system.advancement.pendingFocusChoices];
     await e.update({
       "system.focusProgress": y,
       "system.advancement.pendingFocusChoices": m
@@ -4971,7 +5064,15 @@ class Rd {
           ...structuredClone(o),
           sourceFocusUuid: e.uuid,
           sourceNodeId: t.id,
-          grantedBy: { kind: "focus", sourceUuid: e.uuid, instanceId: e.uuid, grantId: t.id, status: "active", contentUuid: t.abilityUuid, contentKey: `ability:${i.name.trim().toLocaleLowerCase()}` }
+          grantedBy: {
+            kind: "focus",
+            sourceUuid: e.uuid,
+            instanceId: e.uuid,
+            grantId: t.id,
+            status: "active",
+            contentUuid: t.abilityUuid,
+            contentKey: `ability:${i.name.trim().toLocaleLowerCase()}`
+          }
         }
       };
     }
@@ -4990,7 +5091,15 @@ class Rd {
         description: t.abilitySnapshot.description ?? "",
         sourceFocusUuid: e.uuid,
         sourceNodeId: t.id,
-        grantedBy: { kind: "focus", sourceUuid: e.uuid, instanceId: e.uuid, grantId: t.id, status: "active", contentUuid: t.abilityUuid, contentKey: `ability:${a.toLocaleLowerCase()}` }
+        grantedBy: {
+          kind: "focus",
+          sourceUuid: e.uuid,
+          instanceId: e.uuid,
+          grantId: t.id,
+          status: "active",
+          contentUuid: t.abilityUuid,
+          contentKey: `ability:${a.toLocaleLowerCase()}`
+        }
       }
     };
   }
@@ -5009,9 +5118,17 @@ class Rd {
     };
   }
   #A(e, t, i, a) {
-    const o = (a.system ?? {}).grantedBy ?? {}, r = Ge("ability", String(a.name ?? i.abilitySnapshot.name), String(o.contentUuid ?? i.abilityUuid)), l = Wi(e.items, r);
+    const o = (a.system ?? {}).grantedBy ?? {}, r = Ge(
+      "ability",
+      String(a.name ?? i.abilitySnapshot.name),
+      String(o.contentUuid ?? i.abilityUuid)
+    ), l = Wi(e.items, r);
     if (!l) return null;
-    const d = (l.system ?? {}).grantedBy ?? {}, p = Ge("ability", l.name ?? "", String(d.contentUuid ?? ""));
+    const d = (l.system ?? {}).grantedBy ?? {}, p = Ge(
+      "ability",
+      l.name ?? "",
+      String(d.contentUuid ?? "")
+    );
     return {
       id: `${t.uuid}:${i.id}`,
       type: "ability",
@@ -5046,7 +5163,9 @@ class Rd {
     if (_o(e.items, {
       type: "ability",
       contentUuid: String(o.contentUuid ?? ""),
-      contentKey: String(o.contentKey ?? `ability:${String(a.name ?? "").trim().toLocaleLowerCase()}`)
+      contentKey: String(
+        o.contentKey ?? `ability:${String(a.name ?? "").trim().toLocaleLowerCase()}`
+      )
     }))
       throw new ue(
         "duplicate-grant",
@@ -5114,7 +5233,9 @@ const Nd = async (n) => {
   }
 }, Md = () => globalThis.crypto?.randomUUID?.() ?? `adv-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 function Gd(n) {
-  return n.system.category === "attack" || n.system.category === "defense" || n.system.contexts.some((e) => e === "attack" || e.startsWith("attack.") || e === "defense" || e.startsWith("defense."));
+  return n.system.category === "attack" || n.system.category === "defense" || n.system.contexts.some(
+    (e) => e === "attack" || e.startsWith("attack.") || e === "defense" || e.startsWith("defense.")
+  );
 }
 function Ud(n) {
   return n === "inability" ? "untrained" : n === "untrained" ? "trained" : n === "trained" ? "specialized" : null;
@@ -5172,7 +5293,9 @@ class kd {
   async resetProgressionGuidance(e) {
     return this.#u(e, async () => {
       this.#c(e), await e.update({
-        "system.advancement.guidanceCompletedTiers": (e.system.advancement.guidanceCompletedTiers ?? []).filter((t) => t !== L(e.system))
+        "system.advancement.guidanceCompletedTiers": (e.system.advancement.guidanceCompletedTiers ?? []).filter(
+          (t) => t !== L(e.system)
+        )
       });
     });
   }
@@ -5207,10 +5330,7 @@ class kd {
       this.#c(e);
       const i = typeof t == "string" ? t.trim() : "", a = e.system.advancement.purchases, s = i ? a.filter((r) => r.id === i) : [];
       if (s.length !== 1)
-        throw new K(
-          "purchase-not-found",
-          "That current-cycle Advancement purchase is unavailable."
-        );
+        throw new K("purchase-not-found", "That current-cycle Advancement purchase is unavailable.");
       const o = s[0];
       if (o.tier !== L(e.system))
         throw new K(
@@ -5242,15 +5362,9 @@ class kd {
         [a.path]: s,
         "system.advancement.cycle": e.system.advancement.cycle + 1,
         "system.advancement.purchases": [],
-        "system.advancement.pendingFocusChoices": [
-          ...e.system.advancement.pendingFocusChoices,
-          o
-        ],
+        "system.advancement.pendingFocusChoices": [...e.system.advancement.pendingFocusChoices, o],
         ...r ? {
-          "system.advancement.pendingGenreChoices": [
-            ...e.system.advancement.pendingGenreChoices,
-            r
-          ]
+          "system.advancement.pendingGenreChoices": [...e.system.advancement.pendingGenreChoices, r]
         } : {}
       }), { tier: s, focusChoice: o, genreChoice: r };
     });
@@ -5282,10 +5396,7 @@ class kd {
         );
         u[v.path] = v.value;
         const E = v.overrideActive ? v.value : e.system.derived.pools[f].max + A;
-        u[`system.stats.${f}.value`] = Math.min(
-          e.system.stats[f].value + A,
-          E
-        );
+        u[`system.stats.${f}.value`] = Math.min(e.system.stats[f].value + A, E);
       }
     } else if (t.kind === "moveTowardPerfection") {
       const h = fi(
@@ -5301,7 +5412,9 @@ class kd {
       u[h.path] = h.value;
     } else if (t.kind === "skillTraining")
       if (t.mode === "improve") {
-        const h = this.skillTrainingOptions(e, i).find((A) => A.id === t.skillId), f = [...e.items].find((A) => A.id === t.skillId && A.type === "skill");
+        const h = this.skillTrainingOptions(e, i).find(
+          (A) => A.id === t.skillId
+        ), f = [...e.items].find((A) => A.id === t.skillId && A.type === "skill");
         if (!h || !f) throw new K("skill-not-found", "Skill Item not found.");
         if (h.reason === "maximum" || !h.nextRank)
           throw new K("skill-maximum", "This Skill cannot be improved by Core Advancement.");
@@ -5340,9 +5453,13 @@ class kd {
       throw new K("skill-not-found", "The selected Skill source is unavailable.");
     const s = a?.name.trim() || t.customName?.trim() || "";
     if (!s) throw new K("skill-not-found", "A new custom Skill requires a name.");
-    if ([...e.items].some((d) => d.type === "skill" && (d.name.trim().toLocaleLowerCase() === s.toLocaleLowerCase() || !!(a?.uuid && d.system.acquisition?.grantedByUuid === a.uuid))))
+    if ([...e.items].some(
+      (d) => d.type === "skill" && (d.name.trim().toLocaleLowerCase() === s.toLocaleLowerCase() || !!(a?.uuid && d.system.acquisition?.grantedByUuid === a.uuid))
+    ))
       throw new K("duplicate-skill", "This Character already owns that Skill.");
-    const r = a?.system.category ?? t.customCategory ?? "general", l = a?.system.contexts ?? (r === "general" ? [] : [r]), u = r === "attack" || r === "defense" || l.some((d) => d === "attack" || d.startsWith("attack.") || d === "defense" || d.startsWith("defense."));
+    const r = a?.system.category ?? t.customCategory ?? "general", l = a?.system.contexts ?? (r === "general" ? [] : [r]), u = r === "attack" || r === "defense" || l.some(
+      (d) => d === "attack" || d.startsWith("attack.") || d === "defense" || d.startsWith("defense.")
+    );
     if (u && L(e.system) < i.attackDefenseTrainingTier)
       throw new K("skill-tier", "Attack and defense training is not available at this Tier.");
     return {
@@ -5372,10 +5489,7 @@ class kd {
         grantTier: L(e.system),
         focusUuid: ""
       };
-      a["system.advancement.pendingFocusChoices"] = [
-        ...e.system.advancement.pendingFocusChoices,
-        s
-      ];
+      a["system.advancement.pendingFocusChoices"] = [...e.system.advancement.pendingFocusChoices, s];
     } else if (t === "armor")
       a["system.proficiencies.armorCategories"] = Za([
         ...e.system.proficiencies.armorCategories,
@@ -5394,10 +5508,7 @@ class kd {
         source: "otherAdvancement",
         grantTier: L(e.system)
       };
-      a["system.advancement.pendingGenreChoices"] = [
-        ...e.system.advancement.pendingGenreChoices,
-        s
-      ];
+      a["system.advancement.pendingGenreChoices"] = [...e.system.advancement.pendingGenreChoices, s];
     }
   }
   #c(e) {
@@ -5422,13 +5533,16 @@ class kd {
   }
 }
 function Ai(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 const Hd = {
   "not-character": "MAGNUSARCHIVES.Advancement.Errors.NotCharacter",
@@ -5454,7 +5568,9 @@ function pn(n, e) {
   return Number(n[e] ?? 0);
 }
 function $d() {
-  return ["might", "speed", "intellect"].map((n) => `<option value="${n}">${game.i18n.localize(`MAGNUSARCHIVES.Pools.${n[0].toUpperCase()}${n.slice(1)}`)}</option>`).join("");
+  return ["might", "speed", "intellect"].map(
+    (n) => `<option value="${n}">${game.i18n.localize(`MAGNUSARCHIVES.Pools.${n[0].toUpperCase()}${n.slice(1)}`)}</option>`
+  ).join("");
 }
 async function ft(n, e) {
   return foundry.applications.api.DialogV2.input({
@@ -5470,29 +5586,43 @@ function ya(n) {
 async function Vd(n, e) {
   const t = game.i18n.localize(`MAGNUSARCHIVES.Advancement.Option.${e}`);
   if (e === "increaseCapabilities") {
-    const i = await ft(t, `
+    const i = await ft(
+      t,
+      `
       <p>${game.i18n.localize("MAGNUSARCHIVES.Advancement.CapabilitiesPrompt")}</p>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Might")}<input name="might" type="number" min="0" max="4" value="0"></label>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Speed")}<input name="speed" type="number" min="0" max="4" value="0"></label>
-      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`);
-    return i ? { kind: e, allocation: {
-      might: pn(i, "might"),
-      speed: pn(i, "speed"),
-      intellect: pn(i, "intellect")
-    } } : null;
+      <label>${game.i18n.localize("MAGNUSARCHIVES.Pools.Intellect")}<input name="intellect" type="number" min="0" max="4" value="0"></label>`
+    );
+    return i ? {
+      kind: e,
+      allocation: {
+        might: pn(i, "might"),
+        speed: pn(i, "speed"),
+        intellect: pn(i, "intellect")
+      }
+    } : null;
   }
   if (e === "moveTowardPerfection") {
-    const i = await ft(t, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChoosePool")}<select name="pool">${$d()}</select></label>`);
+    const i = await ft(
+      t,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChoosePool")}<select name="pool">${$d()}</select></label>`
+    );
     return i ? { kind: e, pool: Ze(i, "pool") } : null;
   }
   if (e === "skillTraining") {
-    const i = await ft(t, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillMode")}<select name="mode">
+    const i = await ft(
+      t,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillMode")}<select name="mode">
       <option value="learn">${game.i18n.localize("MAGNUSARCHIVES.Advancement.LearnNewSkill")}</option>
       <option value="improve">${game.i18n.localize("MAGNUSARCHIVES.Advancement.ImproveExistingSkill")}</option>
-    </select></label>`);
+    </select></label>`
+    );
     if (!i) return null;
     if (Ze(i, "mode") === "learn") {
-      const r = [...game.items].filter((d) => d.type === "skill").sort((d, p) => d.name.localeCompare(p.name)), l = await ft(t, `
+      const r = [...game.items].filter((d) => d.type === "skill").sort((d, p) => d.name.localeCompare(p.name)), l = await ft(
+        t,
+        `
         <label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillSource")}<select name="sourceUuid">
           <option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Advancement.CustomSkill")}</option>
           ${r.map((d) => `<option value="${Ai(d.uuid)}">${Ai(d.name)}</option>`).join("")}
@@ -5502,7 +5632,8 @@ async function Vd(n, e) {
           <option value="general">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.general")}</option>
           <option value="attack">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.attack")}</option>
           <option value="defense">${game.i18n.localize("MAGNUSARCHIVES.Advancement.SkillCategory.defense")}</option>
-        </select></label>`);
+        </select></label>`
+      );
       if (!l) return null;
       const u = Ze(l, "sourceUuid");
       return u === "custom" ? {
@@ -5512,17 +5643,26 @@ async function Vd(n, e) {
         customCategory: Ze(l, "customCategory")
       } : { kind: e, mode: "learn", sourceUuid: u };
     }
-    const s = game.magnusarchives.services.advancement.skillTrainingOptions(
-      n,
-      rt()
-    ).filter((r) => r.eligible);
+    const s = game.magnusarchives.services.advancement.skillTrainingOptions(n, rt()).filter((r) => r.eligible);
     if (s.length === 0)
       return ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Advancement.NoEligibleSkills")), null;
-    const o = await ft(t, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChooseSkill")}<select name="skillId">${s.map((r) => `<option value="${Ai(r.id)}">${Ai(r.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${r.currentRank}`)} → ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${r.nextRank}`)}</option>`).join("")}</select></label>`);
+    const o = await ft(
+      t,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.ChooseSkill")}<select name="skillId">${s.map(
+        (r) => `<option value="${Ai(r.id)}">${Ai(r.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${r.currentRank}`)} → ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${r.nextRank}`)}</option>`
+      ).join("")}</select></label>`
+    );
     return o ? { kind: e, mode: "improve", skillId: Ze(o, "skillId") } : null;
   }
   if (e === "other") {
-    const i = to.filter((s) => s !== "genre" || L(n.system) >= 3), a = await ft(t, `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.OtherType")}<select name="otherKind">${i.map((s) => `<option value="${s}">${game.i18n.localize(`MAGNUSARCHIVES.Advancement.Other.${s}`)}</option>`).join("")}</select></label>`);
+    const i = to.filter(
+      (s) => s !== "genre" || L(n.system) >= 3
+    ), a = await ft(
+      t,
+      `<label>${game.i18n.localize("MAGNUSARCHIVES.Advancement.OtherType")}<select name="otherKind">${i.map(
+        (s) => `<option value="${s}">${game.i18n.localize(`MAGNUSARCHIVES.Advancement.Other.${s}`)}</option>`
+      ).join("")}</select></label>`
+    );
     return a ? { kind: e, otherKind: Ze(a, "otherKind") } : null;
   }
   return { kind: e };
@@ -5531,11 +5671,7 @@ async function Dd(n, e) {
   const t = await Vd(n, e);
   if (t)
     try {
-      await game.magnusarchives.services.advancement.purchase(
-        n,
-        t,
-        rt()
-      ), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.PurchasedNotice"));
+      await game.magnusarchives.services.advancement.purchase(n, t, rt()), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Advancement.PurchasedNotice"));
     } catch (i) {
       ya(i);
     }
@@ -5575,10 +5711,7 @@ async function Fd(n, e) {
 }
 async function Td(n) {
   try {
-    const e = await game.magnusarchives.services.advancement.advanceTier(
-      n,
-      rt()
-    );
+    const e = await game.magnusarchives.services.advancement.advanceTier(n, rt());
     ui.notifications.info(game.i18n.format("MAGNUSARCHIVES.Advancement.TierAdvancedNotice", { tier: e.tier }));
   } catch (e) {
     ya(e);
@@ -5623,10 +5756,7 @@ class Pd {
       }));
       return await e.update({
         "system.focusProgress": [...e.system.focusProgress, s],
-        "system.advancement.pendingFocusChoices": [
-          ...e.system.advancement.pendingFocusChoices,
-          ...r
-        ],
+        "system.advancement.pendingFocusChoices": [...e.system.advancement.pendingFocusChoices, ...r],
         "system.advancement.initializedFocusUuids": a ? [...e.system.advancement.initializedFocusUuids] : [...e.system.advancement.initializedFocusUuids, t.uuid]
       }), { progress: s, choicesGranted: r };
     });
@@ -5640,7 +5770,9 @@ class Pd {
       const a = e.system.advancement.pendingFocusChoices.filter((s) => s.focusUuid === t).map((s) => s.id);
       return await e.update({
         "system.focusProgress": e.system.focusProgress.filter((s) => s !== i),
-        "system.advancement.pendingFocusChoices": e.system.advancement.pendingFocusChoices.filter((s) => s.focusUuid !== t)
+        "system.advancement.pendingFocusChoices": e.system.advancement.pendingFocusChoices.filter(
+          (s) => s.focusUuid !== t
+        )
       }), { progress: i, removedPendingChoiceIds: a };
     });
   }
@@ -5668,13 +5800,16 @@ class Pd {
   }
 }
 function fn(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function Ko(n) {
   const e = n instanceof ve ? `MAGNUSARCHIVES.Focus.Association.Errors.${n.code}` : "MAGNUSARCHIVES.Focus.Errors.Unexpected";
@@ -5718,9 +5853,11 @@ async function es(n, e) {
         t,
         String(a.provenance)
       );
-      ui.notifications.info(game.i18n.localize(
-        s.choicesGranted.length > 0 ? "MAGNUSARCHIVES.Focus.Association.Added" : "MAGNUSARCHIVES.Focus.Association.Reattached"
-      ));
+      ui.notifications.info(
+        game.i18n.localize(
+          s.choicesGranted.length > 0 ? "MAGNUSARCHIVES.Focus.Association.Added" : "MAGNUSARCHIVES.Focus.Association.Reattached"
+        )
+      );
     } catch (s) {
       Ko(s);
     }
@@ -6132,11 +6269,13 @@ class qd {
   async markInitialized(e, t) {
     if (e.type !== "character")
       throw new Pe("not-character", "Core Setup requires a Character.");
-    if (!e.system.creation.coreInitialized && (await e.update({ "system.creation": {
-      coreInitialized: !0,
-      mode: t,
-      initializedAt: this.#e()
-    } }), !e.system.creation.coreInitialized))
+    if (!e.system.creation.coreInitialized && (await e.update({
+      "system.creation": {
+        coreInitialized: !0,
+        mode: t,
+        initializedAt: this.#e()
+      }
+    }), !e.system.creation.coreInitialized))
       throw new Pe(
         "state-not-persisted",
         "Foundry did not expose the persisted Core initialization state after update."
@@ -6150,13 +6289,16 @@ class qd {
   }
 }
 function Re(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function ts(n) {
   return n ? game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${n}`) : "";
@@ -6180,17 +6322,23 @@ async function is(n, e, t) {
       name: i.name,
       itemUuid: i.uuid,
       snapshot: Od(i),
-      reason: game.i18n.localize(t === "compendium" ? "MAGNUSARCHIVES.GrantConflict.CompendiumItem" : "MAGNUSARCHIVES.GrantConflict.WorldItem"),
+      reason: game.i18n.localize(
+        t === "compendium" ? "MAGNUSARCHIVES.GrantConflict.CompendiumItem" : "MAGNUSARCHIVES.GrantConflict.WorldItem"
+      ),
       reasonSourceUuid: i.uuid
     }
   };
 }
 async function Vt(n) {
-  const e = [...game.items].filter((u) => u.type === n.type).filter((u) => u.uuid !== n.existing.contentUuid && u.uuid !== n.proposed.contentUuid).sort((u, d) => u.name.localeCompare(d.name)), t = n.suggestions.length ? n.suggestions.map((u) => `
+  const e = [...game.items].filter((u) => u.type === n.type).filter((u) => u.uuid !== n.existing.contentUuid && u.uuid !== n.proposed.contentUuid).sort((u, d) => u.name.localeCompare(d.name)), t = n.suggestions.length ? n.suggestions.map(
+    (u) => `
       <label class="grant-conflict-option">
         <input type="radio" name="resolution" value="suggestion:${Re(u.id)}">
         <span><strong>${Re(u.name)}</strong><small>${Re(u.reason)}</small></span>
-      </label>`).join("") : `<p class="empty-list">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoSuggestions")}</p>`, i = game.i18n.localize(n.type === "skill" ? "MAGNUSARCHIVES.GrantConflict.Skill" : "MAGNUSARCHIVES.GrantConflict.Ability"), a = n.existing.rank ? ` — ${Re(ts(n.existing.rank))}` : "", s = n.proposed.rank ? ` — ${Re(ts(n.proposed.rank))}` : "", o = game.user.isGM ? `
+      </label>`
+  ).join("") : `<p class="empty-list">${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.NoSuggestions")}</p>`, i = game.i18n.localize(
+    n.type === "skill" ? "MAGNUSARCHIVES.GrantConflict.Skill" : "MAGNUSARCHIVES.GrantConflict.Ability"
+  ), a = n.existing.rank ? ` — ${Re(ts(n.existing.rank))}` : "", s = n.proposed.rank ? ` — ${Re(ts(n.proposed.rank))}` : "", o = game.user.isGM ? `
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="world"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.WorldItem")}</span></label>
       <select name="worldUuid">${e.map((u) => `<option value="${Re(u.uuid)}">${Re(u.name)}</option>`).join("")}</select>
       <label class="grant-conflict-option"><input type="radio" name="resolution" value="uuid"><span>${game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CompendiumUuid")}</span></label>
@@ -6226,25 +6374,30 @@ async function Vt(n) {
       if (p) return p;
     }
     if (d === "uuid") {
-      const p = String(u.documentUuid ?? "").trim(), y = await is(n, p, p.startsWith("Compendium.") ? "compendium" : "world");
+      const p = String(u.documentUuid ?? "").trim(), y = await is(
+        n,
+        p,
+        p.startsWith("Compendium.") ? "compendium" : "world"
+      );
       if (y) return y;
     }
     if (d === "custom" && n.type === "skill" && n.allowCustom) {
       const p = String(u.customName ?? "").trim();
-      if (p) return {
-        action: "replace",
-        selectionKind: "custom",
-        replacement: {
-          id: `custom:${p.toLocaleLowerCase()}`,
-          type: "skill",
-          name: p,
-          itemUuid: "",
-          snapshot: { name: p, system: {} },
-          reason: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill"),
-          reasonSourceUuid: "",
-          custom: !0
-        }
-      };
+      if (p)
+        return {
+          action: "replace",
+          selectionKind: "custom",
+          replacement: {
+            id: `custom:${p.toLocaleLowerCase()}`,
+            type: "skill",
+            name: p,
+            itemUuid: "",
+            snapshot: { name: p, system: {} },
+            reason: game.i18n.localize("MAGNUSARCHIVES.GrantConflict.CustomSkill"),
+            reasonSourceUuid: "",
+            custom: !0
+          }
+        };
     }
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.GrantConflict.SelectResolution"));
   }
@@ -6333,7 +6486,9 @@ class jd {
     return e.system.genre.sourceUuid ? this.#e(e.system.genre.sourceUuid) : null;
   }
   eligibleEntries(e, t, i) {
-    return t.system.abilityCatalog.filter((a) => (a.catalog ?? "progression") === "progression" && a.minimumTier <= L(e.system) && a.minimumTier <= i.grantTier);
+    return t.system.abilityCatalog.filter(
+      (a) => (a.catalog ?? "progression") === "progression" && a.minimumTier <= L(e.system) && a.minimumTier <= i.grantTier
+    );
   }
   manualCatalog(e, t) {
     return t.system.abilityCatalog.filter((i) => (i.catalog ?? "progression") === "progression").map((i) => ({
@@ -6348,11 +6503,14 @@ class jd {
     return this.#o(e, async () => {
       this.#c(e);
       const a = e.system.genre;
-      if (!a.sourceUuid) throw new q("genre-required", "Attach a Genre before acquiring an Ability.");
+      if (!a.sourceUuid)
+        throw new q("genre-required", "Attach a Genre before acquiring an Ability.");
       const s = await this.#e(a.sourceUuid);
-      if (!s || s.type !== "genre") throw new q("genre-unavailable", "The active Genre source is unavailable.");
+      if (!s || s.type !== "genre")
+        throw new q("genre-unavailable", "The active Genre source is unavailable.");
       const o = s.system.abilityCatalog.find((m) => m.id === t);
-      if (!o) throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!o)
+        throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       if ((o.catalog ?? "progression") !== "progression")
         throw new q("entry-ineligible", "Origin Abilities are not part of Genre progression.");
       if (this.#r(e, s, a, o, "active")) return { entry: o, abilityCreated: !1, conflictOverridden: !1 };
@@ -6362,11 +6520,15 @@ class jd {
       const u = await this.#l(s, a, o), d = this.#s(e, s, o, u);
       let p = !1;
       if (d) {
-        if (!i) throw new q("duplicate-grant", "This Ability is already present on the Character.");
+        if (!i)
+          throw new q("duplicate-grant", "This Ability is already present on the Character.");
         const m = await i(d);
         if (m.action === "cancel") throw new We();
         if (m.action !== "gmOverride")
-          throw new q("duplicate-grant", "A Genre acquisition must use an Ability from its Genre catalog.");
+          throw new q(
+            "duplicate-grant",
+            "A Genre acquisition must use an Ability from its Genre catalog."
+          );
         p = !0;
       }
       const y = d ? void 0 : (await e.createEmbeddedDocuments("Item", [u]))[0];
@@ -6379,16 +6541,20 @@ class jd {
       const a = e.system.genre;
       if (!a.sourceUuid) throw new q("genre-required", "No active Genre is attached.");
       const s = await this.#e(a.sourceUuid);
-      if (!s || s.type !== "genre") throw new q("genre-unavailable", "The active Genre source is unavailable.");
+      if (!s || s.type !== "genre")
+        throw new q("genre-unavailable", "The active Genre source is unavailable.");
       const o = s.system.abilityCatalog.find((l) => l.id === t);
-      if (!o) throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!o)
+        throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       const r = this.#r(e, s, a, o, "active");
       if (!r) throw new q("entry-missing", "This Genre Ability is not currently owned.");
       if (i) {
-        if (!r.delete) throw new q("ability-unavailable", "The embedded Genre Ability cannot be deleted.");
+        if (!r.delete)
+          throw new q("ability-unavailable", "The embedded Genre Ability cannot be deleted.");
         return await r.delete(), { abilityDeleted: !0, abilityRetained: !1 };
       }
-      if (!r.update) throw new q("ability-unavailable", "The embedded Genre Ability cannot be retained.");
+      if (!r.update)
+        throw new q("ability-unavailable", "The embedded Genre Ability cannot be retained.");
       return await r.update({ "system.grantedBy.status": "retained" }), { abilityDeleted: !1, abilityRetained: !0 };
     });
   }
@@ -6396,19 +6562,23 @@ class jd {
     return this.#o(e, async () => {
       this.#c(e);
       const s = e.system.genre;
-      if (!s.sourceUuid) throw new q("genre-required", "Attach a Genre before spending this choice.");
+      if (!s.sourceUuid)
+        throw new q("genre-required", "Attach a Genre before spending this choice.");
       const o = await this.#e(s.sourceUuid);
-      if (!o || o.type !== "genre") throw new q("genre-unavailable", "The active Genre source is unavailable.");
+      if (!o || o.type !== "genre")
+        throw new q("genre-unavailable", "The active Genre source is unavailable.");
       const r = e.system.advancement.pendingGenreChoices.find((m) => m.id === t);
       if (!r) throw new q("choice-missing", "The pending Genre Choice no longer exists.");
       const l = o.system.abilityCatalog.find((m) => m.id === i);
-      if (!l) throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
+      if (!l)
+        throw new q("entry-missing", "The Genre Ability is no longer in the active Genre catalog.");
       if (!this.eligibleEntries(e, o, r).some((m) => m.id === l.id))
         throw new q("entry-ineligible", "This Genre Ability is not eligible for the selected choice.");
       const u = await this.#l(o, s, l), d = this.#s(e, o, l, u);
       let p = !1;
       if (d) {
-        if (!a) throw new q("duplicate-grant", "This Ability is already present on the Character.");
+        if (!a)
+          throw new q("duplicate-grant", "This Ability is already present on the Character.");
         const m = await a(d);
         if (m.action === "cancel") throw new We();
         if (m.action !== "gmOverride")
@@ -6419,7 +6589,9 @@ class jd {
       d || (y = (await e.createEmbeddedDocuments("Item", [u]))[0]);
       try {
         await e.update({
-          "system.advancement.pendingGenreChoices": e.system.advancement.pendingGenreChoices.filter((m) => m.id !== r.id)
+          "system.advancement.pendingGenreChoices": e.system.advancement.pendingGenreChoices.filter(
+            (m) => m.id !== r.id
+          )
         });
       } catch (m) {
         throw await y?.delete?.(), m;
@@ -6467,7 +6639,11 @@ class jd {
       packageName: t.name,
       packageSourceUuid: t.uuid,
       grantId: i.id,
-      existing: p(l, String(l.id ?? d.contentKey), d),
+      existing: p(
+        l,
+        String(l.id ?? d.contentKey),
+        d
+      ),
       proposed: p({ name: String(a.name) }, i.id, r),
       suggestions: [],
       allowCustom: !1,
@@ -6477,7 +6653,8 @@ class jd {
     };
   }
   #c(e) {
-    if (e.type !== "character") throw new xt("not-character", "Genre association requires a Character.");
+    if (e.type !== "character")
+      throw new xt("not-character", "Genre association requires a Character.");
   }
   async #o(e, t) {
     const i = e.uuid ?? e.id, s = (this.#a.get(i) ?? Promise.resolve()).catch(() => {
@@ -6491,13 +6668,16 @@ class jd {
   }
 }
 function xe(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function _i(n) {
   if (n instanceof We) return;
@@ -6581,12 +6761,16 @@ async function Kd(n) {
     }
     const i = `<div class="magnusarchives genre-ability-browser">
       <p class="genre-browser-source"><strong>${xe(e.name)}</strong></p>
-      <div class="genre-browser-list">${t.map((u, d) => `
+      <div class="genre-browser-list">${t.map(
+      (u, d) => `
         <label class="genre-browser-entry${u.owned ? " is-owned" : ""}${u.normallyAvailable ? "" : " is-future"}">
           <input type="radio" name="entryId" value="${xe(u.id)}"${d === 0 ? " checked" : ""}>
           <span><strong>${xe(u.name)}</strong><small>${game.i18n.localize("MAGNUSARCHIVES.Genre.MinimumTier")} ${u.minimumTier}</small></span>
-          <em>${game.i18n.localize(u.owned ? "MAGNUSARCHIVES.Genre.Browser.Owned" : u.normallyAvailable ? "MAGNUSARCHIVES.Genre.Browser.Available" : "MAGNUSARCHIVES.Genre.Browser.HigherTier")}</em>
-        </label>`).join("")}</div>
+          <em>${game.i18n.localize(
+        u.owned ? "MAGNUSARCHIVES.Genre.Browser.Owned" : u.normallyAvailable ? "MAGNUSARCHIVES.Genre.Browser.Available" : "MAGNUSARCHIVES.Genre.Browser.HigherTier"
+      )}</em>
+        </label>`
+    ).join("")}</div>
       <p class="hint">${game.i18n.localize("MAGNUSARCHIVES.Genre.Browser.GuidanceOnly")}</p>
     </div>`, a = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.localize("MAGNUSARCHIVES.Genre.AddAbilities") },
@@ -6597,11 +6781,7 @@ async function Kd(n) {
     const s = String(a.entryId ?? ""), o = t.find((u) => u.id === s);
     if (!o) return;
     if (!o.owned) {
-      await game.magnusarchives.services.genres.acquireManual(
-        n,
-        s,
-        Vt
-      ), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Genre.AbilityAcquired"));
+      await game.magnusarchives.services.genres.acquireManual(n, s, Vt), ui.notifications.info(game.i18n.localize("MAGNUSARCHIVES.Genre.AbilityAcquired"));
       return;
     }
     if (!await foundry.applications.api.DialogV2.confirm({
@@ -6622,13 +6802,16 @@ async function Kd(n) {
   }
 }
 function _t(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function Xd(n, e, t) {
   return n.includes(e) ? n.filter((i) => i !== e) : n.length >= t ? [...n] : [...n, e];
@@ -6641,7 +6824,9 @@ function Jd(n, e) {
   return n.map((t, i) => `<button type="button" class="package-choice-option"${e ? ` data-action="package-choice-${i}"` : ""} data-package-choice-option data-option-id="${_t(t.id)}" aria-pressed="false"><i class="fa-solid fa-check package-choice-check" aria-hidden="true"></i><span>${_t(t.label)}</span></button>`).join("");
 }
 async function Ki(n) {
-  const e = n.options.filter((l, u, d) => l.id && d.findIndex((p) => p.id === l.id) === u);
+  const e = n.options.filter(
+    (l, u, d) => l.id && d.findIndex((p) => p.id === l.id) === u
+  );
   if (!Number.isInteger(n.choose) || n.choose < 1 || n.choose > e.length) return null;
   const t = n.choose === 1, i = Yd();
   let a = [];
@@ -6654,20 +6839,24 @@ async function Ki(n) {
     action: `package-choice-${u}`,
     label: l.label,
     callback: () => i() ? [l.id] : []
-  })) : [{
-    action: "confirm-package-choice",
-    label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm"),
-    icon: "fa-solid fa-check",
-    disabled: !0,
-    callback: () => i() ? [...a] : []
-  }], r = await foundry.applications.api.DialogV2.wait({
+  })) : [
+    {
+      action: "confirm-package-choice",
+      label: game.i18n.localize("MAGNUSARCHIVES.Actions.Confirm"),
+      icon: "fa-solid fa-check",
+      disabled: !0,
+      callback: () => i() ? [...a] : []
+    }
+  ], r = await foundry.applications.api.DialogV2.wait({
     window: { title: n.title },
     position: { width: 430 },
     content: s,
     buttons: o,
     close: () => null,
     render: t ? void 0 : (l, u) => {
-      const d = [...u.element.querySelectorAll("button[data-package-choice-option]")], p = u.element.querySelector('button[data-action="confirm-package-choice"]'), y = u.element.querySelector("[data-package-choice-count]"), m = () => {
+      const d = [...u.element.querySelectorAll("button[data-package-choice-option]")], p = u.element.querySelector(
+        'button[data-action="confirm-package-choice"]'
+      ), y = u.element.querySelector("[data-package-choice-count]"), m = () => {
         for (const h of d) {
           const f = a.includes(h.dataset.optionId ?? "");
           h.classList.toggle("is-selected", f), h.setAttribute("aria-pressed", String(f));
@@ -6724,23 +6913,36 @@ async function au(n) {
   return n.some((e) => (e.sourceMode ?? "fixed") === "catalog") ? iu(n, await nu()) : [...n];
 }
 function Gt(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function Xi(n) {
-  return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
+  return [...n.items].filter(
+    (e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species"
+  );
 }
 async function Sa(n) {
   const e = [...game.items].filter((i) => i.type === n).sort((i, a) => i.name.localeCompare(a.name));
   if (!e.length)
-    return ui.notifications.warn(game.i18n.localize(`MAGNUSARCHIVES.Packages.NoWorld${n === "characterType" ? "Types" : n === "descriptor" ? "Descriptors" : "Species"}`)), null;
+    return ui.notifications.warn(
+      game.i18n.localize(
+        `MAGNUSARCHIVES.Packages.NoWorld${n === "characterType" ? "Types" : n === "descriptor" ? "Descriptors" : "Species"}`
+      )
+    ), null;
   const t = await foundry.applications.api.DialogV2.input({
-    window: { title: game.i18n.localize(n === "characterType" ? "MAGNUSARCHIVES.Packages.AddType" : n === "descriptor" ? "MAGNUSARCHIVES.Packages.AddDescriptor" : "MAGNUSARCHIVES.Packages.AddSpecies") },
+    window: {
+      title: game.i18n.localize(
+        n === "characterType" ? "MAGNUSARCHIVES.Packages.AddType" : n === "descriptor" ? "MAGNUSARCHIVES.Packages.AddDescriptor" : "MAGNUSARCHIVES.Packages.AddSpecies"
+      )
+    },
     content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}
       <select name="uuid">${e.map((i) => `<option value="${Gt(i.uuid)}">${Gt(i.name)}</option>`).join("")}</select>
     </label></div>`,
@@ -6809,9 +7011,17 @@ async function Pn(n, e) {
   let u;
   if (o.genre === "superhero" && o.superhero?.superheroics?.enabled && (u = await su(t.name) ?? void 0, !u))
     return !1;
-  const d = await at(t.name, o.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+  const d = await at(
+    t.name,
+    o.choiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+  );
   if (d === null) return !1;
-  const p = await at(t.name, o.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
+  const p = await at(
+    t.name,
+    o.abilityChoiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice")
+  );
   if (p === null) return !1;
   try {
     await game.magnusarchives.services.characterPackages.attachType(n, t, {
@@ -6845,7 +7055,9 @@ async function Pn(n, e) {
 async function xn(n, e, t) {
   const i = e ?? await Sa("descriptor");
   if (!i) return !1;
-  const a = Xi(n).some((u) => u.type === "descriptor" && u.system.instance.role === "primary"), s = t ? { role: t } : await foundry.applications.api.DialogV2.input({
+  const a = Xi(n).some(
+    (u) => u.type === "descriptor" && u.system.instance.role === "primary"
+  ), s = t ? { role: t } : await foundry.applications.api.DialogV2.input({
     window: { title: i.name },
     content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.DescriptorRole")}
       <select name="role">${a ? "" : `<option value="primary">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.primary")}</option>`}<option value="additional">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.additional")}</option><option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.Role.custom")}</option></select>
@@ -6931,9 +7143,17 @@ async function as(n, e) {
   let r;
   if (o.edgeGrant.mode === "choice" && (r = await Qo(t.name) ?? void 0, !r))
     return;
-  const l = await at(t.name, o.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+  const l = await at(
+    t.name,
+    o.choiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+  );
   if (l === null) return;
-  const u = await at(t.name, o.abilityChoiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice"));
+  const u = await at(
+    t.name,
+    o.abilityChoiceGroups ?? [],
+    game.i18n.localize("MAGNUSARCHIVES.Species.AbilityChoice")
+  );
   if (u === null) return;
   const d = await au(o.descriptorChoiceGroups ?? []), p = await at(
     t.name,
@@ -6941,14 +7161,20 @@ async function as(n, e) {
     game.i18n.localize("MAGNUSARCHIVES.Species.DescriptorChoice")
   );
   if (p === null) return;
-  const y = d.flatMap((f) => f.options.filter((A) => p[f.id]?.includes(A.id)).map((A) => ({ ...A, id: `${f.id}:${A.id}` }))), m = {}, h = {};
+  const y = d.flatMap(
+    (f) => f.options.filter((A) => p[f.id]?.includes(A.id)).map((A) => ({ ...A, id: `${f.id}:${A.id}` }))
+  ), m = {}, h = {};
   for (const f of [...o.descriptorGrants ?? [], ...y]) {
     const A = f.descriptorUuid ? await fromUuid(f.descriptorUuid) : null, v = A?.system ?? f.snapshot.system, E = await Zo(
       f.snapshot.name || A?.name || t.name,
       v.poolBonusChoiceGroups ?? []
     );
     if (E === null) return;
-    const H = await at(f.snapshot.name || A?.name || t.name, v.choiceGroups ?? [], game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice"));
+    const H = await at(
+      f.snapshot.name || A?.name || t.name,
+      v.choiceGroups ?? [],
+      game.i18n.localize("MAGNUSARCHIVES.Packages.SkillChoice")
+    );
     if (H === null) return;
     m[f.id] = H, h[f.id] = E;
   }
@@ -6988,13 +7214,16 @@ function ei(n, e) {
   return String(n[e] ?? "").trim();
 }
 function se(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function tr(n) {
   return game.i18n.localize(`MAGNUSARCHIVES.Pools.${n[0].toUpperCase()}${n.slice(1)}`);
@@ -7033,7 +7262,9 @@ async function wa(n, e, t, i, a = "") {
   return o ? { uuid: ei(o, "uuid"), data: o } : null;
 }
 function ir(n) {
-  return [...n.items].find((e) => e.type === "descriptor" && e.system.instance?.role === "primary")?.name ?? null;
+  return [...n.items].find(
+    (e) => e.type === "descriptor" && e.system.instance?.role === "primary"
+  )?.name ?? null;
 }
 function nr(n) {
   return [...n.items].find((e) => e.type === "characterType")?.name ?? null;
@@ -7103,9 +7334,9 @@ async function fu(n) {
   }
 }
 function gu(n) {
-  const e = [...n.querySelectorAll(
-    'input[name="might"], input[name="speed"], input[name="intellect"]'
-  )], t = n.querySelector("[data-core-points-remaining]"), i = n.querySelector('button[data-action="ok"]'), a = () => {
+  const e = [
+    ...n.querySelectorAll('input[name="might"], input[name="speed"], input[name="intellect"]')
+  ], t = n.querySelector("[data-core-points-remaining]"), i = n.querySelector('button[data-action="ok"]'), a = () => {
     const s = e.map((l) => Number(l.value)), o = s.every((l) => Number.isInteger(l) && l >= 0 && l <= 6), r = 6 - s.reduce((l, u) => l + u, 0);
     t && (t.value = String(r)), i && (i.disabled = !o || r !== 0);
   };
@@ -7116,7 +7347,9 @@ function ar(n, e) {
   return ru + t;
 }
 async function hu(n) {
-  const e = er.map((a) => `<label>${tr(a)} ${ar(n, a)} + <input name="${a}" type="number" min="0" max="6" value="0"></label>`).join(""), t = await Ji(
+  const e = er.map(
+    (a) => `<label>${tr(a)} ${ar(n, a)} + <input name="${a}" type="number" min="0" max="6" value="0"></label>`
+  ).join(""), t = await Ji(
     game.i18n.localize("MAGNUSARCHIVES.Creation.StepPools"),
     `<p>${game.i18n.localize("MAGNUSARCHIVES.Creation.PoolsPrompt")}</p>${e}
      <p>${game.i18n.localize("MAGNUSARCHIVES.Creation.PointsRemaining")}: <output data-core-points-remaining>6</output> / 6</p>`,
@@ -7201,7 +7434,9 @@ async function Au(n) {
     content: `<div class="magnusarchives-dialog-fields">
       <p><strong>${o}</strong></p>
       <p>${er.map((d) => `${tr(d)} ${ar(e, d) + i[d]}`).join(" · ")}</p>
-      ${r.length ? `<ul>${r.map((d) => `<li>${se(d.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${String(d.system.rank)}`)}</li>`).join("")}</ul>` : ""}
+      ${r.length ? `<ul>${r.map(
+      (d) => `<li>${se(d.name)} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${String(d.system.rank)}`)}</li>`
+    ).join("")}</ul>` : ""}
       <p>${game.i18n.localize("MAGNUSARCHIVES.Arc.Label")}: ${se(a?.name ?? game.i18n.localize("MAGNUSARCHIVES.Creation.NoArc"))}</p>
     </div>`,
     yes: { label: game.i18n.localize("MAGNUSARCHIVES.Creation.Finalize") },
@@ -7216,9 +7451,9 @@ async function Au(n) {
 }
 async function ss(n, e) {
   try {
-    await game.magnusarchives.services.characterInitialization.markInitialized(n, e), await n.sheet?.render({ force: !0 }), ui.notifications.info(game.i18n.localize(
-      e === "skipped" ? "MAGNUSARCHIVES.Creation.Skipped" : "MAGNUSARCHIVES.Creation.Marked"
-    ));
+    await game.magnusarchives.services.characterInitialization.markInitialized(n, e), await n.sheet?.render({ force: !0 }), ui.notifications.info(
+      game.i18n.localize(e === "skipped" ? "MAGNUSARCHIVES.Creation.Skipped" : "MAGNUSARCHIVES.Creation.Marked")
+    );
   } catch (t) {
     va(t);
   }
@@ -7244,40 +7479,49 @@ async function os(n, e, t, i = !1) {
   })) return;
   const o = await bu(n, e, t);
   try {
-    const r = await game.magnusarchives.services.focusAcquisition.undo(
-      n,
-      e,
-      t,
-      { deleteAbility: o, force: i }
+    const r = await game.magnusarchives.services.focusAcquisition.undo(n, e, t, {
+      deleteAbility: o,
+      force: i
+    });
+    ui.notifications.info(
+      game.i18n.localize(
+        r.choiceRestored ? "MAGNUSARCHIVES.Focus.UndoChoiceRestored" : "MAGNUSARCHIVES.Focus.UndoCompleted"
+      )
+    ), r.invalidOwnedNodeIds.length > 0 && ui.notifications.warn(
+      game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
+        nodes: bi(e, r.invalidOwnedNodeIds)
+      })
     );
-    ui.notifications.info(game.i18n.localize(r.choiceRestored ? "MAGNUSARCHIVES.Focus.UndoChoiceRestored" : "MAGNUSARCHIVES.Focus.UndoCompleted")), r.invalidOwnedNodeIds.length > 0 && ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
-      nodes: bi(e, r.invalidOwnedNodeIds)
-    }));
   } catch (r) {
     if (r instanceof ue && r.code === "undo-dependent-nodes") {
       if (!game.user.isGM) {
-        ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Focus.Errors.UndoDependencies", {
-          nodes: bi(e, r.dependentNodeIds)
-        }));
+        ui.notifications.error(
+          game.i18n.format("MAGNUSARCHIVES.Focus.Errors.UndoDependencies", {
+            nodes: bi(e, r.dependentNodeIds)
+          })
+        );
         return;
       }
       if (await foundry.applications.api.DialogV2.confirm({
         window: { title: game.i18n.localize("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndo") },
-        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndoWarning", {
-          nodes: bi(e, r.dependentNodeIds)
-        })}</p></div>`,
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format(
+          "MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndoWarning",
+          {
+            nodes: bi(e, r.dependentNodeIds)
+          }
+        )}</p></div>`,
         yes: { label: game.i18n.localize("MAGNUSARCHIVES.Focus.ProgressionEdit.ForceUndo") },
         no: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel") }
       })) {
-        const u = await game.magnusarchives.services.focusAcquisition.undo(
-          n,
-          e,
-          t,
-          { deleteAbility: o, force: !0 }
+        const u = await game.magnusarchives.services.focusAcquisition.undo(n, e, t, {
+          deleteAbility: o,
+          force: !0
+        });
+        ui.notifications.warn(
+          game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
+            nodes: bi(e, u.invalidOwnedNodeIds)
+          })
         );
-        ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Focus.ProgressionEdit.InvalidWarning", {
-          nodes: bi(e, u.invalidOwnedNodeIds)
-        }));
       }
       return;
     }
@@ -7319,7 +7563,9 @@ function Cu(n) {
   return [
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Roll.ManualSkillLevel")}">${ga(0, "manual:")}</optgroup>`,
     `<optgroup label="${game.i18n.localize("MAGNUSARCHIVES.Skill.Title")}">`,
-    ...rr(n).map((e) => `<option value="${e.id}">${e.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${e.system.rank}`)}</option>`),
+    ...rr(n).map(
+      (e) => `<option value="${e.id}">${e.name} — ${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${e.system.rank}`)}</option>`
+    ),
     "</optgroup>"
   ].join("");
 }
@@ -7407,11 +7653,17 @@ async function Ru(n, e) {
           attackSummary: (v, E) => [
             `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.BaseDamage")}</span><strong>${e.system.damage}</strong></div>`,
             `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.PaidDamageEffort")}</span><strong>${E.context.damageEffort ?? 0}</strong></div>`,
-            ...(E.context.freeDamageEffort ?? 0) > 0 ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${E.context.freeDamageEffort}</strong></div>`] : [],
+            ...(E.context.freeDamageEffort ?? 0) > 0 ? [
+              `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.FreeDamageEffort")}</span><strong>${E.context.freeDamageEffort}</strong></div>`
+            ] : [],
             `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Roll.TotalDamageEffort")}</span><strong>${E.damageEffortApplied}</strong></div>`,
             `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.DamagePerEffort")}</span><strong>${m.damageEffortBonus}</strong></div>`,
-            ...e.system.damageEffect !== "none" ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Npc.DamageEffect")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${e.system.damageEffect}`)}${e.system.damageEffect === "stress" ? ` (${e.system.stressAmount})` : ""}</strong></div>`] : [],
-            ...e.system.range ? [`<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${e.system.range}</strong></div>`] : []
+            ...e.system.damageEffect !== "none" ? [
+              `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Npc.DamageEffect")}</span><strong>${game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${e.system.damageEffect}`)}${e.system.damageEffect === "stress" ? ` (${e.system.stressAmount})` : ""}</strong></div>`
+            ] : [],
+            ...e.system.range ? [
+              `<div class="roll-summary-row"><span>${game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label")}</span><strong>${e.system.range}</strong></div>`
+            ] : []
           ].join("")
         } : {}
       });
@@ -7457,14 +7709,16 @@ async function Gu(n, e) {
   if (!i) {
     const o = t.map(
       (l) => game.magnusarchives.services.abilities.previewPayment(n, e, l)
-    ).map((l, u) => `
+    ).map(
+      (l, u) => `
       <label class="ability-payment-choice">
         <input type="radio" name="pool" value="${l.pool}" ${u === 0 ? "checked" : ""}>
         <strong>${Nu(l.pool)}</strong>
         <span>${game.i18n.localize("MAGNUSARCHIVES.Ability.Payment.Current")}: ${l.currentBefore}</span>
         <span>${game.i18n.localize("MAGNUSARCHIVES.Pools.Edge")}: ${l.edge}</span>
         <span>${game.i18n.localize("MAGNUSARCHIVES.Ability.Payment.Pay")}: ${l.costPaid}</span>
-      </label>`).join(""), r = await foundry.applications.api.DialogV2.input({
+      </label>`
+    ).join(""), r = await foundry.applications.api.DialogV2.input({
       window: { title: game.i18n.format("MAGNUSARCHIVES.Ability.Payment.Title", { name: e.name }) },
       content: `<div class="magnusarchives magnusarchives-dialog ability-payment-dialog"><p>${game.i18n.localize("MAGNUSARCHIVES.Ability.Cost")}: <strong>${e.system.cost.amount}</strong></p><div class="ability-payment-choices">${o}</div><p class="ability-payment-whole-cost">${game.i18n.localize("MAGNUSARCHIVES.Ability.Payment.WholeCost")}</p></div>`,
       rejectClose: !1,
@@ -7517,7 +7771,9 @@ function Hu(n = []) {
     const i = hn(t);
     e.has(i) || e.set(i, t);
   }
-  return [...e.values()].sort((t, i) => cs[t.role ?? "custom"] - cs[i.role ?? "custom"] || (t.attachedAt ?? 0) - (i.attachedAt ?? 0) || t.name.localeCompare(i.name, "en-US") || hn(t).localeCompare(hn(i), "en-US"));
+  return [...e.values()].sort(
+    (t, i) => cs[t.role ?? "custom"] - cs[i.role ?? "custom"] || (t.attachedAt ?? 0) - (i.attachedAt ?? 0) || t.name.localeCompare(i.name, "en-US") || hn(t).localeCompare(hn(i), "en-US")
+  );
 }
 function $u(n) {
   const e = n.trim().replace(/^[^a-z]+/i, "").toLocaleLowerCase("en-US");
@@ -7718,7 +7974,8 @@ class ps {
 }
 function Bn(n) {
   const e = n.track, t = n.severity, i = n.count, a = i === void 0 || i.trim() === "" ? Number.NaN : Number(i);
-  if (e !== "character" && e !== "shield" || !ge.includes(t) || !Number.isInteger(a) || a < 0) throw new Error("Invalid Wound count action data.");
+  if (e !== "character" && e !== "shield" || !ge.includes(t) || !Number.isInteger(a) || a < 0)
+    throw new Error("Invalid Wound count action data.");
   if (e === "shield") {
     const s = n.shieldId?.trim();
     if (!s) throw new Error("Invalid Wound count action data.");
@@ -7755,7 +8012,9 @@ function Xu(n) {
   return { family: e, category: t };
 }
 function Yu(n, e) {
-  const t = /* @__PURE__ */ new Set([...Le, ...je]), i = new Set(n.filter((a) => t.has(a)));
+  const t = /* @__PURE__ */ new Set([...Le, ...je]), i = new Set(
+    n.filter((a) => t.has(a))
+  );
   return i.has(e) ? i.delete(e) : i.add(e), [...i];
 }
 async function Ju(n, e, t) {
@@ -7763,13 +8022,16 @@ async function Ju(n, e, t) {
   return await n.update({ [`system.proficiencies.${i}`]: a }), a;
 }
 function wi(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function Qu(n) {
   const e = n ?? { category: "Accuracy", shifts: 1, specification: "", description: "" };
@@ -7919,13 +8181,15 @@ function nm() {
 }
 const yn = "is-quick-roll-pulse";
 function am(n) {
-  n.classList.remove(yn), n.offsetWidth, n.classList.add(yn), n.addEventListener("animationend", () => {
-    n.classList.remove(yn);
-  }, { once: !0 });
+  n.classList.remove(yn), n.offsetWidth, n.classList.add(yn), n.addEventListener(
+    "animationend",
+    () => {
+      n.classList.remove(yn);
+    },
+    { once: !0 }
+  );
 }
-const sm = foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ActorSheetV2
-);
+const sm = foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2);
 function ys(n) {
   const e = n.dataset.severity, t = n.dataset.woundId;
   if (!ge.includes(e) || !t)
@@ -8083,101 +8347,104 @@ class C extends sm {
   static DEFAULT_OPTIONS = {
     ...ra,
     classes: ["magnusarchives", "sheet", "actor", "character-sheet"],
-    actions: ca({
-      applyWound: C.#J,
-      adjustStress: C.#Q,
-      setDamageTrackStep: C.#Z,
-      applySeriousInjury: C.#ee,
-      healDamageTrack: C.#te,
-      setCharacterWoundCount: C.#ie,
-      setShieldWoundCount: C.#ne,
-      toggleFamiliarity: C.#ae,
-      addWeaponFamily: C.#se,
-      removeWeaponFamily: C.#oe,
-      editWound: C.#de,
-      deleteWound: C.#ue,
-      poolDamage: C.#me,
-      recovery: C.#pe,
-      recoveryType: C.#fe,
-      resetRecoveries: C.#ge,
-      rally: C.#he,
-      editCharacterOverride: C.#M,
-      clearCharacterOverride: C.#y,
-      editWoundCapacityOverride: C.#G,
-      resetWoundCapacityOverride: C.#Se,
-      editRecoveryOverride: C.#U,
-      resetRecoveryOverride: C.#b,
-      rollPool: C.#k,
-      inspectHeaderFocus: C.#C,
-      createSkill: C.#Ae,
-      setSkillSort: C.#E,
-      rollSkill: C.#R,
-      configureSkillRoll: C.#$,
-      editSkill: C.#g,
-      deleteSkill: C.#we,
-      resetHeaderAppearance: C.#v,
-      createWeapon: C.#ve,
-      createArmor: C.#Ce,
-      createShield: C.#Ee,
-      attackWeapon: C.#Ie,
-      toggleCombatDetails: C.#Re,
-      rollCombatDepletion: C.#Ne,
-      reloadWeapon: C.#Me,
-      toggleShieldEquipped: C.#Ge,
-      toggleArmorEquipped: C.#Ue,
-      editCombatItem: C.#ke,
-      deleteCombatItem: C.#He,
-      block: C.#$e,
-      dodge: C.#Ve,
-      openFocusNode: C.#De,
-      acquireFocusNode: C.#Fe,
-      gmAcquireFocusNode: C.#Te,
-      purchaseAdvancement: C.#ze,
-      undoAdvancement: C.#Pe,
-      advanceTier: C.#xe,
-      completeProgressionGuidance: C.#qe,
-      resetProgressionGuidance: C.#Oe,
-      addFocus: C.#Be,
-      removeFocus: C.#Le,
-      toggleGmProgressionEdit: C.#je,
-      undoFocusAcquisition: C.#We,
-      gmMarkFocusOwned: C.#_e,
-      gmRemoveFocusOwned: C.#Ke,
-      beginCoreSetup: C.#Xe,
-      skipCoreSetup: C.#Je,
-      markCoreInitialized: C.#Qe,
-      chooseArc: C.#Ye,
-      restoreFocusAbility: C.#Ze,
-      addType: C.#A,
-      addDescriptor: C.#f,
-      addSpecies: C.#p,
-      addGenre: C.#h,
-      inspectGenre: C.#m,
-      removeGenre: C.#S,
-      acquireGenreAbility: C.#w,
-      browseGenreAbilities: C.#V,
-      inspectPackage: C.#D,
-      removePackage: C.#F,
-      inspectGrantedItem: C.#T,
-      createAbility: C.#P,
-      useAbility: C.#z,
-      payAbilityCost: C.#O,
-      toggleAbilityArchived: C.#B,
-      toggleAbilityDetails: C.#x,
-      inspectAbility: C.#q,
-      deleteAbility: C.#L,
-      addPowerShift: C.#re,
-      editPowerShift: C.#le,
-      deletePowerShift: C.#ce,
-      sendItemToChat: C.#Y,
-      createInventoryItem: C.#j,
-      openInventoryItem: C.#W,
-      deleteInventoryItem: C.#K,
-      toggleInventoryDetails: C.#_,
-      rollInventoryDepletion: C.#N,
-      rollArtifactLevel: C.#X,
-      playerIntrusion: C.#ye
-    }, Ss),
+    actions: ca(
+      {
+        applyWound: C.#J,
+        adjustStress: C.#Q,
+        setDamageTrackStep: C.#Z,
+        applySeriousInjury: C.#ee,
+        healDamageTrack: C.#te,
+        setCharacterWoundCount: C.#ie,
+        setShieldWoundCount: C.#ne,
+        toggleFamiliarity: C.#ae,
+        addWeaponFamily: C.#se,
+        removeWeaponFamily: C.#oe,
+        editWound: C.#de,
+        deleteWound: C.#ue,
+        poolDamage: C.#me,
+        recovery: C.#pe,
+        recoveryType: C.#fe,
+        resetRecoveries: C.#ge,
+        rally: C.#he,
+        editCharacterOverride: C.#M,
+        clearCharacterOverride: C.#y,
+        editWoundCapacityOverride: C.#G,
+        resetWoundCapacityOverride: C.#Se,
+        editRecoveryOverride: C.#U,
+        resetRecoveryOverride: C.#b,
+        rollPool: C.#k,
+        inspectHeaderFocus: C.#C,
+        createSkill: C.#Ae,
+        setSkillSort: C.#E,
+        rollSkill: C.#R,
+        configureSkillRoll: C.#$,
+        editSkill: C.#g,
+        deleteSkill: C.#we,
+        resetHeaderAppearance: C.#v,
+        createWeapon: C.#ve,
+        createArmor: C.#Ce,
+        createShield: C.#Ee,
+        attackWeapon: C.#Ie,
+        toggleCombatDetails: C.#Re,
+        rollCombatDepletion: C.#Ne,
+        reloadWeapon: C.#Me,
+        toggleShieldEquipped: C.#Ge,
+        toggleArmorEquipped: C.#Ue,
+        editCombatItem: C.#ke,
+        deleteCombatItem: C.#He,
+        block: C.#$e,
+        dodge: C.#Ve,
+        openFocusNode: C.#De,
+        acquireFocusNode: C.#Fe,
+        gmAcquireFocusNode: C.#Te,
+        purchaseAdvancement: C.#ze,
+        undoAdvancement: C.#Pe,
+        advanceTier: C.#xe,
+        completeProgressionGuidance: C.#qe,
+        resetProgressionGuidance: C.#Oe,
+        addFocus: C.#Be,
+        removeFocus: C.#Le,
+        toggleGmProgressionEdit: C.#je,
+        undoFocusAcquisition: C.#We,
+        gmMarkFocusOwned: C.#_e,
+        gmRemoveFocusOwned: C.#Ke,
+        beginCoreSetup: C.#Xe,
+        skipCoreSetup: C.#Je,
+        markCoreInitialized: C.#Qe,
+        chooseArc: C.#Ye,
+        restoreFocusAbility: C.#Ze,
+        addType: C.#A,
+        addDescriptor: C.#f,
+        addSpecies: C.#p,
+        addGenre: C.#h,
+        inspectGenre: C.#m,
+        removeGenre: C.#S,
+        acquireGenreAbility: C.#w,
+        browseGenreAbilities: C.#V,
+        inspectPackage: C.#D,
+        removePackage: C.#F,
+        inspectGrantedItem: C.#T,
+        createAbility: C.#P,
+        useAbility: C.#z,
+        payAbilityCost: C.#O,
+        toggleAbilityArchived: C.#B,
+        toggleAbilityDetails: C.#x,
+        inspectAbility: C.#q,
+        deleteAbility: C.#L,
+        addPowerShift: C.#re,
+        editPowerShift: C.#le,
+        deletePowerShift: C.#ce,
+        sendItemToChat: C.#Y,
+        createInventoryItem: C.#j,
+        openInventoryItem: C.#W,
+        deleteInventoryItem: C.#K,
+        toggleInventoryDetails: C.#_,
+        rollInventoryDepletion: C.#N,
+        rollArtifactLevel: C.#X,
+        playerIntrusion: C.#ye
+      },
+      Ss
+    ),
     position: { width: 760, height: 760 },
     window: { resizable: !0 }
   };
@@ -8211,27 +8478,37 @@ class C extends sm {
   }
   #u() {
     this.#c?.abort(), this.#c = null;
-    const e = [...this.element.querySelectorAll("input[data-inventory-quantity]")], t = [...this.element.querySelectorAll(
-      ".combat-weapon-row[data-action], .combat-shield-row[data-action], .combat-armor-row[data-action]"
-    )];
+    const e = [...this.element.querySelectorAll("input[data-inventory-quantity]")], t = [
+      ...this.element.querySelectorAll(
+        ".combat-weapon-row[data-action], .combat-shield-row[data-action], .combat-armor-row[data-action]"
+      )
+    ];
     if (!e.length && !t.length) return;
     const i = new AbortController();
     this.#c = i;
     for (const a of t)
-      a.addEventListener("keydown", (s) => {
-        s.target !== a || s.key !== "Enter" && s.key !== " " || (s.preventDefault(), a.click());
-      }, { signal: i.signal });
+      a.addEventListener(
+        "keydown",
+        (s) => {
+          s.target !== a || s.key !== "Enter" && s.key !== " " || (s.preventDefault(), a.click());
+        },
+        { signal: i.signal }
+      );
     if (this.isEditable)
       for (const a of e)
-        a.addEventListener("change", async (s) => {
-          s.stopPropagation();
-          const o = a.dataset.itemId, r = o ? this.actor.items.get(o) : null, l = Number(a.value);
-          if (!r || r.type !== "equipment" || !Number.isInteger(l) || l < 0) {
-            await this.render({ force: !0 });
-            return;
-          }
-          await r.update({ "system.quantity": l });
-        }, { signal: i.signal });
+        a.addEventListener(
+          "change",
+          async (s) => {
+            s.stopPropagation();
+            const o = a.dataset.itemId, r = o ? this.actor.items.get(o) : null, l = Number(a.value);
+            if (!r || r.type !== "equipment" || !Number.isInteger(l) || l < 0) {
+              await this.render({ force: !0 });
+              return;
+            }
+            await r.update({ "system.quantity": l });
+          },
+          { signal: i.signal }
+        );
   }
   _canDragDrop(e) {
     return this.isEditable;
@@ -8279,16 +8556,15 @@ class C extends sm {
   static async #z(e, t) {
     const i = this.actor.items.get(x(t));
     if (!i || i.type !== "ability") throw new Error("Ability Item not found.");
-    await Ru(
-      this.actor,
-      i
-    );
+    await Ru(this.actor, i);
   }
   static async #P() {
-    await (await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("MAGNUSARCHIVES.Ability.New"),
-      type: "ability"
-    }]))[0]?.sheet?.render(!0);
+    await (await this.actor.createEmbeddedDocuments("Item", [
+      {
+        name: game.i18n.localize("MAGNUSARCHIVES.Ability.New"),
+        type: "ability"
+      }
+    ]))[0]?.sheet?.render(!0);
   }
   static #x(e, t) {
     e.preventDefault(), e.stopPropagation();
@@ -8344,10 +8620,12 @@ class C extends sm {
   static async #j(e, t) {
     const i = t.dataset.itemType;
     if (!Gi(i)) throw new Error("Invalid Inventory Item type.");
-    await (await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize(`MAGNUSARCHIVES.Inventory.New.${i}`),
-      type: i
-    }]))[0]?.sheet?.render(!0);
+    await (await this.actor.createEmbeddedDocuments("Item", [
+      {
+        name: game.i18n.localize(`MAGNUSARCHIVES.Inventory.New.${i}`),
+        type: i
+      }
+    ]))[0]?.sheet?.render(!0);
   }
   static async #W(e, t) {
     const i = this.actor.items.get(x(t));
@@ -8390,7 +8668,9 @@ class C extends sm {
   static async #Y(e, t) {
     e.preventDefault(), e.stopPropagation();
     const i = this.actor.items.get(x(t));
-    if (!i || !["ability", "weapon", "shield", "armor", ...On].includes(i.type))
+    if (!i || !["ability", "weapon", "shield", "armor", ...On].includes(
+      i.type
+    ))
       throw new Error("Chat Item not found.");
     await game.magnusarchives.services.itemChat.publish(i);
   }
@@ -8411,20 +8691,14 @@ class C extends sm {
     );
   }
   static async #ee() {
-    await game.magnusarchives.services.conditions.applySeriousInjury(
-      this.actor
-    );
+    await game.magnusarchives.services.conditions.applySeriousInjury(this.actor);
   }
   static async #te() {
-    await game.magnusarchives.services.conditions.healDamageTrack(
-      this.actor
-    );
+    await game.magnusarchives.services.conditions.healDamageTrack(this.actor);
   }
   static async #ie(e, t) {
-    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(
-      game.user,
-      CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
-    )) return;
+    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER))
+      return;
     const i = Bn(t.dataset);
     if (i.track !== "character") throw new Error("Invalid Character Wound count action data.");
     await game.magnusarchives.services.wounds.setCount(
@@ -8434,25 +8708,17 @@ class C extends sm {
     ), await this.render({ force: !0 });
   }
   static async #ne(e, t) {
-    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(
-      game.user,
-      CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
-    )) return;
+    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER))
+      return;
     const i = Bn(t.dataset);
     if (i.track !== "shield") throw new Error("Invalid Shield Wound count action data.");
     const a = this.actor.items.get(i.shieldId);
     if (!a || a.type !== "shield") throw new Error("Shield Item not found.");
-    await game.magnusarchives.services.shields.setCount(
-      a,
-      i.severity,
-      i.count
-    ), await this.render({ force: !0 });
+    await game.magnusarchives.services.shields.setCount(a, i.severity, i.count), await this.render({ force: !0 });
   }
   static async #ae(e, t) {
-    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(
-      game.user,
-      CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
-    )) return;
+    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || !game.user.isGM && !this.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER))
+      return;
     const { family: i, category: a } = Xu(t.dataset);
     await Ju(this.actor, i, a), await this.render({ force: !0 });
   }
@@ -8460,13 +8726,12 @@ class C extends sm {
     await Ku(this.actor), await this.render({ force: !0 });
   }
   static async #oe(e, t) {
-    e.preventDefault(), e.stopPropagation(), await _u(
-      this.actor,
-      t.dataset.weaponFamily
-    ), await this.render({ force: !0 });
+    e.preventDefault(), e.stopPropagation(), await _u(this.actor, t.dataset.weaponFamily), await this.render({ force: !0 });
   }
   static #I(e) {
-    const t = e.actor.system, i = [...e.actor.items].filter((a) => a.type === "characterType");
+    const t = e.actor.system, i = [...e.actor.items].filter(
+      (a) => a.type === "characterType"
+    );
     return $a(t.powerShifts ?? [], i);
   }
   static async #re() {
@@ -8512,7 +8777,10 @@ class C extends sm {
       yes: { label: game.i18n.localize("MAGNUSARCHIVES.Hud.ResetRecoveries") },
       no: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Cancel") }
     })) return;
-    const t = this.actor.system.recovery.slots.map((i) => ({ ...i, used: !1 }));
+    const t = this.actor.system.recovery.slots.map((i) => ({
+      ...i,
+      used: !1
+    }));
     await this.actor.update({
       "system.recovery.slots": t,
       "system.recovery.used": Rt(t)
@@ -8542,10 +8810,7 @@ class C extends sm {
     e.preventDefault(), e.stopPropagation();
     const i = t.dataset.overrideKey;
     if (!i || !Zi.includes(i)) return;
-    const a = kn(
-      this.actor.system,
-      i
-    );
+    const a = kn(this.actor.system, i);
     await this.actor.update({ [a.path]: null });
   }
   static async #G(e) {
@@ -8569,13 +8834,21 @@ class C extends sm {
     this.#i?.abort(), this.#i = new AbortController();
     const { signal: e } = this.#i;
     for (const i of this.element.querySelectorAll(".character-hud-pool[data-action='rollPool']"))
-      i.addEventListener("keydown", (a) => {
-        a.target !== i || a.key !== "Enter" && a.key !== " " || (a.preventDefault(), i.click());
-      }, { signal: e });
+      i.addEventListener(
+        "keydown",
+        (a) => {
+          a.target !== i || a.key !== "Enter" && a.key !== " " || (a.preventDefault(), i.click());
+        },
+        { signal: e }
+      );
     const t = this.element.querySelector("input[data-header-color]");
-    t && this.isEditable && t.addEventListener("change", async (i) => {
-      i.stopPropagation(), await this.actor.update({ "system.appearance.color": t.value });
-    }, { signal: e });
+    t && this.isEditable && t.addEventListener(
+      "change",
+      async (i) => {
+        i.stopPropagation(), await this.actor.update({ "system.appearance.color": t.value });
+      },
+      { signal: e }
+    );
   }
   static async #C(e, t) {
     const i = t.dataset.focusUuid;
@@ -8583,10 +8856,12 @@ class C extends sm {
     await (await Fe(this.actor, i))?.sheet?.render(!0);
   }
   static async #Ae() {
-    await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("MAGNUSARCHIVES.Skill.New"),
-      type: "skill"
-    }]);
+    await this.actor.createEmbeddedDocuments("Item", [
+      {
+        name: game.i18n.localize("MAGNUSARCHIVES.Skill.New"),
+        type: "skill"
+      }
+    ]);
   }
   static #E(e, t) {
     const i = t.dataset.sortMode;
@@ -8598,10 +8873,9 @@ class C extends sm {
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
     am(t);
     try {
-      const a = rt(), s = game.magnusarchives.services.skills.buildQuickRollRequest(
-        i,
-        { enabledRuleModuleIds: a }
-      ), o = await game.magnusarchives.services.rolls.execute(
+      const a = rt(), s = game.magnusarchives.services.skills.buildQuickRollRequest(i, {
+        enabledRuleModuleIds: a
+      }), o = await game.magnusarchives.services.rolls.execute(
         this.actor,
         s,
         Oe()
@@ -8615,10 +8889,7 @@ class C extends sm {
     e.stopPropagation();
     const i = this.actor.items.get(x(t));
     if (!i || i.type !== "skill") throw new Error("Skill Item not found.");
-    await cd(
-      this.actor,
-      i
-    );
+    await cd(this.actor, i);
   }
   static async #v(e) {
     e.preventDefault(), e.stopPropagation(), await this.actor.update({
@@ -8643,16 +8914,22 @@ class C extends sm {
     }) && await i.delete();
   }
   static async #ve() {
-    await this.actor.createEmbeddedDocuments("Item", [{ name: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.New"), type: "weapon" }]);
+    await this.actor.createEmbeddedDocuments("Item", [
+      { name: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.New"), type: "weapon" }
+    ]);
   }
   static async #Ce() {
-    await this.actor.createEmbeddedDocuments("Item", [{ name: game.i18n.localize("MAGNUSARCHIVES.Combat.Armor.New"), type: "armor" }]);
+    await this.actor.createEmbeddedDocuments("Item", [
+      { name: game.i18n.localize("MAGNUSARCHIVES.Combat.Armor.New"), type: "armor" }
+    ]);
   }
   static async #Ee() {
-    await this.actor.createEmbeddedDocuments("Item", [{
-      name: game.i18n.localize("MAGNUSARCHIVES.Shield.New"),
-      type: "shield"
-    }]);
+    await this.actor.createEmbeddedDocuments("Item", [
+      {
+        name: game.i18n.localize("MAGNUSARCHIVES.Shield.New"),
+        type: "shield"
+      }
+    ]);
   }
   static async #Ie(e, t) {
     e.preventDefault(), e.stopPropagation();
@@ -8662,10 +8939,7 @@ class C extends sm {
       ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.InsufficientAmmo"));
       return;
     }
-    await md(
-      this.actor,
-      i
-    );
+    await md(this.actor, i);
   }
   static #Re(e, t) {
     e.preventDefault(), e.stopPropagation();
@@ -8747,9 +9021,11 @@ class C extends sm {
         a,
         Vt
       );
-      ui.notifications.info(game.i18n.localize(
-        o.status === "acquired" ? "MAGNUSARCHIVES.Focus.Acquired" : "MAGNUSARCHIVES.Focus.AlreadyOwned"
-      )), o.status === "acquired" && await this.actor.sheet?.render(!0);
+      ui.notifications.info(
+        game.i18n.localize(
+          o.status === "acquired" ? "MAGNUSARCHIVES.Focus.Acquired" : "MAGNUSARCHIVES.Focus.AlreadyOwned"
+        )
+      ), o.status === "acquired" && await this.actor.sheet?.render(!0);
     } catch (o) {
       C.#be(o);
     }
@@ -8782,10 +9058,7 @@ class C extends sm {
   }
   static async #Pe(e, t) {
     const i = t.dataset.purchaseId;
-    i && await Fd(
-      this.actor,
-      i
-    );
+    i && await Fd(this.actor, i);
   }
   static async #xe() {
     await Td(this.actor);
@@ -8812,29 +9085,17 @@ class C extends sm {
   }
   static async #We(e, t) {
     const { focusUuid: i, nodeId: a } = et(t), s = await Fe(this.actor, i);
-    s && (await os(
-      this.actor,
-      s,
-      a
-    ), await this.render({ force: !0 }));
+    s && (await os(this.actor, s, a), await this.render({ force: !0 }));
   }
   static async #_e(e, t) {
     if (!game.user.isGM || !this.#n) return;
     const { focusUuid: i, nodeId: a } = et(t), s = await Fe(this.actor, i);
-    s && (await wu(
-      this.actor,
-      s,
-      a
-    ), await this.render({ force: !0 }));
+    s && (await wu(this.actor, s, a), await this.render({ force: !0 }));
   }
   static async #Ke(e, t) {
     if (!game.user.isGM || !this.#n) return;
     const { focusUuid: i, nodeId: a } = et(t), s = await Fe(this.actor, i);
-    s && (await os(
-      this.actor,
-      s,
-      a
-    ), await this.render({ force: !0 }));
+    s && (await os(this.actor, s, a), await this.render({ force: !0 }));
   }
   static async #Xe() {
     await Au(this.actor);
@@ -8860,9 +9121,11 @@ class C extends sm {
         s,
         a
       );
-      ui.notifications.info(game.i18n.localize(
-        o.status === "restored" ? "MAGNUSARCHIVES.Focus.AbilityRestored" : "MAGNUSARCHIVES.Focus.AbilityAlreadyPresent"
-      )), o.status === "restored" && await this.actor.sheet?.render(!0);
+      ui.notifications.info(
+        game.i18n.localize(
+          o.status === "restored" ? "MAGNUSARCHIVES.Focus.AbilityRestored" : "MAGNUSARCHIVES.Focus.AbilityAlreadyPresent"
+        )
+      ), o.status === "restored" && await this.actor.sheet?.render(!0);
     } catch (o) {
       C.#be(o);
     }
@@ -8878,111 +9141,131 @@ class C extends sm {
   }
   async _prepareContext(e) {
     this.element?.isConnected && (this.#o = gd(this.element), this.#d = this.#o.activeTab);
-    const t = await super._prepareContext(e), i = qu([...this.actor.items].filter((g) => g.type === "skill").map((g) => {
-      const b = g, F = game.magnusarchives.services.skills.configuredPool(b);
-      return {
-        id: b.id,
-        name: b.name,
-        rank: b.system.rank,
-        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${b.system.rank}`),
-        poolLabel: F ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${F[0].toUpperCase()}${F.slice(1)}`) : game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")
-      };
-    }), this.#a), a = Bu([...this.actor.items].filter((g) => g.type === "ability").map((g) => g));
+    const t = await super._prepareContext(e), i = qu(
+      [...this.actor.items].filter((g) => g.type === "skill").map((g) => {
+        const b = g, F = game.magnusarchives.services.skills.configuredPool(b);
+        return {
+          id: b.id,
+          name: b.name,
+          rank: b.system.rank,
+          rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${b.system.rank}`),
+          poolLabel: F ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${F[0].toUpperCase()}${F.slice(1)}`) : game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool")
+        };
+      }),
+      this.#a
+    ), a = Bu(
+      [...this.actor.items].filter((g) => g.type === "ability").map((g) => g)
+    );
     this.#l.retain(a.map((g) => g.id));
-    const s = await Promise.all(a.map(async (g, b) => {
-      const F = g, z = us(g), de = this.#l.isExpanded(g.id), Ve = Eo(
-        z.cost.amount,
-        z.cost.pools,
-        om,
-        {
-          pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
-          middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
-          final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
-        },
-        z.cost.scalable
-      ), mt = z.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-        z.description,
-        { async: !0, relativeTo: F }
-      ) : "";
-      return {
-        id: g.id,
-        name: g.name,
-        archived: z.archived,
-        startsArchivedGroup: z.archived && (b === 0 || a[b - 1].system.archived !== !0),
-        canPay: this.isEditable && z.cost.payable,
-        canDelete: this.isEditable && z.canDelete,
-        expanded: de,
-        costLabel: Ve,
-        enrichedDescription: mt,
-        hasDescription: !!z.description
-      };
-    })), o = this.actor, r = [...this.actor.items].filter((g) => g.type === "weapon" || g.type === "shield" || g.type === "armor");
-    r.filter((g) => g.type === "shield" && !!g.system.equipped).length > 1 && this.isEditable && await game.magnusarchives.services.shields.normalizeEquipped(
+    const s = await Promise.all(
+      a.map(async (g, b) => {
+        const F = g, z = us(g), de = this.#l.isExpanded(g.id), Ve = Eo(
+          z.cost.amount,
+          z.cost.pools,
+          om,
+          {
+            pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
+            middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
+            final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
+          },
+          z.cost.scalable
+        ), mt = z.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(z.description, {
+          async: !0,
+          relativeTo: F
+        }) : "";
+        return {
+          id: g.id,
+          name: g.name,
+          archived: z.archived,
+          startsArchivedGroup: z.archived && (b === 0 || a[b - 1].system.archived !== !0),
+          canPay: this.isEditable && z.cost.payable,
+          canDelete: this.isEditable && z.canDelete,
+          expanded: de,
+          costLabel: Ve,
+          enrichedDescription: mt,
+          hasDescription: !!z.description
+        };
+      })
+    ), o = this.actor, r = [...this.actor.items].filter(
+      (g) => g.type === "weapon" || g.type === "shield" || g.type === "armor"
+    );
+    r.filter(
+      (g) => g.type === "shield" && !!g.system.equipped
+    ).length > 1 && this.isEditable && await game.magnusarchives.services.shields.normalizeEquipped(
       o
     ), this.#s.retain(r.map((g) => g.id));
-    const u = async (g, b) => b ? foundry.applications.ux.TextEditor.implementation.enrichHTML(b, { async: !0, relativeTo: g }) : "", d = (await Promise.all(r.filter((g) => g.type === "weapon").map(async (g) => {
-      const b = g, F = b.system.description.trim();
-      return {
-        id: b.id,
-        name: b.name,
-        category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${b.system.category}`),
-        attackType: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${b.system.attackType}`),
-        range: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${b.system.rangeCategory}`),
-        damage: game.magnusarchives.services.combat.weaponBaseDamage(b),
-        depletionEnabled: b.system.depletion.enabled,
-        depletionLabel: b.system.depletion.enabled ? un(b.system.depletion) : "",
-        ammoEnabled: b.system.ammo.enabled,
-        ammoLabel: b.system.ammo.enabled ? `${b.system.ammo.value} / ${b.system.ammo.max}` : "",
-        canAttack: game.magnusarchives.services.weapons.ammunition(b).canAttack,
-        depleted: !!b.system.depleted,
-        freelyUsed: game.magnusarchives.services.combat.weaponFreelyUsed(o, b),
-        expanded: this.#s.isExpanded(b.id),
-        hasDescription: !!F,
-        enrichedDescription: await u(g, F)
-      };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), p = (await Promise.all(r.filter((g) => g.type === "armor").map(async (g) => {
-      const b = g, F = b.system.description.trim(), z = b.system.depletion;
-      return {
-        id: b.id,
-        name: b.name,
-        category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${b.system.category}`),
-        equipped: b.system.equipped,
-        freelyUsed: game.magnusarchives.services.combat.armorFreelyUsed(o, b),
-        depletionEnabled: !!z?.enabled,
-        depletionLabel: z?.enabled ? un(z) : "",
-        depleted: !!b.system.depleted,
-        expanded: this.#s.isExpanded(b.id),
-        hasDescription: !!F,
-        enrichedDescription: await u(g, F)
-      };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), y = (await Promise.all(r.filter((g) => g.type === "shield").map(async (g) => {
-      const b = g, F = b.system.description.trim(), z = b.system.depletion, de = Mi({
-        minor: b.system.wounds.minor.length,
-        moderate: b.system.wounds.moderate.length,
-        major: b.system.wounds.major.length
-      }, b.system.derived.capacities).map((Ve) => ({
-        ...Ve,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${Ve.severity}`),
-        shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${Ve.severity}`)
-      }));
-      return {
-        id: b.id,
-        name: b.name,
-        equipped: b.system.equipped,
-        broken: game.magnusarchives.services.shields.isBroken(b),
-        minor: b.system.wounds.minor.length,
-        moderate: b.system.wounds.moderate.length,
-        major: b.system.wounds.major.length,
-        capacities: b.system.derived.capacities,
-        woundTracks: de,
-        depletionEnabled: !!z?.enabled,
-        depletionLabel: z?.enabled ? un(z) : "",
-        depleted: !!b.system.depleted,
-        expanded: this.#s.isExpanded(b.id),
-        hasDescription: !!F,
-        enrichedDescription: await u(g, F)
-      };
-    }))).sort((g, b) => g.name.localeCompare(b.name)), m = y.filter((g) => g.equipped).length > 1, h = this.actor.system, f = [], A = [], v = [];
+    const u = async (g, b) => b ? foundry.applications.ux.TextEditor.implementation.enrichHTML(b, { async: !0, relativeTo: g }) : "", d = (await Promise.all(
+      r.filter((g) => g.type === "weapon").map(async (g) => {
+        const b = g, F = b.system.description.trim();
+        return {
+          id: b.id,
+          name: b.name,
+          category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${b.system.category}`),
+          attackType: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${b.system.attackType}`),
+          range: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${b.system.rangeCategory}`),
+          damage: game.magnusarchives.services.combat.weaponBaseDamage(b),
+          depletionEnabled: b.system.depletion.enabled,
+          depletionLabel: b.system.depletion.enabled ? un(b.system.depletion) : "",
+          ammoEnabled: b.system.ammo.enabled,
+          ammoLabel: b.system.ammo.enabled ? `${b.system.ammo.value} / ${b.system.ammo.max}` : "",
+          canAttack: game.magnusarchives.services.weapons.ammunition(b).canAttack,
+          depleted: !!b.system.depleted,
+          freelyUsed: game.magnusarchives.services.combat.weaponFreelyUsed(o, b),
+          expanded: this.#s.isExpanded(b.id),
+          hasDescription: !!F,
+          enrichedDescription: await u(g, F)
+        };
+      })
+    )).sort((g, b) => g.name.localeCompare(b.name)), p = (await Promise.all(
+      r.filter((g) => g.type === "armor").map(async (g) => {
+        const b = g, F = b.system.description.trim(), z = b.system.depletion;
+        return {
+          id: b.id,
+          name: b.name,
+          category: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${b.system.category}`),
+          equipped: b.system.equipped,
+          freelyUsed: game.magnusarchives.services.combat.armorFreelyUsed(o, b),
+          depletionEnabled: !!z?.enabled,
+          depletionLabel: z?.enabled ? un(z) : "",
+          depleted: !!b.system.depleted,
+          expanded: this.#s.isExpanded(b.id),
+          hasDescription: !!F,
+          enrichedDescription: await u(g, F)
+        };
+      })
+    )).sort((g, b) => g.name.localeCompare(b.name)), y = (await Promise.all(
+      r.filter((g) => g.type === "shield").map(async (g) => {
+        const b = g, F = b.system.description.trim(), z = b.system.depletion, de = Mi(
+          {
+            minor: b.system.wounds.minor.length,
+            moderate: b.system.wounds.moderate.length,
+            major: b.system.wounds.major.length
+          },
+          b.system.derived.capacities
+        ).map((Ve) => ({
+          ...Ve,
+          label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${Ve.severity}`),
+          shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${Ve.severity}`)
+        }));
+        return {
+          id: b.id,
+          name: b.name,
+          equipped: b.system.equipped,
+          broken: game.magnusarchives.services.shields.isBroken(b),
+          minor: b.system.wounds.minor.length,
+          moderate: b.system.wounds.moderate.length,
+          major: b.system.wounds.major.length,
+          capacities: b.system.derived.capacities,
+          woundTracks: de,
+          depletionEnabled: !!z?.enabled,
+          depletionLabel: z?.enabled ? un(z) : "",
+          depleted: !!b.system.depleted,
+          expanded: this.#s.isExpanded(b.id),
+          hasDescription: !!F,
+          enrichedDescription: await u(g, F)
+        };
+      })
+    )).sort((g, b) => g.name.localeCompare(b.name)), m = y.filter((g) => g.equipped).length > 1, h = this.actor.system, f = [], A = [], v = [];
     for (const g of h.focusProgress ?? []) {
       const b = await Fe(this.actor, g.focusUuid);
       if (!b || b.type !== "focus") {
@@ -9029,7 +9312,9 @@ class C extends sm {
         attachedAt: b?.attachedAt ?? 0,
         roleLabel: game.i18n.localize(`MAGNUSARCHIVES.Packages.Role.${F}`)
       };
-    }), M = new Map([...this.actor.items].filter((g) => g.type === "characterType" || g.type === "descriptor" || g.type === "species").map((g) => [g.system.instance?.instanceId ?? "", g.name])), D = [...this.actor.items].filter((g) => {
+    }), M = new Map(
+      [...this.actor.items].filter((g) => g.type === "characterType" || g.type === "descriptor" || g.type === "species").map((g) => [g.system.instance?.instanceId ?? "", g.name])
+    ), D = [...this.actor.items].filter((g) => {
       const b = g.system.grantedBy;
       return b?.instanceId && (b.kind === "type" || b.kind === "descriptor" || b.kind === "species");
     }).map((g) => {
@@ -9083,24 +9368,28 @@ class C extends sm {
       totalEffortCapLabel: game.i18n.localize("MAGNUSARCHIVES.Genre.EffortCap.core")
     }, $e = [...this.actor.items].filter((g) => On.includes(g.type)).sort((g, b) => g.name.localeCompare(b.name, "en-US"));
     this.#r.retain($e.map((g) => g.id));
-    const Se = (await Promise.all($e.map(async (g) => {
-      const b = ju(g);
-      if (!b) return null;
-      const F = this.#r.isExpanded(g.id), z = b.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-        b.description,
-        { async: !0, relativeTo: g }
-      ) : "";
-      return {
-        ...b,
-        expanded: F,
-        hasDescription: !!b.description,
-        enrichedDescription: z,
-        depletionLabel: b.depletion?.enabled ? b.depletion.formula : "",
-        powerLabel: b.power ? game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${b.power}`) : "",
-        canRollLevel: b.levelRollable && b.usable,
-        canRollDepletion: !!(b.depletion?.enabled && b.usable)
-      };
-    }))).filter((g) => g !== null), Ie = {
+    const Se = (await Promise.all(
+      $e.map(async (g) => {
+        const b = ju(
+          g
+        );
+        if (!b) return null;
+        const F = this.#r.isExpanded(g.id), z = b.description ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(b.description, {
+          async: !0,
+          relativeTo: g
+        }) : "";
+        return {
+          ...b,
+          expanded: F,
+          hasDescription: !!b.description,
+          enrichedDescription: z,
+          depletionLabel: b.depletion?.enabled ? b.depletion.formula : "",
+          powerLabel: b.power ? game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${b.power}`) : "",
+          canRollLevel: b.levelRollable && b.usable,
+          canRollDepletion: !!(b.depletion?.enabled && b.usable)
+        };
+      })
+    )).filter((g) => g !== null), Ie = {
       cypherLimit: I.derived.cypherLimit.max,
       equipment: Se.filter((g) => g.type === "equipment"),
       cyphers: Se.filter((g) => g.type === "cypher"),
@@ -9126,11 +9415,14 @@ class C extends sm {
         ...Z.focus,
         displayName: Z.focus.missing ? game.i18n.localize("MAGNUSARCHIVES.Hud.Placeholder.Focus") : Z.focus.displayName
       }
-    }, pe = Mi({
-      minor: I.wounds.minor.length,
-      moderate: I.wounds.moderate.length,
-      major: I.wounds.major.length
-    }, I.derived.wounds.capacities).map((g) => ({
+    }, pe = Mi(
+      {
+        minor: I.wounds.minor.length,
+        moderate: I.wounds.moderate.length,
+        major: I.wounds.major.length
+      },
+      I.derived.wounds.capacities
+    ).map((g) => ({
       ...g,
       shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${g.severity}`),
       pips: g.pips.map((b) => ({
@@ -9147,11 +9439,14 @@ class C extends sm {
       })
     })), N = y.filter((g) => g.equipped), S = N.find((g) => !g.broken) ?? N[0], J = S ? {
       ...S,
-      tracks: Mi({
-        minor: S.minor,
-        moderate: S.moderate,
-        major: S.major
-      }, S.capacities).map((g) => ({
+      tracks: Mi(
+        {
+          minor: S.minor,
+          moderate: S.moderate,
+          major: S.major
+        },
+        S.capacities
+      ).map((g) => ({
         ...g,
         itemId: S.id,
         shortLabel: game.i18n.localize(`MAGNUSARCHIVES.Hud.Wounds.${g.severity}`),
@@ -9183,10 +9478,10 @@ class C extends sm {
       },
       playerIntrusion: {
         visible: this.isEditable,
-        canUse: this.isEditable && game.magnusarchives.services.playerIntrusions.canUse(
-          this.actor
-        ),
-        tooltip: game.i18n.localize(I.xp >= 1 ? "MAGNUSARCHIVES.Intrusion.Player.Tooltip" : "MAGNUSARCHIVES.Intrusion.Player.RequiresTooltip")
+        canUse: this.isEditable && game.magnusarchives.services.playerIntrusions.canUse(this.actor),
+        tooltip: game.i18n.localize(
+          I.xp >= 1 ? "MAGNUSARCHIVES.Intrusion.Player.Tooltip" : "MAGNUSARCHIVES.Intrusion.Player.RequiresTooltip"
+        )
       },
       pools: k.map((g) => ({
         key: g,
@@ -9214,15 +9509,14 @@ class C extends sm {
         hurtAvailable: I.derived.damageTrack.hurtAvailable,
         dead: I.derived.damageTrack.dead,
         canEdit: this.isEditable,
-        steps: Fu(
-          I.damageTrack.step,
-          I.derived.damageTrack.hurtAvailable
-        ).map((g) => ({
-          ...g,
-          label: game.i18n.localize(g.label),
-          hint: game.i18n.localize(g.hintLabel),
-          notes: g.noteLabels.map((b) => game.i18n.localize(b))
-        }))
+        steps: Fu(I.damageTrack.step, I.derived.damageTrack.hurtAvailable).map(
+          (g) => ({
+            ...g,
+            label: game.i18n.localize(g.label),
+            hint: game.i18n.localize(g.hintLabel),
+            notes: g.noteLabels.map((b) => game.i18n.localize(b))
+          })
+        )
       },
       recoveries: zu(I.recovery.slots).map((g) => ({
         ...g,
@@ -9231,14 +9525,18 @@ class C extends sm {
       recoveryFormulaLabel: I.derived.recovery.formula,
       canResetRecoveries: game.user.isGM,
       shield: J
-    }, Ur = (g, b) => [
-      ...this.actor.items
-    ].filter((F) => F.type !== "characterType" && F.type !== "species" ? !1 : F.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[b] === !0).map((F) => F.name), Ra = (g, b, F, z) => b.map((de) => {
-      const Ve = Ur(g, de), mt = F.includes(de), pi = Ve.length > 0, Tr = z.includes(de), zr = mt && pi ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityManualAndGranted", { sources: Ve.join(", ") }) : mt ? game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual") : pi ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", { sources: Ve.join(", ") }) : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityAbsent");
+    }, Ur = (g, b) => [...this.actor.items].filter((F) => F.type !== "characterType" && F.type !== "species" ? !1 : F.system[g === "weapon" ? "weaponUse" : "armorUse"]?.[b] === !0).map((F) => F.name), Ra = (g, b, F, z) => b.map((de) => {
+      const Ve = Ur(g, de), mt = F.includes(de), pi = Ve.length > 0, Tr = z.includes(de), zr = mt && pi ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityManualAndGranted", {
+        sources: Ve.join(", ")
+      }) : mt ? game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityManual") : pi ? game.i18n.format("MAGNUSARCHIVES.Settings.Character.FamiliarityGranted", {
+        sources: Ve.join(", ")
+      }) : game.i18n.localize("MAGNUSARCHIVES.Settings.Character.FamiliarityAbsent");
       return {
         family: g,
         category: de,
-        label: game.i18n.localize(`MAGNUSARCHIVES.Combat.${g === "weapon" ? "Weapon" : "Armor"}.Category.${de}`),
+        label: game.i18n.localize(
+          `MAGNUSARCHIVES.Combat.${g === "weapon" ? "Weapon" : "Armor"}.Category.${de}`
+        ),
         manual: mt,
         packageGranted: pi,
         effective: Tr,
@@ -9307,7 +9605,11 @@ class C extends sm {
       effectiveSlots: I.recovery.slots.length,
       effectiveFormula: I.derived.recovery.formula,
       modifier: I.recovery.rollModifier
-    }, Na = [game.i18n.localize(H.focusAbilityCount === 2 ? "MAGNUSARCHIVES.Advancement.Guidance.TwoFocusAbilities" : "MAGNUSARCHIVES.Advancement.Guidance.FocusAbility")];
+    }, Na = [
+      game.i18n.localize(
+        H.focusAbilityCount === 2 ? "MAGNUSARCHIVES.Advancement.Guidance.TwoFocusAbilities" : "MAGNUSARCHIVES.Advancement.Guidance.FocusAbility"
+      )
+    ];
     H.includesGenreAbility && Na.push(game.i18n.localize("MAGNUSARCHIVES.Advancement.Guidance.GenreAbility"));
     const Ma = typeof this.actor._source?.system?.notes == "string" ? this.actor._source.system.notes : "", Fr = Ma ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(Ma, {
       async: !0,
@@ -9501,11 +9803,12 @@ class mm {
   }
   moveNode(e, t) {
     const i = this.#a(e), a = vs(this.#i, i.tier), s = a.findIndex((y) => y.id === e), o = t === "left" ? s - 1 : s + 1;
-    if (o < 0 || o >= a.length) return Te({
-      version: this.#i.version,
-      nodes: [i],
-      connections: []
-    }).nodes[0];
+    if (o < 0 || o >= a.length)
+      return Te({
+        version: this.#i.version,
+        nodes: [i],
+        connections: []
+      }).nodes[0];
     const r = a[o], l = a[t === "left" ? o - 1 : o + 1], u = r.position.x ?? o, d = l?.position.x, p = t === "left" ? d == null ? u - 1 : (d + u) / 2 : d == null ? u + 1 : (u + d) / 2;
     return this.#l(e, (y) => ({
       ...y,
@@ -9524,15 +9827,9 @@ class mm {
     if (this.#a(e), this.#a(t), e === t)
       throw new Ce("self-connection", "A Focus node cannot connect to itself.");
     if (this.#i.connections.some((a) => a.from === e && a.to === t))
-      throw new Ce(
-        "duplicate-connection",
-        `Focus connection '${e}' -> '${t}' already exists.`
-      );
+      throw new Ce("duplicate-connection", `Focus connection '${e}' -> '${t}' already exists.`);
     const i = {
-      id: this.#r(
-        "connection",
-        new Set(this.#i.connections.map((a) => a.id))
-      ),
+      id: this.#r("connection", new Set(this.#i.connections.map((a) => a.id))),
       from: e,
       to: t
     };
@@ -9544,10 +9841,7 @@ class mm {
   deleteConnection(e) {
     const t = this.#i.connections.find((i) => i.id === e);
     if (!t)
-      throw new Ce(
-        "connection-not-found",
-        `Focus connection '${e}' was not found.`
-      );
+      throw new Ce("connection-not-found", `Focus connection '${e}' was not found.`);
     return this.#i = {
       ...this.#i,
       connections: this.#i.connections.filter((i) => i.id !== e)
@@ -9597,23 +9891,20 @@ class mm {
       const a = this.#e().replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 24), s = `${e}-${a}`;
       if (a && !t.has(s)) return s;
     }
-    throw new Ce(
-      "unique-id-unavailable",
-      `Unable to generate a unique ${e} ID.`
-    );
+    throw new Ce("unique-id-unavailable", `Unable to generate a unique ${e} ID.`);
   }
 }
 function pm(n) {
-  const e = n.querySelector(".magnusarchives-sheet.magnusarchives-item"), t = n.querySelector(".window-content"), i = [...n.querySelectorAll(
-    ".magnusarchives-focus-tree-section[data-focus-uuid]"
-  )].map((a) => {
-    const s = a.querySelector(".focus-tree-scroll");
-    return {
-      focusUuid: a.dataset.focusUuid ?? "",
-      left: s?.scrollLeft ?? 0,
-      top: s?.scrollTop ?? 0
-    };
-  });
+  const e = n.querySelector(".magnusarchives-sheet.magnusarchives-item"), t = n.querySelector(".window-content"), i = [...n.querySelectorAll(".magnusarchives-focus-tree-section[data-focus-uuid]")].map(
+    (a) => {
+      const s = a.querySelector(".focus-tree-scroll");
+      return {
+        focusUuid: a.dataset.focusUuid ?? "",
+        left: s?.scrollLeft ?? 0,
+        top: s?.scrollTop ?? 0
+      };
+    }
+  );
   return {
     vertical: e?.scrollTop ?? 0,
     windowVertical: t?.scrollTop ?? 0,
@@ -9625,9 +9916,7 @@ function fm(n, e) {
   t && (t.scrollTop = e.vertical);
   const i = n.querySelector(".window-content");
   i && (i.scrollTop = e.windowVertical);
-  const a = [...n.querySelectorAll(
-    ".magnusarchives-focus-tree-section[data-focus-uuid]"
-  )];
+  const a = [...n.querySelectorAll(".magnusarchives-focus-tree-section[data-focus-uuid]")];
   for (const s of e.trees) {
     const r = a.find((l) => l.dataset.focusUuid === s.focusUuid)?.querySelector(".focus-tree-scroll");
     r && (r.scrollLeft = s.left, r.scrollTop = s.top);
@@ -9667,18 +9956,16 @@ class fr {
     const t = this.shields(e).filter((s) => s.system.equipped);
     if (t.length <= 1) return t[0] ?? null;
     const [i, ...a] = [...t].sort((s, o) => Number(this.isBroken(s)) - Number(this.isBroken(o)) || s.name.localeCompare(o.name) || s.id.localeCompare(o.id));
-    return await Promise.all(a.map((s) => s.update(
-      { "system.equipped": !1 },
-      { magnusarchivesShieldEquipmentSync: !0 }
-    ))), i ?? null;
+    return await Promise.all(
+      a.map((s) => s.update({ "system.equipped": !1 }, { magnusarchivesShieldEquipmentSync: !0 }))
+    ), i ?? null;
   }
   async setEquipped(e, t, i) {
     if (!this.shields(e).some((a) => a.id === t.id))
       throw new Error("Shield does not belong to this Character.");
-    return i ? (await t.update({ "system.equipped": !0 }, { magnusarchivesShieldEquipmentSync: !0 }), await Promise.all(this.shields(e).filter((a) => a.id !== t.id && a.system.equipped).map((a) => a.update(
-      { "system.equipped": !1 },
-      { magnusarchivesShieldEquipmentSync: !0 }
-    ))), t) : (await t.update({ "system.equipped": !1 }, { magnusarchivesShieldEquipmentSync: !0 }), null);
+    return i ? (await t.update({ "system.equipped": !0 }, { magnusarchivesShieldEquipmentSync: !0 }), await Promise.all(
+      this.shields(e).filter((a) => a.id !== t.id && a.system.equipped).map((a) => a.update({ "system.equipped": !1 }, { magnusarchivesShieldEquipmentSync: !0 }))
+    ), t) : (await t.update({ "system.equipped": !1 }, { magnusarchivesShieldEquipmentSync: !0 }), null);
   }
   isBroken(e) {
     return e.system.wounds.major.length >= this.capacities(e).major;
@@ -9722,13 +10009,9 @@ class fr {
     return this.#e.editTrack(e, t, i, a);
   }
   async setCount(e, t, i) {
-    return this.#e.setTrackCount(
-      e,
-      t,
-      i,
-      this.capacities(e)[t],
-      { sourceUuid: "magnusarchives.manual.shield" }
-    );
+    return this.#e.setTrackCount(e, t, i, this.capacities(e)[t], {
+      sourceUuid: "magnusarchives.manual.shield"
+    });
   }
   async delete(e, t, i) {
     const a = await this.#e.deleteTrack(e, t, i);
@@ -9736,13 +10019,16 @@ class fr {
   }
 }
 function Cs(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 async function hm(n, e, t) {
   const i = n.system.wounds[e].find((s) => s.id === t);
@@ -9809,7 +10095,9 @@ function bm(n) {
 function wm(n, e) {
   const t = n.querySelector("[data-item-sheet-scroll]");
   if (t && (t.scrollTop = e.scrollTop), !e.focusedInput) return;
-  const i = [...n.querySelectorAll("[data-item-focus-key]")].find((r) => r.dataset.itemFocusKey === e.focusedInput?.key);
+  const i = [...n.querySelectorAll("[data-item-focus-key]")].find(
+    (r) => r.dataset.itemFocusKey === e.focusedInput?.key
+  );
   if (!i) return;
   i.focus({ preventScroll: !0 });
   const { selectionStart: a, selectionEnd: s, selectionDirection: o } = e.focusedInput;
@@ -9820,20 +10108,21 @@ function wm(n, e) {
     }
 }
 function Ne(n) {
-  return n.replace(/[&<>"']/g, (e) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[e]);
+  return n.replace(
+    /[&<>"']/g,
+    (e) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    })[e]
+  );
 }
 function ae(n) {
   ui.notifications.error(n instanceof Error ? n.message : String(n));
 }
-const vm = foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ItemSheetV2
-), Es = /* @__PURE__ */ new Set([
+const vm = foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2), Es = /* @__PURE__ */ new Set([
   "rollDepletion",
   "reloadWeapon",
   "editFocusTree",
@@ -9890,10 +10179,8 @@ class $ extends vm {
     return { severity: t, woundId: i };
   }
   static async #S(e, t) {
-    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || this.item.actor && !game.user.isGM && !this.item.actor.testUserPermission(
-      game.user,
-      CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER
-    )) return;
+    if (e.preventDefault(), e.stopPropagation(), !this.isEditable || this.item.actor && !game.user.isGM && !this.item.actor.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER))
+      return;
     const i = Bn(t.dataset);
     if (i.track !== "shield" || i.shieldId !== this.item.id)
       throw new Error("Invalid Shield Wound count action data.");
@@ -9912,47 +10199,52 @@ class $ extends vm {
     await ym(this.item, i.severity, i.woundId);
   }
   static async #D() {
-    !this.isEditable || this.item.type !== "weapon" || (await game.magnusarchives.services.weapons.reload(this.item), await this.render({ force: !0 }));
+    !this.isEditable || this.item.type !== "weapon" || (await game.magnusarchives.services.weapons.reload(
+      this.item
+    ), await this.render({ force: !0 }));
   }
   static DEFAULT_OPTIONS = {
     ...ra,
     classes: ["magnusarchives", "sheet", "item", "item-sheet"],
-    actions: ca({
-      rollDepletion: $.#ne,
-      reloadWeapon: $.#D,
-      openFocusNode: $.#ae,
-      editFocusTree: $.#se,
-      addFocusAbility: $.#oe,
-      saveFocusTree: $.#I,
-      cancelFocusTree: $.#re,
-      selectFocusEditorNode: $.#le,
-      moveFocusNode: $.#ce,
-      setFocusNodeTier: $.#de,
-      startFocusConnection: $.#ue,
-      completeFocusConnection: $.#me,
-      cancelFocusConnection: $.#pe,
-      deleteFocusConnection: $.#fe,
-      clearFocusConnections: $.#ge,
-      refreshFocusSnapshot: $.#he,
-      deleteFocusNode: $.#ye,
-      addPackageGrant: $.#B,
-      addChoiceGroup: $.#K,
-      addChoiceOption: $.#Q,
-      editSkillGrantNote: $.#Z,
-      inspectPackageGrant: $.#ee,
-      refreshPackageGrant: $.#te,
-      removePackageGrant: $.#ie,
-      addPoolBonusChoiceGroup: $.#X,
-      editPoolBonusChoiceGroup: $.#Y,
-      removePoolBonusChoiceGroup: $.#J,
-      setShieldWoundCount: $.#S,
-      editShieldWound: $.#w,
-      deleteShieldWound: $.#V,
-      addGenreAbility: $.#L,
-      inspectGenreAbility: $.#j,
-      refreshGenreAbility: $.#W,
-      removeGenreAbility: $.#_
-    }, Es),
+    actions: ca(
+      {
+        rollDepletion: $.#ne,
+        reloadWeapon: $.#D,
+        openFocusNode: $.#ae,
+        editFocusTree: $.#se,
+        addFocusAbility: $.#oe,
+        saveFocusTree: $.#I,
+        cancelFocusTree: $.#re,
+        selectFocusEditorNode: $.#le,
+        moveFocusNode: $.#ce,
+        setFocusNodeTier: $.#de,
+        startFocusConnection: $.#ue,
+        completeFocusConnection: $.#me,
+        cancelFocusConnection: $.#pe,
+        deleteFocusConnection: $.#fe,
+        clearFocusConnections: $.#ge,
+        refreshFocusSnapshot: $.#he,
+        deleteFocusNode: $.#ye,
+        addPackageGrant: $.#B,
+        addChoiceGroup: $.#K,
+        addChoiceOption: $.#Q,
+        editSkillGrantNote: $.#Z,
+        inspectPackageGrant: $.#ee,
+        refreshPackageGrant: $.#te,
+        removePackageGrant: $.#ie,
+        addPoolBonusChoiceGroup: $.#X,
+        editPoolBonusChoiceGroup: $.#Y,
+        removePoolBonusChoiceGroup: $.#J,
+        setShieldWoundCount: $.#S,
+        editShieldWound: $.#w,
+        deleteShieldWound: $.#V,
+        addGenreAbility: $.#L,
+        inspectGenreAbility: $.#j,
+        refreshGenreAbility: $.#W,
+        removeGenreAbility: $.#_
+      },
+      Es
+    ),
     position: { width: 620, height: 680 },
     window: { resizable: !0 }
   };
@@ -9962,9 +10254,13 @@ class $ extends vm {
   async _onRender(e, t) {
     if (await super._onRender(e, t), da(this.element, this.isEditable, Es), this.#o?.abort(), this.#o = null, this.#c && (fm(this.element, this.#c), this.#c = null), this.#A && (wm(this.element, this.#A), this.#A = null), this.#t.connectionSourceNodeId) {
       const i = new AbortController();
-      this.#o = i, this.element.addEventListener("keydown", (a) => {
-        a.key === "Escape" && (a.preventDefault(), a.stopPropagation(), this.#t.cancelConnection(), this.#g());
-      }, { signal: i.signal }), this.element.querySelector(".focus-tree-node-editor")?.focus({ preventScroll: !0 });
+      this.#o = i, this.element.addEventListener(
+        "keydown",
+        (a) => {
+          a.key === "Escape" && (a.preventDefault(), a.stopPropagation(), this.#t.cancelConnection(), this.#g());
+        },
+        { signal: i.signal }
+      ), this.element.querySelector(".focus-tree-node-editor")?.focus({ preventScroll: !0 });
     }
     this.#e.bind(this.element), this.#i.bind(this.element), this.#P(), this.#x(), this.#q(), this.#O(), this.#F(), this.#T(), this.#z();
   }
@@ -9978,9 +10274,13 @@ class $ extends vm {
     const t = [...this.element.querySelectorAll("details")];
     for (const [i, a] of t.entries()) {
       const s = a.dataset.persistentDisclosure ?? `item-details-${i}`;
-      this.#d.has(s) ? a.open = !0 : this.#u.has(s) && (a.open = !1), a.addEventListener("toggle", () => {
-        a.open ? (this.#d.add(s), this.#u.delete(s)) : (this.#d.delete(s), this.#u.add(s));
-      }, { signal: e.signal });
+      this.#d.has(s) ? a.open = !0 : this.#u.has(s) && (a.open = !1), a.addEventListener(
+        "toggle",
+        () => {
+          a.open ? (this.#d.add(s), this.#u.delete(s)) : (this.#d.delete(s), this.#u.add(s));
+        },
+        { signal: e.signal }
+      );
     }
   }
   #T() {
@@ -9988,21 +10288,29 @@ class $ extends vm {
     const e = this.element.querySelector("[data-depletion-sides]"), t = this.element.querySelector("[data-depletion-threshold]");
     if (!e && !t || !["weapon", "shield", "armor"].includes(this.item.type)) return;
     const i = new AbortController();
-    this.#p = i, e?.addEventListener("change", async () => {
-      const a = Number(e.value), s = Number(this.item.system.depletion.threshold);
-      if (!Number.isInteger(a) || a < 2 || a > 1e3 || s > a) {
-        ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Depletion.InvalidDie")), await this.render({ force: !0 });
-        return;
-      }
-      await this.item.update({ "system.depletion.die": `d${a}` });
-    }, { signal: i.signal }), t?.addEventListener("change", async () => {
-      const a = t.value.trim().match(/^1(?:-(\d+))?$/), s = Number(a?.[1] ?? (a ? 1 : Number.NaN)), o = Zt(this.item.system.depletion);
-      if (!Number.isInteger(s) || s < 1 || s > o) {
-        ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Depletion.InvalidThreshold", { sides: o })), await this.render({ force: !0 });
-        return;
-      }
-      await this.item.update({ "system.depletion.threshold": s });
-    }, { signal: i.signal });
+    this.#p = i, e?.addEventListener(
+      "change",
+      async () => {
+        const a = Number(e.value), s = Number(this.item.system.depletion.threshold);
+        if (!Number.isInteger(a) || a < 2 || a > 1e3 || s > a) {
+          ui.notifications.error(game.i18n.localize("MAGNUSARCHIVES.Depletion.InvalidDie")), await this.render({ force: !0 });
+          return;
+        }
+        await this.item.update({ "system.depletion.die": `d${a}` });
+      },
+      { signal: i.signal }
+    ), t?.addEventListener(
+      "change",
+      async () => {
+        const a = t.value.trim().match(/^1(?:-(\d+))?$/), s = Number(a?.[1] ?? (a ? 1 : Number.NaN)), o = Zt(this.item.system.depletion);
+        if (!Number.isInteger(s) || s < 1 || s > o) {
+          ui.notifications.error(game.i18n.format("MAGNUSARCHIVES.Depletion.InvalidThreshold", { sides: o })), await this.render({ force: !0 });
+          return;
+        }
+        await this.item.update({ "system.depletion.threshold": s });
+      },
+      { signal: i.signal }
+    );
   }
   #z() {
     if (this.#h?.abort(), this.#h = null, this.item.type !== "shield" || !this.isEditable) return;
@@ -10011,62 +10319,72 @@ class $ extends vm {
     const t = new AbortController();
     this.#h = t;
     for (const i of e)
-      i.addEventListener("change", async (a) => {
-        a.preventDefault(), a.stopPropagation();
-        const s = i.dataset.severity;
-        if (ge.includes(s))
-          try {
-            await game.magnusarchives.services.shields.setCapacity(
-              this.item,
-              s,
-              Number(i.value)
-            );
-          } catch (o) {
-            o instanceof pr ? ui.notifications.warn(game.i18n.format("MAGNUSARCHIVES.Shield.CapacityTooLow", {
-              severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${o.severity}`),
-              count: o.current
-            })) : ae(o), await this.render({ force: !0 });
-          }
-      }, { signal: t.signal });
+      i.addEventListener(
+        "change",
+        async (a) => {
+          a.preventDefault(), a.stopPropagation();
+          const s = i.dataset.severity;
+          if (ge.includes(s))
+            try {
+              await game.magnusarchives.services.shields.setCapacity(
+                this.item,
+                s,
+                Number(i.value)
+              );
+            } catch (o) {
+              o instanceof pr ? ui.notifications.warn(
+                game.i18n.format("MAGNUSARCHIVES.Shield.CapacityTooLow", {
+                  severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${o.severity}`),
+                  count: o.current
+                })
+              ) : ae(o), await this.render({ force: !0 });
+            }
+        },
+        { signal: t.signal }
+      );
   }
   #P() {
     if (this.#n?.abort(), this.#n = null, this.item.type !== "ability" || !this.isEditable) return;
-    const e = [...this.element.querySelectorAll(
-      "input[data-ability-allowed-pool]"
-    )];
+    const e = [...this.element.querySelectorAll("input[data-ability-allowed-pool]")];
     if (!e.length) return;
     const t = new AbortController();
     this.#n = t;
     for (const i of e)
-      i.addEventListener("change", async (a) => {
-        a.stopPropagation();
-        const s = e.filter((o) => o.checked).map((o) => o.value).filter((o) => k.includes(o));
-        try {
-          await this.item.update({ "system.cost.allowedPools": s });
-        } catch (o) {
-          ae(o), await this.render({ force: !0 });
-        }
-      }, { signal: t.signal });
+      i.addEventListener(
+        "change",
+        async (a) => {
+          a.stopPropagation();
+          const s = e.filter((o) => o.checked).map((o) => o.value).filter((o) => k.includes(o));
+          try {
+            await this.item.update({ "system.cost.allowedPools": s });
+          } catch (o) {
+            ae(o), await this.render({ force: !0 });
+          }
+        },
+        { signal: t.signal }
+      );
   }
   #x() {
     if (this.#a?.abort(), this.#a = null, this.item.type !== "genre" || !this.isEditable) return;
-    const e = [...this.element.querySelectorAll(
-      "input[data-genre-minimum-tier]"
-    )];
+    const e = [...this.element.querySelectorAll("input[data-genre-minimum-tier]")];
     if (!e.length) return;
     const t = new AbortController();
     this.#a = t;
     for (const i of e)
-      i.addEventListener("change", async (a) => {
-        a.preventDefault(), a.stopPropagation();
-        const s = i.dataset.entryId ?? "", o = this.item.system.abilityCatalog;
-        try {
-          const r = oc(o, s, Number(i.value));
-          await this.item.update({ "system.abilityCatalog": r });
-        } catch (r) {
-          ae(r), await this.render({ force: !0 });
-        }
-      }, { signal: t.signal });
+      i.addEventListener(
+        "change",
+        async (a) => {
+          a.preventDefault(), a.stopPropagation();
+          const s = i.dataset.entryId ?? "", o = this.item.system.abilityCatalog;
+          try {
+            const r = oc(o, s, Number(i.value));
+            await this.item.update({ "system.abilityCatalog": r });
+          } catch (r) {
+            ae(r), await this.render({ force: !0 });
+          }
+        },
+        { signal: t.signal }
+      );
   }
   #q() {
     if (this.#l?.abort(), this.#l = null, this.item.type !== "characterType") return;
@@ -10084,14 +10402,18 @@ class $ extends vm {
     const e = this.element.querySelector("input[data-package-weapon-families]");
     if (!e) return;
     const t = new AbortController();
-    this.#r = t, e.addEventListener("change", async (i) => {
-      i.preventDefault(), i.stopPropagation();
-      try {
-        await this.item.update({ "system.weaponFamilies": le(e.value) });
-      } catch (a) {
-        ae(a), await this.render({ force: !0 });
-      }
-    }, { signal: t.signal });
+    this.#r = t, e.addEventListener(
+      "change",
+      async (i) => {
+        i.preventDefault(), i.stopPropagation();
+        try {
+          await this.item.update({ "system.weaponFamilies": le(e.value) });
+        } catch (a) {
+          ae(a), await this.render({ force: !0 });
+        }
+      },
+      { signal: t.signal }
+    );
   }
   _canDragDrop(e) {
     return this.item.type !== "focus" ? this.isEditable : !!(this.isEditable && game.user.isGM && this.#s);
@@ -10126,7 +10448,11 @@ class $ extends vm {
       return;
     }
     const o = await foundry.applications.api.DialogV2.input({
-      window: { title: game.i18n.localize(i === "ability" ? "MAGNUSARCHIVES.Packages.AddAbility" : i === "skill" ? "MAGNUSARCHIVES.Packages.AddFixedSkill" : "MAGNUSARCHIVES.Species.AddDescriptorGrant") },
+      window: {
+        title: game.i18n.localize(
+          i === "ability" ? "MAGNUSARCHIVES.Packages.AddAbility" : i === "skill" ? "MAGNUSARCHIVES.Packages.AddFixedSkill" : "MAGNUSARCHIVES.Species.AddDescriptorGrant"
+        )
+      },
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${s}${a.map((r) => `<option value="${Ne(r.uuid)}">${Ne(r.name)}</option>`).join("")}</select></label>${i === "skill" ? `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Skill.Rank")}<select name="rank">${ie.map((r) => `<option value="${r}" ${r === "trained" ? "selected" : ""}>${game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${r}`)}</option>`).join("")}</select></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>` : ""}</div>`,
       ok: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add") }
     });
@@ -10137,7 +10463,12 @@ class $ extends vm {
         await this.#Ae(r, String(o.rank ?? "trained"), String(o.notes ?? ""));
       } else {
         const r = await fromUuid(String(o.uuid ?? ""));
-        r && await this.#E(r, "fixed", String(o.rank ?? "trained"), String(o.notes ?? ""));
+        r && await this.#E(
+          r,
+          "fixed",
+          String(o.rank ?? "trained"),
+          String(o.notes ?? "")
+        );
       }
   }
   static async #L() {
@@ -10203,7 +10534,12 @@ class $ extends vm {
     const r = this.item.system;
     if (a) {
       const l = { id: crypto.randomUUID(), choose: Math.max(1, Number(o.choose) || 1), options: [] };
-      await this.item.update({ "system.abilityChoiceGroups": [...r.abilityChoiceGroups, l] });
+      await this.item.update({
+        "system.abilityChoiceGroups": [
+          ...r.abilityChoiceGroups,
+          l
+        ]
+      });
     } else if (s) {
       const l = o.sourceMode === "catalog", u = {
         id: crypto.randomUUID(),
@@ -10214,13 +10550,22 @@ class $ extends vm {
       }, d = r.descriptorChoiceGroups ?? [];
       await this.item.update({ "system.descriptorChoiceGroups": [...d, u] });
     } else {
-      const l = { id: crypto.randomUUID(), choose: Math.max(1, Number(o.choose) || 1), rank: String(o.rank), options: [] };
+      const l = {
+        id: crypto.randomUUID(),
+        choose: Math.max(1, Number(o.choose) || 1),
+        rank: String(o.rank),
+        options: []
+      };
       await this.item.update({ "system.choiceGroups": [...r.choiceGroups, l] });
     }
   }
   async #N(e) {
     const t = await foundry.applications.api.DialogV2.input({
-      window: { title: game.i18n.localize(e ? "MAGNUSARCHIVES.Packages.EditPoolBonusChoiceGroup" : "MAGNUSARCHIVES.Packages.AddPoolBonusChoiceGroup") },
+      window: {
+        title: game.i18n.localize(
+          e ? "MAGNUSARCHIVES.Packages.EditPoolBonusChoiceGroup" : "MAGNUSARCHIVES.Packages.AddPoolBonusChoiceGroup"
+        )
+      },
       content: `<div class="magnusarchives magnusarchives-dialog package-pool-choice-authoring">
         <div class="magnusarchives-dialog-section magnusarchives-dialog-field-grid">
           <label class="magnusarchives-dialog-field">${game.i18n.localize("MAGNUSARCHIVES.Packages.Amount")}<input name="amount" type="number" min="1" value="${e?.amount ?? 1}"></label>
@@ -10263,9 +10608,15 @@ class $ extends vm {
   static async #Q(e, t) {
     if (this.item.type !== "characterType" && this.item.type !== "descriptor" && this.item.type !== "species") return;
     const i = t.dataset.groupId, a = this.item.system, s = t.dataset.choiceKind ?? "skill", o = this.item.type !== "descriptor" && s === "ability", r = this.item.type === "species" && s === "descriptor";
-    if (!(o ? a.abilityChoiceGroups.find((m) => m.id === i) : r ? a.descriptorChoiceGroups.find((m) => m.id === i) : a.choiceGroups.find((m) => m.id === i))) return;
+    if (!(o ? a.abilityChoiceGroups.find(
+      (m) => m.id === i
+    ) : r ? a.descriptorChoiceGroups.find((m) => m.id === i) : a.choiceGroups.find((m) => m.id === i))) return;
     const u = o ? "ability" : r ? "descriptor" : "skill", d = [...game.items].filter((m) => m.type === u).sort((m, h) => m.name.localeCompare(h.name)), p = await foundry.applications.api.DialogV2.input({
-      window: { title: game.i18n.localize(o ? "MAGNUSARCHIVES.Species.AddAbilityOption" : r ? "MAGNUSARCHIVES.Species.AddDescriptorOption" : "MAGNUSARCHIVES.Packages.AddSkillOption") },
+      window: {
+        title: game.i18n.localize(
+          o ? "MAGNUSARCHIVES.Species.AddAbilityOption" : r ? "MAGNUSARCHIVES.Species.AddDescriptorOption" : "MAGNUSARCHIVES.Packages.AddSkillOption"
+        )
+      },
       content: `<div class="magnusarchives-dialog-fields"><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.Source")}<select name="uuid">${o || r ? "" : `<option value="custom">${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkill")}</option>`}${d.map((m) => `<option value="${Ne(m.uuid)}">${Ne(m.name)}</option>`).join("")}</select></label>${o || r ? "" : `<label>${game.i18n.localize("MAGNUSARCHIVES.Packages.CustomSkillName")}<input name="customName" type="text"></label><label>${game.i18n.localize("MAGNUSARCHIVES.Packages.SkillContextNote")}<textarea name="notes" rows="2"></textarea></label>`}</div>`,
       ok: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Add") }
     });
@@ -10273,16 +10624,36 @@ class $ extends vm {
     const y = p.uuid === "custom" ? null : await fromUuid(String(p.uuid ?? ""));
     if (o) {
       if (!y) return;
-      const m = { id: crypto.randomUUID(), abilityUuid: y.uuid, snapshot: this.#b(y) }, h = a.abilityChoiceGroups;
-      await this.item.update({ "system.abilityChoiceGroups": h.map((f) => f.id === i ? { ...f, options: [...f.options, m] } : f) });
+      const m = {
+        id: crypto.randomUUID(),
+        abilityUuid: y.uuid,
+        snapshot: this.#b(y)
+      }, h = a.abilityChoiceGroups;
+      await this.item.update({
+        "system.abilityChoiceGroups": h.map(
+          (f) => f.id === i ? { ...f, options: [...f.options, m] } : f
+        )
+      });
     } else if (r) {
       if (!y) return;
-      const m = { id: crypto.randomUUID(), descriptorUuid: y.uuid, snapshot: this.#b(y) }, h = a.descriptorChoiceGroups;
-      await this.item.update({ "system.descriptorChoiceGroups": h.map((f) => f.id === i ? { ...f, options: [...f.options, m] } : f) });
+      const m = {
+        id: crypto.randomUUID(),
+        descriptorUuid: y.uuid,
+        snapshot: this.#b(y)
+      }, h = a.descriptorChoiceGroups;
+      await this.item.update({
+        "system.descriptorChoiceGroups": h.map(
+          (f) => f.id === i ? { ...f, options: [...f.options, m] } : f
+        )
+      });
     } else {
       const m = this.#C(y, String(p.customName ?? ""), String(p.notes ?? ""));
       if (!m) return;
-      await this.item.update({ "system.choiceGroups": a.choiceGroups.map((h) => h.id === i ? { ...h, options: [...h.options, m] } : h) });
+      await this.item.update({
+        "system.choiceGroups": a.choiceGroups.map(
+          (h) => h.id === i ? { ...h, options: [...h.options, m] } : h
+        )
+      });
     }
   }
   static async #Z(e, t) {
@@ -10331,13 +10702,21 @@ class $ extends vm {
         await this.item.update({ "system.skillGrants": s.filter((o) => o.id !== a) });
       } else if (i === "option") {
         const s = t.dataset.groupId, o = this.item.system.choiceGroups;
-        await this.item.update({ "system.choiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r) });
+        await this.item.update({
+          "system.choiceGroups": o.map(
+            (r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r
+          )
+        });
       } else if (i === "group") {
         const s = this.item.system.choiceGroups;
         await this.item.update({ "system.choiceGroups": s.filter((o) => o.id !== a) });
       } else if (i === "abilityOption") {
         const s = t.dataset.groupId, o = this.item.system.abilityChoiceGroups;
-        await this.item.update({ "system.abilityChoiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r) });
+        await this.item.update({
+          "system.abilityChoiceGroups": o.map(
+            (r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r
+          )
+        });
       } else if (i === "abilityGroup") {
         const s = this.item.system.abilityChoiceGroups;
         await this.item.update({ "system.abilityChoiceGroups": s.filter((o) => o.id !== a) });
@@ -10346,7 +10725,11 @@ class $ extends vm {
         await this.item.update({ "system.descriptorGrants": s.filter((o) => o.id !== a) });
       } else if (i === "descriptorOption") {
         const s = t.dataset.groupId, o = this.item.system.descriptorChoiceGroups;
-        await this.item.update({ "system.descriptorChoiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r) });
+        await this.item.update({
+          "system.descriptorChoiceGroups": o.map(
+            (r) => r.id === s ? { ...r, options: r.options.filter((l) => l.id !== a) } : r
+          )
+        });
       } else if (i === "descriptorGroup") {
         const s = this.item.system.descriptorChoiceGroups;
         await this.item.update({ "system.descriptorChoiceGroups": s.filter((o) => o.id !== a) });
@@ -10391,10 +10774,7 @@ class $ extends vm {
       if (!i) return;
       const a = await fromUuid(String(i.abilityUuid ?? ""));
       if (!a) throw new Error(game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.AbilityUnavailable"));
-      const s = e.addAbility(
-        a,
-        Number(i.tier ?? 1)
-      );
+      const s = e.addAbility(a, Number(i.tier ?? 1));
       this.#t.select(s.id), await this.#g();
     } catch (e) {
       ae(e);
@@ -10492,9 +10872,12 @@ class $ extends vm {
       if (!a) throw new Error(`Focus node '${i}' was not found.`);
       if (!await foundry.applications.api.DialogV2.confirm({
         window: { title: game.i18n.localize("MAGNUSARCHIVES.Focus.Editor.DeleteNode") },
-        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format("MAGNUSARCHIVES.Focus.Editor.DeleteNodeConfirm", {
-          name: Ne(a.abilitySnapshot.name || a.id)
-        })}</p></div>`,
+        content: `<div class="magnusarchives magnusarchives-dialog"><p>${game.i18n.format(
+          "MAGNUSARCHIVES.Focus.Editor.DeleteNodeConfirm",
+          {
+            name: Ne(a.abilitySnapshot.name || a.id)
+          }
+        )}</p></div>`,
         rejectClose: !1,
         modal: !0,
         yes: { label: game.i18n.localize("MAGNUSARCHIVES.Actions.Delete") },
@@ -10604,7 +10987,11 @@ class $ extends vm {
     if (this.item.type === "species") {
       const s = this.item.system;
       if (e.type === "ability") {
-        const o = { id: crypto.randomUUID(), abilityUuid: e.uuid, snapshot: this.#b(e) };
+        const o = {
+          id: crypto.randomUUID(),
+          abilityUuid: e.uuid,
+          snapshot: this.#b(e)
+        };
         await this.item.update({ "system.abilityGrants": [...s.abilityGrants, o] });
         return;
       }
@@ -10615,7 +11002,11 @@ class $ extends vm {
         return;
       }
       if (e.type === "descriptor") {
-        const o = { id: crypto.randomUUID(), descriptorUuid: e.uuid, snapshot: this.#b(e) };
+        const o = {
+          id: crypto.randomUUID(),
+          descriptorUuid: e.uuid,
+          snapshot: this.#b(e)
+        };
         await this.item.update({ "system.descriptorGrants": [...s.descriptorGrants, o] });
         return;
       }
@@ -10625,7 +11016,10 @@ class $ extends vm {
   #R(e) {
     const t = e.dataset.grantKind, i = e.dataset.grantId;
     if (!i) return null;
-    if (t === "ability") return this.item.system.abilityGrants.find((s) => s.id === i) ?? null;
+    if (t === "ability")
+      return this.item.system.abilityGrants.find(
+        (s) => s.id === i
+      ) ?? null;
     const a = this.item.system;
     return t === "skill" ? a.skillGrants.find((s) => s.id === i) ?? null : t === "option" ? a.choiceGroups.find((s) => s.id === e.dataset.groupId)?.options.find((s) => s.id === i) ?? null : t === "abilityOption" ? this.item.system.abilityChoiceGroups.find((s) => s.id === e.dataset.groupId)?.options.find((s) => s.id === i) ?? null : t === "descriptor" ? this.item.system.descriptorGrants.find((s) => s.id === i) ?? null : t === "descriptorOption" ? this.item.system.descriptorChoiceGroups.find((s) => s.id === e.dataset.groupId)?.options.find((s) => s.id === i) ?? null : null;
   }
@@ -10639,16 +11033,33 @@ class $ extends vm {
       await this.item.update({ "system.skillGrants": s.map((o) => o.id === a ? t : o) });
     } else if (i === "option") {
       const s = e.dataset.groupId, o = this.item.system.choiceGroups;
-      await this.item.update({ "system.choiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.map((l) => l.id === a ? t : l) } : r) });
+      await this.item.update({
+        "system.choiceGroups": o.map(
+          (r) => r.id === s ? { ...r, options: r.options.map((l) => l.id === a ? t : l) } : r
+        )
+      });
     } else if (i === "abilityOption") {
       const s = e.dataset.groupId, o = this.item.system.abilityChoiceGroups;
-      await this.item.update({ "system.abilityChoiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.map((l) => l.id === a ? t : l) } : r) });
+      await this.item.update({
+        "system.abilityChoiceGroups": o.map(
+          (r) => r.id === s ? { ...r, options: r.options.map((l) => l.id === a ? t : l) } : r
+        )
+      });
     } else if (i === "descriptor") {
       const s = this.item.system.descriptorGrants;
-      await this.item.update({ "system.descriptorGrants": s.map((o) => o.id === a ? t : o) });
+      await this.item.update({
+        "system.descriptorGrants": s.map((o) => o.id === a ? t : o)
+      });
     } else if (i === "descriptorOption") {
       const s = e.dataset.groupId, o = this.item.system.descriptorChoiceGroups;
-      await this.item.update({ "system.descriptorChoiceGroups": o.map((r) => r.id === s ? { ...r, options: r.options.map((l) => l.id === a ? t : l) } : r) });
+      await this.item.update({
+        "system.descriptorChoiceGroups": o.map(
+          (r) => r.id === s ? {
+            ...r,
+            options: r.options.map((l) => l.id === a ? t : l)
+          } : r
+        )
+      });
     }
   }
   #v(e) {
@@ -10661,18 +11072,42 @@ class $ extends vm {
   }
   async _prepareContext(e) {
     this.element?.isConnected && (this.#A = bm(this.element));
-    const t = await super._prepareContext(e), i = this.item.system, a = this.item.type === "skill", s = this.item.type === "ability", o = this.item.type === "weapon", r = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", d = this.item.type === "cypher", p = this.item.type === "artifact", y = this.item.type === "focus", m = this.item.type === "genre", h = this.item.type === "characterType", f = this.item.type === "descriptor", A = this.item.type === "species", v = h && String(i.genre ?? "none") === "superhero", E = h ? i.instance : void 0, H = ["ability", "focus", "genre", "skill", "weapon", "armor", "shield", "equipment", "cypher", "artifact", "characterType", "descriptor", "species"].includes(this.item.type), R = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", G = H ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(R, {
+    const t = await super._prepareContext(e), i = this.item.system, a = this.item.type === "skill", s = this.item.type === "ability", o = this.item.type === "weapon", r = this.item.type === "armor", l = this.item.type === "shield", u = this.item.type === "equipment", d = this.item.type === "cypher", p = this.item.type === "artifact", y = this.item.type === "focus", m = this.item.type === "genre", h = this.item.type === "characterType", f = this.item.type === "descriptor", A = this.item.type === "species", v = h && String(i.genre ?? "none") === "superhero", E = h ? i.instance : void 0, H = [
+      "ability",
+      "focus",
+      "genre",
+      "skill",
+      "weapon",
+      "armor",
+      "shield",
+      "equipment",
+      "cypher",
+      "artifact",
+      "characterType",
+      "descriptor",
+      "species"
+    ].includes(this.item.type), R = typeof this.item._source?.system?.description == "string" ? this.item._source.system.description : "", G = H ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(R, {
       async: !0,
       relativeTo: this.item
-    }) : "", P = h ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.backgroundOptions ?? ""), { async: !0, relativeTo: this.item }) : "", X = h ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(String(this.item._source.system.equipmentNotes ?? ""), { async: !0, relativeTo: this.item }) : "", M = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), I = Array.isArray(i.contexts) ? i.contexts : [], ne = s ? Ye(this.item) : [], _ = s ? Sm(i) : null, He = _ ? {
+    }) : "", P = h ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      String(this.item._source.system.backgroundOptions ?? ""),
+      { async: !0, relativeTo: this.item }
+    ) : "", X = h ? await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      String(this.item._source.system.equipmentNotes ?? ""),
+      { async: !0, relativeTo: this.item }
+    ) : "", M = String(i.rank ?? "untrained"), D = String(i.defaultPool ?? "choose"), I = Array.isArray(i.contexts) ? i.contexts : [], ne = s ? Ye(this.item) : [], _ = s ? Sm(i) : null, He = _ ? {
       ..._,
       rollModifierLabel: game.i18n.localize(
         _.rollModifierLabel === "task" ? "MAGNUSARCHIVES.Ability.TaskModifier" : _.rollModifierLabel === "defense" ? "MAGNUSARCHIVES.Ability.DefenseModifier" : "MAGNUSARCHIVES.Ability.RollModifier"
       )
     } : null, O = s ? this.item.flags?.magnusarchives?.genreAbility : void 0, Q = O ? {
-      catalogLabel: game.i18n.localize(`MAGNUSARCHIVES.Genre.CatalogKind.${O.catalog ?? "progression"}`),
+      catalogLabel: game.i18n.localize(
+        `MAGNUSARCHIVES.Genre.CatalogKind.${O.catalog ?? "progression"}`
+      ),
       genresLabel: (O.genres ?? []).map((S) => game.i18n.localize(`MAGNUSARCHIVES.Packages.Genre.${S}`)).join(" · "),
-      progressionBandLabel: O.progressionBand === "origin" ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin") : game.i18n.localize(`MAGNUSARCHIVES.Genre.ProgressionBand.${O.progressionBand ?? "mid-tier"}`),
+      progressionBandLabel: O.progressionBand === "origin" ? game.i18n.localize("MAGNUSARCHIVES.Genre.CatalogKind.origin") : game.i18n.localize(
+        `MAGNUSARCHIVES.Genre.ProgressionBand.${O.progressionBand ?? "mid-tier"}`
+      ),
       minimumSuperheroRank: Number(O.minimumSuperheroRank ?? 0)
     } : null, $e = m ? i.abilityCatalog.map((S) => ({
       ...S,
@@ -10684,16 +11119,17 @@ class $ extends vm {
       category: String(i.category ?? "general"),
       contexts: I,
       initiative: !!i.initiative
-    }), Ie = i.grantedBy, ce = !!(Ie?.sourceUuid || Ie?.instanceId || Ie?.grantId), Z = y ? this.#G() : null, Ae = Z?.system.graph, pe = Ae?.nodes.find((S) => S.id === this.#t.selectedNodeId), N = new Map(Ae?.nodes.map((S) => [
-      S.id,
-      S.abilitySnapshot.name || S.id
-    ]) ?? []);
+    }), Ie = i.grantedBy, ce = !!(Ie?.sourceUuid || Ie?.instanceId || Ie?.grantId), Z = y ? this.#G() : null, Ae = Z?.system.graph, pe = Ae?.nodes.find((S) => S.id === this.#t.selectedNodeId), N = new Map(Ae?.nodes.map((S) => [S.id, S.abilitySnapshot.name || S.id]) ?? []);
     return {
       ...t,
       item: this.item,
       system: this.item.system,
       systemFields: la(this.item),
-      enriched: { description: G, backgroundOptions: P, equipmentNotes: X },
+      enriched: {
+        description: G,
+        backgroundOptions: P,
+        equipmentNotes: X
+      },
       usesRichDescription: H,
       isSkill: a,
       isAbility: s,
@@ -10709,7 +11145,9 @@ class $ extends vm {
       typeCustomGenreSelected: h && String(i.genre ?? "none") === "custom",
       typeSuperheroSelected: v,
       typeSuperheroAttached: v && !!E?.instanceId,
-      typeSuperheroicsPoolLabel: E?.selections?.superheroicsPool && E.selections.superheroicsPool !== "none" ? game.i18n.localize(`MAGNUSARCHIVES.Pools.${E.selections.superheroicsPool[0].toUpperCase()}${E.selections.superheroicsPool.slice(1)}`) : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
+      typeSuperheroicsPoolLabel: E?.selections?.superheroicsPool && E.selections.superheroicsPool !== "none" ? game.i18n.localize(
+        `MAGNUSARCHIVES.Pools.${E.selections.superheroicsPool[0].toUpperCase()}${E.selections.superheroicsPool.slice(1)}`
+      ) : game.i18n.localize("MAGNUSARCHIVES.Common.None"),
       typeWeaponFamiliesValue: h ? le(i.weaponFamilies).map(At).join(", ") : "",
       speciesWeaponFamiliesValue: A ? le(i.weaponFamilies).map(At).join(", ") : "",
       weaponFamilySuggestions: ao.map((S) => ({ value: At(S) })),
@@ -10742,7 +11180,9 @@ class $ extends vm {
       })),
       edgeModeOptions: ["none", "fixed", "choice"].map((S) => ({
         value: S,
-        label: game.i18n.localize(S === "none" ? "MAGNUSARCHIVES.Common.None" : S === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"),
+        label: game.i18n.localize(
+          S === "none" ? "MAGNUSARCHIVES.Common.None" : S === "fixed" ? "MAGNUSARCHIVES.Packages.FixedPool" : "MAGNUSARCHIVES.Packages.ChoicePool"
+        ),
         selected: i.edgeGrant?.mode === S
       })),
       descriptorSkillGrants: f ? i.skillGrants.map((S) => ({
@@ -10751,9 +11191,7 @@ class $ extends vm {
       })) : [],
       descriptorPoolBonusChoiceGroups: f ? (i.poolBonusChoiceGroups ?? []).map((S) => ({
         ...S,
-        poolsLabel: S.pools.map((J) => game.i18n.localize(
-          `MAGNUSARCHIVES.Pools.${J[0].toUpperCase()}${J.slice(1)}`
-        )).join(" · ")
+        poolsLabel: S.pools.map((J) => game.i18n.localize(`MAGNUSARCHIVES.Pools.${J[0].toUpperCase()}${J.slice(1)}`)).join(" · ")
       })) : [],
       descriptorChoiceGroups: f ? i.choiceGroups.map((S) => ({
         ...S,
@@ -10768,8 +11206,14 @@ class $ extends vm {
         rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
       })) : [],
       typeAbilityChoiceGroups: h ? i.abilityChoiceGroups : [],
-      speciesSkillGrants: A ? i.skillGrants.map((S) => ({ ...S, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`) })) : [],
-      speciesSkillChoiceGroups: A ? i.choiceGroups.map((S) => ({ ...S, rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`) })) : [],
+      speciesSkillGrants: A ? i.skillGrants.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
+      })) : [],
+      speciesSkillChoiceGroups: A ? i.choiceGroups.map((S) => ({
+        ...S,
+        rankLabel: game.i18n.localize(`MAGNUSARCHIVES.Skill.Ranks.${S.rank}`)
+      })) : [],
       speciesAbilityChoiceGroups: A ? i.abilityChoiceGroups : [],
       speciesDescriptorChoiceGroups: A ? i.descriptorChoiceGroups.map((S) => ({
         ...S,
@@ -10794,12 +11238,17 @@ class $ extends vm {
           toName: N.get(S.to) ?? S.to
         })) ?? []
       } : null,
-      focusTrees: y ? [await game.magnusarchives.services.focusTrees.prepare(Z, this.#s ? {
-        editor: {
-          selectedNodeId: this.#t.selectedNodeId,
-          connectionSourceNodeId: this.#t.connectionSourceNodeId
-        }
-      } : {})] : [],
+      focusTrees: y ? [
+        await game.magnusarchives.services.focusTrees.prepare(
+          Z,
+          this.#s ? {
+            editor: {
+              selectedNodeId: this.#t.selectedNodeId,
+              connectionSourceNodeId: this.#t.connectionSourceNodeId
+            }
+          } : {}
+        )
+      ] : [],
       isHeavyWeapon: o && i.category === "heavy",
       abilityActivationOptions: s ? js.map((S) => ({
         value: S,
@@ -10849,7 +11298,11 @@ class $ extends vm {
         selected: S === M
       })) : [],
       skillPoolOptions: a ? [
-        { value: "choose", label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"), selected: D === "choose" },
+        {
+          value: "choose",
+          label: game.i18n.localize("MAGNUSARCHIVES.Skill.ChoosePool"),
+          selected: D === "choose"
+        },
         ...k.map((S) => ({
           value: S,
           label: game.i18n.localize(`MAGNUSARCHIVES.Pools.${S[0].toUpperCase()}${S.slice(1)}`),
@@ -10921,11 +11374,14 @@ class $ extends vm {
         label: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${S}`),
         selected: i.category === S
       })) : [],
-      shieldWoundTracks: l ? Mi({
-        minor: i.wounds.minor.length,
-        moderate: i.wounds.moderate.length,
-        major: i.wounds.major.length
-      }, i.derived.capacities).map((S) => ({
+      shieldWoundTracks: l ? Mi(
+        {
+          minor: i.wounds.minor.length,
+          moderate: i.wounds.moderate.length,
+          major: i.wounds.major.length
+        },
+        i.derived.capacities
+      ).map((S) => ({
         ...S,
         label: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${S.severity}`),
         pips: S.pips.map((J) => ({
@@ -10947,7 +11403,11 @@ function Ci(n) {
 }
 async function gr(n) {
   const e = await foundry.applications.api.DialogV2.input({
-    window: { title: game.i18n.localize(n ? "MAGNUSARCHIVES.Combat.Modification.Edit" : "MAGNUSARCHIVES.Combat.Modification.Create") },
+    window: {
+      title: game.i18n.localize(
+        n ? "MAGNUSARCHIVES.Combat.Modification.Edit" : "MAGNUSARCHIVES.Combat.Modification.Create"
+      )
+    },
     content: `<div class="magnusarchives-dialog-fields">
       <label>${game.i18n.localize("MAGNUSARCHIVES.Common.Name")} <input name="label" type="text" value="${Ci(n?.label ?? "")}"></label>
       <label>${game.i18n.localize("MAGNUSARCHIVES.Combat.Modification.Contexts")} <input name="contexts" type="text" value="${Ci(n?.contexts.join(", ") ?? "defense.speed")}"></label>
@@ -11024,9 +11484,7 @@ function Nm(n, e) {
   const t = cr(n, e), i = t.ratio > 0.5 ? "healthy" : t.ratio > 0.25 ? "intermediate" : "low";
   return { ...t, state: i };
 }
-const Mm = foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ActorSheetV2
-), Is = /* @__PURE__ */ new Set([
+const Mm = foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2), Is = /* @__PURE__ */ new Set([
   "requestDefense",
   "createModification",
   "editModification",
@@ -11036,12 +11494,15 @@ class wt extends Mm {
   static DEFAULT_OPTIONS = {
     ...ra,
     classes: ["magnusarchives", "sheet", "actor", "npc-sheet"],
-    actions: ca({
-      requestDefense: wt.#e,
-      createModification: wt.#t,
-      editModification: wt.#i,
-      deleteModification: wt.#n
-    }, Is),
+    actions: ca(
+      {
+        requestDefense: wt.#e,
+        createModification: wt.#t,
+        editModification: wt.#i,
+        deleteModification: wt.#n
+      },
+      Is
+    ),
     position: { width: 680, height: 700 },
     window: { resizable: !0 }
   };
@@ -11084,10 +11545,7 @@ class wt extends Mm {
       isGM: game.user.isGM,
       enriched: { notes: o },
       targetNumber: Rm(i.level) ?? "—",
-      healthGauge: Nm(
-        i.health.value,
-        i.health.max ?? i.health.baseMax
-      ),
+      healthGauge: Nm(i.health.value, i.health.max ?? i.health.baseMax),
       damageEffectOptions: xi.map((r) => ({
         value: r,
         label: game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${r}`),
@@ -11160,25 +11618,11 @@ function Hm(n) {
   if (y > i)
     throw new Error(`Paid Effort cannot exceed the Character maximum of ${i}.`);
   const h = [];
-  a > 0 && h.push(An(
-    "core.assets",
-    "MAGNUSARCHIVES.Roll.Breakdown.Assets",
-    "ease",
-    a,
-    "asset"
-  )), s > 0 && h.push(An(
-    "core.effort.paid",
-    "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort",
-    "ease",
-    s,
-    "effort"
-  )), l > 0 && h.push(An(
-    "core.effort.free",
-    "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort",
-    "ease",
-    l,
-    "free-effort"
-  ));
+  a > 0 && h.push(An("core.assets", "MAGNUSARCHIVES.Roll.Breakdown.Assets", "ease", a, "asset")), s > 0 && h.push(
+    An("core.effort.paid", "MAGNUSARCHIVES.Roll.Breakdown.PaidEffort", "ease", s, "effort")
+  ), l > 0 && h.push(
+    An("core.effort.free", "MAGNUSARCHIVES.Roll.Breakdown.FreeEffort", "ease", l, "free-effort")
+  );
   for (const G of n.contributions)
     te(G.steps, `Steps for '${G.id}'`), G.steps > 0 && h.push({ ...G });
   const f = h.filter((G) => G.direction === "ease").reduce((G, P) => G + P.steps, 0), A = h.filter((G) => G.direction === "hinder").reduce((G, P) => G + P.steps, 0), v = f - A, E = Ln(
@@ -11212,11 +11656,7 @@ function Hm(n) {
 }
 function $m(n, e) {
   if (n.finalDifficulty === 0) return Sr(n);
-  const t = yr(e), i = n.targetNumber === null ? null : e >= n.targetNumber, a = km(e), s = hr(
-    a + n.netSteps,
-    0,
-    n.context.limits.difficultyCeiling
-  );
+  const t = yr(e), i = n.targetNumber === null ? null : e >= n.targetNumber, a = km(e), s = hr(a + n.netSteps, 0, n.context.limits.difficultyCeiling);
   return {
     prepared: n,
     naturalRoll: e,
@@ -11254,89 +11694,108 @@ function Vm(n, e = 1) {
   if (t === null) return [];
   const i = { sourceId: "magnusarchives.core", naturalRoll: t }, a = $t(e);
   if (t === 1)
-    return [{
-      ...i,
-      id: "core.natural-1.intrusion",
+    return [
+      {
+        ...i,
+        id: "core.natural-1.intrusion",
+        kind: "gm-intrusion",
+        status: "applied",
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
+        triggersGMIntrusion: !0,
+        intrusionProvenance: "natural-1"
+      }
+    ];
+  const s = t <= a ? [
+    {
+      id: `core.horror-mode.natural-${t}.intrusion`,
+      sourceId: "magnusarchives.horror-mode",
+      naturalRoll: t,
       kind: "gm-intrusion",
       status: "applied",
       label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
       triggersGMIntrusion: !0,
-      intrusionProvenance: "natural-1"
-    }];
-  const s = t <= a ? [{
-    id: `core.horror-mode.natural-${t}.intrusion`,
-    sourceId: "magnusarchives.horror-mode",
-    naturalRoll: t,
-    kind: "gm-intrusion",
-    status: "applied",
-    label: "MAGNUSARCHIVES.Roll.NaturalEffects.GMIntrusion",
-    triggersGMIntrusion: !0,
-    intrusionProvenance: "horror-mode",
-    horrorIntrusionRange: a
-  }] : [];
+      intrusionProvenance: "horror-mode",
+      horrorIntrusionRange: a
+    }
+  ] : [];
   if (t === 17 || t === 18) {
     const o = n.prepared.context.purpose === "damage";
-    return [...s, {
-      ...i,
-      id: `core.natural-${t}.damage`,
-      kind: "damage-bonus",
-      status: o ? bn(n.success) : "inapplicable",
-      label: `MAGNUSARCHIVES.Roll.NaturalEffects.Damage${t}`,
-      damageBonus: t === 17 ? 1 : 2
-    }];
+    return [
+      ...s,
+      {
+        ...i,
+        id: `core.natural-${t}.damage`,
+        kind: "damage-bonus",
+        status: o ? bn(n.success) : "inapplicable",
+        label: `MAGNUSARCHIVES.Roll.NaturalEffects.Damage${t}`,
+        damageBonus: t === 17 ? 1 : 2
+      }
+    ];
   }
   if (t === 19) {
     const o = bn(n.success);
     if (n.prepared.context.purpose === "damage") {
       const r = o === "applied" ? "available" : o;
-      return [...s, {
-        ...i,
-        id: "core.natural-19.damage",
-        kind: "damage-bonus",
-        status: r,
-        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19",
-        damageBonus: 3,
-        choiceGroup: "core.natural-19.choice"
-      }, {
+      return [
+        ...s,
+        {
+          ...i,
+          id: "core.natural-19.damage",
+          kind: "damage-bonus",
+          status: r,
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage19",
+          damageBonus: 3,
+          choiceGroup: "core.natural-19.choice"
+        },
+        {
+          ...i,
+          id: "core.natural-19.minor",
+          kind: "minor-effect",
+          status: r,
+          label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor",
+          choiceGroup: "core.natural-19.choice"
+        }
+      ];
+    }
+    return [
+      ...s,
+      {
         ...i,
         id: "core.natural-19.minor",
         kind: "minor-effect",
-        status: r,
-        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor",
-        choiceGroup: "core.natural-19.choice"
-      }];
-    }
-    return [...s, {
-      ...i,
-      id: "core.natural-19.minor",
-      kind: "minor-effect",
-      status: o,
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
-    }];
+        status: o,
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Minor"
+      }
+    ];
   }
   if (t === 20) {
-    const o = bn(n.success), r = n.prepared.context.purpose === "damage" ? [{
-      ...i,
-      id: "core.natural-20.damage",
-      kind: "damage-bonus",
-      status: o === "applied" ? "available" : o,
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20",
-      damageBonus: 4,
-      choiceGroup: "core.natural-20.choice"
-    }, {
-      ...i,
-      id: "core.natural-20.major",
-      kind: "major-effect",
-      status: o === "applied" ? "available" : o,
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major",
-      choiceGroup: "core.natural-20.choice"
-    }] : [{
-      ...i,
-      id: "core.natural-20.major",
-      kind: "major-effect",
-      status: o,
-      label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major"
-    }];
+    const o = bn(n.success), r = n.prepared.context.purpose === "damage" ? [
+      {
+        ...i,
+        id: "core.natural-20.damage",
+        kind: "damage-bonus",
+        status: o === "applied" ? "available" : o,
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Damage20",
+        damageBonus: 4,
+        choiceGroup: "core.natural-20.choice"
+      },
+      {
+        ...i,
+        id: "core.natural-20.major",
+        kind: "major-effect",
+        status: o === "applied" ? "available" : o,
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major",
+        choiceGroup: "core.natural-20.choice"
+      }
+    ] : [
+      {
+        ...i,
+        id: "core.natural-20.major",
+        kind: "major-effect",
+        status: o,
+        label: "MAGNUSARCHIVES.Roll.NaturalEffects.Major"
+      }
+    ];
     return n.prepared.poolCost > 0 && r.push({
       ...i,
       id: "core.natural-20.refund",
@@ -11624,7 +12083,9 @@ class qm {
   }
   async roll(e, t, i = !1, a) {
     qe(e);
-    const s = this.availableSlots(e).find((o) => o.type === t && (!a || o.id === a));
+    const s = this.availableSlots(e).find(
+      (o) => o.type === t && (!a || o.id === a)
+    );
     if (!s)
       throw new Error(`The '${t}' Core Recovery has already been used today.`);
     return this.calculateRoll(
@@ -11675,7 +12136,9 @@ class qm {
   }
   prepareNonRest(e, t, i) {
     qe(e);
-    const a = this.slots(e), s = Lt(a).find((d) => d.type === t && (!i || d.id === i));
+    const a = this.slots(e), s = Lt(a).find(
+      (d) => d.type === t && (!i || d.id === i)
+    );
     if (!s)
       throw new Error(`The '${t}' Core Recovery has already been used today.`);
     const o = ka(a, s.id, t), r = Rt(o), l = { might: 0, speed: 0, intellect: 0 }, u = {
@@ -12020,13 +12483,7 @@ class _m {
     return await e.update({ "system.wounds": s.wounds }), s;
   }
   async setCount(e, t, i, a = {}) {
-    return j(e), this.setTrackCount(
-      e,
-      t,
-      i,
-      e.system.derived.wounds.capacities[t],
-      a
-    );
+    return j(e), this.setTrackCount(e, t, i, e.system.derived.wounds.capacities[t], a);
   }
   async setTrackCount(e, t, i, a, s = {}) {
     const o = this.setWoundCount(e.system.wounds, t, i, a, s);
@@ -12095,66 +12552,91 @@ function Ym(n, e) {
   }));
 }
 function Jm(n, e) {
-  return n.breakdown.length === 0 && n.totalEase === 0 && n.totalHindrance === 0 ? [] : [{
-    label: e("MAGNUSARCHIVES.Roll.TotalEase"),
-    value: n.totalEase === 0 ? 0 : Ee("ease", n.totalEase)
-  }, {
-    label: e("MAGNUSARCHIVES.Roll.TotalHindrance"),
-    value: n.totalHindrance === 0 ? 0 : Ee("hinder", n.totalHindrance)
-  }];
+  return n.breakdown.length === 0 && n.totalEase === 0 && n.totalHindrance === 0 ? [] : [
+    {
+      label: e("MAGNUSARCHIVES.Roll.TotalEase"),
+      value: n.totalEase === 0 ? 0 : Ee("ease", n.totalEase)
+    },
+    {
+      label: e("MAGNUSARCHIVES.Roll.TotalHindrance"),
+      value: n.totalHindrance === 0 ? 0 : Ee("hinder", n.totalHindrance)
+    }
+  ];
 }
 function Qm(n, e) {
   const t = n.prepared, i = t.context;
   return [
-    ...i.paidEffort > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.PaidEffort"),
-      value: i.paidEffort
-    }] : [],
-    ...(i.damageEffort ?? 0) > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.PaidDamageEffort"),
-      value: i.damageEffort ?? 0
-    }] : [],
-    ...i.freeEffort > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.FreeEffort"),
-      value: i.freeEffort
-    }] : [],
-    ...(i.freeDamageEffort ?? 0) > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.FreeDamageEffort"),
-      value: i.freeDamageEffort ?? 0
-    }] : [],
-    ...t.totalEffortApplied > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
-      value: t.totalEffortMaximum === null ? String(t.totalEffortApplied) : `${t.totalEffortApplied} / ${t.totalEffortMaximum}`
-    }] : []
+    ...i.paidEffort > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.PaidEffort"),
+        value: i.paidEffort
+      }
+    ] : [],
+    ...(i.damageEffort ?? 0) > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.PaidDamageEffort"),
+        value: i.damageEffort ?? 0
+      }
+    ] : [],
+    ...i.freeEffort > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.FreeEffort"),
+        value: i.freeEffort
+      }
+    ] : [],
+    ...(i.freeDamageEffort ?? 0) > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.FreeDamageEffort"),
+        value: i.freeDamageEffort ?? 0
+      }
+    ] : [],
+    ...t.totalEffortApplied > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.TotalAppliedEffort"),
+        value: t.totalEffortMaximum === null ? String(t.totalEffortApplied) : `${t.totalEffortApplied} / ${t.totalEffortMaximum}`
+      }
+    ] : []
   ];
 }
 function Zm(n, e) {
   const t = n.prepared, i = t.actionCostBeforeEdge > 0 || t.effortCostBeforeEdge > 0 || n.poolCostPaid > 0;
   return [
-    ...t.actionCostBeforeEdge > 0 ? [{
-      label: e("MAGNUSARCHIVES.Ability.Cost"),
-      value: t.actionCostBeforeEdge
-    }] : [],
-    ...t.edgeApplied > 0 ? [{
-      label: e("MAGNUSARCHIVES.Pools.Edge"),
-      value: t.edgeApplied
-    }] : [],
-    ...i ? [{
-      label: e("MAGNUSARCHIVES.Roll.CostPaid"),
-      value: n.poolCostPaid
-    }] : [],
-    ...n.poolCostRefunded > 0 ? [{
-      label: e("MAGNUSARCHIVES.Roll.NaturalEffects.Refunded"),
-      value: n.poolCostRefunded
-    }] : []
+    ...t.actionCostBeforeEdge > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Ability.Cost"),
+        value: t.actionCostBeforeEdge
+      }
+    ] : [],
+    ...t.edgeApplied > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Pools.Edge"),
+        value: t.edgeApplied
+      }
+    ] : [],
+    ...i ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.CostPaid"),
+        value: n.poolCostPaid
+      }
+    ] : [],
+    ...n.poolCostRefunded > 0 ? [
+      {
+        label: e("MAGNUSARCHIVES.Roll.NaturalEffects.Refunded"),
+        value: n.poolCostRefunded
+      }
+    ] : []
   ];
 }
 function ep(n, e) {
-  const t = n.naturalEffects.find((i) => i.kind === "gm-intrusion" && i.status === "applied" && i.intrusionProvenance === "horror-mode" && i.horrorIntrusionRange !== void 0);
-  return t?.horrorIntrusionRange === void 0 ? [] : [{
-    label: e("MAGNUSARCHIVES.Horror.Title"),
-    value: `1–${t.horrorIntrusionRange}`
-  }];
+  const t = n.naturalEffects.find(
+    (i) => i.kind === "gm-intrusion" && i.status === "applied" && i.intrusionProvenance === "horror-mode" && i.horrorIntrusionRange !== void 0
+  );
+  return t?.horrorIntrusionRange === void 0 ? [] : [
+    {
+      label: e("MAGNUSARCHIVES.Horror.Title"),
+      value: `1–${t.horrorIntrusionRange}`
+    }
+  ];
 }
 function br(n, e) {
   const t = n.prepared, i = t.context.pool ? `${t.context.pool[0].toUpperCase()}${t.context.pool.slice(1)}` : null, a = Km(n, e), s = a.filter((r) => !r.isIntrusion), o = [
@@ -12171,9 +12653,7 @@ function br(n, e) {
     showNaturalDifficulty: n.naturalDifficulty !== null,
     breakdown: t.breakdown.map((r) => ({
       label: e(r.label),
-      direction: e(
-        r.direction === "ease" ? "MAGNUSARCHIVES.Roll.Ease" : "MAGNUSARCHIVES.Roll.Hinder"
-      ),
+      direction: e(r.direction === "ease" ? "MAGNUSARCHIVES.Roll.Ease" : "MAGNUSARCHIVES.Roll.Hinder"),
       steps: r.steps,
       isEase: r.direction === "ease",
       modifier: Ee(r.direction, r.steps)
@@ -12238,13 +12718,17 @@ function ip(n, e, t = (i) => i) {
       hasDetails: s.length > 0 || i.modifierDetails.length > 0 || i.modifierTotalDetails.length > 0 || i.effortDetails.length > 0 || i.costDetails.length > 0
     };
   if (o.mode === "known") {
-    const r = [{
-      label: t("MAGNUSARCHIVES.Roll.Difficulty"),
-      value: n.prepared.finalDifficulty ?? 0
-    }, {
-      label: t("MAGNUSARCHIVES.Roll.TargetNumber"),
-      value: n.prepared.targetNumber ?? 0
-    }, ...s];
+    const r = [
+      {
+        label: t("MAGNUSARCHIVES.Roll.Difficulty"),
+        value: n.prepared.finalDifficulty ?? 0
+      },
+      {
+        label: t("MAGNUSARCHIVES.Roll.TargetNumber"),
+        value: n.prepared.targetNumber ?? 0
+      },
+      ...s
+    ];
     return {
       ...i,
       ...a,
@@ -12448,23 +12932,20 @@ class cp {
   async executeBatch(e, t, i) {
     if (t.length === 0) return [];
     const a = t.map((m) => this.preview(e, m, i)), s = a[0];
-    if (a.some((m) => m.context.pool !== s.context.pool || m.poolCost !== s.poolCost))
+    if (a.some(
+      (m) => m.context.pool !== s.context.pool || m.poolCost !== s.poolCost
+    ))
       throw new Error("Batch rolls must use one Pool and one shared action cost.");
     const o = s.context.pool, r = o === null ? 0 : e.system.stats[o].value;
     if (r < s.poolCost)
-      throw new Error(
-        `${o ?? "No Pool"} has ${r} points but this action costs ${s.poolCost}.`
-      );
+      throw new Error(`${o ?? "No Pool"} has ${r} points but this action costs ${s.poolCost}.`);
     s.poolCost > 0 && o !== null && await e.update({ [`system.stats.${o}.value`]: r - s.poolCost });
     const u = a.some((m) => m.finalDifficulty !== 0) ? await this.#t() : null, d = a.map((m) => {
-      const h = m.finalDifficulty === 0 ? Sr(m) : $m(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(
-        h,
-        i.enabledRuleModuleIds ?? []
-      );
+      const h = m.finalDifficulty === 0 ? Sr(m) : $m(m, u.naturalRoll), f = this.#e.resolveNaturalEffects(h, i.enabledRuleModuleIds ?? []);
       return { ...h, naturalEffects: f };
-    }), p = d.some((m) => m.naturalEffects.some(
-      (h) => h.status === "applied" && h.refundsPoolCost === !0
-    )) ? s.poolCost : 0;
+    }), p = d.some(
+      (m) => m.naturalEffects.some((h) => h.status === "applied" && h.refundsPoolCost === !0)
+    ) ? s.poolCost : 0;
     p > 0 && o !== null && await e.update({ [`system.stats.${o}.value`]: r });
     let y = !1;
     return d.map((m) => {
@@ -12518,10 +12999,7 @@ class up {
       freeEffort: t.freeEffort ?? 0,
       otherEase: t.otherEase ?? 0,
       otherHindrance: t.otherHindrance ?? 0,
-      contributions: [
-        ...s ? [s] : [],
-        ...t.contributions ?? []
-      ],
+      contributions: [...s ? [s] : [], ...t.contributions ?? []],
       purpose: "task",
       origin: {
         kind: "skill",
@@ -12545,10 +13023,7 @@ class up {
       freeEffort: 0,
       otherEase: 0,
       otherHindrance: 0,
-      contributions: [
-        ...i ? [i] : [],
-        ...t.contributions ?? []
-      ],
+      contributions: [...i ? [i] : [], ...t.contributions ?? []],
       purpose: "task",
       origin: {
         kind: "skill",
@@ -12584,24 +13059,14 @@ class fp {
   async createTargeted(e, t = []) {
     j(e);
     const i = this.policy(t);
-    return await this.#i(e, i.targetedXpToTarget), this.#n(
-      "targeted",
-      [e],
-      i.targetedXpToTarget,
-      i.targetedXpToShare
-    );
+    return await this.#i(e, i.targetedXpToTarget), this.#n("targeted", [e], i.targetedXpToTarget, i.targetedXpToShare);
   }
   async createGroup(e, t = []) {
     const i = [...new Map(e.map((s) => [s.id, s])).values()];
     if (i.length === 0) throw new Error("Choose at least one Character for a Group Intrusion.");
     i.forEach(j);
     const a = this.policy(t);
-    return await Promise.all(i.map((s) => this.#i(s, a.groupXpPerTarget))), this.#n(
-      "group",
-      i,
-      a.groupXpPerTarget,
-      0
-    );
+    return await Promise.all(i.map((s) => this.#i(s, a.groupXpPerTarget))), this.#n("group", i, a.groupXpPerTarget, 0);
   }
   async createFreeFromNaturalResult(e, t, i = []) {
     return !t.naturalEffects.some(
@@ -12611,13 +13076,7 @@ class fp {
   async createFree(e, t = 0, i = []) {
     j(e);
     const a = this.policy(i);
-    return await this.#i(e, a.freeXp), this.#n(
-      "free",
-      [e],
-      a.freeXp,
-      0,
-      t
-    );
+    return await this.#i(e, a.freeXp), this.#n("free", [e], a.freeXp, 0, t);
   }
   async distributeSecondXp(e, t, i) {
     if (j(e), j(t), t.id === e.id)
@@ -12659,11 +13118,13 @@ function gp(n, e) {
 function hp(n, e) {
   for (const [t, i] of Object.entries(n)) {
     if (t === "tagsAll") {
-      if (!Array.isArray(i) || !i.every((s) => typeof s == "string" && e.tags.includes(s))) return !1;
+      if (!Array.isArray(i) || !i.every((s) => typeof s == "string" && e.tags.includes(s)))
+        return !1;
       continue;
     }
     if (t === "tagsAny") {
-      if (!Array.isArray(i) || !i.some((s) => typeof s == "string" && e.tags.includes(s))) return !1;
+      if (!Array.isArray(i) || !i.some((s) => typeof s == "string" && e.tags.includes(s)))
+        return !1;
       continue;
     }
     const a = t === "pool" ? e.pool : t === "attackType" ? e.attackType : t === "weaponCategory" ? e.weaponCategory : t === "defenseType" ? e.defenseType : void 0;
@@ -12694,22 +13155,31 @@ class Sp {
   }
   resolve(e, t, i = []) {
     if (e.type !== "npc") throw new Error("Combat targets must be NPC Actors.");
-    const a = Ui(e.system.level, "NPC Level", 0), s = e.system.modifications.map((d, p) => ({ modification: d, index: p })).filter(({ modification: d }) => gp(d, t) && hp(d.predicate, t)), o = s.filter(({ modification: d }) => d.mode === "levelOverride").sort((d, p) => ks(p.modification) - ks(d.modification) || p.index - d.index)[0]?.modification;
+    const a = Ui(e.system.level, "NPC Level", 0), s = e.system.modifications.map((d, p) => ({ modification: d, index: p })).filter(
+      ({ modification: d }) => gp(d, t) && hp(d.predicate, t)
+    ), o = s.filter(({ modification: d }) => d.mode === "levelOverride").sort(
+      (d, p) => ks(p.modification) - ks(d.modification) || p.index - d.index
+    )[0]?.modification;
     let r = o ? Ui(o.value, `NPC modification '${o.id}'`, 0) : a;
     const l = o ? [o.id] : [];
     for (const { modification: d } of s)
       d.mode === "levelDelta" && (r += Ui(d.value, `NPC modification '${d.id}'`), l.push(d.id));
     r = Math.max(0, r);
     const u = s.map(({ modification: d }) => d).filter((d) => d.mode === "ease" || d.mode === "hinder").map((d) => (l.push(d.id), yp(d)));
-    return this.#e.enrichTargetResolution({
-      targetId: e.id,
-      targetIdentity: Ut(e),
-      targetName: e.name,
-      baseLevel: a,
-      difficulty: r,
-      contributions: u,
-      appliedModificationIds: l
-    }, e, t, i);
+    return this.#e.enrichTargetResolution(
+      {
+        targetId: e.id,
+        targetIdentity: Ut(e),
+        targetName: e.name,
+        baseLevel: a,
+        difficulty: r,
+        contributions: u,
+        appliedModificationIds: l
+      },
+      e,
+      t,
+      i
+    );
   }
   nativeNpcTargets() {
     return [...game.user.targets ?? []].map((e) => Do(e)).filter((e) => e !== null);
@@ -12751,20 +13221,32 @@ class wp {
     t.appliedDamage > 0 && await this.#e(e, `-${t.appliedDamage}`, "#ff5c5c"), t.previousHealth > 0 && t.health === 0 && await this.#e(e, game.i18n.localize("MAGNUSARCHIVES.Combat.Feedback.Dead"), "#ff3030");
   }
   async characterWound(e, t) {
-    await this.#e(e, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Wound", {
-      severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${t}`)
-    }), "#ffb347");
+    await this.#e(
+      e,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Wound", {
+        severity: game.i18n.localize(`MAGNUSARCHIVES.Wounds.Severity.${t}`)
+      }),
+      "#ffb347"
+    );
   }
   async characterStress(e, t, i) {
-    t <= 0 || await this.#e(e, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Stress", {
-      points: t,
-      level: i
-    }), "#d6b24a");
+    t <= 0 || await this.#e(
+      e,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.Stress", {
+        points: t,
+        level: i
+      }),
+      "#d6b24a"
+    );
   }
   async characterSeriousInjury(e, t) {
-    await this.#e(e, game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.SeriousInjury", {
-      step: game.i18n.localize(`MAGNUSARCHIVES.DamageTrack.${t}`)
-    }), t === "dead" ? "#ff3030" : "#ff5c5c");
+    await this.#e(
+      e,
+      game.i18n.format("MAGNUSARCHIVES.Combat.Feedback.SeriousInjury", {
+        step: game.i18n.localize(`MAGNUSARCHIVES.DamageTrack.${t}`)
+      }),
+      t === "dead" ? "#ff3030" : "#ff5c5c"
+    );
   }
   async shieldWound(e, t, i, a) {
     const s = a ? game.i18n.format("MAGNUSARCHIVES.Shield.Feedback.Broken", { shield: t }) : game.i18n.format("MAGNUSARCHIVES.Shield.Feedback.Wound", {
@@ -12915,19 +13397,18 @@ class Np {
     };
   }
   applicableWeaponSkills(e, t, i = []) {
-    return this.#u(e, [
-      "attack",
-      "attack.weapon",
-      `attack.${t.system.attackType}`,
-      `weapon.${t.system.category}`
-    ], i);
+    return this.#u(
+      e,
+      ["attack", "attack.weapon", `attack.${t.system.attackType}`, `weapon.${t.system.category}`],
+      i
+    );
   }
   applicableDefenseSkills(e, t, i = []) {
-    return this.#u(e, [
-      "defense",
-      ...t === "blockWithShield" ? ["defense.block"] : [],
-      `defense.${t}`
-    ], i);
+    return this.#u(
+      e,
+      ["defense", ...t === "blockWithShield" ? ["defense.block"] : [], `defense.${t}`],
+      i
+    );
   }
   buildWeaponAttackPlan(e, t, i = {}) {
     if (t.type !== "weapon") throw new Error("Weapon attacks require a Weapon Item.");
@@ -12983,11 +13464,13 @@ class Np {
       freeEffort: i.freeEffort ?? 0,
       otherEase: i.otherEase ?? 0,
       otherHindrance: i.otherHindrance ?? 0,
-      contributions: [...new Map([
-        ...m,
-        ...R?.contributions ?? [],
-        ...i.contributions ?? []
-      ].map((P) => [P.id, P])).values()],
+      contributions: [
+        ...new Map(
+          [...m, ...R?.contributions ?? [], ...i.contributions ?? []].map(
+            (P) => [P.id, P]
+          )
+        ).values()
+      ],
       purpose: "damage",
       tags: [
         ...l.tags,
@@ -13064,7 +13547,11 @@ class Np {
   }
   buildDefenseRequest(e, t, i) {
     if (!Ls.includes(t)) throw new Error(`Unknown defense '${t}'.`);
-    const a = i.enabledRuleModuleIds ?? [], s = t === "dodge" ? "speed" : "might", o = e.system.derived.combat.armor, r = t === "dodge" ? o.dodgeContributions.map((u) => Hs(u, "hinder", "MAGNUSARCHIVES.Combat.Armor.DodgeHindrance")) : o.blockContributions.map((u) => Hs(u, "ease", "MAGNUSARCHIVES.Combat.Armor.BlockEase")), l = i.skill ? this.#i.rankContribution(i.skill, a) : null;
+    const a = i.enabledRuleModuleIds ?? [], s = t === "dodge" ? "speed" : "might", o = e.system.derived.combat.armor, r = t === "dodge" ? o.dodgeContributions.map(
+      (u) => Hs(u, "hinder", "MAGNUSARCHIVES.Combat.Armor.DodgeHindrance")
+    ) : o.blockContributions.map(
+      (u) => Hs(u, "ease", "MAGNUSARCHIVES.Combat.Armor.BlockEase")
+    ), l = i.skill ? this.#i.rankContribution(i.skill, a) : null;
     return {
       label: t === "dodge" ? "MAGNUSARCHIVES.Combat.Defense.DodgeRoll" : t === "blockWithShield" ? "MAGNUSARCHIVES.Combat.Defense.BlockWithShieldRoll" : "MAGNUSARCHIVES.Combat.Defense.BlockRoll",
       pool: s,
@@ -13131,12 +13618,7 @@ class Np {
       ...a ? { label: `${a.name} attack` } : {},
       sourceUuid: a ? `Actor.${a.id}` : "magnusarchives.combat"
     });
-    return s.appliedSeverity && await this.#r.shieldWound?.(
-      e,
-      t.name,
-      s.appliedSeverity,
-      s.broken
-    ), s;
+    return s.appliedSeverity && await this.#r.shieldWound?.(e, t.name, s.appliedSeverity, s.broken), s;
   }
   /** Commit a previously resolved Shield consequence from an authorized Chat action. */
   async applyShieldWound(e, t, i, a) {
@@ -13145,10 +13627,7 @@ class Np {
   async applyNpcDamage(e, t) {
     if (e.type !== "npc") throw new Error("NPC damage requires an NPC target.");
     const i = Cn(t, "Damage"), a = Cn(e.system.armorBase, "NPC Armor"), s = Cn(e.system.health.value, "NPC Health"), o = Math.max(0, i - a), r = Math.max(0, s - o);
-    await e.update(
-      { "system.health.value": r },
-      { magnusarchivesSkipDeadStatusSync: !0 }
-    );
+    await e.update({ "system.health.value": r }, { magnusarchivesSkipDeadStatusSync: !0 });
     const l = {
       requestedDamage: i,
       armor: a,
@@ -13204,21 +13683,27 @@ class Mp {
         damage: t.grossDamage,
         damageBreakdown: [
           { label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Category", value: t.categoryDamage },
-          ...t.weaponBonusDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.WeaponBonus",
-            value: t.weaponBonusDamage,
-            additive: !0
-          }],
-          ...t.effortDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort",
-            value: t.effortDamage,
-            additive: !0
-          }],
-          ...t.naturalDamage === 0 ? [] : [{
-            label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
-            value: t.naturalDamage,
-            additive: !0
-          }]
+          ...t.weaponBonusDamage === 0 ? [] : [
+            {
+              label: "MAGNUSARCHIVES.Combat.DamageBreakdown.WeaponBonus",
+              value: t.weaponBonusDamage,
+              additive: !0
+            }
+          ],
+          ...t.effortDamage === 0 ? [] : [
+            {
+              label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort",
+              value: t.effortDamage,
+              additive: !0
+            }
+          ],
+          ...t.naturalDamage === 0 ? [] : [
+            {
+              label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
+              value: t.naturalDamage,
+              additive: !0
+            }
+          ]
         ]
       } : {},
       ...s && t.target ? {
@@ -13376,7 +13861,10 @@ const $s = 124, Hp = 58, Vs = 108, $p = 10, Vp = async (n) => {
   } catch {
     return null;
   }
-}, Dp = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(n, e ? { async: !0, relativeTo: e } : { async: !0 });
+}, Dp = async (n, e) => typeof foundry > "u" || !foundry.applications?.ux?.TextEditor?.implementation ? n : foundry.applications.ux.TextEditor.implementation.enrichHTML(
+  n,
+  e ? { async: !0, relativeTo: e } : { async: !0 }
+);
 function Fp(n) {
   const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map();
   for (const i of n) {
@@ -13443,40 +13931,47 @@ class zp {
     const r = Fp(o.nodes.map((m) => m.node)), l = t.editor ? 6 : Math.max(1, ...o.nodes.map((m) => m.node.tier)), u = /* @__PURE__ */ new Map();
     for (const m of o.nodes)
       u.set(m.node.tier, (u.get(m.node.tier) ?? 0) + 1);
-    const d = Math.max(440, ...[...u.values()].map((m) => m * $s + (m + 1) * $p)), p = await Promise.all(o.nodes.map(async (m) => {
-      const h = await this.#t(m.node.abilityUuid), f = m.state === "owned" && s.has(m.node.id), A = h?.description ?? m.node.abilitySnapshot.description ?? "", v = o.diagnostics.some((P) => P.code === "invalid-owned-progression" && P.nodeId === m.node.id || P.severity === "error" && (!P.nodeId || P.nodeId === m.node.id)), E = m.state !== "owned" && m.node.tier > i, H = m.state !== "owned" && m.reason === "no-owned-prerequisite", R = m.state !== "owned" && (m.state !== "available" || v), G = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
-      return {
-        id: m.node.id,
-        abilityUuid: m.node.abilityUuid,
-        abilityName: h?.name || m.node.abilitySnapshot.name || m.node.id,
-        descriptionExcerpt: Tp(A),
-        descriptionHtml: await this.#i(A, h?.relativeTo ?? e),
-        tier: m.node.tier,
-        state: m.state,
-        stateLabel: `MAGNUSARCHIVES.Focus.State.${m.state}`,
-        reason: m.reason,
-        requiredTier: m.requiredTier,
-        reachableFrom: m.reachableFrom,
-        missingAbility: !h,
-        missingOwnedAbility: f,
-        isOwned: m.state === "owned",
-        advisoryUnavailable: R,
-        tierLocked: E,
-        prerequisiteLocked: H,
-        invalidProgression: v,
-        canAcquire: !!(t.editable && t.progress && !t.gmProgressionEdit && m.state !== "owned"),
-        canRestoreAbility: !!(t.editable && t.progress && f),
-        canUndoAcquisition: !!(t.editable && t.progress && m.state === "owned" && !t.gmProgressionEdit),
-        canGmMarkOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state !== "owned"),
-        canGmRemoveOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state === "owned"),
-        primaryAction: t.editor?.connectionSourceNodeId ? "completeFocusConnection" : t.editor ? "selectFocusEditorNode" : G,
-        selected: t.editor?.selectedNodeId === m.node.id,
-        connectionSource: t.editor?.connectionSourceNodeId === m.node.id,
-        xPercent: r.get(m.node.id) ?? 50,
-        width: $s,
-        height: Hp
-      };
-    })), y = e.system.graph.connections.map(({ id: m, from: h, to: f }) => ({ id: m, from: h, to: f }));
+    const d = Math.max(
+      440,
+      ...[...u.values()].map((m) => m * $s + (m + 1) * $p)
+    ), p = await Promise.all(
+      o.nodes.map(async (m) => {
+        const h = await this.#t(m.node.abilityUuid), f = m.state === "owned" && s.has(m.node.id), A = h?.description ?? m.node.abilitySnapshot.description ?? "", v = o.diagnostics.some(
+          (P) => P.code === "invalid-owned-progression" && P.nodeId === m.node.id || P.severity === "error" && (!P.nodeId || P.nodeId === m.node.id)
+        ), E = m.state !== "owned" && m.node.tier > i, H = m.state !== "owned" && m.reason === "no-owned-prerequisite", R = m.state !== "owned" && (m.state !== "available" || v), G = t.editable && t.progress && !t.gmProgressionEdit ? m.state === "owned" ? "undoFocusAcquisition" : "acquireFocusNode" : "openFocusNode";
+        return {
+          id: m.node.id,
+          abilityUuid: m.node.abilityUuid,
+          abilityName: h?.name || m.node.abilitySnapshot.name || m.node.id,
+          descriptionExcerpt: Tp(A),
+          descriptionHtml: await this.#i(A, h?.relativeTo ?? e),
+          tier: m.node.tier,
+          state: m.state,
+          stateLabel: `MAGNUSARCHIVES.Focus.State.${m.state}`,
+          reason: m.reason,
+          requiredTier: m.requiredTier,
+          reachableFrom: m.reachableFrom,
+          missingAbility: !h,
+          missingOwnedAbility: f,
+          isOwned: m.state === "owned",
+          advisoryUnavailable: R,
+          tierLocked: E,
+          prerequisiteLocked: H,
+          invalidProgression: v,
+          canAcquire: !!(t.editable && t.progress && !t.gmProgressionEdit && m.state !== "owned"),
+          canRestoreAbility: !!(t.editable && t.progress && f),
+          canUndoAcquisition: !!(t.editable && t.progress && m.state === "owned" && !t.gmProgressionEdit),
+          canGmMarkOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state !== "owned"),
+          canGmRemoveOwned: !!(t.editable && t.progress && t.gmOverrideAllowed && t.gmProgressionEdit && m.state === "owned"),
+          primaryAction: t.editor?.connectionSourceNodeId ? "completeFocusConnection" : t.editor ? "selectFocusEditorNode" : G,
+          selected: t.editor?.selectedNodeId === m.node.id,
+          connectionSource: t.editor?.connectionSourceNodeId === m.node.id,
+          xPercent: r.get(m.node.id) ?? 50,
+          width: $s,
+          height: Hp
+        };
+      })
+    ), y = e.system.graph.connections.map(({ id: m, from: h, to: f }) => ({ id: m, from: h, to: f }));
     return {
       focusUuid: e.uuid,
       focusName: e.name,
@@ -13556,10 +14051,14 @@ function Rn(n, e) {
   return t.type = e, t;
 }
 function ze(n) {
-  return [...n.items].filter((e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species");
+  return [...n.items].filter(
+    (e) => e.type === "characterType" || e.type === "descriptor" || e.type === "species"
+  );
 }
 function xp(n, e) {
-  return [...n.items].filter((t) => t.system.grantedBy?.instanceId === e);
+  return [...n.items].filter(
+    (t) => t.system.grantedBy?.instanceId === e
+  );
 }
 function Wn(n, e) {
   return xp(n, e).flatMap((i) => {
@@ -13587,8 +14086,21 @@ class qp {
       throw new Error("This Superhero Type requires a Superheroics Pool choice.");
     if (l && !k.includes(l))
       throw new Error("Invalid Superheroics Pool choice.");
-    const u = Number.isInteger(s.superhero?.powerShiftCount) ? Math.max(0, Number(s.superhero?.powerShiftCount)) : 0, d = Array.from({ length: u }, (R, G) => String(i.powerShifts?.[G] ?? "").trim()), p = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), y = this.#p(s.abilityChoiceGroups ?? [], i.abilityChoices ?? {}), m = this.#t(), h = s.instance?.sourceUuid || t.uuid, f = (s.abilityChoiceGroups ?? []).flatMap((R) => R.options.filter((G) => y[R.id]?.includes(G.id)).map((G) => ({ ...G, id: `${R.id}:${G.id}` }))), A = [
-      ...await this.#l([...s.abilityGrants ?? [], ...f], "type", h, m),
+    const u = Number.isInteger(s.superhero?.powerShiftCount) ? Math.max(0, Number(s.superhero?.powerShiftCount)) : 0, d = Array.from(
+      { length: u },
+      (R, G) => String(i.powerShifts?.[G] ?? "").trim()
+    ), p = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), y = this.#p(
+      s.abilityChoiceGroups ?? [],
+      i.abilityChoices ?? {}
+    ), m = this.#t(), h = s.instance?.sourceUuid || t.uuid, f = (s.abilityChoiceGroups ?? []).flatMap(
+      (R) => R.options.filter((G) => y[R.id]?.includes(G.id)).map((G) => ({ ...G, id: `${R.id}:${G.id}` }))
+    ), A = [
+      ...await this.#l(
+        [...s.abilityGrants ?? [], ...f],
+        "type",
+        h,
+        m
+      ),
       ...await this.#r(s.skillGrants ?? [], "type", h, m),
       ...await this.#s(s.choiceGroups ?? [], p, "type", h, m)
     ], { grants: v, skippedGrantIds: E } = await this.#o(
@@ -13616,13 +14128,22 @@ class qp {
         },
         parent: In()
       }
-    }, this.#n(e, H, v, a, i.replaceGrantedItemsMode ?? "delete", E);
+    }, this.#n(
+      e,
+      H,
+      v,
+      a,
+      i.replaceGrantedItemsMode ?? "delete",
+      E
+    );
   }
   async attachDescriptor(e, t, i) {
     this.#S(e, t, "descriptor");
     const a = st(t.system), s = a.instance?.sourceUuid || t.uuid;
-    if (ze(e).some((m) => m.type === "descriptor" && m.system.instance.sourceUuid === s)) throw new Error("This Descriptor is already attached.");
-    if (i.role === "primary" && ze(e).some((m) => m.type === "descriptor" && m.system.instance.role === "primary")) throw new Error("This Character already has a primary Descriptor.");
+    if (ze(e).some((m) => m.type === "descriptor" && m.system.instance.sourceUuid === s))
+      throw new Error("This Descriptor is already attached.");
+    if (i.role === "primary" && ze(e).some((m) => m.type === "descriptor" && m.system.instance.role === "primary"))
+      throw new Error("This Character already has a primary Descriptor.");
     const o = this.#t(), r = this.#m(a.poolBonusChoiceGroups ?? [], i.poolChoices ?? {}), l = this.#f(a.choiceGroups ?? [], i.skillChoices ?? {}), u = [
       ...await this.#r(a.skillGrants ?? [], "descriptor", s, o),
       ...await this.#s(a.choiceGroups ?? [], l, "descriptor", s, o)
@@ -13660,7 +14181,10 @@ class qp {
       throw new Error("This Character already has an active Species.");
     const s = st(t.system), o = s.edgeGrant.mode === "choice" ? i.edgePool : s.edgeGrant.pool;
     if (s.edgeGrant.mode === "choice" && !o) throw new Error("This Species requires an Edge Pool choice.");
-    const r = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), l = this.#p(s.abilityChoiceGroups ?? [], i.abilityChoices ?? {}), u = new Map(
+    const r = this.#f(s.choiceGroups ?? [], i.skillChoices ?? {}), l = this.#p(
+      s.abilityChoiceGroups ?? [],
+      i.abilityChoices ?? {}
+    ), u = new Map(
       (i.resolvedDescriptorChoiceGroups ?? []).map((M) => [M.id, M])
     ), d = (s.descriptorChoiceGroups ?? []).map((M) => {
       if ((M.sourceMode ?? "fixed") !== "catalog") return M;
@@ -13669,24 +14193,40 @@ class qp {
     }), p = this.#h(
       d,
       i.descriptorChoices ?? {}
-    ), y = this.#t(), m = s.instance?.sourceUuid || t.uuid, h = (s.abilityChoiceGroups ?? []).flatMap((M) => M.options.filter((D) => l[M.id]?.includes(D.id)).map((D) => ({ ...D, id: `${M.id}:${D.id}` }))), f = d.flatMap((M) => M.options.filter((D) => p[M.id]?.includes(D.id)).map((D) => ({ ...D, id: `${M.id}:${D.id}` }))), A = [
-      ...await this.#l([...s.abilityGrants ?? [], ...h], "species", m, y),
+    ), y = this.#t(), m = s.instance?.sourceUuid || t.uuid, h = (s.abilityChoiceGroups ?? []).flatMap(
+      (M) => M.options.filter((D) => l[M.id]?.includes(D.id)).map((D) => ({ ...D, id: `${M.id}:${D.id}` }))
+    ), f = d.flatMap(
+      (M) => M.options.filter((D) => p[M.id]?.includes(D.id)).map((D) => ({ ...D, id: `${M.id}:${D.id}` }))
+    ), A = [
+      ...await this.#l(
+        [...s.abilityGrants ?? [], ...h],
+        "species",
+        m,
+        y
+      ),
       ...await this.#r(s.skillGrants ?? [], "species", m, y),
-      ...await this.#s(s.choiceGroups ?? [], r, "species", m, y)
-    ], v = await this.#o(
-      e,
-      A,
-      t,
-      i.conflictResolver
-    ), E = [...v.grants], H = [...v.skippedGrantIds], R = [...v.skippedGrantIds], G = new Set(ze(e).filter((M) => M.type === "descriptor").map((M) => M.system.instance.sourceUuid || `snapshot:${M.name.trim().toLocaleLowerCase()}`)), P = [...s.descriptorGrants ?? [], ...f];
+      ...await this.#s(
+        s.choiceGroups ?? [],
+        r,
+        "species",
+        m,
+        y
+      )
+    ], v = await this.#o(e, A, t, i.conflictResolver), E = [...v.grants], H = [...v.skippedGrantIds], R = [...v.skippedGrantIds], G = new Set(
+      ze(e).filter((M) => M.type === "descriptor").map((M) => M.system.instance.sourceUuid || `snapshot:${M.name.trim().toLocaleLowerCase()}`)
+    ), P = [...s.descriptorGrants ?? [], ...f];
     if (!Me(P.map((M) => M.id)))
       throw new Error("Species Descriptor grant IDs must be unique.");
     for (const M of P) {
       const D = M.descriptorUuid ? await this.#e(M.descriptorUuid) : null;
-      if (D && D.type !== "descriptor") throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
+      if (D && D.type !== "descriptor")
+        throw new Error("A Species Descriptor grant references a non-Descriptor Item.");
       const I = D ? Ot(D) : Pp(M.snapshot, "descriptor");
-      if (!I) throw new Error(`Descriptor grant '${M.id}' has neither a source nor a usable snapshot.`);
-      const ne = st(I.system), _ = ne.instance?.sourceUuid || M.descriptorUuid, He = _ || `snapshot:${String(I.name).trim().toLocaleLowerCase()}`;
+      if (!I)
+        throw new Error(`Descriptor grant '${M.id}' has neither a source nor a usable snapshot.`);
+      const ne = st(
+        I.system
+      ), _ = ne.instance?.sourceUuid || M.descriptorUuid, He = _ || `snapshot:${String(I.name).trim().toLocaleLowerCase()}`;
       if (G.has(He)) {
         H.push(M.id), R.push(M.id);
         continue;
@@ -13699,8 +14239,19 @@ class qp {
         ne.choiceGroups ?? [],
         i.descriptorSkillChoices?.[M.id] ?? {}
       ), Se = [
-        ...await this.#r(ne.skillGrants ?? [], "descriptor", _, O),
-        ...await this.#s(ne.choiceGroups ?? [], $e, "descriptor", _, O)
+        ...await this.#r(
+          ne.skillGrants ?? [],
+          "descriptor",
+          _,
+          O
+        ),
+        ...await this.#s(
+          ne.choiceGroups ?? [],
+          $e,
+          "descriptor",
+          _,
+          O
+        )
       ], Ie = {
         id: String(D?.id ?? M.id),
         uuid: _,
@@ -13783,10 +14334,18 @@ class qp {
     const a = ze(e).find((d) => d.id === t);
     if (!a) throw new Error("Character Package not found.");
     const s = a.system.instance.instanceId, o = Wn(e, s), r = Object.fromEntries(k.map((d) => [d, e.system.derived.pools[d].max])), l = nn(a), u = i === "delete" ? o.map((d) => d.id) : [];
-    return i === "keep" && await Promise.all(o.map((d) => d.update({
-      "system.grantedBy.status": "retained",
-      ...d.type === "descriptor" || d.type === "characterType" || d.type === "species" ? { "system.instance.parent.status": "retained" } : {}
-    }))), await e.deleteEmbeddedDocuments("Item", [a.id, ...u]), await this.#a(e, r, Object.fromEntries(k.map((d) => [d, r[d] - l[d]]))), {
+    return i === "keep" && await Promise.all(
+      o.map(
+        (d) => d.update({
+          "system.grantedBy.status": "retained",
+          ...d.type === "descriptor" || d.type === "characterType" || d.type === "species" ? { "system.instance.parent.status": "retained" } : {}
+        })
+      )
+    ), await e.deleteEmbeddedDocuments("Item", [a.id, ...u]), await this.#a(
+      e,
+      r,
+      Object.fromEntries(k.map((d) => [d, r[d] - l[d]]))
+    ), {
       removedPackageId: a.id,
       deletedGrantedItemIds: u,
       retainedGrantedItemIds: i === "keep" ? o.map((d) => d.id) : []
@@ -13797,15 +14356,21 @@ class qp {
     try {
       if (a) {
         const m = Wn(e, a.system.instance.instanceId);
-        s === "keep" && await Promise.all(m.map((h) => h.update({
-          "system.grantedBy.status": "retained",
-          ...h.type === "descriptor" || h.type === "characterType" || h.type === "species" ? { "system.instance.parent.status": "retained" } : {}
-        }))), await e.deleteEmbeddedDocuments("Item", [
+        s === "keep" && await Promise.all(
+          m.map(
+            (h) => h.update({
+              "system.grantedBy.status": "retained",
+              ...h.type === "descriptor" || h.type === "characterType" || h.type === "species" ? { "system.instance.parent.status": "retained" } : {}
+            })
+          )
+        ), await e.deleteEmbeddedDocuments("Item", [
           a.id,
           ...s === "delete" ? m.map((h) => h.id) : []
         ]);
       }
-      const y = Object.fromEntries(k.map((m) => [m, r[m] + l[m] - u[m]]));
+      const y = Object.fromEntries(
+        k.map((m) => [m, r[m] + l[m] - u[m]])
+      );
       await this.#a(e, r, y);
     } catch (y) {
       const m = d.map((h) => h.id).filter((h) => !!h);
@@ -13817,30 +14382,43 @@ class qp {
   async #a(e, t, i) {
     const a = {};
     for (const s of k)
-      a[`system.stats.${s}.value`] = co(e.system.stats[s].value, t[s], Math.max(0, i[s]));
+      a[`system.stats.${s}.value`] = co(
+        e.system.stats[s].value,
+        t[s],
+        Math.max(0, i[s])
+      );
     await e.update(a);
   }
   async #l(e, t, i, a) {
     if (!Me(e.map((s) => s.id))) throw new Error("Type Ability grant IDs must be unique.");
-    return Promise.all(e.map(async (s) => {
-      const o = s.abilityUuid ? await this.#e(s.abilityUuid) : null;
-      if (o && o.type !== "ability") throw new Error("An Ability grant references a non-Ability Item.");
-      const r = o ? Rn(o, "ability") : En(s.snapshot, "ability");
-      if (!r) throw new Error(`Ability grant '${s.id}' has neither a source nor a usable snapshot.`);
-      const l = Ge("ability", String(r.name ?? s.snapshot.name), s.abilityUuid);
-      return r.system = { ...r.system, grantedBy: Ds(t, i, a, s.id, l) }, r;
-    }));
+    return Promise.all(
+      e.map(async (s) => {
+        const o = s.abilityUuid ? await this.#e(s.abilityUuid) : null;
+        if (o && o.type !== "ability") throw new Error("An Ability grant references a non-Ability Item.");
+        const r = o ? Rn(o, "ability") : En(s.snapshot, "ability");
+        if (!r) throw new Error(`Ability grant '${s.id}' has neither a source nor a usable snapshot.`);
+        const l = Ge("ability", String(r.name ?? s.snapshot.name), s.abilityUuid);
+        return r.system = {
+          ...r.system,
+          grantedBy: Ds(t, i, a, s.id, l)
+        }, r;
+      })
+    );
   }
   async #r(e, t, i, a) {
     if (!Me(e.map((s) => s.id))) throw new Error("Descriptor Skill grant IDs must be unique.");
-    return Promise.all(e.map((s) => this.#c(s, s.rank, t, i, a, s.id)));
+    return Promise.all(
+      e.map((s) => this.#c(s, s.rank, t, i, a, s.id))
+    );
   }
   async #s(e, t, i, a, s) {
     const o = [];
     for (const r of e)
       for (const l of t[r.id] ?? []) {
         const u = r.options.find((d) => d.id === l);
-        o.push(await this.#c(u, r.rank, i, a, s, `${r.id}:${u.id}`));
+        o.push(
+          await this.#c(u, r.rank, i, a, s, `${r.id}:${u.id}`)
+        );
       }
     return o;
   }
@@ -13858,7 +14436,9 @@ class qp {
     }, l;
   }
   async #o(e, t, i, a, s = []) {
-    const o = [], r = [], l = [...e.items], u = s.filter((d) => d.type === "ability" || d.type === "skill");
+    const o = [], r = [], l = [...e.items], u = s.filter(
+      (d) => d.type === "ability" || d.type === "skill"
+    );
     for (const d of t) {
       let p = d;
       const y = p.type;
@@ -13970,9 +14550,19 @@ class qp {
         for (const h of y.choiceGroups ?? []) {
           const f = m?.skillChoices.find((v) => v.groupId === h.id)?.optionIds ?? [], A = a.startsWith(`${h.id}:`) ? a.slice(h.id.length + 1) : "";
           if (d.uuid === t.uuid && A)
-            for (const v of h.options) v.id !== A && o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${d.name} — Skill choice`, d.uuid);
+            for (const v of h.options)
+              v.id !== A && o(
+                { id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot },
+                `${d.name} — Skill choice`,
+                d.uuid
+              );
           else if (!p)
-            for (const v of h.options) f.includes(v.id) || o({ id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot }, `${d.name} — unused Skill choice`, d.uuid);
+            for (const v of h.options)
+              f.includes(v.id) || o(
+                { id: v.id, itemUuid: v.skillUuid, customName: v.customName, snapshot: v.snapshot },
+                `${d.name} — unused Skill choice`,
+                d.uuid
+              );
         }
       } else {
         for (const h of y.abilityGrants ?? [])
@@ -13980,9 +14570,19 @@ class qp {
         for (const h of y.abilityChoiceGroups ?? []) {
           const f = m?.abilityChoices.find((v) => v.groupId === h.id)?.optionIds ?? [], A = a.startsWith(`${h.id}:`) ? a.slice(h.id.length + 1) : "";
           if (d.uuid === t.uuid && A)
-            for (const v of h.options) v.id !== A && o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${d.name} — Ability choice`, d.uuid);
+            for (const v of h.options)
+              v.id !== A && o(
+                { id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot },
+                `${d.name} — Ability choice`,
+                d.uuid
+              );
           else if (!p)
-            for (const v of h.options) f.includes(v.id) || o({ id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot }, `${d.name} — unused Ability choice`, d.uuid);
+            for (const v of h.options)
+              f.includes(v.id) || o(
+                { id: v.id, itemUuid: v.abilityUuid, customName: "", snapshot: v.snapshot },
+                `${d.name} — unused Ability choice`,
+                d.uuid
+              );
         }
       }
     };
@@ -14121,13 +14721,9 @@ class Bp {
     if (t.system.roll !== "none") throw new Error("This Ability requires a roll.");
     const a = this.#a(t, i.targets ?? []), s = this.pool(t, i.pool), o = this.#r(t);
     if (o > 0 && !s) throw new Error("A Pool is required to pay this Ability cost.");
-    if (!s) return { ability: t, actor: { id: e.id, name: e.name }, pool: null, costPaid: 0, edgeApplied: 0, targets: a };
-    const r = e.system.stats[s].value, l = Ln(
-      o,
-      0,
-      e.system.derived.pools[s].edge,
-      t.system.cost.ignoresEdge
-    );
+    if (!s)
+      return { ability: t, actor: { id: e.id, name: e.name }, pool: null, costPaid: 0, edgeApplied: 0, targets: a };
+    const r = e.system.stats[s].value, l = Ln(o, 0, e.system.derived.pools[s].edge, t.system.cost.ignoresEdge);
     if (r < l.poolCost)
       throw new Error(`${s} has ${r} points but this action costs ${l.poolCost}.`);
     return l.poolCost > 0 && await e.update({ [`system.stats.${s}.value`]: r - l.poolCost }), {
@@ -14150,7 +14746,9 @@ class Bp {
       ...t.system.roll === "attack" ? ["attack", "attack.ability", "defense.speed"] : [],
       ...t.system.roll === "defense" ? ["defense"] : [],
       ...a === "speed" ? ["speed-task"] : []
-    ], u = { tags: l, pool: a }, d = r.map((f) => f?.type === "npc" ? this.#i.resolve(f, u, s) : null), p = [], y = Fs(t, t.system.rollModifier, "roll");
+    ], u = { tags: l, pool: a }, d = r.map(
+      (f) => f?.type === "npc" ? this.#i.resolve(f, u, s) : null
+    ), p = [], y = Fs(t, t.system.rollModifier, "roll");
     if (y && p.push(y), t.system.roll === "attack") {
       const f = Fs(t, t.system.attackModifier, "attack");
       f && p.push(f);
@@ -14171,11 +14769,7 @@ class Bp {
       actionCostIgnoresEdge: t.system.cost.ignoresEdge,
       otherEase: i.otherEase ?? 0,
       otherHindrance: i.otherHindrance ?? 0,
-      contributions: [
-        ...p,
-        ...d[A]?.contributions ?? [],
-        ...i.contributions ?? []
-      ],
+      contributions: [...p, ...d[A]?.contributions ?? [], ...i.contributions ?? []],
       purpose: t.system.roll === "attack" ? "damage" : "task",
       tags: l,
       origin: {
@@ -14282,7 +14876,13 @@ class Lp {
         damageBreakdown: [
           { label: "MAGNUSARCHIVES.Ability.DamageBreakdown.Base", value: t.baseDamage },
           ...t.effortDamage ? [{ label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Effort", value: t.effortDamage, additive: !0 }] : [],
-          ...t.naturalDamage ? [{ label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural", value: t.naturalDamage, additive: !0 }] : []
+          ...t.naturalDamage ? [
+            {
+              label: "MAGNUSARCHIVES.Combat.DamageBreakdown.Natural",
+              value: t.naturalDamage,
+              additive: !0
+            }
+          ] : []
         ]
       } : {}
     };
@@ -14291,13 +14891,16 @@ class Lp {
   async publishNoRoll(e, t) {
     const i = t.targets.length ? t.targets : [null];
     for (const a of i) {
-      const s = a ? zs({
-        ability: t.ability,
-        target: a,
-        grossDamage: t.ability.system.damage,
-        damageEffect: t.ability.system.damageEffect,
-        stressAmount: t.ability.system.stressAmount
-      }, e.id) : {}, o = s.action, r = await foundry.applications.handlebars.renderTemplate(
+      const s = a ? zs(
+        {
+          ability: t.ability,
+          target: a,
+          grossDamage: t.ability.system.damage,
+          damageEffect: t.ability.system.damageEffect,
+          stressAmount: t.ability.system.stressAmount
+        },
+        e.id
+      ) : {}, o = s.action, r = await foundry.applications.handlebars.renderTemplate(
         "systems/magnusarchives/templates/chat/ability-card.hbs",
         {
           abilityName: t.ability.name,
@@ -14311,7 +14914,9 @@ class Lp {
           damageEffect: s.damageEffect ? game.i18n.localize(`MAGNUSARCHIVES.CharacterDamage.${s.damageEffect}`) : "",
           stressAmount: s.damageEffect === "stress" ? s.stressAmount : 0,
           combatAction: !!o,
-          combatActionLabel: o ? game.i18n.localize(o.kind === "npcDamage" ? "MAGNUSARCHIVES.Combat.ApplyDamage" : "MAGNUSARCHIVES.Combat.ApplyCharacterDamage") : ""
+          combatActionLabel: o ? game.i18n.localize(
+            o.kind === "npcDamage" ? "MAGNUSARCHIVES.Combat.ApplyDamage" : "MAGNUSARCHIVES.Combat.ApplyCharacterDamage"
+          ) : ""
         }
       ), l = {
         speaker: ChatMessage.getSpeaker({ actor: e }),
@@ -14383,14 +14988,25 @@ function Xp(n) {
     return [
       { label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Quantity"), value: Number(e.quantity ?? 1) },
       ...Number(e.level) > 0 ? [{ label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: Number(e.level) }] : [],
-      ...e.equipped === !0 ? [{ label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes") }] : []
+      ...e.equipped === !0 ? [
+        {
+          label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"),
+          value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes")
+        }
+      ] : []
     ];
   if (n.type === "cypher") {
     const t = dr(e.manifestation), i = ur(e.power);
     return [
-      { label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Manifestation.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${t}`) },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Manifestation.Label"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Manifestation.${t}`)
+      },
       ...String(e.form ?? "").trim() ? [{ label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Form"), value: String(e.form) }] : [],
-      { label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Power.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${i}`) },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Cypher.Power.Label"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Cypher.Power.${i}`)
+      },
       { label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: Ca(e) }
     ];
   }
@@ -14398,43 +15014,80 @@ function Xp(n) {
     const t = e.depletion;
     return [
       { label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Level"), value: Qi(e) },
-      ...t?.enabled === !0 ? [{
-        label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Depletion"),
-        value: String(t.formula || `1${String(t.die ?? "d6")}`)
-      }] : [],
-      ...e.depleted === !0 ? [{ label: game.i18n.localize("MAGNUSARCHIVES.Artifact.Depleted"), value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes") }] : []
+      ...t?.enabled === !0 ? [
+        {
+          label: game.i18n.localize("MAGNUSARCHIVES.Inventory.Depletion"),
+          value: String(t.formula || `1${String(t.die ?? "d6")}`)
+        }
+      ] : [],
+      ...e.depleted === !0 ? [
+        {
+          label: game.i18n.localize("MAGNUSARCHIVES.Artifact.Depleted"),
+          value: game.i18n.localize("MAGNUSARCHIVES.Common.Yes")
+        }
+      ] : []
     ];
   }
   if (n.type === "weapon") {
     const t = String(e.category ?? "medium"), i = String(e.attackType ?? "melee"), a = String(e.rangeCategory ?? "immediate");
     return [
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${t}`) },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.Category.${t}`)
+      },
       { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Damage"), value: Number(e.baseDamage ?? 0) },
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.AttackType.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${i}`) },
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${a}`) }
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Weapon.AttackType.Label"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Weapon.AttackType.${i}`)
+      },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Range.Label"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Range.${a}`)
+      }
     ];
   }
   if (n.type === "shield") {
     const t = e.wounds, i = e.derived, a = i?.capacities, s = i?.broken === !0;
     return [
-      { label: game.i18n.localize("MAGNUSARCHIVES.Shield.Status"), value: game.i18n.localize(s ? "MAGNUSARCHIVES.Shield.Broken" : "MAGNUSARCHIVES.Shield.Functional") },
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize(e.equipped === !0 ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No") },
-      { label: game.i18n.localize("MAGNUSARCHIVES.Shield.WoundTrack"), value: ["minor", "moderate", "major"].map((o) => `${t?.[o]?.length ?? 0}/${a?.[o] ?? 0}`).join(" · ") }
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Shield.Status"),
+        value: game.i18n.localize(s ? "MAGNUSARCHIVES.Shield.Broken" : "MAGNUSARCHIVES.Shield.Functional")
+      },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"),
+        value: game.i18n.localize(e.equipped === !0 ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No")
+      },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Shield.WoundTrack"),
+        value: ["minor", "moderate", "major"].map((o) => `${t?.[o]?.length ?? 0}/${a?.[o] ?? 0}`).join(" · ")
+      }
     ];
   }
   if (n.type === "armor") {
     const t = String(e.category ?? "light");
     return [
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"), value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${t}`) },
-      { label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"), value: game.i18n.localize(e.equipped === !0 ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No") }
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Category"),
+        value: game.i18n.localize(`MAGNUSARCHIVES.Combat.Armor.Category.${t}`)
+      },
+      {
+        label: game.i18n.localize("MAGNUSARCHIVES.Combat.Equipped"),
+        value: game.i18n.localize(e.equipped === !0 ? "MAGNUSARCHIVES.Common.Yes" : "MAGNUSARCHIVES.Common.No")
+      }
     ];
   }
   if (n.type === "ability") {
-    const t = n, i = Ye(t), a = Eo(t.system.cost.amount, i, _p, {
-      pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
-      middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
-      final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
-    }, t.system.cost.scalable === !0);
+    const t = n, i = Ye(t), a = Eo(
+      t.system.cost.amount,
+      i,
+      _p,
+      {
+        pair: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Or"),
+        middle: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.Separator"),
+        final: game.i18n.localize("MAGNUSARCHIVES.Ability.CostDisplay.FinalOr")
+      },
+      t.system.cost.scalable === !0
+    );
     return a ? [{ label: game.i18n.localize("MAGNUSARCHIVES.Ability.Cost"), value: a }] : [];
   }
   return [];
@@ -14668,7 +15321,9 @@ async function of() {
     ui.notifications.warn(game.i18n.localize("MAGNUSARCHIVES.Intrusion.NoCharacters"));
     return;
   }
-  const e = n.map((r) => '<option value="' + r.id + '">' + Ps(r.name) + "</option>").join(""), t = n.map((r) => '<label class="intrusion-character-choice"><input name="group-' + r.id + '" type="checkbox"> ' + Ps(r.name) + "</label>").join(""), i = [
+  const e = n.map((r) => '<option value="' + r.id + '">' + Ps(r.name) + "</option>").join(""), t = n.map(
+    (r) => '<label class="intrusion-character-choice"><input name="group-' + r.id + '" type="checkbox"> ' + Ps(r.name) + "</label>"
+  ).join(""), i = [
     '<div class="magnusarchives-dialog-fields magnusarchives-intrusion-dialog">',
     "<label>" + game.i18n.localize("MAGNUSARCHIVES.Intrusion.ModeLabel"),
     '<select name="mode">',
@@ -14832,7 +15487,11 @@ async function df(n, e) {
         s,
         t.effect,
         t.stressAmount
-      ), ui.notifications.info(game.i18n.localize(t.effect === "stress" ? "MAGNUSARCHIVES.Combat.StressApplied" : "MAGNUSARCHIVES.Combat.SeriousInjuryApplied"));
+      ), ui.notifications.info(
+        game.i18n.localize(
+          t.effect === "stress" ? "MAGNUSARCHIVES.Combat.StressApplied" : "MAGNUSARCHIVES.Combat.SeriousInjuryApplied"
+        )
+      );
     else {
       const o = a.items.get(t.shieldId);
       if (!o || o.type !== "shield") throw new Error("Resolved Shield Item not found.");
@@ -14892,13 +15551,11 @@ function mf(n, e) {
       r.remove();
       continue;
     }
-    r.addEventListener(
-      "click",
-      () => {
-        uf(n, a, l, r);
-      },
-      { once: !0 }
-    );
+    r.addEventListener("click", () => {
+      uf(n, a, l, r);
+    }, {
+      once: !0
+    });
   }
 }
 function pf() {
@@ -15053,7 +15710,9 @@ class Ia extends Ef {
     }
   }
   _getEntryContextOptions() {
-    return super._getEntryContextOptions().filter((e) => e.label !== "COMBATANT.ACTIONS.Clear" && e.label !== "COMBATANT.ACTIONS.Reroll");
+    return super._getEntryContextOptions().filter(
+      (e) => e.label !== "COMBATANT.ACTIONS.Clear" && e.label !== "COMBATANT.ACTIONS.Reroll"
+    );
   }
   _getCombatContextOptions() {
     return super._getCombatContextOptions().filter((e) => e.label !== "COMBAT.InitiativeReset");
@@ -15076,14 +15735,10 @@ class Ia extends Ef {
       return;
     }
     const d = t.combatant?.id, p = d ? u.indexOf(d) : void 0;
-    await t.updateEmbeddedDocuments(
-      "Combatant",
-      Cf(u),
-      {
-        ...p === void 0 || p < 0 ? {} : { combatTurn: p },
-        turnEvents: !1
-      }
-    ), this.#a();
+    await t.updateEmbeddedDocuments("Combatant", Cf(u), {
+      ...p === void 0 || p < 0 ? {} : { combatTurn: p },
+      turnEvents: !1
+    }), this.#a();
   }
   #a() {
     this.element.querySelectorAll(".magnusarchives-combatant-dragging").forEach((e) => {
@@ -15138,7 +15793,9 @@ function qs(n) {
   return e.length >= 5 && e[0] === "Compendium" && e[3] === "Item" ? `${e[1]}.${e[2]}` : null;
 }
 async function Df(n = game.actors, e = game.packs, t = (i, a) => console.warn(i, a)) {
-  const i = [...n].filter((s) => s.type === "character" && qs(s.system.genre.sourceUuid) !== null), a = new Set(i.map((s) => qs(s.system.genre.sourceUuid)));
+  const i = [...n].filter(
+    (s) => s.type === "character" && qs(s.system.genre.sourceUuid) !== null
+  ), a = new Set(i.map((s) => qs(s.system.genre.sourceUuid)));
   for (const s of a)
     try {
       await e.get(s)?.getIndex({ fields: [...Gr] });
@@ -15152,17 +15809,12 @@ Hooks.once("init", async () => {
   const n = new Pm();
   Dm(n);
   const e = new af();
-  e.register(nf), Vf(), game.magnusarchives = Br(n, tf(n), e), Cc(), fc(), Gm(), If(), Gf(), Uf(), lf(), Hooks.callAll("magnusarchives.registerRules", n), Hooks.callAll("magnusarchives.registerThemes", e), Ic(e), await foundry.applications.handlebars.loadTemplates([
-    "systems/magnusarchives/templates/focus/focus-tree.hbs"
-  ]);
+  e.register(nf), Vf(), game.magnusarchives = Br(n, tf(n), e), Cc(), fc(), Gm(), If(), Gf(), Uf(), lf(), Hooks.callAll("magnusarchives.registerRules", n), Hooks.callAll("magnusarchives.registerThemes", e), Ic(e), await foundry.applications.handlebars.loadTemplates(["systems/magnusarchives/templates/focus/focus-tree.hbs"]);
 });
 Hooks.once("ready", async () => {
   $f();
   const n = String(game.settings.get(U, B.theme));
-  game.magnusarchives.themes.apply(game.magnusarchives.themes.has(n) ? n : "core"), ed(
-    game.magnusarchives.services.intrusions,
-    game.magnusarchives.services.intrusionChat
-  ), im(
+  game.magnusarchives.themes.apply(game.magnusarchives.themes.has(n) ? n : "core"), ed(game.magnusarchives.services.intrusions, game.magnusarchives.services.intrusionChat), im(
     game.magnusarchives.services.playerIntrusions,
     game.magnusarchives.services.playerIntrusionChat
   ), pf(), gf(), Sf(), Ip(game.magnusarchives.services.combatStatuses), Rf(), await Df(), await hf(), console.info(`${U} | Ready`);

@@ -1,0 +1,80 @@
+folder: ff93b054f72e6264
+name: Killer's Song
+type: artifact
+_id: 14a37994973c40da
+sort: 4200
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: killers-song
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Slaughter</p><p><strong>Stress:</strong> 3 on understanding and claiming the
+    book; 1 with each use, successful or not.</p><p>A neglected old paperback
+    following a nameless character through ever more brutal fights, growing
+    eager for each one, until a gruesome death.</p><p>Once it's identified,
+    reading a few pages and succeeding at a difficulty 4 Intellect-based task
+    eases the reader's attack rolls for about an hour. On a failure, the reader
+    attacks every living creature within short range with whatever is at hand,
+    and can make an Intellect defense roll each round to come back to their
+    senses.</p><p><strong>Fear:</strong> An affected reader rips the book in two
+    down the spine, releasing an invisible manifestation of The Slaughter.
+    Everyone in very long range who fails an Intellect defense roll attacks
+    everyone and everything within short range, then themselves; each can make
+    another Intellect defense roll each round to stop.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '278'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-slaughter
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!14a37994973c40da'

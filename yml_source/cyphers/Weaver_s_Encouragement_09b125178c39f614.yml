@@ -1,0 +1,67 @@
+_id: 09b125178c39f614
+name: Weaver's Encouragement
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: weavers-encouragement
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p>Someone next to you gains an asset on
+    their next task. If the cypher is level 5 or higher, you can encourage up to
+    three characters at once.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '112'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 4800000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: weavers-encouragement
+      sourceOrder: 48
+      levelFormula: 1d6
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!09b125178c39f614'

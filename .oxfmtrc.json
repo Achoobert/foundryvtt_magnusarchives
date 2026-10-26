@@ -1,0 +1,6 @@
+{
+  "printWidth": 120,
+  "bracketSpacing": false,
+  "trailingComma": "none",
+  "ignorePatterns": ["yml_source/**", "packs/**", "templates/**", "dist/**", "pnpm-lock.yaml"]
+}

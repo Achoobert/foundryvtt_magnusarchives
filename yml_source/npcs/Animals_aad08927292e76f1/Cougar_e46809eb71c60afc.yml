@@ -1,0 +1,84 @@
+_id: e46809eb71c60afc
+name: Cougar
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 3 (9)</p><p><strong>Health:</strong>
+    9</p><p><strong>Damage Inflicted:</strong> 3 points of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Attacks as level 5; Speed
+    defense as level 5</p><p><em>The Magnus Archives Roleplaying Game,
+    p195.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 9
+    baseMax: 9
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 743d99517774e89c
+      label: Attacks
+      contexts:
+        - defense
+      mode: levelOverride
+      value: 5
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: bf4fa2f010d750e4
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 5
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: ''
+items: []
+effects: []
+folder: aad08927292e76f1
+sort: 5100
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Cougar
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!e46809eb71c60afc'

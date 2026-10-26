@@ -1,0 +1,96 @@
+_id: d160ae42951e1c7b
+name: The Artefact Dealer
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A huge, close-cropped, appraising man of Samoan ancestry with an eye for
+    paranormal objects, who fences them to wealthy clients and to agents of the
+    Entities alike.</p>
+  notes: >-
+    <p>A huge, close-cropped, appraising man of Samoan ancestry with an eye for
+    paranormal objects, who fences them to wealthy clients and to agents of the
+    Entities alike.</p><p><strong>Level:</strong> 5 (15)</p><p><strong>Related
+    Entity:</strong> All</p><p><strong>Health:</strong> 21</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Occultism as level
+    7</p><h3>Combat</h3><p>In a pinch he attacks with a retractable baton. He
+    may also have these prepared.</p><p><strong>Associates:</strong> He works
+    with two or three bodyguards (level 3).</p><p><strong>Useful
+    Artefact:</strong> He uses an artefact he is holding before resale: for
+    example the blood money pouch to turn a group of enemies on each other, or
+    the boatswain's call to summon or disperse thick
+    fog.</p><h3>Interaction</h3><p>Buyers are in luck if they find him. He says
+    little about past or future sales, though everything has a
+    price.</p><h3>Use</h3><p>A situation involving an artefact might trace back
+    to him, and later he is a good source for something specific, as long as the
+    PCs don't try to rob him. He is ruthless if his business is threatened. One
+    or two artefacts are usually somewhere nearby.</p><h3>Notes</h3><p>Podcast
+    name: Mikaele Salesa.</p><p>See Artefacts (p248), Blood money pouch (p251),
+    Boatswain's call (p252).</p><p><em>The Magnus Archives Roleplaying Game,
+    p199.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 5
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 09d3334b122b482a
+      label: Occultism
+      contexts:
+        - occultism
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The Artefact Dealer uses surprising strength to break a restraint or a
+    foe's grip, or to break into an enclosure holding an artefact or other
+    valuable.</p>
+items: []
+effects: []
+folder: 0f8e958bdc835289
+sort: 400
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '199'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Artefact Dealer
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!d160ae42951e1c7b'

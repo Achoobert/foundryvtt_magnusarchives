@@ -1,0 +1,67 @@
+_id: 0519392c871fc76a
+name: Nightfall
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: nightfall
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p>For one hour per cypher level, you rely
+    on senses other than sight. Darkness does not hinder your tasks to perceive
+    or attack.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '110'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 2800000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: nightfall
+      sourceOrder: 28
+      levelFormula: 1d6
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!0519392c871fc76a'

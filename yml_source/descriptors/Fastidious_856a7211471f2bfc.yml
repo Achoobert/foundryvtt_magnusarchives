@@ -1,0 +1,153 @@
+name: Fastidious
+type: descriptor
+_id: 856a7211471f2bfc
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>A stickler for accuracy and detail. Everything you own is catalogued and
+    in its place.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Careful:</strong> +2 to your
+    Intellect Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC]{Forensics}.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Researching or
+    identifying.</p></li><li><p><strong>Suggested Inability:</strong> You can't
+    stand disruptions, especially to your concentration. You have an inability
+    in @UUID[Compendium.magnusarchives.skills.Item.2253f39a79c36c71]{Intellect
+    defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '21'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 0
+    intellect: 2
+  skillGrants:
+    - id: c955a94b-efb9-4be8-8edf-931a63d39acc
+      skillUuid: Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Forensics
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You know how to interpret physical evidence to work out what
+            happened at a location, such as a crime scene, or what led to an
+            object's current condition, such as a cause of death.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: knowledge
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 800
+_key: '!items!856a7211471f2bfc'

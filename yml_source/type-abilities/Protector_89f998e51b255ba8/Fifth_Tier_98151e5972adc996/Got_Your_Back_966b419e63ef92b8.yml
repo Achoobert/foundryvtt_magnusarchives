@@ -1,0 +1,82 @@
+name: Got Your Back
+type: ability
+_id: 966b419e63ef92b8
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: protector-got-your-back
+  description: >-
+    <p><strong>Cost:</strong> 4 Speed points.</p><p>When an ally within
+    immediate distance fails a physical task (attacks and defense rolls
+    included), they can reroll. If the reroll also fails, you gain 1 point of
+    Stress. Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '41'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - type-ability
+    - protector
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 5
+  category: type
+  archived: false
+  activation: enabler
+  pool: speed
+  cost:
+    amount: 4
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - speed
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 98151e5972adc996
+sort: 200
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!966b419e63ef92b8'

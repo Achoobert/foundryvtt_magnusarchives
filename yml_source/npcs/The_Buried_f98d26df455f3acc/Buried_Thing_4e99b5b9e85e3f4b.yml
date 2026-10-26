@@ -1,0 +1,93 @@
+_id: 4e99b5b9e85e3f4b
+name: Buried Thing
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Earthen figures shaped as if by someone who had only heard of people: too
+    many fingers, limbs and parts in the wrong places.</p>
+  notes: >-
+    <p>Earthen figures shaped as if by someone who had only heard of people: too
+    many fingers, limbs and parts in the wrong
+    places.</p><p><strong>Level:</strong> 3 (9)</p><p><strong>Related
+    Entity:</strong> The Buried</p><p><strong>Stress on first realizing its
+    horror:</strong> 1 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 9</p><p><strong>Damage
+    Inflicted:</strong> 3 points of Stress</p><p><strong>Movement:</strong>
+    Short. Immediate when burrowing.</p><h3>Combat</h3><p>It batters with
+    malformed stony fingers, usually reaching up from the ground beneath a
+    target in an ambush that eases its first attack by two
+    steps.</p><p><strong>Squeeze:</strong> A target it damages must also succeed
+    on a Might defense roll or be grabbed. A grabbed target's physical actions
+    are hindered until they escape with a successful Might roll as their
+    action.</p><p><strong>Pulled Deeper:</strong> A grabbed target who succeeds
+    on three Might rolls to escape breaks free. One who fails three before
+    succeeding on three is pulled deeper and probably never seen again. A target
+    who doesn't resist is pulled deeper automatically after three
+    rounds.</p><p><strong>Collapse:</strong> Once per day it collapses part of a
+    tunnel, cave or corridor, filling an immediate area with soil and rock and
+    perhaps cutting targets off from the surface.</p><p><strong>Horrific
+    Bruise:</strong> A target it grabbed keeps a muddy, finger-shaped bruise.
+    Whenever they go underground, they must succeed on an Intellect defense roll
+    or the bruise pulses, summoning a buried thing to
+    investigate.</p><h3>Interaction</h3><p>Buried things never speak; they only
+    try to cover targets in earth and stone.</p><h3>Use</h3><p>A lone one is
+    little trouble for a group, but it may mark a PC with a bruise and burrow
+    away, making that PC easy to find the next time they enter a basement,
+    cellar or subway.</p><p><em>The Magnus Archives Roleplaying Game,
+    p204.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 9
+    baseMax: 9
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: Immediate when burrowing.
+  modifications: []
+  gmIntrusion: >-
+    <p>A partly buried character trying to dig free realizes they have been
+    digging down, not up.</p>
+items: []
+effects: []
+folder: f98d26df455f3acc
+sort: 800
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '204'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Buried Thing
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!4e99b5b9e85e3f4b'

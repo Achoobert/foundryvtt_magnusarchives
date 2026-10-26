@@ -1,0 +1,81 @@
+folder: ff93b054f72e6264
+name: The Travels
+type: artifact
+_id: d3774b656f609358
+sort: 5000
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-travels
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Spiral</p><p><strong>Stress:</strong> 3 on realizing the book's power; 1
+    with each use.</p><p>A pale blue, gold-tooled English translation of Ibn
+    Battuta's travels. Once it's identified, the reader can read from it for at
+    least a minute and then step through the nearest closed door, aiming for a
+    place they have visited or know exists. On a difficulty 5 Intellect roll,
+    windowless corridors beyond lead there after a minute or so of walking; on a
+    failure, the door opens where it normally
+    would.</p><p><strong>Fear:</strong> The reader steps into a windowless
+    corridor of green swirling wallpaper, wall lamps, mirrors and paintings of
+    the same corridor, and is lost in a maze. Each minute they can make an
+    Intellect-based roll to find a door or break a mirror leading out; each
+    failure deals 1 Stress. A traveler who dies inside is spat out of the door
+    they entered a few minutes after they went in, however long they spent
+    inside.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '284'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-spiral
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!d3774b656f609358'

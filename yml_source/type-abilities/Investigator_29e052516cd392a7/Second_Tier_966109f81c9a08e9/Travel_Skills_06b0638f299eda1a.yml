@@ -1,0 +1,80 @@
+name: Travel Skills
+type: ability
+_id: 06b0638f299eda1a
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: investigator-travel-skills
+  description: >-
+    <p>You become trained in two of: driving, endurance, geography, piloting or
+    riding. You can take this more than once, picking two different skills each
+    time. Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '31'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - type-ability
+    - investigator
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 2
+  category: type
+  archived: false
+  activation: enabler
+  pool: none
+  cost:
+    amount: 0
+    scalable: false
+    ignoresEdge: false
+    allowedPools: []
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 966109f81c9a08e9
+sort: 900
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!06b0638f299eda1a'

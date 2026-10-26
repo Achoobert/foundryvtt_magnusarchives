@@ -1,0 +1,263 @@
+_id: 610b4877b98d9f4c
+name: Leads
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: leads
+  description: >-
+    <p>Through charisma, natural authority and maybe some training, you get
+    others to follow you willingly. You might be a politician, captain or
+    manager. You carry yourself to inspire, charm or intimidate, and your voice
+    carries over any noise.</p><p><strong>Connection:</strong> Choose one of the
+    following with your group.</p><ol><li><p>Another PC used to follow you, but
+    now you see them as an equal.</p></li><li><p>Another PC recently mocked you
+    in a way that really hurt. How you deal with it is up to
+    you.</p></li><li><p>Another PC introduces you to the follower you gain at
+    tier 2.</p></li><li><p>Another PC looks so much like you that you suspect
+    you're half-siblings.</p></li></ol><p><strong>Minor Effect
+    Suggestion:</strong> The next time you try to influence the same foe, the
+    task is eased.</p><p><strong>Major Effect Suggestion:</strong> The foe stays
+    persuaded, deceived, intimidated or otherwise influenced for twice as
+    long.</p><p><strong>GM Intrusions:</strong> Followers fail, betray you, lie,
+    become corrupted, get kidnapped or die.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6546569e7c7ba80e]{Natural
+    Charisma},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.44424144db44f9af]{Good
+    Advice}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.62dc55bc1fb84fca]{Enhanced
+    Potential},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.265d686160cd7a6d]{Basic
+    Follower}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ec964341892a4aac]{Advanced
+    Command} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.39207905d160ff36]{Expert
+    Follower}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8c3de0e98bc29ddd]{Captivate
+    or Inspire}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4eb7ed8beccc224f]{Greater
+    Enhanced Potential}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.06641901f56f49d8]{Band
+    of Followers} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.238c3e01df68ff06]{Mind
+    of a Leader}.</p></li></ul><p><strong>Followers (p71):</strong> Followers
+    don't need pay, food or housing. The PC usually rolls for a follower. A
+    follower's level is how many tasks they have a modification in, chosen when
+    you gain them. When helping you, a follower grants an asset on a task they
+    have a modification for, and acts as if they had an inability in everything
+    else. Acting on their own, a modification raises their effective level by
+    one for that task.</p><p>A follower can't grant an asset to attacks or
+    defense until they're level 3, and then only with a matching modification. A
+    follower gains a level (and a new modification) each time you advance two
+    tiers after gaining them. The GM may occasionally offer an exceptional
+    follower, one level higher than normal. A follower can be a pet if it makes
+    sense.</p><p>The GM may ask you to actually go and find a suitable follower
+    when you take Basic Follower.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 70-71
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-natural-charisma
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6546569e7c7ba80e
+        abilitySnapshot:
+          name: Natural Charisma
+          description: >-
+            You're trained in all social interactions, including persuasion,
+            deception, intimidation and discerning motive.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-good-advice
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.44424144db44f9af
+        abilitySnapshot:
+          name: Good Advice
+          description: >-
+            When you help another character with a task, they gain an additional
+            asset on top of the normal benefit of help.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-enhanced-potential
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.62dc55bc1fb84fca
+        abilitySnapshot:
+          name: Enhanced Potential
+          description: Gain 3 points to split among your stat Pools however you like.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-basic-follower
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.265d686160cd7a6d
+        abilitySnapshot:
+          name: Basic Follower
+          description: >-
+            You gain a level 2 follower, and one of their modifications must be
+            persuasion. You can take this ability more than once, gaining
+            another level 2 follower each time.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-advanced-command
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ec964341892a4aac
+        abilitySnapshot:
+          name: Advanced Command
+          description: >-
+            On a successful Intellect attack, a target within short range who
+            can hear and understand you obeys any command you give. While you
+            keep doing nothing but issue commands, you can give that target a
+            new one each turn. It ends when you stop or they leave short range.
+            Action to initiate.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-expert-follower
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.39207905d160ff36
+        abilitySnapshot:
+          name: Expert Follower
+          description: >-
+            You gain a level 3 follower with no restriction on their
+            modifications. You can take this more than once. Instead of a new
+            level 3 follower, you can raise an existing level 2 follower to
+            level 3 and gain a new level 2 follower.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-captivate-or-inspire
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8c3de0e98bc29ddd
+        abilitySnapshot:
+          name: Captivate or Inspire
+          description: >-
+            Use your words one of two ways. Either all NPCs of level 2 or lower
+            who hear you stay fixed on you for as long as you keep talking, or
+            all NPCs who hear you act as one level higher for the next hour. You
+            pick which NPCs are affected. Attacking anyone in the crowd breaks
+            their attention. Action to initiate.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-greater-enhanced-potential
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4eb7ed8beccc224f
+        abilitySnapshot:
+          name: Greater Enhanced Potential
+          description: Gain 6 points to split among your stat Pools however you like.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-band-of-followers
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.06641901f56f49d8
+        abilitySnapshot:
+          name: Band of Followers
+          description: >-
+            You gain four level 3 followers with no restriction on their
+            modifications.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-mind-of-a-leader
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.238c3e01df68ff06
+        abilitySnapshot:
+          name: Mind of a Leader
+          description: >-
+            When you plan how to handle a future situation, ask the GM one very
+            general question about how the plan is likely to go and get a short
+            answer.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-bb4b30edb250f167
+        from: t1-natural-charisma
+        to: t2-enhanced-potential
+      - id: connection-4683032e10288666
+        from: t1-natural-charisma
+        to: t2-basic-follower
+      - id: connection-2350c040d9dd2412
+        from: t1-good-advice
+        to: t2-enhanced-potential
+      - id: connection-0f2d52943a2300ef
+        from: t1-good-advice
+        to: t2-basic-follower
+      - id: connection-6145f0ca94d96509
+        from: t2-enhanced-potential
+        to: t3-advanced-command
+      - id: connection-e6645744c9cd94dc
+        from: t2-enhanced-potential
+        to: t3-expert-follower
+      - id: connection-bff0da2fd1c7d0cf
+        from: t2-basic-follower
+        to: t3-advanced-command
+      - id: connection-b5c7451e8316807b
+        from: t2-basic-follower
+        to: t3-expert-follower
+      - id: connection-99563893d3fe2f2a
+        from: t3-advanced-command
+        to: t4-captivate-or-inspire
+      - id: connection-d867bdf824a31854
+        from: t3-expert-follower
+        to: t4-captivate-or-inspire
+      - id: connection-e9922b8f52da62e3
+        from: t4-captivate-or-inspire
+        to: t5-greater-enhanced-potential
+      - id: connection-57ea53acac0c1f51
+        from: t5-greater-enhanced-potential
+        to: t6-band-of-followers
+      - id: connection-c36ef9d1fc375dca
+        from: t5-greater-enhanced-potential
+        to: t6-mind-of-a-leader
+effects: []
+folder: null
+sort: 700
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!610b4877b98d9f4c'

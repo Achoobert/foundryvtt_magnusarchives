@@ -1,0 +1,68 @@
+folder: null
+name: Survival kit
+type: equipment
+_id: f4defdb261d2a459
+sort: 3600
+img: systems/magnusarchives/assets/icons/magnusequipment.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Includes emergency blanket, 2 flares, flashlight, 50-ft. (16 m) rope,
+    rubber gloves, sewing kit, cheap knife.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '102'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  depletion:
+    enabled: false
+    die: d6
+    formula: ''
+    threshold: 1
+  depleted: false
+  equipped: false
+  level: 4
+  quantity: 1
+  price: moderate
+  priceNote: ''
+_key: '!items!f4defdb261d2a459'

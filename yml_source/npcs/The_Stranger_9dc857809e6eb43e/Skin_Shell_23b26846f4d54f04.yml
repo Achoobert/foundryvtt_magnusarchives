@@ -1,0 +1,105 @@
+_id: 23b26846f4d54f04
+name: Skin Shell
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Victims of The Stranger, usually The Anglerfish, whose skin was stuffed
+    with sawdust and cloves and given a false life. They speak fluently but have
+    the glassy eyes of a mounted animal, and seldom resemble the person they
+    were.</p>
+  notes: >-
+    <p>Victims of The Stranger, usually The Anglerfish, whose skin was stuffed
+    with sawdust and cloves and given a false life. They speak fluently but have
+    the glassy eyes of a mounted animal, and seldom resemble the person they
+    were.</p><p><strong>Level:</strong> 3 (9)</p><p><strong>Related
+    Entity:</strong> The Stranger</p><p><strong>Health:</strong>
+    12</p><p><strong>Damage Inflicted:</strong> 3 points of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Recalling the original victim's
+    life as level 1; Perception as level 7</p><h3>Combat</h3><p>It attacks with
+    bare fists.</p><p><strong>Feeling No Pain:</strong> It can't be dazed or
+    stunned by physical attacks and is immune to most poisons and
+    diseases.</p><p><strong>Hard to Drop:</strong> An attack that would reduce
+    it to 0 health does so only if the attack roll was even; otherwise it drops
+    to 1 health instead.</p><h3>Interaction</h3><p>It blends in, but once
+    someone notices, it stops pretending and leans into the
+    uncanny.</p><h3>Use</h3><p>Hard to put down for good without a concentrated
+    effort. One determined PC can handle one, but a group of them is another
+    matter.</p><h3>Notes</h3><p>Sample names: Sarah Baldwin, Daniel Rawlings,
+    Isla Brown, David Thomson, Mia Wilson, Clive Smith, Anne Davies.</p><p>See
+    The Anglerfish (p197).</p><p><em>The Magnus Archives Roleplaying Game,
+    p238.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 12
+    baseMax: 12
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: a9ca2706653a4860
+      label: Recalling the original victim's life
+      contexts:
+        - recall
+      mode: levelOverride
+      value: 1
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 3d6c6bd334734126
+      label: Perception
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character's melee strike lands like hitting a sack of sawdust, and
+    they drop their weapon from the shock.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 4100
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '238'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Skin Shell
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!23b26846f4d54f04'

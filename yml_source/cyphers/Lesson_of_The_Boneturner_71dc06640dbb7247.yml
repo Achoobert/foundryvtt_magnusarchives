@@ -1,0 +1,68 @@
+_id: 71dc06640dbb7247
+name: Lesson of The Boneturner
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: lesson-of-the-boneturner
+  description: >-
+    <p><strong>Level:</strong> 10</p><p>If you reach debilitated on the damage
+    track and survive, then once you are hale again you gain a character
+    advancement (skill training, +4 points to your Pools, +1 Effort, or +1 Edge)
+    without spending 4 XP (Character advancement, p140).</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '109'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 10
+  levelOverride: true
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 2300000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: lesson-of-the-boneturner
+      sourceOrder: 23
+      levelFormula: '10'
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!71dc06640dbb7247'

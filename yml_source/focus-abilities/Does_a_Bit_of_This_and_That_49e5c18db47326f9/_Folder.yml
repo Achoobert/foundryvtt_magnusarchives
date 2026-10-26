@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Does a Bit of This and That
+color: null
+sorting: a
+_id: 49e5c18db47326f9
+description: ''
+sort: 200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!49e5c18db47326f9'

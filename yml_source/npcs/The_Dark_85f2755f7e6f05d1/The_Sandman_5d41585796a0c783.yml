@@ -1,0 +1,94 @@
+_id: 5d41585796a0c783
+name: The Sandman
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Tall and thin, his outline bleeding into the dark, coarse black sand
+    trickling from his mouth as he moves with a slow, hissing gait. Light
+    curdles near him, and his touch dissolves the world into darkness except for
+    his shifting face.</p>
+  notes: >-
+    <p>Tall and thin, his outline bleeding into the dark, coarse black sand
+    trickling from his mouth as he moves with a slow, hissing gait. Light
+    curdles near him, and his touch dissolves the world into darkness except for
+    his shifting face.</p><p><strong>Level:</strong> 6
+    (18)</p><p><strong>Related Entity:</strong> The Dark</p><p><strong>Stress on
+    first realizing its horror:</strong> 1 (usually on a failed Intellect
+    defense roll)</p><p><strong>Health:</strong> 21</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><h3>Combat</h3><p>He attacks with a rasping
+    touch.</p><p><strong>Abrading Sand:</strong> He flings razor-sharp sand at a
+    target in immediate range. On a failed Might defense roll they take damage
+    and are blinded for one round.</p><p><strong>Slumbering Gloom:</strong> Once
+    per minute he exhales black sand over everything in immediate range. Those
+    who fail an Intellect defense roll fall asleep for one minute or until
+    damaged or shaken awake. The area is also filled with complete darkness for
+    one minute, in which his outline or face can be glimpsed as he
+    wishes.</p><p><strong>Topple Into Sack:</strong> Once per minute he pulls a
+    creature in immediate range into his black sack on a failed Speed defense
+    roll. Inside, they gain 3 Stress each round and can take no physical actions
+    until they escape with an Intellect-based roll as their action, or by
+    willingly blinding themselves with sand from his pouch. Anyone who dies in
+    the sack is lost forever in The Dark.</p><h3>Interaction</h3><p>He never
+    speaks or bargains. His presence means someone has been chosen, perhaps by
+    an Avatar of The Dark, or because he smelled their
+    fear.</p><h3>Use</h3><p>He usually hunts lone sleepers, and is almost
+    impossible to stop for good even if lured into a prepared
+    trap.</p><p><em>The Magnus Archives Roleplaying Game, p236.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications: []
+  gmIntrusion: >-
+    <p>The character glimpses his shifting face and gains 2 Stress; on a failed
+    Intellect defense roll they also freeze in terror and lose their next
+    turn.</p>
+items: []
+effects: []
+folder: 85f2755f7e6f05d1
+sort: 3800
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '236'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Sandman
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!5d41585796a0c783'

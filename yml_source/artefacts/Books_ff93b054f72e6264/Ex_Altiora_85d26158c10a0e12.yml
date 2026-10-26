@@ -1,0 +1,80 @@
+folder: ff93b054f72e6264
+name: Ex Altiora
+type: artifact
+_id: 85d26158c10a0e12
+sort: 3500
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: ex-altiora
+  description: >-
+    <p><strong>Level:</strong> 6</p><p><strong>Related Entity:</strong> The
+    Vast</p><p><strong>Stress:</strong> 3 each time the woodcut of the clear
+    night sky is examined carefully.</p><p>A calf-bound Latin poem in the style
+    of Virgil about a creature so vast its head is lost in the clouds, ending
+    with villagers throwing themselves off a cliff. It includes woodcuts of
+    mountains, cliffs and an empty night sky. A glance at the night-sky woodcut
+    brings a brief feeling of falling.</p><p>Studying that woodcut carefully
+    calls for an Intellect defense roll. On a success, for seven days the reader
+    can land safely from a fall of any height, taking only 3 Stress. On a
+    failure, extreme vertigo hinders all their physical tasks by three steps for
+    an hour.</p><p><strong>Fear:</strong> Someone using the book's protection
+    instead falls endlessly for an hour through a seemingly infinite layer of
+    The Vast. They can make an Intellect defense roll each round to end it, and
+    otherwise take 1 Stress every ten minutes.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '273'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-vast
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '6'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!85d26158c10a0e12'

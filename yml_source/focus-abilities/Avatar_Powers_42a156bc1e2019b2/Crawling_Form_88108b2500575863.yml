@@ -1,0 +1,84 @@
+name: Crawling Form
+type: ability
+_id: 88108b2500575863
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-flesh-crawling-form
+  description: >-
+    <p><strong>Cost:</strong> 4 Intellect points and 3 Stress.</p><p>A creature
+    you touch has its limbs fuse together for at least ten minutes. It can only
+    move by squirming and rolling.</p><p>Action.</p><p><em>Supernatural
+    ability.</em></p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '93'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - avatar
+    - the-flesh
+    - supernatural
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 4
+  category: focus
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 4
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 42a156bc1e2019b2
+sort: 18900
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!88108b2500575863'

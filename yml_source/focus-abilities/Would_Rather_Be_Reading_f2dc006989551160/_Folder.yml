@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Would Rather Be Reading
+color: null
+sorting: a
+_id: f2dc006989551160
+description: ''
+sort: 1800
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!f2dc006989551160'

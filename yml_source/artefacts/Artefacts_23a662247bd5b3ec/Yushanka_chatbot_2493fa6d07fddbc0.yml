@@ -1,0 +1,82 @@
+folder: 23a662247bd5b3ec
+name: Yushanka chatbot
+type: artifact
+_id: 2493fa6d07fddbc0
+sort: 2600
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: yushanka-chatbot
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Spiral and The Flesh</p><p><strong>Stress:</strong> 1 the first time the
+    chat window is opened and used; 1 for every few hours of the video watched
+    (seventeen hours in all); 1 each time the video starts playing on another
+    screen near the victim.</p><p>A basic chatbot program, found in several
+    digital forms such as a file named YushankasDespair.exe. A prompt is
+    answered with a scrolling jumble of symbols in which words and phrases
+    surface, until a video starts: a weeping man eating keyboard keys.</p><p>If
+    the viewer shuts the computer down, the video moves to another nearby screen
+    (even one switched off or unplugged), visible only to them, and follows them
+    wherever they go with growing sounds and muttering. The haunting ends only
+    when the viewer sits through all seventeen hours, however sick and dizzy it
+    makes them.</p><p><strong>Fear:</strong> The viewer is compelled to eat
+    their own keyboard; if they go through with it, they take a serious
+    injury.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '265'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-spiral
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!2493fa6d07fddbc0'

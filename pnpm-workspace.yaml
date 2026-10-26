@@ -3,7 +3,7 @@ packages:
   - "tests/e2e"
 
 allowBuilds:
-  '@parcel/watcher': true
+  "@parcel/watcher": true
   classic-level: true
   esbuild: true
   cypress: true

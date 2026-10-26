@@ -1,0 +1,67 @@
+_id: e80af08452050560
+name: Guess You Had to Be There
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: guess-you-had-to-be-there
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p>Perfectly recall one experience you
+    have had, lasting up to one minute per cypher level. Every detail comes
+    back, such as a phone number you watched someone dial.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 1500000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: guess-you-had-to-be-there
+      sourceOrder: 15
+      levelFormula: 1d6
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!e80af08452050560'

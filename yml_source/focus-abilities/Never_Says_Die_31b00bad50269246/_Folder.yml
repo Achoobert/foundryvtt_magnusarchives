@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Never Says Die
+color: null
+sorting: a
+_id: 31b00bad50269246
+description: ''
+sort: 1200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!31b00bad50269246'

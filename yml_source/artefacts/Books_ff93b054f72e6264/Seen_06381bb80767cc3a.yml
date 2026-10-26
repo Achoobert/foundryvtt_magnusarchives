@@ -1,0 +1,78 @@
+folder: ff93b054f72e6264
+name: Seen
+type: artifact
+_id: 06381bb80767cc3a
+sort: 4400
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: seen
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Eye</p><p><strong>Stress:</strong> 3 on becoming fascinated with the book; 1
+    each time someone tries to tell the fascinated reader its pages are
+    blank.</p><p>An old, crumbling book with blank pages. Anyone who looks
+    through it must succeed on an Intellect defense roll or become fascinated,
+    convinced it holds a revolutionary work on something they care about. They
+    can barely think or talk of anything else, hindering all their
+    Intellect-based tasks.</p><p>Each day someone tries to persuade them the
+    pages are blank, they can make another Intellect roll; after three successes
+    the fascination ends.</p><p><strong>Fear:</strong> A watcher's husk (p245)
+    rises in a distant tomb and slowly stalks the reader, who sees it drawing
+    closer whenever they close their eyes.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '279'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-eye
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!06381bb80767cc3a'

@@ -1,0 +1,260 @@
+_id: edb9b0a622fe37a9
+name: Helps Their Friends
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: helps-their-friends
+  description: >-
+    <p>Helping your friends with small things and big ones is simply who you
+    are. Maybe you always had friends, maybe you never did until now, or maybe
+    you lost them and want another chance. When a friend needs a hand, you offer
+    it without thinking.</p><p><strong>Connection:</strong> Choose one of the
+    following with your group.</p><ol><li><p>The first time you saw a friend in
+    trouble, you didn't help. You suspect another PC (that friend) doesn't know,
+    and you're thinking of telling them.</p></li><li><p>You helped another PC
+    with something mildly illegal. You feel guilty, and a little angry at them,
+    though it was your choice.</p></li><li><p>Another PC has always been there
+    for you when you couldn't help yourself.</p></li><li><p>You and another PC
+    tried to help a mutual friend and failed. That friend is gone now, and you
+    feel it's your fault. You don't know if they blame
+    you.</p></li></ol><p><strong>Additional Equipment:</strong> A photo of you
+    and your friends.</p><p><strong>Optional:</strong> You can swap one ability
+    from your type for Advice From a Friend.
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.aeba27869b0a6672]{Advice
+    From a Friend}.</p><p><strong>Minor Effect Suggestion:</strong> Your
+    coaching eases a friend's next action.</p><p><strong>Major Effect
+    Suggestion:</strong> Your help gives a friend a free recovery roll that
+    takes no action.</p><p><strong>GM Intrusions:</strong> Others sometimes have
+    hidden motives. The law takes too much interest. Even when everything goes
+    right, there are repercussions.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.733aaa700fffe462]{Friendly
+    Help},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6d3ded424a064085]{Courageous}</p></li><li><p><strong>Tier
+    2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9f502919c33401a2]{Weather
+    the Vicissitudes}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9c5f3ea54132c617]{Buddy
+    System} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ef373524cb87ea89]{Skill
+    With Attacks}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.90b4ceb3883f2456]{In
+    Harm's Way},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f19fdab1e8bdffe5]{Enhanced
+    Physique}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.341d1b80a54ca67d]{Inspire
+    Action}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7f27c6deedf006ec]{Deep
+    Consideration} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.71856f93044add01]{Skill
+    With Defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 66-67
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-friendly-help
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.733aaa700fffe462
+        abilitySnapshot:
+          name: Friendly Help
+          description: >-
+            If a friend fails a task and you help, they can retry it without
+            spending Effort for the retry. This works even if you're not trained
+            in the task.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-courageous
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6d3ded424a064085
+        abilitySnapshot:
+          name: Courageous
+          description: You're trained in Intellect defense and initiative tasks.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-weather-the-vicissitudes
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9f502919c33401a2
+        abilitySnapshot:
+          name: Weather the Vicissitudes
+          description: >-
+            Ignore the first point of Stress you gain each day. This resets
+            after your ten-hour rest.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-buddy-system
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9c5f3ea54132c617
+        abilitySnapshot:
+          name: Buddy System
+          description: >-
+            Pick a character next to you to be your buddy for ten minutes.
+            You're trained in all tasks to find, heal, interact with or protect
+            them, and while you stand next to each other you both have an asset
+            on Speed defense tasks. You can have only one buddy at a time.
+            Action to initiate.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-skill-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ef373524cb87ea89
+        abilitySnapshot:
+          name: Skill With Attacks
+          description: >-
+            Pick one attack type you aren't trained in: light, medium or heavy,
+            each bashing, bladed or ranged. You become trained in attacks with
+            that type of weapon. You can take this ability more than once,
+            choosing a different attack type each time.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-in-harms-way
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.90b4ceb3883f2456
+        abilitySnapshot:
+          name: In Harm's Way
+          description: >-
+            When you spend your action putting your friends first, defense tasks
+            are eased for any adjacent characters you choose until the end of
+            your next turn. During that time, if one of those friends gains
+            Stress you can take up to half of it (rounded up) instead, and if
+            one would suffer a serious injury you can take it instead, as long
+            as you're not already impaired or debilitated.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-enhanced-physique
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f19fdab1e8bdffe5
+        abilitySnapshot:
+          name: Enhanced Physique
+          description: >-
+            Gain 3 points to split between your Might and Speed Pools however
+            you like.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t5-inspire-action
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.341d1b80a54ca67d
+        abilitySnapshot:
+          name: Inspire Action
+          description: >-
+            Tell one ally who can see and understand you to take an action. If
+            they take exactly that action, they do it immediately as an extra
+            action, and it doesn't use up their normal action on their turn.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-deep-consideration
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7f27c6deedf006ec
+        abilitySnapshot:
+          name: Deep Consideration
+          description: >-
+            When you plan with your friends to reach a goal together, ask the GM
+            one very general question about how the plan is likely to go and get
+            a short answer. Each of you also gains an asset on one roll that
+            carries out the plan, if you act on it within a few days.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.71856f93044add01
+        abilitySnapshot:
+          name: Skill With Defense
+          description: >-
+            Pick one defense task you aren't trained in: Might defense, Speed
+            defense or Intellect defense. You become trained in it.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-ed0eda0c3e7f34e6
+        from: t1-friendly-help
+        to: t2-weather-the-vicissitudes
+      - id: connection-a2775ab58afff902
+        from: t1-courageous
+        to: t2-weather-the-vicissitudes
+      - id: connection-82b7b2e876ccac16
+        from: t2-weather-the-vicissitudes
+        to: t3-buddy-system
+      - id: connection-2fb577ca858b6f06
+        from: t2-weather-the-vicissitudes
+        to: t3-skill-with-attacks
+      - id: connection-55368eeb692458c3
+        from: t3-buddy-system
+        to: t4-in-harms-way
+      - id: connection-dc24e75952d5a522
+        from: t3-buddy-system
+        to: t4-enhanced-physique
+      - id: connection-d148423a6438db8d
+        from: t3-skill-with-attacks
+        to: t4-in-harms-way
+      - id: connection-56e5e0650f67a9cb
+        from: t3-skill-with-attacks
+        to: t4-enhanced-physique
+      - id: connection-b45fff7e1abc6421
+        from: t4-in-harms-way
+        to: t5-inspire-action
+      - id: connection-f9ec63164a415521
+        from: t4-enhanced-physique
+        to: t5-inspire-action
+      - id: connection-33da0f415fb6ef7e
+        from: t5-inspire-action
+        to: t6-deep-consideration
+      - id: connection-5e0d732e0b5837f8
+        from: t5-inspire-action
+        to: t6-skill-with-defense
+effects: []
+folder: null
+sort: 500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!edb9b0a622fe37a9'

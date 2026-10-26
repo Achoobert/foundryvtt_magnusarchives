@@ -1,0 +1,67 @@
+folder: null
+name: Forensics
+type: skill
+_id: uzlopmNCJj8CpFlC
+img: systems/magnusarchives/assets/icons/magnusskill.webp
+system:
+  defaultPool: intellect
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>You know how to interpret physical evidence to work out what happened at
+    a location, such as a crime scene, or what led to an object's current
+    condition, such as a cause of death.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '16'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  rank: untrained
+  category: knowledge
+  contexts: []
+  initiative: false
+  acquisition:
+    minimumTier: 1
+    grantedByUuid: ''
+    notes: ''
+effects: []
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 1400
+_key: '!items!uzlopmNCJj8CpFlC'

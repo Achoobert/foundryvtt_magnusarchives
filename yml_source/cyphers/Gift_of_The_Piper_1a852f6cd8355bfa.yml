@@ -1,0 +1,67 @@
+_id: 1a852f6cd8355bfa
+name: Gift of The Piper
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: gift-of-the-piper
+  description: >-
+    <p><strong>Level:</strong> 1d6 · <strong>Instant.</strong></p><p>Take one
+    extra action right away on your turn.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+    - instant
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 1400000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: gift-of-the-piper
+      sourceOrder: 14
+      levelFormula: 1d6
+      instant: true
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!1a852f6cd8355bfa'

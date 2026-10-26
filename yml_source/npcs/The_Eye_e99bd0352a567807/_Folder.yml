@@ -1,0 +1,20 @@
+_id: e99bd0352a567807
+name: The Eye
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!e99bd0352a567807'

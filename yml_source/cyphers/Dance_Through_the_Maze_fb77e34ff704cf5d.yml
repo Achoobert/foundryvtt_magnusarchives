@@ -1,0 +1,68 @@
+_id: fb77e34ff704cf5d
+name: Dance Through the Maze
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: dance-through-the-maze
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p>For one hour, ease every task of manual
+    dexterity (pickpocketing, lockpicking, juggling, surgery, defusing a bomb
+    and the like) by one step, or by two steps if the cypher is level 5 or
+    higher.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 900000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: dance-through-the-maze
+      sourceOrder: 9
+      levelFormula: 1d6
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!fb77e34ff704cf5d'

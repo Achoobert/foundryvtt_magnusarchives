@@ -1,0 +1,77 @@
+name: Enhanced Intellect
+type: ability
+_id: de0f872612d2735b
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: learns-quickly-enhanced-intellect
+  description: <p>Gain 3 points to your Intellect Pool.</p><p>Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 72-73
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - learns-quickly
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 1
+  category: focus
+  archived: false
+  activation: enabler
+  pool: none
+  cost:
+    amount: 0
+    scalable: false
+    ignoresEdge: false
+    allowedPools: []
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 8e0b02308f335b24
+sort: 6700
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!de0f872612d2735b'

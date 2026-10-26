@@ -1,0 +1,68 @@
+_id: cbee01ba481bd55b
+name: Binary
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: binary
+  description: >-
+    <p><strong>Level:</strong> 1d6 + 2 · <strong>Instant.</strong></p><p>You
+    guess the right PIN or passcode for a phone, lock, card, laptop, website or
+    similar, as long as its level is no higher than the cypher's level.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '107'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+    - instant
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 300000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: binary
+      sourceOrder: 3
+      levelFormula: 1d6 + 2
+      instant: true
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!cbee01ba481bd55b'

@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Runs Away
+color: null
+sorting: a
+_id: b5e1915388499861
+description: ''
+sort: 1400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!b5e1915388499861'

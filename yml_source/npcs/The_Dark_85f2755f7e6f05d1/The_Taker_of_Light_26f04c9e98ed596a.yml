@@ -1,0 +1,104 @@
+_id: 26f04c9e98ed596a
+name: The Taker of Light
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>White-haired and milky-eyed in an inky robe that moves by itself. He has
+    passed from body to body for centuries, each time leaving a dried husk and
+    taking a younger host already touched by The Dark.</p>
+  notes: >-
+    <p>White-haired and milky-eyed in an inky robe that moves by itself. He has
+    passed from body to body for centuries, each time leaving a dried husk and
+    taking a younger host already touched by The
+    Dark.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Dark</p><p><strong>Health:</strong>
+    25</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Perception as level
+    9</p><h3>Combat</h3><p>He throws inky, freezing dust at up to three targets
+    in immediate range, dealing 3 Stress to each one struck. He has these
+    options as his action.</p><p><strong>Consuming Darkness:</strong> Once per
+    day a wave of screaming darkness pours from his mouth at a target in
+    immediate range. On a failed Might defense roll it eats at them like acid,
+    inflicting a serious injury each round. If they fail three defense rolls on
+    their turn before succeeding on three, they are absorbed into The Dark or he
+    takes their body (his choice).</p><p><strong>Entreat the Beast:</strong>
+    Once per day he summons a lightless beast to serve him; once per month he
+    can summon The Still and Lightless Beast.</p><p><strong>Pray the
+    Sandman:</strong> Once per month he sets The Sandman on a target in
+    immediate range, who is attacked sometime in the next few
+    nights.</p><p><strong>Shadowfall:</strong> Once per hour freezing dust falls
+    on everyone in short range, dealing 3 Stress to each one struck, and
+    darkness fills the area for many minutes, snuffing lights there and slowly
+    dimming any brought in.</p><h3>Interaction</h3><p>A centuries-old schemer
+    and fine conversationalist when he likes. His goal is the ritual of the
+    Extinguished Sun, plunging existence into eternal void.</p><h3>Use</h3><p>A
+    principal Avatar of The Dark who should make PCs think hard, since he isn't
+    easily beaten in combat, though he is a little more fragile than other
+    Avatars. Divine Host cultists may accompany him.</p><h3>Notes</h3><p>Podcast
+    name: Maxwell Rayner.</p><p>See Lightless beast (p224), The Sandman (p236),
+    The Extinguished Sun (p171), Cultist, Divine Host (p207).</p><p><em>The
+    Magnus Archives Roleplaying Game, p239.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 25
+    baseMax: 25
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: eb4f01db630450c1
+      label: Perception
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 9
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>The Taker of Light steps into shadow and gets away.</p>
+items: []
+effects: []
+folder: 85f2755f7e6f05d1
+sort: 4200
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '239'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Taker of Light
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!26f04c9e98ed596a'

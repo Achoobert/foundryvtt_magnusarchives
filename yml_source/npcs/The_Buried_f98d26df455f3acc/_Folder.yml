@@ -1,0 +1,20 @@
+_id: f98d26df455f3acc
+name: The Buried
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!f98d26df455f3acc'

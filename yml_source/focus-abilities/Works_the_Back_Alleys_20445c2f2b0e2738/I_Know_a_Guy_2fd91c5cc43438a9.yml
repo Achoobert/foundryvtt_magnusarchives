@@ -1,0 +1,86 @@
+name: I Know a Guy
+type: ability
+_id: 2fd91c5cc43438a9
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: works-the-back-alleys-i-know-a-guy
+  description: >-
+    <p><strong>Cost:</strong> 4 Intellect points.</p><p>Facing a difficult
+    problem that isn't urgent, you reach someone you know, or know of, who might
+    solve it. They're nearly always on the edges of society: criminals,
+    ex-convicts and the like. Typical help includes fencing or buying illegal
+    goods, forgeries and fake IDs, breaking into computers or phones, getting
+    confidential information, or hiring criminals from burglars to hitmen.
+    Finding them, meeting and agreeing terms usually takes three to seven days,
+    and they expect payment or a favour.</p><p>Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 86-87
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - works-the-back-alleys
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 3
+  category: focus
+  archived: false
+  activation: enabler
+  pool: intellect
+  cost:
+    amount: 4
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 20445c2f2b0e2738
+sort: 15700
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!2fd91c5cc43438a9'

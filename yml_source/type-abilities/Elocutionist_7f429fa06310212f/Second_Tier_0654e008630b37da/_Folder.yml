@@ -1,0 +1,20 @@
+type: Item
+folder: 7f429fa06310212f
+name: Second Tier
+color: null
+sorting: m
+_id: 0654e008630b37da
+description: ''
+sort: 200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!0654e008630b37da'

@@ -1,0 +1,106 @@
+_id: 28079887b2fa667c
+name: The Abiding Watcher
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A long-lived Avatar of The Eye who hops from body to body across the
+    centuries. His current host is a reserved, oddly young-looking man with an
+    old-fashioned haircut and cold grey eyes far older than his face.</p>
+  notes: >-
+    <p>A long-lived Avatar of The Eye who hops from body to body across the
+    centuries. His current host is a reserved, oddly young-looking man with an
+    old-fashioned haircut and cold grey eyes far older than his
+    face.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Eye</p><p><strong>Health:</strong>
+    21</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Perception as level
+    9</p><h3>Combat</h3><p>He might pummel a target with an improvised weapon
+    such as a hammer or pipe, but mostly relies on his supernatural
+    abilities.</p><p><strong>Alter Memory:</strong> A target he can see who
+    fails an Intellect defense roll gains a short memory or piece of information
+    (or disinformation) of his choosing. He can insert recorded footage, such as
+    CCTV, the same way.</p><p><strong>Body Hop:</strong> After one hour of
+    "operating" on a helpless target, his consciousness passes into them if they
+    fail three Intellect defense rolls (one each round) before succeeding on
+    three. The new body's eyes are replaced with those of his previous
+    body.</p><p><strong>Eye of Knowing:</strong> He learns about a topic by
+    concentrating on it. If the topic is a character, they keep their secret
+    only with a successful Intellect defense roll.</p><p><strong>Open the
+    Eye:</strong> As his action he can see out of any eyelike object or image,
+    camera, or actual eye anywhere in the world that isn't protected from
+    supernatural scrutiny. A character resists him seeing through their eyes
+    with a successful Intellect defense roll.</p><h3>Interaction</h3><p>He only
+    admits his true nature to those who have already guessed it, and hides his
+    real purpose: enacting the Watcher's Crown, a ritual to make The Eye
+    ascendant. That is why he watches, and sometimes attacks, other
+    Avatars.</p><h3>Use</h3><p>The PCs might know him under another guise,
+    perhaps as the head of their own paranormal investigation
+    group.</p><h3>Notes</h3><p>Podcast name: Elias Bouchard, the latest of many
+    stolen identities going back to Jonah Magnus.</p><p>See The Watcher's Crown
+    (p172).</p><p><em>The Magnus Archives Roleplaying Game, p196.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: e672a1f6ca8be5ab
+      label: Perception
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 9
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character feels a distant call and, on a failed Intellect defense
+    roll, feels compelled to follow it. It leads to The Abiding Watcher.</p>
+items: []
+effects: []
+folder: e99bd0352a567807
+sort: 100
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '196'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Abiding Watcher
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!28079887b2fa667c'

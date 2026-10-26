@@ -1,0 +1,102 @@
+_id: c6de49fff6f266c3
+name: Dabbler
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Ordinary people whose lives were bent by a paranormal book, artefact or
+    encounter, and who learned enough rituals to defend themselves and gain
+    power without serving any single Entity.</p>
+  notes: >-
+    <p>Ordinary people whose lives were bent by a paranormal book, artefact or
+    encounter, and who learned enough rituals to defend themselves and gain
+    power without serving any single Entity.</p><p><strong>Level:</strong> 5
+    (15)</p><p><strong>Related Entity:</strong> Any, usually three or more at
+    once</p><p><strong>Health:</strong> 15</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Occultism as level
+    6</p><h3>Combat</h3><p>A dabbler uses a ritual knife if all else fails, and
+    otherwise one of these spells.</p><p><strong>Blinding the Eye:</strong> The
+    dabbler turns invisible until they attack, or makes the eyes of a target in
+    immediate range invisible for one minute, blinding
+    them.</p><p><strong>Buried Bunker:</strong> A target in immediate range who
+    fails a Might defense roll has their stomach fill with damp soil, taking a
+    serious injury as their belly swells.</p><p><strong>Phantom Flesh:</strong>
+    The dabbler moves an object in long range telekinetically, or chokes a
+    target for 3 Stress each round the target fails a Might defense
+    roll.</p><p><strong>Other Spells:</strong> A dabbler may know spells learned
+    from others, such as The Jigsaw Lady's jigsaw curse, a weaker utter
+    disappearance, or The Tome Hoarder's spiraling
+    confusion.</p><h3>Interaction</h3><p>Goals vary, but nearly all want more
+    power, even at the cost of unsavory deeds.</p><h3>Use</h3><p>Not beholden to
+    one Entity, a dabbler can be a useful contact, but their aims can be nearly
+    as appalling as any monster's, and they make strong recurring
+    foes.</p><h3>Notes</h3><p>Sample names: William Berg, Amara Singh, Liam
+    Chen, Ava Martinez, Mateo Ali, Mia Nguyen, Oliver Jensen, Aria Khan,
+    Sebastian Anderson, Maya Abadi, Edward Nakamura, Peter Crowley.</p><p>See
+    Jigsaw curse (p223), Utter disappearance (p203), Spiraling confusion
+    (p240).</p><p><em>The Magnus Archives Roleplaying Game, p209.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 5
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 49504d3021e819c4
+      label: Occultism
+      contexts:
+        - occultism
+      mode: levelOverride
+      value: 6
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The dabbler gains an immediate extra attack, even if they've already
+    attacked this round.</p>
+items: []
+effects: []
+folder: 0f8e958bdc835289
+sort: 1300
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '209'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Dabbler
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!c6de49fff6f266c3'

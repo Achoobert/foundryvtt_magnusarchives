@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Infiltrates
+color: null
+sorting: a
+_id: d061bc074d0342f2
+description: ''
+sort: 600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!d061bc074d0342f2'

@@ -1,0 +1,79 @@
+name: Band of Followers
+type: ability
+_id: 06641901f56f49d8
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: leads-band-of-followers
+  description: >-
+    <p>You gain four level 3 followers with no restriction on their
+    modifications.</p><p>Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 70-71
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - leads
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 6
+  category: focus
+  archived: false
+  activation: enabler
+  pool: none
+  cost:
+    amount: 0
+    scalable: false
+    ignoresEdge: false
+    allowedPools: []
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 95993d77b8a99d2f
+sort: 6500
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!06641901f56f49d8'

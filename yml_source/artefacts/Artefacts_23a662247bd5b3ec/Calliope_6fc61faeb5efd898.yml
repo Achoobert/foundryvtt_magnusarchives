@@ -1,0 +1,88 @@
+folder: 23a662247bd5b3ec
+name: Calliope
+type: artifact
+_id: 6fc61faeb5efd898
+sort: 300
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: calliope
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Stranger</p><p><strong>Stress:</strong> 3 on acquiring the steam organ and
+    understanding how to use it (or realizing what it has been doing); 1 with
+    each use.</p><p>A performer who plays this antique steam organ and succeeds
+    at a difficulty 1 performance task chooses one effect below. If the
+    performer doesn't know the organ is unusual, or fails the task, Circus Clown
+    is chosen for them and aimed at one of their
+    allies.</p><ul><li><p><strong>Circus Clown:</strong> a nearby toy animates
+    (as a clown doll, p206) and goes after someone the performer
+    chooses.</p></li><li><p><strong>Crowd of Strangers:</strong> once per day,
+    listeners within long range other than the performer and chosen allies who
+    fail an Intellect defense roll become strangers to themselves for an hour,
+    acting callous, cruel and antisocial. They can retry the defense each
+    minute, or each round if someone calls out their
+    behavior.</p></li><li><p><strong>Strange Control:</strong> one listener
+    within long range who fails an Intellect defense roll does as the performer
+    wishes for an hour. They retry the defense each minute and each time they
+    take damage.</p></li><li><p><strong>Thrilling Shriek:</strong> once per day,
+    listeners within long range each gain an asset on one task of their choice
+    within the next hour. Horror Mode begins, or if already active its range
+    increases by 1 until it ends.</p></li></ul><p><strong>Fear:</strong> The
+    organ's player or owner becomes the target of the Circus Clown effect.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '252'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-stranger
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!6fc61faeb5efd898'

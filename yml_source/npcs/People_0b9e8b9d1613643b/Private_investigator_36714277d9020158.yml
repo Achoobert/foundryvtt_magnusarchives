@@ -1,0 +1,75 @@
+_id: 36714277d9020158
+name: Private investigator
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 3 (9)</p><p><strong>Health:</strong>
+    9</p><p><strong>Damage Inflicted:</strong> 3 points of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Perception, initiative and
+    detecting lies as level 5</p><p><em>The Magnus Archives Roleplaying Game,
+    p195.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 9
+    baseMax: 9
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 477c2d0ed299e356
+      label: Perception, initiative and detecting lies
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 5
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: ''
+items: []
+effects: []
+folder: 0b9e8b9d1613643b
+sort: 6100
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Private investigator
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!36714277d9020158'

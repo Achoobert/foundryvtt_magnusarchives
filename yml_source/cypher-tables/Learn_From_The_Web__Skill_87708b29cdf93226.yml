@@ -1,0 +1,222 @@
+_id: 87708b29cdf93226
+name: 'Learn From The Web: Skill'
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+description: <p>The Magnus Archives Roleplaying Game (2024), p109.</p>
+results:
+  - _id: 92def2c3ce26fba4
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 1
+      - 10
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 0
+    type: 0
+    text: Melee attacks
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.92def2c3ce26fba4'
+  - _id: 9b1e3504b045d42e
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 11
+      - 20
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 1
+    type: 0
+    text: Ranged attacks
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.9b1e3504b045d42e'
+  - _id: 50713776c8f4f51c
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 21
+      - 40
+    weight: 20
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 2
+    type: 0
+    text: >-
+      One type of academic or esoteric lore (biology, history, occultism and so
+      on)
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.50713776c8f4f51c'
+  - _id: 3fbbef03b207eb05
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 41
+      - 50
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 3
+    type: 0
+    text: Researching
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.3fbbef03b207eb05'
+  - _id: c5c535e539295988
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 51
+      - 60
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 4
+    type: 0
+    text: Forensics
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.c5c535e539295988'
+  - _id: 4e822c99e20a891c
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 61
+      - 70
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 5
+    type: 0
+    text: Persuasion
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.4e822c99e20a891c'
+  - _id: 65d756707588e929
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 71
+      - 75
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 6
+    type: 0
+    text: Mechanics
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.65d756707588e929'
+  - _id: 1a380d324912aef2
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 76
+      - 80
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 7
+    type: 0
+    text: Speed defense
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.1a380d324912aef2'
+  - _id: bcef5ac59fad76e0
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 81
+      - 85
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 8
+    type: 0
+    text: Intellect defense
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.bcef5ac59fad76e0'
+  - _id: 417f7590d7056d24
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 86
+      - 90
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 9
+    type: 0
+    text: Swimming
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.417f7590d7056d24'
+  - _id: fc6aedd21530af79
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 91
+      - 95
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 10
+    type: 0
+    text: Psychology
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.fc6aedd21530af79'
+  - _id: fa988efb20d780fb
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 96
+      - 100
+    weight: 5
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: learn-from-the-web
+          sourceResultIndex: 11
+    type: 0
+    text: Stealth
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!87708b29cdf93226.fa988efb20d780fb'
+replacement: true
+displayRoll: true
+formula: 1d100
+folder: null
+sort: 200000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: learn-from-the-web
+      sourcePage: '109'
+_key: '!tables!87708b29cdf93226'

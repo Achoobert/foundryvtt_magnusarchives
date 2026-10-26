@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Avatar Powers
+color: null
+sorting: a
+_id: 42a156bc1e2019b2
+description: ''
+sort: 100000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!42a156bc1e2019b2'

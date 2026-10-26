@@ -1,0 +1,85 @@
+name: Verbal Disguise
+type: ability
+_id: 2a18ada08f3ff75f
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: elocutionist-verbal-disguise
+  description: >-
+    <p><strong>Cost:</strong> 1 Intellect point.</p><p>Mimic the voice and
+    speech of someone you've heard to make one significant statement; each
+    further important statement costs 1 more Intellect point. Anyone who sees
+    you isn't fooled, so it suits phones, darkness or a heavy disguise. It
+    doesn't make you more persuasive. If the GM rules the speaker would never
+    say something, you fail at once, and if you said several things, the
+    listener knows none came from them. Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '45'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - type-ability
+    - elocutionist
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 1
+  category: type
+  archived: false
+  activation: enabler
+  pool: intellect
+  cost:
+    amount: 1
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 600e75a9698b6fbe
+sort: 900
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!2a18ada08f3ff75f'

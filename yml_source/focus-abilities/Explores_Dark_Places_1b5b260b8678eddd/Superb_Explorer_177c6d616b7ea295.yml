@@ -1,0 +1,82 @@
+name: Superb Explorer
+type: ability
+_id: 177c6d616b7ea295
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: explores-dark-places-superb-explorer
+  description: >-
+    <p>You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.S9WFjHa5QI83AFQO]{perception},
+    @UUID[Compendium.magnusarchives.skills.Item.4057b66c1d139a6d]{endurance} and
+    @UUID[Compendium.magnusarchives.skills.Item.DbWx19J2Bkv12OpZ]{gymnastics}
+    tasks.</p><p>Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 63-64
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - explores-dark-places
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 1
+  category: focus
+  archived: false
+  activation: enabler
+  pool: none
+  cost:
+    amount: 0
+    scalable: false
+    ignoresEdge: false
+    allowedPools: []
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 1b5b260b8678eddd
+sort: 1800
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!177c6d616b7ea295'

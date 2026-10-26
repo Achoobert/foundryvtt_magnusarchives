@@ -1,0 +1,165 @@
+_id: bb37fe44f39e8b24
+name: 'Serves as an Avatar: The Flesh'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-flesh
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Flesh.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Flesh power:</strong> Choose one
+    of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.88108b2500575863]{Crawling
+    Form},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.87bd30f72ca670d8]{Twisted
+    Form},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.a3c3bbc0e5a68193]{Unholy
+    Hunger}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 93
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-crawling-form
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.88108b2500575863
+        abilitySnapshot:
+          name: Crawling Form
+          description: >-
+            A creature you touch has its limbs fuse together for at least ten
+            minutes. It can only move by squirming and rolling.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-twisted-form
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.87bd30f72ca670d8
+        abilitySnapshot:
+          name: Twisted Form
+          description: >-
+            You reshape a creature you touch however you choose. The change is
+            mostly cosmetic but agonising: 4 points of damage (a serious injury
+            for a PC). Improving, or at least not worsening, its looks takes a
+            full minute and a difficulty 6 Intellect-based roll. Action (or
+            action to initiate).
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-unholy-hunger
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.a3c3bbc0e5a68193
+        abilitySnapshot:
+          name: Unholy Hunger
+          description: >-
+            A creature of level 4 or lower that you touch bites into its own
+            flesh, taking 3 points of damage, and 3 more each round you keep
+            making successful rolls against it. You must use your action each
+            round to concentrate. Each extra level of Effort raises the maximum
+            target level by 1. Action to initiate.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-f748dc6e3aa0ed30
+        from: t1-sense-avatar
+        to: t4-crawling-form
+      - id: connection-3bb71c4c45df37cc
+        from: t1-sense-avatar
+        to: t4-twisted-form
+      - id: connection-2b10b4898c27eb83
+        from: t1-sense-avatar
+        to: t4-unholy-hunger
+effects: []
+folder: 56cfb56d318cca7a
+sort: 700
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!bb37fe44f39e8b24'

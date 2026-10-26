@@ -1,0 +1,80 @@
+name: Mastery With Attacks
+type: ability
+_id: ab4cfb81d0df9a73
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: protector-mastery-with-attacks
+  description: >-
+    <p>Pick one attack type you're already trained in (light, medium or heavy;
+    bashing, bladed or ranged). You become specialized in it. If you aren't
+    trained in an attack, take Skill With Attacks first. Enabler.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '41'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - type-ability
+    - protector
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 5
+  category: type
+  archived: false
+  activation: enabler
+  pool: none
+  cost:
+    amount: 0
+    scalable: false
+    ignoresEdge: false
+    allowedPools: []
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 98151e5972adc996
+sort: 400
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!ab4cfb81d0df9a73'

@@ -42,8 +42,14 @@ The system is now **The Magnus Archives** (`magnusarchives`), forked from Cypher
 - The **Descriptors** pack is the 27 Magnus descriptors (p19-26); **Skills** is the 47-skill list
   plus the three defense tasks (p16-17); **Weapons & Armor** is the weapons from the price tables.
 
+- Compendium content is now editable YAML in `yml_source/<pack>/`, one file per document.
+  `pnpm packs:build` compiles it into `packs/` (run by `build` and `watch`), and `pnpm packs:extract`
+  pulls Foundry edits back into YAML.
+
 ### Removed
 
+- The `content/` JSON snapshots and the `import:*`, `promote:*` and `validate:*` scripts that built
+  the packs from them. `yml_source/` replaces them.
 - Species and Genres are not Magnus Archives concepts. Their data models remain registered so
   existing documents migrate, but the packs are no longer built or shipped.
 - The `types`, `type-abilities`, `foci` and `focus-abilities` packs are not built yet: their Cypher

@@ -1,0 +1,152 @@
+name: Intimidating
+type: descriptor
+_id: b3a216e01bd16ed4
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Imposing in manner, stature, or both. There is a touch of danger about
+    you, and people sense it.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Threatening:</strong> +2 to
+    your Might Pool, or +2 to your Intellect Pool, or +1 to both
+    Pools.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb]{Intimidation}.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Gunsmithing or
+    deception.</p></li><li><p><strong>Suggested Inability:</strong> You're
+    threatening but not a quick study. Tasks related to lore and knowledge are
+    hindered.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '23'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 2
+    speed: 0
+    intellect: 0
+  skillGrants:
+    - id: 2b30e36b-f522-4040-877c-f80fe077bd84
+      skillUuid: Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Intimidation
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You're good at swaying others with threatening words and/or
+            fearsome presence.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: social
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 1300
+_key: '!items!b3a216e01bd16ed4'

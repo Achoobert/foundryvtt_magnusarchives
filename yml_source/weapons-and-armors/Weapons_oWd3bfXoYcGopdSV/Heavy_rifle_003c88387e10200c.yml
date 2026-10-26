@@ -1,0 +1,79 @@
+folder: oWd3bfXoYcGopdSV
+name: Heavy rifle
+type: weapon
+img: systems/magnusarchives/assets/icons/magnusweapons.webp
+system:
+  defaultPool: speed
+  damageOverride: null
+  schemaVersion: 1
+  slug: ''
+  description: ''
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '102'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  category: heavy
+  attackType: ranged
+  rangeCategory: specified
+  rangeNotes: 300 feet (90 m)
+  skillLevel: untrained
+  attackModifier: 0
+  bonusDamage: 0
+  freelyUsed: false
+  ammo:
+    enabled: false
+    value: 0
+    max: 0
+    perAttack: 1
+  depletion:
+    enabled: false
+    die: d6
+    formula: ''
+    threshold: 1
+  depleted: false
+  equipped: false
+  rapidFire: false
+  explosive: false
+effects: []
+sort: 1800
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_id: 003c88387e10200c
+_key: '!items!003c88387e10200c'

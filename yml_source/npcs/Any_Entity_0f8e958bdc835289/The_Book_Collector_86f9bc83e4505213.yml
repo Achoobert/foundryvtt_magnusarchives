@@ -1,0 +1,122 @@
+_id: 86f9bc83e4505213
+name: The Book Collector
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Also called The Librarian. His stamp marks many dangerous grimoires. He
+    gathered such books to protect the world, but his library was built to keep
+    them in, not to keep their masters out, and it fell. He kept a few and
+    vanished from the Entities' notice.</p>
+  notes: >-
+    <p>Also called The Librarian. His stamp marks many dangerous grimoires. He
+    gathered such books to protect the world, but his library was built to keep
+    them in, not to keep their masters out, and it fell. He kept a few and
+    vanished from the Entities' notice.</p><p><strong>Level:</strong> 5
+    (15)</p><p><strong>Related Entity:</strong> Any, usually three or more at
+    once</p><p><strong>Health:</strong> 15</p><p><strong>Damage
+    Inflicted:</strong> 3 points of Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Abilities from paranormal books
+    he holds as level 8; Speed defense as level 3</p><h3>Combat</h3><p>He avoids
+    physical fights, but with a "Leitner" at hand his abilities are formidable,
+    provided he isn't interrupted while reading.</p><p><strong>Reshape
+    Architecture:</strong> After one round reading from The Seven Lamps of
+    Architecture, a target he can see in the same structure is walled in. They
+    must overcome a level 8 doorless room (or a maze), or wait for someone with
+    the same book or ability to let them out. Reading for several minutes lets
+    him redesign a whole structure or underground site.</p><p><strong>Unseen
+    Control:</strong> After one round reading pages salvaged from The Key of
+    Solomon, a target in short range who fails an Intellect defense roll is
+    possessed by a level 8 spirit that does his bidding for eight days (spying,
+    making them forget, conditioning behavior). The target may make an Intellect
+    defense roll each day to expel it. Afterward the spirit may leave or torment
+    the target as it likes. On release the target takes 1 Stress per day they
+    were possessed.</p><p><strong>Utter Disappearance:</strong> After one round
+    reading from A Disappearance, he becomes invisible and intangible, beyond
+    even abilities that find hidden things of level 8 or less, until he chooses
+    to reappear.</p><p><strong>Other Abilities:</strong> With another paranormal
+    book or fragment, he can produce other powerful effects tied to it after
+    reading for at least a round.</p><h3>Interaction</h3><p>He is only met when
+    he arranges it: an old man with short grey hair, a well-cut suit and a faint
+    Norwegian accent. Proud of his library even knowing it was a mistake, he
+    watches the clock, since the longer he is visible the sooner the Entities'
+    agents find him.</p><h3>Use</h3><p>Powerful but fragile when unprepared. He
+    might arrive to help tie plot threads together or rescue the PCs from an
+    overwhelming threat, or turn against them if they stir up too
+    much.</p><h3>Notes</h3><p>Podcast name: Jurgen Leitner.</p><p>See Leitners
+    (p267), A Disappearance (p273), The Key of Solomon (p278), The Seven Lamps
+    of Architecture (p281).</p><p><em>The Magnus Archives Roleplaying Game,
+    p202.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 64d6de8b08511a3b
+      label: Abilities from paranormal books he holds
+      contexts:
+        - paranormal-book
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 4dbaada8c59787ea
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 3
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>Before The Book Collector can help the character, an Avatar of an enemy
+    Entity appears and knocks him unconscious.</p>
+items: []
+effects: []
+folder: 0f8e958bdc835289
+sort: 700
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '202'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Book Collector
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!86f9bc83e4505213'

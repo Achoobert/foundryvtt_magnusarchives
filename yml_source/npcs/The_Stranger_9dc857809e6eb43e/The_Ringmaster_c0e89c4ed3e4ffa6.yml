@@ -1,0 +1,102 @@
+_id: c0e89c4ed3e4ffa6
+name: The Ringmaster
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A plastic mannequin dressed as a circus ringmaster, or disguised in
+    harvested human skin. One of The Stranger's most capable agents, she spreads
+    confusion and identity collapse and wants a world where no one can tell
+    people from objects.</p>
+  notes: >-
+    <p>A plastic mannequin dressed as a circus ringmaster, or disguised in
+    harvested human skin. One of The Stranger's most capable agents, she spreads
+    confusion and identity collapse and wants a world where no one can tell
+    people from objects.</p><p><strong>Level:</strong> 6
+    (18)</p><p><strong>Related Entity:</strong> The
+    Stranger</p><p><strong>Stress on first realizing its horror:</strong> 1
+    (usually on a failed Intellect defense roll)</p><p><strong>Health:</strong>
+    27</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Disguise as level 7 (when
+    impersonating a living thing)</p><h3>Combat</h3><p>She attacks with a set of
+    razor-sharp knives.</p><p><strong>Harvest Skin:</strong> If she wants a
+    target's skin, her knife attacks are surgically precise. Once she has made
+    the target debilitated, she can strip their skin in one motion on her next
+    turn if they fail a Might defense roll, which also inflicts a serious
+    injury.</p><p><strong>Wear a Skin:</strong> She can take on the identity of
+    anyone whose skin she, The Anglerfish or her mannequins harvested, gaining
+    knowledge of their life as the skin silently screams.</p><p><strong>In the
+    Company of Mannequins:</strong> She is rarely without at least a couple of
+    uncanny mannequins nearby.</p><h3>Interaction</h3><p>She loves an audience
+    and a horrifying show, and openly describes her plan to enact the Unknowing
+    and make The Stranger the world's new god.</p><h3>Use</h3><p>PCs may deal
+    with disguised mannequins and skin shells for a long time before finding her
+    behind them, and by then may be ready to face her or disrupt her next
+    attempt at the Unknowing.</p><h3>Notes</h3><p>See Uncanny mannequin (p241),
+    Skin shell (p238), The Unknowing (p175).</p><p><em>The Magnus Archives
+    Roleplaying Game, p235.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 27
+    baseMax: 27
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: f93a260986923a13
+      label: Disguise
+      contexts:
+        - disguise
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: <p>when impersonating a living thing</p>
+  gmIntrusion: >-
+    <p>For a few rounds, the character believes The Ringmaster or one of her
+    agents is an ally.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 3700
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '235'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Ringmaster
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!c0e89c4ed3e4ffa6'

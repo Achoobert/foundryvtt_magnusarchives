@@ -1,0 +1,77 @@
+folder: 23a662247bd5b3ec
+name: Web tape recorder
+type: artifact
+_id: cc3e5bbf0ceaa7c3
+sort: 2500
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: web-tape-recorder
+  description: >-
+    <p><strong>Level:</strong> 1d6+2</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 1 each time someone notices one that
+    shouldn't be there, or it starts recording by itself.</p><p>These look and
+    work like 1980s cassette recorders. Most people never notice anything odd,
+    except that they capture statements of supernatural events (or the events
+    themselves) with less distortion than digital recorders.</p><p>Once someone
+    draws the attention of The Weaver or another powerful Avatar of The Web, the
+    recorders begin creeping into their life, at first plausibly, later
+    appearing from nowhere to record. The sending Avatar hears everything they
+    record.</p><p><strong>Fear:</strong> Someone who realizes where the
+    recorder's loyalty lies forgets the incident that revealed it.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '265'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1d6+2
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!cc3e5bbf0ceaa7c3'

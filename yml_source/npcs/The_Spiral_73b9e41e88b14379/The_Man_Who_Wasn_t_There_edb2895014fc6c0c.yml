@@ -1,0 +1,104 @@
+_id: edb2895014fc6c0c
+name: The Man Who Wasn't There
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A presence that leads people away from reality, drawn above all to those
+    who call to him. Once connected, everyone and everything begins to forget
+    the victim ever existed.</p>
+  notes: >-
+    <p>A presence that leads people away from reality, drawn above all to those
+    who call to him. Once connected, everyone and everything begins to forget
+    the victim ever existed.</p><p><strong>Level:</strong> 6
+    (18)</p><p><strong>Related Entity:</strong> The Spiral</p><p><strong>Stress
+    on first realizing its horror:</strong> 2 (usually on a failed Intellect
+    defense roll)</p><p><strong>Health:</strong> 18</p><p><strong>Damage
+    Inflicted:</strong> 2 points of Stress</p><p><strong>Movement:</strong>
+    Short. Can move through solid objects at
+    will.</p><p><strong>Modifications:</strong> Stealth as level
+    10</p><h3>Combat</h3><p>His touch deals 2 Stress.</p><p><strong>Blot Out
+    Memory:</strong> Targets in immediate range who fail an Intellect defense
+    roll are stunned for one minute, taking no actions unless attacked. If it
+    wears off naturally, they remember nothing of him unless he
+    wishes.</p><p><strong>On the Stair:</strong> He can appear on almost any
+    stairwell.</p><p><strong>Spiraling Stair:</strong> A target who addresses or
+    calls for him and fails an Intellect defense roll slowly becomes less real,
+    as others forget their name or presence. They must succeed on three
+    Intellect defense rolls (one per day) to escape, gaining 1 level of Stress
+    per failure. Three failures before three successes make them the new Man Who
+    Wasn't There. He affects one target at a
+    time.</p><p><strong>Unreal:</strong> He is immaterial and takes no damage
+    from mundane physical sources, half damage from paranormal ones, and full
+    damage from weapons made to harm Entity servitors. He can also fade into
+    apparent non-existence for hours, days or
+    longer.</p><h3>Interaction</h3><p>He never speaks; his smirk widens as his
+    victim fades and he grows more solid. If he passes on the mantle he laughs
+    with joy, until he remembers he died long ago and his body collapses into
+    rot and dust.</p><h3>Use</h3><p>A threat to existence more than to life. The
+    PCs can probably only flee.</p><p><em>The Magnus Archives Roleplaying Game,
+    p226.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 18
+    baseMax: 18
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 2
+    effect: stress
+    stressAmount: 2
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 2 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: Can move through solid objects at will.
+  modifications:
+    - id: 6921673e33fb7a89
+      label: Stealth
+      contexts:
+        - stealth
+      mode: levelOverride
+      value: 10
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>An ally fails to see or hear the character for a couple of rounds or
+    longer, even when the character clearly needs help.</p>
+items: []
+effects: []
+folder: 73b9e41e88b14379
+sort: 2800
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '226'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Man Who Wasn't There
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!edb2895014fc6c0c'

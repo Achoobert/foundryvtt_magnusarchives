@@ -1,0 +1,900 @@
+_id: a697c53de81e6503
+name: Random Cyphers
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+description: <p>The Magnus Archives Roleplaying Game (2024), p107.</p>
+results:
+  - _id: 01527d504e05cb2b
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 1
+      - 2
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 0
+    type: 2
+    text: Another Twist
+    documentCollection: magnusarchives.cyphers
+    documentId: f3be2181d86ae56a
+    _key: '!tables.results!a697c53de81e6503.01527d504e05cb2b'
+  - _id: 92c99266c2c24dad
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 3
+      - 4
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 1
+    type: 2
+    text: Big Picture
+    documentCollection: magnusarchives.cyphers
+    documentId: caddff21b4b19cf8
+    _key: '!tables.results!a697c53de81e6503.92c99266c2c24dad'
+  - _id: bcac19529364c5a0
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 5
+      - 6
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 2
+    type: 2
+    text: Binary
+    documentCollection: magnusarchives.cyphers
+    documentId: cbee01ba481bd55b
+    _key: '!tables.results!a697c53de81e6503.bcac19529364c5a0'
+  - _id: ae7a052c406a2a25
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 7
+      - 7
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 3
+    type: 2
+    text: Body Builder
+    documentCollection: magnusarchives.cyphers
+    documentId: 83d24f08eec099bc
+    _key: '!tables.results!a697c53de81e6503.ae7a052c406a2a25'
+  - _id: 0e6fb3446e923bf1
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 8
+      - 9
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 4
+    type: 2
+    text: Breathing Room
+    documentCollection: magnusarchives.cyphers
+    documentId: 570535b430a11711
+    _key: '!tables.results!a697c53de81e6503.0e6fb3446e923bf1'
+  - _id: 0079daad133a738e
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 10
+      - 11
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 5
+    type: 2
+    text: Burning Desire
+    documentCollection: magnusarchives.cyphers
+    documentId: 4f08de0418ef0e0d
+    _key: '!tables.results!a697c53de81e6503.0079daad133a738e'
+  - _id: 7c5110d00db20f46
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 12
+      - 13
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 6
+    type: 2
+    text: Cheating Death
+    documentCollection: magnusarchives.cyphers
+    documentId: b7a88f4e7d539e7b
+    _key: '!tables.results!a697c53de81e6503.7c5110d00db20f46'
+  - _id: 21f0588e950da43a
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 14
+      - 15
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 7
+    type: 2
+    text: Curiosity
+    documentCollection: magnusarchives.cyphers
+    documentId: d536787332d6411e
+    _key: '!tables.results!a697c53de81e6503.21f0588e950da43a'
+  - _id: 5aa835ca3b481b73
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 16
+      - 17
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 8
+    type: 2
+    text: Dance Through the Maze
+    documentCollection: magnusarchives.cyphers
+    documentId: fb77e34ff704cf5d
+    _key: '!tables.results!a697c53de81e6503.5aa835ca3b481b73'
+  - _id: 15234e7532509b18
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 18
+      - 19
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 9
+    type: 2
+    text: Deathly Silent and Still
+    documentCollection: magnusarchives.cyphers
+    documentId: 45fa72953e57f1db
+    _key: '!tables.results!a697c53de81e6503.15234e7532509b18'
+  - _id: 20f6922f2375bd6c
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 20
+      - 21
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 10
+    type: 2
+    text: Desperate Effort
+    documentCollection: magnusarchives.cyphers
+    documentId: 777af920b24f8256
+    _key: '!tables.results!a697c53de81e6503.20f6922f2375bd6c'
+  - _id: 0e320958435e145d
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 22
+      - 23
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 11
+    type: 2
+    text: Eye Contact
+    documentCollection: magnusarchives.cyphers
+    documentId: e58a3f046ad218b6
+    _key: '!tables.results!a697c53de81e6503.0e320958435e145d'
+  - _id: c0e4427005457927
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 24
+      - 25
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 12
+    type: 2
+    text: Flee The Hunt!
+    documentCollection: magnusarchives.cyphers
+    documentId: 25729327ad7fb00d
+    _key: '!tables.results!a697c53de81e6503.c0e4427005457927'
+  - _id: 09a44c0929078a7f
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 26
+      - 27
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 13
+    type: 2
+    text: Gift of The Piper
+    documentCollection: magnusarchives.cyphers
+    documentId: 1a852f6cd8355bfa
+    _key: '!tables.results!a697c53de81e6503.09a44c0929078a7f'
+  - _id: e482cc996110bb6d
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 28
+      - 29
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 14
+    type: 2
+    text: Guess You Had to Be There
+    documentCollection: magnusarchives.cyphers
+    documentId: e80af08452050560
+    _key: '!tables.results!a697c53de81e6503.e482cc996110bb6d'
+  - _id: b61c8fc3de4afa31
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 30
+      - 31
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 15
+    type: 2
+    text: Gut Feeling
+    documentCollection: magnusarchives.cyphers
+    documentId: 05e72d0a6729ebb8
+    _key: '!tables.results!a697c53de81e6503.b61c8fc3de4afa31'
+  - _id: db24d8c1b58fb0e6
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 32
+      - 33
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 16
+    type: 2
+    text: Hard Shoulder
+    documentCollection: magnusarchives.cyphers
+    documentId: aa4b526c859fbb85
+    _key: '!tables.results!a697c53de81e6503.db24d8c1b58fb0e6'
+  - _id: 564041df2345610a
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 34
+      - 35
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 17
+    type: 2
+    text: Help From a Stranger
+    documentCollection: magnusarchives.cyphers
+    documentId: b4f557890352546e
+    _key: '!tables.results!a697c53de81e6503.564041df2345610a'
+  - _id: 2e3659b519eeb26e
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 36
+      - 37
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 18
+    type: 2
+    text: Implore The Flesh
+    documentCollection: magnusarchives.cyphers
+    documentId: 7fdeca3a287f6ce3
+    _key: '!tables.results!a697c53de81e6503.2e3659b519eeb26e'
+  - _id: bd7e8a52a8ef1f8b
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 38
+      - 39
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 19
+    type: 2
+    text: Jigsaw Solver
+    documentCollection: magnusarchives.cyphers
+    documentId: cdd78233ee7270a7
+    _key: '!tables.results!a697c53de81e6503.bd7e8a52a8ef1f8b'
+  - _id: 2ed46e27316e8581
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 40
+      - 41
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 20
+    type: 2
+    text: Last Words
+    documentCollection: magnusarchives.cyphers
+    documentId: 9aa64599aacf1494
+    _key: '!tables.results!a697c53de81e6503.2ed46e27316e8581'
+  - _id: 297c42bbc4859339
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 42
+      - 43
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 21
+    type: 2
+    text: Learn From The Web
+    documentCollection: magnusarchives.cyphers
+    documentId: ecd2b6e3671d07b6
+    _key: '!tables.results!a697c53de81e6503.297c42bbc4859339'
+  - _id: 5ab6dc5f3541c644
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 44
+      - 45
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 22
+    type: 2
+    text: Lesson of The Boneturner
+    documentCollection: magnusarchives.cyphers
+    documentId: 71dc06640dbb7247
+    _key: '!tables.results!a697c53de81e6503.5ab6dc5f3541c644'
+  - _id: 698288c5ee915b65
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 46
+      - 47
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 23
+    type: 2
+    text: Librarian's Pupil
+    documentCollection: magnusarchives.cyphers
+    documentId: f259009116cf65a5
+    _key: '!tables.results!a697c53de81e6503.698288c5ee915b65'
+  - _id: 02dbcc83420d1cf7
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 48
+      - 49
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 24
+    type: 2
+    text: Like an Avatar
+    documentCollection: magnusarchives.cyphers
+    documentId: e1aac1b63d7b11cb
+    _key: '!tables.results!a697c53de81e6503.02dbcc83420d1cf7'
+  - _id: 623c3cf9ad1e0329
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 50
+      - 51
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 25
+    type: 2
+    text: Meat
+    documentCollection: magnusarchives.cyphers
+    documentId: 1cc7d4b277e8bece
+    _key: '!tables.results!a697c53de81e6503.623c3cf9ad1e0329'
+  - _id: 6bb49af9063047e2
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 52
+      - 53
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 26
+    type: 2
+    text: Nemesis
+    documentCollection: magnusarchives.cyphers
+    documentId: 62cfdffa6c05189a
+    _key: '!tables.results!a697c53de81e6503.6bb49af9063047e2'
+  - _id: 53a924bd56ce5efe
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 54
+      - 55
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 27
+    type: 2
+    text: Nightfall
+    documentCollection: magnusarchives.cyphers
+    documentId: 0519392c871fc76a
+    _key: '!tables.results!a697c53de81e6503.53a924bd56ce5efe'
+  - _id: 95ccbd8394b9e56b
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 56
+      - 57
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 28
+    type: 2
+    text: Observer Effect
+    documentCollection: magnusarchives.cyphers
+    documentId: 2ccaf51338a8667a
+    _key: '!tables.results!a697c53de81e6503.95ccbd8394b9e56b'
+  - _id: 5d5958b63f46cc41
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 58
+      - 59
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 29
+    type: 2
+    text: Of The Beholding
+    documentCollection: magnusarchives.cyphers
+    documentId: f103983d74644b49
+    _key: '!tables.results!a697c53de81e6503.5d5958b63f46cc41'
+  - _id: 24e86a84b7a0962f
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 60
+      - 61
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 30
+    type: 2
+    text: Of The Flesh
+    documentCollection: magnusarchives.cyphers
+    documentId: 8fc49257ec168a68
+    _key: '!tables.results!a697c53de81e6503.24e86a84b7a0962f'
+  - _id: cb0b1d5e1f67ce3a
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 62
+      - 63
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 31
+    type: 2
+    text: Panopticon
+    documentCollection: magnusarchives.cyphers
+    documentId: 562a24a3369b871d
+    _key: '!tables.results!a697c53de81e6503.cb0b1d5e1f67ce3a'
+  - _id: d50f6c35a62628ee
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 64
+      - 65
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 32
+    type: 2
+    text: Personal Space
+    documentCollection: magnusarchives.cyphers
+    documentId: b325e94a55538611
+    _key: '!tables.results!a697c53de81e6503.d50f6c35a62628ee'
+  - _id: d5ff0ad29296940c
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 66
+      - 67
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 33
+    type: 2
+    text: Risen Wind
+    documentCollection: magnusarchives.cyphers
+    documentId: b60cc0c5ff578232
+    _key: '!tables.results!a697c53de81e6503.d5ff0ad29296940c'
+  - _id: 2d7181f1f077f6c2
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 68
+      - 69
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 34
+    type: 2
+    text: Sculptor's Tool
+    documentCollection: magnusarchives.cyphers
+    documentId: 458e197417dfecbc
+    _key: '!tables.results!a697c53de81e6503.2d7181f1f077f6c2'
+  - _id: 7295a1c9b0c712ab
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 70
+      - 71
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 35
+    type: 2
+    text: Show Must Go On
+    documentCollection: magnusarchives.cyphers
+    documentId: 1d36041adee77ca9
+    _key: '!tables.results!a697c53de81e6503.7295a1c9b0c712ab'
+  - _id: 4db0887016afcdcc
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 72
+      - 73
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 36
+    type: 2
+    text: Smell of Blood
+    documentCollection: magnusarchives.cyphers
+    documentId: fba5051e80dacd9b
+    _key: '!tables.results!a697c53de81e6503.4db0887016afcdcc'
+  - _id: 12fac68e27bcc91d
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 74
+      - 74
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 37
+    type: 2
+    text: Spiral's Luck
+    documentCollection: magnusarchives.cyphers
+    documentId: c28a39b01a0abb3c
+    _key: '!tables.results!a697c53de81e6503.12fac68e27bcc91d'
+  - _id: 0423554391995f96
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 75
+      - 76
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 38
+    type: 2
+    text: Squirm
+    documentCollection: magnusarchives.cyphers
+    documentId: e41e26b0c92c4b40
+    _key: '!tables.results!a697c53de81e6503.0423554391995f96'
+  - _id: d0f4482877f0fb8b
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 77
+      - 78
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 39
+    type: 2
+    text: Stare Into The Vast
+    documentCollection: magnusarchives.cyphers
+    documentId: 4a1e282ed733a357
+    _key: '!tables.results!a697c53de81e6503.d0f4482877f0fb8b'
+  - _id: e3ed44a8a7aef3f8
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 79
+      - 80
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 40
+    type: 2
+    text: Strange Music
+    documentCollection: magnusarchives.cyphers
+    documentId: 04e6cdc6f0ec97e4
+    _key: '!tables.results!a697c53de81e6503.e3ed44a8a7aef3f8'
+  - _id: 88de6dd1085e1904
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 81
+      - 82
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 41
+    type: 2
+    text: Taking Stock
+    documentCollection: magnusarchives.cyphers
+    documentId: 8e48d546c106c210
+    _key: '!tables.results!a697c53de81e6503.88de6dd1085e1904'
+  - _id: 3339d310e37a7b25
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 83
+      - 84
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 42
+    type: 2
+    text: Thought for the Day
+    documentCollection: magnusarchives.cyphers
+    documentId: 6cf3f747f12d2d00
+    _key: '!tables.results!a697c53de81e6503.3339d310e37a7b25'
+  - _id: 05a5eb91f9af8c22
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 85
+      - 86
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 43
+    type: 2
+    text: Thrill of the Chase
+    documentCollection: magnusarchives.cyphers
+    documentId: fad7a7f0ed9a95c7
+    _key: '!tables.results!a697c53de81e6503.05a5eb91f9af8c22'
+  - _id: cf175a5ee4e33e90
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 87
+      - 88
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 44
+    type: 2
+    text: Tightrope
+    documentCollection: magnusarchives.cyphers
+    documentId: 66f39a903acf5bd5
+    _key: '!tables.results!a697c53de81e6503.cf175a5ee4e33e90'
+  - _id: 6ac989f4e82ffb1e
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 89
+      - 90
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 45
+    type: 2
+    text: Uncanny Valley
+    documentCollection: magnusarchives.cyphers
+    documentId: 5c66de2c86ce37ea
+    _key: '!tables.results!a697c53de81e6503.6ac989f4e82ffb1e'
+  - _id: 241b2b991ac39685
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 91
+      - 92
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 46
+    type: 2
+    text: Watcher's Know-How
+    documentCollection: magnusarchives.cyphers
+    documentId: a99dcaf87c1fcdb5
+    _key: '!tables.results!a697c53de81e6503.241b2b991ac39685'
+  - _id: 10d2b0b6745b3a3a
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 93
+      - 93
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 47
+    type: 2
+    text: Weaver's Encouragement
+    documentCollection: magnusarchives.cyphers
+    documentId: 09b125178c39f614
+    _key: '!tables.results!a697c53de81e6503.10d2b0b6745b3a3a'
+  - _id: beb3fd06f1e97506
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 94
+      - 95
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 48
+    type: 2
+    text: Well-Being
+    documentCollection: magnusarchives.cyphers
+    documentId: e31afa48dd8a47ac
+    _key: '!tables.results!a697c53de81e6503.beb3fd06f1e97506'
+  - _id: 0ccd340a2a66cbac
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 96
+      - 97
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 49
+    type: 2
+    text: What We All Ignore
+    documentCollection: magnusarchives.cyphers
+    documentId: 917ff8807730d8e3
+    _key: '!tables.results!a697c53de81e6503.0ccd340a2a66cbac'
+  - _id: 3eb95a3458f27b9f
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 98
+      - 99
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 50
+    type: 2
+    text: What We Lose
+    documentCollection: magnusarchives.cyphers
+    documentId: 84c1c8999e0528b5
+    _key: '!tables.results!a697c53de81e6503.3eb95a3458f27b9f'
+  - _id: a8fe817b1bd32f8a
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 100
+      - 100
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: random-cyphers
+          sourceResultIndex: 51
+    type: 2
+    text: Words of The Puppeteer
+    documentCollection: magnusarchives.cyphers
+    documentId: c320bbf0d092b033
+    _key: '!tables.results!a697c53de81e6503.a8fe817b1bd32f8a'
+replacement: true
+displayRoll: true
+formula: 1d100
+folder: null
+sort: 100000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: random-cyphers
+      sourcePage: '107'
+_key: '!tables!a697c53de81e6503'

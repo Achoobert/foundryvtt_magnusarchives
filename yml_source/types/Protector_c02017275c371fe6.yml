@@ -1,0 +1,1181 @@
+name: Protector
+type: characterType
+_id: c02017275c371fe6
+img: systems/magnusarchives/assets/icons/magnustype.webp
+system:
+  schemaVersion: 1
+  slug: protector
+  description: >-
+    <p>Someone has to shine a light into the dark, and someone has to watch
+    their back. Protectors are physical, action-minded people (soldiers, guards,
+    police, mercenaries) who take and deal the most punishment and shield the
+    rest of the group.</p><p><strong>Starting Pools:</strong> Might 10, Speed
+    10, Intellect 8, plus 6 points to assign as you wish.</p><h3>First-Tier
+    Protector</h3><ul><li><p><strong>Effort:</strong> Your Effort is
+    1.</p></li><li><p><strong>Fit:</strong> Edge Might 1, Speed 1, Intellect
+    0.</p></li><li><p><strong>Protector Knowledge:</strong> You're trained in
+    one of
+    @UUID[Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b]{Discerning
+    motive},
+    @UUID[Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC]{Forensics},
+    @UUID[Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb]{Intimidation},
+    @UUID[Compendium.magnusarchives.skills.Item.S9WFjHa5QI83AFQO]{Perception},
+    @UUID[Compendium.magnusarchives.skills.Item.ZxPyYpNcbki4VN3z]{Stealth},
+    @UUID[Compendium.magnusarchives.skills.Item.SbEfC3bQGCbTDvOM]{Tracking}.</p></li><li><p><strong>Cypher
+    Use:</strong> You can have 2 cyphers at a
+    time.</p></li><li><p><strong>Weapons:</strong> You're practiced with light,
+    medium and heavy weapons.</p></li><li><p><strong>Protective
+    Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ad89f8a20b02e255]{Combat
+    Prowess},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a31a52c4f0358ca8]{No
+    Need for Weapons},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.3e9b09aca0c55023]{One
+    Against Many},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f8af6e04e1eb3f48]{Other
+    Knowledge},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.49817f65fc328167]{Overwatch},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.75823414b28760ca]{Physical
+    Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.162d7608661acddf]{Protector},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.663707a2d018a70f]{Slow
+    Them Down},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0db783c6fb7f1f14]{Take
+    the Hit}.</p></li></ul><h3>Second-Tier
+    Protector</h3><ul><li><p><strong>Protective Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.87a2967964003103]{Bodyguard},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7d6d164cfea0f82e]{Coping
+    With the Impossible},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.26112043bf579970]{Intimidating
+    Demeanor},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.fc1b62291f7ac4b2]{Quick
+    Recovery},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f98aaef1736e191c]{Scarred
+    and Hardened},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d55a8edb169afb4f]{Skill
+    With Attacks},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d6042394c9ae539a]{Skill
+    With Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.3816016ca8ec53d2]{Stand
+    Watch},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.cb889a0a80cae1cf]{Support
+    the Team}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Third-Tier
+    Protector</h3><ul><li><p><strong>Expert Cypher Use:</strong> You can have 3
+    cyphers at a time.</p></li><li><p><strong>Protective Abilities:</strong>
+    Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f140aa5114c6d417]{Combat
+    Medic},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.6b5bd23159bb4d2a]{Deadly
+    Aim},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.650701a356bac04e]{Lunge},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bdbf73d0f6a043f0]{Reaction},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.73bb92e7ec1a9fae]{Seen
+    Some . . . Stuff},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f167b79b639e4067]{Spray},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.9f5519d7864c1a81]{Tactical
+    Plan},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.edc98cc1a353839b]{Tough},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0e568d5bbad325b8]{Vigilance},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.15278d48d8274fed]{Impossible
+    Strength}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Fourth-Tier
+    Protector</h3><ul><li><p><strong>Protective Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.21e867eeadc5bc85]{Amazing
+    Effort},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.5e6a7f7866b257b1]{Bury
+    the Bodies},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.e03cfaabfa706faf]{Capable
+    Fighter},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bfb01296f19c8bc9]{Expert
+    Bodyguard},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f9da7505c94fb306]{Free
+    From Danger},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.fec936c933269ae3]{Momentum},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.923c6299522ed813]{Size
+    Them Up},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.06aa2d8a473ad3dd]{Snipe},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.362821358c439507]{Touch
+    the Untouchable}, or from a lower tier. You can also swap one lower-tier
+    ability for another from a lower tier.</p></li></ul><h3>Fifth-Tier
+    Protector</h3><ul><li><p><strong>Adroit Cypher Use:</strong> You can have 4
+    cyphers at a time.</p></li><li><p><strong>Protective Abilities:</strong>
+    Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.314ff3aa787303d9]{Arc
+    Spray},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.966b419e63ef92b8]{Got
+    Your Back},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.59f2a9498f27fe1b]{Improved
+    Success},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ab4cfb81d0df9a73]{Mastery
+    With Attacks},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.9da04b8239fd4007]{Mastery
+    With Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.39de8eb11f6a0272]{Parry},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.50b59d29b5d25c88]{Shrug
+    It Off},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7b4c23949fc845fb]{Savagery},
+    or from a lower tier. You can also swap one lower-tier ability for another
+    from a lower tier.</p></li></ul><h3>Sixth-Tier
+    Protector</h3><ul><li><p><strong>Protective Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a88bd1dd2d0ebdec]{Again
+    and Again},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.c9b2428e0aafca22]{Beacon
+    of Hope},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0d65731d86028403]{Fight
+    On},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a4b26360a0fb16b5]{Finishing
+    Blow},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a7050823b424a61c]{Spin
+    Attack},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7466bf200b7a6ac2]{Self-Sacrifice},
+    or from a lower tier. You can also swap one lower-tier ability for another
+    from a lower tier.</p></li></ul><p>Abilities marked supernatural need 10
+    levels of Stress from supernatural sources first (p27).</p><p><em>Sheet
+    notes:</em> Only the Might Edge is applied automatically; set the Speed Edge
+    of 1 on the sheet. Cypher limits at higher tiers are raised by hand on the
+    sheet.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '36'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - character-type
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 2
+    speed: 2
+    intellect: 0
+  woundBonuses:
+    minor: 0
+    moderate: 0
+    major: 0
+  edgeGrant:
+    mode: fixed
+    pool: might
+    amount: 1
+  weaponUse:
+    light: true
+    medium: true
+    heavy: true
+  armorUse:
+    light: false
+    medium: false
+    heavy: false
+  superhero:
+    rank: 0
+    powerShiftCount: 0
+    superheroics:
+      enabled: false
+      poolBonus: 0
+  abilityGrants: []
+  abilityChoiceGroups:
+    - id: 87f60de33aff81e3
+      choose: 2
+      options:
+        - id: 20e9af35061692fc
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.ad89f8a20b02e255
+          notes: ''
+          snapshot:
+            name: Combat Prowess
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-combat-prowess
+              description: >-
+                <p>Pick melee or ranged attacks: they deal 1 additional point of
+                damage. You can take this twice, once for each. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 99a8a36f8f7c3219
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.a31a52c4f0358ca8
+          notes: ''
+          snapshot:
+            name: No Need for Weapons
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-no-need-for-weapons
+              description: >-
+                <p>Your unarmed attacks (punches, kicks and the like) deal 2
+                additional points of damage. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 3b9be88b1bb79a0c
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.3e9b09aca0c55023
+          notes: ''
+          snapshot:
+            name: One Against Many
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-one-against-many
+              description: >-
+                <p><strong>Cost:</strong> 1+ Speed points.</p><p>Attack the
+                highest-level foe in a group or swarm. If you hit, instead of
+                dealing damage, every foe within immediate distance either moves
+                within an immediate area as you direct, or can't enter an
+                immediate space you pick (to shield allies who stay put, not
+                yourself). Affects level 1 foes; each extra Speed point raises
+                the level affected by 1, and you must cover the highest-level
+                foe. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: speed
+              cost:
+                amount: 1
+                scalable: true
+                ignoresEdge: false
+                allowedPools:
+                  - speed
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 6e8a6da5409d7471
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.f8af6e04e1eb3f48
+          notes: ''
+          snapshot:
+            name: Other Knowledge
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-other-knowledge
+              description: >-
+                <p>You become trained in one non-physical skill of your choice
+                that you aren't already trained in. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 595bf2ba17c08cd7
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.49817f65fc328167
+          notes: ''
+          snapshot:
+            name: Overwatch
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-overwatch
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>Cover a
+                limited area (a doorway, a hallway) with a ranged weapon and
+                attack the next viable target to enter it, just before they act.
+                The target gets no benefit from cover, position, range or
+                visibility, and the attack deals 1 additional point of damage.
+                You can stay on overwatch as long as is reasonable. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 3440e097a8c0f158
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.75823414b28760ca
+          notes: ''
+          snapshot:
+            name: Physical Skills
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-physical-skills
+              description: >-
+                <p>You become trained in endurance or gymnastics. This doesn't
+                improve a skill you're already trained in. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 129ac9af61bf24a9
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.162d7608661acddf
+          notes: ''
+          snapshot:
+            name: Protector
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-protector
+              description: >-
+                <p>Name one character as your charge (you can change it each
+                round, one at a time). While they're within immediate range,
+                they gain an asset on Speed defense tasks. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: b3ebebd1dc47856e
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.663707a2d018a70f
+          notes: ''
+          snapshot:
+            name: Slow Them Down
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-slow-them-down
+              description: >-
+                <p><strong>Cost:</strong> 1 Might or Speed point.</p><p>A
+                pummelling melee attack or covering-fire ranged attack that
+                deals 1 less point of damage but dazes the target for a round:
+                their tasks are hindered and they move at half speed.
+                Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: choose
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - might
+                  - speed
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 55e08fb0856a888e
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.0db783c6fb7f1f14
+          notes: ''
+          snapshot:
+            name: Take the Hit
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: protector-take-the-hit
+              description: >-
+                <p><strong>Cost:</strong> 2 Might points.</p><p>When someone you
+                could touch is struck and would take damage, you take the hit
+                instead. They suffer nothing, and you gain 3 points of Stress
+                whatever the original damage. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '37'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - protector
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: might
+              cost:
+                amount: 2
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - might
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+  skillGrants: []
+  choiceGroups:
+    - id: 847d3d7bfdc72c15
+      choose: 1
+      rank: trained
+      options:
+        - id: 3fe77ff48eb87d89
+          skillUuid: Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Discerning motive
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're practiced at ascertaining another character's lies,
+                motives, and disposition.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: a0e5065b9856ee21
+          skillUuid: Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Forensics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You know how to interpret physical evidence to work out what
+                happened at a location, such as a crime scene, or what led to an
+                object's current condition, such as a cause of death.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 72125a3fd713f0a4
+          skillUuid: Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Intimidation
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're good at swaying others with threatening words and/or
+                fearsome presence.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: dba88a36175ca6d6
+          skillUuid: Compendium.magnusarchives.skills.Item.S9WFjHa5QI83AFQO
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Perception
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You have a better chance to notice what others miss when
+                searching an area, listening closely, or using some other sense
+                to discover what is hidden or not obvious.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: general
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: e8d4dd123a90ec28
+          skillUuid: Compendium.magnusarchives.skills.Item.ZxPyYpNcbki4VN3z
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Stealth
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: speed
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're adept at sneaking and hiding, staying out of sight,
+                and keeping any noise of your presence to a minimum.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: general
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: a13c26748c1d830a
+          skillUuid: Compendium.magnusarchives.skills.Item.SbEfC3bQGCbTDvOM
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Tracking
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You know how to track a target through natural landscapes and
+                urban environments.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: general
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+  genre: none
+  customGenreId: ''
+  backgroundOptions: ''
+  equipmentNotes: ''
+  equipmentBundleUuid: ''
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      superheroicsPool: none
+      powerShifts: []
+      poolChoices: []
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  weaponFamilies: []
+effects: []
+folder: null
+sort: 200
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!c02017275c371fe6'

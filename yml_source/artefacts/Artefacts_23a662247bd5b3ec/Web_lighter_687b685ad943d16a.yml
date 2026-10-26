@@ -1,0 +1,76 @@
+folder: 23a662247bd5b3ec
+name: Web lighter
+type: artifact
+_id: 687b685ad943d16a
+sort: 2300
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: web-lighter
+  description: >-
+    <p><strong>Level:</strong> 1d6+3</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 3 on realizing its true nature.</p><p>A
+    gold flip lighter embossed with a spiderweb. It never runs out of fuel, and
+    if lost or stolen it quietly turns up among its owner's things
+    again.</p><p>The owner never consciously notices they carry it; if someone
+    points it out, they change the subject on a failed Intellect defense roll.
+    Yet it is always to hand when fire would only make things worse. Avatars of
+    The Web, including The Weaver, can track its owner and manifest their power
+    around them.</p><p><strong>Fear:</strong> Even when deliberately left behind
+    it finds its way back. If destroyed, a new one is delivered.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '264'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1d6+3
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!687b685ad943d16a'

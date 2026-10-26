@@ -1,0 +1,80 @@
+folder: 23a662247bd5b3ec
+name: Coffin of The Buried
+type: artifact
+_id: 175089fe200a00b5
+sort: 600
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: coffin-of-the-buried
+  description: >-
+    <p><strong>Level:</strong> 7</p><p><strong>Related Entity:</strong> The
+    Buried</p><p><strong>Stress:</strong> 3 on acquiring it; 1 when trying to
+    use it against someone; 1 for each hour spent trapped in The Buried through
+    it.</p><p>An unvarnished wooden coffin bound with a padlocked chain, "Do Not
+    Open" scratched into its lid. The key is always easy to find. Opened, it
+    reveals rough stone stairs leading down into the domain of The
+    Buried.</p><p>Each time it is opened, someone within immediate range
+    (usually whoever is closest) must succeed on an Intellect defense roll or
+    start down the stairs. The steps narrow into passages that close in until
+    the explorer is entombed in slowly crushing earth or stone, sometimes toyed
+    with by a buried thing (p204) for a few rounds. Most are trapped forever, or
+    until fear and horror finish them.</p><p><strong>Fear:</strong> Someone
+    sleeping near the coffin sleepwalks to it and climbs in on a failed
+    Intellect defense roll.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '254'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-buried
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '7'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!175089fe200a00b5'

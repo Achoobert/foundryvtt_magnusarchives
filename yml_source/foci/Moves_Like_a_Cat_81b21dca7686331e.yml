@@ -1,0 +1,252 @@
+_id: 81b21dca7686331e
+name: Moves Like a Cat
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: moves-like-a-cat
+  description: >-
+    <p>You have uncanny balance and coordination. You move with grace, rarely
+    knock anything over, land well when you fall and often avoid danger
+    altogether. You wear close-fitting clothes and carry
+    little.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC's clumsiness and noise annoy
+    you.</p></li><li><p>Another PC comes from the same place as you, and you
+    knew each other as children.</p></li><li><p>You help another PC with advice
+    and a steadying hand. When you're next to each other, their
+    @UUID[Compendium.magnusarchives.skills.Item.DbWx19J2Bkv12OpZ]{gymnastics}
+    tasks are eased.</p></li><li><p>Another PC owes you a lot of
+    money.</p></li></ol><p><strong>Minor Effect Suggestion:</strong> You restore
+    2 points to your Speed Pool.</p><p><strong>Major Effect Suggestion:</strong>
+    You can take a second action this round.</p><p><strong>GM
+    Intrusions:</strong> Even a cat can be clumsy. A jump is harder than it
+    looks, or an escape move overshoots straight into
+    danger.</p><p><strong>Abilities by tier:</strong></p><ul><li><p><strong>Tier
+    1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3]{Greater
+    Enhanced Speed},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.84a6fccadbab9b04]{Balance}</p></li><li><p><strong>Tier
+    2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.43c26f0099f9401c]{Grit},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.01fde00541ee42e5]{Safe
+    Fall}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2ac539dbb5fdef49]{Enhanced
+    Speed Edge} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3]{Greater
+    Enhanced Speed}. Either way, you also gain
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.09a7344d7cf1d5d9]{Hard
+    to Hit}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.97f7d56a7ff22af8]{Quick
+    Strike}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.38062e924fda82cb]{Slippery}</p></li><li><p><strong>Tier
+    6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.70050201e32563fd]{Perfect
+    Speed Burst} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3]{Greater
+    Enhanced Speed}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 75-76
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-greater-enhanced-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3
+        abilitySnapshot:
+          name: Greater Enhanced Speed
+          description: Gain 6 points to your Speed Pool.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-balance
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.84a6fccadbab9b04
+        abilitySnapshot:
+          name: Balance
+          description: You're trained in gymnastics.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-grit
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.43c26f0099f9401c
+        abilitySnapshot:
+          name: Grit
+          description: You're trained in endurance tasks.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-safe-fall
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.01fde00541ee42e5
+        abilitySnapshot:
+          name: Safe Fall
+          description: >-
+            Falls cause you no Stress, though a fall of more than 10 feet (3.5
+            m) can still cause a serious injury.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-enhanced-speed-edge
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2ac539dbb5fdef49
+        abilitySnapshot:
+          name: Enhanced Speed Edge
+          description: Gain +1 to your Speed Edge.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-greater-enhanced-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3
+        abilitySnapshot:
+          name: Greater Enhanced Speed
+          description: Gain 6 points to your Speed Pool.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t3-hard-to-hit
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.09a7344d7cf1d5d9
+        abilitySnapshot:
+          name: Hard to Hit
+          description: >-
+            You're trained in Speed defense tasks. You gain this alongside
+            whichever tier 3 ability you choose.
+        tier: 3
+        position:
+          x: 2
+          'y': null
+      - id: t4-quick-strike
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.97f7d56a7ff22af8
+        abilitySnapshot:
+          name: Quick Strike
+          description: >-
+            You make a melee attack so fast it's hard to defend against. The
+            attack is eased by two steps, and a foe you hit takes normal damage
+            and is dazed, with its tasks hindered next round.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-slippery
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.38062e924fda82cb
+        abilitySnapshot:
+          name: Slippery
+          description: Tasks to escape any bond or grasp are eased.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-perfect-speed-burst
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.70050201e32563fd
+        abilitySnapshot:
+          name: Perfect Speed Burst
+          description: You take two separate actions this round.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-greater-enhanced-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2f26e25349dd07e3
+        abilitySnapshot:
+          name: Greater Enhanced Speed
+          description: Gain 6 points to your Speed Pool.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-1203c3138885f128
+        from: t1-greater-enhanced-speed
+        to: t2-grit
+      - id: connection-995be496e53b81cd
+        from: t1-greater-enhanced-speed
+        to: t2-safe-fall
+      - id: connection-9ff0dceea3975aa3
+        from: t1-balance
+        to: t2-grit
+      - id: connection-5bd7ae0da658b514
+        from: t1-balance
+        to: t2-safe-fall
+      - id: connection-f1432f155f265b09
+        from: t2-grit
+        to: t3-enhanced-speed-edge
+      - id: connection-7209e527dc492f32
+        from: t2-grit
+        to: t3-greater-enhanced-speed
+      - id: connection-26749bb916d19dfd
+        from: t2-grit
+        to: t3-hard-to-hit
+      - id: connection-b47e78938e50dc15
+        from: t2-safe-fall
+        to: t3-enhanced-speed-edge
+      - id: connection-a2b35ee396d400a5
+        from: t2-safe-fall
+        to: t3-greater-enhanced-speed
+      - id: connection-c7c80a4c9fd76384
+        from: t2-safe-fall
+        to: t3-hard-to-hit
+      - id: connection-12990d53b8f742df
+        from: t3-enhanced-speed-edge
+        to: t4-quick-strike
+      - id: connection-9bd1fadf536b34c3
+        from: t3-greater-enhanced-speed
+        to: t4-quick-strike
+      - id: connection-6e098320a1d17851
+        from: t3-hard-to-hit
+        to: t4-quick-strike
+      - id: connection-b1ee67e1a494fcd8
+        from: t4-quick-strike
+        to: t5-slippery
+      - id: connection-6857ea569b3ca4a9
+        from: t5-slippery
+        to: t6-perfect-speed-burst
+      - id: connection-a814f7bd979d7227
+        from: t5-slippery
+        to: t6-greater-enhanced-speed
+effects: []
+folder: null
+sort: 1000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!81b21dca7686331e'

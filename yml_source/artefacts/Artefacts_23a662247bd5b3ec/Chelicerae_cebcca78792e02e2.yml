@@ -1,0 +1,83 @@
+folder: 23a662247bd5b3ec
+name: Chelicerae
+type: artifact
+_id: cebcca78792e02e2
+sort: 500
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: chelicerae
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 3 when a viewer realizes what the website
+    is for; 3 when used.</p><p>A hard-to-find, primitive message board where
+    every thread is titled with a person's name. A user who starts a thread
+    named for someone they want dead and posts a horrible true experience they
+    (or a loved one) suffered brings that person to The Web's attention.
+    Impressing The Web (or an Avatar such as The Weaver) takes a difficulty 5
+    Intellect-based storytelling roll; on a success the named person is marked
+    for death.</p><p>A marked NPC of level 5 or lower "dies" within the week and
+    becomes a bewebbed puppet (p200).</p><p>A marked PC enters a personal Horror
+    Mode whose range grows by 1 each day. Once the range reaches 1-5, their next
+    triggered intrusion starts the change: they make a Might defense roll every
+    few hours, and if they fail three before succeeding on three, they become a
+    bewebbed puppet.</p><p>Hacking the site and deleting the thread before the
+    victim succumbs makes The Web lose interest.</p><p><strong>Fear:</strong>
+    The story fails to impress The Web, and the poster is marked for death
+    instead.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '254'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!cebcca78792e02e2'

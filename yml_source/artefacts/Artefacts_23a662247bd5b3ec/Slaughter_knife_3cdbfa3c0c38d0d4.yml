@@ -1,0 +1,75 @@
+folder: 23a662247bd5b3ec
+name: Slaughter knife
+type: artifact
+_id: 3cdbfa3c0c38d0d4
+sort: 2000
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: slaughter-knife
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Slaughter</p><p><strong>Stress:</strong> 3 on acquiring the knife and
+    realizing its power.</p><p>A rusted military trench knife (a light weapon,
+    p100). Anyone who handles it directly must succeed on an Intellect defense
+    roll or attack every living creature within short range with it. Each round
+    they can make an Intellect defense roll to drop it and end the
+    compulsion.</p><p><strong>Fear:</strong> The wielder turns the knife on
+    themself and takes a serious injury, and keeps doing so each round until
+    they drop it with an Intellect defense roll or an ally wrestles it away.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '262'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-slaughter
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!3cdbfa3c0c38d0d4'

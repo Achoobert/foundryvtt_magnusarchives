@@ -1,0 +1,98 @@
+_id: 42397fe7d07676d6
+name: The Vampire Hunter
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Lean and athletic despite his white hair and beard, hung with guns,
+    blades and gear. He hunts monsters of every kind for the love of the chase,
+    and sometimes his quarry turns out to be innocent.</p>
+  notes: >-
+    <p>Lean and athletic despite his white hair and beard, hung with guns,
+    blades and gear. He hunts monsters of every kind for the love of the chase,
+    and sometimes his quarry turns out to be
+    innocent.</p><p><strong>Level:</strong> 5 (15)</p><p><strong>Related
+    Entity:</strong> The Hunt</p><p><strong>Health:</strong>
+    18</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Tracking the Entity-touched,
+    initiative and Intellect defense as level 8</p><h3>Combat</h3><p>He usually
+    knifes his target twice as his action, preferring surprise, which eases his
+    first attack by two steps.</p><p><strong>Garrote:</strong> A melee attack
+    that deals no damage but loops a wire around the target's neck. They can't
+    breathe or speak and suffer a serious injury at the end of each of their
+    turns in which they fail a Might roll as their action to break or cut the
+    wire.</p><p><strong>Hidden Weapon:</strong> He draws a hidden weapon, such
+    as a throwing knife, and makes an immediate attack as part of another
+    action.</p><p><strong>Vitality of the Hunt:</strong> While he keeps hunting,
+    he is immune to disease (including cancer) and regains 1 health each round
+    while above 0 health.</p><h3>Interaction</h3><p>He works with other monster
+    hunters, but will betray them to save himself.</p><h3>Use</h3><p>A possible,
+    if checkered, ally. As the PCs change, they may come to look like his
+    quarry. He is tough but a competent group can take
+    him.</p><h3>Notes</h3><p>Podcast name: Trevor Herbert.</p><p>See Vampire
+    (p242).</p><p><em>The Magnus Archives Roleplaying Game, p244.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 18
+    baseMax: 18
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 5
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 560ebd8ffd675124
+      label: Tracking the Entity-touched, initiative and Intellect defense
+      contexts:
+        - tracking
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>A vampire he failed to kill targets the character for associating with
+    him.</p>
+items: []
+effects: []
+folder: cae49fed3ba3c414
+sort: 4600
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '244'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Vampire Hunter
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!42397fe7d07676d6'

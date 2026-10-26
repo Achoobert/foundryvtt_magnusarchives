@@ -1,0 +1,20 @@
+_id: ae33043960b5f86c
+name: The Vast
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 1300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!ae33043960b5f86c'

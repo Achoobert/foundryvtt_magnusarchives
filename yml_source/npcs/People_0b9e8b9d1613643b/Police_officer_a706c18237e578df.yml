@@ -1,0 +1,64 @@
+_id: a706c18237e578df
+name: Police officer
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 3 (9)</p><p><strong>Health:</strong>
+    9</p><p><strong>Damage Inflicted:</strong> Baton or short-range firearm
+    attack deals serious injury.</p><p><strong>Movement:</strong>
+    Short</p><p><em>The Magnus Archives Roleplaying Game, p195.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 9
+    baseMax: 9
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Baton or short-range firearm attack deals serious injury.
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications: []
+  gmIntrusion: ''
+items: []
+effects: []
+folder: 0b9e8b9d1613643b
+sort: 6000
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Police officer
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!a706c18237e578df'

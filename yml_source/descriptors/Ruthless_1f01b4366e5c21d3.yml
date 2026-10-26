@@ -1,0 +1,153 @@
+name: Ruthless
+type: descriptor
+_id: 1f01b4366e5c21d3
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>You harden your heart to others' suffering. What they call cruelty, you
+    call pragmatism.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Hard:</strong> +2 to your
+    Might Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.9NS4fm5VOrlzRwHv]{Deception}.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Intimidation or
+    stealth.</p></li><li><p><strong>Suggested Inability:</strong> You have a
+    hard time connecting with others or sharing their feelings. You have an
+    inability in
+    @UUID[Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b]{Discerning
+    motive}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '25'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 2
+    speed: 0
+    intellect: 0
+  skillGrants:
+    - id: 6efb13a5-8c48-4072-85be-ace4d36b111c
+      skillUuid: Compendium.magnusarchives.skills.Item.9NS4fm5VOrlzRwHv
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Deception
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You are a capable liar, able to use speech and the written word
+            to deceive and misinform others.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: social
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 2100
+_key: '!items!1f01b4366e5c21d3'

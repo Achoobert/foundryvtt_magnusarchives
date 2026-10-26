@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Weapons
+color: null
+sorting: a
+_id: oWd3bfXoYcGopdSV
+description: ''
+sort: 100000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!oWd3bfXoYcGopdSV'

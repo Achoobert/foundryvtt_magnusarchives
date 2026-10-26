@@ -1,0 +1,79 @@
+folder: oWd3bfXoYcGopdSV
+name: Submachine gun
+type: weapon
+img: systems/magnusarchives/assets/icons/magnusweapons.webp
+system:
+  defaultPool: speed
+  damageOverride: null
+  schemaVersion: 1
+  slug: ''
+  description: ''
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '102'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  category: medium
+  attackType: ranged
+  rangeCategory: short
+  rangeNotes: ''
+  skillLevel: untrained
+  attackModifier: 0
+  bonusDamage: 0
+  freelyUsed: false
+  ammo:
+    enabled: false
+    value: 0
+    max: 0
+    perAttack: 1
+  depletion:
+    enabled: false
+    die: d6
+    formula: ''
+    threshold: 1
+  depleted: false
+  equipped: false
+  rapidFire: true
+  explosive: false
+effects: []
+sort: 2100
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_id: 7fc6314de94f0d1b
+_key: '!items!7fc6314de94f0d1b'

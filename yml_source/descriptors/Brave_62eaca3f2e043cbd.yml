@@ -1,0 +1,151 @@
+name: Brave
+type: descriptor
+_id: 62eaca3f2e043cbd
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Bravery is a conscious choice for you, not an absence of fear, and you
+    can instil it in others.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Resolve:</strong> +2 to your
+    Intellect Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.c4b6b98d92624257]{Persuasion}.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Stealth or Might
+    defense.</p></li><li><p><strong>Suggested Inability:</strong> You're brave,
+    but you have to talk yourself into it. You have an inability in
+    @UUID[Compendium.magnusarchives.skills.Item.jUTYItXojqpYujYN]{Initiative}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '19'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 0
+    intellect: 2
+  skillGrants:
+    - id: 09317feb-1914-46b6-8b13-ff2d1727e9b3
+      skillUuid: Compendium.magnusarchives.skills.Item.c4b6b98d92624257
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Persuasion
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You're adept at winning people to your side of an argument
+            through truthful reasoning, understanding, and kindness.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: social
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 200
+_key: '!items!62eaca3f2e043cbd'

@@ -1,0 +1,68 @@
+_id: 05e72d0a6729ebb8
+name: Gut Feeling
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: gut-feeling
+  description: >-
+    <p><strong>Level:</strong> 1d6 + 4</p><p>When choosing between two known
+    options, you pick the more correct one: which way a quarry turned, which
+    wire to cut, which of two suspects is guilty. It does nothing if neither
+    option is right.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 1600000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: gut-feeling
+      sourceOrder: 16
+      levelFormula: 1d6 + 4
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!05e72d0a6729ebb8'

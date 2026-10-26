@@ -1,0 +1,71 @@
+_id: f259009116cf65a5
+name: Librarian's Pupil
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: librarians-pupil
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p>Ease one kind of physical action by
+    three steps. Once active, the boost applies to the next uses of that action,
+    up to the cypher's level in uses, within twenty-four hours. A level 3 cypher
+    boosts the first three attempts. Roll on the table to find the
+    action.</p><p>Roll on
+    @UUID[Compendium.magnusarchives.cypher-tables.RollTable.c4c9e36c8f8540c8]{Librarian's
+    Pupil: Action}.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '110'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 2400000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: librarians-pupil
+      sourceOrder: 24
+      levelFormula: 1d6
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!f259009116cf65a5'

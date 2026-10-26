@@ -1,0 +1,64 @@
+_id: ec01cbd238c74073
+name: Rat
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 1 (3)</p><p><strong>Health:</strong>
+    3</p><p><strong>Damage Inflicted:</strong> 1 point of
+    Stress</p><p><strong>Movement:</strong> Short</p><p><em>The Magnus Archives
+    Roleplaying Game, p195.</em></p>
+  gmNotes: ''
+  level: 1
+  health:
+    value: 3
+    baseMax: 3
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 1
+    effect: stress
+    stressAmount: 1
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 1 point of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications: []
+  gmIntrusion: ''
+items: []
+effects: []
+folder: aad08927292e76f1
+sort: 5600
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Rat
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!ec01cbd238c74073'

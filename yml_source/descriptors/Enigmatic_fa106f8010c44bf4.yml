@@ -1,0 +1,206 @@
+name: Enigmatic
+type: descriptor
+_id: fa106f8010c44bf4
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>The figure lurking quietly in the corner. Nobody knows where you came
+    from or what you want.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Skill:</strong> You're
+    trained in
+    @UUID[Compendium.magnusarchives.skills.Item.ZxPyYpNcbki4VN3z]{Stealth}.</p></li><li><p><strong>Skill:</strong>
+    You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.2253f39a79c36c71]{Intellect
+    defense}.</p></li><li><p><strong>Suggested Second Skill:</strong> Deception
+    or occultism.</p></li><li><p><strong>Suggested Inability:</strong> You have
+    almost as much trouble reading others as they do you. You have an inability
+    in @UUID[Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b]{Discerning
+    motive}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '21'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 0
+    intellect: 0
+  skillGrants:
+    - id: cfec80f8-136f-489a-8bbe-abca1dd798b7
+      skillUuid: Compendium.magnusarchives.skills.Item.ZxPyYpNcbki4VN3z
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Stealth
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: speed
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You're adept at sneaking and hiding, staying out of sight, and
+            keeping any noise of your presence to a minimum.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: general
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+    - id: b41a2f8e-8988-4893-8598-da482262a44c
+      skillUuid: Compendium.magnusarchives.skills.Item.2253f39a79c36c71
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Intellect defense
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You are practiced at holding your nerve against fear, deceit, and
+            anything that reaches for your mind.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: defense
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 700
+_key: '!items!fa106f8010c44bf4'

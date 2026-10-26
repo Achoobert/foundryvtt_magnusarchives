@@ -1,0 +1,156 @@
+name: No-Nonsense
+type: descriptor
+_id: 03943fc08a67627c
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>You hate frills, chitchat and gossip. You prize straight talk and the
+    facts.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Austere:</strong> +2 to your
+    Might Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.1ed6a9dae4acd3cb]{Researching}.</p></li><li><p><strong>Resilient:</strong>
+    You ignore the first 3 points of Stress you would otherwise take in a day
+    from shock, such as Stress from experiencing something supernatural. Once
+    that threshold is passed you suffer Stress normally until after your next
+    ten-hour recovery roll, which resets it.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Instead of an extra skill, you may take the Resilient
+    characteristic.</p></li><li><p><strong>Suggested Inability:</strong> People
+    react badly to your humourless ways. You have an inability in
+    @UUID[Compendium.magnusarchives.skills.Item.c4b6b98d92624257]{Persuasion}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '24'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 2
+    speed: 0
+    intellect: 0
+  skillGrants:
+    - id: d6abb47e-e008-4a30-8804-2249ff50bf69
+      skillUuid: Compendium.magnusarchives.skills.Item.1ed6a9dae4acd3cb
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Researching
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You're skilled at gathering information from databases and
+            physical archives, or by hitting the pavement and asking around.
+            Every form of research takes at least a few hours.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: general
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 1700
+_key: '!items!03943fc08a67627c'

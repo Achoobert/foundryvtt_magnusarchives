@@ -1,0 +1,97 @@
+_id: 7ec629d65c6f5688
+name: Bewebbed Puppet
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Once ordinary people, now hollow puppets full of spiders that quietly
+    carry out small parts of The Weaver's plans.</p>
+  notes: >-
+    <p>Once ordinary people, now hollow puppets full of spiders that quietly
+    carry out small parts of The Weaver's plans.</p><p><strong>Level:</strong> 3
+    (9)</p><p><strong>Related Entity:</strong> The Web</p><p><strong>Stress on
+    first realizing its horror:</strong> 2 (usually on a failed Intellect
+    defense roll)</p><p><strong>Health:</strong> 12</p><p><strong>Damage
+    Inflicted:</strong> 3 points of Stress</p><p><strong>Movement:</strong>
+    Short. Short while climbing.</p><p><strong>Modifications:</strong> Endurance
+    as level 7</p><h3>Combat</h3><p>It batters or bites a
+    foe.</p><p><strong>Paralyzing Venom:</strong> A successful bite deals
+    damage, and on a failed Might defense roll the target is paralyzed for up to
+    one minute, or until they succeed on a Might defense roll on their
+    turn.</p><p><strong>Shocking Wound:</strong> If it takes 5 or more damage,
+    thousands of spiders pour from the wound and its mouth, showing the body is
+    hollow except for webs, spiders and eggs. Anyone seeing this for the first
+    time who fails an Intellect defense roll is stunned and loses their next
+    turn. The puppet keeps acting unless brought to 0 health; the spiders
+    skitter away.</p><p><strong>Web Trap:</strong> With an hour or more to
+    prepare, its spiders spin a web filling a short area. Spotting and avoiding
+    it takes a perception roll. Caught prey is helpless against attacks and can
+    only try to escape with Might-based rolls.</p><h3>Interaction</h3><p>From a
+    distance they seem normal, if absorbed in their tasks. Questioned, they
+    pretend to be normal or flee, perhaps toward a trap. Attacked, they defend
+    themselves.</p><h3>Use</h3><p>Easy enough to dispatch, but the memory will
+    haunt a character's nightmares for months.</p><h3>Notes</h3><p>See The
+    Weaver (p246).</p><p><em>The Magnus Archives Roleplaying Game,
+    p200.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 12
+    baseMax: 12
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: Short while climbing.
+  modifications:
+    - id: d859246c4f909ad8
+      label: Endurance
+      contexts:
+        - endurance
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>The character accidentally swallows one or more spiders.</p>
+items: []
+effects: []
+folder: 724cfdd571bf8432
+sort: 500
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '200'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Bewebbed Puppet
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!7ec629d65c6f5688'

@@ -1,0 +1,85 @@
+name: Door to Elsewhere
+type: ability
+_id: 15ecc1e8cd16446c
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-spiral-door-to-elsewhere
+  description: >-
+    <p><strong>Cost:</strong> 4 Intellect points and 3 Stress.</p><p>A door
+    appears within immediate range and another at a place you know about. They
+    last one minute or until you step through as another action. If no door
+    forms, the place may be protected, too little known to you, or
+    gone.</p><p>Action.</p><p><em>Supernatural ability.</em></p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '95'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - avatar
+    - the-spiral
+    - supernatural
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 4
+  category: focus
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 4
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 42a156bc1e2019b2
+sort: 20100
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!15ecc1e8cd16446c'

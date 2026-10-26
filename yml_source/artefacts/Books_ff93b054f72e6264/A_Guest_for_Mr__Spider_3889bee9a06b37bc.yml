@@ -1,0 +1,84 @@
+folder: ff93b054f72e6264
+name: A Guest for Mr. Spider
+type: artifact
+_id: 3889bee9a06b37bc
+sort: 3600
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: a-guest-for-mr-spider
+  description: >-
+    <p><strong>Level:</strong> 6</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 2 after reading the first scene (Mr.
+    Bluebottle); 1 for each later scene the reader is compelled to read.</p><p>A
+    children's picture book in which Mr. Spider receives a series of visitors
+    through the left-hand door of a bare room, is never satisfied with their
+    gifts, and is implied to eat each one: Mr. Bluebottle, Mrs. Fruit, Mr. Horse
+    and his son. Its second-to-last page shows the right-hand door with a flap
+    to open, and a polite request that the reader knock, because Mr. Spider
+    wants another dinner guest.</p><p>After reading the first scene the reader
+    must succeed on an Intellect defense roll or keep reading, with another roll
+    after each scene to stop, unless someone intervenes. Failing on the
+    second-to-last page compels the reader to travel to a nearby dwelling where
+    a huge spider-shaped aspect of The Web waits (level 6; webbing grabs a
+    target on a hit; a grabbed target takes a serious injury each round until
+    they escape; its kills rise as bewebbed puppets, p200). Whoever knocks is
+    seized and dragged inside, and eaten if they can't
+    escape.</p><p><strong>Fear:</strong> Wherever someone who has read even one
+    page goes, a spider is somewhere watching them, always the same spider.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '274'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '6'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!3889bee9a06b37bc'

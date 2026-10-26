@@ -1,0 +1,232 @@
+_id: b33746f68a393b82
+name: Fights Dirty
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: fights-dirty
+  description: >-
+    <p>The only thing that matters in a fight is who wins. You bite, trip, throw
+    dirt, taunt and lie, and you keep a few nasty surprises hidden on you: a
+    blade in a boot, a razor in a hem, powder in a secret
+    pocket.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC is good in a fight, and a few of your
+    tricks would make them great.</p></li><li><p>Another PC taught you some of
+    your tricks.</p></li><li><p>Another PC doesn't seem to approve of your
+    methods.</p></li><li><p>You beat another PC in a fight long ago, using your
+    tactics. They want a friendly rematch and say they're ready for
+    you.</p></li></ol><p><strong>Additional Equipment:</strong> An easily hidden
+    weapon and one dose of level 3 poison that inflicts 6 points of
+    damage.</p><p><strong>Minor Effect Suggestion:</strong> Your foe trips and
+    falls prone.</p><p><strong>Major Effect Suggestion:</strong> You tangle the
+    foe's legs. They fall and lose their next turn.</p><p><strong>GM
+    Intrusions:</strong> People think poorly of cheats. Sometimes a dirty trick
+    backfires.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.19e254bec4853e5d]{Taking
+    Advantage}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.1fec08041be818f2]{Eye
+    Gouge}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.165de0e266fc09fe]{Spot
+    Weakness} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.a9ccff49eb5dca7a]{Surprise
+    Attack}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.a5845015e6b98a75]{Mind
+    Games},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.3f31c348a8c54450]{Capable
+    Fighter}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.efb3b8b3b29413dd]{Using
+    the Environment}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.65d3a790b610d92d]{Twisting
+    the Knife} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7c11e1b124690ed0]{Murderer}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 64-65
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-taking-advantage
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.19e254bec4853e5d
+        abilitySnapshot:
+          name: Taking Advantage
+          description: >-
+            When a foe is prone, weakened, dazed, stunned, moved down the damage
+            track or otherwise at a disadvantage, your attacks against it are
+            eased, on top of any other modifiers from that disadvantage.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-eye-gouge
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.1fec08041be818f2
+        abilitySnapshot:
+          name: Eye Gouge
+          description: >-
+            You attack a creature that has an eye. The attack is hindered, but
+            on a hit the creature struggles to see for the next hour, and its
+            tasks that rely on sight (most of them) are hindered.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-spot-weakness
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.165de0e266fc09fe
+        abilitySnapshot:
+          name: Spot Weakness
+          description: >-
+            If a creature you can see has a special weakness, such as a
+            vulnerability to fire or a poor perception, you know it. Ask and the
+            GM tells you.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-surprise-attack
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.a9ccff49eb5dca7a
+        abilitySnapshot:
+          name: Surprise Attack
+          description: >-
+            When you attack from hiding, with surprise, or before your opponent
+            has acted, you gain an asset on the attack and deal 2 extra points
+            of damage on a hit.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-mind-games
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.a5845015e6b98a75
+        abilitySnapshot:
+          name: Mind Games
+          description: >-
+            You hit a foe that understands you with lies, mockery or vile
+            language. On a success it is stunned and can't act for one round,
+            then dazed the following round, with its tasks hindered.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-capable-fighter
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.3f31c348a8c54450
+        abilitySnapshot:
+          name: Capable Fighter
+          description: Your attacks deal 1 extra point of damage.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t5-using-the-environment
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.efb3b8b3b29413dd
+        abilitySnapshot:
+          name: Using the Environment
+          description: >-
+            You turn your surroundings to your advantage. For ten minutes, your
+            attack rolls and Speed defense rolls are eased. Action to initiate.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-twisting-the-knife
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.65d3a790b610d92d
+        abilitySnapshot:
+          name: Twisting the Knife
+          description: >-
+            In a round after you hit a foe with a melee weapon, you can
+            automatically deal that weapon's standard damage to it again, with
+            no modifiers: 2 points for a light weapon, 4 for medium, 6 for
+            heavy.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-murderer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7c11e1b124690ed0
+        abilitySnapshot:
+          name: Murderer
+          description: >-
+            A sudden strike to a vital spot kills a target of level 4 or lower
+            outright. Each extra level of Effort raises the maximum target level
+            by 1.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-5c809eeedb23e587
+        from: t1-taking-advantage
+        to: t2-eye-gouge
+      - id: connection-d1cfba3f3f8f37f9
+        from: t2-eye-gouge
+        to: t3-spot-weakness
+      - id: connection-a5f3cd2df5a6de32
+        from: t2-eye-gouge
+        to: t3-surprise-attack
+      - id: connection-c494a1ef526ca721
+        from: t3-spot-weakness
+        to: t4-mind-games
+      - id: connection-32bfbeda1bf5a1b9
+        from: t3-spot-weakness
+        to: t4-capable-fighter
+      - id: connection-5a07fe6dd7b1c94a
+        from: t3-surprise-attack
+        to: t4-mind-games
+      - id: connection-8c19b6ada3f52f7b
+        from: t3-surprise-attack
+        to: t4-capable-fighter
+      - id: connection-bf24a918eabbf560
+        from: t4-mind-games
+        to: t5-using-the-environment
+      - id: connection-c9af3b48a5e14033
+        from: t4-capable-fighter
+        to: t5-using-the-environment
+      - id: connection-f90704f07113032e
+        from: t5-using-the-environment
+        to: t6-twisting-the-knife
+      - id: connection-164529c76538e033
+        from: t5-using-the-environment
+        to: t6-murderer
+effects: []
+folder: null
+sort: 400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!b33746f68a393b82'

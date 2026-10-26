@@ -1,0 +1,79 @@
+folder: 23a662247bd5b3ec
+name: Thrumming cocoon
+type: artifact
+_id: 13d100ac6903d6ea
+sort: 2200
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: thrumming-cocoon
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 3 on seeing the cocoon and recognizing it
+    as a threat; 1 when deliberately revealing it to someone else.</p><p>A
+    silk-wrapped object usually kept in a steamer trunk. When first seen it
+    begins to vibrate and thrum. The viewer (or whoever is nearest, if several
+    see it) is frozen with horror on a failed Intellect defense roll as the silk
+    falls away from an animate metal spider (level 5, health 20).</p><p>The
+    spider hollows out and drinks the helpless victim, inflicting a serious
+    injury every few rounds, unless others distract or destroy it. The victim
+    can retry the Intellect defense roll each round to break free of their
+    paralysis.</p><p><strong>Fear:</strong> The metal spider animates by itself
+    and stealthily seeks out someone who saw it and survived, someone otherwise
+    marked by The Web, or a random victim.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '263'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!13d100ac6903d6ea'

@@ -1,0 +1,227 @@
+_id: 395de00a4c9d792e
+name: Solves Mysteries
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: solves-mysteries
+  description: >-
+    <p>You're a master of deduction. A sharp eye and quick wit let you piece
+    clues together while others are stumped. You might be a detective, but a
+    professor or scientist fits too. You dress practically with a touch of
+    style, maybe carrying a briefcase of
+    tools.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC is the friend who got you reading
+    detective fiction, which became your obsession.</p></li><li><p>Another PC
+    doesn't seem to trust or like you, and you feel you must win them
+    over.</p></li><li><p>Another PC is a great sounding board. After an hour
+    talking with them, you gain an asset on any knowledge-based task you're
+    trained in.</p></li><li><p>You and another PC were rivals in some past
+    endeavour.</p></li></ol><p><strong>Minor Effect Suggestion:</strong> You
+    find an additional clue about the mystery you're working
+    on.</p><p><strong>Major Effect Suggestion:</strong> When you reveal a
+    solution in front of its subject, they're stunned by your brilliance and
+    can't move or act for a round.</p><p><strong>GM Intrusions:</strong>
+    Evidence disappears, red herrings confuse, witnesses lie, and early research
+    is wrong.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.3ad216ea0f7655b3]{Investigate},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c2a3d1edacabc904]{Sleuth}</p></li><li><p><strong>Tier
+    2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b5d8edbc3c2d5b64]{Out
+    of Harm's Way}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.23de1c4ccf683536]{You
+    Studied} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.59b7dca327310ed1]{Skill
+    With Attacks}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4669e65e63ae1f8e]{Draw
+    Conclusion}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c818f3f232a19d97]{Defuse
+    Situation}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9dffc1771b3c42f7]{Seize
+    the Initiative} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.1d50b67524cd04a6]{Greater
+    Skill With Defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 82-83
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-investigate
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.3ad216ea0f7655b3
+        abilitySnapshot:
+          name: Investigate
+          description: >-
+            You can pay for levels of Effort on any Intellect-based task from
+            your Might, Speed or Intellect Pool.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sleuth
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c2a3d1edacabc904
+        abilitySnapshot:
+          name: Sleuth
+          description: You're trained in perception.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-out-of-harms-way
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b5d8edbc3c2d5b64
+        abilitySnapshot:
+          name: Out of Harm's Way
+          description: You're trained in Speed defense tasks.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-you-studied
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.23de1c4ccf683536
+        abilitySnapshot:
+          name: You Studied
+          description: >-
+            You're trained in two areas of knowledge of your choice (not
+            physical or combat skills), or specialized in one.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-skill-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.59b7dca327310ed1
+        abilitySnapshot:
+          name: Skill With Attacks
+          description: >-
+            Pick one attack type you aren't trained in: light, medium or heavy,
+            each bashing, bladed or ranged. You become trained in attacks with
+            that type of weapon. You can take this ability more than once,
+            choosing a different attack type each time.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-draw-conclusion
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4669e65e63ae1f8e
+        abilitySnapshot:
+          name: Draw Conclusion
+          description: >-
+            After a few minutes of careful observation and investigation
+            (questioning NPCs, searching a room or file), a difficulty 3
+            Intellect task teaches you a pertinent fact. Each further use is
+            hindered by an extra step, until you rest for ten hours and the
+            difficulty resets to 3.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-defuse-situation
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c818f3f232a19d97
+        abilitySnapshot:
+          name: Defuse Situation
+          description: >-
+            When questioning provokes anger or violence, you deflect with
+            distraction or evasion. On a successful Intellect attack, a living
+            foe can't attack anyone or anything for one round.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-seize-the-initiative
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9dffc1771b3c42f7
+        abilitySnapshot:
+          name: Seize the Initiative
+          description: >-
+            Within one minute of successfully using Draw Conclusion, you can
+            take one extra, immediate action, even out of turn. You can't use
+            this again until you've rested for ten hours.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-greater-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.1d50b67524cd04a6
+        abilitySnapshot:
+          name: Greater Skill With Defense
+          description: >-
+            Pick one defense task (Might, Speed or Intellect), even one you're
+            trained in. You become trained in it, or specialized if you were
+            already trained. You can take this up to three times, picking a
+            different defense each time.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-14be659c4e5c7b17
+        from: t1-investigate
+        to: t2-out-of-harms-way
+      - id: connection-4e430fae1de78495
+        from: t1-sleuth
+        to: t2-out-of-harms-way
+      - id: connection-d0d1e80396db08a4
+        from: t2-out-of-harms-way
+        to: t3-you-studied
+      - id: connection-b749036f1a368d07
+        from: t2-out-of-harms-way
+        to: t3-skill-with-attacks
+      - id: connection-045a120878fa0214
+        from: t3-you-studied
+        to: t4-draw-conclusion
+      - id: connection-bd4efac9190854bf
+        from: t3-skill-with-attacks
+        to: t4-draw-conclusion
+      - id: connection-7d732462ec12a439
+        from: t4-draw-conclusion
+        to: t5-defuse-situation
+      - id: connection-4e3cdc854b6d7797
+        from: t5-defuse-situation
+        to: t6-seize-the-initiative
+      - id: connection-fbe76978c9d7a333
+        from: t5-defuse-situation
+        to: t6-greater-skill-with-defense
+effects: []
+folder: null
+sort: 1500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!395de00a4c9d792e'

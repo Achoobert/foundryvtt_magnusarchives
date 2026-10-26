@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Investigator
+color: null
+sorting: m
+_id: 29e052516cd392a7
+description: ''
+sort: 100000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!29e052516cd392a7'

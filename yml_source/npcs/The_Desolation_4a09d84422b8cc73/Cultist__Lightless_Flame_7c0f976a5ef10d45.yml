@@ -1,0 +1,100 @@
+_id: 7c0f976a5ef10d45
+name: Cultist, Lightless Flame
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Seekers of meaning who drifted into the Cult of the Lightless Flame and
+    stayed rather than be burned for leaving. Most look ordinary, though many
+    bear a tattoo of a figure wreathed in flame.</p>
+  notes: >-
+    <p>Seekers of meaning who drifted into the Cult of the Lightless Flame and
+    stayed rather than be burned for leaving. Most look ordinary, though many
+    bear a tattoo of a figure wreathed in flame.</p><p><strong>Level:</strong> 3
+    (9)</p><p><strong>Related Entity:</strong> The
+    Desolation</p><p><strong>Health:</strong> 12</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Discerning motive as level
+    1</p><h3>Combat</h3><p>The cultist attacks with a searing touch, and has
+    these abilities.</p><p><strong>Death Blaze:</strong> When killed, the corpse
+    bursts into flame. Anyone who smells the smoke gains an asset on any one
+    action of their choice within the next day. They know it is a gift from The
+    Desolation, which will later ask something of them if they use
+    it.</p><p><strong>Regenerative Candle Flesh:</strong> On any round the
+    cultist spends molding their waxy wounds back into shape, they regain 4
+    health.</p><p><strong>Superheated Breath:</strong> The cultist's breath
+    heats an object anywhere from scalding to melting, sometimes without meaning
+    to. A target in immediate range takes damage on a failed Might defense
+    roll.</p><h3>Interaction</h3><p>Certain of their faith, they tend to treat
+    anyone who feigns the same devotion as a friend.</p><h3>Use</h3><p>A step
+    above ordinary cultists but still vulnerable to ordinary violence, though
+    candle flesh lets them recover if not captured or finished
+    off.</p><h3>Notes</h3><p>Sample names: Alfie Akoye, Kathrine Joe, Robert
+    Peckham, Sandy Netto, Scott Parody, Cory Laurier, Brenda McMillan, Sean
+    Heldt, Lori Nier, Deidre Case, Nicholas Tregenza.</p><p><em>The Magnus
+    Archives Roleplaying Game, p208.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 12
+    baseMax: 12
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 808bbcc4762cd00f
+      label: Discerning motive
+      contexts:
+        - discerning-motive
+      mode: levelOverride
+      value: 1
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The fist or weapon that strikes the cultist sticks in their waxy flesh. A
+    stuck fist deals 1 Stress each round until the character pulls free with a
+    successful Might task.</p>
+items: []
+effects: []
+folder: 4a09d84422b8cc73
+sort: 1200
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '208'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Cultist, Lightless Flame
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!7c0f976a5ef10d45'

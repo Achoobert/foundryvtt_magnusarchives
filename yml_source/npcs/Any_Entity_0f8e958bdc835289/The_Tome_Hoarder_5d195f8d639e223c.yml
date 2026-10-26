@@ -1,0 +1,106 @@
+_id: 5d195f8d639e223c
+name: The Tome Hoarder
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A gaunt, elderly, shaven-headed woman covered in tattooed Sanskrit,
+    usually with death metal blaring. A lifetime of reading eldritch books gave
+    her power, and binding herself to a tome of the trapped dead keeps her
+    undead.</p>
+  notes: >-
+    <p>A gaunt, elderly, shaven-headed woman covered in tattooed Sanskrit,
+    usually with death metal blaring. A lifetime of reading eldritch books gave
+    her power, and binding herself to a tome of the trapped dead keeps her
+    undead.</p><p><strong>Level:</strong> 5 (15)</p><p><strong>Related
+    Entity:</strong> All, channeled through her lore and book
+    collection</p><p><strong>Health:</strong> 15</p><p><strong>Damage
+    Inflicted:</strong> 2 points of Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Sorcery as level
+    6</p><h3>Combat</h3><p>She channels the power of various Entities against
+    foes.</p><p><strong>After the End:</strong> At 0 health she crumbles into
+    parchment dust, but manifests again in a couple of days. She can only be
+    destroyed by finding her page in the Catalogue of the Trapped Dead, removing
+    it and burning it.</p><p><strong>Page Turner:</strong> After defeating a
+    target, she can perform an eight-hour ritual that kills them and binds their
+    spirit to a new page of the Catalogue of the Trapped
+    Dead.</p><p><strong>Plunge Into The Vast:</strong> A target in short range
+    who fails an Intellect defense roll feels themselves falling through empty
+    sky and gains 3 Stress.</p><p><strong>Spiraling Confusion:</strong> Targets
+    in short range who fail an Intellect defense roll are confused for one
+    minute, turning on allies or doing as she wishes, until they succeed on an
+    Intellect defense roll on their turn.</p><h3>Interaction</h3><p>She seeks
+    power without serving the Entities, will bargain for more books, and proudly
+    shows her collection to naive collectors.</p><h3>Use</h3><p>PCs needing
+    specialist knowledge might find her shop or library. She can be beaten, but
+    it proves a false victory when she returns. She is usually near paranormal
+    books, including a couple of Leitners and the Catalogue of the Trapped
+    Dead.</p><h3>Notes</h3><p>Podcast name: Mary Keay.</p><p>She and The Book
+    Collector are two sides of the same coin.</p><p>See Catalogue of the Trapped
+    Dead (p270), Leitners (p267).</p><p><em>The Magnus Archives Roleplaying
+    Game, p240.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 2
+    effect: stress
+    stressAmount: 2
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 2 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 88a3943d3d61954b
+      label: Sorcery
+      contexts:
+        - sorcery
+      mode: levelOverride
+      value: 6
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>She whispers "A treat for The Flesh," and the targeted character must
+    succeed on a Might defense roll or take a serious injury as their flesh
+    convulses and shifts.</p>
+items: []
+effects: []
+folder: 0f8e958bdc835289
+sort: 4300
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '240'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Tome Hoarder
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!5d195f8d639e223c'

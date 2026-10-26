@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Artefacts
+color: null
+sorting: a
+_id: 23a662247bd5b3ec
+description: ''
+sort: 100000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!23a662247bd5b3ec'

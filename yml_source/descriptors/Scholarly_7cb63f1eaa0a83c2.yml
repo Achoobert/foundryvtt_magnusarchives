@@ -1,0 +1,1662 @@
+name: Scholarly
+type: descriptor
+_id: 7cb63f1eaa0a83c2
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>You studied, alone or with an instructor, and you are an expert in a
+    couple of fields.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Studied:</strong> Scholarly
+    offers no initial stat Pool bonus, but another skill
+    instead.</p></li><li><p><strong>Skill:</strong> You're trained in One
+    knowledge skill, such as philosophy, geography, or
+    history.</p></li><li><p><strong>Skill:</strong> You're trained in Another,
+    different knowledge skill, such as astronomy, biology, or
+    geology.</p></li><li><p><strong>Suggested Second Skill:</strong> Identifying
+    or researching.</p></li><li><p><strong>Suggested Inability:</strong> You
+    spend too long on scholarly pursuits to trust your empathy. You have an
+    inability in
+    @UUID[Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b]{Discerning
+    motive}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '26'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 0
+    intellect: 0
+  skillGrants: []
+  choiceGroups:
+    - id: cc3902cc-fc33-4ced-8969-02a63e563c1d
+      choose: 1
+      rank: trained
+      options:
+        - id: a3952372-1319-4f32-8422-8858de9aeaad
+          skillUuid: Compendium.magnusarchives.skills.Item.Ruyq1SdHHH0CAjbJ
+          customName: ''
+          snapshot:
+            name: Astronomy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in the study of the stars, planets, and
+                cosmology in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 53cca0a8-22ab-48f9-8907-64b1a2770e68
+          skillUuid: Compendium.magnusarchives.skills.Item.4XrJq6pn1RcVrbo7
+          customName: ''
+          snapshot:
+            name: Biology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You have a deep working knowledge of living systems,
+                including animals, plants, and insects.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: f0cb2fb7-126d-46f2-8d2f-e7d6b7622161
+          skillUuid: Compendium.magnusarchives.skills.Item.6EAeFLoptNeoy8we
+          customName: ''
+          snapshot:
+            name: Engineering
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can design, analyze, and create innovative solutions for
+                complex problems, utilizing scientific principles and
+                technological knowledge.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 1655c32f-b5e7-45d3-887d-72db559cd78a
+          skillUuid: Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC
+          customName: ''
+          snapshot:
+            name: Forensics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You know how to interpret physical evidence to work out what
+                happened at a location, such as a crime scene, or what led to an
+                object's current condition, such as a cause of death.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: ea155ecc-f51a-4de3-86a0-31f84448c0ec
+          skillUuid: Compendium.magnusarchives.skills.Item.13b2bdb00bf6fbad
+          customName: ''
+          snapshot:
+            name: Geography
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in earthly landscapes, countries, human
+                populations, and maps in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 92aac29a-b2fb-496c-8594-c15a859b3b21
+          skillUuid: Compendium.magnusarchives.skills.Item.5WZgpOhdtyF5lfdj
+          customName: ''
+          snapshot:
+            name: Geology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about Earth's structure, composition,
+                and processes, including earthquakes, volcanoes, and the
+                formation of natural resources.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 3c17ca12-fa96-4fdb-8723-dcad9f254f48
+          skillUuid: Compendium.magnusarchives.skills.Item.WwKxO9b2ETF6e6vq
+          customName: ''
+          snapshot:
+            name: History
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're well-versed in the study of past events, societies,
+                and cultures.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 4376eb4d-7179-4e91-8585-455aa0a84edf
+          skillUuid: Compendium.magnusarchives.skills.Item.USk9iDmN7dNunH2I
+          customName: ''
+          snapshot:
+            name: Mathematics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a whiz with numbers, calculations, and pattern
+                analysis.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 990fb551-b6fc-46ef-8ee0-b36b4ec3dae1
+          skillUuid: Compendium.magnusarchives.skills.Item.1d4c6135d4221600
+          customName: ''
+          snapshot:
+            name: Medicine
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're skilled in general medicine, a medical specialty,
+                nursing, dentistry, optometry, audiology, or a similar
+                practice.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 7c9db264-aece-4dfa-8185-71c7b0004ef9
+          skillUuid: Compendium.magnusarchives.skills.Item.8d7248fff87386d3
+          customName: ''
+          snapshot:
+            name: Occultism
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You study supernatural lore, including parapsychology,
+                paranormal events, and the existence of secret organisations,
+                and you have a working knowledge of tarot or a similar divining
+                practice. It does not usually include knowledge of the Entities
+                and their Avatars.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: df0f06a7-c009-4cfa-8812-7cd3673f6e84
+          skillUuid: Compendium.magnusarchives.skills.Item.2IRvR3ZWIIEStnDV
+          customName: ''
+          snapshot:
+            name: Philosophy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with critically analysing questions of
+                existence, knowledge, ethics, and similar fundamental
+                issues.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: bdc96910-400d-4f1d-83a6-ad05de11aa30
+          skillUuid: Compendium.magnusarchives.skills.Item.D1LtZa629twcMtFe
+          customName: ''
+          snapshot:
+            name: Physics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about the scientifically derived laws of
+                the physical world.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 15ea38ab-0527-45dc-8f4c-8410bb406b8c
+          skillUuid: Compendium.magnusarchives.skills.Item.dbd4639749e26c4b
+          customName: ''
+          snapshot:
+            name: Programming
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can code computers and computer architectures, writing
+                applications, developing new systems, and trying to infiltrate
+                protected digital systems.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 6a67bb04-29a7-42e0-839b-3fc68f16e8ab
+          skillUuid: Compendium.magnusarchives.skills.Item.XBkEFJaxQvgGEaZD
+          customName: ''
+          snapshot:
+            name: Psychology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with the study of human behaviour and the
+                therapies developed to address mental health.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: a78b011e-33a4-440d-8de9-fd73feaabdca
+          skillUuid: Compendium.magnusarchives.skills.Item.57a23c400d43de6e
+          customName: ''
+          snapshot:
+            name: Religion
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a pastor or religious leader in a particular faith,
+                and/or knowledgeable about the study of religious beliefs,
+                practices, and traditions.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+    - id: 873b3116-c692-43e3-89ac-d0d714ca6da8
+      choose: 1
+      rank: trained
+      options:
+        - id: 092e196f-0f2f-4441-8925-7e5331bc9090
+          skillUuid: Compendium.magnusarchives.skills.Item.Ruyq1SdHHH0CAjbJ
+          customName: ''
+          snapshot:
+            name: Astronomy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in the study of the stars, planets, and
+                cosmology in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: b0303380-b8a1-45e5-852e-c88a18f2e13f
+          skillUuid: Compendium.magnusarchives.skills.Item.4XrJq6pn1RcVrbo7
+          customName: ''
+          snapshot:
+            name: Biology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You have a deep working knowledge of living systems,
+                including animals, plants, and insects.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 253a6de4-6859-4bad-8331-5e08c5a61b61
+          skillUuid: Compendium.magnusarchives.skills.Item.6EAeFLoptNeoy8we
+          customName: ''
+          snapshot:
+            name: Engineering
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can design, analyze, and create innovative solutions for
+                complex problems, utilizing scientific principles and
+                technological knowledge.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 95a2810f-fd47-4389-86e7-dd48297b0160
+          skillUuid: Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC
+          customName: ''
+          snapshot:
+            name: Forensics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You know how to interpret physical evidence to work out what
+                happened at a location, such as a crime scene, or what led to an
+                object's current condition, such as a cause of death.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: cd849c09-3825-4afc-8942-03b8019bc13d
+          skillUuid: Compendium.magnusarchives.skills.Item.13b2bdb00bf6fbad
+          customName: ''
+          snapshot:
+            name: Geography
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in earthly landscapes, countries, human
+                populations, and maps in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 5b293808-3182-424d-8bab-5814ec37b67b
+          skillUuid: Compendium.magnusarchives.skills.Item.5WZgpOhdtyF5lfdj
+          customName: ''
+          snapshot:
+            name: Geology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about Earth's structure, composition,
+                and processes, including earthquakes, volcanoes, and the
+                formation of natural resources.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 08273d7b-c1a2-4a07-82e5-082f5d9c2b11
+          skillUuid: Compendium.magnusarchives.skills.Item.WwKxO9b2ETF6e6vq
+          customName: ''
+          snapshot:
+            name: History
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're well-versed in the study of past events, societies,
+                and cultures.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 84a29420-8dbf-45e8-8901-6fb5baa0ab3d
+          skillUuid: Compendium.magnusarchives.skills.Item.USk9iDmN7dNunH2I
+          customName: ''
+          snapshot:
+            name: Mathematics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a whiz with numbers, calculations, and pattern
+                analysis.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: b1ca4208-d0a5-41ba-8eb2-e7a704f806a4
+          skillUuid: Compendium.magnusarchives.skills.Item.1d4c6135d4221600
+          customName: ''
+          snapshot:
+            name: Medicine
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're skilled in general medicine, a medical specialty,
+                nursing, dentistry, optometry, audiology, or a similar
+                practice.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: afe7eebf-a273-40d2-8567-6703efeda11a
+          skillUuid: Compendium.magnusarchives.skills.Item.8d7248fff87386d3
+          customName: ''
+          snapshot:
+            name: Occultism
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You study supernatural lore, including parapsychology,
+                paranormal events, and the existence of secret organisations,
+                and you have a working knowledge of tarot or a similar divining
+                practice. It does not usually include knowledge of the Entities
+                and their Avatars.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: e8eaf9bf-4491-4feb-8585-f769c8fc456c
+          skillUuid: Compendium.magnusarchives.skills.Item.2IRvR3ZWIIEStnDV
+          customName: ''
+          snapshot:
+            name: Philosophy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with critically analysing questions of
+                existence, knowledge, ethics, and similar fundamental
+                issues.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: fdddebd8-a501-4d62-8f23-d1fd781b4ce3
+          skillUuid: Compendium.magnusarchives.skills.Item.D1LtZa629twcMtFe
+          customName: ''
+          snapshot:
+            name: Physics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about the scientifically derived laws of
+                the physical world.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: c65b9ad7-d963-4246-867a-d77e112da437
+          skillUuid: Compendium.magnusarchives.skills.Item.dbd4639749e26c4b
+          customName: ''
+          snapshot:
+            name: Programming
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can code computers and computer architectures, writing
+                applications, developing new systems, and trying to infiltrate
+                protected digital systems.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: b11ac546-33e6-4452-8b2c-da18d28e7a3f
+          skillUuid: Compendium.magnusarchives.skills.Item.XBkEFJaxQvgGEaZD
+          customName: ''
+          snapshot:
+            name: Psychology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with the study of human behaviour and the
+                therapies developed to address mental health.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 82d48d47-897f-4138-888b-ca5c7d637926
+          skillUuid: Compendium.magnusarchives.skills.Item.57a23c400d43de6e
+          customName: ''
+          snapshot:
+            name: Religion
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a pastor or religious leader in a particular faith,
+                and/or knowledgeable about the study of religious beliefs,
+                practices, and traditions.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 2200
+_key: '!items!7cb63f1eaa0a83c2'

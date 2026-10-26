@@ -1,0 +1,20 @@
+type: Item
+folder: 89f998e51b255ba8
+name: Third Tier
+color: null
+sorting: m
+_id: 271742a1f5446fae
+description: ''
+sort: 300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!271742a1f5446fae'

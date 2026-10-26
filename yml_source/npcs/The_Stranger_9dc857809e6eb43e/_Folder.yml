@@ -1,0 +1,20 @@
+_id: 9dc857809e6eb43e
+name: The Stranger
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 1200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!9dc857809e6eb43e'

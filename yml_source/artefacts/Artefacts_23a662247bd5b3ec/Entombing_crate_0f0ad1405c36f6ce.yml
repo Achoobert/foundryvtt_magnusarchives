@@ -1,0 +1,79 @@
+folder: 23a662247bd5b3ec
+name: Entombing crate
+type: artifact
+_id: 0f0ad1405c36f6ce
+sort: 1000
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: entombing-crate
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p><strong>Related Entity:</strong> The
+    Buried</p><p><strong>Stress:</strong> 3 on realizing the threat the crate
+    poses (and/or on being entombed).</p><p>Opening this old wooden crate while
+    it's empty draws The Buried's attention to the opener for four days,
+    wherever they go. If they stay awake for all 96 hours, nothing happens. If
+    they doze off, they wake sealed inside the crate in total darkness, pressed
+    in on every side by splintering wood.</p><p>One day passes outside for every
+    four inside. A trapped victim can try a Might-based escape, hindered by two
+    steps; each failure deals 1 Stress from splinters. They also take 1 Stress
+    for each hour of confinement as the space shrinks. Otherwise they must wait
+    for someone outside to open the crate. Anyone who dies in there isn't in the
+    crate when it's next opened.</p><p><strong>Fear:</strong> A distraction or
+    accident means the marked character falls asleep.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '256'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-buried
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1d6
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!0f0ad1405c36f6ce'

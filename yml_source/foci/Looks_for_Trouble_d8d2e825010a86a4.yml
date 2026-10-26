@@ -1,0 +1,245 @@
+_id: d8d2e825010a86a4
+name: Looks for Trouble
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: looks-for-trouble
+  description: >-
+    <p>You're a scrapper who meets problems head-on and physically. You don't
+    hide or back down, and your friends feel safer heading into danger with you
+    beside them. You probably dress loud so you stand
+    out.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Past events made you watch over another PC.
+    They're your default charge for your tier 2 Protector
+    ability.</p></li><li><p>One or two other PCs seem tough, and you secretly
+    hope to find out who's tougher.</p></li><li><p>When another PC is within
+    immediate range during a fight, they sometimes ease your attacks and
+    sometimes accidentally hinder them (50% chance each way, rolled per
+    fight).</p></li><li><p>You used to be in a relationship with another PC. It
+    ended long ago.</p></li></ol><p><strong>Additional Equipment:</strong> A
+    melee weapon of your choice.</p><p><strong>Minor Effect Suggestion:</strong>
+    The target is dazed for a round, with all its tasks
+    hindered.</p><p><strong>Major Effect Suggestion:</strong> A piece of
+    equipment your opponent wears or holds is destroyed.</p><p><strong>GM
+    Intrusions:</strong> Weapons break or fly out of your grip. Brawlers trip.
+    Things on the battlefield fall or collapse.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.380f5a1f8b9cee96]{Fists
+    of Fury},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6a199ba448392f9a]{Wound
+    Tender}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.58c56216d8bca651]{Protector},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.34a0072f08f96158]{Breaking}</p></li><li><p><strong>Tier
+    3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.81ad7e3007edb695]{Skill
+    With Attacks} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4a6b58cf42912f64]{Greater
+    Enhanced Potential}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.d1d30c5cf8983813]{Knock
+    Out}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.157171a38d55310c]{Mastery
+    With Attacks}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.e7cd4881b2203ed8]{Greater
+    Enhanced Might} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ef4834625aa29668]{Lethal
+    Damage}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 74-75
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-fists-of-fury
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.380f5a1f8b9cee96
+        abilitySnapshot:
+          name: Fists of Fury
+          description: Your unarmed attacks deal 2 extra points of damage.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-wound-tender
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6a199ba448392f9a
+        abilitySnapshot:
+          name: Wound Tender
+          description: You're trained in healing.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-protector
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.58c56216d8bca651
+        abilitySnapshot:
+          name: Protector
+          description: >-
+            Name one character as your charge. You can change who it is every
+            round, but you have only one at a time. While your charge is within
+            immediate range, they gain an asset on Speed defense tasks.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-breaking
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.34a0072f08f96158
+        abilitySnapshot:
+          name: Breaking
+          description: Your tasks to smash doors, containers and other objects are eased.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-skill-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.81ad7e3007edb695
+        abilitySnapshot:
+          name: Skill With Attacks
+          description: >-
+            Pick one attack type you aren't trained in: light, medium or heavy,
+            each bashing, bladed or ranged. You become trained in attacks with
+            that type of weapon. You can take this ability more than once,
+            choosing a different attack type each time.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-greater-enhanced-potential
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4a6b58cf42912f64
+        abilitySnapshot:
+          name: Greater Enhanced Potential
+          description: Gain 6 points to split among your stat Pools however you like.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-knock-out
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.d1d30c5cf8983813
+        abilitySnapshot:
+          name: Knock Out
+          description: >-
+            Make a melee attack that deals no damage. If it hits, make a second
+            Might-based roll; on a success a foe of level 3 or lower is knocked
+            unconscious for one minute. Each level of Effort can raise the foe
+            level you can affect by one or add a minute to the duration.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-mastery-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.157171a38d55310c
+        abilitySnapshot:
+          name: Mastery With Attacks
+          description: >-
+            Pick one attack type you're trained in (light, medium or heavy;
+            bashing, bladed or ranged). You become specialized in it. If you
+            aren't trained in any attack type yet, take Skill With Attacks
+            instead to become trained.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-greater-enhanced-might
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.e7cd4881b2203ed8
+        abilitySnapshot:
+          name: Greater Enhanced Might
+          description: Gain 6 points to your Might Pool.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-lethal-damage
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ef4834625aa29668
+        abilitySnapshot:
+          name: Lethal Damage
+          description: >-
+            Pick one of your attacks that deals points of damage: a weapon, your
+            unarmed attacks or a supernatural ability. It deals 5 extra points
+            of damage when it hits.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-04e862b038eddeec
+        from: t1-fists-of-fury
+        to: t2-protector
+      - id: connection-c89fdd32fa083b14
+        from: t1-fists-of-fury
+        to: t2-breaking
+      - id: connection-811c9aa1a0cfbddf
+        from: t1-wound-tender
+        to: t2-protector
+      - id: connection-5bfb10a5a299a71c
+        from: t1-wound-tender
+        to: t2-breaking
+      - id: connection-c00878b9ce439347
+        from: t2-protector
+        to: t3-skill-with-attacks
+      - id: connection-f7c8f471739056b4
+        from: t2-protector
+        to: t3-greater-enhanced-potential
+      - id: connection-414be00a179a509b
+        from: t2-breaking
+        to: t3-skill-with-attacks
+      - id: connection-1839e2ff98e2a5b0
+        from: t2-breaking
+        to: t3-greater-enhanced-potential
+      - id: connection-b85dd4eab8f1ca25
+        from: t3-skill-with-attacks
+        to: t4-knock-out
+      - id: connection-3ac7a0a976eb8694
+        from: t3-greater-enhanced-potential
+        to: t4-knock-out
+      - id: connection-292235b7bb3deeaf
+        from: t4-knock-out
+        to: t5-mastery-with-attacks
+      - id: connection-f37f00089424aaed
+        from: t5-mastery-with-attacks
+        to: t6-greater-enhanced-might
+      - id: connection-3e28b99f08d9d4dd
+        from: t5-mastery-with-attacks
+        to: t6-lethal-damage
+effects: []
+folder: null
+sort: 900
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!d8d2e825010a86a4'

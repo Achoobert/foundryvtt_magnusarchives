@@ -1,0 +1,110 @@
+_id: 9382b48d2c4b9a7f
+name: Clown Doll
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A doll, puppet or plaything inhabited by an aspect of The Stranger. It is
+    unsettling even on a shop shelf or a child's bed, and the reason becomes
+    clear when it moves.</p>
+  notes: >-
+    <p>A doll, puppet or plaything inhabited by an aspect of The Stranger. It is
+    unsettling even on a shop shelf or a child's bed, and the reason becomes
+    clear when it moves.</p><p><strong>Level:</strong> 3
+    (9)</p><p><strong>Related Entity:</strong> The Stranger</p><p><strong>Stress
+    on first realizing its horror:</strong> 1 (usually on a failed Intellect
+    defense roll)</p><p><strong>Health:</strong> 9</p><p><strong>Damage
+    Inflicted:</strong> 3 points of Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Speed defense as level 5 (due to
+    size); Stealth and disguise as level 6 (when not
+    moving)</p><h3>Combat</h3><p>It prefers surprise, arranging an apparent
+    accident such as a trip down the stairs. It may instead use one of the
+    following as its action.</p><p><strong>Cursed Effigy:</strong> It targets
+    one person at a time. On a failed Intellect defense roll, and if left alone
+    and unobserved for several hours, it buds a second doll that is an obvious
+    effigy of the target. The target must succeed on three Intellect defense
+    rolls (one per day) to escape, gaining 1 level of Stress on each failure. If
+    they fail three before succeeding on three, they are found dead, throat
+    crushed and jaw torn off, and the effigy is missing its jaw too. Finding and
+    separating the doll and effigy before then lifts the
+    curse.</p><p><strong>Play Dead:</strong> It falls limp and looks like an
+    ordinary doll. Treat it as an object of its level until it moves
+    again.</p><p><strong>Strangle:</strong> It wraps its fabric arms around the
+    target's throat. If successful, the target takes damage each round they fail
+    a Might defense roll, until they rip it away with a successful Might-based
+    roll.</p><h3>Interaction</h3><p>It only smiles its unsettling red
+    smile.</p><h3>Use</h3><p>Manageable for a group. A lone or surprised
+    character is in mortal danger. Clown dolls are sometimes found near
+    artefacts such as the calliope.</p><h3>Notes</h3><p>See Calliope
+    (p252).</p><p><em>The Magnus Archives Roleplaying Game, p206.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 9
+    baseMax: 9
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: a2ecaff011c9e333
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 5
+      visibility: gm
+      predicate: {}
+      description: <p>due to size</p>
+    - id: c9d906283e5847bc
+      label: Stealth and disguise
+      contexts:
+        - stealth
+      mode: levelOverride
+      value: 6
+      visibility: gm
+      predicate: {}
+      description: <p>when not moving</p>
+  gmIntrusion: <p>The character finds a second doll that looks somewhat like them.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 1000
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '206'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Clown Doll
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!9382b48d2c4b9a7f'

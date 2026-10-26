@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Solves Mysteries
+color: null
+sorting: a
+_id: 3a89d6acfc71fe0d
+description: ''
+sort: 1500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!3a89d6acfc71fe0d'

@@ -1,0 +1,20 @@
+type: Item
+folder: 110efe94da7fea57
+name: Fifth Tier
+color: null
+sorting: m
+_id: 47de16c09846823f
+description: ''
+sort: 500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!47de16c09846823f'

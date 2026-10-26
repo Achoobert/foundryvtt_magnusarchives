@@ -1,0 +1,100 @@
+_id: 021f176f0d56fab6
+name: The Plaguebearer
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A lanky man with watery blue eyes, unruly dark hair, feverish energy and
+    a cloud of flies. His diseases grow more virulent over time until he sits on
+    a throne of fused, diseased bodies.</p>
+  notes: >-
+    <p>A lanky man with watery blue eyes, unruly dark hair, feverish energy and
+    a cloud of flies. His diseases grow more virulent over time until he sits on
+    a throne of fused, diseased bodies.</p><p><strong>Level:</strong> 5
+    (15)</p><p><strong>Related Entity:</strong> The Corruption and The
+    Extinction</p><p><strong>Stress on first realizing its horror:</strong> 2
+    (usually on a failed Intellect defense roll)</p><p><strong>Health:</strong>
+    21</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Resisting disease and poison as
+    level 10</p><h3>Combat</h3><p>He relies mostly on his
+    abilities.</p><p><strong>Infect:</strong> A target he chooses in immediate
+    range must succeed on a Might defense roll or catch a novel pathogen (a
+    level 5 disease) and gain 2 Stress. Each day they fail a Might defense roll,
+    they take a serious injury. Three successful Might defense rolls throw it
+    off.</p><p><strong>Waxing Virulence:</strong> At first diseased targets
+    trigger a GM intrusion on a roll of 1 or 2. Every few days the range grows
+    (1-3, then 1-4 and so on), each intrusion revealing a grotesque new
+    symptom.</p><p><strong>Ascend the Throne:</strong> No more than once every
+    few years, he uses Infect on everyone in a 2-mile (3 km) radius. The
+    infected are drawn to him unless they succeed on an Intellect defense roll
+    each day.</p><p><strong>Resurgent:</strong> If killed rather than sealed
+    away, he reforms somewhere else within a few
+    months.</p><h3>Interaction</h3><p>Best met in a hazmat suit. He cares about
+    little but epidemiology.</p><h3>Use</h3><p>Within the first year of his
+    return the PCs might deal with him, at the cost of some illness. Once his
+    virulence waxes and he takes his throne, he is far
+    deadlier.</p><h3>Notes</h3><p>Podcast name: John Amherst.</p><p><em>The
+    Magnus Archives Roleplaying Game, p233.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 5
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: df7e246008ce21fb
+      label: Resisting disease and poison
+      contexts:
+        - resist-disease
+      mode: levelOverride
+      value: 10
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>The character's hazmat suit or other protection rips.</p>
+items: []
+effects: []
+folder: 104cdb3501ccefe7
+sort: 3500
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '233'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Plaguebearer
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!021f176f0d56fab6'

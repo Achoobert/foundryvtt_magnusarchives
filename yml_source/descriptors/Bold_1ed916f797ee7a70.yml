@@ -1,0 +1,151 @@
+name: Bold
+type: descriptor
+_id: 1ed916f797ee7a70
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Self-assertive, confident and energetic. Some call you brash; you act
+    rather than wait to learn more.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Energetic:</strong> +2 to
+    your Speed Pool.</p></li><li><p><strong>Skill:</strong> You're trained in
+    @UUID[Compendium.magnusarchives.skills.Item.jUTYItXojqpYujYN]{Initiative}.</p></li><li><p><strong>Suggested
+    Second Skill:</strong> Intellect defense or
+    endurance.</p></li><li><p><strong>Suggested Inability:</strong> You were
+    never good at studying or retaining facts. You have an inability in
+    @UUID[Compendium.magnusarchives.skills.Item.1ed6a9dae4acd3cb]{Researching}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '19'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 2
+    intellect: 0
+  skillGrants:
+    - id: a9d09a40-5211-4786-84bf-8247c0483486
+      skillUuid: Compendium.magnusarchives.skills.Item.jUTYItXojqpYujYN
+      customName: ''
+      rank: trained
+      snapshot:
+        name: Initiative
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: speed
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>Your reactions are honed, easing your initiative tasks in
+            combat.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: combat
+          contexts: []
+          initiative: true
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 100
+_key: '!items!1ed916f797ee7a70'

@@ -1,0 +1,20 @@
+_id: 7aec8fbbb9ac4630
+name: The Slaughter
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 1000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!7aec8fbbb9ac4630'

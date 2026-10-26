@@ -1,0 +1,101 @@
+_id: c4052c5fb2d6f93d
+name: Mirror Haunt
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Intangible aspects of The Eye that feed by watching. The feeling of being
+    watched grows until the victim can't eat or sleep, and is finally driven to
+    an early grave.</p>
+  notes: >-
+    <p>Intangible aspects of The Eye that feed by watching. The feeling of being
+    watched grows until the victim can't eat or sleep, and is finally driven to
+    an early grave.</p><p><strong>Level:</strong> 3 (9)</p><p><strong>Related
+    Entity:</strong> The Eye</p><p><strong>Stress on first realizing its
+    horror:</strong> 2 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 6</p><p><strong>Damage
+    Inflicted:</strong> 3 points of Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Perception and stealth as level
+    10</p><h3>Combat</h3><p>An invisible, intangible presence that usually can't
+    be fought, only endured.</p><p><strong>Instigating Event:</strong> Someone
+    looking into a reflective surface touched by the Entities, such as a mirror
+    of beholding, may glimpse a passing haunt. If they meet its gaze, they must
+    succeed on an Intellect defense roll or become its
+    subject.</p><p><strong>Shedding Attention:</strong> Only extreme measures
+    shed a haunt: passing through The Distortion so it loses the target,
+    persuading an Avatar of The Eye to call it off, blinding oneself (perhaps
+    temporarily, but for at least a week), or somehow making the haunt solid and
+    killing it.</p><p><strong>Subject of Observation:</strong> The subject
+    always feels its gaze, gaining 3 Stress each day. After three full days
+    their GM intrusion range rises by 1 (1-2 on a d20), and it may rise again
+    every few weeks.</p><h3>Interaction</h3><p>Once gained, its attention never
+    wavers.</p><h3>Use</h3><p>Not immediately lethal, but it may drive PCs to
+    seek help from dangerous sources, such as a dabbler or a collector of Entity
+    books.</p><h3>Notes</h3><p>See Mirror of beholding (p260), The Distortion
+    (p216), Dabbler (p209).</p><p><em>The Magnus Archives Roleplaying Game,
+    p228.</em></p>
+  gmNotes: ''
+  level: 3
+  health:
+    value: 6
+    baseMax: 6
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 022d2a9e5fa8f8db
+      label: Perception and stealth
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 10
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The watched character catches another glimpse of the haunt in a
+    reflection at a bad moment and, on a failed Intellect defense roll, trips,
+    drops something important or cries out.</p>
+items: []
+effects: []
+folder: e99bd0352a567807
+sort: 3000
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '228'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Mirror Haunt
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!c4052c5fb2d6f93d'

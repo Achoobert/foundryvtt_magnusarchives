@@ -1,0 +1,75 @@
+folder: 23a662247bd5b3ec
+name: Death's game piece
+type: artifact
+_id: ab18c1de68d96e33
+sort: 900
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: deaths-game-piece
+  description: >-
+    <p><strong>Level:</strong> 1d6+2</p><p><strong>Related Entity:</strong> The
+    End</p><p><strong>Stress:</strong> 3 on acquiring one of the pieces and
+    understanding how to use it; 1 for each game played with it.</p><p>A domino,
+    die, chess piece or similar token carved from old bone. While a game using
+    one is played, its players are wrapped in a bubble of timelessness; no time
+    passes outside. The bubble collapses if a player tries to affect anyone or
+    anything outside it, if anyone leaves, or if someone
+    wins.</p><p><strong>Fear:</strong> Death (p210) takes an interest in one of
+    the players.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '256'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-end
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1d6+2
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!ab18c1de68d96e33'

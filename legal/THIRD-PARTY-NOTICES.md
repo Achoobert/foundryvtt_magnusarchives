@@ -6,7 +6,7 @@ This product is an independent production and is not affiliated with Monte Cook 
 
 Cypher is a trademark of Monte Cook Games, LLC. This project is not affiliated with or endorsed by Monte Cook Games, LLC.
 
-This release includes rules content reviewed against the 2026 *Cypher Reference Document* and redistributed under the applicable 2026 Cypher Open License. Content provenance and the affected system Compendiums are recorded in `CONTENT-SOURCES.md`. The Cypher Open License project site is <https://col.montecookgames.com/>.
+This release includes rules content reviewed against the 2026 _Cypher Reference Document_ and redistributed under the applicable 2026 Cypher Open License. Content provenance and the affected system Compendiums are recorded in `CONTENT-SOURCES.md`. The Cypher Open License project site is <https://col.montecookgames.com/>.
 
 ## Legacy technical reference
 

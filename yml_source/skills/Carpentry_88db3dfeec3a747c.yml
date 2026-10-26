@@ -1,0 +1,67 @@
+folder: null
+name: Carpentry
+type: skill
+_id: 88db3dfeec3a747c
+img: systems/magnusarchives/assets/icons/magnusskill.webp
+system:
+  defaultPool: intellect
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Your woodworking expertise allows you to craft a wide range of objects
+    and structures, from furniture and cabinetry to home framing and related
+    structural work.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '16'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  rank: untrained
+  category: trade
+  contexts: []
+  initiative: false
+  acquisition:
+    minimumTier: 1
+    grantedByUuid: ''
+    notes: ''
+effects: []
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 300
+_key: '!items!88db3dfeec3a747c'

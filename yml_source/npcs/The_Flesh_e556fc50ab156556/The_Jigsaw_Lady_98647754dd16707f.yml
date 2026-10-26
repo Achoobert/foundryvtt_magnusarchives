@@ -1,0 +1,111 @@
+_id: 98647754dd16707f
+name: The Jigsaw Lady
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A round-faced old woman in a lilac dressing gown, in a tidy suburban home
+    full of jigsaws, who is a contract killer. Given an object from the victim,
+    she curses them to lose body parts one parcel at a time until nothing is
+    left.</p>
+  notes: >-
+    <p>A round-faced old woman in a lilac dressing gown, in a tidy suburban home
+    full of jigsaws, who is a contract killer. Given an object from the victim,
+    she curses them to lose body parts one parcel at a time until nothing is
+    left.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Flesh</p><p><strong>Health:</strong>
+    18</p><p><strong>Damage Inflicted:</strong> 1 point of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Speed defense as level 2;
+    Attacks as level 2</p><h3>Combat</h3><p>She rarely attacks directly, but her
+    sorcerous defenses are potent.</p><p><strong>Amputating Defense:</strong>
+    Anyone attacking her must first succeed on an Intellect defense roll. On a
+    failure they instead spend the next minute chewing off their own hand,
+    gaining 2 Stress each round. It ends early if they succeed on an Intellect
+    defense roll on their turn, or once they have gained 6 Stress and the hand
+    comes off, giving a serious injury.</p><p><strong>Jigsaw Curse:</strong>
+    Given a name and an object stolen from that person, she performs a ritual
+    and starts a new jigsaw. Every day or two the victim receives a parcel
+    holding a severed body part, starting with extremities. On a failed
+    Intellect defense roll they can't help opening it, and within hours lose
+    that part by apparent accident, the wound already healed, gaining 1 Stress
+    that can't be recovered until the curse lifts. Resisting five parcels ends
+    the curse. If the victim is murdered first, the curse passes to the
+    killer.</p><h3>Interaction</h3><p>She offers coffee or tea, but once
+    business starts her stare turns flinty and dangerous.</p><h3>Use</h3><p>Easy
+    to underestimate. Her true horror shows if a PC is
+    cursed.</p><h3>Notes</h3><p>Podcast name: Angela.</p><p><em>The Magnus
+    Archives Roleplaying Game, p223.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 18
+    baseMax: 18
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 1
+    effect: stress
+    stressAmount: 1
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 1 point of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: e27472a996d08b31
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 2
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 1be3c20e0552de1c
+      label: Attacks
+      contexts:
+        - defense
+      mode: levelOverride
+      value: 2
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character receives a brown-paper parcel with their name on it, marked
+    FOR IMMEDIATE CONSIDERATION.</p>
+items: []
+effects: []
+folder: e556fc50ab156556
+sort: 2400
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '223'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Jigsaw Lady
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!98647754dd16707f'

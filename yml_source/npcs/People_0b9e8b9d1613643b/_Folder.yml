@@ -1,0 +1,20 @@
+_id: 0b9e8b9d1613643b
+name: People
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 1700
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!0b9e8b9d1613643b'

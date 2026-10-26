@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Wears a Badge
+color: null
+sorting: a
+_id: ad23459f125cd3c8
+description: ''
+sort: 1600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!ad23459f125cd3c8'

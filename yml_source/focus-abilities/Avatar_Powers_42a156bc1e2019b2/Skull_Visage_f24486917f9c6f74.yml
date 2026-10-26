@@ -1,0 +1,84 @@
+name: Skull Visage
+type: ability
+_id: f24486917f9c6f74
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-end-skull-visage
+  description: >-
+    <p><strong>Cost:</strong> 4 Intellect points and 3 Stress.</p><p>Your face
+    briefly flickers into a terrifying animated skull. Up to five chosen targets
+    who see you and are affected by your attack are frozen by fear of death for
+    the next two rounds.</p><p>Action.</p><p><em>Supernatural ability.</em></p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '92'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - avatar
+    - the-end
+    - supernatural
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 4
+  category: focus
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 4
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 42a156bc1e2019b2
+sort: 18500
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!f24486917f9c6f74'

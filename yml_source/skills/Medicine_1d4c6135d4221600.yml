@@ -1,0 +1,66 @@
+folder: null
+name: Medicine
+type: skill
+_id: 1d4c6135d4221600
+img: systems/magnusarchives/assets/icons/magnusskill.webp
+system:
+  defaultPool: intellect
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>You're skilled in general medicine, a medical specialty, nursing,
+    dentistry, optometry, audiology, or a similar practice.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '16'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  rank: untrained
+  category: knowledge
+  contexts: []
+  initiative: false
+  acquisition:
+    minimumTier: 1
+    grantedByUuid: ''
+    notes: ''
+effects: []
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 2800
+_key: '!items!1d4c6135d4221600'

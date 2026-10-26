@@ -1,0 +1,160 @@
+_id: 0c98c17af8e4610f
+name: 'Serves as an Avatar: The Desolation'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-desolation
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Desolation.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Desolation power:</strong> Choose
+    one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c10693fd39f818e6]{Candle
+    Flesh},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.1b493e8d7f42c49b]{Conflagration},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.54d845dbcccfe641]{Fiery
+    Shimmer}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 92
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-desolation
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-candle-flesh
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c10693fd39f818e6
+        abilitySnapshot:
+          name: Candle Flesh
+          description: >-
+            Your flesh turns warm and soft as candle wax. You spend this round
+            reshaping your wounds and move one step up the damage track.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-conflagration
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.1b493e8d7f42c49b
+        abilitySnapshot:
+          name: Conflagration
+          description: >-
+            Heat and flame burst at a point near you. Everything within an
+            immediate area of it suffers 5 points of damage (a serious injury
+            for a PC). Flammable things may catch fire.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-fiery-shimmer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.54d845dbcccfe641
+        abilitySnapshot:
+          name: Fiery Shimmer
+          description: >-
+            For one hour your skin glows like a thin screen over a bonfire. You
+            gain an extra step on the damage track (like the Tough ability) and
+            are immune to fire and heat damage.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-94cfdabf3dad2770
+        from: t1-sense-avatar
+        to: t4-candle-flesh
+      - id: connection-dff1409f5d56e0d1
+        from: t1-sense-avatar
+        to: t4-conflagration
+      - id: connection-428690562ec2ec81
+        from: t1-sense-avatar
+        to: t4-fiery-shimmer
+effects: []
+folder: 56cfb56d318cca7a
+sort: 400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!0c98c17af8e4610f'

@@ -1,0 +1,254 @@
+_id: bfe57bdafdb67a42
+name: Learns Quickly
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: learns-quickly
+  description: >-
+    <p>You don't have your dream job, but you get by. Events may have pushed you
+    here, or your break just hasn't come yet. You work hard, handle trouble as
+    it comes and pick things up fast. You dress to blend in, because standing
+    out draws the wrong attention.</p><p><strong>Connection:</strong> Choose one
+    of the following with your group.</p><ol><li><p>Another PC helped you land
+    your current job.</p></li><li><p>Through no fault of their own, another PC
+    got you fired from your last job.</p></li><li><p>Another PC is your
+    cousin.</p></li><li><p>You're fairly sure another PC hates you, though you
+    don't know why.</p></li></ol><p><strong>Additional Equipment:</strong> Two
+    tickets to a show at a local cinema.</p><p><strong>Minor Effect
+    Suggestion:</strong> Your next task, attack or defense roll within one
+    minute is eased.</p><p><strong>Major Effect Suggestion:</strong> Treat your
+    next task, attack or defense roll within one minute as a natural
+    18.</p><p><strong>GM Intrusions:</strong> Accidents and mistakes are great
+    teachers.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.de0f872612d2735b]{Enhanced
+    Intellect},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.20d7cf2e29919e17]{Picked
+    Up a Few Things}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.490a0233e825dfe5]{Quick
+    Study}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.3dea4b4e79974cc6]{Enhanced
+    Intellect Edge} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f573d22d877760cc]{Flex
+    Skill}. Either way, you also gain
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.1eca5da328efaa0d]{Hard
+    to Distract}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.56006ee2b86bf474]{Pay
+    It Forward}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.de0f872612d2735b]{Enhanced
+    Intellect},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.5e627109d9f33691]{Learned
+    a Few Things}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.d2e084e19ba616be]{Two
+    Things at Once} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.048954c5a7324f64]{Skill
+    With Defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 72-73
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-enhanced-intellect
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.de0f872612d2735b
+        abilitySnapshot:
+          name: Enhanced Intellect
+          description: Gain 3 points to your Intellect Pool.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-picked-up-a-few-things
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.20d7cf2e29919e17
+        abilitySnapshot:
+          name: Picked Up a Few Things
+          description: You're trained in one noncombat task you aren't already trained in.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-quick-study
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.490a0233e825dfe5
+        abilitySnapshot:
+          name: Quick Study
+          description: >-
+            After the first attempt, you gain an asset on repeated similar
+            tasks, like working the same device again or attacking the same foe.
+            The benefit fades once you move to a different task, until you
+            return to it.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-enhanced-intellect-edge
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.3dea4b4e79974cc6
+        abilitySnapshot:
+          name: Enhanced Intellect Edge
+          description: Gain +1 to your Intellect Edge.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-flex-skill
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f573d22d877760cc
+        abilitySnapshot:
+          name: Flex Skill
+          description: >-
+            At the start of each day, pick one task (not an attack or defense)
+            to concentrate on. You're trained in it for the rest of the day.
+            This can't raise a skill you're already trained in to specialized.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t3-hard-to-distract
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.1eca5da328efaa0d
+        abilitySnapshot:
+          name: Hard to Distract
+          description: >-
+            You're trained in Intellect defense tasks. You gain this alongside
+            whichever tier 3 ability you choose.
+        tier: 3
+        position:
+          x: 2
+          'y': null
+      - id: t4-pay-it-forward
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.56006ee2b86bf474
+        abilitySnapshot:
+          name: Pay It Forward
+          description: >-
+            When you suggest something about another character's next action
+            (not an attack), their action is eased for one minute.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-enhanced-intellect
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.de0f872612d2735b
+        abilitySnapshot:
+          name: Enhanced Intellect
+          description: Gain 3 points to your Intellect Pool.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t5-learned-a-few-things
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.5e627109d9f33691
+        abilitySnapshot:
+          name: Learned a Few Things
+          description: >-
+            You're trained in two areas of knowledge of your choice, or
+            specialized in one.
+        tier: 5
+        position:
+          x: 1
+          'y': null
+      - id: t6-two-things-at-once
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.d2e084e19ba616be
+        abilitySnapshot:
+          name: Two Things at Once
+          description: You split your attention and take two separate actions this round.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.048954c5a7324f64
+        abilitySnapshot:
+          name: Skill With Defense
+          description: >-
+            Pick one defense task you aren't trained in: Might defense, Speed
+            defense or Intellect defense. You become trained in it.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-f8c9e288059ed33e
+        from: t1-enhanced-intellect
+        to: t2-quick-study
+      - id: connection-6aeef2ecba67b57b
+        from: t1-picked-up-a-few-things
+        to: t2-quick-study
+      - id: connection-93bf6a257e6978b0
+        from: t2-quick-study
+        to: t3-enhanced-intellect-edge
+      - id: connection-baa27e9c91f814ad
+        from: t2-quick-study
+        to: t3-flex-skill
+      - id: connection-5af57ed045b08a2b
+        from: t2-quick-study
+        to: t3-hard-to-distract
+      - id: connection-90673a80934c71af
+        from: t3-enhanced-intellect-edge
+        to: t4-pay-it-forward
+      - id: connection-595a183a26738a3e
+        from: t3-flex-skill
+        to: t4-pay-it-forward
+      - id: connection-e9b33ca754af4887
+        from: t3-hard-to-distract
+        to: t4-pay-it-forward
+      - id: connection-f5a0133d0bfb6816
+        from: t4-pay-it-forward
+        to: t5-enhanced-intellect
+      - id: connection-0a74787217dc4b7b
+        from: t4-pay-it-forward
+        to: t5-learned-a-few-things
+      - id: connection-1de4aa4d22bc513b
+        from: t5-enhanced-intellect
+        to: t6-two-things-at-once
+      - id: connection-1ce3417dffe66f2f
+        from: t5-enhanced-intellect
+        to: t6-skill-with-defense
+      - id: connection-619b3f2511d1ee7a
+        from: t5-learned-a-few-things
+        to: t6-two-things-at-once
+      - id: connection-39de0bd691f15e35
+        from: t5-learned-a-few-things
+        to: t6-skill-with-defense
+effects: []
+folder: null
+sort: 800
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!bfe57bdafdb67a42'

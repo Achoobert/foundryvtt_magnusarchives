@@ -1,0 +1,99 @@
+_id: af28e1ce7cc270bb
+name: Lonesome Crowd
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A murmuring crowd in oddly quiet neighborhoods that turns out to have no
+    people in it, only blurred faces, leaving whoever enters completely alone.
+    Those who never escape become part of it.</p>
+  notes: >-
+    <p>A murmuring crowd in oddly quiet neighborhoods that turns out to have no
+    people in it, only blurred faces, leaving whoever enters completely alone.
+    Those who never escape become part of it.</p><p><strong>Level:</strong> 5
+    (15)</p><p><strong>Related Entity:</strong> The Lonely</p><p><strong>Stress
+    on first realizing its horror:</strong> 1 (usually on a failed Intellect
+    defense roll)</p><p><strong>Health:</strong> 33</p><p><strong>Damage
+    Inflicted:</strong> 2 points of Stress</p><p><strong>Movement:</strong>
+    Immediate</p><p><strong>Modifications:</strong> Speed defense as level
+    2</p><h3>Combat</h3><p>It is slow, but it automatically draws in and
+    envelops everyone in immediate range who fails an Intellect defense roll.
+    Enveloped targets face the following.</p><p><strong>Escaping the
+    Crowd:</strong> An enveloped target may attempt an Intellect defense roll
+    each round while concentrating on someone they are close to, such as family,
+    a friend, a pet or a lover. Three successes win them free. Targets holding
+    hands ease the roll by one step per person beyond the
+    first.</p><p><strong>Isolating Jostling:</strong> An enveloped target gains
+    2 Stress each minute they remain inside, from the jostling and from
+    recognizing what the crowd is.</p><p><strong>Lost to the Crowd:</strong> A
+    target who fails three defense rolls before succeeding on three is lost
+    forever, becoming another blurred, screaming face.</p><p><strong>Protective
+    Crush:</strong> For anyone caught inside, attempts to physically damage the
+    crowd are hindered by three steps.</p><h3>Interaction</h3><p>It flows this
+    way and that with no purpose but isolating whoever joins
+    it.</p><h3>Use</h3><p>Very dangerous to a lone PC, much less to a group that
+    sticks together. It may seek out a PC who explores alone, has isolating
+    traits, or is marked by the paranormal.</p><p><em>The Magnus Archives
+    Roleplaying Game, p225.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 33
+    baseMax: 33
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 2
+    effect: stress
+    stressAmount: 2
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 2 points of Stress
+  movement:
+    category: immediate
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 6199730a6f12bbbe
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 2
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>The character is jostled especially hard and gains 3 Stress.</p>
+items: []
+effects: []
+folder: 68eccec7b4cc2000
+sort: 2700
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '225'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Lonesome Crowd
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!af28e1ce7cc270bb'

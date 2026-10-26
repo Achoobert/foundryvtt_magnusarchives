@@ -1,0 +1,20 @@
+type: Item
+folder: 7f429fa06310212f
+name: Fourth Tier
+color: null
+sorting: m
+_id: 4a1e2fab5bbb5c8a
+description: ''
+sort: 400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!4a1e2fab5bbb5c8a'

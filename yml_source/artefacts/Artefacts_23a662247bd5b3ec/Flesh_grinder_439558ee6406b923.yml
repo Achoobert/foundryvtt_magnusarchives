@@ -1,0 +1,78 @@
+folder: 23a662247bd5b3ec
+name: Flesh grinder
+type: artifact
+_id: 439558ee6406b923
+sort: 1100
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: flesh-grinder
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Flesh</p><p><strong>Stress:</strong> 3 on recognizing what it can do; 2 with
+    each use.</p><p>A rusty antique iron meat grinder with a vise clamp and
+    crank. While no one has claimed it, each new person who sees it must succeed
+    on an Intellect defense roll or become fascinated and claim it.</p><p>Its
+    claimant (or anyone who identifies it) can regrow a lost finger, hand, foot,
+    arm or leg by feeding the stump into the funnel and cranking until a new
+    limb emerges from the mince. The new tissue can be reattached with full use,
+    or put to some other purpose.</p><p>Someone fascinated with the grinder must
+    succeed on an Intellect defense roll each day or use it even when they have
+    no need.</p><p><strong>Fear:</strong> The user can't stop themselves feeding
+    another hand, foot or limb into the grinder, destroying the original.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '257'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!439558ee6406b923'

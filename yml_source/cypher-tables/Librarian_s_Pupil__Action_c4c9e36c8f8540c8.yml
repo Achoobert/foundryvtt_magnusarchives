@@ -1,0 +1,254 @@
+_id: c4c9e36c8f8540c8
+name: 'Librarian''s Pupil: Action'
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+description: <p>The Magnus Archives Roleplaying Game (2024), p110.</p>
+results:
+  - _id: 8ffb87cce540615d
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 1
+      - 15
+    weight: 15
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 0
+    type: 0
+    text: Melee attack
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.8ffb87cce540615d'
+  - _id: 24b3ea339a3801ba
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 16
+      - 30
+    weight: 15
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 1
+    type: 0
+    text: Ranged attack
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.24b3ea339a3801ba'
+  - _id: ad3d61f7b0aa5cc5
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 31
+      - 40
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 2
+    type: 0
+    text: Speed defense
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.ad3d61f7b0aa5cc5'
+  - _id: b801d4899d1a1a86
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 41
+      - 50
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 3
+    type: 0
+    text: Might defense
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.b801d4899d1a1a86'
+  - _id: 3c7c3a366e0327d4
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 51
+      - 60
+    weight: 10
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 4
+    type: 0
+    text: Intellect defense
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.3c7c3a366e0327d4'
+  - _id: bc284197b7c9e5e7
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 61
+      - 68
+    weight: 8
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 5
+    type: 0
+    text: Gymnastics
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.bc284197b7c9e5e7'
+  - _id: 0b3866b086c1df5b
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 69
+      - 76
+    weight: 8
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 6
+    type: 0
+    text: Endurance
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.0b3866b086c1df5b'
+  - _id: ee3305fe7a2cdcec
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 77
+      - 84
+    weight: 8
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 7
+    type: 0
+    text: Driving
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.ee3305fe7a2cdcec'
+  - _id: 363a25799ee835fd
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 85
+      - 92
+    weight: 8
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 8
+    type: 0
+    text: Equipment operation
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.363a25799ee835fd'
+  - _id: 0ea78b4be2785adf
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 93
+      - 94
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 9
+    type: 0
+    text: Stealth
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.0ea78b4be2785adf'
+  - _id: 52a7c696287ec46d
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 95
+      - 96
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 10
+    type: 0
+    text: Initiative
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.52a7c696287ec46d'
+  - _id: c1b62b98dd5bbf66
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 97
+      - 98
+    weight: 2
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 11
+    type: 0
+    text: Perception
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.c1b62b98dd5bbf66'
+  - _id: a6b3fe6a25a796dd
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 99
+      - 99
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 12
+    type: 0
+    text: Performance
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.a6b3fe6a25a796dd'
+  - _id: 8e804e1c3d6df6e8
+    img: systems/magnusarchives/assets/icons/magnuscypher.webp
+    range:
+      - 100
+      - 100
+    weight: 1
+    drawn: false
+    flags:
+      magnusarchives:
+        cypherImport:
+          sourceTableId: librarians-pupil
+          sourceResultIndex: 13
+    type: 0
+    text: Tracking
+    documentCollection: null
+    documentId: null
+    _key: '!tables.results!c4c9e36c8f8540c8.8e804e1c3d6df6e8'
+replacement: true
+displayRoll: true
+formula: 1d100
+folder: null
+sort: 300000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: librarians-pupil
+      sourcePage: '110'
+_key: '!tables!c4c9e36c8f8540c8'

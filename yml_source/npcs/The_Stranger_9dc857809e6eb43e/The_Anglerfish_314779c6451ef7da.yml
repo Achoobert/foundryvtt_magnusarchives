@@ -1,0 +1,108 @@
+_id: 314779c6451ef7da
+name: The Anglerfish
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A hidden predator that dangles a humanoid lure into the light to draw
+    victims into the dark, where it takes them and their skin.</p>
+  notes: >-
+    <p>A hidden predator that dangles a humanoid lure into the light to draw
+    victims into the dark, where it takes them and their
+    skin.</p><p><strong>Level:</strong> 7 (21)</p><p><strong>Related
+    Entity:</strong> The Stranger</p><p><strong>Stress on first realizing its
+    horror:</strong> 3 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 23</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Stealth as level 8; Persuasion
+    as level 2</p><h3>Combat</h3><p>It bites, but only a target who moves to
+    help its humanoid lure or follows the lure into the
+    darkness.</p><p><strong>Skinner:</strong> The skin of a target it bites
+    begins to lift and peel. A target killed by these bites is usually never
+    seen again as they were (see Allied Skin Shell).</p><p><strong>Allied Skin
+    Shell:</strong> A Skinner victim may return later as a taxidermized skin
+    shell. The Anglerfish may appear near skin shells made from past victims,
+    which coax or trick a target toward its
+    lure.</p><p><strong>Withdraw:</strong> If directly targeted or at risk of
+    being revealed, it folds its lure at the waist and jerks it back into the
+    darkness, then escapes unseen from every onlooker who fails a perception
+    task against its stealth (level 8).</p><h3>Interaction</h3><p>It speaks only
+    through its lure, whose mouth never moves, repeating one flat, mechanical
+    phrase meant to entice prey into the dark, such as an invitation to come and
+    look at something.</p><h3>Use</h3><p>The PCs can encounter it and survive if
+    they don't take the bait. Anyone who does is in serious danger, even with
+    the whole group helping.</p><h3>Notes</h3><p>See Skin shell
+    (p238).</p><p><em>The Magnus Archives Roleplaying Game, p197.</em></p>
+  gmNotes: ''
+  level: 7
+  health:
+    value: 23
+    baseMax: 23
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 7
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: faf3c3fced47be47
+      label: Stealth
+      contexts:
+        - stealth
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: c0505ed01321f8ec
+      label: Persuasion
+      contexts:
+        - persuasion
+      mode: levelOverride
+      value: 2
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>A character who sees The Anglerfish withdraw its lure must succeed on an
+    Intellect defense roll or gain 3 Stress.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 200
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '197'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Anglerfish
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!314779c6451ef7da'

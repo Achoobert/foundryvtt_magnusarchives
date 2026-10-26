@@ -1,0 +1,92 @@
+_id: 4e82203180b37586
+name: The Flesh Hive
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A woman turned into a honeycomb of holes crawling with silver worms,
+    spreading corruption and feeding on the fear it causes.</p>
+  notes: >-
+    <p>A woman turned into a honeycomb of holes crawling with silver worms,
+    spreading corruption and feeding on the fear it
+    causes.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Corruption</p><p><strong>Stress on first realizing its
+    horror:</strong> 3 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 23</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><h3>Combat</h3><p>She coughs up a silver worm at a target in
+    immediate range, inflicting a serious injury on a
+    hit.</p><p><strong>Burrowing Worms:</strong> A target bitten by worms must
+    succeed on a difficulty 3 Speed-based task the next round to remove them. If
+    they (and any helping ally) fail, a worm gets inside: a level 5 disease
+    needing three successful Might defense rolls (one per day) to clear. Each
+    failure moves the target one step down the damage track, and three failures
+    before three successes turn them into a colony under The Corruption's
+    control.</p><p><strong>Worm Cascade:</strong> Once per hour she releases all
+    her worms to swarm a short range for one round. Everything in the area is
+    attacked, gaining 3 Stress on a hit and becoming subject to Burrowing
+    Worms.</p><h3>Interaction</h3><p>She opposes The Eye and other Entities on
+    the rise, and seeks to corrupt and destroy their servants, sometimes making
+    short-term alliances to do so.</p><h3>Use</h3><p>Silver worms and colonies
+    may be the first sign she is near. If she is found, or finds the PCs, their
+    best hope is to run and regroup.</p><h3>Notes</h3><p>Podcast name: Jane
+    Prentiss.</p><p>Colony: level 2; releases a level 3 worm swarm that attacks
+    everything in short range for one round, destroying the colony; targets hit
+    are subject to Burrowing Worms.</p><p>Most worms she releases shrivel, but a
+    few hide and become later silver worm threats. See Silver worm
+    (p237).</p><p><em>The Magnus Archives Roleplaying Game, p218.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 23
+    baseMax: 23
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications: []
+  gmIntrusion: >-
+    <p>The character feels an itch and looks down to see the tail of a silver
+    worm slipping into their body.</p>
+items: []
+effects: []
+folder: 104cdb3501ccefe7
+sort: 1900
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '218'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Flesh Hive
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!4e82203180b37586'

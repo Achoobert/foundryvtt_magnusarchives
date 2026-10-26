@@ -1,0 +1,78 @@
+folder: 23a662247bd5b3ec
+name: Pestilent scalpel
+type: artifact
+_id: 3b2d0fbe24381402
+sort: 1700
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: pestilent-scalpel
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Corruption</p><p><strong>Stress:</strong> 3 on acquiring it and realizing it
+    can't be sterilized; 1 each time it is used to attack someone.</p><p>A
+    corroded, pitted scalpel, usually kept in a sealed plastic box. Whenever
+    it's exposed to air (and about once a day while it stays exposed), it sheds
+    a new airborne disease. Everyone in immediate range must succeed on a Might
+    defense roll or catch it (a level 5 disease) and immediately take 2 Stress.
+    Each day the sick must succeed on a Might defense roll or take a serious
+    injury; three successes and they shake it off.</p><p>It works as a light
+    weapon (p100). Each hit gives the target another new disease on a failed
+    Might defense roll.</p><p><strong>Fear:</strong> The sealed box holding the
+    scalpel cracks, leaks or shatters.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '261'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-corruption
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!3b2d0fbe24381402'

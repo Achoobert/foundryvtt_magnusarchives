@@ -1,0 +1,162 @@
+_id: ba5ddb5c8346b132
+name: 'Serves as an Avatar: The Lonely'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-lonely
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Lonely.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Lonely power:</strong> Choose one
+    of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8afcdb71efe3ba20]{Call
+    the Crowd},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c9ee9a16245fe0ca]{The
+    Fog},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9619157d22fe5a84]{Isolation},
+    or customise one with the GM.</p><p>The Entity powers are suggestions. Work
+    with the GM to customise your Entity-specific power to fit your idea of the
+    Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 94
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-lonely
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-call-the-crowd
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8afcdb71efe3ba20
+        abilitySnapshot:
+          name: Call the Crowd
+          description: >-
+            You summon a lonesome crowd (p225) to a sparsely populated place
+            within long distance. It behaves according to its nature but never
+            targets you, and usually disperses within about ten minutes.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-the-fog
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c9ee9a16245fe0ca
+        abilitySnapshot:
+          name: The Fog
+          description: >-
+            A heavy, rolling fog fills a very long area for one hour. Visibility
+            inside drops to immediate range.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-isolation
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9619157d22fe5a84
+        abilitySnapshot:
+          name: Isolation
+          description: >-
+            For one hour a creature you touch is completely unaware of anyone
+            around them and can't sense other people or creatures at all, unless
+            someone spends a few rounds slapping them and calling their name, or
+            they take damage.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-152512f521a29f9c
+        from: t1-sense-avatar
+        to: t4-call-the-crowd
+      - id: connection-e88183db443161a4
+        from: t1-sense-avatar
+        to: t4-the-fog
+      - id: connection-20da3dabdc42ed76
+        from: t1-sense-avatar
+        to: t4-isolation
+effects: []
+folder: 56cfb56d318cca7a
+sort: 900
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!ba5ddb5c8346b132'

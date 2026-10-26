@@ -2,15 +2,14 @@
   "name": "magnusarchives-foundryvtt",
   "version": "0.1.0-beta.5",
   "private": true,
-  "type": "module",
-  "packageManager": "pnpm@11.19.0",
   "description": "A modern Foundry VTT v14 system for Cypher V2.",
+  "type": "module",
   "scripts": {
-    "build": "vite build && pnpm import:core-packs && pnpm import:cyphers && pnpm import:npcs && pnpm import:example-characters",
-    "dev": "vite build --watch",
+    "build": "vite build && pnpm packs:build",
+    "packs:build": "node scripts/build-yml-packs.mjs",
+    "packs:extract": "node scripts/extract-yml-packs.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest",
     "watch": "node scripts/watch.mjs",
     "dev:sync": "node scripts/dev-sync.mjs",
     "dev:world": "node scripts/ensure-world.mjs",
@@ -21,31 +20,15 @@
     "test:e2e": "pnpm --filter magnusarchives-e2e run tests:ci",
     "test:e2e:open": "pnpm --filter magnusarchives-e2e run tests",
     "check": "pnpm typecheck && pnpm test && pnpm build",
-    "import:core-packs": "node scripts/import-core-packs.mjs",
-    "promote:core-packs": "node scripts/promote-reviewed-core-packs.mjs",
-    "import:foci": "node scripts/import-foci.mjs",
-    "promote:foci": "node scripts/promote-reviewed-foci.mjs",
-    "import:types": "node scripts/import-types.mjs",
-    "promote:types": "node scripts/promote-reviewed-types.mjs",
-    "validate:types": "node scripts/validate-reviewed-types.mjs --packs-root packs",
-    "import:species": "node scripts/import-species.mjs",
-    "promote:species": "node scripts/promote-reviewed-species.mjs",
-    "validate:species": "node scripts/validate-reviewed-species.mjs --packs-root packs",
-    "import:genres": "node scripts/import-genres.mjs",
-    "promote:genres": "node scripts/promote-reviewed-genres.mjs",
-    "validate:genres": "node scripts/validate-reviewed-genres.mjs --packs-root packs",
-    "import:cyphers": "node scripts/import-cyphers.mjs",
-    "import:npcs": "node scripts/import-npcs.mjs",
-    "import:example-characters": "node scripts/import-example-characters.mjs",
-    "validate:type-candidates": "node scripts/type-candidate-validator.mjs",
-    "validate:species-candidates": "node scripts/species-candidate-validator.mjs",
-    "validate:genre-ability-candidates": "node scripts/genre-ability-candidate-validator.mjs",
-    "validate:genre-candidates": "node scripts/genre-candidate-validator.mjs"
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "3.0.4",
     "@types/node": "^24.3.0",
     "classic-level": "^3.0.0",
+    "js-yaml": "5.4.1",
+    "oxfmt": "^0.74.0",
     "sass": "^1.90.0",
     "typescript": "^5.9.2",
     "vite": "^7.1.3",
@@ -53,5 +36,6 @@
   },
   "engines": {
     "node": ">=22.13"
-  }
+  },
+  "packageManager": "pnpm@11.19.0"
 }

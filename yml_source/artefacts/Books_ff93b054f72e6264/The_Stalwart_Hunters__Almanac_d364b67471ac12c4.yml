@@ -1,0 +1,77 @@
+folder: ff93b054f72e6264
+name: The Stalwart Hunters' Almanac
+type: artifact
+_id: d364b67471ac12c4
+sort: 4800
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-stalwart-hunters-almanac
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Flesh and The Hunt</p><p><strong>Stress:</strong> 2 each time a topic in it
+    is read; 1 each time knowledge from it is put to use.</p><p>A leather-bound
+    book of grisly hunting anecdotes, some about animals and a few about people,
+    most ending with the prey butchered for a meal. Reading an anecdote (about
+    ten minutes) and succeeding at a difficulty 4 Intellect-based task to
+    understand it eases the reader's tracking tasks for one
+    day.</p><p><strong>Fear:</strong> A manifestation of The Flesh and The Hunt
+    marks the reader as prey, and if it catches them does to them what the
+    almanac describes.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '283'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-flesh
+    - the-hunt
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!d364b67471ac12c4'

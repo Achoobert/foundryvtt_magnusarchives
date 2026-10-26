@@ -1,0 +1,20 @@
+_id: 73b9e41e88b14379
+name: The Spiral
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 1100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!73b9e41e88b14379'

@@ -1,0 +1,75 @@
+folder: 23a662247bd5b3ec
+name: Mirror of beholding
+type: artifact
+_id: 3490346d70bae65d
+sort: 1500
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: mirror-of-beholding
+  description: >-
+    <p><strong>Level:</strong> 1d6</p><p><strong>Related Entity:</strong> The
+    Eye</p><p><strong>Stress:</strong> 2 on recognizing the mirror's horrible
+    reflection; 1 when using it on someone else.</p><p>Anyone who sees their own
+    reflection in this antique hand mirror also sees a huge staring face
+    somewhere behind them. Whatever they do next, even smashing the mirror, they
+    become the observed subject of a mirror haunt (p228) on a failed Intellect
+    defense roll.</p><p><strong>Fear:</strong> Despite every precaution, an
+    accident leaves the bearer (or someone nearby) looking at their own
+    reflection in the mirror.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '260'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-eye
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1d6
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!3490346d70bae65d'

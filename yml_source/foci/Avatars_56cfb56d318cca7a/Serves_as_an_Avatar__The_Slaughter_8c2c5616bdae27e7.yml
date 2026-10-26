@@ -1,0 +1,169 @@
+_id: 8c2c5616bdae27e7
+name: 'Serves as an Avatar: The Slaughter'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-slaughter
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Slaughter.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Slaughter power:</strong> Choose
+    one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8e73dd1c0d700c6d]{Fatigue
+    of Battle},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4c7a1c9a7f3ee958]{March
+    to the Pipes},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b9d8aa7454ebee33]{The
+    Spirit of War}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 94
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-slaughter
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-fatigue-of-battle
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8e73dd1c0d700c6d
+        abilitySnapshot:
+          name: Fatigue of Battle
+          description: >-
+            A target you touch relives a past trauma (or someone else's, if they
+            have none) for about a minute. Their tasks are hindered, and they
+            suffer 1 point of Stress every round or two, up to 4 (damage instead
+            for an NPC).
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-march-to-the-pipes
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4c7a1c9a7f3ee958
+        abilitySnapshot:
+          name: March to the Pipes
+          description: >-
+            You make music (whistling, singing, bagpipes) and up to five targets
+            of level 3 or lower within long range march in a regimented way in
+            the direction you choose, doing nothing else on their turn. They
+            keep marching each round you keep making successful rolls; you must
+            use your action each round to concentrate. Each extra level of
+            Effort raises the maximum target level by 1. Marching someone
+            straight to their doom, such as off a cliff, takes one more
+            successful roll. Action to initiate.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-the-spirit-of-war
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b9d8aa7454ebee33
+        abilitySnapshot:
+          name: The Spirit of War
+          description: >-
+            A creature within short range is overcome by rage and, as its next
+            action, attacks the nearest creature (you, if no one is nearer) by
+            the most harmful means it has. Each creature near it already engaged
+            in violence adds a round, up to three rounds in total.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-acd557c52b8ba882
+        from: t1-sense-avatar
+        to: t4-fatigue-of-battle
+      - id: connection-50558f0c7eda8a3d
+        from: t1-sense-avatar
+        to: t4-march-to-the-pipes
+      - id: connection-a452367d87028824
+        from: t1-sense-avatar
+        to: t4-the-spirit-of-war
+effects: []
+folder: 56cfb56d318cca7a
+sort: 1000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!8c2c5616bdae27e7'

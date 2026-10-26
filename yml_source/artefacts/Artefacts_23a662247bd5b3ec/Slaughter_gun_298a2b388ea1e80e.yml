@@ -1,0 +1,79 @@
+folder: 23a662247bd5b3ec
+name: Slaughter gun
+type: artifact
+_id: 298a2b388ea1e80e
+sort: 1900
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: slaughter-gun
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Slaughter</p><p><strong>Stress:</strong> 3 on acquiring the pistol and
+    realizing where it came from.</p><p>A Luger pistol (a long-range medium
+    weapon, p100). Handling it without gloves means a Speed defense roll or 1
+    Stress from splinters in the grip. The gun seems eager: the user can spray
+    shots at one target to ease the attack, spending only one round of
+    ammunition.</p><p>Once someone fires it, they must succeed on an Intellect
+    defense roll or attack every living creature within short range, without
+    using any ammunition. Each round they can make an Intellect defense roll to
+    drop the gun and end the compulsion, taking 3 Stress from the
+    experience.</p><p><strong>Fear:</strong> Someone who handled the gun safely
+    (or shook off its compulsion) begins secretly to crave it. If they don't
+    seek it out within the week, it turns up among their belongings anyway.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '261'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-slaughter
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!298a2b388ea1e80e'

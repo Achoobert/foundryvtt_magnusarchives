@@ -1,0 +1,104 @@
+name: Sturdy
+type: descriptor
+_id: ad8086ef2077c5d0
+img: systems/magnusarchives/assets/icons/magnusdescriptor.webp
+system:
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Tough enough to take a lot of punishment. You feel the pain; you just
+    don't let it stop you.</p><p><strong>You gain the following
+    characteristics:</strong></p><ul><li><p><strong>Rugged:</strong> Sturdy
+    offers no initial skill, but a larger stat Pool
+    bonus.</p></li><li><p><strong>Resilient:</strong> You ignore the first 3
+    points of Stress you would otherwise take in a day from physical sources,
+    such as Stress from minor wounds. Once that threshold is passed you suffer
+    Stress normally until after your next ten-hour recovery roll, which resets
+    it.</p></li><li><p><strong>Suggested Second Skill:</strong> Instead of an
+    extra skill, you may take the Resilient
+    characteristic.</p></li><li><p><strong>Suggested Inability:</strong> You're
+    brawny but not mentally flexible. You have an inability in
+    @UUID[Compendium.magnusarchives.skills.Item.2253f39a79c36c71]{Intellect
+    defense}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '26'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 4
+    speed: 0
+    intellect: 0
+  skillGrants: []
+  choiceGroups: []
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+      poolChoices: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  poolBonusChoiceGroups: []
+effects: []
+folder: null
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 2400
+_key: '!items!ad8086ef2077c5d0'

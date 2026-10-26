@@ -35,7 +35,7 @@ describe("NPCs & Monsters compendium", () => {
       system: "magnusarchives"
     }));
     expect(packageJson.scripts["import:npcs"]).toBe("node scripts/import-npcs.mjs");
-    expect(packageJson.scripts.build).toContain("pnpm import:npcs");
+    expect(packageJson.scripts.build).toContain("pnpm packs:build");
   });
 
   it("holds the 46 chapter 12 monsters, three sidebar stat lines and the 16 p195 encounters", () => {

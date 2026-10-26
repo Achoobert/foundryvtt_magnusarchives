@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Looks for Trouble
+color: null
+sorting: a
+_id: 38201ccaa7e35524
+description: ''
+sort: 900
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!38201ccaa7e35524'

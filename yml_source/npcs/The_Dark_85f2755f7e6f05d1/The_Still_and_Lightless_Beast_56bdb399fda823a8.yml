@@ -1,0 +1,95 @@
+_id: 56bdb399fda823a8
+name: The Still and Lightless Beast
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>The singular progenitor of the lightless beasts, usually summoned by The
+    Taker of Light.</p>
+  notes: >-
+    <p>The singular progenitor of the lightless beasts, usually summoned by The
+    Taker of Light.</p><p><strong>Level:</strong> 7 (21)</p><p><strong>Related
+    Entity:</strong> The Dark</p><p><strong>Health:</strong>
+    25</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong> Short. Immediate when phasing
+    through floors, walls and the like.</p><p><strong>Modifications:</strong>
+    Speed defense as level 4 (hard to see); Perception as level
+    8</p><h3>Combat</h3><p>It attacks with whipping
+    tendrils.</p><p><strong>Darken the Block:</strong> Once per month it can
+    plunge a whole city block into darkness before coming for a
+    target.</p><h3>Use</h3><p>Even a prepared group would find it almost
+    impossible to face without special preparation.</p><h3>Notes</h3><p>Printed
+    as a sidebar stat line in the lightless beast entry. Use the lightless
+    beast's abilities as the GM sees fit.</p><p><em>The Magnus Archives
+    Roleplaying Game, p224.</em></p>
+  gmNotes: ''
+  level: 7
+  health:
+    value: 25
+    baseMax: 25
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 7
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: Immediate when phasing through floors, walls and the like.
+  modifications:
+    - id: d3966b5205b934ec
+      label: Speed defense
+      contexts:
+        - attack
+      mode: levelOverride
+      value: 4
+      visibility: gm
+      predicate: {}
+      description: <p>hard to see</p>
+    - id: 83c307d03c65daa8
+      label: Perception
+      contexts:
+        - perception
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: ''
+items: []
+effects: []
+folder: 85f2755f7e6f05d1
+sort: 2600
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '224'
+      sidebar: true
+ownership:
+  default: 0
+prototypeToken:
+  name: The Still and Lightless Beast
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!56bdb399fda823a8'

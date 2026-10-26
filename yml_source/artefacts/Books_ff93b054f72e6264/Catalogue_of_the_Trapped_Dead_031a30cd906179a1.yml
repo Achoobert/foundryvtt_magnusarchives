@@ -1,0 +1,82 @@
+folder: ff93b054f72e6264
+name: Catalogue of the Trapped Dead
+type: artifact
+_id: 031a30cd906179a1
+sort: 3000
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: catalogue-of-the-trapped-dead
+  description: >-
+    <p><strong>Level:</strong> 7</p><p><strong>Related Entity:</strong> The
+    End</p><p><strong>Stress:</strong> 3 on acquiring the book and realizing its
+    power; 3 when performing the ritual to make a new page; 1 each time a spirit
+    is questioned.</p><p>A large, misshapen book of crude parchment pages
+    handwritten in Sanskrit and other languages; anyone can read a page whether
+    or not they know the language. Each page describes how one person
+    died.</p><p>Reading a page thickens the air with a smell of wet earth and
+    summons that person's immaterial spirit, which the reader can question about
+    anything it knew in life. It needn't answer, and may beg or bargain instead.
+    Most spirits are in constant pain and want release; removing and burning
+    their page frees them, while a removed page that is kept can still summon
+    them later.</p><p>A spirit (or another source) can teach the binding ritual:
+    kill someone, ink a description of their death onto their skin, cut that
+    skin away, dry it and stitch it in as a new
+    page.</p><p><strong>Fear:</strong> The Tome Hoarder (p240) appears to
+    reclaim what she considers her property.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '270'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-end
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '7'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!031a30cd906179a1'

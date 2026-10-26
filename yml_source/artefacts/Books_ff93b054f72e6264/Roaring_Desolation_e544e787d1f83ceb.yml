@@ -1,0 +1,77 @@
+folder: ff93b054f72e6264
+name: Roaring Desolation
+type: artifact
+_id: e544e787d1f83ceb
+sort: 4300
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: roaring-desolation
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Desolation</p><p><strong>Stress:</strong> 3 on realizing the book's power; 3
+    each day the owner doesn't burn something.</p><p>A small red-leather book of
+    biblical-style verses praising "The Lightless Flame". After reading a few
+    pages, the reader becomes supernaturally fascinated with fire: each day they
+    don't burn something new, they take 3 Stress that can't be recovered until
+    they do. Burning the same thing again (a cigarette, say) only counts the
+    first time.</p><p>Passing the book to someone else, or ridding themself of
+    it permanently (sinking it at sea, sealing it in concrete), ends the
+    fascination.</p><p><strong>Fear:</strong> The owner decides to set part or
+    all of themself alight, and does so on a failed Intellect defense roll.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '279'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-desolation
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!e544e787d1f83ceb'

@@ -6,7 +6,7 @@ import {ROOT} from "./lib/fvtt-config.mjs";
 const DEBOUNCE_MS = 250;
 
 // `dist` is the Vite bundle output; the rest are served raw by Foundry.
-const WATCH_PATHS = ["dist", "templates", "lang", "assets", "system.json", "tests/quench"];
+const WATCH_PATHS = ["dist", "templates", "lang", "assets", "system.json", "tests/quench", "yml_source"];
 
 function run(script) {
   return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ function rel(filePath) {
 
 let timer;
 let running = false;
-let pending = {sync: false, quench: false};
+let pending = {sync: false, quench: false, packs: false};
 
 function schedule(filePath) {
   const relative = rel(filePath);
@@ -38,6 +38,10 @@ function schedule(filePath) {
   // anything else changed in the same debounce window.
   if (relative === "tests/quench" || relative.startsWith("tests/quench/")) {
     pending.quench = true;
+  } else if (relative.startsWith("yml_source/")) {
+    // Compendium YAML has to be compiled into packs/ before it can be synced.
+    pending.packs = true;
+    pending.sync = true;
   } else {
     pending.sync = true;
   }
@@ -51,17 +55,18 @@ async function flush() {
     return;
   }
   const job = {...pending};
-  pending = {sync: false, quench: false};
+  pending = {sync: false, quench: false, packs: false};
   if (!job.sync && !job.quench) return;
 
   running = true;
+  if (job.packs) await runSafe("packs:build");
   if (job.sync) await runSafe("dev:sync");
   if (job.quench) await runSafe("test:quench:sync");
   running = false;
 }
 
 console.log("Initial sync...");
-pending = {sync: true, quench: existsSync(path.join(ROOT, "tests", "quench"))};
+pending = {sync: true, quench: existsSync(path.join(ROOT, "tests", "quench")), packs: true};
 await flush();
 
 const vite = spawn("pnpm", ["exec", "vite", "build", "--watch"], {
@@ -91,4 +96,4 @@ function shutdown() {
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
 
-console.log("Watching. Vite rebuild + Foundry sync + Quench sync.");
+console.log("Watching. Vite rebuild + pack build + Foundry sync + Quench sync.");

@@ -1,0 +1,20 @@
+_id: 85f2755f7e6f05d1
+name: The Dark
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!85f2755f7e6f05d1'

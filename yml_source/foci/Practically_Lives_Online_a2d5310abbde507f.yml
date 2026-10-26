@@ -1,0 +1,235 @@
+_id: a2d5310abbde507f
+name: Practically Lives Online
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: practically-lives-online
+  description: >-
+    <p>The internet has been your home since you first opened a browser.
+    Websites, social media, gaming, streaming, forums, apps: you know the latest
+    news, jokes and places that matter. You dress so casually it's sometimes
+    inappropriate, and you may forget mirrors
+    exist.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>You knew another PC online long before you met in
+    person.</p></li><li><p>Another PC says you spend too much time online and
+    tells you to go outside. Charming or just annoying? You
+    decide.</p></li><li><p>Another PC believes you've dug up their personal
+    information. You decide whether they're right.</p></li><li><p>Another PC is
+    hopeless with tech and keeps asking you to fix their computer or explain
+    things.</p></li></ol><p><strong>Additional Equipment:</strong> A
+    top-of-the-line laptop and smartphone, beyond what an average character
+    could afford.</p><p><strong>Minor Effect Suggestion:</strong> Your next
+    attempt at anything involving computers is eased.</p><p><strong>Major Effect
+    Suggestion:</strong> Thinking about how you'll brag online about this, you
+    immediately restore 1d6 + 1 points to your Intellect Pool.</p><p><strong>GM
+    Intrusions:</strong> Hackers get hacked. Paying attention to the internet
+    leads to doing or saying exactly the wrong thing in real
+    life.</p><p><strong>Abilities by tier:</strong></p><ul><li><p><strong>Tier
+    1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.66723c188ed301d6]{Online
+    Research},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.994675998a6a0a0a]{Tech
+    Skill}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.d5878b17fa525771]{Hacking}</p></li><li><p><strong>Tier
+    3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.0bc79a45de0e0459]{Online
+    Contacts} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.5fe8e4c376c3bb73]{Crowdsourcing}.</p></li><li><p><strong>Tier
+    4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.382b6278bc9375e2]{Deep
+    Dive}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f466e36ca5a33cbc]{Better
+    Hacking}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9249767ae46ee354]{Read
+    It Somewhere} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.970a01e3a7d3a8a6]{Brain
+    Food}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 79-80
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-online-research
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.66723c188ed301d6
+        abilitySnapshot:
+          name: Online Research
+          description: All researching tasks are eased when you have internet access.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-tech-skill
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.994675998a6a0a0a
+        abilitySnapshot:
+          name: Tech Skill
+          description: >-
+            You're trained in one of these skills of your choice: electronics,
+            engineering, programming or researching.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-hacking
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.d5878b17fa525771
+        abilitySnapshot:
+          name: Hacking
+          description: >-
+            You can pose as someone else online, which might get you into their
+            information, money or credit cards, or let you tip off the
+            authorities about crimes they (probably didn't) commit. Less
+            harmfully, you can learn about them: address, routine, current
+            location. It takes from a minute to many hours, and the difficulty
+            depends on the person's level and their online security; reading
+            someone's email is harder than tracing their family history, and
+            their bank account harder still.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-online-contacts
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.0bc79a45de0e0459
+        abilitySnapshot:
+          name: Online Contacts
+          description: >-
+            You have three contacts you know only online, each with an area of
+            expertise you choose. With online access you can ask them about
+            their field and get a detailed answer within an hour, and answers to
+            follow-up questions within another hour.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-crowdsourcing
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.5fe8e4c376c3bb73
+        abilitySnapshot:
+          name: Crowdsourcing
+          description: >-
+            You post a question online and let others help. If you wait for the
+            answers (up to 24 hours), any information-related task, research
+            included, is eased by two steps. Action to initiate.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-deep-dive
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.382b6278bc9375e2
+        abilitySnapshot:
+          name: Deep Dive
+          description: >-
+            Through the internet, ask the GM one question and get a general
+            answer. The GM sets the level by how obscure it is: something
+            findable elsewhere is level 1, obscure knowledge of the past is
+            level 7. Knowledge of the future is impossible.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-better-hacking
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f466e36ca5a33cbc
+        abilitySnapshot:
+          name: Better Hacking
+          description: >-
+            With electronic access to a system, you try to take control of it:
+            cameras, alarms, electronic locks, tracking, whole email servers,
+            website back ends, databases and so on. The difficulty depends on
+            its protections, usually 3 to 9, and it may take one action or
+            hours.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-read-it-somewhere
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9249767ae46ee354
+        abilitySnapshot:
+          name: Read It Somewhere
+          description: >-
+            After a round of concentration, you recall obscure facts from the
+            internet that ease the task you attempt next round by three steps.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-brain-food
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.970a01e3a7d3a8a6
+        abilitySnapshot:
+          name: Brain Food
+          description: Gain 6 points to your Intellect Pool.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-3a152c906a249dbd
+        from: t1-online-research
+        to: t2-hacking
+      - id: connection-095ce8c5253c0a89
+        from: t1-tech-skill
+        to: t2-hacking
+      - id: connection-f59be9fce082377d
+        from: t2-hacking
+        to: t3-online-contacts
+      - id: connection-a7f20f86f32bd3ea
+        from: t2-hacking
+        to: t3-crowdsourcing
+      - id: connection-b461ac1b4de22bfe
+        from: t3-online-contacts
+        to: t4-deep-dive
+      - id: connection-2b752bbacf89d4cd
+        from: t3-crowdsourcing
+        to: t4-deep-dive
+      - id: connection-eaa10faf2fa8c6fa
+        from: t4-deep-dive
+        to: t5-better-hacking
+      - id: connection-611de51fa7035112
+        from: t5-better-hacking
+        to: t6-read-it-somewhere
+      - id: connection-6d48137194ba5bfd
+        from: t5-better-hacking
+        to: t6-brain-food
+effects: []
+folder: null
+sort: 1300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!a2d5310abbde507f'

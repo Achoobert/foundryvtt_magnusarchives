@@ -1,0 +1,75 @@
+folder: ff93b054f72e6264
+name: Dictionnaire Infernal
+type: artifact
+_id: c21a5013f4994a9f
+sort: 3200
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: dictionnaire-infernal
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Eye</p><p><strong>Stress:</strong> 3 on realizing the book's power; 1 with
+    each use.</p><p>A unique edition of de Plancy's "Infernal Dictionary", dated
+    1908. Reading a few words from it eases the reader's tasks to perceive
+    abnormal presences and influences for one hour, including ones normally
+    imperceptible. For the same hour, tasks to hide from or defend against those
+    presences and influences are hindered.</p><p><strong>Fear:</strong> The book
+    summons an aspect of an Entity, such as a lightless beast (p224), greyling
+    (p220) or buried thing (p204), which attacks the reader.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '272'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-eye
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!c21a5013f4994a9f'

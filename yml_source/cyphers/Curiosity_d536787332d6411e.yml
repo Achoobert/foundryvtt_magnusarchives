@@ -1,0 +1,66 @@
+_id: d536787332d6411e
+name: Curiosity
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: curiosity
+  description: >-
+    <p><strong>Level:</strong> 1d6 + 2</p><p>Add 1 to your Intellect Edge for
+    one hour (2 if the cypher is level 5 or higher).</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 800000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: curiosity
+      sourceOrder: 8
+      levelFormula: 1d6 + 2
+      instant: false
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!d536787332d6411e'

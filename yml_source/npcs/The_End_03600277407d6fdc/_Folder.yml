@@ -1,0 +1,20 @@
+_id: 03600277407d6fdc
+name: The End
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!03600277407d6fdc'

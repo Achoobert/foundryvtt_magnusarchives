@@ -1,0 +1,161 @@
+_id: 59667a698ca932a3
+name: 'Serves as an Avatar: The Hunt'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-hunt
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Hunt.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Hunt power:</strong> Choose one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.0b725cb0c68da494]{Hairy
+    on the Inside},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c3e02a7c14a79119]{Hunting
+    Scream},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f37f2851d7ba0c31]{Stalk
+    and Kill}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 93
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-hunt
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-hairy-on-the-inside
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.0b725cb0c68da494
+        abilitySnapshot:
+          name: Hairy on the Inside
+          description: >-
+            For ten minutes you become more beast-like: +8 to your Might Pool,
+            +1 Might Edge, +2 to your Speed Pool and +1 Speed Edge. Meanwhile
+            you can't spend Intellect points except to try to change back early
+            (a difficulty 2 task). Action to change; action to change back.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-hunting-scream
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c3e02a7c14a79119
+        abilitySnapshot:
+          name: Hunting Scream
+          description: >-
+            Up to three targets within long range who hear your scream, whistle
+            or song and whom you successfully attack are terrified for two
+            rounds, freezing or fleeing as fast as they can (your choice).
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-stalk-and-kill
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f37f2851d7ba0c31
+        abilitySnapshot:
+          name: Stalk and Kill
+          description: >-
+            You mark a nearby creature as your prey. For the next hour, tasks to
+            find, follow or attack it are eased.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-a74392e9dfaefb61
+        from: t1-sense-avatar
+        to: t4-hairy-on-the-inside
+      - id: connection-d7e6d8a064c5008e
+        from: t1-sense-avatar
+        to: t4-hunting-scream
+      - id: connection-6b69d12017dd2d81
+        from: t1-sense-avatar
+        to: t4-stalk-and-kill
+effects: []
+folder: 56cfb56d318cca7a
+sort: 800
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!59667a698ca932a3'

@@ -1,0 +1,164 @@
+_id: 443fc3066c523a02
+name: 'Serves as an Avatar: The Web'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-web
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Web.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Web power:</strong> Choose one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.697e0bbd63f0ba43]{Friend
+    to the Bewebbed},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.cc684570e2257c0b]{Many-eyed
+    Spies},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.06e9f1c7cc03ea36]{Puppet
+    on a String}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 96
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-friend-to-the-bewebbed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.697e0bbd63f0ba43
+        abilitySnapshot:
+          name: Friend to the Bewebbed
+          description: >-
+            You summon a bewebbed puppet (p200). It arrives within a few rounds,
+            as if it was already nearby, and obeys you for one hour or until you
+            dismiss it or it's destroyed.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-many-eyed-spies
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.cc684570e2257c0b
+        abilitySnapshot:
+          name: Many-eyed Spies
+          description: >-
+            Extra spiders gather within the hour at a place you're familiar
+            with. Unless every one is found and killed, you know what happens
+            there for the next day. If they can't find the place, it may be
+            protected, too little known to you, or gone.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-puppet-on-a-string
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.06e9f1c7cc03ea36
+        abilitySnapshot:
+          name: Puppet on a String
+          description: >-
+            You silently implant a command in a creature you touch, set to fire
+            on a trigger you can sum up in one short sentence. When it happens,
+            the target carries out the command as best it can. The command can
+            be fairly complex and take up to 24 hours, but can't directly harm
+            the target or anyone important to it, or be obviously impossible.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-f2fb6bc1ea9dbce3
+        from: t1-sense-avatar
+        to: t4-friend-to-the-bewebbed
+      - id: connection-34404d1a47f2ce47
+        from: t1-sense-avatar
+        to: t4-many-eyed-spies
+      - id: connection-921df12e16c5a2c7
+        from: t1-sense-avatar
+        to: t4-puppet-on-a-string
+effects: []
+folder: 56cfb56d318cca7a
+sort: 1400
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!443fc3066c523a02'

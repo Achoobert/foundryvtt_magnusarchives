@@ -1,0 +1,82 @@
+folder: ff93b054f72e6264
+name: Whispers in White Matter
+type: artifact
+_id: 5a2e8ff16b773bed
+sort: 5100
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: whispers-in-white-matter
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Spiral</p><p><strong>Stress:</strong> 3 on realizing the book's power; 1
+    each time it is deliberately used to add or remove a memory.</p><p>A
+    scuffed, bulky journal, its title in black marker, filled with handwritten
+    entries by several different people. On realizing this, the reader must
+    succeed on an Intellect defense roll or the last entry they read vanishes
+    from the page and becomes their own memory.</p><p>Someone who understands it
+    can erase memories from their own mind by writing them in it, or take on
+    memories written there (without knowing what they'll get until they read).
+    After a couple of rounds of uninterrupted writing, the owner can make an
+    Intellect attack against someone in short range; on a success they delete a
+    simple memory from that person or plant a simple false
+    one.</p><p><strong>Fear:</strong> The reader takes on a horrifying entry
+    about getting ever more lost in The Spiral's endless corridors. On a failed
+    Intellect defense roll they are catatonic, wandering The Spiral in their
+    memory, until a third party removes it.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '284'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-spiral
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!5a2e8ff16b773bed'

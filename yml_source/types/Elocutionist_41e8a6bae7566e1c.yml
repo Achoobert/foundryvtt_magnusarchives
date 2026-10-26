@@ -1,0 +1,1124 @@
+name: Elocutionist
+type: characterType
+_id: 41e8a6bae7566e1c
+img: systems/magnusarchives/assets/icons/magnustype.webp
+system:
+  schemaVersion: 1
+  slug: elocutionist
+  description: >-
+    <p>Getting people to talk about the strange things that happened to them is
+    half the job, and you're good at it. Elocutionists are charming, perceptive
+    spokespeople and fast talkers who read what goes unsaid, invent cover
+    stories and keep their allies' spirits up.</p><p><strong>Starting
+    Pools:</strong> Might 8, Speed 9, Intellect 11, plus 6 points to assign as
+    you wish.</p><h3>First-Tier
+    Elocutionist</h3><ul><li><p><strong>Effort:</strong> Your Effort is
+    1.</p></li><li><p><strong>Fit:</strong> Edge Might 0, Speed 0, Intellect
+    1.</p></li><li><p><strong>People Skills:</strong> You're trained in two of
+    @UUID[Compendium.magnusarchives.skills.Item.9NS4fm5VOrlzRwHv]{Deception},
+    @UUID[Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b]{Discerning
+    motive},
+    @UUID[Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb]{Intimidation},
+    @UUID[Compendium.magnusarchives.skills.Item.c4b6b98d92624257]{Persuasion},
+    @UUID[Compendium.magnusarchives.skills.Item.WPrgzmkLT8BNjGu5]{Performance}.</p></li><li><p><strong>Cypher
+    Use:</strong> You can have 2 cyphers at a
+    time.</p></li><li><p><strong>Weapons:</strong> You're practiced with light
+    and medium weapons, and have an inability with heavy
+    weapons.</p></li><li><p><strong>Locution Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a9da64489c9fb572]{Connected},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.35bdf7e9d1dc9edc]{De-Stress},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.3fca02011da01cba]{Encouragement},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.765aedb68f91fdcc]{Enthrall},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.40658738b65bc2d4]{Inner
+    Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d0b88c4bda1cd074]{Knowledge
+    Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.8045eec1c43e1130]{Secret
+    Agendas},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.97ec69e342ac084b]{Understanding},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.2a18ada08f3ff75f]{Verbal
+    Disguise}.</p></li></ul><h3>Second-Tier
+    Elocutionist</h3><ul><li><p><strong>Locution Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.8a69862d6b8aa91f]{Agitate},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bc6b1a7a63c9a592]{Cold
+    Reading},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a183ffdebb3135f2]{Defuse},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d96dc22870c5f2fe]{Disincentivize},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.c9ab330ae2c5ccb9]{Gather
+    Intelligence},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.951f1d616c4dbd8f]{Inspire
+    Aggression},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.e625b67b193fd2da]{Inspiring
+    Ease},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.fa4ee6a38062d492]{Quick
+    Wits},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a19701cab0085d16]{Skill
+    With Defense}, or from a lower tier. You can also swap one lower-tier
+    ability for another from a lower tier.</p></li></ul><h3>Third-Tier
+    Elocutionist</h3><ul><li><p><strong>Expert Cypher Use:</strong> You can have
+    3 cyphers at a time.</p></li><li><p><strong>Locution Abilities:</strong>
+    Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.999d777e24103bd1]{Blend
+    In},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.31b5b2e3a52d67ba]{Communication},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.87b850182a0ac6eb]{Grand
+    Deception},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ca13e3ef0ef9f431]{Mind
+    Games},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d42e9a448812cf25]{Oratory},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0215b48bcde7698d]{Seen
+    Some . . . Stuff},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.e87c75be34343299]{Slip
+    of the Tongue},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f05479c95732618c]{Surveillance},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.2355d9b365b879c2]{Irresistible
+    Question}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Fourth-Tier
+    Elocutionist</h3><ul><li><p><strong>Locution Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.498974570d0d020a]{Anticipate
+    Attack},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.24f213dd2347b6fe]{Cover
+    Story},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ad8e776cd9291120]{Heightened
+    Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7f3a67c7b60f9cf9]{Look
+    for the Tell},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7ace1b60b158fcf4]{Scarred
+    and Hardened},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.00b948ff530ed790]{Skill
+    With Attacks},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.1425a024fdb122f7]{Spur
+    Effort},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.66781b46370dd4e6]{Stress},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.78bdadd15562cc81]{Understanding
+    Why},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.75b3bd8b832114c0]{Terrorize},
+    or from a lower tier. You can also swap one lower-tier ability for another
+    from a lower tier.</p></li></ul><h3>Fifth-Tier
+    Elocutionist</h3><ul><li><p><strong>Adroit Cypher Use:</strong> You can have
+    4 cyphers at a time.</p></li><li><p><strong>Locution Abilities:</strong>
+    Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d0f02c9277f9a46c]{Performance},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.1aa036c7687b4b9a]{Shrug
+    It Off},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.6955750bfb20d18a]{Soft
+    Speech},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bcded2d583fc2df3]{Stimulate},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.a80912af84f7c94d]{Think
+    Your Way Out},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.4da1a9ade4d8dd1f]{Control},
+    or from a lower tier. You can also swap one lower-tier ability for another
+    from a lower tier.</p></li></ul><h3>Sixth-Tier
+    Elocutionist</h3><ul><li><p><strong>Locution Abilities:</strong> Choose two
+    of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.e690d1ce371c814a]{Inspiring
+    Success},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f902f8c2ca73ba60]{Mastery
+    With Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.c88b6703f34986b7]{Soothing
+    Words},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.21370ccf8aca4a55]{True
+    Communication},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ddef7dd76b2c2b67]{Condemn},
+    or from a lower tier. You can also swap one lower-tier ability for another
+    from a lower tier.</p></li></ul><p>Abilities marked supernatural need 10
+    levels of Stress from supernatural sources first (p27).</p><p><em>Sheet
+    notes:</em> Cypher limits at higher tiers are raised by hand on the
+    sheet.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '43'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - character-type
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 1
+    intellect: 3
+  woundBonuses:
+    minor: 0
+    moderate: 0
+    major: 0
+  edgeGrant:
+    mode: fixed
+    pool: intellect
+    amount: 1
+  weaponUse:
+    light: true
+    medium: true
+    heavy: false
+  armorUse:
+    light: false
+    medium: false
+    heavy: false
+  superhero:
+    rank: 0
+    powerShiftCount: 0
+    superheroics:
+      enabled: false
+      poolBonus: 0
+  abilityGrants: []
+  abilityChoiceGroups:
+    - id: 19d8b1877fd53373
+      choose: 2
+      options:
+        - id: 644e7b39b9ef8cf2
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.a9da64489c9fb572
+          notes: ''
+          snapshot:
+            name: Connected
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-connected
+              description: >-
+                <p>You know people who get things done, from respected
+                authorities to hackers and street criminals. They aren't
+                necessarily friends or trustworthy, but they owe you a favor.
+                Work out the details with the GM. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: dc9315f496a57b0c
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.35bdf7e9d1dc9edc
+          notes: ''
+          snapshot:
+            name: De-Stress
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-de-stress
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>When you rest
+                or relax with allies for an hour, you and they each lose 1 more
+                point of Stress than normal. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 2ff908e41dcb1e81
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.3fca02011da01cba
+          notes: ''
+          snapshot:
+            name: Encouragement
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-encouragement
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>While you
+                keep up an inspiring speech, allies within short range ease one
+                task type you choose: defense, attacks, or tasks for any skill
+                you're trained or specialized in. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 065837273d191b5c
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.765aedb68f91fdcc
+          notes: ''
+          snapshot:
+            name: Enthrall
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-enthrall
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>Your talk
+                holds another creature's attention even if it can't understand
+                you. As long as you do nothing but speak (not even move), it
+                takes no actions except to defend itself, even across several
+                rounds. Attacking it ends the effect. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 0a4b8dea36fbc887
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.40658738b65bc2d4
+          notes: ''
+          snapshot:
+            name: Inner Defense
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-inner-defense
+              description: >-
+                <p>You're trained in resisting attempts to discern your
+                feelings, beliefs or plans, and in resisting torture, telepathic
+                intrusion and mind control. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: b471ab59b2a37116
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.d0b88c4bda1cd074
+          notes: ''
+          snapshot:
+            name: Knowledge Skills
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-knowledge-skills
+              description: >-
+                <p>You become trained in two areas of knowledge you aren't
+                already trained in, such as history, geography or psychology.
+                You can take this more than once, picking two different skills
+                each time. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: f80c072a3933b8a5
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.8045eec1c43e1130
+          notes: ''
+          snapshot:
+            name: Secret Agendas
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-secret-agendas
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>After talking
+                with at least two NPCs for a minute, you pick up one of two
+                things (your choice): how they really feel about each other, or
+                (with three or more) which of them is the odd one out. You might
+                sense, for example, that one of a group secretly serves The Web,
+                though not the details. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 24895b6768afed63
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.97ec69e342ac084b
+          notes: ''
+          snapshot:
+            name: Understanding
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-understanding
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>You observe
+                or study a creature or object. Your next interaction with it
+                gains an asset. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: f0de1fbb4e1c2b50
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.2a18ada08f3ff75f
+          notes: ''
+          snapshot:
+            name: Verbal Disguise
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: elocutionist-verbal-disguise
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>Mimic the
+                voice and speech of someone you've heard to make one significant
+                statement; each further important statement costs 1 more
+                Intellect point. Anyone who sees you isn't fooled, so it suits
+                phones, darkness or a heavy disguise. It doesn't make you more
+                persuasive. If the GM rules the speaker would never say
+                something, you fail at once, and if you said several things, the
+                listener knows none came from them. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '45'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - elocutionist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+  skillGrants: []
+  choiceGroups:
+    - id: 20a0acef57ed68b2
+      choose: 2
+      rank: trained
+      options:
+        - id: 3ecd96378fd8ad79
+          skillUuid: Compendium.magnusarchives.skills.Item.9NS4fm5VOrlzRwHv
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Deception
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are a capable liar, able to use speech and the written
+                word to deceive and misinform others.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 13e7839199d0b4c6
+          skillUuid: Compendium.magnusarchives.skills.Item.952bfb5f1296eb5b
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Discerning motive
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're practiced at ascertaining another character's lies,
+                motives, and disposition.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 5849154595509de6
+          skillUuid: Compendium.magnusarchives.skills.Item.TxjNz86eOB6UwTGb
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Intimidation
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're good at swaying others with threatening words and/or
+                fearsome presence.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 25b6329dd1c5de9f
+          skillUuid: Compendium.magnusarchives.skills.Item.c4b6b98d92624257
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Persuasion
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're adept at winning people to your side of an argument
+                through truthful reasoning, understanding, and kindness.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 4c4ea10ebbbe8298
+          skillUuid: Compendium.magnusarchives.skills.Item.WPrgzmkLT8BNjGu5
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Performance
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are skilled in some kind of performance or art: singing,
+                comedy, playing an instrument, acting, composing, painting, or
+                something else.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: social
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+  genre: none
+  customGenreId: ''
+  backgroundOptions: ''
+  equipmentNotes: ''
+  equipmentBundleUuid: ''
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      superheroicsPool: none
+      powerShifts: []
+      poolChoices: []
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  weaponFamilies: []
+effects: []
+folder: null
+sort: 300
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!41e8a6bae7566e1c'

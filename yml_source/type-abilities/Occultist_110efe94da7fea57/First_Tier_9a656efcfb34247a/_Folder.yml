@@ -1,0 +1,20 @@
+type: Item
+folder: 110efe94da7fea57
+name: First Tier
+color: null
+sorting: m
+_id: 9a656efcfb34247a
+description: ''
+sort: 100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!9a656efcfb34247a'

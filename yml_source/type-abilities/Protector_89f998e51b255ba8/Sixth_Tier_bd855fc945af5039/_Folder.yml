@@ -1,0 +1,20 @@
+type: Item
+folder: 89f998e51b255ba8
+name: Sixth Tier
+color: null
+sorting: m
+_id: bd855fc945af5039
+description: ''
+sort: 600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!bd855fc945af5039'

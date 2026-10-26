@@ -1,0 +1,100 @@
+_id: bd0027e5adafca65
+name: Uncanny Mannequin
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Figures built from scrap and animated by long rituals. Most barely
+    resemble people, but some wear harvested skin to carry out tasks for The
+    Ringmaster or other agents of The Stranger.</p>
+  notes: >-
+    <p>Figures built from scrap and animated by long rituals. Most barely
+    resemble people, but some wear harvested skin to carry out tasks for The
+    Ringmaster or other agents of The Stranger.</p><p><strong>Level:</strong> 4
+    (12)</p><p><strong>Related Entity:</strong> The
+    Stranger</p><p><strong>Stress on first realizing its horror:</strong> 1
+    (usually on a failed Intellect defense roll)</p><p><strong>Health:</strong>
+    15</p><p><strong>Damage Inflicted:</strong> 3 points of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Disguise as level 7 (when
+    freezing in place or impersonating a living thing)</p><h3>Combat</h3><p>It
+    is cruelly capable with a razor-sharp knife, ideal for skinning or
+    decapitation.</p><p><strong>Freeze in Place:</strong> It goes inert like a
+    sculpture or waxwork and can't move or act for at least an hour unless
+    attacked. While frozen, treat it as a level 5
+    object.</p><p><strong>Splinter:</strong> A splinter left in a target it
+    damaged reduces their recovery rolls and other healing by 1 until they
+    remove it with a successful Speed roll as their action.</p><p><strong>Wear a
+    Skin:</strong> Given a harvested skin by another agent of The Stranger, it
+    can take a role in society, for example impersonating the victim to slowly
+    horrify those who knew them.</p><h3>Interaction</h3><p>It has little
+    self-awareness and simply follows orders, but in a skin it gains some
+    awareness, perhaps enough to feel horror at itself.</p><h3>Use</h3><p>One or
+    two are survivable, if stressful. Many, especially with an Avatar of The
+    Stranger, call for bargaining or flight.</p><h3>Notes</h3><p>See The
+    Ringmaster (p235).</p><p><em>The Magnus Archives Roleplaying Game,
+    p241.</em></p>
+  gmNotes: ''
+  level: 4
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: 4cc1323f3911cd29
+      label: Disguise
+      contexts:
+        - disguise
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: <p>when freezing in place or impersonating a living thing</p>
+  gmIntrusion: >-
+    <p>The mannequin folds and breaks its body to slip through an opening too
+    small for the character to follow.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 4400
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '241'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Uncanny Mannequin
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!bd0027e5adafca65'

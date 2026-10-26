@@ -1,0 +1,217 @@
+_id: 48ffd17fcd402bb9
+name: Works the Back Alleys
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: works-the-back-alleys
+  description: >-
+    <p>Thief, burglar, pickpocket: you've made a living in the back alleys at
+    the expense of the rich and careless, whether out of danger or desperation.
+    Those talents serve you well in plenty of other work too. You dress to blend
+    in, and in black when you're on a job.</p><p><strong>Connection:</strong>
+    Choose one of the following with your group.</p><ol><li><p>Another PC knew
+    you before and helped you leave crime behind, at least for
+    now.</p></li><li><p>You once tried to steal from another PC, and they caught
+    you.</p></li><li><p>You can never hide from one particular
+    PC.</p></li><li><p>Another PC knows your real identity or that you work
+    undercover (if either is secret), and has kept quiet so
+    far.</p></li></ol><p><strong>Additional Equipment:</strong> A bag of light
+    tools, including lockpicks.</p><p><strong>Minor Effect Suggestion:</strong>
+    You can immediately try to hide after this action.</p><p><strong>Major
+    Effect Suggestion:</strong> You can immediately take a second action this
+    turn.</p><p><strong>GM Intrusions:</strong> Thieves end up in jail. Powerful
+    enemies are made.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c72e6aa6e75891fc]{Stealthy}</p></li><li><p><strong>Tier
+    2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ee99b0311dd8d906]{Underworld
+    Contacts}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8b748eada00da2c1]{Pull
+    a Fast One} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2fd91c5cc43438a9]{I
+    Know a Guy}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.085d888edb3f4157]{Master
+    Thief}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.a08c2162014b0977]{Dirty
+    Fighter}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.194258389f79cf80]{Alley
+    Rat} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.85b0c4e437be54c4]{All-Out
+    Con}.</p></li></ul><p>Underworld contacts are lasting additions to the
+    campaign, limited to what those people know and can do. I Know a Guy is
+    deliberately more open-ended, but its help is temporary.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 86-87
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-stealthy
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c72e6aa6e75891fc
+        abilitySnapshot:
+          name: Stealthy
+          description: >-
+            You're trained in two of these skills of your choice: deception,
+            discerning motive, disguise, lockpicking, pickpocketing or stealth.
+            You can take this ability more than once, choosing different skills
+            each time.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-underworld-contacts
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ee99b0311dd8d906
+        abilitySnapshot:
+          name: Underworld Contacts
+          description: >-
+            You know many people involved in illegal activity. They aren't
+            necessarily friends or trustworthy, but they see you as one of their
+            own and may owe you a favour. Work out three or four of these
+            contacts with the GM.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-pull-a-fast-one
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8b748eada00da2c1
+        abilitySnapshot:
+          name: Pull a Fast One
+          description: >-
+            When you run a con, pick a pocket, trick a mark, sneak something
+            past a guard and the like, you gain an asset on the task.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-i-know-a-guy
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2fd91c5cc43438a9
+        abilitySnapshot:
+          name: I Know a Guy
+          description: >-
+            Facing a difficult problem that isn't urgent, you reach someone you
+            know, or know of, who might solve it. They're nearly always on the
+            edges of society: criminals, ex-convicts and the like. Typical help
+            includes fencing or buying illegal goods, forgeries and fake IDs,
+            breaking into computers or phones, getting confidential information,
+            or hiring criminals from burglars to hitmen. Finding them, meeting
+            and agreeing terms usually takes three to seven days, and they
+            expect payment or a favour.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-master-thief
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.085d888edb3f4157
+        abilitySnapshot:
+          name: Master Thief
+          description: You're trained in gymnastics and lockpicking.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-dirty-fighter
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.a08c2162014b0977
+        abilitySnapshot:
+          name: Dirty Fighter
+          description: >-
+            You distract, blind, annoy or otherwise hamper a foe, hindering
+            their attacks and defenses for one minute.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-alley-rat
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.194258389f79cf80
+        abilitySnapshot:
+          name: Alley Rat
+          description: >-
+            In a city, you find or make a major shortcut, secret way in or
+            emergency escape route where none seemed to exist. It takes a
+            successful Intellect action at a difficulty the GM sets. Work out
+            the details with the GM.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-all-out-con
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.85b0c4e437be54c4
+        abilitySnapshot:
+          name: All-Out Con
+          description: >-
+            You put everything in: add three free levels of Effort to your next
+            task. You can't use this again until after a ten-hour recovery.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-eca9218f1f68b18b
+        from: t1-stealthy
+        to: t2-underworld-contacts
+      - id: connection-5683b69764c78d9a
+        from: t2-underworld-contacts
+        to: t3-pull-a-fast-one
+      - id: connection-02da93e774d0ba72
+        from: t2-underworld-contacts
+        to: t3-i-know-a-guy
+      - id: connection-17c2f343a0101780
+        from: t3-pull-a-fast-one
+        to: t4-master-thief
+      - id: connection-237525106d013a41
+        from: t3-i-know-a-guy
+        to: t4-master-thief
+      - id: connection-8da0b75bccbfb257
+        from: t4-master-thief
+        to: t5-dirty-fighter
+      - id: connection-bd254fe97820dc60
+        from: t5-dirty-fighter
+        to: t6-alley-rat
+      - id: connection-3f245ae0d26353b5
+        from: t5-dirty-fighter
+        to: t6-all-out-con
+effects: []
+folder: null
+sort: 1700
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!48ffd17fcd402bb9'

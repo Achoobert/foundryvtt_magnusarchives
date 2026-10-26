@@ -1,0 +1,81 @@
+name: Blinding Attack
+type: ability
+_id: 519151d6f159967e
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: explores-dark-places-blinding-attack
+  description: >-
+    <p><strong>Cost:</strong> 3 Speed points.</p><p>Using a light source, you
+    make a melee attack. It deals no damage, but if it hits, the target is
+    blinded for one minute.</p><p>Action.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 63-64
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - explores-dark-places
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 6
+  category: focus
+  archived: false
+  activation: action
+  pool: speed
+  cost:
+    amount: 3
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - speed
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 1b5b260b8678eddd
+sort: 2500
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!519151d6f159967e'

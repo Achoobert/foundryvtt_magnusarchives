@@ -1,0 +1,88 @@
+folder: ff93b054f72e6264
+name: The Boneturner's Tale
+type: artifact
+_id: 0c0b4d2e2eaba3d7
+sort: 2800
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-boneturners-tale
+  description: >-
+    <p><strong>Level:</strong> 6</p><p><strong>Related Entity:</strong> The
+    Flesh</p><p><strong>Stress:</strong> 3 on realizing the book's power; 1 with
+    each use.</p><p>A thick, anonymous black paperback in which a new pilgrim,
+    the Bonesmith, joins the Canterbury pilgrims, with grisly results. Each hour
+    spent studying it lets the reader attempt one permanent gross change to
+    their own body: taller by up to a foot (30 cm), sharpened fingers, more
+    attractive, extra muscle, an extra organ, eye or mouth, and so on.</p><p>A
+    purely cosmetic change takes a difficulty 2 Intellect-based roll. A change
+    with a basic mechanical benefit (easing Might-based tasks from muscle,
+    easing interaction from uncanny symmetry, +1 damage from sharpened fingers)
+    takes difficulty 4. Each further change made while benefiting from an
+    earlier one is hindered by an additional step.</p><p>On a failure, the
+    reader takes 3 Stress as their body slumps like wet clay, hindering all
+    physical tasks and undoing earlier benefits for about ten hours, during
+    which no more changes can be tried.</p><p>The reader can change a willing
+    person the same way. Against an unwilling one, they must first hit with an
+    attack roll, then make the Intellect-based roll.</p><p>If stored with
+    ordinary books after use, the books around it start to
+    bleed.</p><p><strong>Fear:</strong> The reader draws an Entity's attention.
+    They must stop using the book entirely, or keep going knowing they are
+    entering a contract with The Flesh that may demand they become an
+    Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '268'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '6'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!0c0b4d2e2eaba3d7'

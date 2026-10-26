@@ -1,0 +1,160 @@
+_id: af101d676ff18cb5
+name: 'Serves as an Avatar: The Eye'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-eye
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Eye.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Eye power:</strong> Choose one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6228f1938b530a18]{Hypercognizance},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.78d3fd5d2b7c152f]{Modify
+    Memory},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.48f7662c7f0d23c7]{Truth},
+    or customise one with the GM.</p><p>The Entity powers are suggestions. Work
+    with the GM to customise your Entity-specific power to fit your idea of the
+    Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 93
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-eye
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-hypercognizance
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6228f1938b530a18
+        abilitySnapshot:
+          name: Hypercognizance
+          description: >-
+            For ten minutes you're aware of everything around you. You can see
+            things that are normally invisible, and attacks and other tasks
+            relying on sight are eased by two steps. Action to initiate.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-modify-memory
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.78d3fd5d2b7c152f
+        abilitySnapshot:
+          name: Modify Memory
+          description: >-
+            On a successful Intellect attack, a target within short range gains
+            a brief memory that isn't theirs, or a piece of information or
+            disinformation. Alternatively, you insert up to one round of visual
+            footage into a surveillance recording.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-truth
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.48f7662c7f0d23c7
+        abilitySnapshot:
+          name: Truth
+          description: >-
+            You learn a pertinent fact you didn't know about a nearby creature.
+            No roll needed.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-d62b69625bbecdb3
+        from: t1-sense-avatar
+        to: t4-hypercognizance
+      - id: connection-f6ae1aecd84b5131
+        from: t1-sense-avatar
+        to: t4-modify-memory
+      - id: connection-902331e74cb44202
+        from: t1-sense-avatar
+        to: t4-truth
+effects: []
+folder: 56cfb56d318cca7a
+sort: 600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!af101d676ff18cb5'

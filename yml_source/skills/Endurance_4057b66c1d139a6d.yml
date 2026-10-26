@@ -1,0 +1,67 @@
+folder: null
+name: Endurance
+type: skill
+_id: 4057b66c1d139a6d
+img: systems/magnusarchives/assets/icons/magnusskill.webp
+system:
+  defaultPool: might
+  schemaVersion: 1
+  slug: ''
+  description: >-
+    <p>Regular training has improved your physical fitness, easing your
+    climbing, jumping, and swimming tasks, plus similar feats that require
+    sustained strength.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '16'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags: []
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  rank: untrained
+  category: physical
+  contexts: []
+  initiative: false
+  acquisition:
+    minimumTier: 1
+    grantedByUuid: ''
+    notes: ''
+effects: []
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+sort: 1100
+_key: '!items!4057b66c1d139a6d'

@@ -1,0 +1,77 @@
+folder: ff93b054f72e6264
+name: The Joy of Eating
+type: artifact
+_id: 94a8e4cd5d2fbb77
+sort: 4000
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-joy-of-eating
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Flesh</p><p><strong>Stress:</strong> 1 each time someone understands a
+    recipe; 3 if the book tries to eat the cook.</p><p>A glossy modern cookbook
+    whose cover chef is not smiling but grimacing in terror. Every recipe uses
+    meat. Understanding a recipe takes a successful Intellect defense roll each
+    time it's attempted; if the dish is then made that day, everyone who eats it
+    gains a free one-action recovery roll (once per
+    day).</p><p><strong>Fear:</strong> The book begins eating the reader,
+    starting with their hands, its letters gnashing like teeth. Each round they
+    fail a Might defense roll they take a serious injury; three successes before
+    they die and they pull free.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '277'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-flesh
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!94a8e4cd5d2fbb77'

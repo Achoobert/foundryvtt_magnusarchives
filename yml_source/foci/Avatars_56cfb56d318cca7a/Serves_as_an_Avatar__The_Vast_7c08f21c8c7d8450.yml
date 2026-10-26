@@ -1,0 +1,163 @@
+_id: 7c08f21c8c7d8450
+name: 'Serves as an Avatar: The Vast'
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: avatar-the-vast
+  description: >-
+    <p>The Entities sometimes give a person a share of their power, spreading
+    fear in the world. That person is an Avatar. Each Entity makes its own
+    Avatars, directly or not, and may have several or none. The Avatar chooses
+    to accept the gift, even without grasping what it means. Some serve their
+    Entity like a god; unwilling ones hold great power knowing each use feeds
+    something malevolent.</p><p>"Serves as an Avatar" is an extra focus added on
+    top of the character's normal focus. This one is for an Avatar of The
+    Vast.</p><p><strong>Requirements:</strong></p><ul><li><p>Tier 4 or
+    higher.</p></li><li><p>Has gained 10 levels of Stress from paranormal
+    experiences over time.</p></li><li><p>Has at least one supernatural ability
+    from their type.</p></li><li><p>Has died and been reborn, physically or
+    metaphorically: something drastic has changed them in body or mind. A
+    character who seems to die in play and meets the other requirements may
+    return changed, likely only once.</p></li></ul><p><strong>Feeding:</strong>
+    An Avatar must feed their Entity or be fed upon. If you don't use your
+    Entity power at least once a week, you gain 3 points of Stress, and 3 more
+    each following day you go without using it.</p><p><strong>All Avatars
+    gain:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887]{Sense
+    Avatar} and
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc]{Sense
+    Supernatural Activity}.</p><p><strong>The Vast power:</strong> Choose one of
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.919615407cbb190f]{Hurl
+    Into the Void},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2cab4bf5279e1c18]{Image
+    of a Colossus},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.00b87a6119234050]{Wings
+    of The Vast}, or customise one with the GM.</p><p>The Entity powers are
+    suggestions. Work with the GM to customise your Entity-specific power to fit
+    your idea of the Avatar.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 89-90, 96
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+    - avatar
+    - the-vast
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-sense-avatar
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7874e3210961b887
+        abilitySnapshot:
+          name: Sense Avatar
+          description: >-
+            You can tell another Avatar is one if you can perceive them normally
+            and are nearby, usually with no roll or action. An Avatar can try to
+            hide what they are, but you can still spend an action on an
+            Intellect-based task to identify them.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-supernatural-activity
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2155ece099f298bc
+        abilitySnapshot:
+          name: Sense Supernatural Activity
+          description: >-
+            You sense the presence of any supernatural creature, artefact, book
+            or effect within immediate range.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t4-hurl-into-the-void
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.919615407cbb190f
+        abilitySnapshot:
+          name: Hurl Into the Void
+          description: >-
+            A close creature that you can see, and that can see you, believes
+            it's been flung backward into an endless fall. It loses its next
+            action flailing and takes 3 points of damage from the shock (3
+            points of Stress for a PC).
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-image-of-a-colossus
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2cab4bf5279e1c18
+        abilitySnapshot:
+          name: Image of a Colossus
+          description: >-
+            A creature you touch sees an impossibly huge being in the distance.
+            Terrified, it freezes or flees at full speed (your choice) this
+            round, and keeps doing so each round you keep making successful
+            rolls against it. You must use your action each round to
+            concentrate. Action to initiate.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t4-wings-of-the-vast
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.00b87a6119234050
+        abilitySnapshot:
+          name: Wings of The Vast
+          description: >-
+            You're snatched into the sky as if by an invisible giant. For ten
+            minutes you can fly a long distance each round.
+        tier: 4
+        position:
+          x: 2
+          'y': null
+    connections:
+      - id: connection-c1f02cd1d0add68d
+        from: t1-sense-avatar
+        to: t4-hurl-into-the-void
+      - id: connection-d229796c6c57ae91
+        from: t1-sense-avatar
+        to: t4-image-of-a-colossus
+      - id: connection-982e51dc5bc78d64
+        from: t1-sense-avatar
+        to: t4-wings-of-the-vast
+effects: []
+folder: 56cfb56d318cca7a
+sort: 1300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!7c08f21c8c7d8450'

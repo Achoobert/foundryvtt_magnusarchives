@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Carries a Gun
+color: null
+sorting: a
+_id: e09ad9318eeb5030
+description: ''
+sort: 100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!e09ad9318eeb5030'

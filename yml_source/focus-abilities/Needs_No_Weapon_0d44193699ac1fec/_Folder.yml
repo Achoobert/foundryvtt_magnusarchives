@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Needs No Weapon
+color: null
+sorting: a
+_id: 0d44193699ac1fec
+description: ''
+sort: 1100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!0d44193699ac1fec'

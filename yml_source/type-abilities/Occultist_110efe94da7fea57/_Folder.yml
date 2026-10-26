@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Occultist
+color: null
+sorting: m
+_id: 110efe94da7fea57
+description: ''
+sort: 400000
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!110efe94da7fea57'

@@ -106,7 +106,7 @@ $forbiddenPrefixes = @(
   "src/",
   "tests/",
   "docs/",
-  "content/",
+  "yml_source/",
   "scripts/",
   "_reference/",
   ".generated/",

@@ -1,0 +1,103 @@
+_id: 54239b655887782c
+name: The Weaver
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A rail-thin woman with bleached-blonde hair over a web of white thread at
+    one temple, who moves stiffly with oddly bending knees and writhing fingers,
+    and in some light has too many eyes or seems a giant spider. The ultimate
+    schemer, whose slow plans can reshape the world.</p>
+  notes: >-
+    <p>A rail-thin woman with bleached-blonde hair over a web of white thread at
+    one temple, who moves stiffly with oddly bending knees and writhing fingers,
+    and in some light has too many eyes or seems a giant spider. The ultimate
+    schemer, whose slow plans can reshape the
+    world.</p><p><strong>Level:</strong> 7 (21)</p><p><strong>Related
+    Entity:</strong> The Web</p><p><strong>Health:</strong>
+    21</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong> Short. Short when
+    climbing.</p><p><strong>Modifications:</strong> Deception and persuasion as
+    level 9</p><h3>Combat</h3><p>She channels paranormal energy against
+    foes.</p><p><strong>Puppeteer's Trance:</strong> Everyone in immediate range
+    who fails an Intellect defense roll stands entranced for ten minutes, until
+    they succeed on an Intellect defense roll or she takes damage. Afterward
+    they don't remember, but may carry a new idea or habit she planted. As her
+    action she can instead puppet entranced targets however she likes, such as
+    making them dance, operate machinery, or slam their heads against a window.
+    Each time a controlled target harms themselves, they may immediately make an
+    Intellect defense roll to escape.</p><p><strong>Scuttling Spies:</strong> If
+    she wants to know what is happening somewhere, spiders arrive within the
+    hour, and unless every one is found and killed, she
+    knows.</p><p><strong>Webbed Regeneration:</strong> She regains 2 health each
+    round, even at 0 health.</p><h3>Interaction</h3><p>She can be perfectly
+    pleasant, and may work with those who oppose Entities other than The
+    Web.</p><h3>Use</h3><p>The PCs may meet her several times without violence,
+    especially if she wants something from them. If they prove they are no
+    longer useful, she could be their end.</p><h3>Notes</h3><p>Podcast name:
+    Annabelle Cane.</p><p><em>The Magnus Archives Roleplaying Game,
+    p246.</em></p>
+  gmNotes: ''
+  level: 7
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 7
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: Short when climbing.
+  modifications:
+    - id: 2a6ce5d577f7167c
+      label: Deception and persuasion
+      contexts:
+        - deception
+      mode: levelOverride
+      value: 9
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character's hands climb up their body and begin to choke them,
+    dealing damage each round until they escape the trance.</p>
+items: []
+effects: []
+folder: 724cfdd571bf8432
+sort: 4800
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '246'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Weaver
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!54239b655887782c'

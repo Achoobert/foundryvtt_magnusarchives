@@ -1,0 +1,229 @@
+_id: 2d3ecb7dc41329d9
+name: Explores Dark Places
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: explores-dark-places
+  description: >-
+    <p>Cellars, empty houses, tunnels and caves feel like home to you, and open
+    skies may make you uneasy. The dark is where lost things turn up. You wear
+    dark clothes to blend in, or sensible gear for serious work below
+    ground.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC has been your partner on past
+    expeditions. When you both work on the same noncombat task, you each gain an
+    asset.</p></li><li><p>You think you once saw two other PCs doing something
+    illegal through a keyhole. You choose whether to share it; they choose
+    whether it was really them.</p></li><li><p>One other PC always seems to hear
+    you, however quietly you move.</p></li><li><p>One other PC is so loud that
+    you feel bound to teach them to move quietly, whether they want lessons or
+    not.</p></li></ol><p><strong>Minor Effect Suggestion:</strong> The target is
+    dazed for a round, and all its tasks are hindered.</p><p><strong>Major
+    Effect Suggestion:</strong> The target is stunned and loses its next
+    turn.</p><p><strong>GM Intrusions:</strong> Belongings slip out of pockets
+    in the dark and maps go missing. Information you gather leaves out something
+    important.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.177c6d616b7ea295]{Superb
+    Explorer}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.406f4c11055802e3]{Superb
+    Infiltrator},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7afc68f67536dac4]{Eyes
+    Adjusted}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.69c487f075621bc6]{Nightstrike}
+    or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.68c5e57a37cff69a]{Slippery
+    Customer}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8a97b3af2d216f7f]{Hard-Won
+    Resilience}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.4d30c3af0857106a]{Dark
+    Explorer}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.519151d6f159967e]{Blinding
+    Attack} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.441d7c0b205fb29a]{Dark
+    Flow}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 63-64
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-superb-explorer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.177c6d616b7ea295
+        abilitySnapshot:
+          name: Superb Explorer
+          description: You're trained in perception, endurance and gymnastics tasks.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-superb-infiltrator
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.406f4c11055802e3
+        abilitySnapshot:
+          name: Superb Infiltrator
+          description: You're trained in lockpicking and mechanics.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-eyes-adjusted
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7afc68f67536dac4
+        abilitySnapshot:
+          name: Eyes Adjusted
+          description: >-
+            Darkness doesn't hinder you, and you can see faintly even in total
+            darkness.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-nightstrike
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.69c487f075621bc6
+        abilitySnapshot:
+          name: Nightstrike
+          description: >-
+            Attacks you make in dim light or darkness get a free level of
+            Effort.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-slippery-customer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.68c5e57a37cff69a
+        abilitySnapshot:
+          name: Slippery Customer
+          description: >-
+            When you apply Effort to escape bonds, squeeze through tight spaces
+            or perform other contortions, you get a free level of Effort. You're
+            also trained in Speed defense tasks.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-hard-won-resilience
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8a97b3af2d216f7f
+        abilitySnapshot:
+          name: Hard-Won Resilience
+          description: >-
+            Exposure to terrible things has toughened you. Reduce any Stress you
+            gain, from any source, by 1 point.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-dark-explorer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.4d30c3af0857106a
+        abilitySnapshot:
+          name: Dark Explorer
+          description: >-
+            You ignore penalties for any action, including fighting, in very dim
+            light or cramped spaces. With Eyes Adjusted, that holds even in
+            total darkness. You're trained in stealth tasks while in dim light
+            or none.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-blinding-attack
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.519151d6f159967e
+        abilitySnapshot:
+          name: Blinding Attack
+          description: >-
+            Using a light source, you make a melee attack. It deals no damage,
+            but if it hits, the target is blinded for one minute.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-dark-flow
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.441d7c0b205fb29a
+        abilitySnapshot:
+          name: Dark Flow
+          description: >-
+            For one hour you're immersed in working in the dark. When you apply
+            a level of Effort to stealth, lockpicking, endurance or perception
+            tasks in dim light or darkness, you get two free levels of Effort on
+            that task. Action to initiate.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-5f644ad9166391f2
+        from: t1-superb-explorer
+        to: t2-superb-infiltrator
+      - id: connection-920ec228a0173a2f
+        from: t1-superb-explorer
+        to: t2-eyes-adjusted
+      - id: connection-744d1f78f48dafec
+        from: t2-superb-infiltrator
+        to: t3-nightstrike
+      - id: connection-423846af1a98d811
+        from: t2-superb-infiltrator
+        to: t3-slippery-customer
+      - id: connection-83eaea537dbccd94
+        from: t2-eyes-adjusted
+        to: t3-nightstrike
+      - id: connection-27e967002f9c1793
+        from: t2-eyes-adjusted
+        to: t3-slippery-customer
+      - id: connection-1314c982fd76bc63
+        from: t3-nightstrike
+        to: t4-hard-won-resilience
+      - id: connection-0361d62240c1fe30
+        from: t3-slippery-customer
+        to: t4-hard-won-resilience
+      - id: connection-644373d48885f4c3
+        from: t4-hard-won-resilience
+        to: t5-dark-explorer
+      - id: connection-18748d7e7f2fb8d0
+        from: t5-dark-explorer
+        to: t6-blinding-attack
+      - id: connection-1b68151cffaa2da6
+        from: t5-dark-explorer
+        to: t6-dark-flow
+effects: []
+folder: null
+sort: 300
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!2d3ecb7dc41329d9'

@@ -1,0 +1,268 @@
+_id: 7ab7d5a985dea18f
+name: Wears a Badge
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: wears-a-badge
+  description: >-
+    <p>You're a police officer. It's a hard and often thankless job, made worse
+    when bad apples abuse their power, but you take enforcing the law and
+    keeping the peace seriously. Hard questions and your commanding presence
+    often get confessions. On duty you're in uniform with your badge or warrant
+    card on show; off duty you still carry
+    them.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC once trained under you as a cadet (if
+    they agree they were in law enforcement), but has since moved
+    on.</p></li><li><p>You know another PC spent several months in prison, but
+    not why.</p></li><li><p>Another PC is an old friend who hates that you're a
+    cop and keeps trying to get you to quit.</p></li><li><p>There's a warrant on
+    record for another PC, probably unpaid parking fines. You've chosen not to
+    raise it, for now.</p></li></ol><p><strong>Additional Equipment:</strong>
+    Police uniform and duty belt (handcuffs, radio, holster, torch), a badge, a
+    gun (medium ranged weapon you're licensed to carry) and a baton (light melee
+    weapon).</p><p><strong>Minor Effect Suggestion:</strong> The next time you
+    command the same foe, the task is eased.</p><p><strong>Major Effect
+    Suggestion:</strong> The foe surrenders, or your ability affects them for
+    twice as long.</p><p><strong>GM Intrusions:</strong> Bystanders react badly
+    when you reveal your authority. A more urgent situation demands your
+    attention.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.43a9c23160cc519d]{Authority},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.51dd19ab2e359b3a]{Driver},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c73e543e4d3800d1]{Armed
+    Response}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.731998d2f651843f]{Command}</p></li><li><p><strong>Tier
+    3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2a82e9a2546507fe]{Cool
+    Under Fire} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.71d39d3b2f8e97b4]{Insider}.</p></li><li><p><strong>Tier
+    4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.0932f9b16bf17947]{Rapid
+    Attack}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f1da9727bccfe419]{Encouraging
+    Presence},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.40d86c27707e362c]{Skill
+    With Defense}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.feab8d677b18b295]{Greater
+    Enhanced Might or Speed} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8089438094ff5cf0]{Close
+    to the Chief}.</p></li></ul><p><strong>Badge or warrant card:</strong> a
+    real one requires ongoing employment with a police force, though leave,
+    sabbaticals and holidays don't put it at risk. If it's taken away and you
+    use a fake, someone may spot the fraud, though most NPCs won't.</p><p>Taking
+    Close to the Chief makes you part of the problem: special treatment is
+    likely a sign of corruption.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 84-85
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-authority
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.43a9c23160cc519d
+        abilitySnapshot:
+          name: Authority
+          description: >-
+            Your air of authority is an asset on all social interactions. Some
+            people react the opposite way, such as criminals or those the police
+            have wronged, and your interactions with them are hindered instead.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-driver
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.51dd19ab2e359b3a
+        abilitySnapshot:
+          name: Driver
+          description: You're trained in driving.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t1-armed-response
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c73e543e4d3800d1
+        abilitySnapshot:
+          name: Armed Response
+          description: You're practiced with guns and take no penalty when you use one.
+        tier: 1
+        position:
+          x: 2
+          'y': null
+      - id: t2-command
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.731998d2f651843f
+        abilitySnapshot:
+          name: Command
+          description: >-
+            Using your authority as an officer, you give one simple command to a
+            target within short range who can understand you. On a successful
+            Intellect attack, they try to carry it out as their next action. The
+            command can't directly harm them or their allies ("Flee" might work,
+            "Stab yourself" won't) and must be a single action. They can still
+            defend themselves and strike back if attacked.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-cool-under-fire
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2a82e9a2546507fe
+        abilitySnapshot:
+          name: Cool Under Fire
+          description: You're trained in Speed defense tasks.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-insider
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.71d39d3b2f8e97b4
+        abilitySnapshot:
+          name: Insider
+          description: >-
+            You can get information only law enforcement has: past cases and
+            crimes, identities from licence plates, missing persons details and
+            so on.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-rapid-attack
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.0932f9b16bf17947
+        abilitySnapshot:
+          name: Rapid Attack
+          description: Once per round, you can make an extra attack with your gun.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-encouraging-presence
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f1da9727bccfe419
+        abilitySnapshot:
+          name: Encouraging Presence
+          description: >-
+            For one minute, allies within short range gain an asset on defense
+            rolls.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t5-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.40d86c27707e362c
+        abilitySnapshot:
+          name: Skill With Defense
+          description: >-
+            Pick one defense task you aren't trained in: Might defense, Speed
+            defense or Intellect defense. You become trained in it.
+        tier: 5
+        position:
+          x: 1
+          'y': null
+      - id: t6-greater-enhanced-might-or-speed
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.feab8d677b18b295
+        abilitySnapshot:
+          name: Greater Enhanced Might or Speed
+          description: >-
+            Gain 6 points to your Might Pool, 6 to your Speed Pool, or split 6
+            points between them.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-close-to-the-chief
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8089438094ff5cf0
+        abilitySnapshot:
+          name: Close to the Chief
+          description: >-
+            The chief of police (or equivalent) respects and likes you. Beyond
+            sharing information, they give you room to bend or break the rules.
+            Through them you can see almost any case file, in your department or
+            other agencies (national police, Interpol and the like), and call in
+            backup or help, kept confidential if needed.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-5ad06ea16a8424cc
+        from: t1-authority
+        to: t2-command
+      - id: connection-47d11901450b65df
+        from: t1-driver
+        to: t2-command
+      - id: connection-17c9a7637eae5a7c
+        from: t1-armed-response
+        to: t2-command
+      - id: connection-658c4851060b0ce2
+        from: t2-command
+        to: t3-cool-under-fire
+      - id: connection-4a96f9140788c7fe
+        from: t2-command
+        to: t3-insider
+      - id: connection-c40b92e3d6db4ad0
+        from: t3-cool-under-fire
+        to: t4-rapid-attack
+      - id: connection-89b6cd5177878d87
+        from: t3-insider
+        to: t4-rapid-attack
+      - id: connection-a38572b49f0f9e0e
+        from: t4-rapid-attack
+        to: t5-encouraging-presence
+      - id: connection-bb9d5baef3231d6c
+        from: t4-rapid-attack
+        to: t5-skill-with-defense
+      - id: connection-fe119b4198d2439f
+        from: t5-encouraging-presence
+        to: t6-greater-enhanced-might-or-speed
+      - id: connection-fb2876a57b8278eb
+        from: t5-encouraging-presence
+        to: t6-close-to-the-chief
+      - id: connection-87b06597106084fa
+        from: t5-skill-with-defense
+        to: t6-greater-enhanced-might-or-speed
+      - id: connection-3a4d778a03484d94
+        from: t5-skill-with-defense
+        to: t6-close-to-the-chief
+effects: []
+folder: null
+sort: 1600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!7ab7d5a985dea18f'

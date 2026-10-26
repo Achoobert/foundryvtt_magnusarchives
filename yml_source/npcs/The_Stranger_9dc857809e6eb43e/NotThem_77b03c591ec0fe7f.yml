@@ -1,0 +1,93 @@
+_id: 77b03c591ec0fe7f
+name: NotThem
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A stranger has taken the place of someone close to you, a parent, a
+    cousin, a child, and only you notice. Even old photos show the impostor.</p>
+  notes: >-
+    <p>A stranger has taken the place of someone close to you, a parent, a
+    cousin, a child, and only you notice. Even old photos show the
+    impostor.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Stranger</p><p><strong>Stress on first realizing its
+    horror:</strong> 2 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 21</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong> Short.
+    Short when climbing.</p><p><strong>Modifications:</strong> Disguise as level
+    8</p><h3>Combat</h3><p>In monstrous form, NotThem squeezes a foe in
+    immediate range with long, spindly limbs.</p><p><strong>Monstrous
+    Shape:</strong> To make a squeeze attack it stretches into a long, thin
+    monster with too-many-jointed stick limbs. It may "wear" a target it kills,
+    using that guise for its next victim.</p><p><strong>Stranger in Our
+    Midst:</strong> Each time a target faces evidence that a stranger has
+    replaced someone in their life, and that only they see it, they must succeed
+    on an Intellect defense roll or gain 2 Stress. After gaining Stress this way
+    they are immune for the next few days.</p><h3>Interaction</h3><p>It acts
+    like the person it replaced until the target notices, then plays up the
+    wrongness, subtly and then openly, over weeks or months until the target's
+    fear peaks; then it moves on or kills them.</p><h3>Use</h3><p>Others rarely
+    see the truth. PCs who do should flee unless they have a real
+    plan.</p><p><em>The Magnus Archives Roleplaying Game, p230.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: Short when climbing.
+  modifications:
+    - id: 328fc22be232445b
+      label: Disguise
+      contexts:
+        - disguise
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: <p>An ally, completely fooled, sides with NotThem against the character.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 3200
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '230'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: NotThem
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!77b03c591ec0fe7f'

@@ -1,0 +1,20 @@
+_id: cae49fed3ba3c414
+name: The Hunt
+type: Actor
+folder: null
+color: null
+sorting: a
+description: ''
+sort: 800
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!cae49fed3ba3c414'

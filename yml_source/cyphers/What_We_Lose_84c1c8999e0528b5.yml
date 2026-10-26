@@ -1,0 +1,70 @@
+_id: 84c1c8999e0528b5
+name: What We Lose
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: what-we-lose
+  description: >-
+    <p><strong>Level:</strong> 1d6 + 3 ·
+    <strong>Instant.</strong></p><p>Brushing past someone, you lift something
+    from their pocket, bag or other container, if they carry anything. Ease the
+    pickpocketing task by two steps, or by four if the cypher is level 7 or
+    higher.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '113'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+    - instant
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 5100000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: what-we-lose
+      sourceOrder: 51
+      levelFormula: 1d6 + 3
+      instant: true
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!84c1c8999e0528b5'

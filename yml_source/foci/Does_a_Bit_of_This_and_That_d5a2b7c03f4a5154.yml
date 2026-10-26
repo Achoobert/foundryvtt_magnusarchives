@@ -1,0 +1,226 @@
+_id: d5a2b7c03f4a5154
+name: Does a Bit of This and That
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: does-a-bit-of-this-and-that
+  description: >-
+    <p>You've drifted through plenty of jobs and nothing has stuck. You take
+    life easy, pick things up, and move on when they get dull, so you know a
+    little about a lot. You dress casually and might be fit or bookish,
+    whichever suits you.</p><p><strong>Connection:</strong> Choose one of the
+    following with your group.</p><ol><li><p>Another PC has always been there
+    for you and has bailed you out more than once.</p></li><li><p>Another PC is
+    far too uptight. You hope to be the one who teaches them to
+    relax.</p></li><li><p>You're a bit jealous of another PC, who beats you at
+    your favourite hobby.</p></li><li><p>You owe another PC money and fully mean
+    to pay it back once things go your way.</p></li></ol><p><strong>Minor Effect
+    Suggestion:</strong> Something you've lived through eases your next
+    action.</p><p><strong>Major Effect Suggestion:</strong> You get a free
+    recovery roll that takes no action.</p><p><strong>GM Intrusions:</strong>
+    New situations confuse and stress you. Past actions, or failures to act,
+    come back to haunt you.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b44d70c2b67b0eb6]{Life
+    Lessons}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.9862dfd1e512227c]{Totally
+    Chill}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.c8549d179a90b471]{Skill
+    With Attacks} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ecb1812c8e976d37]{Improvise}.</p></li><li><p><strong>Tier
+    4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b44d70c2b67b0eb6]{Life
+    Lessons},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.169427dfaf340df4]{Greater
+    Skill With Defense}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.e8b379590eebe466]{Greater
+    Enhanced Potential}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.98c387f9f580474e]{Drawing
+    on Life's Experiences} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.0493897952566309]{Quick
+    Wits}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 61-62
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-life-lessons
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b44d70c2b67b0eb6
+        abilitySnapshot:
+          name: Life Lessons
+          description: Pick any two noncombat skills. You become trained in both.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t2-totally-chill
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.9862dfd1e512227c
+        abilitySnapshot:
+          name: Totally Chill
+          description: Your ten-minute recovery roll takes only one round.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-skill-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.c8549d179a90b471
+        abilitySnapshot:
+          name: Skill With Attacks
+          description: >-
+            Pick one attack type you aren't trained in: light, medium or heavy,
+            each bashing, bladed or ranged. You become trained in attacks with
+            that type of weapon. You can take this ability more than once,
+            choosing a different attack type each time.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-improvise
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ecb1812c8e976d37
+        abilitySnapshot:
+          name: Improvise
+          description: >-
+            When you attempt a task you're not trained in, you can improvise (a
+            makeshift tool, a flash of insight, plain dumb luck) to gain an
+            asset on it.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-life-lessons
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b44d70c2b67b0eb6
+        abilitySnapshot:
+          name: Life Lessons
+          description: Pick any two noncombat skills. You become trained in both.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t4-greater-skill-with-defense
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.169427dfaf340df4
+        abilitySnapshot:
+          name: Greater Skill With Defense
+          description: >-
+            Pick one defense task (Might, Speed or Intellect), even one you're
+            trained in. You become trained in it, or specialized if you were
+            already trained. You can take this up to three times, picking a
+            different defense each time.
+        tier: 4
+        position:
+          x: 1
+          'y': null
+      - id: t5-greater-enhanced-potential
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.e8b379590eebe466
+        abilitySnapshot:
+          name: Greater Enhanced Potential
+          description: Gain 6 points to split among your stat Pools however you like.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-drawing-on-lifes-experiences
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.98c387f9f580474e
+        abilitySnapshot:
+          name: Drawing on Life's Experiences
+          description: >-
+            Ask the GM one question and get a general answer. The GM sets the
+            task level by how obscure the answer is: something you could look up
+            elsewhere is level 1, obscure knowledge of the past is level 7. The
+            player is encouraged to describe the past experience that supplies
+            the answer.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-quick-wits
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.0493897952566309
+        abilitySnapshot:
+          name: Quick Wits
+          description: >-
+            When a task would normally cost points from your Intellect Pool, you
+            can pay with Speed points instead.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-c7b0c9261d7c018e
+        from: t1-life-lessons
+        to: t2-totally-chill
+      - id: connection-5f15c337ef570532
+        from: t2-totally-chill
+        to: t3-skill-with-attacks
+      - id: connection-f171e7134379f2d0
+        from: t2-totally-chill
+        to: t3-improvise
+      - id: connection-495ed228e3f2ae60
+        from: t3-skill-with-attacks
+        to: t4-life-lessons
+      - id: connection-69d4e438882d2bbb
+        from: t3-skill-with-attacks
+        to: t4-greater-skill-with-defense
+      - id: connection-c3019f44fa128589
+        from: t3-improvise
+        to: t4-life-lessons
+      - id: connection-0a554c7d9ded786a
+        from: t3-improvise
+        to: t4-greater-skill-with-defense
+      - id: connection-cde51494a0c1f818
+        from: t4-life-lessons
+        to: t5-greater-enhanced-potential
+      - id: connection-4716b8297080539b
+        from: t4-greater-skill-with-defense
+        to: t5-greater-enhanced-potential
+      - id: connection-91d1a99b54c94436
+        from: t5-greater-enhanced-potential
+        to: t6-drawing-on-lifes-experiences
+      - id: connection-813ce634a63d23c0
+        from: t5-greater-enhanced-potential
+        to: t6-quick-wits
+effects: []
+folder: null
+sort: 200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!d5a2b7c03f4a5154'

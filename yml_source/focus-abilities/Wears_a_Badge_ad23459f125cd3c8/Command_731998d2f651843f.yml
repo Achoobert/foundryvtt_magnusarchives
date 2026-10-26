@@ -1,0 +1,85 @@
+name: Command
+type: ability
+_id: 731998d2f651843f
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: wears-a-badge-command
+  description: >-
+    <p><strong>Cost:</strong> 3 Intellect points.</p><p>Using your authority as
+    an officer, you give one simple command to a target within short range who
+    can understand you. On a successful Intellect attack, they try to carry it
+    out as their next action. The command can't directly harm them or their
+    allies ("Flee" might work, "Stab yourself" won't) and must be a single
+    action. They can still defend themselves and strike back if
+    attacked.</p><p>Action.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 84-85
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus-ability
+    - wears-a-badge
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 2
+  category: focus
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 3
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: none
+  rollModifier: 0
+  attackModifier: 0
+  damage: 0
+  damageEffect: none
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: ad23459f125cd3c8
+sort: 14600
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!731998d2f651843f'

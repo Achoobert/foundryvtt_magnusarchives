@@ -1,0 +1,83 @@
+folder: ff93b054f72e6264
+name: Book of the Dead
+type: artifact
+_id: ec55a6c6f0e924b4
+sort: 2900
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: book-of-the-dead
+  description: >-
+    <p><strong>Level:</strong> 6</p><p><strong>Related Entity:</strong> The
+    End</p><p><strong>Stress:</strong> 1 on realizing the book details the
+    reader's future; 3 each time it is reopened and the predicted death has
+    changed.</p><p>A heavy, worn black-cloth book whose text shifts from Latin
+    through Middle English to modern English. Each entry describes a death in
+    graphic detail; every one recorded really happened as written. The
+    second-to-last entry is the death of its previous owner, and the last
+    predicts the current reader's horrible death about eleven years from
+    now.</p><p>Each time the reader closes and reopens it, the manner of death
+    changes, just as bad or worse, and the date moves about 20 percent closer. A
+    reader who stops checking meets the last death described. Someone with ties
+    to other Entities might save themself, though Avatars of The End become
+    their enemies.</p><p>If several people pass it around at once, its final
+    pages may hold several predictions; handing it on doesn't change the
+    previous reader's fate. The d10 Unpleasant Deaths table (p271) offers
+    inspiration.</p><p><strong>Fear:</strong> Rather than drawing 20 percent
+    closer, the reader's predicted death is set for the next three days.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '269'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-end
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '6'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!ec55a6c6f0e924b4'

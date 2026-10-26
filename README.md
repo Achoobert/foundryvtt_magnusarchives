@@ -16,24 +16,30 @@ https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/
 ```
 
 > [!IMPORTANT]
+>
 > ## AI-ASSISTED PROJECT
+>
 > **This system was developed extensively with AI assistance, including ChatGPT and Codex.**
 >
 > If you do not want to use software made with AI assistance, **do not use this system.**
 
 > [!WARNING]
+>
 > ## EARLY BETA
+>
 > **Expect bugs, rough edges and changes.**
 
 > [!NOTE]
+>
 > ## FORKS & THANKS
+>
 > This system is a fork of **SokK's [Cypher V2](https://github.com/SebsokK/cypherv2)**, which is itself
 > a fork of Marko's [Cypher System for Foundry VTT](https://github.com/mrkwnzl/cyphersystem-foundryvtt).
 >
 > Thank you to **Marko (mrkwnzl)** and **SokK** — this system exists because of their work. ❤️
 
 **The Magnus Archives** (`magnusarchives`) is an unofficial Foundry VTT v14 game system for
-*The Magnus Archives Roleplaying Game*, built on Foundry Application V2 with a compact interface
+_The Magnus Archives Roleplaying Game_, built on Foundry Application V2 with a compact interface
 and a rules engine designed to guide play without over-enforcing it.
 
 ## How this differs from Cypher V2
@@ -96,9 +102,8 @@ so the core health model here is different from its upstream:
 - Avatar foci put Sense Avatar and Sense Supernatural Activity at Tier 1 so the tree can unlock the
   Entity powers; the GM attaches an Avatar focus only from Tier 4.
 
-The CRD `types`, `foci`, `species`, `genres` and `genre-abilities` content and importers are still in
-the repository but are not built or shipped. Do not run `import:types` or `import:foci`: they write
-the same pack folders as the Magnus content.
+Compendium content is editable YAML in `yml_source/<pack>/`, one file per document. `pnpm build`
+compiles it into `packs/`; see `packs/README.md` for editing and extracting.
 
 ## Development
 
@@ -121,12 +126,12 @@ pnpm check          # typecheck + unit tests + build
 Copy `fvtt.config.example.js` to `fvtt.config.js` and fill in your paths, then:
 
 ```bash
-pnpm build              # Vite bundle + compendium packs
+pnpm build              # Vite bundle + compendium packs from yml_source/
 pnpm dev:world          # create the dev world
 pnpm dev:sync           # copy the system into Data/systems/magnusarchives
 pnpm test:quench:sync   # copy the Quench test module into Data/modules
 pnpm dev:seed           # enable Quench and set the dev GM password (Foundry must be stopped)
-pnpm watch              # vite build --watch + re-sync on every change
+pnpm watch              # vite build --watch, rebuild packs, re-sync on every change
 ```
 
 `pnpm dev:seed` exists because Foundry v14 refuses to join a user with no password, so the dev
@@ -135,11 +140,11 @@ Foundry first.
 
 ### Tests
 
-| Command | What it runs |
-| --- | --- |
-| `pnpm test` | vitest unit tests |
-| `pnpm test:e2e` | Cypress against a live Foundry, including the Quench suite |
-| `pnpm test:e2e:open` | the same, in the Cypress UI |
+| Command              | What it runs                                               |
+| -------------------- | ---------------------------------------------------------- |
+| `pnpm test`          | vitest unit tests                                          |
+| `pnpm test:e2e`      | Cypress against a live Foundry, including the Quench suite |
+| `pnpm test:e2e:open` | the same, in the Cypress UI                                |
 
 Quench batches live in `tests/quench/` and run inside a live world. Cypress drives them and fails
 if the pass count is zero, because a broken `registerBatch` fails silently.
@@ -163,7 +168,7 @@ https://github.com/Achoobert/foundryvtt_magnusarchives/releases/latest/download/
 This is an **unofficial fan-made system**. It is not an official Rusty Quill, Monte Cook Games or
 Foundry Virtual Tabletop product, and is not affiliated with any of them.
 
-*The Magnus Archives* is co-created by Jonathan Sims and Alexander J Newall and distributed by
+_The Magnus Archives_ is co-created by Jonathan Sims and Alexander J Newall and distributed by
 Rusty Quill Ltd. The Magnus Archives Roleplaying Game is © 2024 Rusty Quill. Cypher System content
 is © 2024 Monte Cook Games, LLC, published under the Cypher Open License at
 https://col.montecookgames.com.

@@ -1,0 +1,223 @@
+_id: 1f666d9369db67c9
+name: Carries a Gun
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: carries-a-gun
+  description: >-
+    <p>You're dangerous with a firearm in hand. Long practice keeps you steady
+    under fire. You might be a cop, a criminal, a hunter or someone who decided
+    to protect themselves, and you dress so the gun is hidden, close at hand, or
+    both.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>You once winged another PC during target practice
+    and badly hurt them. They decide whether they resent, fear or forgive
+    you.</p></li><li><p>You overheard another PC say nobody should own a gun.
+    You can prove them right or wrong.</p></li><li><p>Another PC's mother gave
+    you the gun you carry.</p></li><li><p>Another PC thinks you're famous for
+    something you never did. You decide whether to correct
+    them.</p></li></ol><p><strong>Additional Equipment:</strong> A firearm and
+    three magazines of ammunition.</p><p><strong>Minor Effect
+    Suggestion:</strong> A blow to the side of the head leaves the target
+    deafened for a few minutes.</p><p><strong>Major Effect Suggestion:</strong>
+    You hit an artery. The foe bleeds for 1 point of damage each round until
+    they bind the wound with a difficulty 3 Intellect or Speed
+    task.</p><p><strong>GM Intrusions:</strong> The gun misfires or jams: the
+    attack fails, the action is lost, and another action is needed to clear
+    it.</p><p><strong>Abilities by tier:</strong></p><ul><li><p><strong>Tier
+    1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.bba2d3c921cb8b99]{Gunner},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.837f22c351f71648]{Practiced
+    With Guns}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6d6c75cf1404893e]{Careful
+    Shot}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8886ebc970bae8a9]{Trained
+    Gunner} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.21181a41c62b3af7]{Damage
+    Dealer}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.ace0569a3c669a58]{Snap
+    Shot}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.5b00f0e0d4dd9960]{Arc
+    Spray}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.905f003d3fec0aa2]{Special
+    Shot} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.277f4b7b0409c561]{Lethal
+    Damage}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 60-61
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-gunner
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.bba2d3c921cb8b99
+        abilitySnapshot:
+          name: Gunner
+          description: Your attacks with guns deal 1 extra point of damage.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-practiced-with-guns
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.837f22c351f71648
+        abilitySnapshot:
+          name: Practiced With Guns
+          description: You're practiced with guns and take no penalty when you use one.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-careful-shot
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6d6c75cf1404893e
+        abilitySnapshot:
+          name: Careful Shot
+          description: >-
+            You can pay for levels of Effort to increase gun damage from either
+            your Speed Pool or your Intellect Pool. Each level adds 3 points of
+            damage to a successful attack, or 5 points if you spent a turn
+            lining up the shot.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-trained-gunner
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8886ebc970bae8a9
+        abilitySnapshot:
+          name: Trained Gunner
+          description: >-
+            Choose one: you become trained with guns, or you gain the Spray
+            ability (cost 2 Speed points).
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-damage-dealer
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.21181a41c62b3af7
+        abilitySnapshot:
+          name: Damage Dealer
+          description: Your gun attacks deal 3 extra points of damage.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-snap-shot
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.ace0569a3c669a58
+        abilitySnapshot:
+          name: Snap Shot
+          description: >-
+            You can make two gun attacks as one action. The second attack is
+            hindered by two steps.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-arc-spray
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.5b00f0e0d4dd9960
+        abilitySnapshot:
+          name: Arc Spray
+          description: >-
+            With a rapid-fire weapon, you shoot at up to three targets standing
+            next to one another. Make a separate attack roll for each; every
+            attack is hindered.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-special-shot
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.905f003d3fec0aa2
+        abilitySnapshot:
+          name: Special Shot
+          description: >-
+            When you hit with a gun, you can deal 1 less point of damage to
+            strike a precise spot. For example, you can knock an object out of a
+            hand, hit a limb the target moves with so its top speed drops to
+            immediate for a few days (or until it gets expert medical care), or
+            sever a strap so a pack or worn device falls off.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-lethal-damage
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.277f4b7b0409c561
+        abilitySnapshot:
+          name: Lethal Damage
+          description: >-
+            Your standard gun attacks deal 5 extra points of damage when they
+            hit.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-05af21414d70df08
+        from: t1-gunner
+        to: t2-careful-shot
+      - id: connection-9b3a237ba2f5b4f2
+        from: t1-practiced-with-guns
+        to: t2-careful-shot
+      - id: connection-f3e14ff69a4fbe72
+        from: t2-careful-shot
+        to: t3-trained-gunner
+      - id: connection-5b735a8536277654
+        from: t2-careful-shot
+        to: t3-damage-dealer
+      - id: connection-dc98da1763f6d186
+        from: t3-trained-gunner
+        to: t4-snap-shot
+      - id: connection-7a296c50ed72eba5
+        from: t3-damage-dealer
+        to: t4-snap-shot
+      - id: connection-9130e6de3e599d2f
+        from: t4-snap-shot
+        to: t5-arc-spray
+      - id: connection-7412371457c1b4ff
+        from: t5-arc-spray
+        to: t6-special-shot
+      - id: connection-618396045993b6e5
+        from: t5-arc-spray
+        to: t6-lethal-damage
+effects: []
+folder: null
+sort: 100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!1f666d9369db67c9'

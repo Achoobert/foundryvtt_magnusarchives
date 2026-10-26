@@ -1,0 +1,95 @@
+_id: 0e4c757bf43a0dbb
+name: Disciple of the Endless
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>Wanderers whose eyes open onto infinite space, feeding on fear of
+    falling, of bottomless water, of open spaces and of cosmic insignificance.
+    Looking at them brings dizziness and a falling stomach.</p>
+  notes: >-
+    <p>Wanderers whose eyes open onto infinite space, feeding on fear of
+    falling, of bottomless water, of open spaces and of cosmic insignificance.
+    Looking at them brings dizziness and a falling
+    stomach.</p><p><strong>Level:</strong> 6 (18)</p><p><strong>Related
+    Entity:</strong> The Vast</p><p><strong>Health:</strong>
+    24</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong> Short. Flies and swims a long
+    distance each round.</p><h3>Combat</h3><p>He rarely uses physical violence,
+    relying on his abilities.</p><p><strong>Agoraphaura:</strong> Anyone in
+    short range who looks at him feels as if falling or drowning (his choice),
+    hindering all tasks directly involving him. Looking away ends the sensation,
+    though not looking has its own costs.</p><p><strong>Feel the Fall:</strong>
+    As his action he concentrates on a target in long range. On a failed
+    Intellect defense roll, they hallucinate falling through endless blue sky,
+    or sinking in bottomless water, for one hour or until released. They may try
+    an Intellect defense roll each round to break free; otherwise they gain 1
+    Stress every ten minutes and are effectively helpless.</p><p><strong>Into
+    The Vast:</strong> Instead, an affected target physically falls into endless
+    sky or water. They attempt an Intellect defense roll each round; three
+    successes return them to the world, but three failures first mean they fall
+    forever (or are crushed by the pressure).</p><h3>Interaction</h3><p>He makes
+    short-term alliances for his own benefit, but must feed on those who fear
+    falling or open spaces, and may wish them "Enjoy sky blue" before dropping
+    them.</p><h3>Use</h3><p>A light encounter can introduce a character to The
+    Vast, as long as they don't provoke him. He may have, or know where to find,
+    Ex Altiora.</p><h3>Notes</h3><p>Podcast names: Michael Crew (a thin, pale
+    man with a lightning-shaped scar, who prefers the fear of falling) and Simon
+    Fairchild (a tiny, pink, skeletal man with an unneeded cane, who prefers the
+    fear of the deep).</p><p>See Ex Altiora (p273).</p><p><em>The Magnus
+    Archives Roleplaying Game, p214.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 24
+    baseMax: 24
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: Flies and swims a long distance each round.
+  modifications: []
+  gmIntrusion: >-
+    <p>The whole sky twists and takes a bite from a character who fails a Speed
+    defense roll, inflicting a serious injury.</p>
+items: []
+effects: []
+folder: ae33043960b5f86c
+sort: 1700
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '214'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Disciple of the Endless
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!0e4c757bf43a0dbb'

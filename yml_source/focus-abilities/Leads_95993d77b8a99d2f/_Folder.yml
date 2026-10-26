@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Leads
+color: null
+sorting: a
+_id: 95993d77b8a99d2f
+description: ''
+sort: 700
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!95993d77b8a99d2f'

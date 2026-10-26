@@ -1,0 +1,254 @@
+_id: 64c2fc3338c6245c
+name: Infiltrates
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: infiltrates
+  description: >-
+    <p>Subtlety, guile and stealth are your trade, honed over years of practice.
+    You use disguises and tools, but your training matters most. Infiltrators
+    are often spies, agents or undercover officers, and sometimes thieves or
+    assassins.</p><p><strong>Connection:</strong> Choose one of the following
+    with your group.</p><ol><li><p>You watched another PC from a distance for a
+    while before you met and became allies. You decide whether to tell
+    them.</p></li><li><p>However hard you try, you can't hide from one other
+    PC.</p></li><li><p>You and two other PCs once worked a mission together,
+    then fell out.</p></li><li><p>Another PC is your sibling (if their player
+    agrees), and you look very alike.</p></li></ol><p><strong>Minor Effect
+    Suggestion:</strong> Your moves startle the opponent so much that they're
+    dazed and their tasks are hindered.</p><p><strong>Major Effect
+    Suggestion:</strong> Every opponent within short range is startled and
+    dazed, with their tasks hindered.</p><p><strong>GM Intrusions:</strong>
+    Spies are punished harshly when caught, and allies disown infiltrators who
+    get caught. Some secrets are better left buried.</p><p><strong>Abilities by
+    tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b68e008aa4c32e97]{Stealthy},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.d5641a784f86f54e]{Sense
+    Attitudes}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.32dfd30c4f9a9327]{Impersonate},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.299ce9cbfa0bdcb9]{Flight
+    Not Fight}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.778d2fca9f86cc75]{Awareness}
+    or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.bf4c9ed156dd4dcd]{Skill
+    With Attacks}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.983fa61357867e75]{Nearly
+    Invisible}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.29728ac9a4334f38]{Evasion}</p></li><li><p><strong>Tier
+    6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.cc8cfcd73554b632]{Brainwashing}
+    or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.5b1c6de3437b1cb0]{Spring
+    Away}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 68-69
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-stealthy
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b68e008aa4c32e97
+        abilitySnapshot:
+          name: Stealthy
+          description: >-
+            You're trained in two of these skills of your choice: deception,
+            disguise, lockpicking, pickpocketing or stealth. You can take this
+            ability more than once, choosing different skills each time.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-sense-attitudes
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.d5641a784f86f54e
+        abilitySnapshot:
+          name: Sense Attitudes
+          description: You're trained in discerning motive.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-impersonate
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.32dfd30c4f9a9327
+        abilitySnapshot:
+          name: Impersonate
+          description: >-
+            For one hour you change your voice, posture and mannerisms and throw
+            together a disguise, gaining an asset to pass as someone else,
+            either a specific person or a general role. Action to initiate.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-flight-not-fight
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.299ce9cbfa0bdcb9
+        abilitySnapshot:
+          name: Flight Not Fight
+          description: >-
+            If you use your action only to move, your Speed defense tasks are
+            eased.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-awareness
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.778d2fca9f86cc75
+        abilitySnapshot:
+          name: Awareness
+          description: >-
+            When you spend a level of Effort on a perception task, you get one
+            extra free level of Effort on it.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-skill-with-attacks
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.bf4c9ed156dd4dcd
+        abilitySnapshot:
+          name: Skill With Attacks
+          description: >-
+            Pick one attack type you aren't trained in: light, medium or heavy,
+            each bashing, bladed or ranged. You become trained in attacks with
+            that type of weapon. You can take this ability more than once,
+            choosing a different attack type each time.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-nearly-invisible
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.983fa61357867e75
+        abilitySnapshot:
+          name: Nearly Invisible
+          description: >-
+            For ten minutes you commit fully to staying unseen. While hiding,
+            you're specialized in stealth and Speed defense tasks. The effect
+            ends if you reveal yourself (attacking, using an ability, moving
+            something large), but you can take an action to hide again and
+            restore it. Action to initiate or reinitiate.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-evasion
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.29728ac9a4334f38
+        abilitySnapshot:
+          name: Evasion
+          description: You're trained in all defense tasks.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-brainwashing
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.cc8cfcd73554b632
+        abilitySnapshot:
+          name: Brainwashing
+          description: >-
+            With trickery and smooth lies, you make a target of level 3 or lower
+            do as you say. On a successful Intellect attack, you direct the
+            actions of a target you speak to for one minute, letting them act
+            freely or overriding them case by case, as long as you can see and
+            direct them. If someone challenges what they're doing, you need
+            another successful Intellect attack to reassure them or they stop.
+            Each extra level of Effort can raise the target's maximum level by 1
+            or add a minute. Action to initiate. The book advises handling this
+            with care and never using it on PCs.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-spring-away
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.5b1c6de3437b1cb0
+        abilitySnapshot:
+          name: Spring Away
+          description: >-
+            Whenever you succeed on a Speed defense roll, you can immediately
+            move up to a short distance. Once per round.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-99d832d50c95ad5d
+        from: t1-stealthy
+        to: t2-impersonate
+      - id: connection-e3c36c29bfdbadcc
+        from: t1-stealthy
+        to: t2-flight-not-fight
+      - id: connection-50ea5d50ecb0882c
+        from: t1-sense-attitudes
+        to: t2-impersonate
+      - id: connection-8bb92a76eb5b4b83
+        from: t1-sense-attitudes
+        to: t2-flight-not-fight
+      - id: connection-6ee6cc2d568db5bc
+        from: t2-impersonate
+        to: t3-awareness
+      - id: connection-d7c6f263cc09ff12
+        from: t2-impersonate
+        to: t3-skill-with-attacks
+      - id: connection-a802706e89ee96ba
+        from: t2-flight-not-fight
+        to: t3-awareness
+      - id: connection-013171ba15cbf588
+        from: t2-flight-not-fight
+        to: t3-skill-with-attacks
+      - id: connection-ce9815de8d7233a2
+        from: t3-awareness
+        to: t4-nearly-invisible
+      - id: connection-7c47d614f6971ead
+        from: t3-skill-with-attacks
+        to: t4-nearly-invisible
+      - id: connection-7fff648b4089045f
+        from: t4-nearly-invisible
+        to: t5-evasion
+      - id: connection-d8310ac45f658559
+        from: t5-evasion
+        to: t6-brainwashing
+      - id: connection-37bfbab3b1054e5f
+        from: t5-evasion
+        to: t6-spring-away
+effects: []
+folder: null
+sort: 600
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!64c2fc3338c6245c'

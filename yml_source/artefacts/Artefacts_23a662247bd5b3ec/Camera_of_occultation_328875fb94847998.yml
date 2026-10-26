@@ -1,0 +1,76 @@
+folder: 23a662247bd5b3ec
+name: Camera of occultation
+type: artifact
+_id: 328875fb94847998
+sort: 400
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: camera-of-occultation
+  description: >-
+    <p><strong>Level:</strong> 8</p><p><strong>Related Entity:</strong> The
+    Spiral</p><p><strong>Stress:</strong> 3 on recognizing what the camera can
+    do; 1 for each week of using it.</p><p>An old camera with a cracked lens. It
+    hides everything within very long range from being sensed by the Entities
+    (The Spiral included) and their Avatars and aspects, and it blocks the
+    active use of paranormal abilities in that
+    area.</p><p><strong>Fear:</strong> The camera stores up the worry of a life
+    in hiding. When it is taken or stolen, it releases all of it to feed The
+    Spiral: the owner dies on a failed Intellect defense roll, and everyone in
+    short range takes a serious injury on a failed Speed defense roll.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '253'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-spiral
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '8'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!328875fb94847998'

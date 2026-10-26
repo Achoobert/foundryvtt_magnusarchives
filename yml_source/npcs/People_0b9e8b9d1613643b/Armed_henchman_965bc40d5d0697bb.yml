@@ -1,0 +1,64 @@
+_id: 965bc40d5d0697bb
+name: Armed henchman
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 2 (6)</p><p><strong>Health:</strong>
+    6</p><p><strong>Damage Inflicted:</strong> Short-range firearm attack deals
+    serious injury.</p><p><strong>Movement:</strong> Short</p><p><em>The Magnus
+    Archives Roleplaying Game, p195.</em></p>
+  gmNotes: ''
+  level: 2
+  health:
+    value: 6
+    baseMax: 6
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 2
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Short-range firearm attack deals serious injury.
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications: []
+  gmIntrusion: ''
+items: []
+effects: []
+folder: 0b9e8b9d1613643b
+sort: 5800
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Armed henchman
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!965bc40d5d0697bb'

@@ -1,0 +1,64 @@
+_id: db7150006b9aa5f5
+name: Shark, great white
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: ''
+  notes: >-
+    <p><strong>Level:</strong> 5 (15)</p><p><strong>Health:</strong>
+    20</p><p><strong>Damage Inflicted:</strong> Serious
+    injury</p><p><strong>Movement:</strong> Long. Swims a long distance each
+    round.</p><p><em>The Magnus Archives Roleplaying Game, p195.</em></p>
+  gmNotes: ''
+  level: 5
+  health:
+    value: 20
+    baseMax: 20
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 5
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: long
+    distance: ''
+    notes: Swims a long distance each round.
+  modifications: []
+  gmIntrusion: ''
+items: []
+effects: []
+folder: aad08927292e76f1
+sort: 5700
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '195'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Shark, great white
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!db7150006b9aa5f5'

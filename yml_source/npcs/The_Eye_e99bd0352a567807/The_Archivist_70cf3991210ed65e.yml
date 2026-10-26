@@ -1,0 +1,119 @@
+_id: 70cf3991210ed65e
+name: The Archivist
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A slight, prematurely grey man who looks like he hasn't slept in a week,
+    scarred by past encounters: worm pocks, a burned hand and more. He
+    catalogues the paranormal by taking statements, willing or not, and is fed
+    by them.</p>
+  notes: >-
+    <p>A slight, prematurely grey man who looks like he hasn't slept in a week,
+    scarred by past encounters: worm pocks, a burned hand and more. He
+    catalogues the paranormal by taking statements, willing or not, and is fed
+    by them.</p><p><strong>Level:</strong> 7 (21)</p><p><strong>Related
+    Entity:</strong> The Eye</p><p><strong>Health:</strong>
+    21</p><p><strong>Damage Inflicted:</strong> 3 points of
+    Stress</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Attacks as level 3; Might as
+    level 3; Knowledge skills, languages and secrets as level
+    8</p><h3>Combat</h3><p>He rarely attacks physically, preferring to flee or
+    use one of his abilities to neutralize a foe.</p><p><strong>Compel
+    Statement:</strong> A subject in immediate range he asks to answer a
+    question or give a statement on a topic must do so on a failed Intellect
+    defense roll, and answers must be true. A compelled statement lasts ten to
+    twenty minutes, during which the subject can do nothing but speak
+    truthfully, unless they take damage, which breaks the effect. Afterward
+    nightmares hinder the subject's Intellect-based tasks for several months or
+    longer.</p><p><strong>Beholding Vitality:</strong> He regains 1 health each
+    round (even at 0 health), or 10 health on the round he finishes taking a
+    statement.</p><h3>Interaction</h3><p>He can be rude and scornful, but shows
+    real compassion to people harmed by the Entities, including by his own
+    powers. He is frightened of much of what he learns.</p><h3>Use</h3><p>Not
+    physically imposing, but compelling a statement can stop violence before it
+    starts. Even if beaten down, his Entity-granted vitality brings him
+    back.</p><h3>Notes</h3><p>Podcast name: Jonathan Sims.</p><p><em>The Magnus
+    Archives Roleplaying Game, p198.</em></p>
+  gmNotes: ''
+  level: 7
+  health:
+    value: 21
+    baseMax: 21
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 3
+    effect: stress
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: 3 points of Stress
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: b7a08d1a17571c6f
+      label: Attacks
+      contexts:
+        - defense
+      mode: levelOverride
+      value: 3
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 6fdc0eac812dad94
+      label: Might
+      contexts:
+        - might
+      mode: levelOverride
+      value: 3
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 3880b70eecf41a7a
+      label: Knowledge skills, languages and secrets
+      contexts:
+        - knowledge
+      mode: levelOverride
+      value: 8
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The Archivist compels the character to take a specific action other than
+    answering a question or giving a statement.</p>
+items: []
+effects: []
+folder: e99bd0352a567807
+sort: 300
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '198'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Archivist
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!70cf3991210ed65e'

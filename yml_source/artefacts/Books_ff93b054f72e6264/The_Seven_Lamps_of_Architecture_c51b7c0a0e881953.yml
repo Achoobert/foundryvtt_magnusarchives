@@ -1,0 +1,84 @@
+folder: ff93b054f72e6264
+name: The Seven Lamps of Architecture
+type: artifact
+_id: c51b7c0a0e881953
+sort: 4600
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-seven-lamps-of-architecture
+  description: >-
+    <p><strong>Level:</strong> 6</p><p><strong>Related Entity:</strong> The
+    Buried</p><p><strong>Stress:</strong> 3 on realizing the book's abilities; 1
+    each time the reader feels the walls pressing in; 1 each time one of its
+    abilities is used.</p><p>An impossible early edition of Ruskin's book with
+    handwritten notes in its margins. Touching or reading it inside a building
+    means a Might defense roll or labored breathing and the sense of walls
+    closing in, hindering physical tasks until the reader has been outside for
+    about a minute.</p><p>Someone who identifies it can use these abilities
+    while they have it:</p><ul><li><p>After concentrating for a few rounds, find
+    the way through a structure or artificial tunnel to a known room, area,
+    person or object, with an Intellect-based task at the level of the structure
+    or the thing sought.</p></li><li><p>After reading for one round, make an
+    attack roll to reshape the building or tunnel they're in, walling off
+    someone they can see inside it. The victim must overcome a level 6 doorless
+    room (or sometimes a maze) or wait to be freed by someone with the same book
+    or ability.</p></li></ul><p><strong>Fear:</strong> Read too recklessly
+    (flipped through, or its powers called on too often), it entombs the reader
+    in a lightless cavity inside the walls, too narrow to move or read in.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '281'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-buried
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '6'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!c51b7c0a0e881953'

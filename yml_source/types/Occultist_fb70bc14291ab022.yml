@@ -1,0 +1,1771 @@
+name: Occultist
+type: characterType
+_id: fb70bc14291ab022
+img: systems/magnusarchives/assets/icons/magnustype.webp
+system:
+  schemaVersion: 1
+  slug: occultist
+  description: >-
+    <p>The things you were told to leave alone have always called to you.
+    Occultists are well-read, brooding people steeped in dark lore, often the
+    first to recognise what the group is facing and the most likely to develop
+    real paranormal powers.</p><p><strong>Starting Pools:</strong> Might 7,
+    Speed 9, Intellect 12, plus 6 points to assign as you
+    wish.</p><h3>First-Tier Occultist</h3><ul><li><p><strong>Effort:</strong>
+    Your Effort is 1.</p></li><li><p><strong>Fit:</strong> Edge Might 0, Speed
+    0, Intellect 1.</p></li><li><p><strong>Knowledge Skills:</strong> You're
+    trained in
+    @UUID[Compendium.magnusarchives.skills.Item.8d7248fff87386d3]{Occultism},
+    and trained in one of
+    @UUID[Compendium.magnusarchives.skills.Item.Ruyq1SdHHH0CAjbJ]{Astronomy},
+    @UUID[Compendium.magnusarchives.skills.Item.4XrJq6pn1RcVrbo7]{Biology},
+    @UUID[Compendium.magnusarchives.skills.Item.6EAeFLoptNeoy8we]{Engineering},
+    @UUID[Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC]{Forensics},
+    @UUID[Compendium.magnusarchives.skills.Item.13b2bdb00bf6fbad]{Geography},
+    @UUID[Compendium.magnusarchives.skills.Item.5WZgpOhdtyF5lfdj]{Geology},
+    @UUID[Compendium.magnusarchives.skills.Item.WwKxO9b2ETF6e6vq]{History},
+    @UUID[Compendium.magnusarchives.skills.Item.USk9iDmN7dNunH2I]{Mathematics},
+    @UUID[Compendium.magnusarchives.skills.Item.1d4c6135d4221600]{Medicine},
+    @UUID[Compendium.magnusarchives.skills.Item.2IRvR3ZWIIEStnDV]{Philosophy},
+    @UUID[Compendium.magnusarchives.skills.Item.D1LtZa629twcMtFe]{Physics},
+    @UUID[Compendium.magnusarchives.skills.Item.dbd4639749e26c4b]{Programming},
+    @UUID[Compendium.magnusarchives.skills.Item.XBkEFJaxQvgGEaZD]{Psychology},
+    @UUID[Compendium.magnusarchives.skills.Item.57a23c400d43de6e]{Religion},
+    @UUID[Compendium.magnusarchives.skills.Item.1ed6a9dae4acd3cb]{Researching}.</p></li><li><p><strong>Expert
+    Cypher Use:</strong> You can have 3 cyphers at a
+    time.</p></li><li><p><strong>Weapons:</strong> You're practiced with light
+    and medium weapons, and have an inability with heavy
+    weapons.</p></li><li><p><strong>Occult Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.19446b5f70591232]{Already
+    Tainted},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.4d88030a00bb69f2]{Artefact
+    Affinity},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.326b4e0ca21ecee7]{Esoteric
+    Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.eace440e38864256]{Intuition},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.6c2ae974f0a959f3]{Sensitive},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bc3d3610905e0c9d]{Slightly
+    Sinister Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.deb1202f4bae0c7e]{Supernatural
+    Comprehension},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.7bddd531719c1cf4]{Understanding},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.c9e2f56c7f2429d3]{Ventriloquism},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.78bfe5babe83d069]{Mesmerism}.</p></li></ul><h3>Second-Tier
+    Occultist</h3><ul><li><p><strong>Occult Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.9f6d1ec705beee96]{Cold
+    Reading},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.bd5e6185e9dda98c]{Hoax},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.5535dd785ab8b182]{Practiced
+    With Medium Weapons},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.ba64f85cea356f3e]{Seen
+    Some . . . Stuff},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.4a20a368527d491a]{Skill
+    With Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.33d3a30aa211e12c]{Spout
+    Nonsense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.aba66e53180fa051]{Premonition},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.32309a6021d7d290]{Send
+    Thoughts}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Third-Tier
+    Occultist</h3><ul><li><p><strong>Adroit Cypher Use:</strong> You can have 4
+    cyphers at a time.</p></li><li><p><strong>Occult Abilities:</strong> Choose
+    two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.740ada2c600174c5]{Cooperative
+    Sorcery},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.3385f34bc45f83c9]{Embracing
+    the Unknown},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.52d5fe1ad54a49bf]{Intense
+    Practitioner},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.dbfec87b38813174]{Peering
+    Beyond the Veil},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.e488e112ef09ac72]{Resistance
+    to the Uncanny},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.b11ef25ae811ae8c]{Shatter},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.39fa642ad1fb0306]{Supernatural
+    Resistance}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Fourth-Tier
+    Occultist</h3><ul><li><p><strong>Occult Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.d38a89030cf15fe1]{Combating
+    the Uncanny},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.db283e0437bfda39]{Heightened
+    Skills},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.61d13f47f97792fd]{Shrug
+    It Off},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.c7a1967f182b7667]{Think
+    Your Way Out},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0a52bf0113e0056a]{Cypher
+    Manifestation},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.82aa19bc26770afa]{Edit
+    Memories}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Fifth-Tier
+    Occultist</h3><ul><li><p><strong>Master Cypher Use:</strong> You can have 5
+    cyphers at a time.</p></li><li><p><strong>Occult Abilities:</strong> Choose
+    two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.72607ee3552916e8]{See
+    the Truth},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.b712d003add6575a]{Skill
+    With Attacks},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.1e85ff1049c61b0e]{Stern
+    Stuff},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.0fbca3f58c065801]{Stressed
+    Mind},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.945c4e5c839b7087]{Vanish
+    From Sight}, or from a lower tier. You can also swap one lower-tier ability
+    for another from a lower tier.</p></li></ul><h3>Sixth-Tier
+    Occultist</h3><ul><li><p><strong>Occult Abilities:</strong> Choose two of
+    @UUID[Compendium.magnusarchives.type-abilities.Item.386130c88140aa38]{Craft
+    Artefact},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.f258f02a8fae1376]{Defending
+    Others},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.00c794802d3d616d]{Mastery
+    With Defense},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.27eaa8c73e0635c8]{Meditative
+    Restoration},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.9a8b5f66e7867779]{Ghost},
+    @UUID[Compendium.magnusarchives.type-abilities.Item.68cac6a8630554de]{Psychokinetic
+    Attack}, or from a lower tier. You can also swap one lower-tier ability for
+    another from a lower tier.</p></li></ul><p>Abilities marked supernatural
+    need 10 levels of Stress from supernatural sources first
+    (p27).</p><p><em>Sheet notes:</em> The Might Pool starts at 7, below Core
+    Setup's base of 8; lower it by 1 on the sheet. Core Setup sets a cypher
+    limit of 2; raise it to 3. Cypher limits at higher tiers are raised by hand
+    on the sheet.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '51'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - character-type
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  poolBonuses:
+    might: 0
+    speed: 1
+    intellect: 4
+  woundBonuses:
+    minor: 0
+    moderate: 0
+    major: 0
+  edgeGrant:
+    mode: fixed
+    pool: intellect
+    amount: 1
+  weaponUse:
+    light: true
+    medium: true
+    heavy: false
+  armorUse:
+    light: false
+    medium: false
+    heavy: false
+  superhero:
+    rank: 0
+    powerShiftCount: 0
+    superheroics:
+      enabled: false
+      poolBonus: 0
+  abilityGrants: []
+  abilityChoiceGroups:
+    - id: 3da59f960299cbdf
+      choose: 2
+      options:
+        - id: 0acab435fa2bef22
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.19446b5f70591232
+          notes: ''
+          snapshot:
+            name: Already Tainted
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-already-tainted
+              description: >-
+                <p>You start the game able to choose supernatural abilities,
+                without first gaining 10 levels of supernatural Stress. Check
+                with the GM that this suits the campaign. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '52'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 45a035a5124b8796
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.4d88030a00bb69f2
+          notes: ''
+          snapshot:
+            name: Artefact Affinity
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-artefact-affinity
+              description: <p>Tasks to identify or use an artefact are eased. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '52'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 90503f6c3acc0767
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.326b4e0ca21ecee7
+          notes: ''
+          snapshot:
+            name: Esoteric Skills
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-esoteric-skills
+              description: >-
+                <p>You become trained in two of: biology, history, identifying,
+                philosophy, physics, publishing, religion or researching.
+                Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '52'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: e6b1c112f1f49ed2
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.eace440e38864256
+          notes: ''
+          snapshot:
+            name: Intuition
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-intuition
+              description: >-
+                <p><strong>Cost:</strong> 2 Intellect points.</p><p>The GM, not
+                you, decides when this triggers: you spend the points and get a
+                weird feeling that something is wrong, with a clue to what. It
+                should be an occasional surprise, not something to rely on, and
+                it fails if you can't pay. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '52'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: intellect
+              cost:
+                amount: 2
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 2378280630b5f808
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.6c2ae974f0a959f3
+          notes: ''
+          snapshot:
+            name: Sensitive
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-sensitive
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>For ten
+                minutes, tasks to perceive abnormal presences or influences,
+                even ones people and animals normally can't sense, are eased.
+                Action to initiate.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 00aa3c88b11acab5
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.bc3d3610905e0c9d
+          notes: ''
+          snapshot:
+            name: Slightly Sinister Skills
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-slightly-sinister-skills
+              description: >-
+                <p>You become trained in two of: deception, disguise,
+                intimidation, pickpocketing or stealth. You can take this more
+                than once, picking two different skills each time. Enabler.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: enabler
+              pool: none
+              cost:
+                amount: 0
+                scalable: false
+                ignoresEdge: false
+                allowedPools: []
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: e8e549ae5b60d4da
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.deb1202f4bae0c7e
+          notes: ''
+          snapshot:
+            name: Supernatural Comprehension
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-supernatural-comprehension
+              description: >-
+                <p><strong>Cost:</strong> 2 Intellect points.</p><p>With about a
+                minute of study, you identify the parameters of an unnatural
+                effect within immediate distance, such as a curse, a spell or
+                the presence of something inhuman. Action to initiate.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 2
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 2021835ae5a4255e
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.7bddd531719c1cf4
+          notes: ''
+          snapshot:
+            name: Understanding
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-understanding
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>You observe
+                or study a creature or object. Your next interaction with it
+                gains an asset. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: f49ed486a23afd08
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.c9e2f56c7f2429d3
+          notes: ''
+          snapshot:
+            name: Ventriloquism
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-ventriloquism
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point.</p><p>For one round
+                your voice seems to come from anywhere you choose within
+                immediate distance. Action.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+        - id: 57a52c72168fb16d
+          abilityUuid: Compendium.magnusarchives.type-abilities.Item.78bfe5babe83d069
+          notes: ''
+          snapshot:
+            name: Mesmerism
+            img: systems/magnusarchives/assets/icons/magnusability.webp
+            system:
+              schemaVersion: 1
+              slug: occultist-mesmerism
+              description: >-
+                <p><strong>Cost:</strong> 1 Intellect point and 1
+                Stress.</p><p>You transfix a person within immediate distance.
+                They lose their next action and notice nothing that round unless
+                attacked or shaken out of it; the following round they're
+                disoriented and their actions are hindered.
+                Action.</p><p><em>Supernatural ability:</em> available only once
+                you have gained 10 levels of Stress from supernatural sources
+                (p27), or from first tier with the Occultist's Already
+                Tainted.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '53'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags:
+                - type-ability
+                - occultist
+                - supernatural
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              tier: 1
+              category: type
+              archived: false
+              activation: action
+              pool: intellect
+              cost:
+                amount: 1
+                scalable: false
+                ignoresEdge: false
+                allowedPools:
+                  - intellect
+              roll: none
+              rollModifier: 0
+              attackModifier: 0
+              damage: 0
+              damageEffect: none
+              stressAmount: 3
+              range: ''
+              targetMode: none
+              sourceFocusUuid: ''
+              sourceNodeId: ''
+          alternatives: []
+  skillGrants:
+    - id: cccbe7d27e6ba454
+      skillUuid: Compendium.magnusarchives.skills.Item.8d7248fff87386d3
+      customName: ''
+      notes: ''
+      rank: trained
+      snapshot:
+        name: Occultism
+        img: systems/magnusarchives/assets/icons/magnusskill.webp
+        system:
+          defaultPool: intellect
+          schemaVersion: 1
+          slug: ''
+          description: >-
+            <p>You study supernatural lore, including parapsychology, paranormal
+            events, and the existence of secret organisations, and you have a
+            working knowledge of tarot or a similar divining practice. It does
+            not usually include knowledge of the Entities and their Avatars.</p>
+          source:
+            uuid: ''
+            book: The Magnus Archives Roleplaying Game
+            page: '16'
+            license: original
+          automation:
+            mode: descriptive
+            duration:
+              enabled: false
+              trigger: recovery
+            rollDefaults: {}
+          ruleElements: []
+          tags: []
+          grantedBy:
+            kind: other
+            sourceUuid: ''
+            instanceId: ''
+            grantId: ''
+            status: active
+            contentUuid: ''
+            contentKey: ''
+            replacement:
+              active: false
+              originalName: ''
+              originalContentUuid: ''
+              originalContentKey: ''
+              replacementName: ''
+              replacementContentUuid: ''
+              replacementContentKey: ''
+              selectionKind: none
+          rank: untrained
+          category: knowledge
+          contexts: []
+          initiative: false
+          acquisition:
+            minimumTier: 1
+            grantedByUuid: ''
+            notes: ''
+      alternatives: []
+  choiceGroups:
+    - id: 49d9edd7c496b8b9
+      choose: 1
+      rank: trained
+      options:
+        - id: 5d321254481aadb2
+          skillUuid: Compendium.magnusarchives.skills.Item.Ruyq1SdHHH0CAjbJ
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Astronomy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in the study of the stars, planets, and
+                cosmology in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 9d96b49cfe65a861
+          skillUuid: Compendium.magnusarchives.skills.Item.4XrJq6pn1RcVrbo7
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Biology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You have a deep working knowledge of living systems,
+                including animals, plants, and insects.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: c065463039953029
+          skillUuid: Compendium.magnusarchives.skills.Item.6EAeFLoptNeoy8we
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Engineering
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can design, analyze, and create innovative solutions for
+                complex problems, utilizing scientific principles and
+                technological knowledge.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 9abdaed1bdd173eb
+          skillUuid: Compendium.magnusarchives.skills.Item.uzlopmNCJj8CpFlC
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Forensics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You know how to interpret physical evidence to work out what
+                happened at a location, such as a crime scene, or what led to an
+                object's current condition, such as a cause of death.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 9f4a542e7f206919
+          skillUuid: Compendium.magnusarchives.skills.Item.13b2bdb00bf6fbad
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Geography
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You are well-versed in earthly landscapes, countries, human
+                populations, and maps in general.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 77563a5eb90bdfd2
+          skillUuid: Compendium.magnusarchives.skills.Item.5WZgpOhdtyF5lfdj
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Geology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about Earth's structure, composition,
+                and processes, including earthquakes, volcanoes, and the
+                formation of natural resources.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 16cd2b32ab0a9fe2
+          skillUuid: Compendium.magnusarchives.skills.Item.WwKxO9b2ETF6e6vq
+          customName: ''
+          notes: ''
+          snapshot:
+            name: History
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're well-versed in the study of past events, societies,
+                and cultures.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: da871a114d70f7b5
+          skillUuid: Compendium.magnusarchives.skills.Item.USk9iDmN7dNunH2I
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Mathematics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a whiz with numbers, calculations, and pattern
+                analysis.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 8b02c633de14c7b0
+          skillUuid: Compendium.magnusarchives.skills.Item.1d4c6135d4221600
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Medicine
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're skilled in general medicine, a medical specialty,
+                nursing, dentistry, optometry, audiology, or a similar
+                practice.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: e977a575c1b1493b
+          skillUuid: Compendium.magnusarchives.skills.Item.2IRvR3ZWIIEStnDV
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Philosophy
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with critically analysing questions of
+                existence, knowledge, ethics, and similar fundamental
+                issues.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 8b9ddbac819082d3
+          skillUuid: Compendium.magnusarchives.skills.Item.D1LtZa629twcMtFe
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Physics
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're knowledgeable about the scientifically derived laws of
+                the physical world.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: eb00cda7b819c724
+          skillUuid: Compendium.magnusarchives.skills.Item.dbd4639749e26c4b
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Programming
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You can code computers and computer architectures, writing
+                applications, developing new systems, and trying to infiltrate
+                protected digital systems.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 86e7d0629b309698
+          skillUuid: Compendium.magnusarchives.skills.Item.XBkEFJaxQvgGEaZD
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Psychology
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're conversant with the study of human behaviour and the
+                therapies developed to address mental health.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 613bf669f3b65bac
+          skillUuid: Compendium.magnusarchives.skills.Item.57a23c400d43de6e
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Religion
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're a pastor or religious leader in a particular faith,
+                and/or knowledgeable about the study of religious beliefs,
+                practices, and traditions.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: knowledge
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+        - id: 06870da5bcab1822
+          skillUuid: Compendium.magnusarchives.skills.Item.1ed6a9dae4acd3cb
+          customName: ''
+          notes: ''
+          snapshot:
+            name: Researching
+            img: systems/magnusarchives/assets/icons/magnusskill.webp
+            system:
+              defaultPool: intellect
+              schemaVersion: 1
+              slug: ''
+              description: >-
+                <p>You're skilled at gathering information from databases and
+                physical archives, or by hitting the pavement and asking around.
+                Every form of research takes at least a few hours.</p>
+              source:
+                uuid: ''
+                book: The Magnus Archives Roleplaying Game
+                page: '16'
+                license: original
+              automation:
+                mode: descriptive
+                duration:
+                  enabled: false
+                  trigger: recovery
+                rollDefaults: {}
+              ruleElements: []
+              tags: []
+              grantedBy:
+                kind: other
+                sourceUuid: ''
+                instanceId: ''
+                grantId: ''
+                status: active
+                contentUuid: ''
+                contentKey: ''
+                replacement:
+                  active: false
+                  originalName: ''
+                  originalContentUuid: ''
+                  originalContentKey: ''
+                  replacementName: ''
+                  replacementContentUuid: ''
+                  replacementContentKey: ''
+                  selectionKind: none
+              rank: untrained
+              category: general
+              contexts: []
+              initiative: false
+              acquisition:
+                minimumTier: 1
+                grantedByUuid: ''
+                notes: ''
+  genre: none
+  customGenreId: ''
+  backgroundOptions: ''
+  equipmentNotes: ''
+  equipmentBundleUuid: ''
+  instance:
+    sourceUuid: ''
+    instanceId: ''
+    role: primary
+    attachedAt: 0
+    selections:
+      edgePool: none
+      superheroicsPool: none
+      powerShifts: []
+      poolChoices: []
+      skillChoices: []
+      abilityChoices: []
+      suppressedGrantIds: []
+    parent:
+      kind: other
+      sourceUuid: ''
+      instanceId: ''
+      grantId: ''
+      status: active
+      contentUuid: ''
+      contentKey: ''
+      replacement:
+        active: false
+        originalName: ''
+        originalContentUuid: ''
+        originalContentKey: ''
+        replacementName: ''
+        replacementContentUuid: ''
+        replacementContentKey: ''
+        selectionKind: none
+  weaponFamilies: []
+effects: []
+folder: null
+sort: 400
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!fb70bc14291ab022'

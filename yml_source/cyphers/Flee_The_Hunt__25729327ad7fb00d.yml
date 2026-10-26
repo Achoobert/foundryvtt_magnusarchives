@@ -1,0 +1,69 @@
+_id: 25729327ad7fb00d
+name: Flee The Hunt!
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: flee-the-hunt
+  description: >-
+    <p><strong>Level:</strong> 1d6 · <strong>Instant.</strong></p><p>If you are
+    being chased, you escape and the pursuer eventually gives up. If they get
+    another chance later (say, you come back), a new chase is resolved
+    normally.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '108'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+    - instant
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 1300000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: flee-the-hunt
+      sourceOrder: 13
+      levelFormula: 1d6
+      instant: true
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!25729327ad7fb00d'

@@ -1,0 +1,79 @@
+folder: 23a662247bd5b3ec
+name: Web table
+type: artifact
+_id: 9eec393bd365afb9
+sort: 2400
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: web-table
+  description: >-
+    <p><strong>Level:</strong> 7</p><p><strong>Related Entity:</strong> The
+    Web</p><p><strong>Stress:</strong> 1 on studying the table; 1 when using
+    it.</p><p>A large dark-wood table carved with a hypnotic pattern that draws
+    the eye to a small square recess at its center. Someone who knows about the
+    Entities, such as a dabbler (p209), or who has identified the table, can
+    make an Intellect-based attack against an Avatar or aspect of an Entity
+    within short range. On a success the target is swallowed by the table, able
+    to see and hear what happens around it but not act.</p><p>An Avatar or
+    similarly powerful being can still remanifest, but can't stray more than
+    very long range from the table, has all its tasks hindered by three steps,
+    and can't harm the table itself.</p><p><strong>Fear:</strong> By accident,
+    design or misunderstanding, the table is destroyed, freeing at least one
+    bound Avatar or aspect, such as an angry NotThem (p230).</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '264'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-web
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '7'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!9eec393bd365afb9'

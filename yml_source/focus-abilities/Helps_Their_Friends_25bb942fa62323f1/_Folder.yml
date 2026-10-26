@@ -1,0 +1,20 @@
+type: Item
+folder: null
+name: Helps Their Friends
+color: null
+sorting: a
+_id: 25bb942fa62323f1
+description: ''
+sort: 500
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!folders!25bb942fa62323f1'

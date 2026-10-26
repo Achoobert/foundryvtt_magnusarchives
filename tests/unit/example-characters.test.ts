@@ -49,9 +49,9 @@ describe("Example Characters compendium", () => {
     });
   });
 
-  it("is built by the import script the build runs", () => {
+  it("is compiled from yml_source by the build", () => {
     expect(packageJson.scripts["import:example-characters"]).toBe("node scripts/import-example-characters.mjs");
-    expect(packageJson.scripts.build).toContain("pnpm import:example-characters");
+    expect(packageJson.scripts.build).toContain("pnpm packs:build");
   });
 
   it("builds the sample sheet's Character with its printed Pools and Edge (p379)", () => {

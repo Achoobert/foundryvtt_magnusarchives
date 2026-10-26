@@ -1,0 +1,225 @@
+_id: 9a4eb59b0f6267a2
+name: Never Says Die
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: never-says-die
+  description: >-
+    <p>When others give up, you're only getting started. Resilience and stubborn
+    determination carry you through. You don't fuss over your appearance and
+    you're not much of a talker. You act.</p><p><strong>Connection:</strong>
+    Choose one of the following with your group.</p><ol><li><p>You feel an
+    overwhelming need to impress another PC, and you're not sure
+    why.</p></li><li><p>Another PC is capable but needs motivating, and you keep
+    urging them to keep going.</p></li><li><p>You feel protective of another PC
+    and don't want to see them hurt.</p></li><li><p>Another PC says they've
+    known you for years, but you barely remember
+    them.</p></li></ol><p><strong>Minor Effect Suggestion:</strong> You restore
+    2 points to your Might Pool.</p><p><strong>Major Effect Suggestion:</strong>
+    Your next action is eased by two steps.</p><p><strong>GM
+    Intrusions:</strong> Sometimes it's your equipment or weapons that give
+    out.</p><p><strong>Abilities by tier:</strong></p><ul><li><p><strong>Tier
+    1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.b9ad37b8ca830ddf]{Improved
+    Recovery},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.7c2be6d145440f5d]{Push
+    on Through}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8ecd619162a2e17d]{Tough}</p></li><li><p><strong>Tier
+    3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6530d8ea3e1d3984]{Stand
+    Like Iron} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.17e83b9807bc5109]{Hidden
+    Reserves}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.59d974bf1cabfd75]{Outlast
+    the Foe}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.921146801407b0dc]{Not
+    Dead Yet}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.5e55bf90ffc56428]{Final
+    Defiance} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.6565702f22c8e50f]{Ignore
+    Affliction}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 78-79
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-improved-recovery
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.b9ad37b8ca830ddf
+        abilitySnapshot:
+          name: Improved Recovery
+          description: >-
+            Your ten-minute recovery roll takes one action instead, so your
+            first two recovery rolls take one action each, the third one hour
+            and the fourth ten hours.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-push-on-through
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.7c2be6d145440f5d
+        abilitySnapshot:
+          name: Push on Through
+          description: For one hour you ignore the effects of terrain while moving.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-tough
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8ecd619162a2e17d
+        abilitySnapshot:
+          name: Tough
+          description: >-
+            You gain an extra step on your damage track, called hurt, between
+            hale and impaired. Hurt has no other effect; you're sore and bruised
+            but fine.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t3-stand-like-iron
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6530d8ea3e1d3984
+        abilitySnapshot:
+          name: Stand Like Iron
+          description: >-
+            The next attack this encounter that would give you a serious injury
+            gives you 2 points of Stress instead.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-hidden-reserves
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.17e83b9807bc5109
+        abilitySnapshot:
+          name: Hidden Reserves
+          description: >-
+            When you make a recovery roll, you also gain +1 to your Might Edge
+            and your Speed Edge for the next ten minutes.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-outlast-the-foe
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.59d974bf1cabfd75
+        abilitySnapshot:
+          name: Outlast the Foe
+          description: >-
+            After five full rounds of combat, you have an asset on all tasks for
+            the rest of that combat and deal 1 extra point of damage per attack.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-not-dead-yet
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.921146801407b0dc
+        abilitySnapshot:
+          name: Not Dead Yet
+          description: >-
+            While debilitated, you can act as if you were only impaired. You're
+            still one step from death.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-final-defiance
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.5e55bf90ffc56428
+        abilitySnapshot:
+          name: Final Defiance
+          description: >-
+            When you would die, you stay conscious and active, debilitated, for
+            one more round, plus another round each time you succeed on a
+            difficulty 5 Might task. If someone else succeeds on a difficulty 5
+            healing task on you during that time, you survive, still
+            debilitated. If you reach dead again while in this state, you can't
+            be saved.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-ignore-affliction
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.6565702f22c8e50f
+        abilitySnapshot:
+          name: Ignore Affliction
+          description: >-
+            Ignore an unwanted condition or affliction (disease, paralysis, mind
+            control, a broken limb and so on, but not Stress or the damage
+            track) and act as if it doesn't affect you for one hour. A condition
+            that would last less than an hour is negated entirely.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-2c9a0e537318ed91
+        from: t1-improved-recovery
+        to: t2-tough
+      - id: connection-188bc7077aa3ca15
+        from: t1-push-on-through
+        to: t2-tough
+      - id: connection-2bd5e46955b91562
+        from: t2-tough
+        to: t3-stand-like-iron
+      - id: connection-8cf7734eb53e01bf
+        from: t2-tough
+        to: t3-hidden-reserves
+      - id: connection-eeed70b88e2b1a37
+        from: t3-stand-like-iron
+        to: t4-outlast-the-foe
+      - id: connection-91d81d6e821c3362
+        from: t3-hidden-reserves
+        to: t4-outlast-the-foe
+      - id: connection-c12fd2d935f63a8a
+        from: t4-outlast-the-foe
+        to: t5-not-dead-yet
+      - id: connection-4e99e9356dd44205
+        from: t5-not-dead-yet
+        to: t6-final-defiance
+      - id: connection-1c22cf10d721c537
+        from: t5-not-dead-yet
+        to: t6-ignore-affliction
+effects: []
+folder: null
+sort: 1200
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!9a4eb59b0f6267a2'

@@ -1,0 +1,69 @@
+_id: 570535b430a11711
+name: Breathing Room
+type: cypher
+img: systems/magnusarchives/assets/icons/magnuscypher.webp
+system:
+  schemaVersion: 1
+  slug: breathing-room
+  description: >-
+    <p><strong>Level:</strong> 1d6 + 1 · <strong>Instant.</strong></p><p>As part
+    of a physical action (an attack, a bump, a shout, shoving past), you make an
+    NPC within immediate range drop whatever they hold, if their level is lower
+    than the cypher's level.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '107'
+    license: Rusty Quill; not covered by the Cypher Open License
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - standard
+    - instant
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: 1
+  levelOverride: false
+  category: standard
+  manifest: false
+  manifestation: subtle
+  form: ''
+  power: low
+  identified: true
+  uses: 1
+effects: []
+folder: null
+sort: 500000
+flags:
+  magnusarchives:
+    cypherImport:
+      sourceId: breathing-room
+      sourceOrder: 5
+      levelFormula: 1d6 + 1
+      instant: true
+      category: standard
+      sourcePower: null
+      nonstandard: false
+      reviewStatus: verified
+      reviewNote: ''
+_key: '!items!570535b430a11711'

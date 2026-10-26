@@ -1,0 +1,75 @@
+folder: 23a662247bd5b3ec
+name: Dark wardrobe
+type: artifact
+_id: 8fe62e6e58753fbc
+sort: 800
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: dark-wardrobe
+  description: >-
+    <p><strong>Level:</strong> 4</p><p><strong>Related Entity:</strong> The
+    Dark</p><p><strong>Stress:</strong> 3 on acquiring it and realizing no light
+    can exist inside.</p><p>An ordinary-seeming oak wardrobe, except that no
+    light reaches its interior, so everything stored inside must be found by
+    touch.</p><p>After a couple of days, probably while the owner is away, it
+    spawns a lightless beast (p224) that slithers off to menace the owner or
+    someone they know. Later it may spawn another, this time waiting until
+    someone is there to watch it emerge.</p><p><strong>Fear:</strong> The
+    Sandman (p236) emerges instead of a lightless beast.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '256'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - artefact
+    - the-dark
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '4'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!8fe62e6e58753fbc'

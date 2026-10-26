@@ -1,0 +1,243 @@
+_id: 713ccedb58ef5bcd
+name: Needs No Weapon
+type: focus
+img: systems/magnusarchives/assets/icons/magnusfocus.webp
+system:
+  schemaVersion: 1
+  slug: needs-no-weapon
+  description: >-
+    <p>You are the weapon. Punches, kicks and full-body moves let you hurt foes
+    badly without draining yourself. You learned through training, the military
+    or a rough upbringing, and you keep your body in top shape. You wear loose
+    clothes and rarely carry anything but maybe knuckle or boot
+    weapons.</p><p><strong>Connection:</strong> Choose one of the following with
+    your group.</p><ol><li><p>Another PC thinks a real weapon is something you
+    hold, and may look down on you.</p></li><li><p>Another PC is so unaware of
+    their body that they keep getting in your way. If you miss and hit someone
+    nearby by accident, it's likely them.</p></li><li><p>You once trained with a
+    close friend of another PC, and you owe that friend a great
+    deal.</p></li><li><p>Two other PCs asked to become your students, but only
+    one shows any talent.</p></li></ol><p><strong>Minor Effect
+    Suggestion:</strong> You trip the target and knock it
+    prone.</p><p><strong>Major Effect Suggestion:</strong> You strike a limb,
+    making it useless for the next minute.</p><p><strong>GM Intrusions:</strong>
+    Hitting some foes hurts you as much as them. Armed opponents have longer
+    reach. Complicated moves can throw you off balance.</p><p><strong>Abilities
+    by tier:</strong></p><ul><li><p><strong>Tier 1:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.665c70188f828820]{Fists
+    of Fury},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.3a519343c3cba70e]{Scarred
+    and Hardened}</p></li><li><p><strong>Tier 2:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.008069c90d155613]{Advantage
+    to Disadvantage},
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.17aa16b31801e8ca]{Unarmed
+    Fighting Style}</p></li><li><p><strong>Tier 3:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.04e62e868433ad5d]{Moving
+    Like Water} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.8d97774f6ea80bd6]{Greater
+    Enhanced Potential}.</p></li><li><p><strong>Tier 4:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.1d9fb9c8410e5153]{Stand
+    Like Iron}</p></li><li><p><strong>Tier 5:</strong>
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.2ccd5f6b5d80f155]{Stun
+    Attack}</p></li><li><p><strong>Tier 6:</strong> Choose
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.f70ca63d0f475330]{Master
+    of Unarmed Fighting Style} or
+    @UUID[Compendium.magnusarchives.focus-abilities.Item.81920ca524e8a45d]{Lethal
+    Damage}.</p></li></ul>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: 76-77
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - focus
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  graph:
+    version: 1
+    nodes:
+      - id: t1-fists-of-fury
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.665c70188f828820
+        abilitySnapshot:
+          name: Fists of Fury
+          description: Your unarmed attacks deal 2 extra points of damage.
+        tier: 1
+        position:
+          x: 0
+          'y': null
+      - id: t1-scarred-and-hardened
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.3a519343c3cba70e
+        abilitySnapshot:
+          name: Scarred and Hardened
+          description: >-
+            Reduce the Stress you suffer from physical injury by 1 (by 2 if your
+            type already gives you this ability). Stress from mental shock or
+            despair is unaffected.
+        tier: 1
+        position:
+          x: 1
+          'y': null
+      - id: t2-advantage-to-disadvantage
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.008069c90d155613
+        abilitySnapshot:
+          name: Advantage to Disadvantage
+          description: >-
+            You attack an armed foe with a flurry of moves, dealing damage and
+            disarming them. Their weapon ends up in your hands or 10 feet (3.5
+            m) away on the ground, your choice. This attack is hindered.
+        tier: 2
+        position:
+          x: 0
+          'y': null
+      - id: t2-unarmed-fighting-style
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.17aa16b31801e8ca
+        abilitySnapshot:
+          name: Unarmed Fighting Style
+          description: You're trained in unarmed attacks.
+        tier: 2
+        position:
+          x: 1
+          'y': null
+      - id: t3-moving-like-water
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.04e62e868433ad5d
+        abilitySnapshot:
+          name: Moving Like Water
+          description: >-
+            You flow and spin so that for one minute all your attacks and Speed
+            defense tasks gain an asset.
+        tier: 3
+        position:
+          x: 0
+          'y': null
+      - id: t3-greater-enhanced-potential
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.8d97774f6ea80bd6
+        abilitySnapshot:
+          name: Greater Enhanced Potential
+          description: Gain 6 points to split among your stat Pools however you like.
+        tier: 3
+        position:
+          x: 1
+          'y': null
+      - id: t4-stand-like-iron
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.1d9fb9c8410e5153
+        abilitySnapshot:
+          name: Stand Like Iron
+          description: >-
+            The next attack this encounter that would give you a serious injury
+            gives you 2 points of Stress instead.
+        tier: 4
+        position:
+          x: 0
+          'y': null
+      - id: t5-stun-attack
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.2ccd5f6b5d80f155
+        abilitySnapshot:
+          name: Stun Attack
+          description: >-
+            As part of a melee or ranged attack, attempt a difficulty 5 Speed
+            task. On a success, your attack deals normal damage and the creature
+            is stunned and loses its next turn. On a failure you still roll the
+            attack normally but can't stun.
+        tier: 5
+        position:
+          x: 0
+          'y': null
+      - id: t6-master-of-unarmed-fighting-style
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.f70ca63d0f475330
+        abilitySnapshot:
+          name: Master of Unarmed Fighting Style
+          description: >-
+            You're specialized in unarmed attacks. If you already are, your
+            unarmed attacks deal 2 extra points of damage instead.
+        tier: 6
+        position:
+          x: 0
+          'y': null
+      - id: t6-lethal-damage
+        abilityUuid: Compendium.magnusarchives.focus-abilities.Item.81920ca524e8a45d
+        abilitySnapshot:
+          name: Lethal Damage
+          description: Your unarmed attacks deal 5 extra points of damage when they hit.
+        tier: 6
+        position:
+          x: 1
+          'y': null
+    connections:
+      - id: connection-bf784d7412cd73e3
+        from: t1-fists-of-fury
+        to: t2-advantage-to-disadvantage
+      - id: connection-dece4f5f0541adf9
+        from: t1-fists-of-fury
+        to: t2-unarmed-fighting-style
+      - id: connection-65214f0d762baa90
+        from: t1-scarred-and-hardened
+        to: t2-advantage-to-disadvantage
+      - id: connection-b399be144b0376c9
+        from: t1-scarred-and-hardened
+        to: t2-unarmed-fighting-style
+      - id: connection-11dfcbff4252f44d
+        from: t2-advantage-to-disadvantage
+        to: t3-moving-like-water
+      - id: connection-79fdbf1d977548a6
+        from: t2-advantage-to-disadvantage
+        to: t3-greater-enhanced-potential
+      - id: connection-0a7bc171d0feb62a
+        from: t2-unarmed-fighting-style
+        to: t3-moving-like-water
+      - id: connection-070af0cab7b33015
+        from: t2-unarmed-fighting-style
+        to: t3-greater-enhanced-potential
+      - id: connection-539179b47a41eeef
+        from: t3-moving-like-water
+        to: t4-stand-like-iron
+      - id: connection-985e02f0b377fa7c
+        from: t3-greater-enhanced-potential
+        to: t4-stand-like-iron
+      - id: connection-26b27d7983b7146a
+        from: t4-stand-like-iron
+        to: t5-stun-attack
+      - id: connection-a03fe00f40d1c800
+        from: t5-stun-attack
+        to: t6-master-of-unarmed-fighting-style
+      - id: connection-0765985feb2130d5
+        from: t5-stun-attack
+        to: t6-lethal-damage
+effects: []
+folder: null
+sort: 1100
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_key: '!items!713ccedb58ef5bcd'

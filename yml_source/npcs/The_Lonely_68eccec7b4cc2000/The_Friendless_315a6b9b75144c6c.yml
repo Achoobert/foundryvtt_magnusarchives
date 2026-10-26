@@ -1,0 +1,109 @@
+_id: 315a6b9b75144c6c
+name: The Friendless
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>A man pale as white porcelain who cultivates loneliness, breaking bonds
+    of friendship and community. He preys most on those already inward-looking
+    or cut off from others.</p>
+  notes: >-
+    <p>A man pale as white porcelain who cultivates loneliness, breaking bonds
+    of friendship and community. He preys most on those already inward-looking
+    or cut off from others.</p><p><strong>Level:</strong> 6
+    (18)</p><p><strong>Related Entity:</strong> The
+    Lonely</p><p><strong>Health:</strong> 25</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong> Short.
+    The book prints no Movement line for this
+    entry.</p><p><strong>Modifications:</strong> Stealth as level 9; Persuasion
+    as level 7</p><h3>Combat</h3><p>He uses his abilities in
+    combat.</p><p><strong>Go Away:</strong> A target in short range who fails an
+    Intellect defense roll is banished, with a sharp, staticky pop, into an
+    isolated layer of The Lonely: a cold, empty mirror of the world full of fog,
+    floods or endless suburbs. Trapped targets take 1 Stress each hour they fail
+    an Intellect defense roll, and may attempt an Intellect-based task each
+    minute they search for a way out, reappearing a few yards to a few miles
+    from where they vanished.</p><p><strong>Travel The Lonely:</strong> As his
+    action he enters The Lonely, which holds no danger for him, and leaves when
+    he likes for any place he knows or finds by exploring for several
+    hours.</p><h3>Interaction</h3><p>He loves sending others into The Lonely,
+    but will cooperate to keep other Entities at bay. His fondness for wagers
+    can be used to win his help, and he rarely misses a chance to praise
+    solitude.</p><h3>Use</h3><p>PCs working alone have the most to fear, whether
+    he banishes them or persuades them to isolate
+    themselves.</p><h3>Notes</h3><p>Podcast name: Peter Lukas.</p><p><em>The
+    Magnus Archives Roleplaying Game, p219.</em></p>
+  gmNotes: ''
+  level: 6
+  health:
+    value: 25
+    baseMax: 25
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 6
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: The book prints no Movement line for this entry.
+  modifications:
+    - id: 613fe9e6c429e518
+      label: Stealth
+      contexts:
+        - stealth
+      mode: levelOverride
+      value: 9
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: f3116bf5b305b984
+      label: Persuasion
+      contexts:
+        - persuasion
+      mode: levelOverride
+      value: 7
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The character realizes they have lost time and wandered away from their
+    friends to somewhere unfamiliar (not The Lonely), and their friends didn't
+    notice until now.</p>
+items: []
+effects: []
+folder: 68eccec7b4cc2000
+sort: 2000
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '219'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: The Friendless
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!315a6b9b75144c6c'

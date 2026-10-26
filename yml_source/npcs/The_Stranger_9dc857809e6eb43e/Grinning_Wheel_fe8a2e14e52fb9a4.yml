@@ -1,0 +1,110 @@
+_id: fe8a2e14e52fb9a4
+name: Grinning Wheel
+type: npc
+img: systems/magnusarchives/assets/icons/magnusnpc.webp
+system:
+  schemaVersion: 1
+  description: >-
+    <p>It passes as a friendly helper, salesperson or repair person, but its
+    face keeps changing as if on half-seen wheels within wheels. Those wheels
+    are worm-like things studded with gnashing mouths and stolen faces.</p>
+  notes: >-
+    <p>It passes as a friendly helper, salesperson or repair person, but its
+    face keeps changing as if on half-seen wheels within wheels. Those wheels
+    are worm-like things studded with gnashing mouths and stolen
+    faces.</p><p><strong>Level:</strong> 4 (12)</p><p><strong>Related
+    Entity:</strong> The Stranger and The Hunt</p><p><strong>Stress on first
+    realizing its horror:</strong> 2 (usually on a failed Intellect defense
+    roll)</p><p><strong>Health:</strong> 15</p><p><strong>Damage
+    Inflicted:</strong> Serious injury</p><p><strong>Movement:</strong>
+    Short</p><p><strong>Modifications:</strong> Recalling the original victim's
+    life as level 2; Disguise (as a past victim) as level
+    5</p><h3>Combat</h3><p>It relies on its abilities and
+    traits.</p><p><strong>Another Face:</strong> It swaps one face for another.
+    Anyone seeing this for the first time gains 2 Stress on a failed Intellect
+    defense roll.</p><p><strong>Reveal the Wheel:</strong> It shows its true
+    form and tries to rip off a target's face. First-time witnesses gain 2
+    Stress on a failed Intellect defense roll, and the target must succeed on a
+    Speed defense roll or suffer a serious injury. A target killed this way adds
+    their face to its collection.</p><p><strong>Stranger in Charge:</strong> As
+    its action it locks gazes with a target, who must succeed on an Intellect
+    defense roll or act as it wishes for a minute, or until they succeed on a
+    later Intellect defense roll: following it, attacking an ally, or starting
+    to remove their own face (3 Stress, which ends the
+    control).</p><h3>Interaction</h3><p>Little personality of its own, but it
+    may imitate an ordinary person using memories from past
+    victims.</p><h3>Use</h3><p>A group can beat one without much risk, but it
+    may target one PC wearing the face of someone they once knew and
+    wronged.</p><p><em>The Magnus Archives Roleplaying Game, p221.</em></p>
+  gmNotes: ''
+  level: 4
+  health:
+    value: 15
+    baseMax: 15
+  armor: 0
+  armorBase: 0
+  damage:
+    amount: 4
+    effect: seriousInjury
+    stressAmount: 3
+    defense:
+      allowBlock: true
+      allowDodge: true
+    notes: Serious injury
+  movement:
+    category: short
+    distance: ''
+    notes: ''
+  modifications:
+    - id: a1c72da4023618f2
+      label: Recalling the original victim's life
+      contexts:
+        - recall
+      mode: levelOverride
+      value: 2
+      visibility: gm
+      predicate: {}
+      description: ''
+    - id: 96224bb6bbacb7e9
+      label: Disguise (as a past victim)
+      contexts:
+        - disguise
+      mode: levelOverride
+      value: 5
+      visibility: gm
+      predicate: {}
+      description: ''
+  gmIntrusion: >-
+    <p>The wheel's new face belongs to someone the character knows; they suffer
+    2 Stress from the realization.</p>
+items: []
+effects: []
+folder: 9dc857809e6eb43e
+sort: 2200
+flags:
+  magnusarchives:
+    source:
+      book: The Magnus Archives Roleplaying Game
+      page: '221'
+      sidebar: false
+ownership:
+  default: 0
+prototypeToken:
+  name: Grinning Wheel
+  texture:
+    src: systems/magnusarchives/assets/icons/magnusnpc.webp
+  actorLink: false
+  sight:
+    enabled: false
+  disposition: -1
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!fe8a2e14e52fb9a4'

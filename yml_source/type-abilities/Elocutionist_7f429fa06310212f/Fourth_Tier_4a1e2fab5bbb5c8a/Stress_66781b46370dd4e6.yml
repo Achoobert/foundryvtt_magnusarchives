@@ -1,0 +1,82 @@
+name: Stress
+type: ability
+_id: 66781b46370dd4e6
+img: systems/magnusarchives/assets/icons/magnusability.webp
+system:
+  schemaVersion: 1
+  slug: elocutionist-stress
+  description: >-
+    <p><strong>Cost:</strong> 5 Intellect points.</p><p>Insidious, terrifying
+    words deal 3 points of Stress (4 points of damage to NPCs) to up to five
+    people you choose within short range who can hear and understand you. Make a
+    separate attack roll against each. Action.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '48'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - type-ability
+    - elocutionist
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  tier: 4
+  category: type
+  archived: false
+  activation: action
+  pool: intellect
+  cost:
+    amount: 5
+    scalable: false
+    ignoresEdge: false
+    allowedPools:
+      - intellect
+  roll: attack
+  rollModifier: 0
+  attackModifier: 0
+  damage: 4
+  damageEffect: stress
+  stressAmount: 3
+  range: ''
+  targetMode: none
+  sourceFocusUuid: ''
+  sourceNodeId: ''
+effects: []
+folder: 4a1e2fab5bbb5c8a
+sort: 800
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+_key: '!items!66781b46370dd4e6'

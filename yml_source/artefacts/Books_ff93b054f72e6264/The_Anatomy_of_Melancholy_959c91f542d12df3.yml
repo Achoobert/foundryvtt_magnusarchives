@@ -1,0 +1,78 @@
+folder: ff93b054f72e6264
+name: The Anatomy of Melancholy
+type: artifact
+_id: 959c91f542d12df3
+sort: 2700
+img: systems/magnusarchives/assets/icons/magnusartefact.webp
+effects: []
+flags: {}
+ownership:
+  default: 0
+_stats:
+  coreVersion: '14.360'
+  systemId: null
+  systemVersion: null
+  createdTime: null
+  modifiedTime: null
+  lastModifiedBy: null
+  compendiumSource: null
+  duplicateSource: null
+  exportSource: null
+system:
+  schemaVersion: 1
+  slug: the-anatomy-of-melancholy
+  description: >-
+    <p><strong>Level:</strong> 5</p><p><strong>Related Entity:</strong> The
+    Eye</p><p><strong>Stress:</strong> 3 if a reader resists the book's attempt
+    to read them; none if they succumb.</p><p>A unique Russian translation of
+    Robert Burton's study of melancholy. Anyone who glances at a page, even
+    without reading the language, must succeed on an Intellect defense roll or
+    be "read back" and drained of emotion for about an hour.</p><p>A drained
+    victim can't act on their own will. They carry out tasks others command,
+    without feeling, but lapse into stillness unless the command is constantly
+    repeated. They can make an Intellect defense roll each minute to end the
+    effect early.</p><p><strong>Fear:</strong> On a failed Might defense roll,
+    the book reads more than emotion and physically erases part of the reader's
+    body: an ear, an eye, a hand, or sometimes all of them.</p>
+  source:
+    uuid: ''
+    book: The Magnus Archives Roleplaying Game
+    page: '268'
+    license: original
+  automation:
+    mode: descriptive
+    duration:
+      enabled: false
+      trigger: recovery
+    rollDefaults: {}
+  ruleElements: []
+  tags:
+    - book
+    - the-eye
+  grantedBy:
+    kind: other
+    sourceUuid: ''
+    instanceId: ''
+    grantId: ''
+    status: active
+    contentUuid: ''
+    contentKey: ''
+    replacement:
+      active: false
+      originalName: ''
+      originalContentUuid: ''
+      originalContentKey: ''
+      replacementName: ''
+      replacementContentUuid: ''
+      replacementContentKey: ''
+      selectionKind: none
+  level: '5'
+  identified: true
+  depletion:
+    enabled: false
+    die: d6
+    formula: 1d6
+    threshold: 1
+  depleted: false
+  uses: 0
+_key: '!items!959c91f542d12df3'
