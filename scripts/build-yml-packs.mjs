@@ -10,7 +10,7 @@
 import {existsSync} from "node:fs";
 import path from "node:path";
 import {compilePack} from "@foundryvtt/foundryvtt-cli";
-import {ROOT} from "./lib/fvtt-config.mjs";
+import {ROOT} from "./lib/root.mjs";
 import {SYSTEM_MANIFEST} from "./lib/system-manifest.mjs";
 
 const SOURCE_DIR = path.join(ROOT, "yml_source");

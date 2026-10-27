@@ -1,6 +1,6 @@
 import {readFileSync} from "node:fs";
 import path from "node:path";
-import {ROOT} from "./fvtt-config.mjs";
+import {ROOT} from "./root.mjs";
 
 export const SYSTEM_MANIFEST_PATH = path.join(ROOT, "system.json");
 export const SYSTEM_MANIFEST = JSON.parse(readFileSync(SYSTEM_MANIFEST_PATH, "utf8"));
